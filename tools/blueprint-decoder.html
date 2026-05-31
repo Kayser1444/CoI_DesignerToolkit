@@ -12,7 +12,6 @@
 <header>
   <h1>CoI Blueprint Decoder</h1>
   <span>Paste a blueprint string on the left — decoded output appears on the right.</span>
-  <button id="load-test" style="margin-left:auto;background:#2d3035;color:#d4cfc7;border:1px solid #3a3d42;border-radius:3px;padding:3px 10px;font-size:11px;cursor:pointer">Load test</button>
 </header>
 
 <div class="workspace">
@@ -21,7 +20,10 @@
   <div class="pane">
     <div class="pane-header">
       Blueprint string
-      <span id="input-badge" class="badge"></span>
+      <span style="display:flex;align-items:center;gap:8px">
+        <button id="load-test" style="background:#2d3035;color:#d4cfc7;border:1px solid #3a3d42;border-radius:3px;padding:3px 10px;font-size:11px;cursor:pointer">Load test</button>
+        <span id="input-badge" class="badge"></span>
+      </span>
     </div>
     <textarea id="input" placeholder="B1234:SGVsbG8gV29ybGQ...&#10;&#10;Paste a Captain of Industry blueprint or folder string here." spellcheck="false"></textarea>
   </div>
@@ -41,7 +43,7 @@
 
 <script src="blueprint-decoder.js"></script>
 <script>
-  const TEST_BLUEPRINT = 'B520:H4sIAAAAAAAACn2RMU7DMBiFX1w3daMUPETCbB2DZFVly+AFNUIZMnToBaoqAyhqqjRUysgxEMfgIByHAYRw/pZOjb3F+fze/97PveF8lszm74zdLF7qQztd1evtflfVzX4aP5br5m6AW8avzteLqqzq15/vr+thdL582GyK7fHX7+fbhw/PHy/rqqmadleMrjqdRbU9FG1Vr+7BRGBfPhebpqrbCRg8gOUcGWfj0fKpLNf1fuDZL370+Zcc2ZcThiMOZGBji+EiZlUtyTLBcoEOE32YlWNZyPKQsLAXs4K5RCbJVLqwVMJIbjHTj1lTE/KUTE2vaZc05TCc1JyFpIABYb2FdLMlElr6FtPO2XToJzSb7p2t09PCT6he3VtvN1vCoTmZOiMkgAZhzgixhJLCYsoZQYUipgjKudNIAjKwGJxqCIOI1OAsxAieUiGmt5AOU0LEhCknBhFEhMFZb8yhOBVyud4TFnGAU1LnFmJAgdQub+GERbCH1I7nD4xjnhFKBAAA';
+  const TEST_BLUEPRINT = 'B772:H4sIAAAAAAAACnWSzW7TQBDHZ531R1InMWkSEtpC4QEiPg6IYygpspQ2VlpUiUtl7G264Oxa602bHHmAPEARQhzgxgGpVw5IPACPwhEkUMU6MVFTCV/snf/M/H87Y4yMu62HrUf+L6TZD8YHviRi0xsN4xxYOnZ6gg4o86MOk1RO3PDtVNMrXT6giaRB4rJ4JHd4SMBYXQR7I5lFNbP8lDAi/MgTlAvVwLGaWz23M5aEhSRs9U6ICCIevOor269vbJSv7HJJjyY91uWnfZIQcUIQKuQ9wSWXk5isFLs+C2eUKSSyzT4JaEwSVHSWFMoGqJTfFz5LjrgY6jaAgXT8TvGDoZmONbNTvVeQjYqopNcxYLDw+6lmWuXmnuTCHxB3GHMhn6nLR55CJUyC08i0zjjVtgUfZpLqeG0tE2fGV3SorF9VL3dW5au1Jd/F1Kq1Jc9FHNcabrK8jSc08V9EJIR685I038lCu15vRxE/3eWsnSR0wEg4T4BGrR0RIQ+OCXtMVEaHzQqQVmjaGcJ2NKLhjWp2Sl8kVOsJR4FcK2Yfh7M1gJoqGGqqORPWS4s7b/GIi4tvH8/KG9VFsB2kI5hLP84/GIAKNw1PLXb/Pmi3CirvJQmU16SoASAAzcJgYNg0PRpFvkhyyMAIf5pqqvB2Y4cy+pzGhy73VO+9Yz8mh2mzlKiAAUDHn//7I9gFBZ0iv/7z+2d54+L72XmKc2eOc0/h/GMoYbAVQw7ZyvvL3Du1cFKL2fMXUtc1JF4DAAA=';
   document.getElementById('load-test').addEventListener('click', function() {
     const ta = document.getElementById('input');
     ta.value = TEST_BLUEPRINT;

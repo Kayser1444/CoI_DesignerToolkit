@@ -10,7 +10,7 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 
 ### Update blueprint
 
-![update_bp_image](image-1.png)
+![Update blueprint button](docs/assets/update-blueprint.png)
 
 Select a blueprint in your blueprint book and click **Update** to replace its contents with a fresh area selection.
 
@@ -25,7 +25,7 @@ This is meant for the usual blueprint-authoring loop: find a small mistake, fix 
 
 ### Remembered blueprint folder
 
-![last_bp_folder](image-2.png)
+![Remembered blueprint folder](docs/assets/remembered-blueprint-folder.png)
 
 DTK remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created.
 
@@ -33,7 +33,7 @@ The folder path is stored in `config.json`. If a folder is renamed or removed, D
 
 ### Blueprint operational stats
 
-![Operational_cost_image](image.png)
+![Blueprint operational stats](docs/assets/blueprint-operational-stats.png)
 
 The blueprint detail panel now separates **Construction cost** from **Operational cost**.
 
@@ -82,7 +82,7 @@ The output is ready to paste directly into a CoI Hub post or wiki page.
 
 Mitigation/Fix for: https://discord.com/channels/803508556325584926/1405800905646805093/1405800905646805093
 
-![normalization](image-6.png)
+![Symmetric normalization result](docs/assets/symmetric-normalization-result.png)
 
 DTK normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
 
@@ -99,11 +99,13 @@ The result is still normal blueprint data. This does not patch blueprint placeme
 
 ### Blueprint inspector tool
 
-![bp_inspector](image-3.png)
+![Blueprint inspector tool](docs/assets/blueprint-inspector-tool.png)
 
 The release package also includes a standalone browser tool under `tools/blueprint-decoder.html`.
 
-Paste a Captain of Industry blueprint string into the inspector to view decoded metadata, entity rows, transforms, trajectories, prioritized ports, extracted strings, and a hex dump. It is intended for blueprint authors and modders who want to inspect what a blueprint actually contains without loading it in-game.
+Paste a Captain of Industry blueprint string into the inspector to view decoded metadata, entity rows, transforms, trajectories, prioritized ports, extracted strings, and a hex dump.
+
+This is a technical decoder only. It does **not** render a graphical blueprint preview, place or modify blueprints, edit blueprint data, or provide any kind of visual blueprint editor. It is intended for blueprint authors and modders who want to inspect what a blueprint string actually contains without loading it in-game.
 
 ## Notes
 

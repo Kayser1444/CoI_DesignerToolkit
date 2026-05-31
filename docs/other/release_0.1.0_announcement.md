@@ -1,8 +1,8 @@
 # 🧰 Kayser's Designer Toolkit v0.1.0
 
-This is the first public release of Kayser's Designer Toolkit, a toolbox for Captain of Industry blueprint creators who spend too much time carefully arranging things and then discover one tiny mistake after the blueprint is already in the book.
+This is the first public release of Kayser's Designer Toolkit (DTK), a toolbox for Captain of Industry blueprint creators who spend too much time carefully arranging things and then discover one tiny mistake after the blueprint is already in the book.
 
-The short version: DTK lets you update an existing blueprint from a new area selection, remembers where you were in the blueprint book in each save, adds operational cost stats and Markdown export for documentation, normalizes symmetric entities so paste-over behaves better, and includes a standalone blueprint inspector for digging into blueprint strings.
+The short version: DTK lets you update an existing blueprint from a new area selection, remembers where you were in the blueprint book in each save, adds operational cost stats and Markdown export for documentation, normalizes symmetric entities so paste-over behaves better, and includes a standalone technical decoder for digging into blueprint strings.
 
 ## 🧭 Designer-Only, Consumer-Free
 
@@ -100,7 +100,7 @@ tools/blueprint-decoder.html
 
 Paste a Captain of Industry blueprint string into it and it will decode the payload into a more readable view, including metadata, entity rows, transforms, trajectories, prioritized ports, extracted strings, and a hex dump.
 
-This is mostly for authors and modders who want to see what is really inside a blueprint string. It is not required in-game, but it is very handy when a blueprint is behaving strangely and you want more than vibes.
+This is a technical decoder only. It is **not** a graphical blueprint viewer, blueprint manipulation tool, placement helper, or editor. It will not show you a rendered layout or let you change the blueprint. It is mostly for authors and modders who want to see what is really inside a blueprint string when a blueprint is behaving strangely and you want more than vibes.
 
 ## 📦 Compatibility
 

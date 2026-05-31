@@ -69,12 +69,6 @@ $filesToInclude = @(
     'changelog.txt',
     'readme.md',
     'thumbnail.png',
-    'image.png',
-    'image-1.png',
-    'image-2.png',
-    'image-3.png',
-    'image-4.png',
-    'image-6.png',
     'LICENSE'
 )
 
@@ -88,6 +82,12 @@ foreach ($file in $filesToInclude) {
 $translationsDir = Join-Path $PSScriptRoot 'translations'
 if (Test-Path $translationsDir) {
     Copy-Item $translationsDir -Destination (Join-Path $packageRootDir 'translations') -Recurse -Force
+}
+
+$docsAssetsDir = Join-Path $PSScriptRoot 'docs\assets'
+if (Test-Path $docsAssetsDir) {
+    New-Item -ItemType Directory -Path (Join-Path $packageRootDir 'docs') -Force | Out-Null
+    Copy-Item $docsAssetsDir -Destination (Join-Path $packageRootDir 'docs\assets') -Recurse -Force
 }
 
 $toolsDir = Join-Path $PSScriptRoot 'tools'
