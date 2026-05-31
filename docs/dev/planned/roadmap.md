@@ -15,14 +15,19 @@ Planned and candidate improvements for CoI Designer Toolkit.
 ### Other
 * ~~Persist the current open folder (in the blueprint book) to our config.json~~
 
+### Blueprint information
+* ~~Add info about max workers, electricity, computing (TF), maintenance (1 vs 2 vs 3).~~
+    - Summary row injected into the Detail panel; shows workers, electricity, computing, and maintenance (grouped by tier). Only non-zero stats are displayed.
+
 ## Planned
 
 ### Blueprint management
 * Blueprint editor?
 
 ### Blueprint information
-* Add stuff like workers, electricity, computing, etc.
-* Export information to .md? sync to a library?
+* Export all BP details to clipboard or .md file
+* Export BP folder's all BPs detaile to clipboard or .md file
+* Export .json structure
 
 ### Entities
 * Buildable U1 transports
@@ -33,3 +38,4 @@ Planned and candidate improvements for CoI Designer Toolkit.
 * AoE normalize/align entities (normalize rotate, flip to same alignment)
 * Blueprint terrain designations?
 * Normalize direction (rotate BP)
+* Paste all in folder at the same time
