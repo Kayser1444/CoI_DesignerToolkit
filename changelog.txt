@@ -1,2 +1,3 @@
 ## v0.1.0
-- Initial release
+* Added **Update blueprint** button in the blueprint placement panel: re-selects an area to replace an existing blueprint while preserving its name, description, overlap settings, and book position
+* Persists the last-open blueprint book folder to config.json and restores it when the blueprint book is reopened
