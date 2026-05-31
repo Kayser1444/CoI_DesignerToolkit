@@ -1,3 +1,6 @@
 {
-  "last_blueprint_folder": ""
+  "last_blueprint_folder": {
+    "default": "",
+    "description": "Do not delete — stores the last-open blueprint book folder so the mod can restore it on load."
+  }
 }
