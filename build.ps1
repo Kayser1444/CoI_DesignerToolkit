@@ -68,7 +68,7 @@ $filesToInclude = @(
     '0Harmony.dll',
     'changelog.txt',
     'readme.md',
-    'thumbnail.jpg',
+    'thumbnail.png',
     'LICENSE'
 )
 
