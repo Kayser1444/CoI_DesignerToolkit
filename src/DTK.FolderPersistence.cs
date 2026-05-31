@@ -83,17 +83,29 @@ internal static class FolderPersistence
     {
         try
         {
-            if (s_config == null || s_setFolderMethod == null) return;
+            s_log.Info("CtorPostfix: entered");
+            if (s_config == null || s_setFolderMethod == null)
+            {
+                s_log.Warning("CtorPostfix: s_config or s_setFolderMethod is null — aborting");
+                return;
+            }
             string savedPath = s_config.GetString(CONFIG_KEY, "");
+            s_log.Info($"CtorPostfix: savedPath='{savedPath}'");
             if (string.IsNullOrEmpty(savedPath))
                 return;
 
             var window = (BlueprintsWindow)__instance;
+            s_log.Info($"CtorPostfix: root folder name='{window.BlueprintsLibrary.Root.Name}', children={window.BlueprintsLibrary.Root.Folders.Count}");
             IBlueprintsFolder target = FindFolder(window.BlueprintsLibrary.Root, savedPath);
+            s_log.Info($"CtorPostfix: resolved target='{target?.Name}'");
             if (target == null || target == window.BlueprintsLibrary.Root)
+            {
+                s_log.Info("CtorPostfix: target is null or root — not navigating");
                 return;
+            }
 
             s_setFolderMethod.Invoke(window, new object[] { target });
+            s_log.Info($"CtorPostfix: navigated to '{target.Name}'");
         }
         catch (Exception ex)
         {
@@ -109,7 +121,8 @@ internal static class FolderPersistence
             if (s_config == null) return;
             var window = (BlueprintsWindow)__instance;
             string path = BuildPath(window.CurrentFolder, window.BlueprintsLibrary.Root);
-            s_config.TrySetValue(CONFIG_KEY, path, out _);
+            bool ok = s_config.TrySetValue(CONFIG_KEY, path, out string err);
+            s_log.Info($"SetFolderPostfix: saved path='{path}', ok={ok}" + (ok ? "" : $", err={err}"));
         }
         catch (Exception ex)
         {

@@ -76,7 +76,7 @@ internal static class BlueprintUpdater
             // m_placementPanel[0] is the inner Row that contains the Place and Demolish buttons.
             UiComponent innerRow = window.m_placementPanel[0];
 
-            var updateBtn = new ButtonIcon(Button.General, REPLACE_ICON)
+            var updateBtn = new ButtonIconText(Button.Primary, REPLACE_ICON, "Update".AsLoc())
                 .Tooltip("Update selected blueprint from a new area selection".AsLoc());
             updateBtn.OnClick(() => OnUpdateClick(window, blueprintCreationController));
 
@@ -133,6 +133,10 @@ internal static class BlueprintUpdater
                     // list of [all folders, then all blueprints] in the parent folder.
                     if (bpIndex >= 0)
                         window.BlueprintsLibrary.TryReorderItem(newBp, folder, folder.Folders.Count + bpIndex);
+
+                    // Signal the window to auto-select the new blueprint on re-activation,
+                    // which drives a Detail panel refresh.
+                    window.m_newItem = newBpOpt.As<IBlueprintItem>();
                 }
 
                 window.m_controller.ActivateSelf();
