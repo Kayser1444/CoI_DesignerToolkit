@@ -1,0 +1,120 @@
+<!-- CoI Designer Toolkit
+Copyright (c) 2026 Kayser1444
+Licensed under the MIT License.
+
+Unofficial mod for Captain of Industry. Captain of Industry, MaFi Games, and
+related trademarks, code, and assets belong to MaFi Games. This repository is
+intended to contain only original mod code/configuration; if MaFi Games material
+is included by mistake, I intend to correct it promptly upon discovery or notice.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <CaptainIndustryManagedPath Condition="'$(CaptainIndustryManagedPath)' == '' and '$(CAPTAIN_INDUSTRY_MANAGED_PATH)' != ''">$(CAPTAIN_INDUSTRY_MANAGED_PATH)</CaptainIndustryManagedPath>
+    <CaptainIndustryManagedPath Condition="'$(CaptainIndustryManagedPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed</CaptainIndustryManagedPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AssemblyName>CoI_DesignerToolkit</AssemblyName>
+    <RootNamespace>CoIDesignerToolkit</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <Target Name="CopyModFilesToProjectRoot" AfterTargets="Build">
+    <Message Text="Copying mod files to project root..." Importance="High" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ProjectDir)" OverwriteReadOnlyFiles="true" />
+    <Copy SourceFiles="$(OutDir)0Harmony.dll" DestinationFolder="$(ProjectDir)" Condition="Exists('$(OutDir)0Harmony.dll')" OverwriteReadOnlyFiles="true" />
+    <Delete Files="$(ProjectDir)$(TargetFileName).old" />
+  </Target>
+
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);external\**\*;artifacts\**\*</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2">
+      <IncludeAssets>build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Mafi.Base" Publicize="true">
+      <HintPath>$(CaptainIndustryManagedPath)\Mafi.Base.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Mafi.Core" Publicize="true">
+      <HintPath>$(CaptainIndustryManagedPath)\Mafi.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Mafi">
+      <HintPath>$(CaptainIndustryManagedPath)\Mafi.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Mafi.Unity" Publicize="true">
+      <HintPath>$(CaptainIndustryManagedPath)\Mafi.Unity.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.3.3">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="external\CoI_AutoHelpers\src\CoI.AutoHelpers\Localization\**\*.cs"
+             Link="CoI.AutoHelpers\Localization\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="external\CoI_AutoHelpers\src\CoI.AutoHelpers\Logging\**\*.cs"
+             Link="CoI.AutoHelpers\Logging\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="external\CoI_AutoHelpers\src\CoI.AutoHelpers\Persistence\**\*.cs"
+             Link="CoI.AutoHelpers\Persistence\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="external\CoI_AutoHelpers\src\CoI.AutoHelpers\Runtime\**\*.cs"
+             Link="CoI.AutoHelpers\Runtime\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="external\CoI_AutoHelpers\src\CoI.AutoHelpers\VanillaAttachments\**\*.cs"
+             Link="CoI.AutoHelpers\VanillaAttachments\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>BuildTimestamp</_Parameter1>
+      <_Parameter2>$([System.DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss"))</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>

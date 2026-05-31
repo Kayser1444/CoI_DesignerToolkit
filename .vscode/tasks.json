@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build CoI_DesignerToolkit",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "CoI_DesignerToolkit.sln",
+        "-c",
+        "Debug"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build CoI_DesignerToolkit (Release)",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "CoI_DesignerToolkit.sln",
+        "-c",
+        "Release"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "Clean CoI_DesignerToolkit",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "clean",
+        "CoI_DesignerToolkit.sln"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "Build CoI_DesignerToolkit (Release with Package)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "./build.ps1",
+        "-Configuration",
+        "Release",
+        "-Package"
+      ],
+      "group": "build"
+    }
+  ]
+}

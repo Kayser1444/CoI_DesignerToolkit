@@ -1,0 +1,38 @@
+# Build outputs
+bin/
+obj/
+*.dll
+*.pdb
+*.mdb
+
+# Generated mod packages
+artifacts/
+archive/
+*.zip
+
+# Local/editor state
+.vs/
+.vscode/*
+!.vscode/tasks.json
+*.code-workspace
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.lscache
+
+# OS noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Helper link (Windows junction pointing to live CoI_AutoHelpers workspace folder)
+external/
+
+# NuGet
+packages/
+*.nupkg
+project.assets.json
+project.nuget.cache
+*.nuget.g.props
+*.nuget.g.targets

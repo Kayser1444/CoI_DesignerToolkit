@@ -1,0 +1,22 @@
+{
+  "id": "CoI_DesignerToolkit",
+  "version": "0.1.0",
+  "display_name": "CoI Designer Toolkit",
+  "description_short": "A toolkit for designers.",
+  "description_long": "<b>CoI Designer Toolkit</b>\n\nA work in progress.",
+  "authors": [
+    "Kayser1444"
+  ],
+  "min_game_version": "0.8.2",
+  "max_verified_game_version": "0.8.5",
+  "primary_dlls": [
+    "0Harmony.dll", "CoI_DesignerToolkit.dll"
+  ],
+  "mod_dependencies": [],
+  "optional_mod_dependencies": [],
+  "incompatible_mods": [],
+  "non_locking_dll_load": true,
+  "can_add_to_saved_game": true,
+  "can_remove_from_saved_game": true,
+  "primary_mod_class_name": "CoIDesignerToolkitMod"
+}
