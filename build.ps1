@@ -13,7 +13,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$solution = Join-Path $PSScriptRoot 'CoI_DesignerToolkit.sln'
+$solution = Join-Path $PSScriptRoot 'DesignerToolkit.sln'
 $manifestPath = Join-Path $PSScriptRoot 'manifest.json'
 $artifactsDir = Join-Path $PSScriptRoot 'artifacts'
 $stagingDir = Join-Path $artifactsDir 'package'
@@ -23,7 +23,7 @@ if (-not $PSBoundParameters.ContainsKey('Package')) {
     $Package = $Configuration -eq 'Release'
 }
 
-Write-Host "Building CoI_DesignerToolkit ($Configuration)..."
+Write-Host "Building DesignerToolkit ($Configuration)..."
 dotnet build $solution -c $Configuration
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
@@ -39,10 +39,10 @@ if (-not (Test-Path $manifestPath)) {
 }
 
 $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
-$packageId = if ($manifest.id) { [string]$manifest.id } else { 'CoI_DesignerToolkit' }
+$packageId = if ($manifest.id) { [string]$manifest.id } else { 'DesignerToolkit' }
 $packageVersion = if ($manifest.version) { [string]$manifest.version } else { 'dev' }
 
-$packageRootName = 'CoI_DesignerToolkit'
+$packageRootName = 'DesignerToolkit'
 $zipPath = Join-Path $PSScriptRoot ("{0}-{1}.zip" -f $packageId, $packageVersion)
 $packageRootDir = Join-Path $stagingDir $packageRootName
 
@@ -64,7 +64,7 @@ New-Item -ItemType Directory -Path $packageRootDir -Force | Out-Null
 $filesToInclude = @(
     'manifest.json',
     'config.json',
-    'CoI_DesignerToolkit.dll',
+    'DesignerToolkit.dll',
     '0Harmony.dll',
     'changelog.txt',
     'readme.md',

@@ -45,7 +45,7 @@ public sealed class CoIDesignerToolkitMod : IMod, IDisposable
 
     public void RegisterPrototypes(ProtoRegistrator registrator)
     {
-        m_harmony = new Harmony("CoI_DesignerToolkit");
+        m_harmony = new Harmony("DesignerToolkit");
         m_harmony.PatchAll();
     }
 
@@ -68,6 +68,6 @@ public sealed class CoIDesignerToolkitMod : IMod, IDisposable
 
     public void Dispose()
     {
-        m_harmony?.UnpatchAll("CoI_DesignerToolkit");
+        m_harmony?.UnpatchAll("DesignerToolkit");
     }
 }

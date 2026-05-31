@@ -17,7 +17,7 @@ is included by mistake, I intend to correct it promptly upon discovery or notice
     <CaptainIndustryManagedPath Condition="'$(CaptainIndustryManagedPath)' == '' and '$(CAPTAIN_INDUSTRY_MANAGED_PATH)' != ''">$(CAPTAIN_INDUSTRY_MANAGED_PATH)</CaptainIndustryManagedPath>
     <CaptainIndustryManagedPath Condition="'$(CaptainIndustryManagedPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed</CaptainIndustryManagedPath>
     <OutputPath>bin\$(Configuration)\</OutputPath>
-    <AssemblyName>CoI_DesignerToolkit</AssemblyName>
+    <AssemblyName>DesignerToolkit</AssemblyName>
     <RootNamespace>CoIDesignerToolkit</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
