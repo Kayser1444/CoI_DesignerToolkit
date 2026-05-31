@@ -20,7 +20,7 @@ Planned and candidate improvements for CoI Designer Toolkit.
     - Summary row injected into the Detail panel; shows workers, electricity, computing, and maintenance (grouped by tier). Only non-zero stats are displayed.
 
 * ~~Export single BP details to clipboard as Markdown~~
-    - "Copy as Markdown" button injected into the blueprint Detail panel. Copies paste-ready Markdown: description, Components table, Construction cost table, and Operational stats table. Suitable for CoI Hub posts.
+    - "Copy as Markdown" button injected into the blueprint Detail panel. Copies paste-ready Markdown: heading, description, Components table, Construction table, and Operational table. Suitable for CoI Hub posts.
 
 * ~~Export BP folder's all BPs details to clipboard~~
     - "Copy as Markdown" button injected into the blueprint folder Detail panel. Copies a wide Markdown table of all blueprints in the folder tree (recursive), with one row per blueprint, a Folder column for the relative sub-folder path, and dynamically discovered stat/cost columns sorted A-Z.

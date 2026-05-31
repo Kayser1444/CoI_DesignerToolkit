@@ -1,9 +1,7 @@
-## Unreleased
-* Blueprint stats row in the Detail panel: shows total workers, electricity, computing, and maintenance for all entities in the selected blueprint
-* **Copy as Markdown** in the blueprint detail panel: copies a Markdown-formatted summary to the clipboard — description, Components table (A-Z), Construction cost table (A-Z), and Operational stats table (A-Z)
-* **Copy as Markdown** in the blueprint folder detail panel: copies a wide Markdown table of all blueprints in the folder tree (recursive); each blueprint is a row, with a Folder column for the relative sub-folder path and dynamically discovered stat/cost columns (A-Z); rows sorted by folder then by blueprint name
-* Fix: electricity values now always use `.` as the decimal separator regardless of OS locale
-
 ## v0.1.0
 * Added **Update blueprint** button in the blueprint placement panel: re-selects an area to replace an existing blueprint while preserving its name, description, overlap settings, and book position
 * Persists the last-open blueprint book folder to config.json and restores it when the blueprint book is reopened
+* Blueprint stats row in the Detail panel: shows total workers, electricity, computing, and maintenance for all entities in the selected blueprint
+* **Copy as Markdown** in the blueprint detail panel: copies a Markdown-formatted summary to the clipboard - heading, description, Components table (A-Z), Construction table (A-Z), and Operational table
+* **Copy as Markdown** in the blueprint folder detail panel: copies a wide Markdown table of all blueprints in the folder tree (recursive); each blueprint is a row, with a Folder column for the relative sub-folder path and dynamically discovered stat/cost columns (A-Z); rows sorted by folder then by blueprint name
+* Fix: electricity values now always use `.` as the decimal separator regardless of OS locale

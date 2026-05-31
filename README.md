@@ -4,7 +4,7 @@ Kayser's Designer Toolkit is a quality-of-life mod for Captain of Industry bluep
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. DTK helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
-Download the latest release from the Captain of Industry Hub:https://coigame.com/Mods/Search?author=Kayser
+Download the latest release from the Captain of Industry Hub: https://coigame.com/Mods/Search?author=Kayser
 
 ## Features
 
@@ -50,14 +50,31 @@ Only non-zero stats are shown, so small blueprints stay clean and large builds g
 
 DTK adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
 
-**Single blueprint** — clicking the button copies a Markdown-formatted summary to the clipboard:
+**Single blueprint** - clicking the button copies a Markdown-formatted summary to the clipboard:
 
 - Blueprint heading and description
-- **Components** table — all major entity types and their counts, sorted A-Z
-- **Construction cost** table — all required products and quantities, sorted A-Z
-- **Operational** table — entities, workers, electricity, computing, and maintenance products per month, sorted A-Z
+- **Components** table - all major entity types and their counts, sorted A-Z
+- **Construction** table - all required products and quantities, sorted A-Z
+- **Operational** table - entities, workers, electricity, computing, and maintenance products per month
 
-**Blueprint folder** — clicking the button copies a wide Markdown table listing every blueprint in the folder, including blueprints in sub-folders. Each blueprint is a row. Columns include Blueprint name, Folder (relative path within the exported root), Entities, and any workers / electricity / computing / maintenance / construction product columns present across the folder, sorted A-Z. Rows are sorted by folder path, then by blueprint name within each folder.
+**Blueprint folder** - clicking the button copies a wide Markdown table listing every blueprint in the folder, including blueprints in sub-folders. Each blueprint is a row. Columns include Blueprint name, Folder (relative path within the exported root), Entities, and any workers / electricity / computing / maintenance / construction product columns present across the folder, sorted A-Z. Rows are sorted by folder path, then by blueprint name within each folder.
+
+Example output:
+
+```markdown
+## Kayser's Compact Concrete
+
+Kayser's Compact Concrete
+The Compactest Concrete
+
+https://hub.coigame.com/Blueprint/Detail/590
+
+| Blueprint | Folder | Entities | Workers | Electricity | Maintenance I / mo | Concrete slab | Construction Parts | Construction Parts II |
+|---|---|---|---|---|---|---|---|---|
+| Big Concrete (example) | . | 258 | 282 | 13.0 MW | 312 | 200 | 96 | 882 |
+| Concrete Slab Stages (chart) | . | 579 | 504 | 17.4 MW | 549 | 280 | 1,3k | 2,1k |
+| 1: Double T1 Mixer (24x) | Concrete Slabs | 33 | 16 | 550 kW | 20 | - | 198 | 136 |
+```
 
 The output is ready to paste directly into a CoI Hub post or wiki page.
 
@@ -65,19 +82,18 @@ The output is ready to paste directly into a CoI Hub post or wiki page.
 
 Mitigation/Fix for: https://discord.com/channels/803508556325584926/1405800905646805093/1405800905646805093
 
-![sym_normalization](image-4.png)
+![normalization](image-6.png)
 
 DTK normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
 
 Captain of Industry can treat a functionally identical balancer at rotation 0 and rotation 2 as different, which can block paste-over updates. DTK fixes that at blueprint capture time by resetting symmetric entity rotation and reflection to a canonical orientation.
 
-The normalization pass:
+The normalization pass focuses on the known paste-over problem cases:
 
-- detects symmetry from the entity's port layout at runtime
-- avoids hardcoded proto lists
-- preserves position
-- remaps prioritized port flags so input/output priority intent survives
-- leaves asymmetric entities alone
+- resets supported symmetric entities to a consistent stored orientation
+- keeps their blueprint position unchanged
+- preserves balancer priority settings where DTK can safely remap them
+- skips entities that do not match the supported symmetric layouts
 
 The result is still normal blueprint data. This does not patch blueprint placement and does not require blueprint users to install DTK.
 
@@ -98,7 +114,7 @@ Paste a Captain of Industry blueprint string into the inspector to view decoded 
 
 ## Installation
 
-- Download the latest version of the mod from GitHub Releases.
+- Download the latest version of the mod from the Captain of Industry Hub.
 - Extract the mod folder into your Captain of Industry mods directory (`%AppData%\Captain of Industry\Mods`).
 - Enable the mod when loading or starting a new game.
 
