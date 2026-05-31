@@ -137,14 +137,15 @@ internal static class NormalizeSymmetric
             return;
         }
 
-        // Category 4: lifts — reflection-symmetric only; just clear the flip, keep rotation.
+        // Category 4: lifts — clearing reflection rotates them 180°, so compensate.
         // Covers all tiers/variants via prefix match. No port remap needed.
         if (proto.Id.ToString().StartsWith("LiftIoPortShape_", StringComparison.Ordinal))
         {
             if (tf.Value.IsReflected)
             {
-                config.Transform = new TileTransform(tf.Value.Position, tf.Value.Rotation, false);
-                s_log.Info($"[NormSym] {proto.Id} @ {rotLabel}: lift — cleared reflection, rotation unchanged.");
+                var compensatedRotation = new Rotation90((tf.Value.Rotation.AngleIndex + 2) % 4);
+                config.Transform = new TileTransform(tf.Value.Position, compensatedRotation, false);
+                s_log.Info($"[NormSym] {proto.Id} @ {rotLabel}: lift — cleared reflection and compensated rotation to {compensatedRotation.AngleIndex * 90}°.");
             }
             return;
         }

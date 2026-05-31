@@ -46,6 +46,21 @@ When a selected blueprint contains relevant entities, DTK adds a compact operati
 
 Only non-zero stats are shown, so small blueprints stay clean and large builds get the extra planning information where it belongs.
 
+### Copy as Markdown
+
+DTK adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
+
+**Single blueprint** — clicking the button copies a Markdown-formatted summary to the clipboard:
+
+- Blueprint heading and description
+- **Components** table — all major entity types and their counts, sorted A-Z
+- **Construction cost** table — all required products and quantities, sorted A-Z
+- **Operational** table — entities, workers, electricity, computing, and maintenance products per month, sorted A-Z
+
+**Blueprint folder** — clicking the button copies a wide Markdown table listing every blueprint in the folder, including blueprints in sub-folders. Each blueprint is a row. Columns include Blueprint name, Folder (relative path within the exported root), Entities, and any workers / electricity / computing / maintenance / construction product columns present across the folder, sorted A-Z. Rows are sorted by folder path, then by blueprint name within each folder.
+
+The output is ready to paste directly into a CoI Hub post or wiki page.
+
 ### Symmetric entity normalization
 
 Mitigation/Fix for: https://discord.com/channels/803508556325584926/1405800905646805093/1405800905646805093
