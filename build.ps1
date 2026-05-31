@@ -87,14 +87,20 @@ if (Test-Path $translationsDir) {
 $docsAssetsDir = Join-Path $PSScriptRoot 'docs\assets'
 if (Test-Path $docsAssetsDir) {
     New-Item -ItemType Directory -Path (Join-Path $packageRootDir 'docs') -Force | Out-Null
-    Copy-Item $docsAssetsDir -Destination (Join-Path $packageRootDir 'docs\assets') -Recurse -Force
-}
-
-$toolsDir = Join-Path $PSScriptRoot 'tools'
-if (Test-Path $toolsDir) {
-    Copy-Item $toolsDir -Destination (Join-Path $packageRootDir 'tools') -Recurse -Force
-    Get-ChildItem -Path (Join-Path $packageRootDir 'tools') -Filter '*.zip' -Recurse -File |
-        Remove-Item -Force
+    New-Item -ItemType Directory -Path (Join-Path $packageRootDir 'docs\assets') -Force | Out-Null
+    $docsAssetsToInclude = @(
+        'update-blueprint.png',
+        'remembered-blueprint-folder.png',
+        'blueprint-operational-stats.png',
+        'copy-as-markdown.png',
+        'symmetric-normalization-result.png'
+    )
+    foreach ($asset in $docsAssetsToInclude) {
+        $sourcePath = Join-Path $docsAssetsDir $asset
+        if (Test-Path $sourcePath) {
+            Copy-Item $sourcePath -Destination (Join-Path $packageRootDir "docs\assets\$asset") -Force
+        }
+    }
 }
 
 if (Test-Path $zipPath) {

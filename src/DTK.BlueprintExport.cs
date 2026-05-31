@@ -157,7 +157,7 @@ internal static class BlueprintExport
             s_states.Add(__instance, state);
 
             var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, "Copy as Markdown".AsLoc())
-                .Tooltip("Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the CoI Hub.".AsLoc())
+                .Tooltip("Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub.".AsLoc())
                 .Visible(false);
 
             copyBtn.OnClick(() =>

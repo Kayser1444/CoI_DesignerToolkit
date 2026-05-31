@@ -17,12 +17,12 @@ using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
 
-public sealed class CoIDesignerToolkitMod : IMod, IDisposable
+public sealed class DesignerToolkitMod : IMod, IDisposable
 {
     private static readonly ModLogger s_log = new ModLogger("DTK");
     private Harmony? m_harmony;
 
-    public string Name => "CoI Designer Toolkit";
+    public string Name => "Designer Toolkit";
 
     public int Version => 1;
 
@@ -36,7 +36,7 @@ public sealed class CoIDesignerToolkitMod : IMod, IDisposable
 
     public static string ModVersion { get; private set; } = "?";
 
-    public CoIDesignerToolkitMod(ModManifest manifest)
+    public DesignerToolkitMod(ModManifest manifest)
     {
         Manifest = manifest;
         ModVersion = manifest.Version.ToString();
@@ -63,7 +63,7 @@ public sealed class CoIDesignerToolkitMod : IMod, IDisposable
 
     public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
     {
-        s_log.Info($"[DTK] CoI Designer Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(CoIDesignerToolkitMod).Assembly)}");
+        s_log.Info($"[DTK] Designer Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
     }
 
     public void MigrateJsonConfig(VersionSlim savedVersion, Dict<string, object> savedValues)

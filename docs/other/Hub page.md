@@ -1,16 +1,20 @@
-# Designer Toolkit
+# 🧰 Kayser's Designer Toolkit
 
 Kayser's Designer Toolkit (DTK) is a quality-of-life mod for Captain of Industry blueprint creators.
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. DTK helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
-Download the latest release from the Captain of Industry Hub: https://coigame.com/Mods/Search?author=Kayser
+## ✨ Feature List
 
-## Features
+- [🔁 Update blueprint](#-update-blueprint)
+- [📂 Remembered blueprint folder](#-remembered-blueprint-folder)
+- [📊 Blueprint operational stats](#-blueprint-operational-stats)
+- [📝 Copy as Markdown](#-copy-as-markdown)
+- [🧩 Symmetric entity normalization](#-symmetric-entity-normalization)
 
-### Update blueprint
+### 🔁 Update blueprint
 
-![Update blueprint button](docs/assets/update-blueprint.png)
+![update-blueprint.png](/content-images/b5ef0dc2ec2d4688e5e6ba65c08dcf67d831bc3e8b92312554fb003ec55bad2a/update-blueprint.png)
 
 Select a blueprint in your blueprint book and click **Update** to replace its contents with a fresh area selection.
 
@@ -23,17 +27,17 @@ DTK keeps the blueprint's existing:
 
 This is meant for the usual blueprint-authoring loop: find a small mistake, fix it in-world, update the existing blueprint, and keep the book organized.
 
-### Remembered blueprint folder
+### 📂 Remembered blueprint folder
 
-![Remembered blueprint folder](docs/assets/remembered-blueprint-folder.png)
+![remembered-blueprint-folder.png](/content-images/bd11e3f67062aa6a456a334fd50decd89667a29c4f4eda166bfff902f968fc91/remembered-blueprint-folder.png)
 
 DTK remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created.
 
 The folder path is stored in `config.json`. If a folder is renamed or removed, DTK gracefully falls back to the deepest folder it can still find.
 
-### Blueprint operational stats
+### 📊 Blueprint operational stats
 
-![Blueprint operational stats](docs/assets/blueprint-operational-stats.png)
+![blueprint-operational-stats.png](/content-images/d476e2ab7976bb3130040d62a6d987f3bc9d95ddd0e116b5f20daf867f3e5190/blueprint-operational-stats.png)
 
 The blueprint detail panel now separates **Construction cost** from **Operational cost**.
 
@@ -46,9 +50,9 @@ When a selected blueprint contains relevant entities, DTK adds a compact operati
 
 Only non-zero stats are shown, so small blueprints stay clean and large builds get the extra planning information where it belongs.
 
-### Copy as Markdown
+### 📝 Copy as Markdown
 
-![Copy as Markdown button](docs/assets/copy-as-markdown.png)
+![image.png](/content-images/786bf604956dbf2eb157e4db3e6e7bc0f4c816bc95439d6a39fa5b6bf437c086/image.png)
 
 DTK adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
 
@@ -78,13 +82,27 @@ https://hub.coigame.com/Blueprint/Detail/590
 | 1: Double T1 Mixer (24x) | Concrete Slabs | 33 | 16 | 550 kW | 20 | - | 198 | 136 |
 ```
 
+Rendered in markdown as:
+
+## Kayser's Compact Concrete
+
+Kayser's Compact Concrete The Compactest Concrete
+
+https://hub.coigame.com/Blueprint/Detail/590
+
+| Blueprint | Folder | Entities | Workers | Electricity | Maintenance I / mo | Concrete slab | Construction Parts | Construction Parts II |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Big Concrete (example) | . | 258 | 282 | 13.0 MW | 312 | 200 | 96 | 882 |
+| Concrete Slab Stages (chart) | . | 579 | 504 | 17.4 MW | 549 | 280 | 1,3k | 2,1k |
+| 1: Double T1 Mixer (24x) | Concrete Slabs | 33 | 16 | 550 kW | 20 | \- | 198 | 136 |
+
 The output is ready to paste directly into a Hub post or wiki page.
 
-### Symmetric entity normalization
+### 🧩 Symmetric entity normalization
+
+![symmetric-normalization-result.png](/content-images/b668e393f133cabe73642be461496f2eb16923445f79b6bafbd990aac5d67fbd/symmetric-normalization-result.png)
 
 Mitigation/Fix for: https://discord.com/channels/803508556325584926/1405800905646805093/1405800905646805093
-
-![Symmetric normalization result](docs/assets/symmetric-normalization-result.png)
 
 DTK normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
 
@@ -99,34 +117,34 @@ The normalization pass focuses on the known paste-over problem cases:
 
 The result is still normal blueprint data. This does not patch blueprint placement and does not require blueprint users to install DTK.
 
-## Notes
+## 📌 Notes
 
 - Compatible with vanilla saves.
 - Can be added to or removed from existing saves.
 - Requires Captain of Industry `0.8.2` or newer.
 - Blueprint consumers do not need this mod installed.
 
-## Installation
+## 📦 Installation
 
 - Download the latest version of the mod from the Captain of Industry Hub.
 - Extract the mod folder into your Captain of Industry mods directory (`%AppData%\Captain of Industry\Mods`).
 - Enable the mod when loading or starting a new game.
 
-## Build from source
+## 🛠️ Build from source
 
 - Install the .NET SDK with .NET Framework 4.8 targeting support.
 - Make sure Captain of Industry is installed, or set `CAPTAIN_INDUSTRY_MANAGED_PATH` to the game's `Captain of Industry_Data\Managed` directory.
 - Run `./build.ps1 -Configuration Release`.
 - The release zip is created in the project root.
 
-## License
+## 📜 License
 
 MIT. See [LICENSE](LICENSE).
 
-## Attribution and trademarks
+## ⚖️ Attribution and trademarks
 
 Designer Toolkit is an unofficial, community-made mod for Captain of Industry.
 
 Captain of Industry, MaFi Games, and related names, trademarks, game code, and assets are the property of MaFi Games. This mod is not affiliated with, endorsed by, or sponsored by MaFi Games.
 
-This repository is intended to contain only original mod code and configuration, licensed under the MIT License. It does not intentionally include Captain of Industry game code, game assets, or other MaFi Games intellectual property. If any such material is found to have been included by mistake, I intend to correct it promptly upon discovery or notice.
+This repository is intended to contain only original mod code and configuration, licensed under the MIT License. It does not intentionally include Captain of Industry game code, game assets, or other MaFi Games intellectual property.
