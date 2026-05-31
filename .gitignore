@@ -21,6 +21,9 @@ archive/
 *.sln.docstates
 *.lscache
 
+# Scratch / local output files
+docs/other/dump.md
+
 # OS noise
 Thumbs.db
 Desktop.ini
