@@ -46,7 +46,7 @@ public sealed class CoIDesignerToolkitMod : IMod, IDisposable
     public void RegisterPrototypes(ProtoRegistrator registrator)
     {
         m_harmony = new Harmony("DesignerToolkit");
-        m_harmony.PatchAll();
+        BlueprintUpdater.ApplyPatches(m_harmony);
     }
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
