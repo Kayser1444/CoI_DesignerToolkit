@@ -69,6 +69,8 @@ $filesToInclude = @(
     'changelog.txt',
     'readme.md',
     'thumbnail.png',
+    'image.png',
+    'image-1.png',
     'LICENSE'
 )
 
@@ -82,6 +84,13 @@ foreach ($file in $filesToInclude) {
 $translationsDir = Join-Path $PSScriptRoot 'translations'
 if (Test-Path $translationsDir) {
     Copy-Item $translationsDir -Destination (Join-Path $packageRootDir 'translations') -Recurse -Force
+}
+
+$toolsDir = Join-Path $PSScriptRoot 'tools'
+if (Test-Path $toolsDir) {
+    Copy-Item $toolsDir -Destination (Join-Path $packageRootDir 'tools') -Recurse -Force
+    Get-ChildItem -Path (Join-Path $packageRootDir 'tools') -Filter '*.zip' -Recurse -File |
+        Remove-Item -Force
 }
 
 if (Test-Path $zipPath) {

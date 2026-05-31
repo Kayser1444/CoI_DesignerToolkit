@@ -49,6 +49,7 @@ public sealed class CoIDesignerToolkitMod : IMod, IDisposable
         BlueprintUpdater.ApplyPatches(m_harmony);
         FolderPersistence.ApplyPatches(m_harmony, JsonConfig);
         BlueprintStats.ApplyPatches(m_harmony);
+        NormalizeSymmetric.ApplyPatches(m_harmony);
     }
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
