@@ -1,0 +1,118 @@
+[
+  [
+    "dtk.mod.name",
+    "Designer Toolkit"
+  ],
+  [
+    "dtk.settings.tab.markdown",
+    "Markdown"
+  ],
+  [
+    "dtk.settings.markdown_copy.heading",
+    "Copia Markdown"
+  ],
+  [
+    "dtk.settings.markdown_table_language.label",
+    "Lingua delle tabelle Markdown"
+  ],
+  [
+    "dtk.settings.markdown_table_language.description",
+    "Controlla quale lingua devono usare le intestazioni delle tabelle Markdown e i nomi di prodotti/entità."
+  ],
+  [
+    "dtk.settings.markdown_table_language.pending",
+    "Inglese, Locale, Entrambi e Ibrido sono ora collegati all'esportazione Markdown."
+  ],
+  [
+    "dtk.settings.language.english",
+    "Inglese"
+  ],
+  [
+    "dtk.settings.language.local",
+    "Locale"
+  ],
+  [
+    "dtk.settings.language.both",
+    "Entrambi"
+  ],
+  [
+    "dtk.settings.language.hybrid",
+    "Ibrido"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Copia come Markdown"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Copia le statistiche del progetto come tabella Markdown negli appunti, pronta da incollare nell'Hub."
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Copia l'elenco dei progetti della cartella come tabella Markdown negli appunti."
+  ],
+  [
+    "dtk.markdown.components.heading",
+    "Componenti"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Costruzione"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Operativo"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Entità"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Conteggio"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Prodotto"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "Quantità"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Proprietà"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "Valore"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Progetto"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Cartella"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Entità"
+  ],
+  [
+    "dtk.markdown.workers.stat",
+    "Lavoratori"
+  ],
+  [
+    "dtk.markdown.electricity.stat",
+    "Elettricità"
+  ],
+  [
+    "dtk.markdown.computing.stat",
+    "Computazione"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ mese"
+  ]
+]

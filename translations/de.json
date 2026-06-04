@@ -1,0 +1,118 @@
+[
+  [
+    "dtk.mod.name",
+    "Designer Toolkit"
+  ],
+  [
+    "dtk.settings.tab.markdown",
+    "Markdown"
+  ],
+  [
+    "dtk.settings.markdown_copy.heading",
+    "Markdown kopieren"
+  ],
+  [
+    "dtk.settings.markdown_table_language.label",
+    "Sprache der Markdown-Tabellen"
+  ],
+  [
+    "dtk.settings.markdown_table_language.description",
+    "Legt fest, welche Sprache Markdown-Tabellenüberschriften sowie Produkt- und Entitätsnamen verwenden sollen."
+  ],
+  [
+    "dtk.settings.markdown_table_language.pending",
+    "Englisch, Lokal, Beide und Hybrid werden jetzt vom Markdown-Export verwendet."
+  ],
+  [
+    "dtk.settings.language.english",
+    "Englisch"
+  ],
+  [
+    "dtk.settings.language.local",
+    "Lokal"
+  ],
+  [
+    "dtk.settings.language.both",
+    "Beide"
+  ],
+  [
+    "dtk.settings.language.hybrid",
+    "Hybrid"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Als Markdown kopieren"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Kopiert Blaupausenstatistiken als Markdown-Tabelle in die Zwischenablage, bereit zum Einfügen in den Hub."
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Kopiert die Blaupausenliste des Ordners als Markdown-Tabelle in die Zwischenablage."
+  ],
+  [
+    "dtk.markdown.components.heading",
+    "Komponenten"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Bau"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Betrieb"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Entität"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Anzahl"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Produkt"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "Menge"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Eigenschaft"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "Wert"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Blaupause"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Ordner"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Entitäten"
+  ],
+  [
+    "dtk.markdown.workers.stat",
+    "Arbeiter"
+  ],
+  [
+    "dtk.markdown.electricity.stat",
+    "Strom"
+  ],
+  [
+    "dtk.markdown.computing.stat",
+    "Rechenleistung"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ Monat"
+  ]
+]

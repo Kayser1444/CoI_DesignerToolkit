@@ -2,5 +2,16 @@
   "last_blueprint_folder": {
     "default": "",
     "description": "Do not delete — stores the last-open blueprint book folder so the mod can restore it on load."
+  },
+  "markdown_table_language": {
+    "default": 0,
+    "is_integer": true,
+    "description": "Initial Markdown table language for saves without Designer Toolkit settings state (0=English, 1=Local, 2=Both, 3=Hybrid).",
+    "min": 0,
+    "max": 3
+  },
+  "dtkSettingsStateJson": {
+    "default": "{\"schemaVersion\":1}",
+    "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved DTK settings."
   }
 }

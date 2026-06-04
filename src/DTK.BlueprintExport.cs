@@ -42,6 +42,13 @@ internal static class BlueprintExport
 
     private const string CLIPBOARD_ICON = "Assets/Unity/UserInterface/General/Clipboard.svg";
 
+    private enum MarkdownRenderLanguage
+    {
+        English,
+        Local,
+        Hybrid,
+    }
+
     // ── Single-blueprint state ──────────────────────────────────────────────
     private sealed class State
     {
@@ -156,8 +163,8 @@ internal static class BlueprintExport
             var state = new State();
             s_states.Add(__instance, state);
 
-            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, "Copy as Markdown".AsLoc())
-                .Tooltip("Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub.".AsLoc())
+            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, DtkLocalization.CopyAsMarkdownButton.AsFormatted)
+                .Tooltip(DtkLocalization.CopyBlueprintMarkdownTooltip.AsFormatted)
                 .Visible(false);
 
             copyBtn.OnClick(() =>
@@ -210,8 +217,8 @@ internal static class BlueprintExport
             var folderState = new FolderState();
             s_folderStates.Add(__instance, folderState);
 
-            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, "Copy as Markdown".AsLoc())
-                .Tooltip("Copy folder blueprint list as a Markdown table to the clipboard.".AsLoc())
+            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, DtkLocalization.CopyAsMarkdownButton.AsFormatted)
+                .Tooltip(DtkLocalization.CopyFolderMarkdownTooltip.AsFormatted)
                 .Visible(false);
 
             copyBtn.OnClick(() =>
@@ -259,7 +266,9 @@ internal static class BlueprintExport
     /// <summary>
     /// Computes all stats for a single blueprint into a <see cref="BpStats"/> struct.
     /// </summary>
-    private static BpStats ComputeBpStats(IBlueprint blueprint)
+    private static BpStats ComputeBpStats(
+        IBlueprint blueprint,
+        MarkdownRenderLanguage language)
     {
         var stats = new BpStats
         {
@@ -305,7 +314,7 @@ internal static class BlueprintExport
         // Maintenance — stored A-Z by product name
         foreach (var kvp in maintenanceByProduct)
             if (kvp.Value > Fix32.Zero)
-                stats.MaintenanceValues[kvp.Key.Strings.Name.TranslatedString] =
+                stats.MaintenanceValues[DisplayName(kvp.Key.Strings.Name, language)] =
                     kvp.Value.ToStringRoundedAdaptive();
 
         // Construction cost — stored A-Z by product name
@@ -313,14 +322,14 @@ internal static class BlueprintExport
         for (int i = 0; i < products.Length; i++)
         {
             var pq = products[i];
-            stats.ConstructionValues[pq.Product.Strings.Name.TranslatedString] =
+            stats.ConstructionValues[DisplayName(pq.Product.Strings.Name, language)] =
                 pq.Quantity.Value.ToStringWithSiSuffix().Value;
         }
 
         // Component counts — stored A-Z by entity name
         foreach (KeyValuePair<Proto, int> kvp in blueprint.AllMajorProtos)
         {
-            string name = kvp.Key.Strings.Name.TranslatedString;
+            string name = DisplayName(kvp.Key.Strings.Name, language);
             stats.ComponentCounts.TryGetValue(name, out int existing2);
             stats.ComponentCounts[name] = existing2 + kvp.Value;
         }
@@ -333,23 +342,41 @@ internal static class BlueprintExport
     /// </summary>
     internal static string BuildMarkdown(IBlueprint blueprint)
     {
-        var s  = ComputeBpStats(blueprint);
         var sb = new StringBuilder();
 
         // Heading + description
-        sb.AppendLine($"## {s.Name}");
+        sb.AppendLine($"## {blueprint.Name}");
         if (!string.IsNullOrWhiteSpace(blueprint.Desc))
         {
             sb.AppendLine();
             sb.AppendLine(blueprint.Desc.Trim());
         }
 
+        if (DesignerToolkitSettings.MarkdownTableLanguage == MarkdownTableLanguage.Both)
+        {
+            AppendBlueprintTables(sb, ComputeBpStats(blueprint, MarkdownRenderLanguage.English), MarkdownRenderLanguage.English);
+            AppendBlueprintTables(sb, ComputeBpStats(blueprint, MarkdownRenderLanguage.Local), MarkdownRenderLanguage.Local);
+        }
+        else
+        {
+            MarkdownRenderLanguage language = ResolveRenderLanguage();
+            AppendBlueprintTables(sb, ComputeBpStats(blueprint, language), language);
+        }
+
+        return sb.ToString();
+    }
+
+    private static void AppendBlueprintTables(
+        StringBuilder sb,
+        BpStats s,
+        MarkdownRenderLanguage language)
+    {
         // ── Components ───────────────────────────────────────────────────────
         if (s.ComponentCounts.Count > 0)
         {
             sb.AppendLine();
-            sb.AppendLine("### Components");
-            sb.AppendLine("| Entity | Count |");
+            sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownComponentsHeading, language)}");
+            sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntityHeader, language)} | {MarkdownText(DtkLocalization.MarkdownCountHeader, language)} |");
             sb.AppendLine("|---|---|");
             foreach (var kvp in s.ComponentCounts)   // already A-Z
                 sb.AppendLine($"| {kvp.Key} | {kvp.Value} |");
@@ -359,8 +386,8 @@ internal static class BlueprintExport
         if (s.ConstructionValues.Count > 0)
         {
             sb.AppendLine();
-            sb.AppendLine("### Construction");
-            sb.AppendLine("| Product | Quantity |");
+            sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownConstructionHeading, language)}");
+            sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownProductHeader, language)} | {MarkdownText(DtkLocalization.MarkdownQuantityHeader, language)} |");
             sb.AppendLine("|---|---|");
             foreach (var kvp in s.ConstructionValues)   // already A-Z
                 sb.AppendLine($"| {kvp.Key} | {kvp.Value} |");
@@ -368,17 +395,15 @@ internal static class BlueprintExport
 
         // ── Operational ──────────────────────────────────────────────────────
         sb.AppendLine();
-        sb.AppendLine("### Operational");
-        sb.AppendLine("| Property | Value |");
+        sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownOperationalHeading, language)}");
+        sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownPropertyHeader, language)} | {MarkdownText(DtkLocalization.MarkdownValueHeader, language)} |");
         sb.AppendLine("|---|---|");
-        sb.AppendLine($"| Entities | {s.Entities} |");
-        if (s.Workers > 0) sb.AppendLine($"| Workers | {s.Workers} |");
-        if (s.ElecKw  > 0) sb.AppendLine($"| Electricity | {FormatElectricity(s.ElecKw)} |");
-        if (s.CompTf  > 0) sb.AppendLine($"| Computing | {s.CompTf} TF |");
+        sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} | {s.Entities} |");
+        if (s.Workers > 0) sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownWorkersStat, language)} | {s.Workers} |");
+        if (s.ElecKw  > 0) sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownElectricityStat, language)} | {FormatElectricity(s.ElecKw)} |");
+        if (s.CompTf  > 0) sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownComputingStat, language)} | {s.CompTf} TF |");
         foreach (var kvp in s.MaintenanceValues)   // already A-Z
-            sb.AppendLine($"| {kvp.Key} / mo | {kvp.Value} |");
-
-        return sb.ToString();
+            sb.AppendLine($"| {kvp.Key} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} | {kvp.Value} |");
     }
 
     /// <summary>
@@ -390,10 +415,36 @@ internal static class BlueprintExport
     internal static string BuildFolderMarkdown(IBlueprintsFolder folder)
     {
         // ── Collect BPs from this folder and all sub-folders recursively ───
-        var bpList = new List<BpStats>();
-        CollectBps(folder, "", bpList);
+        var sb = new StringBuilder();
 
-        // Sort by folder path A-Z, then by name A-Z within the same folder
+        sb.AppendLine($"## {folder.Name}");
+        if (!string.IsNullOrWhiteSpace(folder.Desc))
+        {
+            sb.AppendLine();
+            sb.AppendLine(folder.Desc.Trim());
+        }
+
+        if (DesignerToolkitSettings.MarkdownTableLanguage == MarkdownTableLanguage.Both)
+        {
+            AppendFolderTable(sb, folder, MarkdownRenderLanguage.English);
+            AppendFolderTable(sb, folder, MarkdownRenderLanguage.Local);
+        }
+        else
+        {
+            AppendFolderTable(sb, folder, ResolveRenderLanguage());
+        }
+
+        return sb.ToString();
+    }
+
+    private static void AppendFolderTable(
+        StringBuilder sb,
+        IBlueprintsFolder folder,
+        MarkdownRenderLanguage language)
+    {
+        var bpList = new List<BpStats>();
+        CollectBps(folder, "", bpList, language);
+
         bpList.Sort((a, b) =>
         {
             int c = string.Compare(a.FolderPath, b.FolderPath, StringComparison.OrdinalIgnoreCase);
@@ -414,23 +465,14 @@ internal static class BlueprintExport
             foreach (var k in s.ConstructionValues.Keys) constrCols.Add(k);
         }
 
-        // ── Build table ────────────────────────────────────────────────────
-        var sb = new StringBuilder();
-
-        sb.AppendLine($"## {folder.Name}");
-        if (!string.IsNullOrWhiteSpace(folder.Desc))
-        {
-            sb.AppendLine();
-            sb.AppendLine(folder.Desc.Trim());
-        }
         sb.AppendLine();
 
         // Header row
-        sb.Append("| Blueprint | Folder | Entities |");
-        if (hasWorkers) sb.Append(" Workers |");
-        if (hasElec)    sb.Append(" Electricity |");
-        if (hasComp)    sb.Append(" Computing |");
-        foreach (var col in maintCols)  sb.Append($" {col} / mo |");
+        sb.Append($"| {MarkdownText(DtkLocalization.MarkdownBlueprintHeader, language)} | {MarkdownText(DtkLocalization.MarkdownFolderHeader, language)} | {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} |");
+        if (hasWorkers) sb.Append($" {MarkdownText(DtkLocalization.MarkdownWorkersStat, language)} |");
+        if (hasElec)    sb.Append($" {MarkdownText(DtkLocalization.MarkdownElectricityStat, language)} |");
+        if (hasComp)    sb.Append($" {MarkdownText(DtkLocalization.MarkdownComputingStat, language)} |");
+        foreach (var col in maintCols)  sb.Append($" {col} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} |");
         foreach (var col in constrCols) sb.Append($" {col} |");
         sb.AppendLine();
 
@@ -457,19 +499,21 @@ internal static class BlueprintExport
                 sb.Append(s.ConstructionValues.TryGetValue(col, out var cv) ? $" {cv} |" : " - |");
             sb.AppendLine();
         }
-
-        return sb.ToString();
     }
 
     /// <summary>
     /// Recursively collects all blueprints under <paramref name="folder"/> into <paramref name="result"/>,
     /// setting each entry's <see cref="BpStats.FolderPath"/> to the path relative to the root folder.
     /// </summary>
-    private static void CollectBps(IBlueprintsFolder folder, string relativePath, List<BpStats> result)
+    private static void CollectBps(
+        IBlueprintsFolder folder,
+        string relativePath,
+        List<BpStats> result,
+        MarkdownRenderLanguage language)
     {
         for (int i = 0; i < folder.Blueprints.Count; i++)
         {
-            var s = ComputeBpStats(folder.Blueprints[i]);
+            var s = ComputeBpStats(folder.Blueprints[i], language);
             s.FolderPath = relativePath;
             result.Add(s);
         }
@@ -480,7 +524,7 @@ internal static class BlueprintExport
             string subPath = string.IsNullOrEmpty(relativePath)
                 ? sub.Name
                 : $"{relativePath}/{sub.Name}";
-            CollectBps(sub, subPath, result);
+            CollectBps(sub, subPath, result, language);
         }
     }
 
@@ -500,5 +544,54 @@ internal static class BlueprintExport
         if (mw < 10.0)  return mw.ToString("F2", System.Globalization.CultureInfo.InvariantCulture) + " MW";
         if (mw < 100.0) return mw.ToString("F1", System.Globalization.CultureInfo.InvariantCulture) + " MW";
         return $"{(int)Math.Round(mw)} MW";
+    }
+
+    private static MarkdownRenderLanguage ResolveRenderLanguage()
+    {
+        switch (DesignerToolkitSettings.MarkdownTableLanguage)
+        {
+            case MarkdownTableLanguage.Local:
+                return MarkdownRenderLanguage.Local;
+            case MarkdownTableLanguage.Hybrid:
+                return MarkdownRenderLanguage.Hybrid;
+            case MarkdownTableLanguage.English:
+            case MarkdownTableLanguage.Both:
+            default:
+                return MarkdownRenderLanguage.English;
+        }
+    }
+
+    private static string DisplayName(
+        LocStr name,
+        MarkdownRenderLanguage language)
+    {
+        return LocalizedText(name, language);
+    }
+
+    private static string MarkdownText(
+        LocStr text,
+        MarkdownRenderLanguage language)
+    {
+        return LocalizedText(text, language);
+    }
+
+    private static string LocalizedText(
+        LocStr text,
+        MarkdownRenderLanguage language)
+    {
+        string english = LocalizationManager.GetUsEnStringFor(text);
+        switch (language)
+        {
+            case MarkdownRenderLanguage.Local:
+                return text.TranslatedString;
+            case MarkdownRenderLanguage.Hybrid:
+                string local = text.TranslatedString;
+                return string.Equals(local, english, StringComparison.Ordinal)
+                    ? local
+                    : $"{local} ({english})";
+            case MarkdownRenderLanguage.English:
+            default:
+                return english;
+        }
     }
 }

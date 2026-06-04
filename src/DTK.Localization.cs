@@ -1,0 +1,76 @@
+// CoI Designer Toolkit
+// Copyright (c) 2026 Kayser1444
+// Licensed under the MIT License.
+//
+// Unofficial mod for Captain of Industry. Captain of Industry, MaFi Games, and
+// related trademarks, code, and assets belong to MaFi Games. This repository is
+// intended to contain only original mod code/configuration; if MaFi Games material
+// is included by mistake, I intend to correct it promptly upon discovery or notice.
+using Mafi.Localization;
+
+namespace CoIDesignerToolkit;
+
+internal static class DtkLocalization
+{
+    public static LocStr ModName =
+        Loc.Str("dtk.mod.name", "Designer Toolkit", "Designer Toolkit mod name.");
+
+    public static LocStr SettingsTabMarkdown =
+        Loc.Str("dtk.settings.tab.markdown", "Markdown", "Settings tab title for Markdown settings.");
+    public static LocStr SettingsMarkdownCopyHeading =
+        Loc.Str("dtk.settings.markdown_copy.heading", "Markdown Copy", "Settings section heading for Markdown copy/export settings.");
+    public static LocStr SettingsMarkdownTableLanguage =
+        Loc.Str("dtk.settings.markdown_table_language.label", "Markdown table language", "Settings row label for Markdown table language.");
+    public static LocStr SettingsMarkdownTableLanguageDescription =
+        Loc.Str("dtk.settings.markdown_table_language.description", "Controls which language Markdown table headers and product/entity names should use.", "Settings row description for Markdown table language.");
+    public static LocStr SettingsMarkdownTableLanguagePending =
+        Loc.Str("dtk.settings.markdown_table_language.pending", "English, Local, Both, and Hybrid are wired into Markdown export.", "Settings note for Markdown table language implementation status.");
+    public static LocStr SettingsLanguageEnglish =
+        Loc.Str("dtk.settings.language.english", "English", "Dropdown option for English Markdown table language.");
+    public static LocStr SettingsLanguageLocal =
+        Loc.Str("dtk.settings.language.local", "Local", "Dropdown option for local Markdown table language.");
+    public static LocStr SettingsLanguageBoth =
+        Loc.Str("dtk.settings.language.both", "Both", "Dropdown option for bilingual Markdown table language.");
+    public static LocStr SettingsLanguageHybrid =
+        Loc.Str("dtk.settings.language.hybrid", "Hybrid", "Dropdown option for hybrid Markdown table language.");
+
+    public static LocStr CopyAsMarkdownButton =
+        Loc.Str("dtk.blueprint.copy_as_markdown.button", "Copy as Markdown", "Button label for copying blueprint information as Markdown.");
+    public static LocStr CopyBlueprintMarkdownTooltip =
+        Loc.Str("dtk.blueprint.copy_as_markdown.tooltip", "Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub.", "Tooltip for copying one blueprint as Markdown.");
+    public static LocStr CopyFolderMarkdownTooltip =
+        Loc.Str("dtk.blueprint.copy_folder_as_markdown.tooltip", "Copy folder blueprint list as a Markdown table to the clipboard.", "Tooltip for copying a blueprint folder as Markdown.");
+
+    public static LocStr MarkdownComponentsHeading =
+        Loc.Str("dtk.markdown.components.heading", "Components", "Markdown section heading for component counts.");
+    public static LocStr MarkdownConstructionHeading =
+        Loc.Str("dtk.markdown.construction.heading", "Construction", "Markdown section heading for construction costs.");
+    public static LocStr MarkdownOperationalHeading =
+        Loc.Str("dtk.markdown.operational.heading", "Operational", "Markdown section heading for operational stats.");
+    public static LocStr MarkdownEntityHeader =
+        Loc.Str("dtk.markdown.entity.header", "Entity", "Markdown table header for entity names.");
+    public static LocStr MarkdownCountHeader =
+        Loc.Str("dtk.markdown.count.header", "Count", "Markdown table header for counts.");
+    public static LocStr MarkdownProductHeader =
+        Loc.Str("dtk.markdown.product.header", "Product", "Markdown table header for product names.");
+    public static LocStr MarkdownQuantityHeader =
+        Loc.Str("dtk.markdown.quantity.header", "Quantity", "Markdown table header for quantities.");
+    public static LocStr MarkdownPropertyHeader =
+        Loc.Str("dtk.markdown.property.header", "Property", "Markdown table header for property names.");
+    public static LocStr MarkdownValueHeader =
+        Loc.Str("dtk.markdown.value.header", "Value", "Markdown table header for values.");
+    public static LocStr MarkdownBlueprintHeader =
+        Loc.Str("dtk.markdown.blueprint.header", "Blueprint", "Markdown table header for blueprint names.");
+    public static LocStr MarkdownFolderHeader =
+        Loc.Str("dtk.markdown.folder.header", "Folder", "Markdown table header for folder names.");
+    public static LocStr MarkdownEntitiesStat =
+        Loc.Str("dtk.markdown.entities.stat", "Entities", "Markdown operational stat label for entity count.");
+    public static LocStr MarkdownWorkersStat =
+        Loc.Str("dtk.markdown.workers.stat", "Workers", "Markdown operational stat label for workers.");
+    public static LocStr MarkdownElectricityStat =
+        Loc.Str("dtk.markdown.electricity.stat", "Electricity", "Markdown operational stat label for electricity.");
+    public static LocStr MarkdownComputingStat =
+        Loc.Str("dtk.markdown.computing.stat", "Computing", "Markdown operational stat label for computing.");
+    public static LocStr MarkdownPerMonthSuffix =
+        Loc.Str("dtk.markdown.per_month.suffix", "/ mo", "Markdown suffix for monthly maintenance columns.");
+}

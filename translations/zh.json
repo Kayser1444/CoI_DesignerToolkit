@@ -1,0 +1,118 @@
+[
+  [
+    "dtk.mod.name",
+    "Designer Toolkit"
+  ],
+  [
+    "dtk.settings.tab.markdown",
+    "Markdown"
+  ],
+  [
+    "dtk.settings.markdown_copy.heading",
+    "Markdown 复制"
+  ],
+  [
+    "dtk.settings.markdown_table_language.label",
+    "Markdown 表格语言"
+  ],
+  [
+    "dtk.settings.markdown_table_language.description",
+    "控制 Markdown 表头以及产品/实体名称使用的语言。"
+  ],
+  [
+    "dtk.settings.markdown_table_language.pending",
+    "英语、本地、双语和混合模式现在都已接入 Markdown 导出。"
+  ],
+  [
+    "dtk.settings.language.english",
+    "英语"
+  ],
+  [
+    "dtk.settings.language.local",
+    "本地"
+  ],
+  [
+    "dtk.settings.language.both",
+    "双语"
+  ],
+  [
+    "dtk.settings.language.hybrid",
+    "混合"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "复制为 Markdown"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "将蓝图统计作为 Markdown 表格复制到剪贴板，可直接粘贴到 Hub。"
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "将文件夹中的蓝图列表作为 Markdown 表格复制到剪贴板。"
+  ],
+  [
+    "dtk.markdown.components.heading",
+    "组件"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "建造"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "运行"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "实体"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "数量"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "产品"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "数量"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "属性"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "数值"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "蓝图"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "文件夹"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "实体"
+  ],
+  [
+    "dtk.markdown.workers.stat",
+    "工人"
+  ],
+  [
+    "dtk.markdown.electricity.stat",
+    "电力"
+  ],
+  [
+    "dtk.markdown.computing.stat",
+    "算力"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ 月"
+  ]
+]

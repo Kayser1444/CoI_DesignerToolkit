@@ -1,0 +1,118 @@
+[
+  [
+    "dtk.mod.name",
+    "Designer Toolkit"
+  ],
+  [
+    "dtk.settings.tab.markdown",
+    "Markdown"
+  ],
+  [
+    "dtk.settings.markdown_copy.heading",
+    "Markdown Copy"
+  ],
+  [
+    "dtk.settings.markdown_table_language.label",
+    "Markdown table language"
+  ],
+  [
+    "dtk.settings.markdown_table_language.description",
+    "Controls which language Markdown table headers and product/entity names should use."
+  ],
+  [
+    "dtk.settings.markdown_table_language.pending",
+    "English, Local, Both, and Hybrid are wired into Markdown export."
+  ],
+  [
+    "dtk.settings.language.english",
+    "English"
+  ],
+  [
+    "dtk.settings.language.local",
+    "Local"
+  ],
+  [
+    "dtk.settings.language.both",
+    "Both"
+  ],
+  [
+    "dtk.settings.language.hybrid",
+    "Hybrid"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Copy as Markdown"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub."
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Copy folder blueprint list as a Markdown table to the clipboard."
+  ],
+  [
+    "dtk.markdown.components.heading",
+    "Components"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Construction"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Operational"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Entity"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Count"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Product"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "Quantity"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Property"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "Value"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Blueprint"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Folder"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Entities"
+  ],
+  [
+    "dtk.markdown.workers.stat",
+    "Workers"
+  ],
+  [
+    "dtk.markdown.electricity.stat",
+    "Electricity"
+  ],
+  [
+    "dtk.markdown.computing.stat",
+    "Computing"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ mo"
+  ]
+]

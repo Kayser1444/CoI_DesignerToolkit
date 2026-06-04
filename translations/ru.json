@@ -1,0 +1,118 @@
+[
+  [
+    "dtk.mod.name",
+    "Designer Toolkit"
+  ],
+  [
+    "dtk.settings.tab.markdown",
+    "Markdown"
+  ],
+  [
+    "dtk.settings.markdown_copy.heading",
+    "Копирование Markdown"
+  ],
+  [
+    "dtk.settings.markdown_table_language.label",
+    "Язык таблиц Markdown"
+  ],
+  [
+    "dtk.settings.markdown_table_language.description",
+    "Определяет, какой язык будут использовать заголовки таблиц Markdown и названия продуктов/объектов."
+  ],
+  [
+    "dtk.settings.markdown_table_language.pending",
+    "Английский, локальный, оба и гибридный режимы уже подключены к экспорту Markdown."
+  ],
+  [
+    "dtk.settings.language.english",
+    "Английский"
+  ],
+  [
+    "dtk.settings.language.local",
+    "Локальный"
+  ],
+  [
+    "dtk.settings.language.both",
+    "Оба"
+  ],
+  [
+    "dtk.settings.language.hybrid",
+    "Гибридный"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Скопировать как Markdown"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Копирует статистику чертежа в буфер обмена в виде таблицы Markdown, готовой для вставки в Hub."
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Копирует список чертежей папки в буфер обмена в виде таблицы Markdown."
+  ],
+  [
+    "dtk.markdown.components.heading",
+    "Компоненты"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Строительство"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Эксплуатация"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Объект"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Количество"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Продукт"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "Количество"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Свойство"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "Значение"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Чертеж"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Папка"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Объекты"
+  ],
+  [
+    "dtk.markdown.workers.stat",
+    "Рабочие"
+  ],
+  [
+    "dtk.markdown.electricity.stat",
+    "Электричество"
+  ],
+  [
+    "dtk.markdown.computing.stat",
+    "Вычисления"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ мес."
+  ]
+]
