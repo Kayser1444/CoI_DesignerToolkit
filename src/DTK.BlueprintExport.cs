@@ -399,9 +399,9 @@ internal static class BlueprintExport
         sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownPropertyHeader, language)} | {MarkdownText(DtkLocalization.MarkdownValueHeader, language)} |");
         sb.AppendLine("|---|---|");
         sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} | {s.Entities} |");
-        if (s.Workers > 0) sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownWorkersStat, language)} | {s.Workers} |");
-        if (s.ElecKw  > 0) sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownElectricityStat, language)} | {FormatElectricity(s.ElecKw)} |");
-        if (s.CompTf  > 0) sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownComputingStat, language)} | {s.CompTf} TF |");
+        if (s.Workers > 0) sb.AppendLine($"| {MarkdownText(Tr.Workers, language)} | {s.Workers} |");
+        if (s.ElecKw  > 0) sb.AppendLine($"| {MarkdownText(Tr.ElectricityStats, language)} | {FormatElectricity(s.ElecKw)} |");
+        if (s.CompTf  > 0) sb.AppendLine($"| {MarkdownText(Tr.ComputingStats, language)} | {s.CompTf} TF |");
         foreach (var kvp in s.MaintenanceValues)   // already A-Z
             sb.AppendLine($"| {kvp.Key} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} | {kvp.Value} |");
     }
@@ -469,9 +469,9 @@ internal static class BlueprintExport
 
         // Header row
         sb.Append($"| {MarkdownText(DtkLocalization.MarkdownBlueprintHeader, language)} | {MarkdownText(DtkLocalization.MarkdownFolderHeader, language)} | {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} |");
-        if (hasWorkers) sb.Append($" {MarkdownText(DtkLocalization.MarkdownWorkersStat, language)} |");
-        if (hasElec)    sb.Append($" {MarkdownText(DtkLocalization.MarkdownElectricityStat, language)} |");
-        if (hasComp)    sb.Append($" {MarkdownText(DtkLocalization.MarkdownComputingStat, language)} |");
+        if (hasWorkers) sb.Append($" {MarkdownText(Tr.Workers, language)} |");
+        if (hasElec)    sb.Append($" {MarkdownText(Tr.ElectricityStats, language)} |");
+        if (hasComp)    sb.Append($" {MarkdownText(Tr.ComputingStats, language)} |");
         foreach (var col in maintCols)  sb.Append($" {col} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} |");
         foreach (var col in constrCols) sb.Append($" {col} |");
         sb.AppendLine();

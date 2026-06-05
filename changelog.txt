@@ -1,3 +1,6 @@
+## v0.2.0a (unreleased)
+* Changed Markdown export to use vanilla game translations for workers, electricity, and computing, removing duplicate Designer Toolkit translation entries
+
 ## v0.2.0
 * Added **Mod Settings** window, opened from the top-right **M** button or with `Alt+M`
 * Added **Markdown table language** setting with English, Local, Both, and Hybrid modes
@@ -15,3 +18,6 @@
 * **Copy as Markdown** in the blueprint detail panel: copies a Markdown-formatted summary to the clipboard - heading, description, Components table (A-Z), Construction table (A-Z), and Operational table
 * **Copy as Markdown** in the blueprint folder detail panel: copies a wide Markdown table of all blueprints in the folder tree (recursive); each blueprint is a row, with a Folder column for the relative sub-folder path and dynamically discovered stat/cost columns (A-Z); rows sorted by folder then by blueprint name
 * Fix: electricity values now always use `.` as the decimal separator regardless of OS locale
+
+
+

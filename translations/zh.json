@@ -100,18 +100,6 @@
     "实体"
   ],
   [
-    "dtk.markdown.workers.stat",
-    "工人"
-  ],
-  [
-    "dtk.markdown.electricity.stat",
-    "电力"
-  ],
-  [
-    "dtk.markdown.computing.stat",
-    "算力"
-  ],
-  [
     "dtk.markdown.per_month.suffix",
     "/ 月"
   ]

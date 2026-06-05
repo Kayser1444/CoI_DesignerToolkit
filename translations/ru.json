@@ -100,18 +100,6 @@
     "Объекты"
   ],
   [
-    "dtk.markdown.workers.stat",
-    "Рабочие"
-  ],
-  [
-    "dtk.markdown.electricity.stat",
-    "Электричество"
-  ],
-  [
-    "dtk.markdown.computing.stat",
-    "Вычисления"
-  ],
-  [
     "dtk.markdown.per_month.suffix",
     "/ мес."
   ]

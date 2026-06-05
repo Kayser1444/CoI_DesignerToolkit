@@ -6,11 +6,12 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 
 ## ✨ Feature List
 
-- [🔁 Update blueprint](#-update-blueprint)
-- [📂 Remembered blueprint folder](#-remembered-blueprint-folder)
-- [📊 Blueprint operational stats](#-blueprint-operational-stats)
-- [📝 Copy as Markdown](#-copy-as-markdown)
-- [🧩 Symmetric entity normalization](#-symmetric-entity-normalization)
+- \[🔁 Update blueprint\]
+- \[📂 Remembered blueprint folder\]
+- \[📊 Blueprint operational stats\]
+- \[📝 Copy as Markdown\]
+- \[🧩 Symmetric entity normalization\]
+- \[⚙️ Mod settings\]
 
 ### 🔁 Update blueprint
 
@@ -31,30 +32,30 @@ This is meant for the usual blueprint-authoring loop: find a small mistake, fix 
 
 ![remembered-blueprint-folder.png](/content-images/bd11e3f67062aa6a456a334fd50decd89667a29c4f4eda166bfff902f968fc91/remembered-blueprint-folder.png)
 
-DTK remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created.
-
-The folder path is stored in `config.json`. If a folder is renamed or removed, DTK gracefully falls back to the deepest folder it can still find.
+DTK remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created. The folder path is stored in the vanilla save file. This allows you to store different currently open blueprint book page in different save games.
 
 ### 📊 Blueprint operational stats
 
-![blueprint-operational-stats.png](/content-images/d476e2ab7976bb3130040d62a6d987f3bc9d95ddd0e116b5f20daf867f3e5190/blueprint-operational-stats.png)
+The blueprint detail panel now also shows **Operational cost**.
 
-The blueprint detail panel now separates **Construction cost** from **Operational cost**.
+![blueprint-operational-stats.png](/content-images/d476e2ab7976bb3130040d62a6d987f3bc9d95ddd0e116b5f20daf867f3e5190/blueprint-operational-stats.png)
 
 When a selected blueprint contains relevant entities, DTK adds a compact operational summary row showing:
 
 - workers
 - electricity
 - computing
-- maintenance by product
+- maintenance by tier
 
-Only non-zero stats are shown, so small blueprints stay clean and large builds get the extra planning information where it belongs.
+Only non-zero stats are shown, so small blueprints stay clean and large builds get the extra planning information where it belongs. Operational costs assume 100% utilization on all entities.
 
 ### 📝 Copy as Markdown
 
 ![image.png](/content-images/786bf604956dbf2eb157e4db3e6e7bc0f4c816bc95439d6a39fa5b6bf437c086/image.png)
 
 DTK adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
+
+The language used for table headers and product/entity names is controlled by the **Markdown table language** setting in Mod Settings (see below). The default is **English**.
 
 **Single blueprint** - clicking the button copies a Markdown-formatted summary to the clipboard:
 
@@ -65,7 +66,7 @@ DTK adds a **Copy as Markdown** button to both the blueprint detail panel and th
 
 **Blueprint folder** - clicking the button copies a wide Markdown table listing every blueprint in the folder, including blueprints in sub-folders. Each blueprint is a row. Columns include Blueprint name, Folder (relative path within the exported root), Entities, and any workers / electricity / computing / maintenance / construction product columns present across the folder, sorted A-Z. Rows are sorted by folder path, then by blueprint name within each folder.
 
-Example output:
+Example output (folder):
 
 ```markdown
 ## Kayser's Compact Concrete
@@ -98,6 +99,21 @@ https://hub.coigame.com/Blueprint/Detail/590
 
 The output is ready to paste directly into a Hub post or wiki page.
 
+### ⚙️ Mod settings
+
+DTK adds a **Mod Settings** panel, accessible from the top-right **M** button in the mod menu or with the keyboard shortcut `Alt+M`.
+
+**Markdown table language** controls which language is used for table headers and product/entity names when copying Markdown:
+
+| Mode | Behavior |
+|---|---|
+| **English** | English headers and names (default) |
+| **Local** | Current game language |
+| **Both** | English tables first, followed by local-language tables |
+| **Hybrid** | Local text first, with English in parentheses where strings differ |
+
+Settings are stored per save file. The `markdown_table_language` key in `config.json` sets the initial value for saves that have no stored settings yet.
+
 ### 🧩 Symmetric entity normalization
 
 ![symmetric-normalization-result.png](/content-images/b668e393f133cabe73642be461496f2eb16923445f79b6bafbd990aac5d67fbd/symmetric-normalization-result.png)
@@ -106,16 +122,18 @@ Mitigation/Fix for: https://discord.com/channels/803508556325584926/140580090564
 
 DTK normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
 
-Captain of Industry can treat a functionally identical balancer at rotation 0 and rotation 2 as different, which can block paste-over updates. DTK fixes that at blueprint capture time by resetting symmetric entity rotation and reflection to a canonical orientation.
+Captain of Industry can treat a functionally identical connector at e.g. rotation 0° and rotation 90° as different, which can block paste-over updates. DTK fixes that at blueprint capture time by resetting symmetric entities' rotation and flip-state to a canonical orientation.
 
 The normalization pass focuses on the known paste-over problem cases:
 
 - resets supported symmetric entities to a consistent stored orientation
 - keeps their blueprint position unchanged
-- preserves balancer priority settings where DTK can safely remap them
+- preserves balancer priority settings
 - skips entities that do not match the supported symmetric layouts
 
-The result is still normal blueprint data. This does not patch blueprint placement and does not require blueprint users to install DTK.
+The result is still normal blueprint data with all (normalized) entities at rotation 0° and non-flipped. This does not patch blueprint placement and does *not* require blueprint users to install DTK.
+
+This is a passive feature that allows you to freely place connectors, balancers, and lifts in multi-tier blueprints without worrying about their orientation.
 
 ## 📌 Notes
 
@@ -123,19 +141,13 @@ The result is still normal blueprint data. This does not patch blueprint placeme
 - Can be added to or removed from existing saves.
 - Requires Captain of Industry `0.8.2` or newer.
 - Blueprint consumers do not need this mod installed.
+- UI translations included for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
 
 ## 📦 Installation
 
 - Download the latest version of the mod from the Captain of Industry Hub.
 - Extract the mod folder into your Captain of Industry mods directory (`%AppData%\Captain of Industry\Mods`).
 - Enable the mod when loading or starting a new game.
-
-## 🛠️ Build from source
-
-- Install the .NET SDK with .NET Framework 4.8 targeting support.
-- Make sure Captain of Industry is installed, or set `CAPTAIN_INDUSTRY_MANAGED_PATH` to the game's `Captain of Industry_Data\Managed` directory.
-- Run `./build.ps1 -Configuration Release`.
-- The release zip is created in the project root.
 
 ## 📜 License
 

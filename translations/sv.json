@@ -100,18 +100,6 @@
     "Entiteter"
   ],
   [
-    "dtk.markdown.workers.stat",
-    "Arbetare"
-  ],
-  [
-    "dtk.markdown.electricity.stat",
-    "Elektricitet"
-  ],
-  [
-    "dtk.markdown.computing.stat",
-    "Datorkraft"
-  ],
-  [
     "dtk.markdown.per_month.suffix",
     "/ mån"
   ]

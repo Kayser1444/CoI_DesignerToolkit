@@ -100,18 +100,6 @@
     "Entità"
   ],
   [
-    "dtk.markdown.workers.stat",
-    "Lavoratori"
-  ],
-  [
-    "dtk.markdown.electricity.stat",
-    "Elettricità"
-  ],
-  [
-    "dtk.markdown.computing.stat",
-    "Computazione"
-  ],
-  [
     "dtk.markdown.per_month.suffix",
     "/ mese"
   ]

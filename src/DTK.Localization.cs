@@ -65,12 +65,7 @@ internal static class DtkLocalization
         Loc.Str("dtk.markdown.folder.header", "Folder", "Markdown table header for folder names.");
     public static LocStr MarkdownEntitiesStat =
         Loc.Str("dtk.markdown.entities.stat", "Entities", "Markdown operational stat label for entity count.");
-    public static LocStr MarkdownWorkersStat =
-        Loc.Str("dtk.markdown.workers.stat", "Workers", "Markdown operational stat label for workers.");
-    public static LocStr MarkdownElectricityStat =
-        Loc.Str("dtk.markdown.electricity.stat", "Electricity", "Markdown operational stat label for electricity.");
-    public static LocStr MarkdownComputingStat =
-        Loc.Str("dtk.markdown.computing.stat", "Computing", "Markdown operational stat label for computing.");
     public static LocStr MarkdownPerMonthSuffix =
         Loc.Str("dtk.markdown.per_month.suffix", "/ mo", "Markdown suffix for monthly maintenance columns.");
 }
+
