@@ -102,5 +102,37 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ mo"
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Restore defaults"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Restore the global mod defaults for all settings."
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Save as global"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Save these settings globally for new games."
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Restored built-in defaults in memory."
+  ],
+  [
+    "dtk.settings.status.save_failed",
+    "Save failed: {0}"
+  ],
+  [
+    "dtk.settings.status.saved_to_config",
+    "Saved to config.json."
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "Save failed: settings store is not initialized."
   ]
 ]

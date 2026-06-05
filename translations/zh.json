@@ -102,5 +102,37 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ 月"
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "恢复默认值"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "恢复所有设置的全局模组默认值。"
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "保存为全局"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "将这些设置全局保存，用于新游戏。"
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "已在内存中恢复内置默认值。"
+  ],
+  [
+    "dtk.settings.status.save_failed",
+    "保存失败：{0}"
+  ],
+  [
+    "dtk.settings.status.saved_to_config",
+    "已保存到 config.json。"
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "保存失败：设置存储尚未初始化。"
   ]
 ]

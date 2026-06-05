@@ -8,6 +8,7 @@
 // is included by mistake, I intend to correct it promptly upon discovery or notice.
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using Mafi;
 using Mafi.Collections;
 using Mafi.Core.Mods;
@@ -36,7 +37,7 @@ internal static class DesignerToolkitSettings
     private const string MARKDOWN_TABLE_LANGUAGE_KEY = "markdown_table_language";
     private const int SETTINGS_SCHEMA_VERSION = 1;
     private const string SETTINGS_TAB_ICON_ASSET =
-        "Assets/Unity/UserInterface/Toolbar/Stats.svg";
+        "Assets/Unity/UserInterface/General/Blueprint.svg";
     private static readonly Percent SETTINGS_LABEL_WIDTH = 50.Percent();
     private static readonly Percent SETTINGS_COLUMN_WIDTH = 60.Percent();
     private static readonly Px SETTINGS_SECTION_INDENT = 4.pt();
@@ -44,11 +45,16 @@ internal static class DesignerToolkitSettings
 
     private static readonly ModLogger s_log = new ModLogger("DTK.Settings");
 
+    private static ModJsonConfig? s_config;
+    private static IModStateJsonStore? s_store;
+
     public static MarkdownTableLanguage MarkdownTableLanguage { get; private set; } =
         MarkdownTableLanguage.English;
 
     public static void Initialize(ModJsonConfig config, IModStateJsonStore store)
     {
+        s_config = config;
+        s_store = store;
         MarkdownTableLanguage initialLanguage = FromInt(config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
         MarkdownTableLanguage = LoadFromJsonStore(store, initialLanguage);
     }
@@ -98,8 +104,81 @@ internal static class DesignerToolkitSettings
                 .OnValueChanged((language, _) => SetMarkdownTableLanguage(language));
 
         root.Add(languageDropdown);
+        root.Add(BuildFooter(() => languageDropdown.SetValue(MarkdownTableLanguage)));
 
         return root;
+    }
+
+    private static PanelFooterRow BuildFooter(Action refresh)
+    {
+        var status = new Label(LocStrFormatted.Empty).MarginTopBottom(1.pt());
+
+        var reset = new ButtonText(Button.General, DtkLocalization.SettingsRestoreDefaults.AsFormatted, () =>
+        {
+            MarkdownTableLanguage = MarkdownTableLanguage.English;
+            refresh();
+            status.Value(DtkLocalization.SettingsRestoredDefaults.AsFormatted);
+        }).Tooltip(DtkLocalization.SettingsRestoreDefaultsTooltip.AsFormatted);
+
+        var save = new ButtonText(Button.Primary, DtkLocalization.SettingsSaveAsGlobal.AsFormatted, () =>
+        {
+            if (s_store == null)
+            {
+                status.Value(DtkLocalization.SettingsStoreNotInitialized.AsFormatted);
+                return;
+            }
+
+            SaveToJsonStore(s_store);
+            status.Value(TrySaveGlobalConfig(out string error)
+                ? DtkLocalization.SettingsSavedToConfig.AsFormatted
+                : new LocStrFormatted(string.Format(DtkLocalization.SettingsSaveFailed.TranslatedString, error)));
+        }).Tooltip(DtkLocalization.SettingsSaveAsGlobalTooltip.AsFormatted);
+
+        return new PanelFooterRow().BodyAdd(
+            row => row.Gap(2.pt()).AlignItemsCenter(),
+            status,
+            new UiComponent().FlexGrow(1f),
+            reset,
+            save);
+    }
+
+    private static bool TrySaveGlobalConfig(out string error)
+    {
+        error = string.Empty;
+        try
+        {
+            if (s_config != null && !s_config.TrySetValue(MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out error))
+                return false;
+
+            string? directory = Path.GetDirectoryName(typeof(DesignerToolkitSettings).Assembly.Location);
+            if (string.IsNullOrWhiteSpace(directory))
+            {
+                error = "Could not resolve mod directory.";
+                return false;
+            }
+
+            string path = Path.Combine(directory, "config.json");
+            string json = File.ReadAllText(path);
+            string pattern = "(\"" + MARKDOWN_TABLE_LANGUAGE_KEY + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)-?\\d+";
+            string updated = Regex.Replace(
+                json,
+                pattern,
+                match => match.Groups[1].Value + ((int)MarkdownTableLanguage).ToString(System.Globalization.CultureInfo.InvariantCulture),
+                RegexOptions.Singleline);
+            if (updated == json)
+            {
+                error = "Could not find markdown_table_language default in config.json.";
+                return false;
+            }
+
+            File.WriteAllText(path, updated, new System.Text.UTF8Encoding(false));
+            return true;
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            return false;
+        }
     }
 
     private static void SetMarkdownTableLanguage(MarkdownTableLanguage language)

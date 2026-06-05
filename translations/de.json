@@ -102,5 +102,37 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ Monat"
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Standardwerte wiederherstellen"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Stellt die globalen Mod-Standardwerte für alle Einstellungen wieder her."
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Global speichern"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Speichert diese Einstellungen global für neue Spiele."
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Eingebaute Standardwerte im Speicher wiederhergestellt."
+  ],
+  [
+    "dtk.settings.status.save_failed",
+    "Speichern fehlgeschlagen: {0}"
+  ],
+  [
+    "dtk.settings.status.saved_to_config",
+    "In config.json gespeichert."
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "Speichern fehlgeschlagen: Einstellungsspeicher ist nicht initialisiert."
   ]
 ]

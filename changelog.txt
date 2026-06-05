@@ -1,4 +1,6 @@
 ## v0.2.0a (unreleased)
+* Added **Restore defaults** and **Save as global** buttons to Designer Toolkit's Mod Settings tab
+* Rebuilt Designer Toolkit with the updated AutoHelpers Mod Settings icon handoff so tab icons render through the shared settings window
 * Changed Markdown export to use vanilla game translations for workers, electricity, and computing, removing duplicate Designer Toolkit translation entries
 
 ## v0.2.0

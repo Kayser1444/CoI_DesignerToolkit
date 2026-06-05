@@ -102,5 +102,37 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ мес."
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Восстановить значения"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Восстанавливает глобальные значения мода по умолчанию для всех настроек."
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Сохранить глобально"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Сохраняет эти настройки глобально для новых игр."
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Встроенные значения по умолчанию восстановлены в памяти."
+  ],
+  [
+    "dtk.settings.status.save_failed",
+    "Не удалось сохранить: {0}"
+  ],
+  [
+    "dtk.settings.status.saved_to_config",
+    "Сохранено в config.json."
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "Не удалось сохранить: хранилище настроек не инициализировано."
   ]
 ]

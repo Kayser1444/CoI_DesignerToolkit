@@ -102,5 +102,37 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ mês"
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Restaurar padrões"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Restaura os padrões globais do mod para todas as configurações."
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Salvar como global"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Salva estas configurações globalmente para novos jogos."
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Padrões internos restaurados na memória."
+  ],
+  [
+    "dtk.settings.status.save_failed",
+    "Falha ao salvar: {0}"
+  ],
+  [
+    "dtk.settings.status.saved_to_config",
+    "Salvo em config.json."
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "Falha ao salvar: armazenamento de configurações não inicializado."
   ]
 ]

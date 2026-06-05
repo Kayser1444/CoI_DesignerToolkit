@@ -33,6 +33,22 @@ internal static class DtkLocalization
         Loc.Str("dtk.settings.language.both", "Both", "Dropdown option for bilingual Markdown table language.");
     public static LocStr SettingsLanguageHybrid =
         Loc.Str("dtk.settings.language.hybrid", "Hybrid", "Dropdown option for hybrid Markdown table language.");
+    public static LocStr SettingsRestoreDefaults =
+        Loc.Str("dtk.settings.action.restore_defaults", "Restore defaults", "Button label for restoring default settings.");
+    public static LocStr SettingsRestoreDefaultsTooltip =
+        Loc.Str("dtk.settings.action.restore_defaults.tooltip", "Restore the global mod defaults for all settings.", "Tooltip for restoring default settings.");
+    public static LocStr SettingsSaveAsGlobal =
+        Loc.Str("dtk.settings.action.save_as_global", "Save as global", "Button label for saving settings globally.");
+    public static LocStr SettingsSaveAsGlobalTooltip =
+        Loc.Str("dtk.settings.action.save_as_global.tooltip", "Save these settings globally for new games.", "Tooltip for saving settings globally.");
+    public static LocStr SettingsRestoredDefaults =
+        Loc.Str("dtk.settings.status.restored_defaults", "Restored built-in defaults in memory.", "Status message after settings are restored to defaults.");
+    public static LocStr SettingsSavedToConfig =
+        Loc.Str("dtk.settings.status.saved_to_config", "Saved to config.json.", "Status message after settings are saved.");
+    public static LocStr SettingsSaveFailed =
+        Loc.Str("dtk.settings.status.save_failed", "Save failed: {0}", "Status message after settings save fails. {0} = error message.");
+    public static LocStr SettingsStoreNotInitialized =
+        Loc.Str("dtk.settings.status.store_not_initialized", "Save failed: settings store is not initialized.", "Status message when settings store is not initialized.");
 
     public static LocStr CopyAsMarkdownButton =
         Loc.Str("dtk.blueprint.copy_as_markdown.button", "Copy as Markdown", "Button label for copying blueprint information as Markdown.");
