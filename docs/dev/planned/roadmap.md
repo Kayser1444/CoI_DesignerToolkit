@@ -20,4 +20,3 @@ Planned and candidate improvements for Designer Toolkit.
 * Blueprint terrain designations?
 * Paste all BPs in folder at the same time
 * 'Recycle Bin' for deleted and/or updated blueprints - potentially with retention policy
-* Translation of all mod strings
