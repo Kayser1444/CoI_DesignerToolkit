@@ -38,9 +38,9 @@ internal static class DtkLocalization
     public static LocStr SettingsRestoreDefaultsTooltip =
         Loc.Str("dtk.settings.action.restore_defaults.tooltip", "Restore the global mod defaults for all settings.", "Tooltip for restoring default settings.");
     public static LocStr SettingsSaveAsGlobal =
-        Loc.Str("dtk.settings.action.save_as_global", "Save as global", "Button label for saving settings globally.");
+        Loc.Str("dtk.settings.action.save_as_global", "Save as config", "Button label for saving settings as config default.");
     public static LocStr SettingsSaveAsGlobalTooltip =
-        Loc.Str("dtk.settings.action.save_as_global.tooltip", "Save these settings globally for new games.", "Tooltip for saving settings globally.");
+        Loc.Str("dtk.settings.action.save_as_global.tooltip", "Save these settings to config.json. They will be used as the defaults for all new games.", "Tooltip for saving settings as config default.");
     public static LocStr SettingsRestoredDefaults =
         Loc.Str("dtk.settings.status.restored_defaults", "Restored built-in defaults in memory.", "Status message after settings are restored to defaults.");
     public static LocStr SettingsSavedToConfig =
