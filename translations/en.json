@@ -24,6 +24,14 @@
     "English, Local, Both, and Hybrid are wired into Markdown export."
   ],
   [
+    "dtk.settings.markdown_number_format.label",
+    "Markdown number format"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "Controls decimal and thousands separators in Markdown exports. Auto follows the rendered table language: English tables use en-US separators and local tables use the current game locale."
+  ],
+  [
     "dtk.settings.language.english",
     "English"
   ],
@@ -38,6 +46,18 @@
   [
     "dtk.settings.language.hybrid",
     "Hybrid"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "Auto"
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "English separators"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "Local separators"
   ],
   [
     "dtk.blueprint.copy_as_markdown.button",

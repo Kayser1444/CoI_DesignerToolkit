@@ -30,11 +30,19 @@ internal enum MarkdownTableLanguage
     Hybrid = 3,
 }
 
+internal enum MarkdownNumberFormat
+{
+    Auto = 0,
+    English = 1,
+    Local = 2,
+}
+
 internal static class DesignerToolkitSettings
 {
     internal const string SettingsStateConfigKey = "dtkSettingsStateJson";
 
     private const string MARKDOWN_TABLE_LANGUAGE_KEY = "markdown_table_language";
+    private const string MARKDOWN_NUMBER_FORMAT_KEY = "markdown_number_format";
     private const int SETTINGS_SCHEMA_VERSION = 1;
     private const string SETTINGS_TAB_ICON_ASSET =
         "Assets/Unity/UserInterface/General/Blueprint.svg";
@@ -50,13 +58,16 @@ internal static class DesignerToolkitSettings
 
     public static MarkdownTableLanguage MarkdownTableLanguage { get; private set; } =
         MarkdownTableLanguage.English;
+    public static MarkdownNumberFormat MarkdownNumberFormat { get; private set; } =
+        MarkdownNumberFormat.Auto;
 
     public static void Initialize(ModJsonConfig config, IModStateJsonStore store)
     {
         s_config = config;
         s_store = store;
         MarkdownTableLanguage initialLanguage = FromInt(config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
-        MarkdownTableLanguage = LoadFromJsonStore(store, initialLanguage);
+        MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
+        LoadFromJsonStore(store, initialLanguage, initialNumberFormat);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -104,7 +115,25 @@ internal static class DesignerToolkitSettings
                 .OnValueChanged((language, _) => SetMarkdownTableLanguage(language));
 
         root.Add(languageDropdown);
-        root.Add(BuildFooter(() => languageDropdown.SetValue(MarkdownTableLanguage)));
+
+        Dropdown<MarkdownNumberFormat> numberFormatDropdown =
+            new Dropdown<MarkdownNumberFormat>(NumberFormatDropdownOption)
+                .Label(DtkLocalization.SettingsMarkdownNumberFormat.AsFormatted)
+                .Tooltip(DtkLocalization.SettingsMarkdownNumberFormatDescription.AsFormatted)
+                .LabelWidth(SETTINGS_LABEL_WIDTH)
+                .SetOptions(
+                    MarkdownNumberFormat.Auto,
+                    MarkdownNumberFormat.English,
+                    MarkdownNumberFormat.Local)
+                .SetValue(MarkdownNumberFormat)
+                .OnValueChanged((numberFormat, _) => SetMarkdownNumberFormat(numberFormat));
+
+        root.Add(numberFormatDropdown);
+        root.Add(BuildFooter(() =>
+        {
+            languageDropdown.SetValue(MarkdownTableLanguage);
+            numberFormatDropdown.SetValue(MarkdownNumberFormat);
+        }));
 
         return root;
     }
@@ -116,6 +145,7 @@ internal static class DesignerToolkitSettings
         var reset = new ButtonText(Button.General, DtkLocalization.SettingsRestoreDefaults.AsFormatted, () =>
         {
             MarkdownTableLanguage = MarkdownTableLanguage.English;
+            MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             refresh();
             status.Value(DtkLocalization.SettingsRestoredDefaults.AsFormatted);
         }).Tooltip(DtkLocalization.SettingsRestoreDefaultsTooltip.AsFormatted);
@@ -149,6 +179,8 @@ internal static class DesignerToolkitSettings
         {
             if (s_config != null && !s_config.TrySetValue(MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out error))
+                return false;
 
             string? directory = Path.GetDirectoryName(typeof(DesignerToolkitSettings).Assembly.Location);
             if (string.IsNullOrWhiteSpace(directory))
@@ -159,15 +191,16 @@ internal static class DesignerToolkitSettings
 
             string path = Path.Combine(directory, "config.json");
             string json = File.ReadAllText(path);
-            string pattern = "(\"" + MARKDOWN_TABLE_LANGUAGE_KEY + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)-?\\d+";
-            string updated = Regex.Replace(
-                json,
-                pattern,
-                match => match.Groups[1].Value + ((int)MarkdownTableLanguage).ToString(System.Globalization.CultureInfo.InvariantCulture),
-                RegexOptions.Singleline);
-            if (updated == json)
+            string updated = TryReplaceConfigDefault(json, MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out bool languageUpdated);
+            updated = TryReplaceConfigDefault(updated, MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out bool numberFormatUpdated);
+            if (!languageUpdated)
             {
                 error = "Could not find markdown_table_language default in config.json.";
+                return false;
+            }
+            if (!numberFormatUpdated)
+            {
+                error = "Could not find markdown_number_format default in config.json.";
                 return false;
             }
 
@@ -186,33 +219,54 @@ internal static class DesignerToolkitSettings
         MarkdownTableLanguage = language;
     }
 
-    private static MarkdownTableLanguage LoadFromJsonStore(
-        IModStateJsonStore store,
-        MarkdownTableLanguage initialLanguage)
+    private static void SetMarkdownNumberFormat(MarkdownNumberFormat numberFormat)
     {
+        MarkdownNumberFormat = numberFormat;
+    }
+
+    private static string TryReplaceConfigDefault(string json, string key, int value, out bool updated)
+    {
+        string pattern = "(\"" + key + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)-?\\d+";
+        string result = Regex.Replace(
+            json,
+            pattern,
+            match => match.Groups[1].Value + value.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            RegexOptions.Singleline);
+        updated = result != json;
+        return result;
+    }
+
+    private static void LoadFromJsonStore(
+        IModStateJsonStore store,
+        MarkdownTableLanguage initialLanguage,
+        MarkdownNumberFormat initialNumberFormat)
+    {
+        MarkdownTableLanguage = initialLanguage;
+        MarkdownNumberFormat = initialNumberFormat;
+
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
-            return initialLanguage;
+            return;
 
         try
         {
             object parsed = new JsonParser().Parse(new StringReader(json));
             if (!(parsed is Dict<string, object> root))
-                return initialLanguage;
+                return;
 
             if (!TryGetInt(root, "schemaVersion", out int schemaVersion)
                 || schemaVersion != SETTINGS_SCHEMA_VERSION)
-                return initialLanguage;
+                return;
 
             if (TryGetInt(root, "markdownTableLanguage", out int language))
-                return FromInt(language);
+                MarkdownTableLanguage = FromInt(language);
+            if (TryGetInt(root, "markdownNumberFormat", out int numberFormat))
+                MarkdownNumberFormat = NumberFormatFromInt(numberFormat);
         }
         catch (Exception ex)
         {
             s_log.Warning($"Failed to load DTK settings state from {store.StorageKind}: {ex.Message}");
         }
-
-        return initialLanguage;
     }
 
     private static string BuildStateJson()
@@ -221,8 +275,22 @@ internal static class DesignerToolkitSettings
         writer.AppendStartObject();
         writer.AppendNumberField("schemaVersion", SETTINGS_SCHEMA_VERSION);
         writer.AppendNumberField("markdownTableLanguage", (int)MarkdownTableLanguage);
+        writer.AppendNumberField("markdownNumberFormat", (int)MarkdownNumberFormat);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
+    }
+
+    private static MarkdownNumberFormat NumberFormatFromInt(int value)
+    {
+        switch (value)
+        {
+            case (int)MarkdownNumberFormat.English:
+                return MarkdownNumberFormat.English;
+            case (int)MarkdownNumberFormat.Local:
+                return MarkdownNumberFormat.Local;
+            default:
+                return MarkdownNumberFormat.Auto;
+        }
     }
 
     private static MarkdownTableLanguage FromInt(int value)
@@ -287,6 +355,27 @@ internal static class DesignerToolkitSettings
                 return DtkLocalization.SettingsLanguageHybrid.AsFormatted;
             default:
                 return DtkLocalization.SettingsLanguageEnglish.AsFormatted;
+        }
+    }
+
+    private static UiComponent NumberFormatDropdownOption(
+        MarkdownNumberFormat numberFormat,
+        int index,
+        bool isInDropdown)
+    {
+        return new Label(NumberFormatLabel(numberFormat));
+    }
+
+    private static LocStrFormatted NumberFormatLabel(MarkdownNumberFormat numberFormat)
+    {
+        switch (numberFormat)
+        {
+            case MarkdownNumberFormat.English:
+                return DtkLocalization.SettingsNumberFormatEnglish.AsFormatted;
+            case MarkdownNumberFormat.Local:
+                return DtkLocalization.SettingsNumberFormatLocal.AsFormatted;
+            default:
+                return DtkLocalization.SettingsNumberFormatAuto.AsFormatted;
         }
     }
 }

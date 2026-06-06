@@ -17,7 +17,6 @@ Planned and candidate improvements for Designer Toolkit.
 * Throughput limiter on transports
 
 ### Markdown and HUB support
-* Configurable decimal separator ('.',',', or 'Auto' (Match language locale))
 * Auto-publish?
 
 ### Other

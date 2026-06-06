@@ -24,6 +24,14 @@
     "英语、本地、双语和混合模式现在都已接入 Markdown 导出。"
   ],
   [
+    "dtk.settings.markdown_number_format.label",
+    "Markdown 数字格式"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "控制 Markdown 导出中的小数和千位分隔符。自动模式会跟随渲染表格的语言：英语表格使用 en-US 分隔符，本地表格使用当前游戏语言。"
+  ],
+  [
     "dtk.settings.language.english",
     "英语"
   ],
@@ -38,6 +46,18 @@
   [
     "dtk.settings.language.hybrid",
     "混合"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "自动"
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "英语分隔符"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "本地分隔符"
   ],
   [
     "dtk.blueprint.copy_as_markdown.button",

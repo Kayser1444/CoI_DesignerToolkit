@@ -24,6 +24,14 @@
     "Englisch, Lokal, Beide und Hybrid werden jetzt vom Markdown-Export verwendet."
   ],
   [
+    "dtk.settings.markdown_number_format.label",
+    "Markdown-Zahlenformat"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "Legt Dezimal- und Tausendertrennzeichen in Markdown-Exporten fest. Auto folgt der Sprache der gerenderten Tabelle: Englische Tabellen verwenden en-US-Trennzeichen, lokale Tabellen die aktuelle Spielsprache."
+  ],
+  [
     "dtk.settings.language.english",
     "Englisch"
   ],
@@ -38,6 +46,18 @@
   [
     "dtk.settings.language.hybrid",
     "Hybrid"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "Auto"
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "Englische Trennzeichen"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "Lokale Trennzeichen"
   ],
   [
     "dtk.blueprint.copy_as_markdown.button",

@@ -112,7 +112,15 @@ DTK adds a **Mod Settings** panel, accessible from the top-right **M** button in
 | **Both** | English tables first, followed by local-language tables |
 | **Hybrid** | Local text first, with English in parentheses where strings differ |
 
-Settings are stored per save file. The `markdown_table_language` key in `config.json` sets the initial value for saves that have no stored settings yet.
+**Markdown number format** controls decimal and thousands separators in copied Markdown:
+
+| Mode | Behavior |
+|---|---|
+| **Auto** | English tables use English separators; local and hybrid tables use the current game locale |
+| **English separators** | Force English separators everywhere |
+| **Local separators** | Force current-language separators everywhere |
+
+Settings are stored per save file. The `markdown_table_language` and `markdown_number_format` keys in `config.json` set the initial values for saves that have no stored settings yet.
 
 ### 🧩 Symmetric entity normalization
 

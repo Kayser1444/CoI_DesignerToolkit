@@ -24,6 +24,14 @@
     "Английский, локальный, оба и гибридный режимы уже подключены к экспорту Markdown."
   ],
   [
+    "dtk.settings.markdown_number_format.label",
+    "Формат чисел Markdown"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "Определяет десятичные разделители и разделители тысяч в экспорте Markdown. Авто следует языку выводимой таблицы: английские таблицы используют разделители en-US, а локальные — текущий язык игры."
+  ],
+  [
     "dtk.settings.language.english",
     "Английский"
   ],
@@ -38,6 +46,18 @@
   [
     "dtk.settings.language.hybrid",
     "Гибридный"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "Авто"
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "Английские разделители"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "Локальные разделители"
   ],
   [
     "dtk.blueprint.copy_as_markdown.button",

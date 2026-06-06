@@ -24,6 +24,14 @@
     "Engelska, Lokalt, Båda och Hybrid används nu av Markdown-exporten."
   ],
   [
+    "dtk.settings.markdown_number_format.label",
+    "Talformat för Markdown"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "Styr decimal- och tusentalsavgränsare i Markdown-exporter. Auto följer den renderade tabellens språk: engelska tabeller använder en-US-avgränsare och lokala tabeller använder spelets aktuella språk."
+  ],
+  [
     "dtk.settings.language.english",
     "Engelska"
   ],
@@ -38,6 +46,18 @@
   [
     "dtk.settings.language.hybrid",
     "Hybrid"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "Auto"
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "Engelska avgränsare"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "Lokala avgränsare"
   ],
   [
     "dtk.blueprint.copy_as_markdown.button",

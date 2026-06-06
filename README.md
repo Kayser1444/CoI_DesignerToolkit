@@ -61,6 +61,8 @@ DTK adds a **Copy as Markdown** button to both the blueprint detail panel and th
 
 **Blueprint folder** - clicking the button copies a wide Markdown table listing every blueprint in the folder, including blueprints in sub-folders. Each blueprint is a row. Columns include Blueprint name, Folder (relative path within the exported root), Entities, and any workers / electricity / computing / maintenance / construction product columns present across the folder, sorted A-Z. Rows are sorted by folder path, then by blueprint name within each folder.
 
+Markdown export settings let you choose English, local, bilingual, or hybrid names, and separately choose automatic, English, or local number separators.
+
 Example output:
 
 ```markdown

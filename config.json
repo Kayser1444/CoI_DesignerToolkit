@@ -10,6 +10,13 @@
     "min": 0,
     "max": 3
   },
+  "markdown_number_format": {
+    "default": 0,
+    "is_integer": true,
+    "description": "Initial Markdown number format for saves without Designer Toolkit settings state (0=Auto, 1=English/en-US separators, 2=Local/current-language separators).",
+    "min": 0,
+    "max": 2
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved DTK settings."

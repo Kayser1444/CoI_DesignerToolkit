@@ -8,6 +8,7 @@
 // is included by mistake, I intend to correct it promptly upon discovery or notice.
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -27,7 +28,6 @@ using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
 using CoI.AutoHelpers.Logging;
 using UnityEngine;
-using StringComparer = System.StringComparer;
 
 namespace CoIDesignerToolkit;
 
@@ -79,12 +79,12 @@ internal static class BlueprintExport
         public int Workers;
         public int ElecKw;
         public int CompTf;
-        /// <summary>Maintenance product display-name → formatted value (A-Z keyed).</summary>
-        public SortedDictionary<string, string> MaintenanceValues;
-        /// <summary>Construction product display-name → formatted quantity (A-Z keyed).</summary>
-        public SortedDictionary<string, string> ConstructionValues;
-        /// <summary>Component entity display-name → count (A-Z keyed).</summary>
-        public SortedDictionary<string, int> ComponentCounts;
+        /// <summary>Maintenance product proto → monthly value.</summary>
+        public Dictionary<VirtualProductProto, Fix32> MaintenanceValues;
+        /// <summary>Construction product proto → quantity.</summary>
+        public Dictionary<ProductProto, int> ConstructionValues;
+        /// <summary>Component entity proto → count.</summary>
+        public Dictionary<Proto, int> ComponentCounts;
     }
 
     internal static void ApplyPatches(Harmony harmony)
@@ -266,17 +266,15 @@ internal static class BlueprintExport
     /// <summary>
     /// Computes all stats for a single blueprint into a <see cref="BpStats"/> struct.
     /// </summary>
-    private static BpStats ComputeBpStats(
-        IBlueprint blueprint,
-        MarkdownRenderLanguage language)
+    private static BpStats ComputeBpStats(IBlueprint blueprint)
     {
         var stats = new BpStats
         {
             Name                = blueprint.Name,
             Entities            = blueprint.Items.Length,
-            MaintenanceValues   = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-            ConstructionValues  = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-            ComponentCounts     = new SortedDictionary<string, int>(StringComparer.OrdinalIgnoreCase),
+            MaintenanceValues   = new Dictionary<VirtualProductProto, Fix32>(),
+            ConstructionValues  = new Dictionary<ProductProto, int>(),
+            ComponentCounts     = new Dictionary<Proto, int>(),
         };
 
         var maintenanceByProduct = new Dictionary<VirtualProductProto, Fix32>();
@@ -311,27 +309,24 @@ internal static class BlueprintExport
                 constructionCost.Add(lep.Costs.BaseConstructionCost);
         }
 
-        // Maintenance — stored A-Z by product name
+        // Maintenance values stay keyed by proto until Markdown rendering.
         foreach (var kvp in maintenanceByProduct)
             if (kvp.Value > Fix32.Zero)
-                stats.MaintenanceValues[DisplayName(kvp.Key.Strings.Name, language)] =
-                    kvp.Value.ToStringRoundedAdaptive();
+                stats.MaintenanceValues[kvp.Key] = kvp.Value;
 
-        // Construction cost — stored A-Z by product name
+        // Construction values stay keyed by proto until Markdown rendering.
         var products = constructionCost.Products;
         for (int i = 0; i < products.Length; i++)
         {
             var pq = products[i];
-            stats.ConstructionValues[DisplayName(pq.Product.Strings.Name, language)] =
-                pq.Quantity.Value.ToStringWithSiSuffix().Value;
+            stats.ConstructionValues[pq.Product] = pq.Quantity.Value;
         }
 
-        // Component counts — stored A-Z by entity name
+        // Component counts stay keyed by proto until Markdown rendering.
         foreach (KeyValuePair<Proto, int> kvp in blueprint.AllMajorProtos)
         {
-            string name = DisplayName(kvp.Key.Strings.Name, language);
-            stats.ComponentCounts.TryGetValue(name, out int existing2);
-            stats.ComponentCounts[name] = existing2 + kvp.Value;
+            stats.ComponentCounts.TryGetValue(kvp.Key, out int existing2);
+            stats.ComponentCounts[kvp.Key] = existing2 + kvp.Value;
         }
 
         return stats;
@@ -352,15 +347,16 @@ internal static class BlueprintExport
             sb.AppendLine(blueprint.Desc.Trim());
         }
 
-        if (DesignerToolkitSettings.MarkdownTableLanguage == MarkdownTableLanguage.Both)
+        if (ShouldRenderBothLanguages())
         {
-            AppendBlueprintTables(sb, ComputeBpStats(blueprint, MarkdownRenderLanguage.English), MarkdownRenderLanguage.English);
-            AppendBlueprintTables(sb, ComputeBpStats(blueprint, MarkdownRenderLanguage.Local), MarkdownRenderLanguage.Local);
+            BpStats stats = ComputeBpStats(blueprint);
+            AppendBlueprintTables(sb, stats, MarkdownRenderLanguage.English);
+            AppendBlueprintTables(sb, stats, MarkdownRenderLanguage.Local);
         }
         else
         {
             MarkdownRenderLanguage language = ResolveRenderLanguage();
-            AppendBlueprintTables(sb, ComputeBpStats(blueprint, language), language);
+            AppendBlueprintTables(sb, ComputeBpStats(blueprint), language);
         }
 
         return sb.ToString();
@@ -378,8 +374,8 @@ internal static class BlueprintExport
             sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownComponentsHeading, language)}");
             sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntityHeader, language)} | {MarkdownText(DtkLocalization.MarkdownCountHeader, language)} |");
             sb.AppendLine("|---|---|");
-            foreach (var kvp in s.ComponentCounts)   // already A-Z
-                sb.AppendLine($"| {kvp.Key} | {kvp.Value} |");
+            foreach (var proto in SortedProtos(s.ComponentCounts.Keys, language))
+                sb.AppendLine($"| {DisplayName(proto, language)} | {FormatInteger(s.ComponentCounts[proto], language)} |");
         }
 
         // ── Construction ─────────────────────────────────────────────────────
@@ -389,8 +385,8 @@ internal static class BlueprintExport
             sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownConstructionHeading, language)}");
             sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownProductHeader, language)} | {MarkdownText(DtkLocalization.MarkdownQuantityHeader, language)} |");
             sb.AppendLine("|---|---|");
-            foreach (var kvp in s.ConstructionValues)   // already A-Z
-                sb.AppendLine($"| {kvp.Key} | {kvp.Value} |");
+            foreach (var proto in SortedProtos(s.ConstructionValues.Keys, language))
+                sb.AppendLine($"| {DisplayName(proto, language)} | {FormatSiQuantity(s.ConstructionValues[proto], language)} |");
         }
 
         // ── Operational ──────────────────────────────────────────────────────
@@ -398,12 +394,12 @@ internal static class BlueprintExport
         sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownOperationalHeading, language)}");
         sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownPropertyHeader, language)} | {MarkdownText(DtkLocalization.MarkdownValueHeader, language)} |");
         sb.AppendLine("|---|---|");
-        sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} | {s.Entities} |");
-        if (s.Workers > 0) sb.AppendLine($"| {MarkdownText(Tr.Workers, language)} | {s.Workers} |");
-        if (s.ElecKw  > 0) sb.AppendLine($"| {MarkdownText(Tr.ElectricityStats, language)} | {FormatElectricity(s.ElecKw)} |");
-        if (s.CompTf  > 0) sb.AppendLine($"| {MarkdownText(Tr.ComputingStats, language)} | {s.CompTf} TF |");
-        foreach (var kvp in s.MaintenanceValues)   // already A-Z
-            sb.AppendLine($"| {kvp.Key} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} | {kvp.Value} |");
+        sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} | {FormatInteger(s.Entities, language)} |");
+        if (s.Workers > 0) sb.AppendLine($"| {MarkdownText(Tr.Workers, language)} | {FormatInteger(s.Workers, language)} |");
+        if (s.ElecKw  > 0) sb.AppendLine($"| {MarkdownText(Tr.ElectricityStats, language)} | {FormatElectricity(s.ElecKw, language)} |");
+        if (s.CompTf  > 0) sb.AppendLine($"| {MarkdownText(Tr.ComputingStats, language)} | {FormatInteger(s.CompTf, language)} TF |");
+        foreach (var proto in SortedProtos(s.MaintenanceValues.Keys, language))
+            sb.AppendLine($"| {DisplayName(proto, language)} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} | {FormatAdaptive(s.MaintenanceValues[proto], language)} |");
     }
 
     /// <summary>
@@ -424,7 +420,7 @@ internal static class BlueprintExport
             sb.AppendLine(folder.Desc.Trim());
         }
 
-        if (DesignerToolkitSettings.MarkdownTableLanguage == MarkdownTableLanguage.Both)
+        if (ShouldRenderBothLanguages())
         {
             AppendFolderTable(sb, folder, MarkdownRenderLanguage.English);
             AppendFolderTable(sb, folder, MarkdownRenderLanguage.Local);
@@ -443,7 +439,7 @@ internal static class BlueprintExport
         MarkdownRenderLanguage language)
     {
         var bpList = new List<BpStats>();
-        CollectBps(folder, "", bpList, language);
+        CollectBps(folder, "", bpList);
 
         bpList.Sort((a, b) =>
         {
@@ -453,8 +449,8 @@ internal static class BlueprintExport
 
         // ── Discover dynamic columns ───────────────────────────────────────
         bool hasWorkers = false, hasElec = false, hasComp = false;
-        var maintCols  = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
-        var constrCols = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+        var maintCols  = new HashSet<VirtualProductProto>();
+        var constrCols = new HashSet<ProductProto>();
 
         foreach (var s in bpList)
         {
@@ -472,8 +468,11 @@ internal static class BlueprintExport
         if (hasWorkers) sb.Append($" {MarkdownText(Tr.Workers, language)} |");
         if (hasElec)    sb.Append($" {MarkdownText(Tr.ElectricityStats, language)} |");
         if (hasComp)    sb.Append($" {MarkdownText(Tr.ComputingStats, language)} |");
-        foreach (var col in maintCols)  sb.Append($" {col} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} |");
-        foreach (var col in constrCols) sb.Append($" {col} |");
+        List<VirtualProductProto> sortedMaintCols = SortedProtos(maintCols, language);
+        List<ProductProto> sortedConstrCols = SortedProtos(constrCols, language);
+
+        foreach (var col in sortedMaintCols)  sb.Append($" {DisplayName(col, language)} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} |");
+        foreach (var col in sortedConstrCols) sb.Append($" {DisplayName(col, language)} |");
         sb.AppendLine();
 
         // Separator row
@@ -481,22 +480,22 @@ internal static class BlueprintExport
         if (hasWorkers) sb.Append("---|");
         if (hasElec)    sb.Append("---|");
         if (hasComp)    sb.Append("---|");
-        foreach (var _ in maintCols)  sb.Append("---|");
-        foreach (var _ in constrCols) sb.Append("---|");
+        foreach (var _ in sortedMaintCols)  sb.Append("---|");
+        foreach (var _ in sortedConstrCols) sb.Append("---|");
         sb.AppendLine();
 
         // Data rows
         foreach (var s in bpList)
         {
             string folderCell = string.IsNullOrEmpty(s.FolderPath) ? "." : s.FolderPath;
-            sb.Append($"| {s.Name} | {folderCell} | {s.Entities} |");
-            if (hasWorkers) sb.Append(s.Workers > 0 ? $" {s.Workers} |" : " - |");
-            if (hasElec)    sb.Append(s.ElecKw  > 0 ? $" {FormatElectricity(s.ElecKw)} |" : " - |");
-            if (hasComp)    sb.Append(s.CompTf  > 0 ? $" {s.CompTf} TF |" : " - |");
-            foreach (var col in maintCols)
-                sb.Append(s.MaintenanceValues.TryGetValue(col, out var mv) ? $" {mv} |" : " - |");
-            foreach (var col in constrCols)
-                sb.Append(s.ConstructionValues.TryGetValue(col, out var cv) ? $" {cv} |" : " - |");
+            sb.Append($"| {s.Name} | {folderCell} | {FormatInteger(s.Entities, language)} |");
+            if (hasWorkers) sb.Append(s.Workers > 0 ? $" {FormatInteger(s.Workers, language)} |" : " - |");
+            if (hasElec)    sb.Append(s.ElecKw  > 0 ? $" {FormatElectricity(s.ElecKw, language)} |" : " - |");
+            if (hasComp)    sb.Append(s.CompTf  > 0 ? $" {FormatInteger(s.CompTf, language)} TF |" : " - |");
+            foreach (var col in sortedMaintCols)
+                sb.Append(s.MaintenanceValues.TryGetValue(col, out var mv) ? $" {FormatAdaptive(mv, language)} |" : " - |");
+            foreach (var col in sortedConstrCols)
+                sb.Append(s.ConstructionValues.TryGetValue(col, out var cv) ? $" {FormatSiQuantity(cv, language)} |" : " - |");
             sb.AppendLine();
         }
     }
@@ -508,12 +507,11 @@ internal static class BlueprintExport
     private static void CollectBps(
         IBlueprintsFolder folder,
         string relativePath,
-        List<BpStats> result,
-        MarkdownRenderLanguage language)
+        List<BpStats> result)
     {
         for (int i = 0; i < folder.Blueprints.Count; i++)
         {
-            var s = ComputeBpStats(folder.Blueprints[i], language);
+            var s = ComputeBpStats(folder.Blueprints[i]);
             s.FolderPath = relativePath;
             result.Add(s);
         }
@@ -524,7 +522,7 @@ internal static class BlueprintExport
             string subPath = string.IsNullOrEmpty(relativePath)
                 ? sub.Name
                 : $"{relativePath}/{sub.Name}";
-            CollectBps(sub, subPath, result, language);
+            CollectBps(sub, subPath, result);
         }
     }
 
@@ -537,13 +535,78 @@ internal static class BlueprintExport
         return false;
     }
 
-    private static string FormatElectricity(int kw)
+    private static string FormatElectricity(int kw, MarkdownRenderLanguage language)
     {
-        if (kw < 1000) return $"{kw} kW";
+        if (kw < 1000) return $"{FormatInteger(kw, language)} kW";
         double mw = kw / 1000.0;
-        if (mw < 10.0)  return mw.ToString("F2", System.Globalization.CultureInfo.InvariantCulture) + " MW";
-        if (mw < 100.0) return mw.ToString("F1", System.Globalization.CultureInfo.InvariantCulture) + " MW";
-        return $"{(int)Math.Round(mw)} MW";
+        if (mw < 10.0)  return FormatDecimal(mw, 2, language) + " MW";
+        if (mw < 100.0) return FormatDecimal(mw, 1, language) + " MW";
+        return $"{FormatInteger((int)Math.Round(mw), language)} MW";
+    }
+
+    private static string FormatSiQuantity(int value, MarkdownRenderLanguage language)
+    {
+        long abs = Math.Abs((long)value);
+        if (abs < 1000) return FormatInteger(value, language);
+        if (abs < 1000000)
+        {
+            if (abs < 10000) return FormatDecimalOptional(value / 1000.0, 1, language) + "k";
+            return FormatInteger((int)Math.Round(value / 1000.0), language) + "k";
+        }
+        if (abs < 1000000000)
+        {
+            if (abs < 10000000) return FormatDecimalOptional(value / 1000000.0, 1, language) + "M";
+            return FormatInteger((int)Math.Round(value / 1000000.0), language) + "M";
+        }
+        if (abs < 10000000000L) return FormatDecimalOptional(value / 1000000000.0, 1, language) + "G";
+        return FormatInteger((long)Math.Round(value / 1000000000.0), language) + "G";
+    }
+
+    private static string FormatAdaptive(Fix32 value, MarkdownRenderLanguage language)
+    {
+        double number = value.ToDouble();
+        double abs = Math.Abs(number);
+        int decimals;
+        if (abs < 0.0995 && abs > 0.0) decimals = 3;
+        else if (abs < 0.995 && abs > 0.0) decimals = 2;
+        else if (abs < 9.95) decimals = 1;
+        else decimals = 0;
+        return decimals > 0
+            ? FormatDecimal(number, decimals, language)
+            : FormatInteger((int)Math.Round(number), language);
+    }
+
+    private static string FormatInteger(long value, MarkdownRenderLanguage language)
+    {
+        return value.ToString("#,0", NumberFormatFor(language));
+    }
+
+    private static string FormatDecimal(double value, int decimals, MarkdownRenderLanguage language)
+    {
+        string format = decimals <= 0 ? "#,0" : "#,0." + new string('0', decimals);
+        return value.ToString(format, NumberFormatFor(language));
+    }
+
+    private static string FormatDecimalOptional(double value, int decimals, MarkdownRenderLanguage language)
+    {
+        string format = decimals <= 0 ? "#,0" : "#,0." + new string('#', decimals);
+        return value.ToString(format, NumberFormatFor(language));
+    }
+
+    private static NumberFormatInfo NumberFormatFor(MarkdownRenderLanguage language)
+    {
+        switch (DesignerToolkitSettings.MarkdownNumberFormat)
+        {
+            case MarkdownNumberFormat.English:
+                return CultureInfo.GetCultureInfo(LocalizationManager.EN_US_CULTURE_INFO_ID).NumberFormat;
+            case MarkdownNumberFormat.Local:
+                return LocalizationManager.CurrentCultureInfo.NumberFormat;
+            case MarkdownNumberFormat.Auto:
+            default:
+                return language == MarkdownRenderLanguage.English
+                    ? CultureInfo.GetCultureInfo(LocalizationManager.EN_US_CULTURE_INFO_ID).NumberFormat
+                    : LocalizationManager.CurrentCultureInfo.NumberFormat;
+        }
     }
 
     private static MarkdownRenderLanguage ResolveRenderLanguage()
@@ -561,11 +624,34 @@ internal static class BlueprintExport
         }
     }
 
+    private static bool ShouldRenderBothLanguages()
+    {
+        return DesignerToolkitSettings.MarkdownTableLanguage == MarkdownTableLanguage.Both
+            && !string.Equals(
+                LocalizationManager.CurrentLangInfo.CultureInfoId,
+                LocalizationManager.EN_US_CULTURE_INFO_ID,
+                StringComparison.Ordinal);
+    }
+
+    private static List<TProto> SortedProtos<TProto>(
+        IEnumerable<TProto> protos,
+        MarkdownRenderLanguage language)
+        where TProto : Proto
+    {
+        var sorted = new List<TProto>(protos);
+        sorted.Sort((a, b) =>
+        {
+            int c = string.Compare(DisplayName(a, language), DisplayName(b, language), StringComparison.OrdinalIgnoreCase);
+            return c != 0 ? c : string.Compare(a.Id.ToString(), b.Id.ToString(), StringComparison.Ordinal);
+        });
+        return sorted;
+    }
+
     private static string DisplayName(
-        LocStr name,
+        Proto proto,
         MarkdownRenderLanguage language)
     {
-        return LocalizedText(name, language);
+        return LocalizedText(proto.Strings.Name, language);
     }
 
     private static string MarkdownText(

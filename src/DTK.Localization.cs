@@ -25,6 +25,10 @@ internal static class DtkLocalization
         Loc.Str("dtk.settings.markdown_table_language.description", "Controls which language Markdown table headers and product/entity names should use.", "Settings row description for Markdown table language.");
     public static LocStr SettingsMarkdownTableLanguagePending =
         Loc.Str("dtk.settings.markdown_table_language.pending", "English, Local, Both, and Hybrid are wired into Markdown export.", "Settings note for Markdown table language implementation status.");
+    public static LocStr SettingsMarkdownNumberFormat =
+        Loc.Str("dtk.settings.markdown_number_format.label", "Markdown number format", "Settings row label for Markdown number formatting.");
+    public static LocStr SettingsMarkdownNumberFormatDescription =
+        Loc.Str("dtk.settings.markdown_number_format.description", "Controls decimal and thousands separators in Markdown exports. Auto follows the rendered table language: English tables use en-US separators and local tables use the current game locale.", "Settings row description for Markdown number formatting.");
     public static LocStr SettingsLanguageEnglish =
         Loc.Str("dtk.settings.language.english", "English", "Dropdown option for English Markdown table language.");
     public static LocStr SettingsLanguageLocal =
@@ -33,6 +37,12 @@ internal static class DtkLocalization
         Loc.Str("dtk.settings.language.both", "Both", "Dropdown option for bilingual Markdown table language.");
     public static LocStr SettingsLanguageHybrid =
         Loc.Str("dtk.settings.language.hybrid", "Hybrid", "Dropdown option for hybrid Markdown table language.");
+    public static LocStr SettingsNumberFormatAuto =
+        Loc.Str("dtk.settings.number_format.auto", "Auto", "Dropdown option for automatic Markdown number formatting.");
+    public static LocStr SettingsNumberFormatEnglish =
+        Loc.Str("dtk.settings.number_format.english", "English separators", "Dropdown option for en-US Markdown number formatting.");
+    public static LocStr SettingsNumberFormatLocal =
+        Loc.Str("dtk.settings.number_format.local", "Local separators", "Dropdown option for local Markdown number formatting.");
     public static LocStr SettingsRestoreDefaults =
         Loc.Str("dtk.settings.action.restore_defaults", "Restore defaults", "Button label for restoring default settings.");
     public static LocStr SettingsRestoreDefaultsTooltip =
@@ -84,4 +94,3 @@ internal static class DtkLocalization
     public static LocStr MarkdownPerMonthSuffix =
         Loc.Str("dtk.markdown.per_month.suffix", "/ mo", "Markdown suffix for monthly maintenance columns.");
 }
-

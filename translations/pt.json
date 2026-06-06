@@ -24,6 +24,14 @@
     "Inglês, Local, Ambos e Híbrido já estão conectados à exportação Markdown."
   ],
   [
+    "dtk.settings.markdown_number_format.label",
+    "Formato de números Markdown"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "Controla os separadores decimais e de milhares nas exportações Markdown. Auto segue o idioma da tabela renderizada: tabelas em inglês usam separadores en-US e tabelas locais usam o idioma atual do jogo."
+  ],
+  [
     "dtk.settings.language.english",
     "Inglês"
   ],
@@ -38,6 +46,18 @@
   [
     "dtk.settings.language.hybrid",
     "Híbrido"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "Auto"
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "Separadores em inglês"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "Separadores locais"
   ],
   [
     "dtk.blueprint.copy_as_markdown.button",
