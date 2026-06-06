@@ -28,7 +28,7 @@ namespace CoIDesignerToolkit;
 
 public sealed class DesignerToolkitMod : IMod, IDisposable
 {
-    private static readonly ModLogger s_log = new ModLogger("DTK");
+    private static readonly ModLogger s_log = new ModLogger("BDT");
     private Harmony? m_harmony;
     private ISimLoopEvents? m_simLoopEvents;
     private IModStateJsonStore? m_settingsStateStore;
@@ -74,7 +74,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
     {
-        s_log.Info($"[DTK] Designer Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
+        s_log.Info($"[BDT] Designer Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
 
         RegisterAutoHelpersLocalizationLateApply(resolver);
 

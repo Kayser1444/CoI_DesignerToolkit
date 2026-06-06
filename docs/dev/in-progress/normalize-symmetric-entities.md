@@ -185,7 +185,7 @@ For a 2×2 entity:
 
 ### Phase 1 (current): symmetry-based normalization (Category 2 only)
 
-Current code in `DTK.NormalizeSymmetric.cs`:
+Current code in `BDT.NormalizeSymmetric.cs`:
 - `IsStoredTransformASymmetry` → correct for Cat. 2; blocks Cat. 3
 - `RemapPrioritizedPorts` → works for symmetries (offset=0); fails for non-symmetric orientations due to missing tile-coordinate offset
 

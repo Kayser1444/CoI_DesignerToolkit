@@ -31,7 +31,7 @@ namespace CoIDesignerToolkit;
 /// </summary>
 internal static class BlueprintUpdater
 {
-    private static readonly ModLogger s_log = new ModLogger("DTK.BpUpdate");
+    private static readonly ModLogger s_log = new ModLogger("BDT.BpUpdate");
 
     private const string REPLACE_ICON = "Assets/Unity/UserInterface/General/Replace.svg";
 

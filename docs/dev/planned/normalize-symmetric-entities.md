@@ -27,7 +27,7 @@ Patch the point where the game produces a `Blueprint` object (e.g. after
 world state is touched. The game serializes normally afterward, producing a
 fully vanilla-compatible BP string.
 
-A console command `dtk_normalize_bp` can apply the same pass to an already-
+A console command `bdt_normalize_bp` can apply the same pass to an already-
 stored blueprint for retroactive fixes.
 
 ---

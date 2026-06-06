@@ -31,7 +31,7 @@ namespace CoIDesignerToolkit;
 /// </summary>
 internal static class BlueprintStats
 {
-    private static readonly ModLogger s_log = new ModLogger("DTK.BpStats");
+    private static readonly ModLogger s_log = new ModLogger("BDT.BpStats");
 
     // Stores the ops-section Column (heading + tiles row) keyed by BlueprintDetail instance.
     private static readonly ConditionalWeakTable<object, Column> s_opsSections =

@@ -12,7 +12,7 @@ Designer Toolkit supports Markdown language modes through `MarkdownTableLanguage
 - `Both`
 - `Hybrid`
 
-`DTK.BlueprintExport` rendered those modes by computing blueprint stats for a
+`BDT.BlueprintExport` rendered those modes by computing blueprint stats for a
 specific `MarkdownRenderLanguage` and calling `DisplayName(...)` while building
 the stats object.
 

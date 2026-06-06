@@ -51,7 +51,7 @@ internal static class DesignerToolkitSettings
     private static readonly Px SETTINGS_SECTION_INDENT = 4.pt();
     private static readonly Px SETTINGS_OPTIONS_GAP = 2.pt();
 
-    private static readonly ModLogger s_log = new ModLogger("DTK.Settings");
+    private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
     private static ModJsonConfig? s_config;
     private static IModStateJsonStore? s_store;
@@ -74,15 +74,15 @@ internal static class DesignerToolkitSettings
     {
         ModStateJsonSaveResult result = store.SaveJson(BuildStateJson());
         if (!result.Succeeded)
-            s_log.Warning($"Failed to save DTK settings state to {result.StorageKind} value '{result.StateKey}': {result.ErrorMessage}");
+            s_log.Warning($"Failed to save BDT settings state to {result.StorageKind} value '{result.StateKey}': {result.ErrorMessage}");
     }
 
     public static ModSettingsTab BuildSettingsTab()
     {
         return new ModSettingsTab(
             "designer-toolkit",
-            DtkLocalization.ModName.AsFormatted,
-            DtkLocalization.SettingsTabMarkdown.AsFormatted,
+            BdtLocalization.ModName.AsFormatted,
+            BdtLocalization.SettingsTabMarkdown.AsFormatted,
             100,
             BuildMarkdownSettingsContent,
             SETTINGS_TAB_ICON_ASSET);
@@ -95,16 +95,16 @@ internal static class DesignerToolkitSettings
             .PaddingLeft(SETTINGS_SECTION_INDENT)
             .Width(SETTINGS_COLUMN_WIDTH);
 
-        root.Add(new Title(DtkLocalization.SettingsMarkdownCopyHeading.AsFormatted)
+        root.Add(new Title(BdtLocalization.SettingsMarkdownCopyHeading.AsFormatted)
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
         Dropdown<MarkdownTableLanguage> languageDropdown =
             new Dropdown<MarkdownTableLanguage>(LanguageDropdownOption)
-                .Label(DtkLocalization.SettingsMarkdownTableLanguage.AsFormatted)
+                .Label(BdtLocalization.SettingsMarkdownTableLanguage.AsFormatted)
                 .Tooltip(new LocStrFormatted(
-                    DtkLocalization.SettingsMarkdownTableLanguageDescription.TranslatedString
+                    BdtLocalization.SettingsMarkdownTableLanguageDescription.TranslatedString
                     + "\n\n"
-                    + DtkLocalization.SettingsMarkdownTableLanguagePending.TranslatedString))
+                    + BdtLocalization.SettingsMarkdownTableLanguagePending.TranslatedString))
                 .LabelWidth(SETTINGS_LABEL_WIDTH)
                 .SetOptions(
                     MarkdownTableLanguage.English,
@@ -118,8 +118,8 @@ internal static class DesignerToolkitSettings
 
         Dropdown<MarkdownNumberFormat> numberFormatDropdown =
             new Dropdown<MarkdownNumberFormat>(NumberFormatDropdownOption)
-                .Label(DtkLocalization.SettingsMarkdownNumberFormat.AsFormatted)
-                .Tooltip(DtkLocalization.SettingsMarkdownNumberFormatDescription.AsFormatted)
+                .Label(BdtLocalization.SettingsMarkdownNumberFormat.AsFormatted)
+                .Tooltip(BdtLocalization.SettingsMarkdownNumberFormatDescription.AsFormatted)
                 .LabelWidth(SETTINGS_LABEL_WIDTH)
                 .SetOptions(
                     MarkdownNumberFormat.Auto,
@@ -142,27 +142,27 @@ internal static class DesignerToolkitSettings
     {
         var status = new Label(LocStrFormatted.Empty).MarginTopBottom(1.pt());
 
-        var reset = new ButtonText(Button.General, DtkLocalization.SettingsRestoreDefaults.AsFormatted, () =>
+        var reset = new ButtonText(Button.General, BdtLocalization.SettingsRestoreDefaults.AsFormatted, () =>
         {
             MarkdownTableLanguage = MarkdownTableLanguage.English;
             MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             refresh();
-            status.Value(DtkLocalization.SettingsRestoredDefaults.AsFormatted);
-        }).Tooltip(DtkLocalization.SettingsRestoreDefaultsTooltip.AsFormatted);
+            status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
+        }).Tooltip(BdtLocalization.SettingsRestoreDefaultsTooltip.AsFormatted);
 
-        var save = new ButtonText(Button.Primary, DtkLocalization.SettingsSaveAsGlobal.AsFormatted, () =>
+        var save = new ButtonText(Button.Primary, BdtLocalization.SettingsSaveAsGlobal.AsFormatted, () =>
         {
             if (s_store == null)
             {
-                status.Value(DtkLocalization.SettingsStoreNotInitialized.AsFormatted);
+                status.Value(BdtLocalization.SettingsStoreNotInitialized.AsFormatted);
                 return;
             }
 
             SaveToJsonStore(s_store);
             status.Value(TrySaveGlobalConfig(out string error)
-                ? DtkLocalization.SettingsSavedToConfig.AsFormatted
-                : new LocStrFormatted(string.Format(DtkLocalization.SettingsSaveFailed.TranslatedString, error)));
-        }).Tooltip(DtkLocalization.SettingsSaveAsGlobalTooltip.AsFormatted);
+                ? BdtLocalization.SettingsSavedToConfig.AsFormatted
+                : new LocStrFormatted(string.Format(BdtLocalization.SettingsSaveFailed.TranslatedString, error)));
+        }).Tooltip(BdtLocalization.SettingsSaveAsGlobalTooltip.AsFormatted);
 
         return new PanelFooterRow().BodyAdd(
             row => row.Gap(2.pt()).AlignItemsCenter(),
@@ -265,7 +265,7 @@ internal static class DesignerToolkitSettings
         }
         catch (Exception ex)
         {
-            s_log.Warning($"Failed to load DTK settings state from {store.StorageKind}: {ex.Message}");
+            s_log.Warning($"Failed to load BDT settings state from {store.StorageKind}: {ex.Message}");
         }
     }
 
@@ -348,13 +348,13 @@ internal static class DesignerToolkitSettings
         switch (language)
         {
             case MarkdownTableLanguage.Local:
-                return DtkLocalization.SettingsLanguageLocal.AsFormatted;
+                return BdtLocalization.SettingsLanguageLocal.AsFormatted;
             case MarkdownTableLanguage.Both:
-                return DtkLocalization.SettingsLanguageBoth.AsFormatted;
+                return BdtLocalization.SettingsLanguageBoth.AsFormatted;
             case MarkdownTableLanguage.Hybrid:
-                return DtkLocalization.SettingsLanguageHybrid.AsFormatted;
+                return BdtLocalization.SettingsLanguageHybrid.AsFormatted;
             default:
-                return DtkLocalization.SettingsLanguageEnglish.AsFormatted;
+                return BdtLocalization.SettingsLanguageEnglish.AsFormatted;
         }
     }
 
@@ -371,11 +371,11 @@ internal static class DesignerToolkitSettings
         switch (numberFormat)
         {
             case MarkdownNumberFormat.English:
-                return DtkLocalization.SettingsNumberFormatEnglish.AsFormatted;
+                return BdtLocalization.SettingsNumberFormatEnglish.AsFormatted;
             case MarkdownNumberFormat.Local:
-                return DtkLocalization.SettingsNumberFormatLocal.AsFormatted;
+                return BdtLocalization.SettingsNumberFormatLocal.AsFormatted;
             default:
-                return DtkLocalization.SettingsNumberFormatAuto.AsFormatted;
+                return BdtLocalization.SettingsNumberFormatAuto.AsFormatted;
         }
     }
 }

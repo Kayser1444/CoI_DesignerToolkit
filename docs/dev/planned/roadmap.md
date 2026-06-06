@@ -22,4 +22,8 @@ Planned and candidate improvements for Designer Toolkit.
 ### Other
 * Blueprint terrain designations?
 * Paste all BPs in folder at the same time
+* Take over layer show/hide, AoE up-/downgrade, Transport Cleanup from U++
 * 'Recycle Bin' for deleted and/or updated blueprints - potentially with retention policy
+* Check translations of the Mod Settings window title and the Designer Toolkit tab
+* Rename mod to "Blueprint Designer's Toolkit" + thumbnail and stuff
+* Improve the icon in settings

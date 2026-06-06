@@ -38,7 +38,7 @@ namespace CoIDesignerToolkit;
 /// </summary>
 internal static class BlueprintExport
 {
-    private static readonly ModLogger s_log = new ModLogger("DTK.BpExport");
+    private static readonly ModLogger s_log = new ModLogger("BDT.BpExport");
 
     private const string CLIPBOARD_ICON = "Assets/Unity/UserInterface/General/Clipboard.svg";
 
@@ -163,8 +163,8 @@ internal static class BlueprintExport
             var state = new State();
             s_states.Add(__instance, state);
 
-            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, DtkLocalization.CopyAsMarkdownButton.AsFormatted)
-                .Tooltip(DtkLocalization.CopyBlueprintMarkdownTooltip.AsFormatted)
+            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, BdtLocalization.CopyAsMarkdownButton.AsFormatted)
+                .Tooltip(BdtLocalization.CopyBlueprintMarkdownTooltip.AsFormatted)
                 .Visible(false);
 
             copyBtn.OnClick(() =>
@@ -217,8 +217,8 @@ internal static class BlueprintExport
             var folderState = new FolderState();
             s_folderStates.Add(__instance, folderState);
 
-            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, DtkLocalization.CopyAsMarkdownButton.AsFormatted)
-                .Tooltip(DtkLocalization.CopyFolderMarkdownTooltip.AsFormatted)
+            var copyBtn = new ButtonIconText(Button.General, CLIPBOARD_ICON, BdtLocalization.CopyAsMarkdownButton.AsFormatted)
+                .Tooltip(BdtLocalization.CopyFolderMarkdownTooltip.AsFormatted)
                 .Visible(false);
 
             copyBtn.OnClick(() =>
@@ -371,8 +371,8 @@ internal static class BlueprintExport
         if (s.ComponentCounts.Count > 0)
         {
             sb.AppendLine();
-            sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownComponentsHeading, language)}");
-            sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntityHeader, language)} | {MarkdownText(DtkLocalization.MarkdownCountHeader, language)} |");
+            sb.AppendLine($"### {MarkdownText(BdtLocalization.MarkdownComponentsHeading, language)}");
+            sb.AppendLine($"| {MarkdownText(BdtLocalization.MarkdownEntityHeader, language)} | {MarkdownText(BdtLocalization.MarkdownCountHeader, language)} |");
             sb.AppendLine("|---|---|");
             foreach (var proto in SortedProtos(s.ComponentCounts.Keys, language))
                 sb.AppendLine($"| {DisplayName(proto, language)} | {FormatInteger(s.ComponentCounts[proto], language)} |");
@@ -382,8 +382,8 @@ internal static class BlueprintExport
         if (s.ConstructionValues.Count > 0)
         {
             sb.AppendLine();
-            sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownConstructionHeading, language)}");
-            sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownProductHeader, language)} | {MarkdownText(DtkLocalization.MarkdownQuantityHeader, language)} |");
+            sb.AppendLine($"### {MarkdownText(BdtLocalization.MarkdownConstructionHeading, language)}");
+            sb.AppendLine($"| {MarkdownText(BdtLocalization.MarkdownProductHeader, language)} | {MarkdownText(BdtLocalization.MarkdownQuantityHeader, language)} |");
             sb.AppendLine("|---|---|");
             foreach (var proto in SortedProtos(s.ConstructionValues.Keys, language))
                 sb.AppendLine($"| {DisplayName(proto, language)} | {FormatSiQuantity(s.ConstructionValues[proto], language)} |");
@@ -391,15 +391,15 @@ internal static class BlueprintExport
 
         // ── Operational ──────────────────────────────────────────────────────
         sb.AppendLine();
-        sb.AppendLine($"### {MarkdownText(DtkLocalization.MarkdownOperationalHeading, language)}");
-        sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownPropertyHeader, language)} | {MarkdownText(DtkLocalization.MarkdownValueHeader, language)} |");
+        sb.AppendLine($"### {MarkdownText(BdtLocalization.MarkdownOperationalHeading, language)}");
+        sb.AppendLine($"| {MarkdownText(BdtLocalization.MarkdownPropertyHeader, language)} | {MarkdownText(BdtLocalization.MarkdownValueHeader, language)} |");
         sb.AppendLine("|---|---|");
-        sb.AppendLine($"| {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} | {FormatInteger(s.Entities, language)} |");
+        sb.AppendLine($"| {MarkdownText(BdtLocalization.MarkdownEntitiesStat, language)} | {FormatInteger(s.Entities, language)} |");
         if (s.Workers > 0) sb.AppendLine($"| {MarkdownText(Tr.Workers, language)} | {FormatInteger(s.Workers, language)} |");
         if (s.ElecKw  > 0) sb.AppendLine($"| {MarkdownText(Tr.ElectricityStats, language)} | {FormatElectricity(s.ElecKw, language)} |");
         if (s.CompTf  > 0) sb.AppendLine($"| {MarkdownText(Tr.ComputingStats, language)} | {FormatInteger(s.CompTf, language)} TF |");
         foreach (var proto in SortedProtos(s.MaintenanceValues.Keys, language))
-            sb.AppendLine($"| {DisplayName(proto, language)} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} | {FormatAdaptive(s.MaintenanceValues[proto], language)} |");
+            sb.AppendLine($"| {DisplayName(proto, language)} {MarkdownText(BdtLocalization.MarkdownPerMonthSuffix, language)} | {FormatAdaptive(s.MaintenanceValues[proto], language)} |");
     }
 
     /// <summary>
@@ -464,14 +464,14 @@ internal static class BlueprintExport
         sb.AppendLine();
 
         // Header row
-        sb.Append($"| {MarkdownText(DtkLocalization.MarkdownBlueprintHeader, language)} | {MarkdownText(DtkLocalization.MarkdownFolderHeader, language)} | {MarkdownText(DtkLocalization.MarkdownEntitiesStat, language)} |");
+        sb.Append($"| {MarkdownText(BdtLocalization.MarkdownBlueprintHeader, language)} | {MarkdownText(BdtLocalization.MarkdownFolderHeader, language)} | {MarkdownText(BdtLocalization.MarkdownEntitiesStat, language)} |");
         if (hasWorkers) sb.Append($" {MarkdownText(Tr.Workers, language)} |");
         if (hasElec)    sb.Append($" {MarkdownText(Tr.ElectricityStats, language)} |");
         if (hasComp)    sb.Append($" {MarkdownText(Tr.ComputingStats, language)} |");
         List<VirtualProductProto> sortedMaintCols = SortedProtos(maintCols, language);
         List<ProductProto> sortedConstrCols = SortedProtos(constrCols, language);
 
-        foreach (var col in sortedMaintCols)  sb.Append($" {DisplayName(col, language)} {MarkdownText(DtkLocalization.MarkdownPerMonthSuffix, language)} |");
+        foreach (var col in sortedMaintCols)  sb.Append($" {DisplayName(col, language)} {MarkdownText(BdtLocalization.MarkdownPerMonthSuffix, language)} |");
         foreach (var col in sortedConstrCols) sb.Append($" {DisplayName(col, language)} |");
         sb.AppendLine();
 

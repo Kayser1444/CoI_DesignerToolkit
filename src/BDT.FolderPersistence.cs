@@ -23,7 +23,7 @@ namespace CoIDesignerToolkit;
 /// </summary>
 internal static class FolderPersistence
 {
-    private static readonly ModLogger s_log = new ModLogger("DTK.FolderPersist");
+    private static readonly ModLogger s_log = new ModLogger("BDT.FolderPersist");
 
     internal const string CONFIG_KEY = "last_blueprint_folder";
     private const char PATH_SEP = '>';

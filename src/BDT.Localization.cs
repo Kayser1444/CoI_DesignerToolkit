@@ -10,10 +10,10 @@ using Mafi.Localization;
 
 namespace CoIDesignerToolkit;
 
-internal static class DtkLocalization
+internal static class BdtLocalization
 {
     public static LocStr ModName =
-        Loc.Str("dtk.mod.name", "Designer Toolkit", "Designer Toolkit mod name.");
+        Loc.Str("dtk.mod.name", "Blueprint Designer's Toolkit", "Blueprint Designer's Toolkit mod name.");
 
     public static LocStr SettingsTabMarkdown =
         Loc.Str("dtk.settings.tab.markdown", "Markdown", "Settings tab title for Markdown settings.");

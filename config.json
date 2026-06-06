@@ -19,6 +19,6 @@
   },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
-    "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved DTK settings."
+    "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."
   }
 }

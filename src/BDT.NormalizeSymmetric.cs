@@ -37,7 +37,7 @@ namespace CoIDesignerToolkit;
 /// </summary>
 internal static class NormalizeSymmetric
 {
-    private static readonly ModLogger s_log = new ModLogger("DTK.NormSym");
+    private static readonly ModLogger s_log = new ModLogger("BDT.NormSym");
 
     // Cache symmetry test results per (proto, rotation index, reflected) to avoid re-testing.
     private static readonly Dictionary<(Proto.ID, int, bool), bool> s_symmetryCache =

@@ -1,8 +1,8 @@
 # Designer Toolkit
 
-Kayser's Designer Toolkit (DTK) is a quality-of-life mod for Captain of Industry blueprint creators.
+Kayser's Designer Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
 
-It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. DTK helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
+It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
 Download the latest release from the Captain of Industry Hub: https://coigame.com/Mods/Search?author=Kayser
 
@@ -14,7 +14,7 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 
 Select a blueprint in your blueprint book and click **Update** to replace its contents with a fresh area selection.
 
-DTK keeps the blueprint's existing:
+BDT keeps the blueprint's existing:
 
 - name
 - description
@@ -27,9 +27,9 @@ This is meant for the usual blueprint-authoring loop: find a small mistake, fix 
 
 ![Remembered blueprint folder](docs/assets/remembered-blueprint-folder.png)
 
-DTK remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created.
+BDT remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created.
 
-The folder path is stored in `config.json`. If a folder is renamed or removed, DTK gracefully falls back to the deepest folder it can still find.
+The folder path is stored in `config.json`. If a folder is renamed or removed, BDT gracefully falls back to the deepest folder it can still find.
 
 ### Blueprint operational stats
 
@@ -37,7 +37,7 @@ The folder path is stored in `config.json`. If a folder is renamed or removed, D
 
 The blueprint detail panel now separates **Construction cost** from **Operational cost**.
 
-When a selected blueprint contains relevant entities, DTK adds a compact operational summary row showing:
+When a selected blueprint contains relevant entities, BDT adds a compact operational summary row showing:
 
 - workers
 - electricity
@@ -50,7 +50,7 @@ Only non-zero stats are shown, so small blueprints stay clean and large builds g
 
 ![Copy as Markdown button](docs/assets/copy-as-markdown.png)
 
-DTK adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
+BDT adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
 
 **Single blueprint** - clicking the button copies a Markdown-formatted summary to the clipboard:
 
@@ -88,18 +88,18 @@ Mitigation/Fix for: https://discord.com/channels/803508556325584926/140580090564
 
 ![Symmetric normalization result](docs/assets/symmetric-normalization-result.png)
 
-DTK normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
+BDT normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
 
-Captain of Industry can treat a functionally identical balancer at rotation 0 and rotation 2 as different, which can block paste-over updates. DTK fixes that at blueprint capture time by resetting symmetric entity rotation and reflection to a canonical orientation.
+Captain of Industry can treat a functionally identical balancer at rotation 0 and rotation 2 as different, which can block paste-over updates. BDT fixes that at blueprint capture time by resetting symmetric entity rotation and reflection to a canonical orientation.
 
 The normalization pass focuses on the known paste-over problem cases:
 
 - resets supported symmetric entities to a consistent stored orientation
 - keeps their blueprint position unchanged
-- preserves balancer priority settings where DTK can safely remap them
+- preserves balancer priority settings where BDT can safely remap them
 - skips entities that do not match the supported symmetric layouts
 
-The result is still normal blueprint data. This does not patch blueprint placement and does not require blueprint users to install DTK.
+The result is still normal blueprint data. This does not patch blueprint placement and does not require blueprint users to install BDT.
 
 ## Notes
 

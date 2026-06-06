@@ -3,7 +3,7 @@ description: Load when working on DesignerToolkit mod code, making changes, or i
 applyTo: 'src/**/*.cs'
 ---
 
-# DTK-specific instructions
+# BDT-specific instructions
 
 Read the shared workspace instructions first:
 
@@ -11,7 +11,7 @@ Read the shared workspace instructions first:
 
 # Build verification
 
-For DTK-only changes, run:
+For BDT-only changes, run:
 
 ```powershell
 dotnet build DesignerToolkit.sln -c Debug
@@ -19,4 +19,4 @@ dotnet build DesignerToolkit.sln -c Debug
 
 # Settings file
 
-DTK uses `config.json` for user-configurable settings.
+BDT uses `config.json` for user-configurable settings.
