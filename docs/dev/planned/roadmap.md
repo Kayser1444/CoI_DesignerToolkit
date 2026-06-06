@@ -27,3 +27,10 @@ Planned and candidate improvements for Designer Toolkit.
 * Check translations of the Mod Settings window title and the Designer Toolkit tab
 * Rename mod to "Blueprint Designer's Toolkit" + thumbnail and stuff
 * Improve the icon in settings
+* Undo features!
+
+
+## Mori's features
+* Replace the wonky area upgrade/downgrade with a hook on the native 'i' tool--coupled with instant build
+* Instant build/upgrade/downgrade only in sandbox mode!
+

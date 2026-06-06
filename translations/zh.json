@@ -60,6 +60,18 @@
     "本地分隔符"
   ],
   [
+    "dtk.settings.instant_build.heading",
+    "INSTANT BUILD"
+  ],
+  [
+    "dtk.settings.instant_build_mode.label",
+    "Instant build mode"
+  ],
+  [
+    "dtk.settings.instant_build_mode.description",
+    "Automatically completes construction and deconstruction without materials, workers, or unity. Enabling this also turns off the game's insta-build toggle."
+  ],
+  [
     "dtk.blueprint.copy_as_markdown.button",
     "复制为 Markdown"
   ],
@@ -156,3 +168,4 @@
     "保存失败：设置存储尚未初始化。"
   ]
 ]
+

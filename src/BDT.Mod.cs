@@ -11,12 +11,16 @@ using System.IO;
 using HarmonyLib;
 using Mafi;
 using Mafi.Collections;
+using Mafi.Core.Entities;
+using Mafi.Core.Entities.Static;
 using Mafi.Core.Game;
 using Mafi.Core.GameLoop;
 using Mafi.Core.Mods;
 using Mafi.Core.Prototypes;
 using Mafi.Core.Simulation;
+using Mafi.Core.Utils;
 using Mafi.Unity;
+using Mafi.Unity.Entities;
 using Mafi.Unity.Ui.Hud;
 using Mafi.Unity.UiToolkit;
 using CoI.AutoHelpers.Localization;
@@ -32,8 +36,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private Harmony? m_harmony;
     private ISimLoopEvents? m_simLoopEvents;
     private IModStateJsonStore? m_settingsStateStore;
+    private InstantBuildMode? m_instantBuildMode;
+    private AreaUpgradeTool? m_areaUpgradeTool;
+    private TransportCleanupTool? m_transportCleanupTool;
 
-    public string Name => "Designer Toolkit";
+    public string Name => "Blueprint Designer's Toolkit";
 
     public int Version => 1;
 
@@ -74,7 +81,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
     {
-        s_log.Info($"[BDT] Designer Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
+        s_log.Info($"[BDT] Blueprint Designer's Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
 
         RegisterAutoHelpersLocalizationLateApply(resolver);
 
@@ -83,6 +90,29 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore);
+
+        object? instaBuildManager = resolver.TryResolve(typeof(InstaBuildManager)).ValueOrNull;
+        m_instantBuildMode = new InstantBuildMode(
+            resolver.Resolve<EntitiesManager>(),
+            resolver.Resolve<IConstructionManager>(),
+            m_simLoopEvents,
+            instaBuildManager);
+        m_instantBuildMode.Initialize();
+        DesignerToolkitSettings.InstantBuildModeChanged += m_instantBuildMode.OnSettingsChanged;
+
+        m_areaUpgradeTool = new AreaUpgradeTool(
+            resolver.Resolve<EntitiesManager>(),
+            resolver.Resolve<UpgradesManager>(),
+            resolver.Resolve<IGameLoopEvents>(),
+            m_simLoopEvents);
+        m_areaUpgradeTool.Initialize();
+
+        m_transportCleanupTool = new TransportCleanupTool(
+            resolver.Resolve<EntitiesManager>(),
+            resolver.Resolve<IGameLoopEvents>(),
+            m_simLoopEvents,
+            resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance);
+        m_transportCleanupTool.Initialize();
 
         ModSettings.EnsureInitialized(
             resolver.Resolve<HudController>(),
@@ -158,6 +188,25 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     private void unsubscribeWorldEvents()
     {
+        if (m_instantBuildMode != null)
+        {
+            DesignerToolkitSettings.InstantBuildModeChanged -= m_instantBuildMode.OnSettingsChanged;
+            m_instantBuildMode.Dispose();
+            m_instantBuildMode = null;
+        }
+
+        if (m_areaUpgradeTool != null)
+        {
+            m_areaUpgradeTool.Dispose();
+            m_areaUpgradeTool = null;
+        }
+
+        if (m_transportCleanupTool != null)
+        {
+            m_transportCleanupTool.Dispose();
+            m_transportCleanupTool = null;
+        }
+
         if (m_simLoopEvents != null)
         {
             try { m_simLoopEvents.BeforeSave.RemoveNonSaveable(this, beforeSave); }

@@ -1,11 +1,3 @@
-## v0.2.0a (unreleased)
-* Added **Restore defaults** and **Save as global** buttons to Designer Toolkit's Mod Settings tab
-* Added **Markdown number format** setting with Auto, English separators, and Local separators modes
-* Fixed Markdown **Both** language mode so it does not duplicate English output when the current game language is English
-* Fixed Markdown export so products and entities with identical display names no longer have their stats merged internally
-* Rebuilt Designer Toolkit with the updated AutoHelpers Mod Settings icon handoff so tab icons render through the shared settings window
-* Changed Markdown export to use vanilla game translations for workers, electricity, and computing, removing duplicate Designer Toolkit translation entries
-
 ## v0.2.0
 * Added **Mod Settings** window, opened from the top-right **M** button or with `Alt+M`
 * Added **Markdown table language** setting with English, Local, Both, and Hybrid modes

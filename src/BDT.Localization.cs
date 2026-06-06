@@ -16,7 +16,7 @@ internal static class BdtLocalization
         Loc.Str("dtk.mod.name", "Blueprint Designer's Toolkit", "Blueprint Designer's Toolkit mod name.");
 
     public static LocStr SettingsTabMarkdown =
-        Loc.Str("dtk.settings.tab.markdown", "Markdown", "Settings tab title for Markdown settings.");
+        Loc.Str("dtk.settings.tab.markdown", "Settings", "Settings tab title for BDT settings.");
     public static LocStr SettingsMarkdownCopyHeading =
         Loc.Str("dtk.settings.markdown_copy.heading", "Markdown Copy", "Settings section heading for Markdown copy/export settings.");
     public static LocStr SettingsMarkdownTableLanguage =
@@ -43,6 +43,28 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.number_format.english", "English separators", "Dropdown option for en-US Markdown number formatting.");
     public static LocStr SettingsNumberFormatLocal =
         Loc.Str("dtk.settings.number_format.local", "Local separators", "Dropdown option for local Markdown number formatting.");
+    public static LocStr SettingsInstantBuildHeading =
+        Loc.Str("dtk.settings.instant_build.heading", "INSTANT BUILD", "Settings section heading for automatic construction tools.");
+    public static LocStr SettingsInstantBuildMode =
+        Loc.Str("dtk.settings.instant_build_mode.label", "Instant build mode", "Settings row label for instant build mode.");
+    public static LocStr SettingsInstantBuildModeDescription =
+        Loc.Str("dtk.settings.instant_build_mode.description", "Automatically completes construction and deconstruction without materials, workers, or unity. Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
+    public static LocStr SettingsToolsHeading =
+        Loc.Str("dtk.settings.tools.heading", "TOOLS", "Settings section heading for tool hotkeys.");
+    public static LocStr SettingsAreaUpgradeHotkey =
+        Loc.Str("dtk.settings.area_upgrade_hotkey.label", "Area upgrade hotkey", "Settings row label for the area upgrade hotkey.");
+    public static LocStr SettingsAreaDowngradeHotkey =
+        Loc.Str("dtk.settings.area_downgrade_hotkey.label", "Area downgrade hotkey", "Settings row label for the area downgrade hotkey.");
+    public static LocStr SettingsTransportCleanupHotkey =
+        Loc.Str("dtk.settings.transport_cleanup_hotkey.label", "Transport cleanup hotkey", "Settings row label for the transport cleanup hotkey.");
+    public static LocStr SettingsToolHotkeyDescription =
+        Loc.Str("dtk.settings.tool_hotkey.description", "Configures the keyboard shortcut that arms this tool.", "Settings row description for tool hotkeys.");
+    public static LocStr SettingsHotkeyRequireCtrl =
+        Loc.Str("dtk.settings.hotkey.require_ctrl", "Require Ctrl", "Settings toggle label for requiring Ctrl in a hotkey.");
+    public static LocStr SettingsHotkeyRequireAlt =
+        Loc.Str("dtk.settings.hotkey.require_alt", "Require Alt", "Settings toggle label for requiring Alt in a hotkey.");
+    public static LocStr SettingsHotkeyRequireShift =
+        Loc.Str("dtk.settings.hotkey.require_shift", "Require Shift", "Settings toggle label for requiring Shift in a hotkey.");
     public static LocStr SettingsRestoreDefaults =
         Loc.Str("dtk.settings.action.restore_defaults", "Restore defaults", "Button label for restoring default settings.");
     public static LocStr SettingsRestoreDefaultsTooltip =

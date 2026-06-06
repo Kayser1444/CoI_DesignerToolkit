@@ -17,6 +17,34 @@
     "min": 0,
     "max": 2
   },
+  "instant_build_mode": {
+    "default": false,
+    "description": "Initial instant build mode for saves without BDT settings state. When enabled, BDT completes construction and deconstruction automatically."
+  },
+  "area_upgrade_hotkey_primary": {
+    "default": "LeftControl + PageUp",
+    "description": "Initial primary area upgrade hotkey for saves without BDT settings state. Leave empty to disable the primary binding."
+  },
+  "area_upgrade_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary area upgrade hotkey for saves without BDT settings state. Leave empty to disable the secondary binding."
+  },
+  "area_downgrade_hotkey_primary": {
+    "default": "LeftControl + PageDown",
+    "description": "Initial primary area downgrade hotkey for saves without BDT settings state. Leave empty to disable the primary binding."
+  },
+  "area_downgrade_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary area downgrade hotkey for saves without BDT settings state. Leave empty to disable the secondary binding."
+  },
+  "transport_cleanup_hotkey_primary": {
+    "default": "LeftAlt + Delete",
+    "description": "Initial primary transport cleanup hotkey for saves without BDT settings state. Leave empty to disable the primary binding."
+  },
+  "transport_cleanup_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary transport cleanup hotkey for saves without BDT settings state. Leave empty to disable the secondary binding."
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."
