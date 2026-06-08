@@ -12,7 +12,7 @@ v0.2.0 | 2026-06-04
 * Added per-save persistence for Designer Toolkit settings through `dtkSettingsStateJson`; `markdown_table_language` in `config.json` is used only to initialize saves without persisted settings
 * Added Designer Toolkit translations for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese
 
-v0.1.0 | 2026-05-10
+v0.1.0 | 2026-05-31
 * Added **Update blueprint** button in the blueprint placement panel: re-selects an area to replace an existing blueprint while preserving its name, description, overlap settings, and book position
 * Persists the last-open blueprint book folder to config.json and restores it when the blueprint book is reopened
 * Blueprint stats row in the Detail panel: shows total workers, electricity, computing, and maintenance for all entities in the selected blueprint
