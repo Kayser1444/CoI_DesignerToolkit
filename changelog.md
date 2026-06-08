@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.2.0b [unreleased]
+## v0.3.0 [packaged]
 
 - Renamed the mod identity around Blueprint Designer's Toolkit (BDT)
 - Added a BDT-native instant build mode based on Mori's Utilities++ source
@@ -14,7 +14,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Added insta-build suppression when instant build mode is enabled, matching the Utilities++ behavior
 - Added dev and player docs for the instant build mode integration
 - Added translation keys for the new settings UI, with English fallback strings in non-English locales
-- Added an area upgrade/downgrade tool with default hotkeys (`Ctrl+PgUp` and `Ctrl+PgDn`) and a BDT-native drag rectangle overlay
+- Removed custom Area Upgrade Tool and integrated its instant-finish logic into `InstantBuildMode` to natively support the game's upgrade tool
 - Deferred translations for the area upgrade/downgrade tool until the English interaction is polished
 - Added a transport cleanup tool with default hotkey (`Alt+Del`), red drag/highlight preview, and sim-loop removal of disconnected belt/pipe segments
 - Deferred translations for the transport cleanup tool until the English interaction is polished
@@ -23,6 +23,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Updated the shared Mod Settings window to reopen on the last active mod tab during the current runtime session
 - Corrected boolean config defaults to use documented `true`/`false` values instead of integer flags
 - Verified `dotnet build DesignerToolkit.sln -c Debug --no-restore` succeeds; normal restore remains blocked locally by a NuGet temp lock
+- Rephrased the sandbox warning for Instant Build Mode to a British derogatory expression
 
 ## v0.2.0a [packaged]
 

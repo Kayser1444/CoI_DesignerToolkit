@@ -46,20 +46,8 @@ internal static class DesignerToolkitSettings
     private const string MARKDOWN_TABLE_LANGUAGE_KEY = "markdown_table_language";
     private const string MARKDOWN_NUMBER_FORMAT_KEY = "markdown_number_format";
     private const string INSTANT_BUILD_MODE_KEY = "instant_build_mode";
-    private const string AREA_UPGRADE_HOTKEY_PRIMARY_KEY = "area_upgrade_hotkey_primary";
-    private const string AREA_UPGRADE_HOTKEY_SECONDARY_KEY = "area_upgrade_hotkey_secondary";
-    private const string AREA_DOWNGRADE_HOTKEY_PRIMARY_KEY = "area_downgrade_hotkey_primary";
-    private const string AREA_DOWNGRADE_HOTKEY_SECONDARY_KEY = "area_downgrade_hotkey_secondary";
     private const string TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY = "transport_cleanup_hotkey_primary";
     private const string TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY = "transport_cleanup_hotkey_secondary";
-    private const string LEGACY_AREA_UPGRADE_HOTKEY_KEY = "area_upgrade_hotkey_key";
-    private const string LEGACY_AREA_UPGRADE_HOTKEY_CTRL_KEY = "area_upgrade_hotkey_ctrl";
-    private const string LEGACY_AREA_UPGRADE_HOTKEY_ALT_KEY = "area_upgrade_hotkey_alt";
-    private const string LEGACY_AREA_UPGRADE_HOTKEY_SHIFT_KEY = "area_upgrade_hotkey_shift";
-    private const string LEGACY_AREA_DOWNGRADE_HOTKEY_KEY = "area_downgrade_hotkey_key";
-    private const string LEGACY_AREA_DOWNGRADE_HOTKEY_CTRL_KEY = "area_downgrade_hotkey_ctrl";
-    private const string LEGACY_AREA_DOWNGRADE_HOTKEY_ALT_KEY = "area_downgrade_hotkey_alt";
-    private const string LEGACY_AREA_DOWNGRADE_HOTKEY_SHIFT_KEY = "area_downgrade_hotkey_shift";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_KEY = "transport_cleanup_hotkey_key";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_CTRL_KEY = "transport_cleanup_hotkey_ctrl";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_ALT_KEY = "transport_cleanup_hotkey_alt";
@@ -71,10 +59,6 @@ internal static class DesignerToolkitSettings
     private static readonly Percent SETTINGS_COLUMN_WIDTH = 96.Percent();
     private static readonly Px SETTINGS_SECTION_INDENT = 4.pt();
     private static readonly Px SETTINGS_OPTIONS_GAP = 2.pt();
-    private static readonly BdtHotkey DEFAULT_AREA_UPGRADE_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftControl, KeyCode.PageUp);
-    private static readonly BdtHotkey DEFAULT_AREA_DOWNGRADE_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftControl, KeyCode.PageDown);
     private static readonly BdtHotkey DEFAULT_TRANSPORT_CLEANUP_HOTKEY =
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.Delete);
 
@@ -88,8 +72,6 @@ internal static class DesignerToolkitSettings
     public static MarkdownNumberFormat MarkdownNumberFormat { get; private set; } =
         MarkdownNumberFormat.Auto;
     public static bool InstantBuildModeEnabled { get; private set; }
-    public static BdtHotkey AreaUpgradeHotkey { get; private set; } = DEFAULT_AREA_UPGRADE_HOTKEY;
-    public static BdtHotkey AreaDowngradeHotkey { get; private set; } = DEFAULT_AREA_DOWNGRADE_HOTKEY;
     public static BdtHotkey TransportCleanupHotkey { get; private set; } = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
@@ -101,24 +83,6 @@ internal static class DesignerToolkitSettings
         MarkdownTableLanguage initialLanguage = FromInt(config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
         MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
         bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
-        BdtHotkey initialAreaUpgradeHotkey = HotkeyFromConfig(
-            config,
-            AREA_UPGRADE_HOTKEY_PRIMARY_KEY,
-            AREA_UPGRADE_HOTKEY_SECONDARY_KEY,
-            LEGACY_AREA_UPGRADE_HOTKEY_KEY,
-            LEGACY_AREA_UPGRADE_HOTKEY_CTRL_KEY,
-            LEGACY_AREA_UPGRADE_HOTKEY_ALT_KEY,
-            LEGACY_AREA_UPGRADE_HOTKEY_SHIFT_KEY,
-            DEFAULT_AREA_UPGRADE_HOTKEY);
-        BdtHotkey initialAreaDowngradeHotkey = HotkeyFromConfig(
-            config,
-            AREA_DOWNGRADE_HOTKEY_PRIMARY_KEY,
-            AREA_DOWNGRADE_HOTKEY_SECONDARY_KEY,
-            LEGACY_AREA_DOWNGRADE_HOTKEY_KEY,
-            LEGACY_AREA_DOWNGRADE_HOTKEY_CTRL_KEY,
-            LEGACY_AREA_DOWNGRADE_HOTKEY_ALT_KEY,
-            LEGACY_AREA_DOWNGRADE_HOTKEY_SHIFT_KEY,
-            DEFAULT_AREA_DOWNGRADE_HOTKEY);
         BdtHotkey initialTransportCleanupHotkey = HotkeyFromConfig(
             config,
             TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY,
@@ -133,8 +97,6 @@ internal static class DesignerToolkitSettings
             initialLanguage,
             initialNumberFormat,
             initialInstantBuildMode,
-            initialAreaUpgradeHotkey,
-            initialAreaDowngradeHotkey,
             initialTransportCleanupHotkey);
     }
 
@@ -225,24 +187,6 @@ internal static class DesignerToolkitSettings
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
-        BdtKeyBindingField areaUpgradePrimaryField;
-        BdtKeyBindingField areaUpgradeSecondaryField;
-        root.Add(BuildHotkeyRow(
-            BdtLocalization.SettingsAreaUpgradeHotkey.AsFormatted,
-            () => AreaUpgradeHotkey,
-            hotkey => AreaUpgradeHotkey = hotkey,
-            out areaUpgradePrimaryField,
-            out areaUpgradeSecondaryField));
-
-        BdtKeyBindingField areaDowngradePrimaryField;
-        BdtKeyBindingField areaDowngradeSecondaryField;
-        root.Add(BuildHotkeyRow(
-            BdtLocalization.SettingsAreaDowngradeHotkey.AsFormatted,
-            () => AreaDowngradeHotkey,
-            hotkey => AreaDowngradeHotkey = hotkey,
-            out areaDowngradePrimaryField,
-            out areaDowngradeSecondaryField));
-
         BdtKeyBindingField transportCleanupPrimaryField;
         BdtKeyBindingField transportCleanupSecondaryField;
         root.Add(BuildHotkeyRow(
@@ -257,10 +201,6 @@ internal static class DesignerToolkitSettings
             languageDropdown.SetValue(MarkdownTableLanguage);
             numberFormatDropdown.SetValue(MarkdownNumberFormat);
             instantBuildToggle.Value(InstantBuildModeEnabled);
-            areaUpgradePrimaryField.Refresh();
-            areaUpgradeSecondaryField.Refresh();
-            areaDowngradePrimaryField.Refresh();
-            areaDowngradeSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
             transportCleanupSecondaryField.Refresh();
         }));
@@ -297,8 +237,6 @@ internal static class DesignerToolkitSettings
             MarkdownTableLanguage = MarkdownTableLanguage.English;
             MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             SetInstantBuildMode(false);
-            AreaUpgradeHotkey = DEFAULT_AREA_UPGRADE_HOTKEY;
-            AreaDowngradeHotkey = DEFAULT_AREA_DOWNGRADE_HOTKEY;
             TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
             refresh();
             status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
@@ -337,10 +275,6 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out error))
                 return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, AreaUpgradeHotkey, AREA_UPGRADE_HOTKEY_PRIMARY_KEY, AREA_UPGRADE_HOTKEY_SECONDARY_KEY, out error))
-                return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, AreaDowngradeHotkey, AREA_DOWNGRADE_HOTKEY_PRIMARY_KEY, AREA_DOWNGRADE_HOTKEY_SECONDARY_KEY, out error))
-                return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
 
@@ -356,18 +290,6 @@ internal static class DesignerToolkitSettings
             string updated = TryReplaceConfigDefault(json, MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out bool languageUpdated);
             updated = TryReplaceConfigDefault(updated, MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out bool numberFormatUpdated);
             updated = TryReplaceConfigDefault(updated, INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out bool instantBuildUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                AreaUpgradeHotkey,
-                AREA_UPGRADE_HOTKEY_PRIMARY_KEY,
-                AREA_UPGRADE_HOTKEY_SECONDARY_KEY,
-                out bool areaUpgradeHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                AreaDowngradeHotkey,
-                AREA_DOWNGRADE_HOTKEY_PRIMARY_KEY,
-                AREA_DOWNGRADE_HOTKEY_SECONDARY_KEY,
-                out bool areaDowngradeHotkeyUpdated);
             updated = TryReplaceHotkeyConfigDefaults(
                 updated,
                 TransportCleanupHotkey,
@@ -387,16 +309,6 @@ internal static class DesignerToolkitSettings
             if (!instantBuildUpdated)
             {
                 error = "Could not find instant_build_mode default in config.json.";
-                return false;
-            }
-            if (!areaUpgradeHotkeyUpdated)
-            {
-                error = "Could not find area upgrade hotkey defaults in config.json.";
-                return false;
-            }
-            if (!areaDowngradeHotkeyUpdated)
-            {
-                error = "Could not find area downgrade hotkey defaults in config.json.";
                 return false;
             }
             if (!transportCleanupHotkeyUpdated)
@@ -554,15 +466,11 @@ internal static class DesignerToolkitSettings
         MarkdownTableLanguage initialLanguage,
         MarkdownNumberFormat initialNumberFormat,
         bool initialInstantBuildMode,
-        BdtHotkey initialAreaUpgradeHotkey,
-        BdtHotkey initialAreaDowngradeHotkey,
         BdtHotkey initialTransportCleanupHotkey)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
         InstantBuildModeEnabled = initialInstantBuildMode;
-        AreaUpgradeHotkey = initialAreaUpgradeHotkey;
-        AreaDowngradeHotkey = initialAreaDowngradeHotkey;
         TransportCleanupHotkey = initialTransportCleanupHotkey;
 
         string json = store.LoadJson();
@@ -585,24 +493,6 @@ internal static class DesignerToolkitSettings
                 MarkdownNumberFormat = NumberFormatFromInt(numberFormat);
             if (TryGetBool(root, "instantBuildMode", out bool instantBuildMode))
                 InstantBuildModeEnabled = instantBuildMode;
-            AreaUpgradeHotkey = HotkeyFromState(
-                root,
-                "areaUpgradeHotkeyPrimary",
-                "areaUpgradeHotkeySecondary",
-                "areaUpgradeHotkeyKey",
-                "areaUpgradeHotkeyCtrl",
-                "areaUpgradeHotkeyAlt",
-                "areaUpgradeHotkeyShift",
-                AreaUpgradeHotkey);
-            AreaDowngradeHotkey = HotkeyFromState(
-                root,
-                "areaDowngradeHotkeyPrimary",
-                "areaDowngradeHotkeySecondary",
-                "areaDowngradeHotkeyKey",
-                "areaDowngradeHotkeyCtrl",
-                "areaDowngradeHotkeyAlt",
-                "areaDowngradeHotkeyShift",
-                AreaDowngradeHotkey);
             TransportCleanupHotkey = HotkeyFromState(
                 root,
                 "transportCleanupHotkeyPrimary",
@@ -627,16 +517,6 @@ internal static class DesignerToolkitSettings
         writer.AppendNumberField("markdownTableLanguage", (int)MarkdownTableLanguage);
         writer.AppendNumberField("markdownNumberFormat", (int)MarkdownNumberFormat);
         writer.AppendBoolField("instantBuildMode", InstantBuildModeEnabled);
-        AppendHotkeyFields(
-            writer,
-            AreaUpgradeHotkey,
-            "areaUpgradeHotkeyPrimary",
-            "areaUpgradeHotkeySecondary");
-        AppendHotkeyFields(
-            writer,
-            AreaDowngradeHotkey,
-            "areaDowngradeHotkeyPrimary",
-            "areaDowngradeHotkeySecondary");
         AppendHotkeyFields(
             writer,
             TransportCleanupHotkey,

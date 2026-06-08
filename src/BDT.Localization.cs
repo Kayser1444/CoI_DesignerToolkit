@@ -48,15 +48,12 @@ internal static class BdtLocalization
     public static LocStr SettingsInstantBuildMode =
         Loc.Str("dtk.settings.instant_build_mode.label", "Instant build mode", "Settings row label for instant build mode.");
     public static LocStr SettingsInstantBuildModeDescription =
-        Loc.Str("dtk.settings.instant_build_mode.description", "Automatically completes construction and deconstruction without materials, workers, or unity. Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
+        Loc.Str("dtk.settings.instant_build_mode.description", "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
     public static LocStr SettingsInstantBuildModeSandboxOnly =
-        Loc.Str("dtk.settings.instant_build_mode.sandbox_only", "Available only in Sandbox mode.", "Tooltip for instant build mode when the game is not in sandbox mode.");
+        Loc.Str("dtk.settings.instant_build_mode.sandbox_only", "Sod off to the sandbox, you lazy git!", "Tooltip for instant build mode when the game is not in sandbox mode.");
     public static LocStr SettingsToolsHeading =
         Loc.Str("dtk.settings.tools.heading", "TOOLS", "Settings section heading for tool hotkeys.");
-    public static LocStr SettingsAreaUpgradeHotkey =
-        Loc.Str("dtk.settings.area_upgrade_hotkey.label", "Area upgrade hotkey", "Settings row label for the area upgrade hotkey.");
-    public static LocStr SettingsAreaDowngradeHotkey =
-        Loc.Str("dtk.settings.area_downgrade_hotkey.label", "Area downgrade hotkey", "Settings row label for the area downgrade hotkey.");
+
     public static LocStr SettingsTransportCleanupHotkey =
         Loc.Str("dtk.settings.transport_cleanup_hotkey.label", "Transport cleanup hotkey", "Settings row label for the transport cleanup hotkey.");
     public static LocStr SettingsToolHotkeyDescription =

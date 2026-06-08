@@ -37,7 +37,6 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private ISimLoopEvents? m_simLoopEvents;
     private IModStateJsonStore? m_settingsStateStore;
     private InstantBuildMode? m_instantBuildMode;
-    private AreaUpgradeTool? m_areaUpgradeTool;
     private TransportCleanupTool? m_transportCleanupTool;
 
     public string Name => "Blueprint Designer's Toolkit";
@@ -95,18 +94,13 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         m_instantBuildMode = new InstantBuildMode(
             resolver.Resolve<EntitiesManager>(),
             resolver.Resolve<IConstructionManager>(),
+            resolver.Resolve<UpgradesManager>(),
             m_simLoopEvents,
             instaBuildManager,
             resolver.Resolve<GameDifficultyConfig>());
         m_instantBuildMode.Initialize();
         DesignerToolkitSettings.InstantBuildModeChanged += m_instantBuildMode.OnSettingsChanged;
 
-        m_areaUpgradeTool = new AreaUpgradeTool(
-            resolver.Resolve<EntitiesManager>(),
-            resolver.Resolve<UpgradesManager>(),
-            resolver.Resolve<IGameLoopEvents>(),
-            m_simLoopEvents);
-        m_areaUpgradeTool.Initialize();
 
         m_transportCleanupTool = new TransportCleanupTool(
             resolver.Resolve<EntitiesManager>(),
@@ -194,12 +188,6 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             DesignerToolkitSettings.InstantBuildModeChanged -= m_instantBuildMode.OnSettingsChanged;
             m_instantBuildMode.Dispose();
             m_instantBuildMode = null;
-        }
-
-        if (m_areaUpgradeTool != null)
-        {
-            m_areaUpgradeTool.Dispose();
-            m_areaUpgradeTool = null;
         }
 
         if (m_transportCleanupTool != null)

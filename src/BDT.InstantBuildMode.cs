@@ -23,6 +23,7 @@ internal sealed class InstantBuildMode : IDisposable
 
     private readonly EntitiesManager m_entitiesManager;
     private readonly IConstructionManager m_constructionManager;
+    private readonly UpgradesManager m_upgradesManager;
     private readonly ISimLoopEvents m_simLoopEvents;
     private readonly object? m_instaBuildManager;
     private readonly MethodInfo? m_setInstaBuildMethod;
@@ -34,12 +35,14 @@ internal sealed class InstantBuildMode : IDisposable
     public InstantBuildMode(
         EntitiesManager entitiesManager,
         IConstructionManager constructionManager,
+        UpgradesManager upgradesManager,
         ISimLoopEvents simLoopEvents,
         object? instaBuildManager,
         GameDifficultyConfig difficultyConfig)
     {
         m_entitiesManager = entitiesManager;
         m_constructionManager = constructionManager;
+        m_upgradesManager = upgradesManager;
         m_simLoopEvents = simLoopEvents;
         m_instaBuildManager = instaBuildManager;
         m_difficultyConfig = difficultyConfig;
@@ -98,8 +101,13 @@ internal sealed class InstantBuildMode : IDisposable
                     continue;
 
                 ConstructionState state = entity.ConstructionState;
-                if (state == ConstructionState.InConstruction || state == ConstructionState.InDeconstruction)
+                if (state == ConstructionState.InConstruction || 
+                    state == ConstructionState.InDeconstruction ||
+                    state == ConstructionState.PreparingUpgrade ||
+                    state == ConstructionState.BeingUpgraded)
+                {
                     m_snapshot.Add(entity);
+                }
             }
         }
         catch (Exception ex)
@@ -120,6 +128,11 @@ internal sealed class InstantBuildMode : IDisposable
                     m_constructionManager.MarkConstructed(entity);
                 else if (entity.ConstructionState == ConstructionState.InDeconstruction)
                     m_constructionManager.MarkDeconstructed(entity);
+                else if (entity.ConstructionState == ConstructionState.PreparingUpgrade || entity.ConstructionState == ConstructionState.BeingUpgraded)
+                {
+                    if (entity is IUpgradableEntity upgradableEntity)
+                        m_upgradesManager.TryFinishUpgradeImmediately(upgradableEntity, payWithUnity: false, out string _);
+                }
             }
             catch (Exception ex)
             {
