@@ -49,6 +49,8 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.instant_build_mode.label", "Instant build mode", "Settings row label for instant build mode.");
     public static LocStr SettingsInstantBuildModeDescription =
         Loc.Str("dtk.settings.instant_build_mode.description", "Automatically completes construction and deconstruction without materials, workers, or unity. Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
+    public static LocStr SettingsInstantBuildModeSandboxOnly =
+        Loc.Str("dtk.settings.instant_build_mode.sandbox_only", "Available only in Sandbox mode.", "Tooltip for instant build mode when the game is not in sandbox mode.");
     public static LocStr SettingsToolsHeading =
         Loc.Str("dtk.settings.tools.heading", "TOOLS", "Settings section heading for tool hotkeys.");
     public static LocStr SettingsAreaUpgradeHotkey =

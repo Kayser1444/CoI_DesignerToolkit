@@ -11,6 +11,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Mafi;
 using Mafi.Collections;
+using Mafi.Core.Game;
 using Mafi.Core.Mods;
 using Mafi.Localization;
 using Mafi.Serialization;
@@ -144,18 +145,18 @@ internal static class DesignerToolkitSettings
             s_log.Warning($"Failed to save BDT settings state to {result.StorageKind} value '{result.StateKey}': {result.ErrorMessage}");
     }
 
-    public static ModSettingsTab BuildSettingsTab()
+    public static ModSettingsTab BuildSettingsTab(DependencyResolver resolver)
     {
         return new ModSettingsTab(
             "designer-toolkit",
             BdtLocalization.ModName.AsFormatted,
             BdtLocalization.SettingsTabMarkdown.AsFormatted,
             100,
-            BuildMarkdownSettingsContent,
+            () => BuildMarkdownSettingsContent(resolver),
             SETTINGS_TAB_ICON_ASSET);
     }
 
-    private static UiComponent BuildMarkdownSettingsContent()
+    private static UiComponent BuildMarkdownSettingsContent(DependencyResolver resolver)
     {
         var root = new Column(SETTINGS_OPTIONS_GAP)
             .AlignItemsStretch()
@@ -200,11 +201,24 @@ internal static class DesignerToolkitSettings
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
+        bool isSandbox = resolver.Resolve<GameDifficultyConfig>().IsSandbox;
+
         Toggle instantBuildToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsInstantBuildMode.AsFormatted)
             .Tooltip(BdtLocalization.SettingsInstantBuildModeDescription.AsFormatted)
             .Value(InstantBuildModeEnabled)
             .OnValueChanged(SetInstantBuildMode);
+
+        if (!isSandbox)
+        {
+            instantBuildToggle.Enabled(false);
+            instantBuildToggle.Tooltip(BdtLocalization.SettingsInstantBuildModeSandboxOnly.AsFormatted);
+        }
+        else
+        {
+            instantBuildToggle.Tooltip(BdtLocalization.SettingsInstantBuildModeDescription.AsFormatted);
+        }
+
         root.Add(instantBuildToggle);
 
         root.Add(new Title(BdtLocalization.SettingsToolsHeading.AsFormatted)

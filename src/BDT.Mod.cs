@@ -96,7 +96,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<EntitiesManager>(),
             resolver.Resolve<IConstructionManager>(),
             m_simLoopEvents,
-            instaBuildManager);
+            instaBuildManager,
+            resolver.Resolve<GameDifficultyConfig>());
         m_instantBuildMode.Initialize();
         DesignerToolkitSettings.InstantBuildModeChanged += m_instantBuildMode.OnSettingsChanged;
 
@@ -118,7 +119,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<HudController>(),
             resolver.Resolve<UiRoot>(),
             resolver.Resolve<IRootEscapeManager>());
-        ModSettings.RegisterTab(DesignerToolkitSettings.BuildSettingsTab());
+        ModSettings.RegisterTab(DesignerToolkitSettings.BuildSettingsTab(resolver));
     }
 
     public void MigrateJsonConfig(VersionSlim savedVersion, Dict<string, object> savedValues)

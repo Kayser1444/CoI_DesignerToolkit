@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
+using Mafi.Core.Game;
 using Mafi.Core.Simulation;
 using CoI.AutoHelpers.Logging;
 
@@ -25,6 +26,7 @@ internal sealed class InstantBuildMode : IDisposable
     private readonly ISimLoopEvents m_simLoopEvents;
     private readonly object? m_instaBuildManager;
     private readonly MethodInfo? m_setInstaBuildMethod;
+    private readonly GameDifficultyConfig m_difficultyConfig;
     private readonly List<IStaticEntity> m_snapshot = new List<IStaticEntity>();
 
     private bool m_isSubscribed;
@@ -33,12 +35,14 @@ internal sealed class InstantBuildMode : IDisposable
         EntitiesManager entitiesManager,
         IConstructionManager constructionManager,
         ISimLoopEvents simLoopEvents,
-        object? instaBuildManager)
+        object? instaBuildManager,
+        GameDifficultyConfig difficultyConfig)
     {
         m_entitiesManager = entitiesManager;
         m_constructionManager = constructionManager;
         m_simLoopEvents = simLoopEvents;
         m_instaBuildManager = instaBuildManager;
+        m_difficultyConfig = difficultyConfig;
         m_setInstaBuildMethod = instaBuildManager?.GetType().GetMethod(
             "SetInstaBuild",
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -52,7 +56,7 @@ internal sealed class InstantBuildMode : IDisposable
         m_simLoopEvents.UpdateAfterCmdProc.AddNonSaveable(this, OnUpdateAfterCmdProc);
         m_isSubscribed = true;
 
-        if (DesignerToolkitSettings.InstantBuildModeEnabled)
+        if (DesignerToolkitSettings.InstantBuildModeEnabled && m_difficultyConfig.IsSandbox)
             DisableInstaBuildIfNeeded();
 
         s_log.Info("Instant build mode initialized.");
@@ -70,13 +74,13 @@ internal sealed class InstantBuildMode : IDisposable
 
     internal void OnSettingsChanged(bool enabled)
     {
-        if (enabled)
+        if (enabled && m_difficultyConfig.IsSandbox)
             DisableInstaBuildIfNeeded();
     }
 
     private void OnUpdateAfterCmdProc()
     {
-        if (!DesignerToolkitSettings.InstantBuildModeEnabled)
+        if (!DesignerToolkitSettings.InstantBuildModeEnabled || !m_difficultyConfig.IsSandbox)
             return;
 
         DrainConstructionStates();
