@@ -1,8 +1,8 @@
 # 🧰 Kayser's Designer Toolkit
 
-Kayser's Designer Toolkit (DTK) is a quality-of-life mod for Captain of Industry blueprint creators.
+Kayser's Designer Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
 
-It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. DTK helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
+It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
 ## ✨ Feature List
 
@@ -21,7 +21,7 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 
 Select a blueprint in your blueprint book and click **Update** to replace its contents with a fresh area selection.
 
-DTK keeps the blueprint's existing:
+BDT keeps the blueprint's existing:
 
 - name
 - description
@@ -34,7 +34,7 @@ This is meant for the usual blueprint-authoring loop: find a small mistake, fix 
 
 ![remembered-blueprint-folder.png](/content-images/bd11e3f67062aa6a456a334fd50decd89667a29c4f4eda166bfff902f968fc91/remembered-blueprint-folder.png)
 
-DTK remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created. The folder path is stored in the vanilla save file. This allows you to store different currently open blueprint book page in different save games.
+BDT remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created. The folder path is stored in the vanilla save file. This allows you to store different currently open blueprint book page in different save games.
 
 ### 📊 Blueprint operational stats
 
@@ -42,7 +42,7 @@ The blueprint detail panel now also shows **Operational cost**.
 
 ![blueprint-operational-stats.png](/content-images/d476e2ab7976bb3130040d62a6d987f3bc9d95ddd0e116b5f20daf867f3e5190/blueprint-operational-stats.png)
 
-When a selected blueprint contains relevant entities, DTK adds a compact operational summary row showing:
+When a selected blueprint contains relevant entities, BDT adds a compact operational summary row showing:
 
 - workers
 - electricity
@@ -55,7 +55,7 @@ Only non-zero stats are shown, so small blueprints stay clean and large builds g
 
 ![image.png](/content-images/786bf604956dbf2eb157e4db3e6e7bc0f4c816bc95439d6a39fa5b6bf437c086/image.png)
 
-DTK adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
+BDT adds a **Copy as Markdown** button to both the blueprint detail panel and the blueprint folder detail panel.
 
 The language used for table headers and product/entity names is controlled by the **Markdown table language** setting in Mod Settings (see below). The default is **English**.
 
@@ -107,9 +107,9 @@ The output is ready to paste directly into a Hub post or wiki page.
 
 Mitigation/Fix for: https://discord.com/channels/803508556325584926/1405800905646805093/1405800905646805093
 
-DTK normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
+BDT normalizes rotationally-symmetric entities in captured blueprints, such as balancers/zippers and mini-zippers/connectors.
 
-Captain of Industry can treat a functionally identical connector at e.g. rotation 0° and rotation 90° as different, which can block paste-over updates. DTK fixes that at blueprint capture time by resetting symmetric entities' rotation and flip-state to a canonical orientation.
+Captain of Industry can treat a functionally identical connector at e.g. rotation 0° and rotation 90° as different, which can block paste-over updates. BDT fixes that at blueprint capture time by resetting symmetric entities' rotation and flip-state to a canonical orientation.
 
 The normalization pass focuses on the known paste-over problem cases:
 
@@ -118,23 +118,23 @@ The normalization pass focuses on the known paste-over problem cases:
 - preserves balancer priority settings
 - skips entities that do not match the supported symmetric layouts
 
-The result is still normal blueprint data with all (normalized) entities at rotation 0° and non-flipped. This does not patch blueprint placement and does *not* require blueprint users to install DTK.
+The result is still normal blueprint data with all (normalized) entities at rotation 0° and non-flipped. This does not patch blueprint placement and does *not* require blueprint users to install BDT.
 
 This is a passive feature that allows you to freely place connectors, balancers, and lifts in multi-tier blueprints without worrying about their orientation.
 
 ### ⚡ Instant build mode
 
-DTK includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. It even finishes tasks while the game is paused.
+BDT includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. It even finishes tasks while the game is paused.
 
 Enabling this feature turns off the game's built-in insta-build toggle. *(Migrated from Moriarty's Utilities++ - Thanks @Mori!)*
 
 ### 🧹 Transport cleanup tool
 
-DTK adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to instantly remove disconnected belts and pipes via an area selection drag. *(Migrated from Moriarty's Utilities++ - Thanks @Mori!)*
+BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to instantly remove disconnected belts and pipes via an area selection drag. *(Migrated from Moriarty's Utilities++ - Thanks @Mori!)*
 
 ### ⚙️ Mod settings
 
-DTK adds a **Mod Settings** panel, accessible from the top-right **M** button in the mod menu or with the keyboard shortcut `Alt+M`.
+BDT adds a **Mod Settings** panel, accessible from the top-right **M** button in the mod menu or with the keyboard shortcut `Alt+M`.
 
 ![image.png](/content-images/d8738776e313704bf3ee98b162eef95068ce9f34d4ec0e6130cc5c36fc192984/image.png)
 
