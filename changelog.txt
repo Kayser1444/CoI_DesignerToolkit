@@ -1,14 +1,16 @@
 v0.3.0 | 2026-06-08
-* Added **Mod Settings** window, opened from the top-right **M** button or with `Alt+M`
 * Added **Instant build mode** (configurable in Mod Settings) which instantly finishes construction, deconstruction, upgrades, and downgrades without materials or unity
 * Added **Transport cleanup tool** (default `Alt+Del`) to instantly remove disconnected belts and pipes
 * Added **Restore defaults** and **Save as config** buttons to Mod Settings
 * Added **Markdown number format** setting with Auto, English, Local modes
+* Changed Markdown export to use vanilla game translations for workers, electricity, and computing
+* Fixed: Markdown export products and entities with identical names do not merge
+
+v0.2.0 | 2026-06-04
+* Added **Mod Settings** window, opened from the top-right **M** button or with `Alt+M`
 * Added **Markdown table language** setting with English, Local, Both, and Hybrid modes
 * Added per-save persistence for Designer Toolkit settings through `dtkSettingsStateJson`; `markdown_table_language` in `config.json` is used only to initialize saves without persisted settings
 * Added Designer Toolkit translations for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese
-* Changed Markdown export to use vanilla game translations for workers, electricity, and computing
-* Fixed: Markdown export products and entities with identical names do not merge
 
 v0.1.0 | 2026-05-10
 * Added **Update blueprint** button in the blueprint placement panel: re-selects an area to replace an existing blueprint while preserving its name, description, overlap settings, and book position
@@ -17,4 +19,3 @@ v0.1.0 | 2026-05-10
 * **Copy as Markdown** in the blueprint detail panel: copies a Markdown-formatted summary to the clipboard - heading, description, Components table (A-Z), Construction table (A-Z), and Operational table
 * **Copy as Markdown** in the blueprint folder detail panel: copies a wide Markdown table of all blueprints in the folder tree (recursive); each blueprint is a row, with a Folder column for the relative sub-folder path and dynamically discovered stat/cost columns (A-Z); rows sorted by folder then by blueprint name
 * Fixed: electricity values now always use `.` as the decimal separator regardless of OS locale
-
