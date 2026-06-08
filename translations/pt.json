@@ -1,171 +1,198 @@
 [
   [
-    "dtk.mod.name",
-    "Blueprint Designer's Toolkit"
+    "dtk.settings.hotkey.require_alt",
+    "Require Alt"
   ],
   [
-    "dtk.settings.tab.markdown",
-    "Markdown"
-  ],
-  [
-    "dtk.settings.markdown_copy.heading",
-    "Cópia Markdown"
-  ],
-  [
-    "dtk.settings.markdown_table_language.label",
-    "Idioma das tabelas Markdown"
-  ],
-  [
-    "dtk.settings.markdown_table_language.description",
-    "Controla qual idioma os cabeçalhos das tabelas Markdown e os nomes de produtos/entidades devem usar."
-  ],
-  [
-    "dtk.settings.markdown_table_language.pending",
-    "Inglês, Local, Ambos e Híbrido já estão conectados à exportação Markdown."
-  ],
-  [
-    "dtk.settings.markdown_number_format.label",
-    "Formato de números Markdown"
-  ],
-  [
-    "dtk.settings.markdown_number_format.description",
-    "Controla os separadores decimais e de milhares nas exportações Markdown. Auto segue o idioma da tabela renderizada: tabelas em inglês usam separadores en-US e tabelas locais usam o idioma atual do jogo."
-  ],
-  [
-    "dtk.settings.language.english",
-    "Inglês"
-  ],
-  [
-    "dtk.settings.language.local",
-    "Local"
-  ],
-  [
-    "dtk.settings.language.both",
-    "Ambos"
-  ],
-  [
-    "dtk.settings.language.hybrid",
-    "Híbrido"
-  ],
-  [
-    "dtk.settings.number_format.auto",
-    "Auto"
-  ],
-  [
-    "dtk.settings.number_format.english",
-    "Separadores em inglês"
-  ],
-  [
-    "dtk.settings.number_format.local",
-    "Separadores locais"
-  ],
-  [
-    "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
-  ],
-  [
-    "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
-  ],
-  [
-    "dtk.settings.instant_build_mode.description",
-    "Automatically completes construction and deconstruction without materials, workers, or unity. Enabling this also turns off the game's insta-build toggle."
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.button",
-    "Copiar como Markdown"
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.tooltip",
-    "Copia as estatísticas do plano como uma tabela Markdown para a área de transferência, pronta para colar no Hub."
-  ],
-  [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
-    "Copia a lista de planos da pasta como uma tabela Markdown para a área de transferência."
-  ],
-  [
-    "dtk.markdown.components.heading",
-    "Componentes"
-  ],
-  [
-    "dtk.markdown.construction.heading",
-    "Construção"
-  ],
-  [
-    "dtk.markdown.operational.heading",
-    "Operacional"
-  ],
-  [
-    "dtk.markdown.entity.header",
-    "Entidade"
-  ],
-  [
-    "dtk.markdown.count.header",
-    "Contagem"
-  ],
-  [
-    "dtk.markdown.product.header",
-    "Produto"
-  ],
-  [
-    "dtk.markdown.quantity.header",
-    "Quantidade"
-  ],
-  [
-    "dtk.markdown.property.header",
-    "Propriedade"
+    "dtk.settings.hotkey.require_shift",
+    "Require Shift"
   ],
   [
     "dtk.markdown.value.header",
     "Valor"
   ],
   [
-    "dtk.markdown.blueprint.header",
-    "Plano"
+    "dtk.settings.markdown_table_language.label",
+    "Idioma das tabelas Markdown"
   ],
   [
-    "dtk.markdown.folder.header",
-    "Pasta"
-  ],
-  [
-    "dtk.markdown.entities.stat",
-    "Entidades"
-  ],
-  [
-    "dtk.markdown.per_month.suffix",
-    "/ mês"
-  ],
-  [
-    "dtk.settings.action.restore_defaults",
-    "Restaurar padrões"
-  ],
-  [
-    "dtk.settings.action.restore_defaults.tooltip",
-    "Restaura os padrões globais do mod para todas as configurações."
-  ],
-  [
-    "dtk.settings.action.save_as_global",
-    "Salvar como global"
-  ],
-  [
-    "dtk.settings.action.save_as_global.tooltip",
-    "Salva estas configurações globalmente para novos jogos."
-  ],
-  [
-    "dtk.settings.status.restored_defaults",
-    "Padrões internos restaurados na memória."
+    "dtk.markdown.quantity.header",
+    "Quantidade"
   ],
   [
     "dtk.settings.status.save_failed",
     "Falha ao salvar: {0}"
   ],
   [
-    "dtk.settings.status.saved_to_config",
-    "Salvo em config.json."
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Copia a lista de planos da pasta como uma tabela Markdown para a área de transferência."
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Entidade"
+  ],
+  [
+    "dtk.settings.tab.markdown",
+    "Markdown"
+  ],
+  [
+    "dtk.settings.instant_build_mode.label",
+    "Instant build mode"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "Separadores locais"
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Restaurar padrões"
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Salvar como global"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Operacional"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Produto"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ mês"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Plano"
+  ],
+  [
+    "dtk.settings.instant_build_mode.description",
+    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Copiar como Markdown"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "Controla os separadores decimais e de milhares nas exportações Markdown. Auto segue o idioma da tabela renderizada: tabelas em inglês usam separadores en-US e tabelas locais usam o idioma atual do jogo."
+  ],
+  [
+    "dtk.settings.language.both",
+    "Ambos"
+  ],
+  [
+    "dtk.settings.language.local",
+    "Local"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Propriedade"
+  ],
+  [
+    "dtk.settings.markdown_table_language.description",
+    "Controla qual idioma os cabeçalhos das tabelas Markdown e os nomes de produtos/entidades devem usar."
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "Separadores em inglês"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Restaura os padrões globais do mod para todas as configurações."
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Construção"
+  ],
+  [
+    "dtk.settings.markdown_number_format.label",
+    "Formato de números Markdown"
   ],
   [
     "dtk.settings.status.store_not_initialized",
     "Falha ao salvar: armazenamento de configurações não inicializado."
+  ],
+  [
+    "dtk.settings.tools.heading",
+    "TOOLS"
+  ],
+  [
+    "dtk.settings.instant_build.heading",
+    "INSTANT BUILD"
+  ],
+  [
+    "dtk.settings.hotkey.require_ctrl",
+    "Require Ctrl"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Entidades"
+  ],
+  [
+    "dtk.mod.name",
+    "Blueprint Designer's Toolkit"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Pasta"
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Padrões internos restaurados na memória."
+  ],
+  [
+    "dtk.settings.transport_cleanup_hotkey.label",
+    "Transport cleanup hotkey"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Salva estas configurações globalmente para novos jogos."
+  ],
+  [
+    "dtk.settings.language.english",
+    "Inglês"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "Auto"
+  ],
+  [
+    "dtk.settings.markdown_table_language.pending",
+    "Inglês, Local, Ambos e Híbrido já estão conectados à exportação Markdown."
+  ],
+  [
+    "dtk.settings.instant_build_mode.sandbox_only",
+    "Sod off to the sandbox, you lazy git!"
+  ],
+  [
+    "dtk.settings.language.hybrid",
+    "Híbrido"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Contagem"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Copia as estatísticas do plano como uma tabela Markdown para a área de transferência, pronta para colar no Hub."
+  ],
+  [
+    "dtk.settings.markdown_copy.heading",
+    "Cópia Markdown"
+  ],
+  [
+    "dtk.settings.tool_hotkey.description",
+    "Configures the keyboard shortcut that arms this tool."
+  ],
+  [
+    "dtk.settings.status.saved_to_config",
+    "Salvo em config.json."
+  ],
+  [
+    "dtk.markdown.components.heading",
+    "Componentes"
   ]
 ]
-

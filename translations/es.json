@@ -1,171 +1,198 @@
 [
   [
-    "dtk.mod.name",
-    "Blueprint Designer's Toolkit"
+    "dtk.settings.hotkey.require_alt",
+    "Require Alt"
   ],
   [
-    "dtk.settings.tab.markdown",
-    "Markdown"
-  ],
-  [
-    "dtk.settings.markdown_copy.heading",
-    "Copia Markdown"
-  ],
-  [
-    "dtk.settings.markdown_table_language.label",
-    "Idioma de tablas Markdown"
-  ],
-  [
-    "dtk.settings.markdown_table_language.description",
-    "Controla qué idioma deben usar los encabezados de tablas Markdown y los nombres de productos/entidades."
-  ],
-  [
-    "dtk.settings.markdown_table_language.pending",
-    "Inglés, Local, Ambos e Híbrido ya están conectados al exportador Markdown."
-  ],
-  [
-    "dtk.settings.markdown_number_format.label",
-    "Formato de números Markdown"
-  ],
-  [
-    "dtk.settings.markdown_number_format.description",
-    "Controla los separadores decimales y de miles en las exportaciones Markdown. Auto sigue el idioma de la tabla renderizada: las tablas en inglés usan separadores en-US y las locales usan la configuración regional actual del juego."
-  ],
-  [
-    "dtk.settings.language.english",
-    "Inglés"
-  ],
-  [
-    "dtk.settings.language.local",
-    "Local"
-  ],
-  [
-    "dtk.settings.language.both",
-    "Ambos"
-  ],
-  [
-    "dtk.settings.language.hybrid",
-    "Híbrido"
-  ],
-  [
-    "dtk.settings.number_format.auto",
-    "Auto"
-  ],
-  [
-    "dtk.settings.number_format.english",
-    "Separadores ingleses"
-  ],
-  [
-    "dtk.settings.number_format.local",
-    "Separadores locales"
-  ],
-  [
-    "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
-  ],
-  [
-    "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
-  ],
-  [
-    "dtk.settings.instant_build_mode.description",
-    "Automatically completes construction and deconstruction without materials, workers, or unity. Enabling this also turns off the game's insta-build toggle."
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.button",
-    "Copiar como Markdown"
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.tooltip",
-    "Copia las estadísticas del plano como una tabla Markdown al portapapeles, lista para pegar en el Hub."
-  ],
-  [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
-    "Copia la lista de planos de la carpeta como una tabla Markdown al portapapeles."
-  ],
-  [
-    "dtk.markdown.components.heading",
-    "Componentes"
-  ],
-  [
-    "dtk.markdown.construction.heading",
-    "Construcción"
-  ],
-  [
-    "dtk.markdown.operational.heading",
-    "Operación"
-  ],
-  [
-    "dtk.markdown.entity.header",
-    "Entidad"
-  ],
-  [
-    "dtk.markdown.count.header",
-    "Cantidad"
-  ],
-  [
-    "dtk.markdown.product.header",
-    "Producto"
-  ],
-  [
-    "dtk.markdown.quantity.header",
-    "Cantidad"
-  ],
-  [
-    "dtk.markdown.property.header",
-    "Propiedad"
+    "dtk.settings.hotkey.require_shift",
+    "Require Shift"
   ],
   [
     "dtk.markdown.value.header",
     "Valor"
   ],
   [
-    "dtk.markdown.blueprint.header",
-    "Plano"
+    "dtk.settings.markdown_table_language.label",
+    "Idioma de tablas Markdown"
   ],
   [
-    "dtk.markdown.folder.header",
-    "Carpeta"
-  ],
-  [
-    "dtk.markdown.entities.stat",
-    "Entidades"
-  ],
-  [
-    "dtk.markdown.per_month.suffix",
-    "/ mes"
-  ],
-  [
-    "dtk.settings.action.restore_defaults",
-    "Restaurar predeterminados"
-  ],
-  [
-    "dtk.settings.action.restore_defaults.tooltip",
-    "Restaura los valores globales predeterminados del mod para todos los ajustes."
-  ],
-  [
-    "dtk.settings.action.save_as_global",
-    "Guardar como global"
-  ],
-  [
-    "dtk.settings.action.save_as_global.tooltip",
-    "Guarda estos ajustes globalmente para partidas nuevas."
-  ],
-  [
-    "dtk.settings.status.restored_defaults",
-    "Predeterminados integrados restaurados en memoria."
+    "dtk.markdown.quantity.header",
+    "Cantidad"
   ],
   [
     "dtk.settings.status.save_failed",
     "Error al guardar: {0}"
   ],
   [
-    "dtk.settings.status.saved_to_config",
-    "Guardado en config.json."
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Copia la lista de planos de la carpeta como una tabla Markdown al portapapeles."
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Entidad"
+  ],
+  [
+    "dtk.settings.tab.markdown",
+    "Markdown"
+  ],
+  [
+    "dtk.settings.instant_build_mode.label",
+    "Instant build mode"
+  ],
+  [
+    "dtk.settings.number_format.local",
+    "Separadores locales"
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Restaurar predeterminados"
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Guardar como global"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Operación"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Producto"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ mes"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Plano"
+  ],
+  [
+    "dtk.settings.instant_build_mode.description",
+    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Copiar como Markdown"
+  ],
+  [
+    "dtk.settings.markdown_number_format.description",
+    "Controla los separadores decimales y de miles en las exportaciones Markdown. Auto sigue el idioma de la tabla renderizada: las tablas en inglés usan separadores en-US y las locales usan la configuración regional actual del juego."
+  ],
+  [
+    "dtk.settings.language.both",
+    "Ambos"
+  ],
+  [
+    "dtk.settings.language.local",
+    "Local"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Propiedad"
+  ],
+  [
+    "dtk.settings.markdown_table_language.description",
+    "Controla qué idioma deben usar los encabezados de tablas Markdown y los nombres de productos/entidades."
+  ],
+  [
+    "dtk.settings.number_format.english",
+    "Separadores ingleses"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Restaura los valores globales predeterminados del mod para todos los ajustes."
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Construcción"
+  ],
+  [
+    "dtk.settings.markdown_number_format.label",
+    "Formato de números Markdown"
   ],
   [
     "dtk.settings.status.store_not_initialized",
     "Error al guardar: el almacén de ajustes no está inicializado."
+  ],
+  [
+    "dtk.settings.tools.heading",
+    "TOOLS"
+  ],
+  [
+    "dtk.settings.instant_build.heading",
+    "INSTANT BUILD"
+  ],
+  [
+    "dtk.settings.hotkey.require_ctrl",
+    "Require Ctrl"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Entidades"
+  ],
+  [
+    "dtk.mod.name",
+    "Blueprint Designer's Toolkit"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Carpeta"
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Predeterminados integrados restaurados en memoria."
+  ],
+  [
+    "dtk.settings.transport_cleanup_hotkey.label",
+    "Transport cleanup hotkey"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Guarda estos ajustes globalmente para partidas nuevas."
+  ],
+  [
+    "dtk.settings.language.english",
+    "Inglés"
+  ],
+  [
+    "dtk.settings.number_format.auto",
+    "Auto"
+  ],
+  [
+    "dtk.settings.markdown_table_language.pending",
+    "Inglés, Local, Ambos e Híbrido ya están conectados al exportador Markdown."
+  ],
+  [
+    "dtk.settings.instant_build_mode.sandbox_only",
+    "Sod off to the sandbox, you lazy git!"
+  ],
+  [
+    "dtk.settings.language.hybrid",
+    "Híbrido"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Cantidad"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Copia las estadísticas del plano como una tabla Markdown al portapapeles, lista para pegar en el Hub."
+  ],
+  [
+    "dtk.settings.markdown_copy.heading",
+    "Copia Markdown"
+  ],
+  [
+    "dtk.settings.tool_hotkey.description",
+    "Configures the keyboard shortcut that arms this tool."
+  ],
+  [
+    "dtk.settings.status.saved_to_config",
+    "Guardado en config.json."
+  ],
+  [
+    "dtk.markdown.components.heading",
+    "Componentes"
   ]
 ]
-
