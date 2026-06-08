@@ -2,6 +2,11 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.3.0a [unreleased]
+
+- Removed obsolete area upgrade hotkeys from config.json
+- Synced updated translation keys and English fallbacks into all language files
+
 ## v0.3.0 [packaged]
 
 - Renamed the mod identity around Blueprint Designer's Toolkit (BDT)
