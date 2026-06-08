@@ -1,6 +1,6 @@
 v0.3.0 | 2026-06-08
-* Added **Instant build mode** (configurable in Mod Settings) which instantly finishes construction, deconstruction, upgrades, and downgrades without materials or unity
-* Added **Transport cleanup tool** (default `Alt+Del`) to instantly remove disconnected belts and pipes
+* Migrated **Instant build mode** (configurable in Mod Settings) which instantly finishes construction, deconstruction, upgrades, and downgrades without materials or unity from Moriarty's Utilities++ (THANKS!)
+* Migrated **Transport cleanup tool** (default `Alt+Del`) to instantly remove disconnected belts and pipes from Moriarty's Utilities++
 * Added **Restore defaults** and **Save as config** buttons to Mod Settings
 * Added **Markdown number format** setting with Auto, English, Local modes
 * Changed Markdown export to use vanilla game translations for workers, electricity, and computing
