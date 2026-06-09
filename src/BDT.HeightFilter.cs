@@ -34,6 +34,10 @@ using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit
 {
+    /// <summary>
+    /// Implements the height filter rendering system, allowing players to step down the rendering of transports,
+    /// transport pillars, and layout entities from levels 0 (underground only) to 6 (all).
+    /// </summary>
     internal sealed class HeightFilter : IDisposable
     {
         private static readonly ModLogger s_log = new ModLogger("BDT.HeightFilter");
@@ -64,6 +68,10 @@ namespace CoIDesignerToolkit
             m_gameLoopEvents = gameLoopEvents;
         }
 
+        /// <summary>
+        /// Resolves rendering dependencies, sets up simulation and keyboard update event handlers,
+        /// and applies Harmony runtime patches.
+        /// </summary>
         public void Initialize(DependencyResolver resolver)
         {
             if (m_isInitialized) return;
@@ -210,6 +218,10 @@ namespace CoIDesignerToolkit
             }
         }
 
+        /// <summary>
+        /// Thread-safe game loop synchronization update handler. Applies changes to active entity renderers
+        /// when the simulation loop is blocked, avoiding threading conflicts with Sim update loops.
+        /// </summary>
         private void OnSyncUpdate(GameTime _)
         {
             if (m_firstUpdate)
@@ -225,6 +237,10 @@ namespace CoIDesignerToolkit
             }
         }
 
+        /// <summary>
+        /// Unity render loop frame end event handler. Defers the first height filter check by a small number of frames
+        /// until the game's rendering pipeline finishes initializing, ensuring valid pillar render data is loaded.
+        /// </summary>
         private void OnRenderUpdateEnd(GameTime _)
         {
             if (m_initDelayFrames > 0)
@@ -273,6 +289,10 @@ namespace CoIDesignerToolkit
             return (double)hiddenCount / pivots.Length > 0.5;
         }
 
+        /// <summary>
+        /// Implements the pillar visibility filter logic. Checks all segments of a transport pillar against
+        /// the terrain height, returning true if 50% or more of the segments are above the filter threshold.
+        /// </summary>
         private bool ShouldPillarBeHidden(TransportPillar pillar)
         {
             int maxVisibleLevel = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
@@ -538,6 +558,10 @@ namespace CoIDesignerToolkit
             }
         }
 
+        /// <summary>
+        /// Bypasses the deferred sync queue to immediately remove render parts from the pillar renderer chunk.
+        /// This is required to keep hidden states visual during the current frame update.
+        /// </summary>
         private void HidePillarDirect(TransportPillar pillar)
         {
             if (s_pillarsRenderer == null) return;
@@ -562,6 +586,10 @@ namespace CoIDesignerToolkit
             }
         }
 
+        /// <summary>
+        /// Bypasses the deferred sync queue to immediately add render parts back to the pillar renderer chunk
+        /// using compute spec visuals, restoring visibility for previously hidden pillars.
+        /// </summary>
         private void ShowPillarDirect(TransportPillar pillar)
         {
             if (s_pillarsRenderer == null) return;

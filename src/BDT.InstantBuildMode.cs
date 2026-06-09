@@ -17,6 +17,11 @@ using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
 
+/// <summary>
+/// Controls the automatic instant construction, deconstruction, and upgrade mode in the blueprint designer.
+/// When enabled, scans the active entities during the simulation tick and forces their completion immediately,
+/// while disabling the game's native sandbox insta-build toggle to avoid conflicts.
+/// </summary>
 internal sealed class InstantBuildMode : IDisposable
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.InstantBuild");
@@ -81,6 +86,10 @@ internal sealed class InstantBuildMode : IDisposable
             DisableInstaBuildIfNeeded();
     }
 
+    /// <summary>
+    /// Invoked after simulation commands are processed. Scans and drains pending construction states if
+    /// the tool is enabled and the map is a sandbox game.
+    /// </summary>
     private void OnUpdateAfterCmdProc()
     {
         if (!DesignerToolkitSettings.InstantBuildModeEnabled || !m_difficultyConfig.IsSandbox)
@@ -89,6 +98,11 @@ internal sealed class InstantBuildMode : IDisposable
         DrainConstructionStates();
     }
 
+    /// <summary>
+    /// Scans all static entities in the game, collects those in in-progress construction, deconstruction,
+    /// or upgrade states, and immediately finishes them. Performs scanning in a snapshot first to avoid
+    /// modifying the collection during iteration.
+    /// </summary>
     private void DrainConstructionStates()
     {
         m_snapshot.Clear();
@@ -143,6 +157,11 @@ internal sealed class InstantBuildMode : IDisposable
         m_snapshot.Clear();
     }
 
+    /// <summary>
+    /// Disables the game's built-in sandbox insta-build mode via reflection. Since BDT's instant build handles
+    /// all designer placement actions customly, disabling vanilla insta-build prevents duplicate event handlers
+    /// and conflicts.
+    /// </summary>
     private void DisableInstaBuildIfNeeded()
     {
         if (!m_constructionManager.IsInstaBuildEnabled)

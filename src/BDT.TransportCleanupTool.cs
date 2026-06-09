@@ -20,6 +20,10 @@ using UnityEngine;
 
 namespace CoIDesignerToolkit;
 
+/// <summary>
+/// A designer tool that allows dragging a deletion box to clean up disconnected/stray transport segments
+/// (belts and pipes) immediately. Highlights matches in red and removes them during the simulation update.
+/// </summary>
 internal sealed class TransportCleanupTool : IDisposable
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.TransportCleanup");
@@ -88,6 +92,10 @@ internal sealed class TransportCleanupTool : IDisposable
         }
     }
 
+    /// <summary>
+    /// Handles user input for the cleanup tool, starting/updating/ending the selection box drag,
+    /// and activating/deactivating the tool. Runs on the main UI/Input thread.
+    /// </summary>
     private void OnInputUpdate(GameTime _)
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -139,6 +147,10 @@ internal sealed class TransportCleanupTool : IDisposable
         }
     }
 
+    /// <summary>
+    /// Processes enqueued deletion commands on the simulation thread to safely remove transport
+    /// entities from the game world without causing threading or synchronization exceptions.
+    /// </summary>
     private void OnUpdateAfterCmdProc()
     {
         List<EntityId> work;
@@ -172,6 +184,12 @@ internal sealed class TransportCleanupTool : IDisposable
         ClearHighlights();
     }
 
+    /// <summary>
+    /// Computes which transports fall inside the screen-space selection rectangle. Converts 3D game coordinates
+    /// to Unity world space and then to screen space.
+    /// Note: Game coordinates (X, Y, height Z) map to Unity world space as (X*2, Z*2, Y*2), where vertical height
+    /// is represented by the second component (Y).
+    /// </summary>
     private void ComputeMatchesAndUpdateHighlights()
     {
         m_matches.Clear();
@@ -275,6 +293,10 @@ internal sealed class TransportCleanupTool : IDisposable
         s_log.Info($"Transport cleanup queued {m_matches.Count} disconnected belt/pipe segment(s).");
     }
 
+    /// <summary>
+    /// Performs the actual entity deletion using <see cref="EntitiesManager.RemoveAndDestroyEntityNoChecks"/>.
+    /// Executes on the simulation thread.
+    /// </summary>
     private void ApplyPending(List<EntityId> ids)
     {
         int succeeded = 0;
