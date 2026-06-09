@@ -6,7 +6,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 - 
 
-## v0.3.1
+## v0.3.1 [released]
 
 - Removed obsolete area upgrade hotkeys from config.json
 - Synced updated translation keys and English fallbacks into all language files
