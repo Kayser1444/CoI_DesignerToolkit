@@ -58,7 +58,20 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.transport_cleanup_hotkey.label", "Transport cleanup hotkey", "Settings row label for the transport cleanup hotkey.");
     public static LocStr SettingsToolHotkeyDescription =
         Loc.Str("dtk.settings.tool_hotkey.description", "Configures the keyboard shortcut that arms this tool.", "Settings row description for tool hotkeys.");
+    public static LocStr SettingsHeightFilterHeading =
+        Loc.Str("dtk.settings.height_filter.heading", "HEIGHT FILTER", "Settings section heading for height filter settings.");
+    public static LocStr SettingsHeightFilterMaxVisible =
+        Loc.Str("dtk.settings.height_filter_max_visible.label", "Max visible layer", "Settings row label for max visible layer.");
+    public static LocStr SettingsHeightFilterMaxVisibleDescription =
+        Loc.Str("dtk.settings.height_filter_max_visible.description", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
+    public static LocStr SettingsHeightFilterShowHotkey =
+        Loc.Str("dtk.settings.height_filter_show_hotkey.label", "Show layer hotkey", "Settings row label for height filter show layer hotkey.");
+    public static LocStr SettingsHeightFilterHideHotkey =
+        Loc.Str("dtk.settings.height_filter_hide_hotkey.label", "Hide layer hotkey", "Settings row label for height filter hide layer hotkey.");
+    public static LocStr SettingsGlobalHotkeyTooltip =
+        Loc.Str("dtk.settings.global_hotkey.description", "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json.", "Settings row description for global hotkeys.");
     public static LocStr SettingsHotkeyRequireCtrl =
+
         Loc.Str("dtk.settings.hotkey.require_ctrl", "Require Ctrl", "Settings toggle label for requiring Ctrl in a hotkey.");
     public static LocStr SettingsHotkeyRequireAlt =
         Loc.Str("dtk.settings.hotkey.require_alt", "Require Alt", "Settings toggle label for requiring Alt in a hotkey.");

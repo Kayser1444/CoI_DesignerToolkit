@@ -4,7 +4,9 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.3.1a [unreleased]
 
-- 
+- Fixed height filter system to safely run inside SyncUpdate instead of InputUpdate, resolving race conditions and "Dictionary changed during iteration" exceptions in the simulation thread.
+- Fixed pillar rendering filtering by deferring the initial height filter application by 5 rendering frames, ensuring the game's TransportPillarsRenderer has initialized RendererData on first load.
+- Refined pillar show/hide logic to handle cases where game updates regenerate transport pillars.
 
 ## v0.3.1 [released]
 

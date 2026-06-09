@@ -38,6 +38,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private IModStateJsonStore? m_settingsStateStore;
     private InstantBuildMode? m_instantBuildMode;
     private TransportCleanupTool? m_transportCleanupTool;
+    private HeightFilter? m_heightFilter;
 
     public string Name => "Blueprint Designer's Toolkit";
 
@@ -108,6 +109,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_simLoopEvents,
             resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance);
         m_transportCleanupTool.Initialize();
+
+        m_heightFilter = new HeightFilter(m_harmony!, resolver.Resolve<IGameLoopEvents>());
+        m_heightFilter.Initialize(resolver);
 
         ModSettings.EnsureInitialized(
             resolver.Resolve<HudController>(),
@@ -194,6 +198,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         {
             m_transportCleanupTool.Dispose();
             m_transportCleanupTool = null;
+        }
+
+        if (m_heightFilter != null)
+        {
+            m_heightFilter.Dispose();
+            m_heightFilter = null;
         }
 
         if (m_simLoopEvents != null)

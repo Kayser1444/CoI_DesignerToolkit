@@ -29,8 +29,25 @@
     "default": "",
     "description": "Initial secondary transport cleanup hotkey for saves without BDT settings state. Leave empty to disable the secondary binding."
   },
+  "height_filter_show_layer_hotkey_primary": {
+    "default": "PageUp",
+    "description": "Initial primary height filter show layer hotkey. Leave empty to disable the primary binding."
+  },
+  "height_filter_show_layer_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary height filter show layer hotkey. Leave empty to disable the secondary binding."
+  },
+  "height_filter_hide_layer_hotkey_primary": {
+    "default": "PageDown",
+    "description": "Initial primary height filter hide layer hotkey. Leave empty to disable the primary binding."
+  },
+  "height_filter_hide_layer_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary height filter hide layer hotkey. Leave empty to disable the secondary binding."
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."
   }
 }
+

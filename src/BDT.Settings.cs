@@ -48,6 +48,10 @@ internal static class DesignerToolkitSettings
     private const string INSTANT_BUILD_MODE_KEY = "instant_build_mode";
     private const string TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY = "transport_cleanup_hotkey_primary";
     private const string TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY = "transport_cleanup_hotkey_secondary";
+    private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY = "height_filter_show_layer_hotkey_primary";
+    private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY = "height_filter_show_layer_hotkey_secondary";
+    private const string HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY = "height_filter_hide_layer_hotkey_primary";
+    private const string HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY = "height_filter_hide_layer_hotkey_secondary";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_KEY = "transport_cleanup_hotkey_key";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_CTRL_KEY = "transport_cleanup_hotkey_ctrl";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_ALT_KEY = "transport_cleanup_hotkey_alt";
@@ -61,6 +65,10 @@ internal static class DesignerToolkitSettings
     private static readonly Px SETTINGS_OPTIONS_GAP = 2.pt();
     private static readonly BdtHotkey DEFAULT_TRANSPORT_CLEANUP_HOTKEY =
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.Delete);
+    private static readonly BdtHotkey DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY =
+        BdtHotkey.FromPrimaryKeys(KeyCode.PageUp);
+    private static readonly BdtHotkey DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY =
+        BdtHotkey.FromPrimaryKeys(KeyCode.PageDown);
 
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
@@ -73,9 +81,13 @@ internal static class DesignerToolkitSettings
     public static MarkdownNumberFormat MarkdownNumberFormat { get; private set; } =
         MarkdownNumberFormat.Auto;
     public static bool InstantBuildModeEnabled { get; private set; }
+    public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
     public static BdtHotkey TransportCleanupHotkey { get; private set; } = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
+    public static BdtHotkey HeightFilterShowLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
+    public static BdtHotkey HeightFilterHideLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
+    public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
 
     public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string modDirectory)
     {
@@ -94,12 +106,28 @@ internal static class DesignerToolkitSettings
             LEGACY_TRANSPORT_CLEANUP_HOTKEY_ALT_KEY,
             LEGACY_TRANSPORT_CLEANUP_HOTKEY_SHIFT_KEY,
             DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
+        BdtHotkey initialShowLayerHotkey = HotkeyFromConfig(
+            config,
+            HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY,
+            HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY,
+            "", "", "", "",
+            DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
+        BdtHotkey initialHideLayerHotkey = HotkeyFromConfig(
+            config,
+            HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY,
+            HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY,
+            "", "", "", "",
+            DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
+
+        TransportCleanupHotkey = initialTransportCleanupHotkey;
+        HeightFilterShowLayerHotkey = initialShowLayerHotkey;
+        HeightFilterHideLayerHotkey = initialHideLayerHotkey;
+
         LoadFromJsonStore(
             store,
             initialLanguage,
             initialNumberFormat,
-            initialInstantBuildMode,
-            initialTransportCleanupHotkey);
+            initialInstantBuildMode);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -185,6 +213,47 @@ internal static class DesignerToolkitSettings
 
         root.Add(instantBuildToggle);
 
+        root.Add(new Title(BdtLocalization.SettingsHeightFilterHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        Dropdown<int> heightFilterDropdown = new Dropdown<int>(HeightFilterDropdownOption)
+            .Label(BdtLocalization.SettingsHeightFilterMaxVisible.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsHeightFilterMaxVisibleDescription.AsFormatted)
+            .LabelWidth(SETTINGS_LABEL_WIDTH)
+            .SetOptions(0, 1, 2, 3, 4, 5, 6)
+            .SetValue(HeightFilterMaxVisibleLevel)
+            .OnValueChanged((level, _) => SetHeightFilterMaxVisibleLevel(level));
+        root.Add(heightFilterDropdown);
+
+        BdtKeyBindingField showLayerPrimaryField;
+        BdtKeyBindingField showLayerSecondaryField;
+        root.Add(BuildHotkeyRow(
+            BdtLocalization.SettingsHeightFilterShowHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+            () => HeightFilterShowLayerHotkey,
+            hotkey =>
+            {
+                HeightFilterShowLayerHotkey = hotkey;
+                SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, hotkey);
+            },
+            out showLayerPrimaryField,
+            out showLayerSecondaryField));
+
+        BdtKeyBindingField hideLayerPrimaryField;
+        BdtKeyBindingField hideLayerSecondaryField;
+        root.Add(BuildHotkeyRow(
+            BdtLocalization.SettingsHeightFilterHideHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+            () => HeightFilterHideLayerHotkey,
+            hotkey =>
+            {
+                HeightFilterHideLayerHotkey = hotkey;
+                SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, hotkey);
+            },
+            out hideLayerPrimaryField,
+            out hideLayerSecondaryField));
+
         root.Add(new Title(BdtLocalization.SettingsToolsHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -193,8 +262,13 @@ internal static class DesignerToolkitSettings
         BdtKeyBindingField transportCleanupSecondaryField;
         root.Add(BuildHotkeyRow(
             BdtLocalization.SettingsTransportCleanupHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
             () => TransportCleanupHotkey,
-            hotkey => TransportCleanupHotkey = hotkey,
+            hotkey =>
+            {
+                TransportCleanupHotkey = hotkey;
+                SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, hotkey);
+            },
             out transportCleanupPrimaryField,
             out transportCleanupSecondaryField));
 
@@ -203,6 +277,11 @@ internal static class DesignerToolkitSettings
             languageDropdown.SetValue(MarkdownTableLanguage);
             numberFormatDropdown.SetValue(MarkdownNumberFormat);
             instantBuildToggle.Value(InstantBuildModeEnabled);
+            heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
+            showLayerPrimaryField.Refresh();
+            showLayerSecondaryField.Refresh();
+            hideLayerPrimaryField.Refresh();
+            hideLayerSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
             transportCleanupSecondaryField.Refresh();
         }));
@@ -212,6 +291,7 @@ internal static class DesignerToolkitSettings
 
     private static Row BuildHotkeyRow(
         LocStrFormatted label,
+        LocStrFormatted tooltip,
         Func<BdtHotkey> getHotkey,
         Action<BdtHotkey> setHotkey,
         out BdtKeyBindingField primaryField,
@@ -222,7 +302,7 @@ internal static class DesignerToolkitSettings
         return new Row(2.pt())
         {
             new Label(label)
-                .Tooltip(BdtLocalization.SettingsToolHotkeyDescription.AsFormatted)
+                .Tooltip(tooltip)
                 .NoShrink()
                 .Width(SETTINGS_LABEL_WIDTH),
             primaryField,
@@ -239,7 +319,13 @@ internal static class DesignerToolkitSettings
             MarkdownTableLanguage = MarkdownTableLanguage.English;
             MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             SetInstantBuildMode(false);
+            SetHeightFilterMaxVisibleLevel(6);
+            HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
+            HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
             TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
+            SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
+            SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
+            SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
             refresh();
             status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
         }).Tooltip(BdtLocalization.SettingsRestoreDefaultsTooltip.AsFormatted);
@@ -279,6 +365,10 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
+            if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterShowLayerHotkey, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, out error))
+                return false;
+            if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterHideLayerHotkey, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, out error))
+                return false;
 
             if (string.IsNullOrWhiteSpace(s_modDirectory))
             {
@@ -297,6 +387,18 @@ internal static class DesignerToolkitSettings
                 TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY,
                 TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY,
                 out bool transportCleanupHotkeyUpdated);
+            updated = TryReplaceHotkeyConfigDefaults(
+                updated,
+                HeightFilterShowLayerHotkey,
+                HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY,
+                HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY,
+                out bool showLayerHotkeyUpdated);
+            updated = TryReplaceHotkeyConfigDefaults(
+                updated,
+                HeightFilterHideLayerHotkey,
+                HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY,
+                HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY,
+                out bool hideLayerHotkeyUpdated);
             if (!languageUpdated)
             {
                 error = "Could not find markdown_table_language default in config.json.";
@@ -312,9 +414,9 @@ internal static class DesignerToolkitSettings
                 error = "Could not find instant_build_mode default in config.json.";
                 return false;
             }
-            if (!transportCleanupHotkeyUpdated)
+            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated)
             {
-                error = "Could not find transport cleanup hotkey defaults in config.json.";
+                error = "Could not find hotkey defaults in config.json.";
                 return false;
             }
 
@@ -346,6 +448,60 @@ internal static class DesignerToolkitSettings
         InstantBuildModeEnabled = enabled;
         try { InstantBuildModeChanged?.Invoke(enabled); }
         catch (Exception ex) { s_log.Warning($"Instant build mode change handler failed: {ex.Message}"); }
+    }
+
+    public static void SetHeightFilterMaxVisibleLevel(int level)
+    {
+        if (HeightFilterMaxVisibleLevel == level)
+            return;
+
+        HeightFilterMaxVisibleLevel = level;
+        try { HeightFilterMaxVisibleLevelChanged?.Invoke(level); }
+        catch (Exception ex) { s_log.Warning($"Height filter max visible level change handler failed: {ex.Message}"); }
+    }
+
+    private static UiComponent HeightFilterDropdownOption(int level, int index, bool isInDropdown)
+    {
+        string labelText = level == 6 ? "All" : level.ToString();
+        return new Label(labelText.AsLoc());
+    }
+
+    private static void SaveGlobalHotkey(string primaryKey, string secondaryKey, BdtHotkey hotkey)
+    {
+        if (s_config == null || string.IsNullOrWhiteSpace(s_modDirectory))
+            return;
+
+        try
+        {
+            string error;
+            if (!s_config.TrySetValue(primaryKey, hotkey.PrimaryConfigString(), out error))
+            {
+                s_log.Warning($"Failed to set config value {primaryKey}: {error}");
+                return;
+            }
+            if (!s_config.TrySetValue(secondaryKey, hotkey.SecondaryConfigString(), out error))
+            {
+                s_log.Warning($"Failed to set config value {secondaryKey}: {error}");
+                return;
+            }
+
+            string path = Path.Combine(s_modDirectory, "config.json");
+            string json = File.ReadAllText(path);
+            string updated = TryReplaceHotkeyConfigDefaults(json, hotkey, primaryKey, secondaryKey, out bool updatedOK);
+            if (updatedOK)
+            {
+                File.WriteAllText(path, updated, new System.Text.UTF8Encoding(false));
+                s_log.Info($"Successfully wrote global hotkey {primaryKey} to config.json");
+            }
+            else
+            {
+                s_log.Warning($"Could not find default value for {primaryKey}/{secondaryKey} in config.json to replace.");
+            }
+        }
+        catch (Exception ex)
+        {
+            s_log.Warning($"Failed to save hotkey {primaryKey} to config.json: {ex.Message}");
+        }
     }
 
     private static bool TrySetHotkeyConfig(
@@ -468,13 +624,11 @@ internal static class DesignerToolkitSettings
         IModStateJsonStore store,
         MarkdownTableLanguage initialLanguage,
         MarkdownNumberFormat initialNumberFormat,
-        bool initialInstantBuildMode,
-        BdtHotkey initialTransportCleanupHotkey)
+        bool initialInstantBuildMode)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
         InstantBuildModeEnabled = initialInstantBuildMode;
-        TransportCleanupHotkey = initialTransportCleanupHotkey;
 
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
@@ -496,15 +650,8 @@ internal static class DesignerToolkitSettings
                 MarkdownNumberFormat = NumberFormatFromInt(numberFormat);
             if (TryGetBool(root, "instantBuildMode", out bool instantBuildMode))
                 InstantBuildModeEnabled = instantBuildMode;
-            TransportCleanupHotkey = HotkeyFromState(
-                root,
-                "transportCleanupHotkeyPrimary",
-                "transportCleanupHotkeySecondary",
-                "transportCleanupHotkeyKey",
-                "transportCleanupHotkeyCtrl",
-                "transportCleanupHotkeyAlt",
-                "transportCleanupHotkeyShift",
-                TransportCleanupHotkey);
+            if (TryGetInt(root, "heightFilterMaxVisibleLevel", out int heightFilterMaxVisibleLevel))
+                HeightFilterMaxVisibleLevel = heightFilterMaxVisibleLevel;
         }
         catch (Exception ex)
         {
@@ -520,11 +667,7 @@ internal static class DesignerToolkitSettings
         writer.AppendNumberField("markdownTableLanguage", (int)MarkdownTableLanguage);
         writer.AppendNumberField("markdownNumberFormat", (int)MarkdownNumberFormat);
         writer.AppendBoolField("instantBuildMode", InstantBuildModeEnabled);
-        AppendHotkeyFields(
-            writer,
-            TransportCleanupHotkey,
-            "transportCleanupHotkeyPrimary",
-            "transportCleanupHotkeySecondary");
+        writer.AppendNumberField("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
     }
