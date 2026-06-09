@@ -101,7 +101,7 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Restaura los valores globales predeterminados del mod para todos los ajustes."
+    "Restaura los valores globales predeterminados del mod para todos los ajustes. (No los guarda automáticamente como config.json.)"
   ],
   [
     "dtk.markdown.construction.heading",

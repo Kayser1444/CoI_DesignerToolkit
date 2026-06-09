@@ -101,7 +101,7 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Restore the global mod defaults for all settings."
+    "Restore the global mod defaults for all settings. (Does not automatically save them as config.)"
   ],
   [
     "dtk.markdown.construction.heading",

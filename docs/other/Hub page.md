@@ -1,6 +1,8 @@
-# 🧰 Kayser's Designer Toolkit
+# 🧰 Kayser's Blueprint Designer's Toolkit
 
-Kayser's Designer Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
+*Formerly known as **Kayser's Designer's Toolkit**.*
+
+Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 

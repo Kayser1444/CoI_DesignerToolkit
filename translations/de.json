@@ -101,7 +101,7 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Stellt die globalen Mod-Standardwerte für alle Einstellungen wieder her."
+    "Stellt die globalen Mod-Standardwerte für alle Einstellungen wieder her. (Speichert sie nicht automatisch als config.json.)"
   ],
   [
     "dtk.markdown.construction.heading",

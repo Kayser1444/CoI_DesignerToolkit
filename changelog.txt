@@ -1,3 +1,8 @@
+v0.3.1 | 2026-06-09
+* Fixed: settings save default failure ("Save failed: Invalid path") by resolving the mod folder path correctly
+* Fixed: settings save default validation to successfully write the configuration file even if values match currently stored defaults
+* Updated **Restore defaults** tooltip to clarify that it does not automatically save defaults to the configuration file
+
 v0.3.0 | 2026-06-08
 * Migrated **Instant build mode** (configurable in Mod Settings) which instantly finishes construction, deconstruction, upgrades, and downgrades without materials or unity from Moriarty's Utilities++ (THANKS!)
 * Migrated **Transport cleanup tool** (default `Alt+Del`) to instantly remove disconnected belts and pipes from Moriarty's Utilities++

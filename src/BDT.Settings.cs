@@ -66,6 +66,7 @@ internal static class DesignerToolkitSettings
 
     private static ModJsonConfig? s_config;
     private static IModStateJsonStore? s_store;
+    private static string? s_modDirectory;
 
     public static MarkdownTableLanguage MarkdownTableLanguage { get; private set; } =
         MarkdownTableLanguage.English;
@@ -76,10 +77,11 @@ internal static class DesignerToolkitSettings
 
     public static event Action<bool>? InstantBuildModeChanged;
 
-    public static void Initialize(ModJsonConfig config, IModStateJsonStore store)
+    public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string modDirectory)
     {
         s_config = config;
         s_store = store;
+        s_modDirectory = modDirectory;
         MarkdownTableLanguage initialLanguage = FromInt(config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
         MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
         bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
@@ -278,14 +280,13 @@ internal static class DesignerToolkitSettings
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
 
-            string? directory = Path.GetDirectoryName(typeof(DesignerToolkitSettings).Assembly.Location);
-            if (string.IsNullOrWhiteSpace(directory))
+            if (string.IsNullOrWhiteSpace(s_modDirectory))
             {
                 error = "Could not resolve mod directory.";
                 return false;
             }
 
-            string path = Path.Combine(directory, "config.json");
+            string path = Path.Combine(s_modDirectory, "config.json");
             string json = File.ReadAllText(path);
             string updated = TryReplaceConfigDefault(json, MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out bool languageUpdated);
             updated = TryReplaceConfigDefault(updated, MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out bool numberFormatUpdated);
@@ -405,37 +406,40 @@ internal static class DesignerToolkitSettings
     private static string TryReplaceConfigDefault(string json, string key, int value, out bool updated)
     {
         string pattern = "(\"" + key + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)-?\\d+";
-        string result = Regex.Replace(
+        updated = Regex.IsMatch(json, pattern, RegexOptions.Singleline);
+        if (!updated)
+            return json;
+        return Regex.Replace(
             json,
             pattern,
             match => match.Groups[1].Value + value.ToString(System.Globalization.CultureInfo.InvariantCulture),
             RegexOptions.Singleline);
-        updated = result != json;
-        return result;
     }
 
     private static string TryReplaceConfigDefault(string json, string key, bool value, out bool updated)
     {
         string pattern = "(\"" + key + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)(true|false|0|1)";
-        string result = Regex.Replace(
+        updated = Regex.IsMatch(json, pattern, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        if (!updated)
+            return json;
+        return Regex.Replace(
             json,
             pattern,
             match => match.Groups[1].Value + (value ? "true" : "false"),
             RegexOptions.Singleline | RegexOptions.IgnoreCase);
-        updated = result != json;
-        return result;
     }
 
     private static string TryReplaceConfigDefault(string json, string key, string value, out bool updated)
     {
         string pattern = "(\"" + key + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)\"(?:\\\\.|[^\"])*\"";
-        string result = Regex.Replace(
+        updated = Regex.IsMatch(json, pattern, RegexOptions.Singleline);
+        if (!updated)
+            return json;
+        return Regex.Replace(
             json,
             pattern,
             match => match.Groups[1].Value + "\"" + EscapeJsonString(value) + "\"",
             RegexOptions.Singleline);
-        updated = result != json;
-        return result;
     }
 
     private static string EscapeJsonString(string value)
@@ -447,11 +451,10 @@ internal static class DesignerToolkitSettings
     {
         try
         {
-            string? directory = Path.GetDirectoryName(typeof(DesignerToolkitSettings).Assembly.Location);
-            if (string.IsNullOrWhiteSpace(directory))
+            if (string.IsNullOrWhiteSpace(s_modDirectory))
                 return false;
 
-            string json = File.ReadAllText(Path.Combine(directory, "config.json"));
+            string json = File.ReadAllText(Path.Combine(s_modDirectory, "config.json"));
             return Regex.IsMatch(json, "\"" + Regex.Escape(key) + "\"\\s*:");
         }
         catch (Exception ex)

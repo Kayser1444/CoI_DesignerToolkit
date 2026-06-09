@@ -2,10 +2,13 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.3.0a [unreleased]
+## v0.3.1
 
 - Removed obsolete area upgrade hotkeys from config.json
 - Synced updated translation keys and English fallbacks into all language files
+- Fixed settings save default failure ("Save failed: Invalid path") by using Manifest.RootDirectoryPath instead of Assembly.Location for config.json resolution
+- Fixed settings save default validation logic (Regex.IsMatch) to successfully write configuration file even if values match currently stored defaults
+- Updated and translated the "Restore defaults" tooltip note across all 8 language files to refer to the "Save as config" button and config.json
 
 ## v0.3.0 [packaged]
 

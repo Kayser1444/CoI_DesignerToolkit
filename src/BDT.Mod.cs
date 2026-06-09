@@ -88,7 +88,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         m_simLoopEvents.BeforeSave.AddNonSaveable(this, beforeSave);
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
-        DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore);
+        DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath);
 
         object? instaBuildManager = resolver.TryResolve(typeof(InstaBuildManager)).ValueOrNull;
         m_instantBuildMode = new InstantBuildMode(
