@@ -1,198 +1,206 @@
 [
   [
-    "dtk.settings.hotkey.require_alt",
-    "Require Alt"
-  ],
-  [
-    "dtk.settings.hotkey.require_shift",
-    "Require Shift"
-  ],
-  [
-    "dtk.markdown.value.header",
-    "数值"
-  ],
-  [
-    "dtk.settings.markdown_table_language.label",
-    "Markdown 表格语言"
-  ],
-  [
-    "dtk.markdown.quantity.header",
-    "数量"
-  ],
-  [
-    "dtk.settings.status.save_failed",
-    "保存失败：{0}"
-  ],
-  [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
-    "将文件夹中的蓝图列表作为 Markdown 表格复制到剪贴板。"
-  ],
-  [
-    "dtk.markdown.entity.header",
-    "实体"
+    "dtk.mod.name",
+    "Blueprint Designer's Toolkit"
   ],
   [
     "dtk.settings.tab.markdown",
     "Markdown"
   ],
   [
-    "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
+    "dtk.settings.markdown_copy.heading",
+    "Markdown 复制"
   ],
   [
-    "dtk.settings.number_format.local",
-    "本地分隔符"
-  ],
-  [
-    "dtk.settings.action.restore_defaults",
-    "恢复默认值"
-  ],
-  [
-    "dtk.settings.action.save_as_global",
-    "保存为全局"
-  ],
-  [
-    "dtk.markdown.operational.heading",
-    "运行"
-  ],
-  [
-    "dtk.markdown.product.header",
-    "产品"
-  ],
-  [
-    "dtk.markdown.per_month.suffix",
-    "/ 月"
-  ],
-  [
-    "dtk.markdown.blueprint.header",
-    "蓝图"
-  ],
-  [
-    "dtk.settings.instant_build_mode.description",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.button",
-    "复制为 Markdown"
-  ],
-  [
-    "dtk.settings.markdown_number_format.description",
-    "控制 Markdown 导出中的小数和千位分隔符。自动模式会跟随渲染表格的语言：英语表格使用 en-US 分隔符，本地表格使用当前游戏语言。"
-  ],
-  [
-    "dtk.settings.language.both",
-    "双语"
-  ],
-  [
-    "dtk.settings.language.local",
-    "本地"
-  ],
-  [
-    "dtk.markdown.property.header",
-    "属性"
+    "dtk.settings.markdown_table_language.label",
+    "Markdown 表格语言"
   ],
   [
     "dtk.settings.markdown_table_language.description",
     "控制 Markdown 表头以及产品/实体名称使用的语言。"
   ],
   [
-    "dtk.settings.number_format.english",
-    "英语分隔符"
-  ],
-  [
-    "dtk.settings.action.restore_defaults.tooltip",
-    "恢复所有设置的全局模组默认值。（不会自动保存为 config.json。）"
-  ],
-  [
-    "dtk.markdown.construction.heading",
-    "建造"
+    "dtk.settings.markdown_table_language.pending",
+    "英语、本地、双语和混合模式现在都已接入 Markdown 导出。"
   ],
   [
     "dtk.settings.markdown_number_format.label",
     "Markdown 数字格式"
   ],
   [
-    "dtk.settings.status.store_not_initialized",
-    "保存失败：设置存储尚未初始化。"
-  ],
-  [
-    "dtk.settings.tools.heading",
-    "TOOLS"
-  ],
-  [
-    "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
-  ],
-  [
-    "dtk.settings.hotkey.require_ctrl",
-    "Require Ctrl"
-  ],
-  [
-    "dtk.markdown.entities.stat",
-    "实体"
-  ],
-  [
-    "dtk.mod.name",
-    "Blueprint Designer's Toolkit"
-  ],
-  [
-    "dtk.markdown.folder.header",
-    "文件夹"
-  ],
-  [
-    "dtk.settings.status.restored_defaults",
-    "已在内存中恢复内置默认值。"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
-  ],
-  [
-    "dtk.settings.action.save_as_global.tooltip",
-    "将这些设置全局保存，用于新游戏。"
+    "dtk.settings.markdown_number_format.description",
+    "控制 Markdown 导出中的小数和千位分隔符。自动模式会跟随渲染表格的语言：英语表格使用 en-US 分隔符，本地表格使用当前游戏语言。"
   ],
   [
     "dtk.settings.language.english",
     "英语"
   ],
   [
-    "dtk.settings.number_format.auto",
-    "自动"
+    "dtk.settings.language.local",
+    "本地"
   ],
   [
-    "dtk.settings.markdown_table_language.pending",
-    "英语、本地、双语和混合模式现在都已接入 Markdown 导出。"
-  ],
-  [
-    "dtk.settings.instant_build_mode.sandbox_only",
-    "Sod off to the sandbox, you lazy git!"
+    "dtk.settings.language.both",
+    "双语"
   ],
   [
     "dtk.settings.language.hybrid",
     "混合"
   ],
   [
-    "dtk.markdown.count.header",
-    "数量"
+    "dtk.settings.number_format.auto",
+    "自动"
   ],
   [
-    "dtk.blueprint.copy_as_markdown.tooltip",
-    "将蓝图统计作为 Markdown 表格复制到剪贴板，可直接粘贴到 Hub。"
+    "dtk.settings.number_format.english",
+    "英语分隔符"
   ],
   [
-    "dtk.settings.markdown_copy.heading",
-    "Markdown 复制"
+    "dtk.settings.number_format.local",
+    "本地分隔符"
   ],
   [
-    "dtk.settings.tool_hotkey.description",
-    "Configures the keyboard shortcut that arms this tool."
+    "dtk.settings.instant_build.heading",
+    "INSTANT BUILD"
+  ],
+  [
+    "dtk.settings.instant_build_mode.label",
+    "Instant build mode"
+  ],
+  [
+    "dtk.settings.instant_build_mode.description",
+    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+  ],
+  [
+    "dtk.settings.instant_build_mode.sandbox_only",
+    "Sod off to the sandbox, you lazy git!"
+  ],
+  [
+    "dtk.settings.tools.heading",
+    "TOOLS"
+  ],
+  [
+    "dtk.settings.transport_cleanup_hotkey.label",
+    "Transport cleanup hotkey"
+  ],
+  [
+    "dtk.settings.height_filter.heading",
+    "HEIGHT FILTER"
+  ],
+  [
+    "dtk.settings.height_filter_max_visible.label",
+    "Max visible layer"
+  ],
+  [
+    "dtk.settings.height_filter_max_visible.description",
+    "Limits the height level of transports, structures, and pillars rendered in the world."
+  ],
+  [
+    "dtk.settings.height_filter_show_hotkey.label",
+    "Show layer hotkey"
+  ],
+  [
+    "dtk.settings.height_filter_hide_hotkey.label",
+    "Hide layer hotkey"
+  ],
+  [
+    "dtk.settings.global_hotkey.description",
+    "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json."
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "恢复默认值"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "恢复所有设置的全局模组默认值。（不会自动保存为 config.json。）"
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "保存为全局"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "将这些设置全局保存，用于新游戏。"
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "已在内存中恢复内置默认值。"
   ],
   [
     "dtk.settings.status.saved_to_config",
     "已保存到 config.json。"
   ],
   [
+    "dtk.settings.status.save_failed",
+    "保存失败：{0}"
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "保存失败：设置存储尚未初始化。"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "复制为 Markdown"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "将蓝图统计作为 Markdown 表格复制到剪贴板，可直接粘贴到 Hub。"
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "将文件夹中的蓝图列表作为 Markdown 表格复制到剪贴板。"
+  ],
+  [
     "dtk.markdown.components.heading",
     "组件"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "建造"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "运行"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "实体"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "数量"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "产品"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "数量"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "属性"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "数值"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "蓝图"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "文件夹"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "实体"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ 月"
   ]
 ]

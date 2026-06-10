@@ -20,3 +20,7 @@ dotnet build DesignerToolkit.sln -c Debug
 # Settings file
 
 BDT uses `config.json` for user-configurable settings.
+
+# Releases
+
+For public releases, review `DesignerToolkit\docs\other\Hub page.md` to incorporate any new player-facing features.

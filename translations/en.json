@@ -1,198 +1,206 @@
 [
   [
-    "dtk.settings.hotkey.require_alt",
-    "Require Alt"
-  ],
-  [
-    "dtk.settings.hotkey.require_shift",
-    "Require Shift"
-  ],
-  [
-    "dtk.markdown.value.header",
-    "Value"
-  ],
-  [
-    "dtk.settings.markdown_table_language.label",
-    "Markdown table language"
-  ],
-  [
-    "dtk.markdown.quantity.header",
-    "Quantity"
-  ],
-  [
-    "dtk.settings.status.save_failed",
-    "Save failed: {0}"
-  ],
-  [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
-    "Copy folder blueprint list as a Markdown table to the clipboard."
-  ],
-  [
-    "dtk.markdown.entity.header",
-    "Entity"
+    "dtk.mod.name",
+    "Blueprint Designer's Toolkit"
   ],
   [
     "dtk.settings.tab.markdown",
     "Markdown"
   ],
   [
-    "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
+    "dtk.settings.markdown_copy.heading",
+    "Markdown Copy"
   ],
   [
-    "dtk.settings.number_format.local",
-    "Local separators"
-  ],
-  [
-    "dtk.settings.action.restore_defaults",
-    "Restore defaults"
-  ],
-  [
-    "dtk.settings.action.save_as_global",
-    "Save as global"
-  ],
-  [
-    "dtk.markdown.operational.heading",
-    "Operational"
-  ],
-  [
-    "dtk.markdown.product.header",
-    "Product"
-  ],
-  [
-    "dtk.markdown.per_month.suffix",
-    "/ mo"
-  ],
-  [
-    "dtk.markdown.blueprint.header",
-    "Blueprint"
-  ],
-  [
-    "dtk.settings.instant_build_mode.description",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.button",
-    "Copy as Markdown"
-  ],
-  [
-    "dtk.settings.markdown_number_format.description",
-    "Controls decimal and thousands separators in Markdown exports. Auto follows the rendered table language: English tables use en-US separators and local tables use the current game locale."
-  ],
-  [
-    "dtk.settings.language.both",
-    "Both"
-  ],
-  [
-    "dtk.settings.language.local",
-    "Local"
-  ],
-  [
-    "dtk.markdown.property.header",
-    "Property"
+    "dtk.settings.markdown_table_language.label",
+    "Markdown table language"
   ],
   [
     "dtk.settings.markdown_table_language.description",
     "Controls which language Markdown table headers and product/entity names should use."
   ],
   [
-    "dtk.settings.number_format.english",
-    "English separators"
-  ],
-  [
-    "dtk.settings.action.restore_defaults.tooltip",
-    "Restore the global mod defaults for all settings. (Does not automatically save them as config.)"
-  ],
-  [
-    "dtk.markdown.construction.heading",
-    "Construction"
+    "dtk.settings.markdown_table_language.pending",
+    "English, Local, Both, and Hybrid are wired into Markdown export."
   ],
   [
     "dtk.settings.markdown_number_format.label",
     "Markdown number format"
   ],
   [
-    "dtk.settings.status.store_not_initialized",
-    "Save failed: settings store is not initialized."
-  ],
-  [
-    "dtk.settings.tools.heading",
-    "TOOLS"
-  ],
-  [
-    "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
-  ],
-  [
-    "dtk.settings.hotkey.require_ctrl",
-    "Require Ctrl"
-  ],
-  [
-    "dtk.markdown.entities.stat",
-    "Entities"
-  ],
-  [
-    "dtk.mod.name",
-    "Blueprint Designer's Toolkit"
-  ],
-  [
-    "dtk.markdown.folder.header",
-    "Folder"
-  ],
-  [
-    "dtk.settings.status.restored_defaults",
-    "Restored built-in defaults in memory."
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
-  ],
-  [
-    "dtk.settings.action.save_as_global.tooltip",
-    "Save these settings globally for new games."
+    "dtk.settings.markdown_number_format.description",
+    "Controls decimal and thousands separators in Markdown exports. Auto follows the rendered table language: English tables use en-US separators and local tables use the current game locale."
   ],
   [
     "dtk.settings.language.english",
     "English"
   ],
   [
-    "dtk.settings.number_format.auto",
-    "Auto"
+    "dtk.settings.language.local",
+    "Local"
   ],
   [
-    "dtk.settings.markdown_table_language.pending",
-    "English, Local, Both, and Hybrid are wired into Markdown export."
-  ],
-  [
-    "dtk.settings.instant_build_mode.sandbox_only",
-    "Sod off to the sandbox, you lazy git!"
+    "dtk.settings.language.both",
+    "Both"
   ],
   [
     "dtk.settings.language.hybrid",
     "Hybrid"
   ],
   [
-    "dtk.markdown.count.header",
-    "Count"
+    "dtk.settings.number_format.auto",
+    "Auto"
   ],
   [
-    "dtk.blueprint.copy_as_markdown.tooltip",
-    "Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub."
+    "dtk.settings.number_format.english",
+    "English separators"
   ],
   [
-    "dtk.settings.markdown_copy.heading",
-    "Markdown Copy"
+    "dtk.settings.number_format.local",
+    "Local separators"
   ],
   [
-    "dtk.settings.tool_hotkey.description",
-    "Configures the keyboard shortcut that arms this tool."
+    "dtk.settings.instant_build.heading",
+    "INSTANT BUILD"
+  ],
+  [
+    "dtk.settings.instant_build_mode.label",
+    "Instant build mode"
+  ],
+  [
+    "dtk.settings.instant_build_mode.description",
+    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+  ],
+  [
+    "dtk.settings.instant_build_mode.sandbox_only",
+    "Sod off to the sandbox, you lazy git!"
+  ],
+  [
+    "dtk.settings.tools.heading",
+    "TOOLS"
+  ],
+  [
+    "dtk.settings.transport_cleanup_hotkey.label",
+    "Transport cleanup hotkey"
+  ],
+  [
+    "dtk.settings.height_filter.heading",
+    "HEIGHT FILTER"
+  ],
+  [
+    "dtk.settings.height_filter_max_visible.label",
+    "Max visible layer"
+  ],
+  [
+    "dtk.settings.height_filter_max_visible.description",
+    "Limits the height level of transports, structures, and pillars rendered in the world."
+  ],
+  [
+    "dtk.settings.height_filter_show_hotkey.label",
+    "Show layer hotkey"
+  ],
+  [
+    "dtk.settings.height_filter_hide_hotkey.label",
+    "Hide layer hotkey"
+  ],
+  [
+    "dtk.settings.global_hotkey.description",
+    "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json."
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Restore defaults"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Restore the global mod defaults for all settings. (Does not automatically save them as config.)"
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Save as global"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Save these settings globally for new games."
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Restored built-in defaults in memory."
   ],
   [
     "dtk.settings.status.saved_to_config",
     "Saved to config.json."
   ],
   [
+    "dtk.settings.status.save_failed",
+    "Save failed: {0}"
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "Save failed: settings store is not initialized."
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Copy as Markdown"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub."
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Copy folder blueprint list as a Markdown table to the clipboard."
+  ],
+  [
     "dtk.markdown.components.heading",
     "Components"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Construction"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Operational"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Entity"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Count"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Product"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "Quantity"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Property"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "Value"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Blueprint"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Folder"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Entities"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ mo"
   ]
 ]

@@ -15,6 +15,7 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - \[🧩 Symmetric entity normalization\]
 - \[⚡ Instant build mode\]
 - \[🧹 Transport cleanup tool\]
+- \[👁️ Height filter\]
 - \[⚙️ Mod settings\]
 
 ### 🔁 Update blueprint
@@ -133,6 +134,17 @@ Enabling this feature turns off the game's built-in insta-build toggle. *(Migrat
 ### 🧹 Transport cleanup tool
 
 BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to instantly remove disconnected belts and pipes via an area selection drag. *(Migrated from Moriarty's Utilities++ - Thanks @Mori!)*
+
+### 👁️ Height filter
+
+BDT features a Height Filter rendering system that allows players to filter the visibility of transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) in the world. 
+
+Adjusting the visible height levels makes it significantly easier to inspect and manage multi-tier pipe stacks, layered belt paths, or dense underground logistics without visual clutter.
+
+- `PageUp`: increases the maximum visible level (up to level 6, which shows all heights).
+- `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
+
+These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
 ### ⚙️ Mod settings
 

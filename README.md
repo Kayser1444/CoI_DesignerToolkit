@@ -101,6 +101,15 @@ The normalization pass focuses on the known paste-over problem cases:
 
 The result is still normal blueprint data. This does not patch blueprint placement and does not require blueprint users to install BDT.
 
+### Height filter
+
+Filter the visibility of transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) in the world. This is highly useful for inspecting and managing multi-level logistics or underground layouts.
+
+- `PageUp`: increases the maximum visible level (up to level 6, which shows all heights).
+- `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
+
+These hotkeys can be customized in BDT's mod settings (under **HEIGHT FILTER**). Hidden entities are protected from selection to prevent accidental demolition or interaction.
+
 ## Notes
 
 - Compatible with vanilla saves.

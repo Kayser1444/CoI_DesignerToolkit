@@ -1,198 +1,206 @@
 [
   [
-    "dtk.settings.hotkey.require_alt",
-    "Require Alt"
-  ],
-  [
-    "dtk.settings.hotkey.require_shift",
-    "Require Shift"
-  ],
-  [
-    "dtk.markdown.value.header",
-    "Värde"
-  ],
-  [
-    "dtk.settings.markdown_table_language.label",
-    "Språk för Markdown-tabeller"
-  ],
-  [
-    "dtk.markdown.quantity.header",
-    "Antal"
-  ],
-  [
-    "dtk.settings.status.save_failed",
-    "Det gick inte att spara: {0}"
-  ],
-  [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
-    "Kopiera mappens ritningslista som en Markdown-tabell till urklipp."
-  ],
-  [
-    "dtk.markdown.entity.header",
-    "Entitet"
+    "dtk.mod.name",
+    "Blueprint Designer's Toolkit"
   ],
   [
     "dtk.settings.tab.markdown",
     "Markdown"
   ],
   [
-    "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
+    "dtk.settings.markdown_copy.heading",
+    "Markdownkopiering"
   ],
   [
-    "dtk.settings.number_format.local",
-    "Lokala avgränsare"
-  ],
-  [
-    "dtk.settings.action.restore_defaults",
-    "Återställ standard"
-  ],
-  [
-    "dtk.settings.action.save_as_global",
-    "Spara globalt"
-  ],
-  [
-    "dtk.markdown.operational.heading",
-    "Drift"
-  ],
-  [
-    "dtk.markdown.product.header",
-    "Produkt"
-  ],
-  [
-    "dtk.markdown.per_month.suffix",
-    "/ mån"
-  ],
-  [
-    "dtk.markdown.blueprint.header",
-    "Ritning"
-  ],
-  [
-    "dtk.settings.instant_build_mode.description",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.button",
-    "Kopiera som Markdown"
-  ],
-  [
-    "dtk.settings.markdown_number_format.description",
-    "Styr decimal- och tusentalsavgränsare i Markdown-exporter. Auto följer den renderade tabellens språk: engelska tabeller använder en-US-avgränsare och lokala tabeller använder spelets aktuella språk."
-  ],
-  [
-    "dtk.settings.language.both",
-    "Båda"
-  ],
-  [
-    "dtk.settings.language.local",
-    "Lokalt"
-  ],
-  [
-    "dtk.markdown.property.header",
-    "Egenskap"
+    "dtk.settings.markdown_table_language.label",
+    "Språk för Markdown-tabeller"
   ],
   [
     "dtk.settings.markdown_table_language.description",
     "Styr vilket språk rubriker i Markdown-tabeller och produkt-/entitetsnamn ska använda."
   ],
   [
-    "dtk.settings.number_format.english",
-    "Engelska avgränsare"
-  ],
-  [
-    "dtk.settings.action.restore_defaults.tooltip",
-    "Återställer moddens globala standardvärden för alla inställningar. (Sparar dem inte automatiskt som config.json.)"
-  ],
-  [
-    "dtk.markdown.construction.heading",
-    "Konstruktion"
+    "dtk.settings.markdown_table_language.pending",
+    "Engelska, Lokalt, Båda och Hybrid används nu av Markdown-exporten."
   ],
   [
     "dtk.settings.markdown_number_format.label",
     "Talformat för Markdown"
   ],
   [
-    "dtk.settings.status.store_not_initialized",
-    "Det gick inte att spara: inställningslagret är inte initierat."
-  ],
-  [
-    "dtk.settings.tools.heading",
-    "TOOLS"
-  ],
-  [
-    "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
-  ],
-  [
-    "dtk.settings.hotkey.require_ctrl",
-    "Require Ctrl"
-  ],
-  [
-    "dtk.markdown.entities.stat",
-    "Entiteter"
-  ],
-  [
-    "dtk.mod.name",
-    "Blueprint Designer's Toolkit"
-  ],
-  [
-    "dtk.markdown.folder.header",
-    "Mapp"
-  ],
-  [
-    "dtk.settings.status.restored_defaults",
-    "Inbyggda standardvärden återställda i minnet."
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
-  ],
-  [
-    "dtk.settings.action.save_as_global.tooltip",
-    "Sparar dessa inställningar globalt för nya spel."
+    "dtk.settings.markdown_number_format.description",
+    "Styr decimal- och tusentalsavgränsare i Markdown-exporter. Auto följer den renderade tabellens språk: engelska tabeller använder en-US-avgränsare och lokala tabeller använder spelets aktuella språk."
   ],
   [
     "dtk.settings.language.english",
     "Engelska"
   ],
   [
-    "dtk.settings.number_format.auto",
-    "Auto"
+    "dtk.settings.language.local",
+    "Lokalt"
   ],
   [
-    "dtk.settings.markdown_table_language.pending",
-    "Engelska, Lokalt, Båda och Hybrid används nu av Markdown-exporten."
-  ],
-  [
-    "dtk.settings.instant_build_mode.sandbox_only",
-    "Sod off to the sandbox, you lazy git!"
+    "dtk.settings.language.both",
+    "Båda"
   ],
   [
     "dtk.settings.language.hybrid",
     "Hybrid"
   ],
   [
-    "dtk.markdown.count.header",
-    "Antal"
+    "dtk.settings.number_format.auto",
+    "Auto"
   ],
   [
-    "dtk.blueprint.copy_as_markdown.tooltip",
-    "Kopiera ritningsstatistik som en Markdown-tabell till urklipp, redo att klistras in i hubben."
+    "dtk.settings.number_format.english",
+    "Engelska avgränsare"
   ],
   [
-    "dtk.settings.markdown_copy.heading",
-    "Markdownkopiering"
+    "dtk.settings.number_format.local",
+    "Lokala avgränsare"
   ],
   [
-    "dtk.settings.tool_hotkey.description",
-    "Configures the keyboard shortcut that arms this tool."
+    "dtk.settings.instant_build.heading",
+    "INSTANT BUILD"
+  ],
+  [
+    "dtk.settings.instant_build_mode.label",
+    "Instant build mode"
+  ],
+  [
+    "dtk.settings.instant_build_mode.description",
+    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+  ],
+  [
+    "dtk.settings.instant_build_mode.sandbox_only",
+    "Sod off to the sandbox, you lazy git!"
+  ],
+  [
+    "dtk.settings.tools.heading",
+    "TOOLS"
+  ],
+  [
+    "dtk.settings.transport_cleanup_hotkey.label",
+    "Transport cleanup hotkey"
+  ],
+  [
+    "dtk.settings.height_filter.heading",
+    "HÖJDFILTER"
+  ],
+  [
+    "dtk.settings.height_filter_max_visible.label",
+    "Max synlig nivå"
+  ],
+  [
+    "dtk.settings.height_filter_max_visible.description",
+    "Begränsar höjdnivån för transporter, strukturer och pelare som ritas i världen."
+  ],
+  [
+    "dtk.settings.height_filter_show_hotkey.label",
+    "Snabbknapp för visa nivå"
+  ],
+  [
+    "dtk.settings.height_filter_hide_hotkey.label",
+    "Snabbknapp för dölj nivå"
+  ],
+  [
+    "dtk.settings.global_hotkey.description",
+    "Konfigurerar tangentbordsgenvägen som aktiverar eller utlöser detta verktyg. Detta är en global inställning som gäller för alla sparade spel och sparas direkt i config.json."
+  ],
+  [
+    "dtk.settings.action.restore_defaults",
+    "Återställ standard"
+  ],
+  [
+    "dtk.settings.action.restore_defaults.tooltip",
+    "Återställer moddens globala standardvärden för alla inställningar. (Sparar dem inte automatiskt som config.json.)"
+  ],
+  [
+    "dtk.settings.action.save_as_global",
+    "Spara globalt"
+  ],
+  [
+    "dtk.settings.action.save_as_global.tooltip",
+    "Sparar dessa inställningar globalt för nya spel."
+  ],
+  [
+    "dtk.settings.status.restored_defaults",
+    "Inbyggda standardvärden återställda i minnet."
   ],
   [
     "dtk.settings.status.saved_to_config",
     "Sparat i config.json."
   ],
   [
+    "dtk.settings.status.save_failed",
+    "Det gick inte att spara: {0}"
+  ],
+  [
+    "dtk.settings.status.store_not_initialized",
+    "Det gick inte att spara: inställningslagret är inte initierat."
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.button",
+    "Kopiera som Markdown"
+  ],
+  [
+    "dtk.blueprint.copy_as_markdown.tooltip",
+    "Kopiera ritningsstatistik som en Markdown-tabell till urklipp, redo att klistras in i hubben."
+  ],
+  [
+    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "Kopiera mappens ritningslista som en Markdown-tabell till urklipp."
+  ],
+  [
     "dtk.markdown.components.heading",
     "Komponenter"
+  ],
+  [
+    "dtk.markdown.construction.heading",
+    "Konstruktion"
+  ],
+  [
+    "dtk.markdown.operational.heading",
+    "Drift"
+  ],
+  [
+    "dtk.markdown.entity.header",
+    "Entitet"
+  ],
+  [
+    "dtk.markdown.count.header",
+    "Antal"
+  ],
+  [
+    "dtk.markdown.product.header",
+    "Produkt"
+  ],
+  [
+    "dtk.markdown.quantity.header",
+    "Antal"
+  ],
+  [
+    "dtk.markdown.property.header",
+    "Egenskap"
+  ],
+  [
+    "dtk.markdown.value.header",
+    "Värde"
+  ],
+  [
+    "dtk.markdown.blueprint.header",
+    "Ritning"
+  ],
+  [
+    "dtk.markdown.folder.header",
+    "Mapp"
+  ],
+  [
+    "dtk.markdown.entities.stat",
+    "Entiteter"
+  ],
+  [
+    "dtk.markdown.per_month.suffix",
+    "/ mån"
   ]
 ]
