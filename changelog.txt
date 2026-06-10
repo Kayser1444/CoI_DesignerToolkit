@@ -1,3 +1,10 @@
+v0.4.0 | 2026-06-10
+* Added **Height filter** to step down rendering of transports, pillars, and layout entities from level 6 (all visible) to level 0 (underground only)
+* Added default hotkeys `PageUp` (increase visible level) and `PageDown` (decrease visible level)
+* Added height filter setting and customizable primary/secondary hotkeys in Mod Settings under **HEIGHT FILTER**
+* Protects hidden entities from selection to prevent accidental interaction or demolition
+* Updated Swedish translations and synced locale fallback strings across all supported languages
+
 v0.3.1 | 2026-06-09
 * Fixed: settings save default failure ("Save failed: Invalid path") by resolving the mod folder path correctly
 * Fixed: settings save default validation to successfully write the configuration file even if values match currently stored defaults

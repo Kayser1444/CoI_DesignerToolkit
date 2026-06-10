@@ -2,11 +2,17 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.3.1a [unreleased]
+## v0.4.0 [packaged]
 
-- Fixed height filter system to safely run inside SyncUpdate instead of InputUpdate, resolving race conditions and "Dictionary changed during iteration" exceptions in the simulation thread.
-- Fixed pillar rendering filtering by deferring the initial height filter application by 5 rendering frames, ensuring the game's TransportPillarsRenderer has initialized RendererData on first load.
-- Refined pillar show/hide logic to handle cases where game updates regenerate transport pillars.
+- Added height filter rendering and controls for transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) to filter visibility from levels 0 (underground only) to 6 (all)
+- Added default hotkeys `PageUp` (increase visibility level) and `PageDown` (decrease visibility level)
+- Fixed height filter system to safely run inside SyncUpdate instead of InputUpdate, resolving race conditions and "Dictionary changed during iteration" exceptions in the simulation thread
+- Fixed pillar rendering filtering by deferring the initial height filter application by 5 rendering frames, ensuring the game's TransportPillarsRenderer has initialized RendererData on first load
+- Refined pillar show/hide logic to handle cases where game updates regenerate transport pillars
+- Synced updated translation keys and English fallbacks into all language files, with Swedish translations added for the new height filter settings
+- Removed unused/stale translation keys from `en.json`, `sv.json`, and other locale files
+- Added player and developer documentation for the height filter feature
+
 
 ## v0.3.1 [released]
 
