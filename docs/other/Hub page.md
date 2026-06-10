@@ -8,15 +8,15 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 
 ## ✨ Feature List
 
-- \[🔁 Update blueprint\]
-- \[📂 Remembered blueprint folder\]
-- \[📊 Blueprint operational stats\]
-- \[📝 Copy as Markdown\]
-- \[🧩 Symmetric entity normalization\]
-- \[⚡ Instant build mode\]
-- \[🧹 Transport cleanup tool\]
-- \[👁️ Height filter\]
-- \[⚙️ Mod settings\]
+- [🔁 Update blueprint]
+- [📂 Remembered blueprint folder]
+- [📊 Blueprint operational stats]
+- [📝 Copy as Markdown]
+- [🧩 Symmetric entity normalization]
+- [⚡ Instant build mode]
+- [🧹 Transport cleanup tool]
+- [👁️ Height filter]
+- [⚙️ Mod settings]
 
 ### 🔁 Update blueprint
 
@@ -127,13 +127,19 @@ This is a passive feature that allows you to freely place connectors, balancers,
 
 ### ⚡ Instant build mode
 
-BDT includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. It even finishes tasks while the game is paused.
+BDT includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. The benefit over the vanilla insta-build toggle is that you don't need to unpause the game and risk having products 
 
-Enabling this feature turns off the game's built-in insta-build toggle. *(Migrated from Moriarty's Utilities++ - Thanks @Mori!)*
+Enabling this feature turns off the game's built-in insta-build toggle.
+
+Migrated from Moriarty's Utilities++, with permission. (Thanks!)
 
 ### 🧹 Transport cleanup tool
 
-BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to instantly remove disconnected belts and pipes via an area selection drag. *(Migrated from Moriarty's Utilities++ - Thanks @Mori!)*
+BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to check for and demolish useless disconnected belts and pipes via an area selection drag, before capturing your blueprint or layout, or as a standalone tool.
+
+The hotkey can be changed in BDT's mod settings under **TRANSPORT CLEANUP**.
+
+Migrated from Moriarty's Utilities++, with permission. (Thanks!)
 
 ### 👁️ Height filter
 
@@ -145,6 +151,8 @@ Adjusting the visible height levels makes it significantly easier to inspect and
 - `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
 
 These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
+
+Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks!)
 
 ### ⚙️ Mod settings
 
