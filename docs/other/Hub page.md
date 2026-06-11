@@ -16,6 +16,8 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - \[⚡ Instant build mode\]
 - \[🧹 Transport cleanup tool\]
 - \[👁️ Height filter\]
+- \[🚦 Throughput Limiter\]
+- \[🚧 Legacy Belt Configurations\]
 - \[⚙️ Mod settings\]
 
 ### 🔁 Update blueprint
@@ -153,6 +155,18 @@ Adjusting the visible height levels makes it significantly easier to inspect and
 These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
+
+### 🚦 Throughput Limiter
+
+BDT allows you to restrict the flow rate of transports directly via the inspector UI. A new "Throughput Limiter" panel is added to supported transports where you can enable the limit and set a maximum throughput in items/min. Limits are saved per entity but not preserved in blueprints.
+
+This allows you to test your designs thoroughly before capturing the blueprint.
+
+### 🚧 Legacy Belt Configurations
+
+The Mod Settings menu now features an option to enable Update 1 style transport construction. Turning on "Allow curvy incline belts" permits transports to turn and incline/decline on the exact same tile, restoring the ability to build tight, curvy vertical belts.
+
+Before, U1-style belts were only possible to integrate in modern designs through tedious copy-pasting from an older blueprint or save file.
 
 ### ⚙️ Mod settings
 
