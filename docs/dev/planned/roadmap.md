@@ -15,7 +15,6 @@ Planned and candidate improvements for Designer Toolkit.
 * Buildable U1 transports
 * Sources and sinks rate limiters
 * Throughput limiter on transports
-* Allow building transports parallel to terrain ramps
 
 ### Markdown and HUB support
 * Auto-publish?

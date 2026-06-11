@@ -70,7 +70,6 @@ internal static class DesignerToolkitSettings
         BdtHotkey.FromPrimaryKeys(KeyCode.PageUp);
     private static readonly BdtHotkey DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY =
         BdtHotkey.FromPrimaryKeys(KeyCode.PageDown);
-
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
     private static ModJsonConfig? s_config;
@@ -121,7 +120,6 @@ internal static class DesignerToolkitSettings
             HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY,
             "", "", "", "",
             DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
-
         TransportCleanupHotkey = initialTransportCleanupHotkey;
         HeightFilterShowLayerHotkey = initialShowLayerHotkey;
         HeightFilterHideLayerHotkey = initialHideLayerHotkey;
@@ -295,6 +293,7 @@ internal static class DesignerToolkitSettings
             hideLayerPrimaryField.Refresh();
             hideLayerSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
+            transportCleanupSecondaryField.Refresh();
             transportCleanupSecondaryField.Refresh();
         }));
 
