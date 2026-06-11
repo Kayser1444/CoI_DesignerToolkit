@@ -9,9 +9,12 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Mafi;
+using Mafi.Core.Buildings.Storages;
 using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
 using Mafi.Core.Game;
+using Mafi.Core.Products;
 using Mafi.Core.Simulation;
 using CoI.AutoHelpers.Logging;
 
@@ -117,6 +120,7 @@ internal sealed class InstantBuildMode : IDisposable
                 ConstructionState state = entity.ConstructionState;
                 if (state == ConstructionState.InConstruction || 
                     state == ConstructionState.InDeconstruction ||
+                    state == ConstructionState.PendingDeconstruction ||
                     state == ConstructionState.PreparingUpgrade ||
                     state == ConstructionState.BeingUpgraded)
                 {
@@ -141,7 +145,16 @@ internal sealed class InstantBuildMode : IDisposable
                 if (entity.ConstructionState == ConstructionState.InConstruction)
                     m_constructionManager.MarkConstructed(entity);
                 else if (entity.ConstructionState == ConstructionState.InDeconstruction)
+                {
+                    if (entity is StorageBase storageBase)
+                        ClearStorageContents(storageBase);
                     m_constructionManager.MarkDeconstructed(entity);
+                }
+                else if (entity.ConstructionState == ConstructionState.PendingDeconstruction)
+                {
+                    if (entity is StorageBase storageBase)
+                        ClearStorageContents(storageBase);
+                }
                 else if (entity.ConstructionState == ConstructionState.PreparingUpgrade || entity.ConstructionState == ConstructionState.BeingUpgraded)
                 {
                     if (entity is IUpgradableEntity upgradableEntity)
@@ -155,6 +168,34 @@ internal sealed class InstantBuildMode : IDisposable
         }
 
         m_snapshot.Clear();
+    }
+
+    /// <summary>
+    /// Clears any stored product buffer contents inside a StorageBase entity to allow immediate deconstruction.
+    /// </summary>
+    private void ClearStorageContents(StorageBase storageBase)
+    {
+        if (storageBase.Buffer.HasValue)
+        {
+            try
+            {
+                var buffer = storageBase.Buffer.Value;
+                if (!buffer.IsEmpty)
+                {
+                    buffer.SetCleaningMode(isEnabled: false);
+                    Quantity quantity = buffer.RemoveAll();
+                    if (quantity.IsPositive)
+                    {
+                        storageBase.Context.ProductsManager.ProductDestroyed(buffer.Product, quantity, DestroyReason.Cleared);
+                        s_log.Info($"InstantBuild: Cleared {quantity} of {buffer.Product} from storage {storageBase.Id} to allow deconstruction.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                s_log.Exception(ex, $"Failed to clear storage contents for {storageBase.Id}");
+            }
+        }
     }
 
     /// <summary>
