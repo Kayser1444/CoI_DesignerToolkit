@@ -256,7 +256,7 @@ internal static class DesignerToolkitSettings
             out hideLayerPrimaryField,
             out hideLayerSecondaryField));
 
-        root.Add(new Title(BdtLocalization.SettingsToolsHeading.AsFormatted)
+        root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
@@ -266,6 +266,10 @@ internal static class DesignerToolkitSettings
             .Value(LegacyBeltConfigurationsEnabled)
             .OnValueChanged(SetLegacyBeltConfigurations);
         root.Add(legacyBeltConfigurationsToggle);
+
+        root.Add(new Title(BdtLocalization.SettingsTransportCleanupHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
 
         BdtKeyBindingField transportCleanupPrimaryField;
         BdtKeyBindingField transportCleanupSecondaryField;

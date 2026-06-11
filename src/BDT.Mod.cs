@@ -39,6 +39,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private InstantBuildMode? m_instantBuildMode;
     private TransportCleanupTool? m_transportCleanupTool;
     private HeightFilter? m_heightFilter;
+    private IModStateJsonStore? m_rateLimitsStateStore;
 
     public string Name => "Blueprint Designer's Toolkit";
 
@@ -70,6 +71,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         BlueprintExport.ApplyPatches(m_harmony);
         NormalizeSymmetric.ApplyPatches(m_harmony);
         LegacyBeltConfigurations.ApplyPatches(m_harmony);
+        RateLimitPatches.Apply(m_harmony);
+        RateLimitInspectorPatches.Apply(m_harmony);
     }
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
@@ -91,6 +94,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath);
+
+        m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
+        RateLimitManager.Initialize(m_rateLimitsStateStore);
+        
+        var entitiesManager = resolver.Resolve<EntitiesManager>();
+        entitiesManager.EntityRemoved.AddNonSaveable(this, RateLimitManager.OnEntityRemoved);
 
         object? instaBuildManager = resolver.TryResolve(typeof(InstaBuildManager)).ValueOrNull;
         m_instantBuildMode = new InstantBuildMode(
@@ -137,6 +146,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             ?? ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         m_settingsStateStore = store;
         DesignerToolkitSettings.SaveToJsonStore(store);
+
+        // Rate limits save automatically when modified, but just in case:
+        IModStateJsonStore rateStore = m_rateLimitsStateStore
+            ?? ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
+        m_rateLimitsStateStore = rateStore;
     }
 
     private void RegisterAutoHelpersLocalizationLateApply(DependencyResolver resolver)
@@ -206,6 +220,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_heightFilter.Dispose();
             m_heightFilter = null;
         }
+
+        RateLimitManager.Clear();
 
         if (m_simLoopEvents != null)
         {

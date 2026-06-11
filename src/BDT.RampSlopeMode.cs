@@ -1,3 +1,4 @@
+#if false
 // CoI Designer Toolkit
 // Copyright (c) 2026 Kayser1444
 // Licensed under the MIT License.
@@ -86,8 +87,8 @@ internal sealed class RampSlopeMode : IDisposable
 
     private void ToggleRampInclineMode()
     {
-        bool newMode = !DesignerToolkitSettings.RampInclineModeEnabled;
-        DesignerToolkitSettings.RampInclineModeEnabled = newMode;
+        bool newMode = !false;
+        // false = newMode;
 
         if (newMode)
         {
@@ -162,7 +163,7 @@ internal sealed class RampSlopeMode : IDisposable
         
         m_originalZStepLengths.Clear();
         m_isApplied = false;
-        DesignerToolkitSettings.RampInclineModeEnabled = false;
+        // false = false;
     }
 
     // Harmony Patches
@@ -241,7 +242,7 @@ internal sealed class RampSlopeMode : IDisposable
     // Patches Implementation
     private static void InitPathFinding_Postfix(TransportPathFinder __instance)
     {
-        if (DesignerToolkitSettings.RampInclineModeEnabled)
+        if (false)
         {
             AccessTools.Field(typeof(TransportPathFinder), "m_startMustBeFlat").SetValue(__instance, false);
             AccessTools.Field(typeof(TransportPathFinder), "m_goalMustBeFlat").SetValue(__instance, false);
@@ -250,7 +251,7 @@ internal sealed class RampSlopeMode : IDisposable
 
     private static void TryCreateFromPivots_Prefix(ref bool allowDenormalizedStartEndDirections)
     {
-        if (DesignerToolkitSettings.RampInclineModeEnabled)
+        if (false)
         {
             allowDenormalizedStartEndDirections = true;
         }
@@ -263,7 +264,7 @@ internal sealed class RampSlopeMode : IDisposable
         out RelTile3i startDirection,
         out RelTile3i endDirection)
     {
-        if (DesignerToolkitSettings.RampInclineModeEnabled)
+        if (false)
         {
             // Calculate startDirection
             if (startDirMaybe.HasValue)
@@ -359,7 +360,7 @@ internal sealed class RampSlopeMode : IDisposable
 
     private static void RenderUpdate_Postfix(PathFindingTransportPreview __instance)
     {
-        if (DesignerToolkitSettings.RampInclineModeEnabled && s_heightPopupField != null)
+        if (false && s_heightPopupField != null)
         {
             CursorMessage cursorMessage = (CursorMessage)s_heightPopupField.GetValue(__instance);
             if (cursorMessage != null && cursorMessage.IsAttached)
@@ -373,3 +374,4 @@ internal sealed class RampSlopeMode : IDisposable
         }
     }
 }
+#endif

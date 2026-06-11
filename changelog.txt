@@ -1,3 +1,7 @@
+v0.5.0 | 2026-06-11
+* Added **Throughput Limiter** to set custom maximum throughput capacities (items/min) on any transport, source, or sink via the entity inspector
+* Added **Legacy Belt Configurations** setting to allow Update 1 style transport construction, permitting transports to turn and change height on the exact same tile
+
 v0.4.0 | 2026-06-10
 * Added **Height filter** to step down rendering of transports, pillars, and layout entities from level 6 (all visible) to level 0 (underground only)
 * Added default hotkeys `PageUp` (increase visible level) and `PageDown` (decrease visible level)

@@ -2,7 +2,9 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.4.0a [unreleased]
+## v0.5.0 [packaged]
+
+- Added **Throughput Limiter** feature: allows setting a custom max throughput (items/min) on any transport, source, or sink via the entity inspector
 
 - Added **Legacy Belt Configurations** setting: when enabled, bypasses the pathfinder and construction-helper constraints that normally prevent a belt from both turning and changing height on the same tile
   - Harmony transpiler on `TransportPathFinder.tryGetStepCost`: replaces `RelTile2i.IsParallelTo` calls with a hook that returns `true` when the setting is on, suppressing the "no turn while ramping" IL guards

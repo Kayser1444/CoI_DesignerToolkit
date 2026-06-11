@@ -52,6 +52,10 @@
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."
+  },
+  "bdtRateLimitsStateJson": {
+    "default": "{\"schemaVersion\":1}",
+    "description": "Internal per-save Designer Toolkit rate limits state. Editing may reset saved BDT rate limits."
   }
 }
 

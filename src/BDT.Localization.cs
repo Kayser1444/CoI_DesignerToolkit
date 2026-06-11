@@ -55,8 +55,19 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.legacy_belt_configurations.label", "Allow curvy incline belts", "Settings row label for allowing legacy belt configurations (curvy incline belts).");
     public static LocStr SettingsLegacyBeltConfigurationsDescription =
         Loc.Str("dtk.settings.legacy_belt_configurations.description", "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly).", "Settings row description for allowing legacy belt configurations (curvy incline belts).");
-    public static LocStr SettingsToolsHeading =
-        Loc.Str("dtk.settings.tools.heading", "TOOLS", "Settings section heading for tool hotkeys.");
+
+    public static LocStr RateLimitTitle =
+        Loc.Str("dtk.rate_limit.title", "Throughput Limiter", "Panel title for the throughput limiter inspector.");
+    public static LocStr RateLimitEnable =
+        Loc.Str("dtk.rate_limit.enable", "Enable Throughput Limit", "Checkbox label to enable the throughput limiter.");
+    public static LocStr RateLimitItemsPerMin =
+        Loc.Str("dtk.rate_limit.items_per_min", "items/min", "Unit label for items per minute in the throughput limiter.");
+
+    public static LocStr SettingsTransportConstructionHeading =
+        Loc.Str("dtk.settings.transport_construction.heading", "TRANSPORT CONSTRUCTION", "Settings section heading for transport construction settings.");
+
+    public static LocStr SettingsTransportCleanupHeading =
+        Loc.Str("dtk.settings.transport_cleanup.heading", "TRANSPORT CLEANUP", "Settings section heading for transport cleanup settings.");
 
     public static LocStr SettingsTransportCleanupHotkey =
         Loc.Str("dtk.settings.transport_cleanup_hotkey.label", "Transport cleanup hotkey", "Settings row label for the transport cleanup hotkey.");

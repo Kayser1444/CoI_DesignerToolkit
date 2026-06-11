@@ -12,9 +12,12 @@ Planned and candidate improvements for Designer Toolkit.
 * Blueprint editor?
 
 ### Entities
-* Buildable U1 transports
+* Buildable U1 transports-done
 * Sources and sinks rate limiters
 * Throughput limiter on transports
+* Throughput display on transports, connectors, balancers
+* Content display on all entities missing them (balancer, sorter, ...)
+* Allow building transports parallel to terrain ramps-abandoned
 
 ### Markdown and HUB support
 * Auto-publish?

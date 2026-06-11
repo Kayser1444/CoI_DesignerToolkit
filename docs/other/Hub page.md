@@ -4,19 +4,19 @@
 
 Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
 
-It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
+It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, documenting, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
 ## ✨ Feature List
 
-- [🔁 Update blueprint]
-- [📂 Remembered blueprint folder]
-- [📊 Blueprint operational stats]
-- [📝 Copy as Markdown]
-- [🧩 Symmetric entity normalization]
-- [⚡ Instant build mode]
-- [🧹 Transport cleanup tool]
-- [👁️ Height filter]
-- [⚙️ Mod settings]
+- \[🔁 Update blueprint\]
+- \[📂 Remembered blueprint folder\]
+- \[📊 Blueprint operational stats\]
+- \[📝 Copy as Markdown\]
+- \[🧩 Symmetric entity normalization\]
+- \[⚡ Instant build mode\]
+- \[🧹 Transport cleanup tool\]
+- \[👁️ Height filter\]
+- \[⚙️ Mod settings\]
 
 ### 🔁 Update blueprint
 
@@ -127,32 +127,32 @@ This is a passive feature that allows you to freely place connectors, balancers,
 
 ### ⚡ Instant build mode
 
-BDT includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. The benefit over the vanilla insta-build toggle is that you don't need to unpause the game and risk having products 
+BDT includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. The benefit over the vanilla insta-build toggle is that you don't need to unpause the game and risk having products end up in the wrong places when your build is being modified.
 
 Enabling this feature turns off the game's built-in insta-build toggle.
 
-Migrated from Moriarty's Utilities++, with permission. (Thanks!)
+Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
 
 ### 🧹 Transport cleanup tool
 
-BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to check for and demolish useless disconnected belts and pipes via an area selection drag, before capturing your blueprint or layout, or as a standalone tool.
+BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to detect and demolish useless belts and pipes via an area selection drag, before capturing your blueprint. To avoid capturing input and output transports, terminate them properly with a source or sink.
 
 The hotkey can be changed in BDT's mod settings under **TRANSPORT CLEANUP**.
 
-Migrated from Moriarty's Utilities++, with permission. (Thanks!)
+Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
 
 ### 👁️ Height filter
 
-BDT features a Height Filter rendering system that allows players to filter the visibility of transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) in the world. 
+BDT features a Height Filter rendering system that allows players to filter the visibility of transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) in the world.
 
-Adjusting the visible height levels makes it significantly easier to inspect and manage multi-tier pipe stacks, layered belt paths, or dense underground logistics without visual clutter.
+Adjusting the visible height levels makes it significantly easier to inspect and manage multi-tier pipe stacks, layered belt paths, or dense underground logistics without visual clutter. Transports that span multiple levels are hidden/shown based on the majority of their nodes.
 
 - `PageUp`: increases the maximum visible level (up to level 6, which shows all heights).
 - `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
 
 These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
-Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks!)
+Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
 ### ⚙️ Mod settings
 
@@ -172,7 +172,7 @@ BDT adds a **Mod Settings** panel, accessible from the top-right **M** button in
 **Markdown number format** controls decimal and thousands separators in copied Markdown:
 
 | Mode | Behavior |
-|---|---|
+| --- | --- |
 | **Auto** | English tables use English separators; local and hybrid tables use the current game locale |
 | **English separators** | Force English separators everywhere |
 | **Local separators** | Force current-language separators everywhere |
