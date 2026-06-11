@@ -51,6 +51,10 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.instant_build_mode.description", "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
     public static LocStr SettingsInstantBuildModeSandboxOnly =
         Loc.Str("dtk.settings.instant_build_mode.sandbox_only", "Sod off to the sandbox, you lazy git!", "Tooltip for instant build mode when the game is not in sandbox mode.");
+    public static LocStr SettingsLegacyBeltConfigurations =
+        Loc.Str("dtk.settings.legacy_belt_configurations.label", "Allow curvy incline belts", "Settings row label for allowing legacy belt configurations (curvy incline belts).");
+    public static LocStr SettingsLegacyBeltConfigurationsDescription =
+        Loc.Str("dtk.settings.legacy_belt_configurations.description", "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly).", "Settings row description for allowing legacy belt configurations (curvy incline belts).");
     public static LocStr SettingsToolsHeading =
         Loc.Str("dtk.settings.tools.heading", "TOOLS", "Settings section heading for tool hotkeys.");
 

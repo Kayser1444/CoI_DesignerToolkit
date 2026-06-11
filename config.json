@@ -21,6 +21,10 @@
     "default": false,
     "description": "Initial instant build mode for saves without BDT settings state. When enabled, BDT completes construction and deconstruction automatically."
   },
+  "legacy_belt_configurations": {
+    "default": true,
+    "description": "Initial state for legacy belt configurations (Update 1 style transport construction that allows turning and inclining/declining on the same tile)."
+  },
   "transport_cleanup_hotkey_primary": {
     "default": "LeftAlt + Delete",
     "description": "Initial primary transport cleanup hotkey for saves without BDT settings state. Leave empty to disable the primary binding."

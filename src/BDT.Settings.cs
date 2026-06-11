@@ -46,6 +46,7 @@ internal static class DesignerToolkitSettings
     private const string MARKDOWN_TABLE_LANGUAGE_KEY = "markdown_table_language";
     private const string MARKDOWN_NUMBER_FORMAT_KEY = "markdown_number_format";
     private const string INSTANT_BUILD_MODE_KEY = "instant_build_mode";
+    private const string LEGACY_BELT_CONFIGURATIONS_KEY = "legacy_belt_configurations";
     private const string TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY = "transport_cleanup_hotkey_primary";
     private const string TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY = "transport_cleanup_hotkey_secondary";
     private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY = "height_filter_show_layer_hotkey_primary";
@@ -81,6 +82,7 @@ internal static class DesignerToolkitSettings
     public static MarkdownNumberFormat MarkdownNumberFormat { get; private set; } =
         MarkdownNumberFormat.Auto;
     public static bool InstantBuildModeEnabled { get; private set; }
+    public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
     public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
     public static BdtHotkey TransportCleanupHotkey { get; private set; } = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
     public static BdtHotkey HeightFilterShowLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
@@ -97,6 +99,7 @@ internal static class DesignerToolkitSettings
         MarkdownTableLanguage initialLanguage = FromInt(config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
         MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
         bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
+        bool initialLegacyBeltConfigurations = config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
         BdtHotkey initialTransportCleanupHotkey = HotkeyFromConfig(
             config,
             TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY,
@@ -127,7 +130,8 @@ internal static class DesignerToolkitSettings
             store,
             initialLanguage,
             initialNumberFormat,
-            initialInstantBuildMode);
+            initialInstantBuildMode,
+            initialLegacyBeltConfigurations);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -258,6 +262,13 @@ internal static class DesignerToolkitSettings
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
+        Toggle legacyBeltConfigurationsToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsLegacyBeltConfigurations.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsLegacyBeltConfigurationsDescription.AsFormatted)
+            .Value(LegacyBeltConfigurationsEnabled)
+            .OnValueChanged(SetLegacyBeltConfigurations);
+        root.Add(legacyBeltConfigurationsToggle);
+
         BdtKeyBindingField transportCleanupPrimaryField;
         BdtKeyBindingField transportCleanupSecondaryField;
         root.Add(BuildHotkeyRow(
@@ -277,6 +288,7 @@ internal static class DesignerToolkitSettings
             languageDropdown.SetValue(MarkdownTableLanguage);
             numberFormatDropdown.SetValue(MarkdownNumberFormat);
             instantBuildToggle.Value(InstantBuildModeEnabled);
+            legacyBeltConfigurationsToggle.Value(LegacyBeltConfigurationsEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
             showLayerPrimaryField.Refresh();
             showLayerSecondaryField.Refresh();
@@ -319,6 +331,7 @@ internal static class DesignerToolkitSettings
             MarkdownTableLanguage = MarkdownTableLanguage.English;
             MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             SetInstantBuildMode(false);
+            SetLegacyBeltConfigurations(true);
             SetHeightFilterMaxVisibleLevel(6);
             HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
             HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
@@ -363,6 +376,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out error))
+                return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterShowLayerHotkey, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, out error))
@@ -381,6 +396,7 @@ internal static class DesignerToolkitSettings
             string updated = TryReplaceConfigDefault(json, MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out bool languageUpdated);
             updated = TryReplaceConfigDefault(updated, MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out bool numberFormatUpdated);
             updated = TryReplaceConfigDefault(updated, INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out bool instantBuildUpdated);
+            updated = TryReplaceConfigDefault(updated, LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out bool legacyBeltConfigurationsUpdated);
             updated = TryReplaceHotkeyConfigDefaults(
                 updated,
                 TransportCleanupHotkey,
@@ -412,6 +428,11 @@ internal static class DesignerToolkitSettings
             if (!instantBuildUpdated)
             {
                 error = "Could not find instant_build_mode default in config.json.";
+                return false;
+            }
+            if (!legacyBeltConfigurationsUpdated)
+            {
+                error = "Could not find legacy_belt_configurations default in config.json.";
                 return false;
             }
             if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated)
@@ -448,6 +469,11 @@ internal static class DesignerToolkitSettings
         InstantBuildModeEnabled = enabled;
         try { InstantBuildModeChanged?.Invoke(enabled); }
         catch (Exception ex) { s_log.Warning($"Instant build mode change handler failed: {ex.Message}"); }
+    }
+
+    private static void SetLegacyBeltConfigurations(bool enabled)
+    {
+        LegacyBeltConfigurationsEnabled = enabled;
     }
 
     public static void SetHeightFilterMaxVisibleLevel(int level)
@@ -624,11 +650,13 @@ internal static class DesignerToolkitSettings
         IModStateJsonStore store,
         MarkdownTableLanguage initialLanguage,
         MarkdownNumberFormat initialNumberFormat,
-        bool initialInstantBuildMode)
+        bool initialInstantBuildMode,
+        bool initialLegacyBeltConfigurations)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
         InstantBuildModeEnabled = initialInstantBuildMode;
+        LegacyBeltConfigurationsEnabled = initialLegacyBeltConfigurations;
 
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
@@ -650,6 +678,8 @@ internal static class DesignerToolkitSettings
                 MarkdownNumberFormat = NumberFormatFromInt(numberFormat);
             if (TryGetBool(root, "instantBuildMode", out bool instantBuildMode))
                 InstantBuildModeEnabled = instantBuildMode;
+            if (TryGetBool(root, "legacyBeltConfigurations", out bool legacyBeltConfigurations))
+                LegacyBeltConfigurationsEnabled = legacyBeltConfigurations;
             if (TryGetInt(root, "heightFilterMaxVisibleLevel", out int heightFilterMaxVisibleLevel))
                 HeightFilterMaxVisibleLevel = heightFilterMaxVisibleLevel;
         }
@@ -667,6 +697,7 @@ internal static class DesignerToolkitSettings
         writer.AppendNumberField("markdownTableLanguage", (int)MarkdownTableLanguage);
         writer.AppendNumberField("markdownNumberFormat", (int)MarkdownNumberFormat);
         writer.AppendBoolField("instantBuildMode", InstantBuildModeEnabled);
+        writer.AppendBoolField("legacyBeltConfigurations", LegacyBeltConfigurationsEnabled);
         writer.AppendNumberField("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();

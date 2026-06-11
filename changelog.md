@@ -4,7 +4,14 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.4.0a [unreleased]
 
-- 
+- Added **Legacy Belt Configurations** setting: when enabled, bypasses the pathfinder and construction-helper constraints that normally prevent a belt from both turning and changing height on the same tile
+  - Harmony transpiler on `TransportPathFinder.tryGetStepCost`: replaces `RelTile2i.IsParallelTo` calls with a hook that returns `true` when the setting is on, suppressing the "no turn while ramping" IL guards
+  - Prefix on `TransportPathFinder.InitPathFinding`: strips `StartMustBeFlat` / `GoalMustBeFlat` / `BanStartRampsInX` / `BanStartRampsInY` flags and clears `BannedStartDirections`, so the pathfinder allows ramp steps in any direction at the start and goal nodes
+  - Postfix on `TransportPathFinder.InitPathFinding` and `ChangeGoal`: force-clears `m_startMustBeFlat`, `m_goalMustBeFlat`, `m_startMustNotHavePerpendicularRamp`, and `m_goalMustNotHavePerpendicularRamp` after the port-scanning loop sets them
+  - Transpiler on `TransportsConstructionHelper.CanChangeDirectionOf`: intercepts `ldfld Tile3i.Z` instructions (not `call get_Z` — Z is a public field) and inserts a hook returning 0 when enabled, suppressing the "only reverse is allowed when extending a ramp" guard
+- Confirmed working in-game: single-tile belts can now both turn and ramp simultaneously when the setting is enabled
+- Renamed feature from `AllowShortCurvyBelts` to `LegacyBeltConfigurations` (file, class, property, config key, state-blob key, and loc strings)
+
 
 ## v0.4.0 [released]
 

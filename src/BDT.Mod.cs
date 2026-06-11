@@ -69,6 +69,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         BlueprintStats.ApplyPatches(m_harmony);
         BlueprintExport.ApplyPatches(m_harmony);
         NormalizeSymmetric.ApplyPatches(m_harmony);
+        LegacyBeltConfigurations.ApplyPatches(m_harmony);
     }
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
