@@ -1,5 +1,7 @@
 # Instant Build Mode Import
 
+Status: implemented (v0.3.0). The instant-build-style construction functionality from Mori's Utilities++ has been absorbed and integrated natively within BDT's architecture.
+
 ## Intent
 
 BDT is absorbing the instant-build-style construction functionality from Mori's Utilities++ source while keeping the implementation native to BDT's architecture. The imported files remain under `imports/UtilitiesPlusPlusImport` as reference material only and are excluded from compilation.

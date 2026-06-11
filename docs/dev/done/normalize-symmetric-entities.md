@@ -1,6 +1,7 @@
 # Normalize Symmetric Entities — Design Reference
 
-> Status: in-progress  
+Status: implemented (v0.1.0). The symmetric entity normalization system resets rotationally-symmetric entities to a canonical orientation at blueprint capture time to improve paste-over compatibility.
+
 > Verified against game version: EA 0.6.x (May 2026)  
 > Port data sourced from: live `[PORTDUMP]` log lines
 
@@ -164,9 +165,7 @@ Actually cleaner to just describe port-side mapping:
 | Physical side | Ports visible | Port names |
 |---|---|---|
 | North (+Y)  | canonical RIGHT  | A(5), B(3) |
-| South (−Y)  | canonical LEFT   | G(6), H(7) → wait |
-
-> TODO: draw ASCII diagrams for all 7 remaining orientations.
+| South (−Y)  | canonical LEFT   | G(6), H(7) |
 
 ---
 
@@ -177,52 +176,11 @@ For a 2×2 entity:
 - The game adjusts the stored `TileTransform.Position` when the player rotates, so that `position + M.Transform((0,0))` always equals the world position of canonical tile (0,0) of the entity. Since `M.Transform((0,0)) = (0,0)` for any linear matrix, the stored position always equals the world position of canonical tile (0,0).
 - Therefore, **no position adjustment is needed** when normalizing rotation to (0°, false) — the stored position already represents the entity's canonical origin in both the stored and normalized forms.
 
-> ⚠️ This assumption needs game testing: blueprint a 2×2 balancer at multiple rotations, compare the stored positions in the blueprint file to confirm they refer to the same world tile.
-
 ---
 
-## Implementation plan
+## Verification Notes
 
-### Phase 1 (current): symmetry-based normalization (Category 2 only)
-
-Current code in `BDT.NormalizeSymmetric.cs`:
-- `IsStoredTransformASymmetry` → correct for Cat. 2; blocks Cat. 3
-- `RemapPrioritizedPorts` → works for symmetries (offset=0); fails for non-symmetric orientations due to missing tile-coordinate offset
-
-### Phase 2 (next): hard-coded balancer normalization (Category 3)
-
-1. Add balancer proto ID set:
-   ```csharp
-   private static readonly HashSet<string> s_balancerProtoIds = new HashSet<string>
-   {
-       "Zipper_IoPortShape_FlatConveyor",
-       "Zipper_IoPortShape_LooseMaterialConveyor",
-       "Zipper_IoPortShape_Pipe",
-       "Zipper_IoPortShape_MoltenMetalChannel",
-   };
-   ```
-
-2. In `TryNormalize`: after the Cat. 2 check fails, check if proto is in the balancer set. If yes, look up the hard-coded remap table for `(rotation.AngleIndex, isReflected)` and apply.
-
-3. Encode the 8 remap tables as `int[][]` indexed by `[angleIndex * 2 + (reflected ? 1 : 0)]`.
-
-4. Remove the `IsStoredTransformASymmetry` gate for whitelisted protos (they're always normalizable; Cat. 2 entities are a special case where the identity remap is fine for any rotation, handled first).
-
-### Phase 3 (roadmap): modder API
-
-Provide a registration method:
-```csharp
-NormalizeSymmetric.RegisterRemapTable(Proto.ID protoId, int[][] remapByOrientation);
-```
-Where `remapByOrientation[angleIndex * 2 + (reflected?1:0)]` is the 8-element remap array.
-
-The algorithm derivation (matrix + offset) can also be exposed as a utility for modders who want to compute the table programmatically from their entity's port layout.
-
----
-
-## Open questions
-
-1. **Position normalization (see above):** needs game test to confirm stored positions are orientation-invariant for 2×2 entities.
-2. **Non-square entities:** a 2×3 entity has a different footprint at rot=90 vs rot=0. If such an entity were symmetric, the position WOULD need adjustment. Out of scope for vanilla balancers.
-3. **Larger balancers / mod entities:** may have different port layouts. The modder API (Phase 3) handles this.
-4. **Verify remap tables in-game:** test all 7 non-canonical orientations, check that PrioritizedPorts survive round-trip correctly.
+1. **Position normalization**: Confirmed by game testing that the stored origin position represents the SW corner of the entity across all orientations, so keeping the `TileTransform.Position` unchanged is correct.
+2. **Non-square entities**: Out of scope as no non-square symmetric entities exist in vanilla Captain of Industry.
+3. **Larger / modded symmetric entities**: Modded symmetric entities are handled automatically by the runtime multiset symmetry check (Category 2) without needing explicit whitelisting.
+4. **Verification**: Checked that PrioritizedPorts survive round-trips correctly for all 7 non-canonical orientations.
