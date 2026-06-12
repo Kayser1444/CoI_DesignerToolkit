@@ -61,39 +61,39 @@
   ],
   [
     "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
+    "CONSTRUÇÃO INSTANTÂNEA"
   ],
   [
     "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
+    "Modo de construção instantânea"
   ],
   [
     "dtk.settings.instant_build_mode.description",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+    "Completa automaticamente e instantaneamente construção, demolição, upgrades e downgrades sem materiais, trabalhadores ou unidade (mesmo em pausa). Ativar isso também desativa o interruptor de construção instantânea do jogo."
   ],
   [
     "dtk.settings.instant_build_mode.sandbox_only",
-    "Sod off to the sandbox, you lazy git!"
+    "Vai jogar na sandbox, seu preguiçoso!"
   ],
   [
     "dtk.settings.legacy_belt_configurations.label",
-    "Allow curvy incline belts"
+    "Permitir esteiras inclinadas curvas"
   ],
   [
     "dtk.settings.legacy_belt_configurations.description",
-    "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly)."
+    "Ativa a construção de transportes no estilo da Atualização 1, permitindo que os transportes virem e subam/desçam no mesmo tile (tornando possível construir esteiras inclinadas curvas diretamente)."
   ],
   [
     "dtk.rate_limit.title",
-    "Throughput Limiter"
+    "Limitador de throughput"
   ],
   [
     "dtk.rate_limit.enable",
-    "Limit throughput"
+    "Limitar throughput"
   ],
   [
     "dtk.rate_limit.sandbox_only",
-    "Throughput limiting is only available in sandbox mode."
+    "A limitação de throughput só está disponível no modo sandbox."
   ],
   [
     "dtk.rate_limit.items_per_min",
@@ -101,39 +101,39 @@
   ],
   [
     "dtk.settings.transport_construction.heading",
-    "TRANSPORT CONSTRUCTION"
+    "CONSTRUÇÃO DE TRANSPORTE"
   ],
   [
     "dtk.settings.transport_cleanup.heading",
-    "TRANSPORT CLEANUP"
+    "LIMPEZA DE TRANSPORTE"
   ],
   [
     "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
+    "Atalho de limpeza de transporte"
   ],
   [
     "dtk.settings.height_filter.heading",
-    "HEIGHT FILTER"
+    "FILTRO DE ALTURA"
   ],
   [
     "dtk.settings.height_filter_max_visible.label",
-    "Max visible layer"
+    "Camada máxima visível"
   ],
   [
     "dtk.settings.height_filter_max_visible.description",
-    "Limits the height level of transports, structures, and pillars rendered in the world."
+    "Limita o nível de altura de transportes, estruturas e pilares renderizados no mundo."
   ],
   [
     "dtk.settings.height_filter_show_hotkey.label",
-    "Show layer hotkey"
+    "Atalho para mostrar camada"
   ],
   [
     "dtk.settings.height_filter_hide_hotkey.label",
-    "Hide layer hotkey"
+    "Atalho para ocultar camada"
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json."
+    "Configura o atalho de teclado que ativa ou aciona esta ferramenta. Esta é uma configuração global que se aplica a todos os saves e é salva diretamente em config.json."
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -233,102 +233,102 @@
   ],
   [
     "dtk.throughput.title",
-    "Throughput"
+    "Produtividade"
   ],
   [
     "dtk.throughput.display",
-    "Display throughput"
+    "Exibir throughput"
   ],
   [
     "dtk.throughput.days_to_average",
-    "days to average"
+    "dias para média"
   ],
   [
     "dtk.settings.throughput.heading",
-    "THROUGHPUT"
+    "PRODUTIVIDADE"
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Throughput overlay toggle"
+    "Alternar sobreposição de throughput"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Enables/disables the in-world throughput overlays."
+    "Ativa/desativa as sobreposições de throughput no mundo."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
-    "Throughput overlay hotkey"
+    "Atalho de sobreposição de throughput"
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Throughput heat-map"
+    "Mapa de calor de throughput"
   ],
   [
     "dtk.settings.throughput_colorblind.label",
-    "Colorblind-friendly colors"
+    "Cores para daltônicos"
   ],
   [
     "dtk.settings.throughput_colorblind.description",
-    "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility."
+    "Muda os gradientes do mapa de calor de Verde-Laranja-Vermelho para Azul-Amarelo-Vermelho para melhor visibilidade."
   ],
   [
     "dtk.settings.throughput_show_as_percent.label",
-    "Show throughput as percent"
+    "Mostrar throughput como porcentagem"
   ],
   [
     "dtk.settings.throughput_show_as_percent.description",
-    "Switches the in-world throughput display format from absolute numbers (items/min) to a percentage of the entity's maximum capacity."
+    "Muda o formato de exibição de throughput no mundo de números absolutos (itens/min) para uma porcentagem da capacidade máxima."
   ],
   [
     "dtk.throughput.aoe_tool.name",
-    "Throughput Area Tool"
+    "Ferramenta de área de throughput"
   ],
   [
     "dtk.throughput.aoe_tool.tooltip",
-    "Click and drag to select an area, then configure throughput display settings for all selected entities by type."
+    "Clique e arraste para selecionar uma área, depois configure as exibições de throughput para todas as entidades selecionadas por tipo."
   ],
   [
     "dtk.throughput.aoe_tool.window_title",
-    "Configure Throughput in Area"
+    "Configurar throughput na área"
   ],
   [
     "dtk.throughput.aoe_tool.apply",
-    "Apply"
+    "Aplicar"
   ],
   [
     "dtk.throughput.aoe_tool.close",
-    "Close"
+    "Fechar"
   ],
   [
     "dtk.throughput.aoe_tool.no_change",
-    "No change"
+    "Sem alteração"
   ],
   [
     "dtk.throughput.aoe_tool.enable",
-    "Enable"
+    "Ativar"
   ],
   [
     "dtk.throughput.aoe_tool.disable",
-    "Disable"
+    "Desativar"
   ],
   [
     "dtk.throughput.aoe_tool.override_days_label",
-    "Set averaging period"
+    "Definir período de média"
   ],
   [
     "dtk.throughput.days",
-    "days"
+    "dias"
   ],
   [
     "dtk.throughput.aoe_tool.global_header",
-    "Batch settings"
+    "Configurações em lote"
   ],
   [
     "dtk.throughput.aoe_tool.global_display",
-    "Display state: "
+    "Estado de exibição: "
   ],
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Throughput tool hotkey"
+    "Atalho da ferramenta de throughput"
   ]
 ]

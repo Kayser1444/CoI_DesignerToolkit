@@ -61,39 +61,39 @@
   ],
   [
     "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
+    "即时建造"
   ],
   [
     "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
+    "即时建造模式"
   ],
   [
     "dtk.settings.instant_build_mode.description",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+    "自动即时完成建造、拆除、升级和降级，无需材料、工人或统一度（即使在暂停状态下也有效）。启用此功能还会关闭游戏自身的即时建造开关。"
   ],
   [
     "dtk.settings.instant_build_mode.sandbox_only",
-    "Sod off to the sandbox, you lazy git!"
+    "滚去沙盒模式玩吧，懒鬼！"
   ],
   [
     "dtk.settings.legacy_belt_configurations.label",
-    "Allow curvy incline belts"
+    "允许弯曲坡度传送带"
   ],
   [
     "dtk.settings.legacy_belt_configurations.description",
-    "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly)."
+    "启用更新1风格的传输建造，允许传输在同一格同时转弯和上升/下降（使弯曲坡度传送带可以直接建造）。"
   ],
   [
     "dtk.rate_limit.title",
-    "Throughput Limiter"
+    "吞吐量限制器"
   ],
   [
     "dtk.rate_limit.enable",
-    "Limit throughput"
+    "限制吞吐量"
   ],
   [
     "dtk.rate_limit.sandbox_only",
-    "Throughput limiting is only available in sandbox mode."
+    "吞吐量限制仅在沙盒模式下可用。"
   ],
   [
     "dtk.rate_limit.items_per_min",
@@ -101,39 +101,39 @@
   ],
   [
     "dtk.settings.transport_construction.heading",
-    "TRANSPORT CONSTRUCTION"
+    "传输建造"
   ],
   [
     "dtk.settings.transport_cleanup.heading",
-    "TRANSPORT CLEANUP"
+    "传输清理"
   ],
   [
     "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
+    "传输清理快捷键"
   ],
   [
     "dtk.settings.height_filter.heading",
-    "HEIGHT FILTER"
+    "高度过滤器"
   ],
   [
     "dtk.settings.height_filter_max_visible.label",
-    "Max visible layer"
+    "最大可见层级"
   ],
   [
     "dtk.settings.height_filter_max_visible.description",
-    "Limits the height level of transports, structures, and pillars rendered in the world."
+    "限制世界中渲染的传输、结构和支柱的高度层级。"
   ],
   [
     "dtk.settings.height_filter_show_hotkey.label",
-    "Show layer hotkey"
+    "显示层级快捷键"
   ],
   [
     "dtk.settings.height_filter_hide_hotkey.label",
-    "Hide layer hotkey"
+    "隐藏层级快捷键"
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json."
+    "配置激活或触发此工具的键盘快捷键。这是一个全局设置，适用于所有存档，并直接保存到config.json中。"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -233,102 +233,102 @@
   ],
   [
     "dtk.throughput.title",
-    "Throughput"
+    "吞吐量"
   ],
   [
     "dtk.throughput.display",
-    "Display throughput"
+    "显示吞吐量"
   ],
   [
     "dtk.throughput.days_to_average",
-    "days to average"
+    "平均天数"
   ],
   [
     "dtk.settings.throughput.heading",
-    "THROUGHPUT"
+    "吞吐量"
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Throughput overlay toggle"
+    "切换吞吐量叠加层"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Enables/disables the in-world throughput overlays."
+    "启用/禁用世界中的吞吐量叠加层。"
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
-    "Throughput overlay hotkey"
+    "吞吐量叠加层快捷键"
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Throughput heat-map"
+    "吞吐量热力图"
   ],
   [
     "dtk.settings.throughput_colorblind.label",
-    "Colorblind-friendly colors"
+    "色盲友好颜色"
   ],
   [
     "dtk.settings.throughput_colorblind.description",
-    "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility."
+    "将热力图渐变从绿-橙-红更改为蓝-黄-红，以提高可见性。"
   ],
   [
     "dtk.settings.throughput_show_as_percent.label",
-    "Show throughput as percent"
+    "以百分比显示吞吐量"
   ],
   [
     "dtk.settings.throughput_show_as_percent.description",
-    "Switches the in-world throughput display format from absolute numbers (items/min) to a percentage of the entity's maximum capacity."
+    "将世界吞吐量显示格式从绝对数字（物品/分钟）切换为最大容量的百分比。"
   ],
   [
     "dtk.throughput.aoe_tool.name",
-    "Throughput Area Tool"
+    "吞吐量区域工具"
   ],
   [
     "dtk.throughput.aoe_tool.tooltip",
-    "Click and drag to select an area, then configure throughput display settings for all selected entities by type."
+    "点击并拖动以选择区域，然后按类型为所有选定实体配置吞吐量显示设置。"
   ],
   [
     "dtk.throughput.aoe_tool.window_title",
-    "Configure Throughput in Area"
+    "配置区域内吞吐量"
   ],
   [
     "dtk.throughput.aoe_tool.apply",
-    "Apply"
+    "应用"
   ],
   [
     "dtk.throughput.aoe_tool.close",
-    "Close"
+    "关闭"
   ],
   [
     "dtk.throughput.aoe_tool.no_change",
-    "No change"
+    "不更改"
   ],
   [
     "dtk.throughput.aoe_tool.enable",
-    "Enable"
+    "启用"
   ],
   [
     "dtk.throughput.aoe_tool.disable",
-    "Disable"
+    "禁用"
   ],
   [
     "dtk.throughput.aoe_tool.override_days_label",
-    "Set averaging period"
+    "设置平均周期"
   ],
   [
     "dtk.throughput.days",
-    "days"
+    "天"
   ],
   [
     "dtk.throughput.aoe_tool.global_header",
-    "Batch settings"
+    "批量设置"
   ],
   [
     "dtk.throughput.aoe_tool.global_display",
-    "Display state: "
+    "显示状态："
   ],
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Throughput tool hotkey"
+    "吞吐量工具快捷键"
   ]
 ]

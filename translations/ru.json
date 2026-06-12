@@ -61,39 +61,39 @@
   ],
   [
     "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
+    "МГНОВЕННОЕ СТРОИТЕЛЬСТВО"
   ],
   [
     "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
+    "Режим мгновенного строительства"
   ],
   [
     "dtk.settings.instant_build_mode.description",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+    "Автоматически и мгновенно завершает строительство, снос, улучшения и понижения без материалов, рабочих и единства (даже на паузе). Включение также отключает переключатель мгновенного строительства игры."
   ],
   [
     "dtk.settings.instant_build_mode.sandbox_only",
-    "Sod off to the sandbox, you lazy git!"
+    "Иди в режим песочницы, лентяй!"
   ],
   [
     "dtk.settings.legacy_belt_configurations.label",
-    "Allow curvy incline belts"
+    "Разрешить изогнутые наклонные ленты"
   ],
   [
     "dtk.settings.legacy_belt_configurations.description",
-    "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly)."
+    "Включает строительство транспорта в стиле Обновления 1, позволяя транспортным лентам поворачивать и подниматься/спускаться на одной клетке (что делает возможным прямое строительство изогнутых наклонных лент)."
   ],
   [
     "dtk.rate_limit.title",
-    "Throughput Limiter"
+    "Ограничитель пропускной способности"
   ],
   [
     "dtk.rate_limit.enable",
-    "Limit throughput"
+    "Ограничить пропускную способность"
   ],
   [
     "dtk.rate_limit.sandbox_only",
-    "Throughput limiting is only available in sandbox mode."
+    "Ограничение пропускной способности доступно только в режиме песочницы."
   ],
   [
     "dtk.rate_limit.items_per_min",
@@ -101,39 +101,39 @@
   ],
   [
     "dtk.settings.transport_construction.heading",
-    "TRANSPORT CONSTRUCTION"
+    "СТРОИТЕЛЬСТВО ТРАНСПОРТА"
   ],
   [
     "dtk.settings.transport_cleanup.heading",
-    "TRANSPORT CLEANUP"
+    "ОЧИСТКА ТРАНСПОРТА"
   ],
   [
     "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
+    "Горячая клавиша очистки транспорта"
   ],
   [
     "dtk.settings.height_filter.heading",
-    "HEIGHT FILTER"
+    "ФИЛЬТР ВЫСОТЫ"
   ],
   [
     "dtk.settings.height_filter_max_visible.label",
-    "Max visible layer"
+    "Макс. видимый уровень"
   ],
   [
     "dtk.settings.height_filter_max_visible.description",
-    "Limits the height level of transports, structures, and pillars rendered in the world."
+    "Ограничивает уровень высоты транспортов, строений и опор, отображаемых в мире."
   ],
   [
     "dtk.settings.height_filter_show_hotkey.label",
-    "Show layer hotkey"
+    "Горячая клавиша показа уровня"
   ],
   [
     "dtk.settings.height_filter_hide_hotkey.label",
-    "Hide layer hotkey"
+    "Горячая клавиша скрытия уровня"
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json."
+    "Настраивает горячую клавишу, которая активирует или запускает этот инструмент. Это глобальная настройка, применяемая ко всем сохранениям и сохраняемая непосредственно в config.json."
   ],
   [
     "dtk.settings.action.restore_defaults",

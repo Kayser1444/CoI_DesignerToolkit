@@ -61,39 +61,39 @@
   ],
   [
     "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
+    "OMEDELBART BYGGE"
   ],
   [
     "dtk.settings.instant_build_mode.label",
-    "Instant build mode"
+    "Omedelbart bygge-läge"
   ],
   [
     "dtk.settings.instant_build_mode.description",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+    "Slutför automatiskt och omedelbart konstruktion, rivning, uppgraderingar och nedgraderingar utan material, arbetare eller enhet (även vid paus). Aktivering stänger även av spelets eget omedelbart-bygge-alternativ."
   ],
   [
     "dtk.settings.instant_build_mode.sandbox_only",
-    "Sod off to the sandbox, you lazy git!"
+    "Stick till sandlådan, du late drummel!"
   ],
   [
     "dtk.settings.legacy_belt_configurations.label",
-    "Allow curvy incline belts"
+    "Tillåt kurviga lutningsband"
   ],
   [
     "dtk.settings.legacy_belt_configurations.description",
-    "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly)."
+    "Aktiverar transportkonstruktion i stil med Uppdatering 1, vilket gör att transporter kan svänga och stiga/sjunka på samma ruta (möjliggör direkt konstruktion av kurviga lutningsband)."
   ],
   [
     "dtk.rate_limit.title",
-    "Throughput Limiter"
+    "Genomströmningsbegränsare"
   ],
   [
     "dtk.rate_limit.enable",
-    "Limit throughput"
+    "Begränsa genomströmning"
   ],
   [
     "dtk.rate_limit.sandbox_only",
-    "Throughput limiting is only available in sandbox mode."
+    "Genomströmningsbegränsning är endast tillgänglig i sandlådeläge."
   ],
   [
     "dtk.rate_limit.items_per_min",
@@ -109,7 +109,7 @@
   ],
   [
     "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
+    "Snabbknapp för transportrensning"
   ],
   [
     "dtk.settings.height_filter.heading",
@@ -269,7 +269,7 @@
   ],
   [
     "dtk.settings.throughput_colorblind.description",
-    "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility."
+    "Ändrar värmekartans gradienter från Grön-Orange-Röd till Blå-Gul-Röd för bättre synlighet."
   ],
   [
     "dtk.settings.throughput_show_as_percent.label",
