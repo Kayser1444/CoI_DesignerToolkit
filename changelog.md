@@ -7,6 +7,23 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Upgraded **Throughput Limiter** UI: the input field now uses the game's LCD display font styling
 - Added `+` and `-` buttons to the Throughput Limiter UI, supporting `Shift` (5x) and `Control` (10x) step modifiers
 - Restricted the Throughput Limiter UI controls to **sandbox mode only** (with a tooltip explaining this in standard games)
+- Merged the Throughput Limiter and Throughput Monitor into a consolidated **Throughput** inspector panel
+- Added **Throughput heat-map** settings with `Relative` and `Capacity` modes
+- Added **Colorblind-friendly colors** option (Blue-Yellow-Red) with a descriptive tooltip
+- Added **Show throughput as percent** option to render overlays as a percentage of maximum capacity
+- Implemented **UI occlusion checks** using raycasts to hide throughput labels rendered behind active UI windows/panels
+- Optimized occlusion check performance by caching visual element panels once per frame, preventing Factory rendering lag
+- Added a pulsing neon red-orange **bottleneck glow border** behind overlay text for entities running at >98% capacity
+- Extended throughput monitoring and inspector UI to sandbox sources and sinks
+- Implemented **Throughput Area Tool** (defaults to `LeftShift + LeftAlt + T`) to click/drag and select an area of entities
+- Added a **Simplified Bulk Configuration Window** for the AoE tool:
+  - Collapses multiple tiers of selected entities (e.g. Flat lift I, II, III) into single, summarized checklist entries
+  - List checkboxes directly toggle throughput display visibility for all entities in that category instantly
+  - Inline Set Days controls and a non-closing "Apply" button allow configuring averaging days iteratively
+- Mitigated hotkey conflicts by requiring exclusive modifiers for key detection, preventing `Shift-Alt-T` from triggering the `Alt-T` display toggle
+- Automatically activates the throughput overlay display when the AoE tool window is used
+- Reordered throughput inspector fields to right-align numeric input controls flush with the right edge
+- Localized all new strings and fully updated Russian translations (`translations/ru.json`)
 
 ## v0.5.0 [released]
 

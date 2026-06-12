@@ -230,5 +230,101 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ mo"
+  ],
+  [
+    "dtk.throughput.title",
+    "Throughput"
+  ],
+  [
+    "dtk.throughput.display",
+    "Display throughput"
+  ],
+  [
+    "dtk.throughput.days_to_average",
+    "days to average"
+  ],
+  [
+    "dtk.settings.throughput.heading",
+    "THROUGHPUT"
+  ],
+  [
+    "dtk.settings.throughput_toggle.label",
+    "Throughput overlay toggle"
+  ],
+  [
+    "dtk.settings.throughput_toggle.description",
+    "Enables/disables the in-world throughput overlays."
+  ],
+  [
+    "dtk.settings.throughput_toggle_hotkey.label",
+    "Throughput overlay hotkey"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.label",
+    "Throughput heat-map"
+  ],
+  [
+    "dtk.settings.throughput_colorblind.label",
+    "Colorblind-friendly colors"
+  ],
+  [
+    "dtk.settings.throughput_colorblind.description",
+    "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility."
+  ],
+  [
+    "dtk.settings.throughput_show_as_percent.label",
+    "Show throughput as percent"
+  ],
+  [
+    "dtk.settings.throughput_show_as_percent.description",
+    "Switches the in-world throughput display format from absolute numbers (items/min) to a percentage of the entity's maximum capacity."
+  ],
+  [
+    "dtk.throughput.aoe_tool.name",
+    "Throughput Area Tool"
+  ],
+  [
+    "dtk.throughput.aoe_tool.tooltip",
+    "Click and drag to select an area, then configure throughput display settings for all selected entities by type."
+  ],
+  [
+    "dtk.throughput.aoe_tool.window_title",
+    "Configure Throughput in Area"
+  ],
+  [
+    "dtk.throughput.aoe_tool.apply",
+    "Apply"
+  ],
+  [
+    "dtk.throughput.aoe_tool.close",
+    "Close"
+  ],
+  [
+    "dtk.throughput.aoe_tool.no_change",
+    "No change"
+  ],
+  [
+    "dtk.throughput.aoe_tool.enable",
+    "Enable"
+  ],
+  [
+    "dtk.throughput.aoe_tool.disable",
+    "Disable"
+  ],
+  [
+    "dtk.throughput.aoe_tool.override_days",
+    "Set days"
+  ],
+  [
+    "dtk.throughput.aoe_tool.global_header",
+    "Batch settings"
+  ],
+  [
+    "dtk.throughput.aoe_tool.global_display",
+    "Display state: "
+  ],
+  [
+    "dtk.settings.throughput_aoe_tool_hotkey.label",
+    "Throughput tool hotkey"
   ]
 ]

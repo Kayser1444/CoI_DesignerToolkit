@@ -230,5 +230,101 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ mån"
+  ],
+  [
+    "dtk.throughput.title",
+    "Genomströmning"
+  ],
+  [
+    "dtk.throughput.display",
+    "Visa genomströmning"
+  ],
+  [
+    "dtk.throughput.days_to_average",
+    "dagar att snitta"
+  ],
+  [
+    "dtk.settings.throughput.heading",
+    "GENOMSTRÖMNING"
+  ],
+  [
+    "dtk.settings.throughput_toggle.label",
+    "Växla genomströmningsvy"
+  ],
+  [
+    "dtk.settings.throughput_toggle.description",
+    "Slår på/av genomströmningsvyer i världen."
+  ],
+  [
+    "dtk.settings.throughput_toggle_hotkey.label",
+    "Snabbknapp för genomströmningsvy"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.label",
+    "Färgkarta för genomströmning"
+  ],
+  [
+    "dtk.settings.throughput_colorblind.label",
+    "Färgblindsvänliga färger"
+  ],
+  [
+    "dtk.settings.throughput_colorblind.description",
+    "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility."
+  ],
+  [
+    "dtk.settings.throughput_show_as_percent.label",
+    "Visa genomströmning i procent"
+  ],
+  [
+    "dtk.settings.throughput_show_as_percent.description",
+    "Ändrar visningsformatet för genomströmning i världen från absoluta tal (enheter/min) till en procentandel av enhetens maximala kapacitet."
+  ],
+  [
+    "dtk.throughput.aoe_tool.name",
+    "Genomströmningsområdesverktyg"
+  ],
+  [
+    "dtk.throughput.aoe_tool.tooltip",
+    "Klicka och dra för att markera ett område, konfigurera sedan visningsinställningar för genomströmning för alla markerade enheter per typ."
+  ],
+  [
+    "dtk.throughput.aoe_tool.window_title",
+    "Konfigurera genomströmning i område"
+  ],
+  [
+    "dtk.throughput.aoe_tool.apply",
+    "Verkställ"
+  ],
+  [
+    "dtk.throughput.aoe_tool.close",
+    "Stäng"
+  ],
+  [
+    "dtk.throughput.aoe_tool.no_change",
+    "Ingen ändring"
+  ],
+  [
+    "dtk.throughput.aoe_tool.enable",
+    "Aktivera"
+  ],
+  [
+    "dtk.throughput.aoe_tool.disable",
+    "Inaktivera"
+  ],
+  [
+    "dtk.throughput.aoe_tool.override_days",
+    "Ange dagar"
+  ],
+  [
+    "dtk.throughput.aoe_tool.global_header",
+    "Batchinställningar"
+  ],
+  [
+    "dtk.throughput.aoe_tool.global_display",
+    "Visningsstatus: "
+  ],
+  [
+    "dtk.settings.throughput_aoe_tool_hotkey.label",
+    "Genomströmningsverktyg genväg"
   ]
 ]

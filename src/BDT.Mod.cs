@@ -40,6 +40,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private TransportCleanupTool? m_transportCleanupTool;
     private HeightFilter? m_heightFilter;
     private IModStateJsonStore? m_rateLimitsStateStore;
+    private IModStateJsonStore? m_throughputStateStore;
+    private ThroughputManager? m_throughputManager;
+    private ThroughputWorldRenderer? m_throughputWorldRenderer;
+    private UnityEngine.GameObject? m_throughputWorldRendererGo;
+    private ThroughputAoETool? m_throughputAoETool;
 
     public string Name => "Blueprint Designer's Toolkit";
 
@@ -72,7 +77,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         NormalizeSymmetric.ApplyPatches(m_harmony);
         LegacyBeltConfigurations.ApplyPatches(m_harmony);
         RateLimitPatches.Apply(m_harmony);
-        RateLimitInspectorPatches.Apply(m_harmony);
+        ThroughputPatches.Apply(m_harmony);
+        ThroughputInspectorPatches.Apply(m_harmony);
     }
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
@@ -99,6 +105,19 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
         RateLimitManager.Initialize(m_rateLimitsStateStore);
         
+        m_throughputStateStore = ModStateJsonStores.CreateDefault(JsonConfig, ThroughputManager.CONFIG_KEY);
+        m_throughputManager = new ThroughputManager();
+        m_throughputManager.Initialize(resolver, m_throughputStateStore);
+
+        var gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
+        gameLoopEvents.RegisterRendererInitState(this, () =>
+        {
+            m_throughputWorldRendererGo = new UnityEngine.GameObject("BDT.ThroughputWorldRenderer");
+            m_throughputWorldRenderer = m_throughputWorldRendererGo.AddComponent<ThroughputWorldRenderer>();
+            m_throughputWorldRenderer.Setup(resolver.Resolve<EntitiesManager>());
+            UnityEngine.Object.DontDestroyOnLoad(m_throughputWorldRendererGo);
+        });
+        
         var entitiesManager = resolver.Resolve<EntitiesManager>();
         entitiesManager.EntityRemoved.AddNonSaveable(this, RateLimitManager.OnEntityRemoved);
 
@@ -120,6 +139,18 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_simLoopEvents,
             resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance);
         m_transportCleanupTool.Initialize();
+
+        m_throughputAoETool = new ThroughputAoETool(
+            resolver.Resolve<Mafi.Unity.Ui.Hud.ToolbarHud>(),
+            resolver.Resolve<Mafi.Unity.Ui.UiContext>(),
+            resolver.Resolve<Mafi.Unity.InputControl.CursorPickingManager>(),
+            resolver.Resolve<Mafi.Unity.UiStatic.Cursors.CursorManager>(),
+            resolver.Resolve<Mafi.Unity.InputControl.AreaTool.AreaSelectionToolFactory>(),
+            resolver.Resolve<IEntitiesManager>(),
+            resolver.Resolve<NewInstanceOf<EntityHighlighter>>(),
+            resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>(),
+            resolver.Resolve<IGameLoopEvents>());
+        m_throughputAoETool.Initialize();
 
         m_heightFilter = new HeightFilter(m_harmony!, resolver.Resolve<IGameLoopEvents>());
         m_heightFilter.Initialize(resolver);
@@ -152,6 +183,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         IModStateJsonStore rateStore = m_rateLimitsStateStore
             ?? ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
         m_rateLimitsStateStore = rateStore;
+
+        if (m_throughputManager != null)
+        {
+            m_throughputManager.SaveConfigState();
+        }
     }
 
     private void RegisterAutoHelpersLocalizationLateApply(DependencyResolver resolver)
@@ -216,6 +252,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_transportCleanupTool = null;
         }
 
+        if (m_throughputAoETool != null)
+        {
+            m_throughputAoETool.Dispose();
+            m_throughputAoETool = null;
+        }
+
         if (m_heightFilter != null)
         {
             m_heightFilter.Dispose();
@@ -223,6 +265,19 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         }
 
         RateLimitManager.Clear();
+
+        if (m_throughputWorldRendererGo != null)
+        {
+            UnityEngine.Object.Destroy(m_throughputWorldRendererGo);
+            m_throughputWorldRendererGo = null;
+            m_throughputWorldRenderer = null;
+        }
+
+        if (m_throughputManager != null)
+        {
+            m_throughputManager.Dispose();
+            m_throughputManager = null;
+        }
 
         if (m_simLoopEvents != null)
         {

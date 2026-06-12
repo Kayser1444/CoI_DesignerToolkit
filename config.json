@@ -49,6 +49,41 @@
     "default": "",
     "description": "Initial secondary height filter hide layer hotkey. Leave empty to disable the secondary binding."
   },
+  "throughput_overlay_enabled": {
+    "default": true,
+    "description": "Initial throughput overlay visibility state for saves without BDT settings state. When enabled, configured throughput overlays will render in-world."
+  },
+  "throughput_overlay_toggle_hotkey_primary": {
+    "default": "LeftAlt + T",
+    "description": "Initial primary throughput overlay toggle hotkey. Leave empty to disable."
+  },
+  "throughput_overlay_toggle_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary throughput overlay toggle hotkey. Leave empty to disable."
+  },
+  "throughput_aoe_tool_hotkey_primary": {
+    "default": "LeftShift + LeftAlt + T",
+    "description": "Initial primary throughput AoE tool hotkey. Leave empty to disable."
+  },
+  "throughput_aoe_tool_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary throughput AoE tool hotkey. Leave empty to disable."
+  },
+  "throughput_heatmap_mode": {
+    "default": 2,
+    "is_integer": true,
+    "description": "Initial throughput heatmap mode for saves without BDT settings state (0=None, 1=Relative, 2=Capacity).",
+    "min": 0,
+    "max": 2
+  },
+  "throughput_colorblind_mode": {
+    "default": false,
+    "description": "Initial throughput colorblind-friendly colors mode for saves without BDT settings state."
+  },
+  "throughput_show_as_percent": {
+    "default": false,
+    "description": "Initial throughput show as percent mode for saves without BDT settings state."
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."
@@ -56,6 +91,11 @@
   "bdtRateLimitsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit rate limits state. Editing may reset saved BDT rate limits."
+  },
+  "bdtThroughputConfigStateJson": {
+    "default": "{\"schemaVersion\":1}",
+    "description": "Internal per-save Designer Toolkit throughput configurations state. Editing may reset saved BDT throughput configs."
   }
 }
+
 

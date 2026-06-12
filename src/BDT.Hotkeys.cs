@@ -128,6 +128,29 @@ internal readonly struct BdtHotkey
                 return false;
         }
 
+        // Check if any standard modifier is pressed that is NOT in the hotkey keys
+        bool hasCtrl = false;
+        bool hasAlt = false;
+        bool hasShift = false;
+
+        for (int i = 0; i < keys.Length; i++)
+        {
+            KeyCode k = keys[i];
+            if (k == KeyCode.LeftControl || k == KeyCode.RightControl)
+                hasCtrl = true;
+            else if (k == KeyCode.LeftAlt || k == KeyCode.RightAlt)
+                hasAlt = true;
+            else if (k == KeyCode.LeftShift || k == KeyCode.RightShift)
+                hasShift = true;
+        }
+
+        if (!hasCtrl && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+            return false;
+        if (!hasAlt && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)))
+            return false;
+        if (!hasShift && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            return false;
+
         return true;
     }
 }

@@ -230,5 +230,101 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ мес."
+  ],
+  [
+    "dtk.throughput.title",
+    "Пропускная способность"
+  ],
+  [
+    "dtk.throughput.display",
+    "Отображать пропускную способность"
+  ],
+  [
+    "dtk.throughput.days_to_average",
+    "дней для усреднения"
+  ],
+  [
+    "dtk.settings.throughput.heading",
+    "ПРОПУСКНАЯ СПОСОБНОСТЬ"
+  ],
+  [
+    "dtk.settings.throughput_toggle.label",
+    "Переключатель оверлея пропускной способности"
+  ],
+  [
+    "dtk.settings.throughput_toggle.description",
+    "Включает/выключает оверлеи пропускной способности в мире."
+  ],
+  [
+    "dtk.settings.throughput_toggle_hotkey.label",
+    "Горячая клавиша оверлея пропускной способности"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.label",
+    "Тепловая карта пропускной способности"
+  ],
+  [
+    "dtk.settings.throughput_colorblind.label",
+    "Цвета для дальтоников"
+  ],
+  [
+    "dtk.settings.throughput_colorblind.description",
+    "Меняет градиенты тепловой карты с Зеленый-Оранжевый-Красный на Синий-Желтый-Красный для лучшей видимости."
+  ],
+  [
+    "dtk.settings.throughput_show_as_percent.label",
+    "Показывать пропускную способность в процентах"
+  ],
+  [
+    "dtk.settings.throughput_show_as_percent.description",
+    "Переключает формат отображения пропускной способности в мире с абсолютных чисел (ед/мин) на процент от максимальной мощности объекта."
+  ],
+  [
+    "dtk.throughput.aoe_tool.name",
+    "Инструмент области пропускной способности"
+  ],
+  [
+    "dtk.throughput.aoe_tool.tooltip",
+    "Нажмите и перетащите, чтобы выбрать область, затем настройте параметры отображения пропускной способности для всех выбранных объектов по типу."
+  ],
+  [
+    "dtk.throughput.aoe_tool.window_title",
+    "Настройка пропускной способности в области"
+  ],
+  [
+    "dtk.throughput.aoe_tool.apply",
+    "Применить"
+  ],
+  [
+    "dtk.throughput.aoe_tool.close",
+    "Закрыть"
+  ],
+  [
+    "dtk.throughput.aoe_tool.no_change",
+    "Без изменений"
+  ],
+  [
+    "dtk.throughput.aoe_tool.enable",
+    "Включить"
+  ],
+  [
+    "dtk.throughput.aoe_tool.disable",
+    "Выключить"
+  ],
+  [
+    "dtk.throughput.aoe_tool.override_days",
+    "Задать дни"
+  ],
+  [
+    "dtk.throughput.aoe_tool.global_header",
+    "Групповые настройки"
+  ],
+  [
+    "dtk.throughput.aoe_tool.global_display",
+    "Состояние отображения: "
+  ],
+  [
+    "dtk.settings.throughput_aoe_tool_hotkey.label",
+    "Горячая клавиша инструмента области"
   ]
 ]

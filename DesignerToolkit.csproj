@@ -85,6 +85,10 @@ is included by mistake, I intend to correct it promptly upon discovery or notice
       <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(CaptainIndustryManagedPath)\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
 
     <Reference Include="mscorlib" />
     <Reference Include="System" />

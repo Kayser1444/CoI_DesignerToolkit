@@ -135,4 +135,56 @@ internal static class BdtLocalization
         Loc.Str("dtk.markdown.entities.stat", "Entities", "Markdown operational stat label for entity count.");
     public static LocStr MarkdownPerMonthSuffix =
         Loc.Str("dtk.markdown.per_month.suffix", "/ mo", "Markdown suffix for monthly maintenance columns.");
+
+    public static LocStr ThroughputTitle =
+        Loc.Str("dtk.throughput.title", "Throughput", "Panel title for the throughput inspector.");
+    public static LocStr ThroughputDisplay =
+        Loc.Str("dtk.throughput.display", "Display throughput", "Checkbox label to enable display of throughput in the world.");
+    public static LocStr ThroughputDaysToAverage =
+        Loc.Str("dtk.throughput.days_to_average", "days to average", "Label for the days to average setting.");
+
+    public static LocStr SettingsThroughputHeading =
+        Loc.Str("dtk.settings.throughput.heading", "THROUGHPUT", "Settings section heading for throughput settings.");
+    public static LocStr SettingsThroughputToggle =
+        Loc.Str("dtk.settings.throughput_toggle.label", "Throughput overlay toggle", "Settings row label for throughput overlay toggle.");
+    public static LocStr SettingsThroughputToggleDescription =
+        Loc.Str("dtk.settings.throughput_toggle.description", "Enables/disables the in-world throughput overlays.", "Settings row description for throughput overlay visibility.");
+    public static LocStr SettingsThroughputToggleHotkey =
+        Loc.Str("dtk.settings.throughput_toggle_hotkey.label", "Throughput overlay hotkey", "Settings row label for throughput overlay toggle hotkey.");
+    public static LocStr SettingsThroughputHeatmap =
+        Loc.Str("dtk.settings.throughput_heatmap.label", "Throughput heat-map", "Settings row label for throughput heat-map.");
+    public static LocStr SettingsThroughputColorblind =
+        Loc.Str("dtk.settings.throughput_colorblind.label", "Colorblind-friendly colors", "Settings row label for colorblind-friendly heatmap colors.");
+    public static LocStr SettingsThroughputColorblindDescription =
+        Loc.Str("dtk.settings.throughput_colorblind.description", "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility.", "Settings row description / tooltip for colorblind heatmap colors.");
+    public static LocStr SettingsThroughputShowAsPercent =
+        Loc.Str("dtk.settings.throughput_show_as_percent.label", "Show throughput as percent", "Settings row label for showing throughput as percentage of capacity.");
+    public static LocStr SettingsThroughputShowAsPercentDescription =
+        Loc.Str("dtk.settings.throughput_show_as_percent.description", "Switches the in-world throughput display format from absolute numbers (items/min) to a percentage of the entity's maximum capacity.", "Settings row description for showing throughput as percent.");
+    
+    public static LocStr ThroughputAoEToolName =
+        Loc.Str("dtk.throughput.aoe_tool.name", "Throughput Area Tool", "Name of the throughput AoE tool.");
+    public static LocStr ThroughputAoEToolTooltip =
+        Loc.Str("dtk.throughput.aoe_tool.tooltip", "Click and drag to select an area, then configure throughput display settings for all selected entities by type.", "Tooltip for the throughput AoE tool button.");
+    public static LocStr ThroughputAoEToolWindowTitle =
+        Loc.Str("dtk.throughput.aoe_tool.window_title", "Configure Throughput in Area", "Title of the throughput configuration tool window.");
+    public static LocStr ThroughputAoEToolApply =
+        Loc.Str("dtk.throughput.aoe_tool.apply", "Apply", "Button label to apply changes.");
+    public static LocStr ThroughputAoEToolClose =
+        Loc.Str("dtk.throughput.aoe_tool.close", "Close", "Button label to close window.");
+    public static LocStr ThroughputAoEToolNoChange =
+        Loc.Str("dtk.throughput.aoe_tool.no_change", "No change", "Dropdown option to keep existing throughput display settings.");
+    public static LocStr ThroughputAoEToolEnable =
+        Loc.Str("dtk.throughput.aoe_tool.enable", "Enable", "Dropdown option to force enable throughput display.");
+    public static LocStr ThroughputAoEToolDisable =
+        Loc.Str("dtk.throughput.aoe_tool.disable", "Disable", "Dropdown option to force disable throughput display.");
+    public static LocStr ThroughputAoEToolOverrideDays =
+        Loc.Str("dtk.throughput.aoe_tool.override_days", "Set days", "Checkbox label to override days to average in the area.");
+    public static LocStr ThroughputAoEToolGlobalActionHeader =
+        Loc.Str("dtk.throughput.aoe_tool.global_header", "Batch settings", "Header for the bulk action settings section.");
+    public static LocStr ThroughputAoEToolGlobalDisplay =
+        Loc.Str("dtk.throughput.aoe_tool.global_display", "Display state: ", "Label for global display state setting.");
+    public static LocStr SettingsThroughputAoEToolHotkey =
+        Loc.Str("dtk.settings.throughput_aoe_tool_hotkey.label", "Throughput tool hotkey", "Settings row label for throughput AoE tool toggle hotkey.");
 }
+

@@ -39,6 +39,13 @@ internal enum MarkdownNumberFormat
     Local = 2,
 }
 
+internal enum ThroughputHeatmapMode
+{
+    None = 0,
+    Relative = 1,
+    Capacity = 2,
+}
+
 internal static class DesignerToolkitSettings
 {
     internal const string SettingsStateConfigKey = "dtkSettingsStateJson";
@@ -66,6 +73,21 @@ internal static class DesignerToolkitSettings
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_CTRL_KEY = "transport_cleanup_hotkey_ctrl";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_ALT_KEY = "transport_cleanup_hotkey_alt";
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_SHIFT_KEY = "transport_cleanup_hotkey_shift";
+    
+    private const string THROUGHPUT_OVERLAY_ENABLED_KEY = "throughput_overlay_enabled";
+    private const string THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY = "throughput_overlay_toggle_hotkey_primary";
+    private const string THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY = "throughput_overlay_toggle_hotkey_secondary";
+    private const string THROUGHPUT_HEATMAP_MODE_KEY = "throughput_heatmap_mode";
+    private const string THROUGHPUT_COLORBLIND_MODE_KEY = "throughput_colorblind_mode";
+    private const string THROUGHPUT_SHOW_AS_PERCENT_KEY = "throughput_show_as_percent";
+    private const string THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY = "throughput_aoe_tool_hotkey_primary";
+    private const string THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY = "throughput_aoe_tool_hotkey_secondary";
+
+    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_KEY = "";
+    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_CTRL_KEY = "";
+    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_ALT_KEY = "";
+    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SHIFT_KEY = "";
+
     private const int SETTINGS_SCHEMA_VERSION = 1;
     private const string SETTINGS_TAB_ICON_ASSET =
         "Assets/Unity/UserInterface/General/Blueprint.svg";
@@ -79,6 +101,11 @@ internal static class DesignerToolkitSettings
         BdtHotkey.FromPrimaryKeys(KeyCode.PageUp);
     private static readonly BdtHotkey DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY =
         BdtHotkey.FromPrimaryKeys(KeyCode.PageDown);
+    private static readonly BdtHotkey DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY =
+        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.T);
+    private static readonly BdtHotkey DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY =
+        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.LeftShift, KeyCode.T);
+
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
     private static ModJsonConfig? s_config;
@@ -92,12 +119,36 @@ internal static class DesignerToolkitSettings
     public static bool InstantBuildModeEnabled { get; private set; }
     public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
     public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
+    public static bool ThroughputOverlayEnabled { get; private set; } = true;
+    public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.None;
+    public static bool ThroughputColorblindMode { get; private set; } = false;
+    public static bool ThroughputShowAsPercent { get; private set; } = false;
+
     public static BdtHotkey TransportCleanupHotkey { get; private set; } = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
     public static BdtHotkey HeightFilterShowLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
     public static BdtHotkey HeightFilterHideLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
+    public static BdtHotkey ThroughputOverlayToggleHotkey { get; private set; } = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
+    public static BdtHotkey ThroughputAoEToolHotkey { get; private set; } = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
+    public static event Action<bool>? ThroughputOverlayEnabledChanged;
+
+    private static void SetThroughputHeatmapMode(ThroughputHeatmapMode mode)
+    {
+        ThroughputHeatmapMode = mode;
+    }
+
+    private static void SetThroughputColorblindMode(bool enabled)
+    {
+        ThroughputColorblindMode = enabled;
+    }
+
+    private static void SetThroughputShowAsPercent(bool enabled)
+    {
+        ThroughputShowAsPercent = enabled;
+    }
+
 
     public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string modDirectory)
     {
@@ -108,6 +159,11 @@ internal static class DesignerToolkitSettings
         MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
         bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
         bool initialLegacyBeltConfigurations = config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
+        bool initialThroughputOverlayEnabled = config.GetBool(THROUGHPUT_OVERLAY_ENABLED_KEY, true);
+        ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, 0));
+        bool initialThroughputColorblindMode = config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
+        bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
+
         BdtHotkey initialTransportCleanupHotkey = HotkeyFromConfig(
             config,
             TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY,
@@ -129,16 +185,35 @@ internal static class DesignerToolkitSettings
             HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY,
             "", "", "", "",
             DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
+        BdtHotkey initialThroughputOverlayToggleHotkey = HotkeyFromConfig(
+            config,
+            THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
+            THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
+            "", "", "", "",
+            DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
+        BdtHotkey initialThroughputAoEToolHotkey = HotkeyFromConfig(
+            config,
+            THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY,
+            THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
+            "", "", "", "",
+            DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
+
         TransportCleanupHotkey = initialTransportCleanupHotkey;
         HeightFilterShowLayerHotkey = initialShowLayerHotkey;
         HeightFilterHideLayerHotkey = initialHideLayerHotkey;
+        ThroughputOverlayToggleHotkey = initialThroughputOverlayToggleHotkey;
+        ThroughputAoEToolHotkey = initialThroughputAoEToolHotkey;
 
         LoadFromJsonStore(
             store,
             initialLanguage,
             initialNumberFormat,
             initialInstantBuildMode,
-            initialLegacyBeltConfigurations);
+            initialLegacyBeltConfigurations,
+            initialThroughputOverlayEnabled,
+            initialThroughputHeatmapMode,
+            initialThroughputColorblindMode,
+            initialThroughputShowAsPercent);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -265,6 +340,75 @@ internal static class DesignerToolkitSettings
             out hideLayerPrimaryField,
             out hideLayerSecondaryField));
 
+        root.Add(new Title(BdtLocalization.SettingsThroughputHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        Toggle throughputOverlayToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsThroughputToggle.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsThroughputToggleDescription.AsFormatted)
+            .Value(ThroughputOverlayEnabled)
+            .OnValueChanged(SetThroughputOverlayEnabled);
+        root.Add(throughputOverlayToggle);
+
+        Toggle colorblindToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsThroughputColorblind.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsThroughputColorblindDescription.AsFormatted)
+            .Value(ThroughputColorblindMode)
+            .OnValueChanged(SetThroughputColorblindMode);
+        colorblindToggle.Enabled(ThroughputHeatmapMode != ThroughputHeatmapMode.None);
+
+        Dropdown<ThroughputHeatmapMode> heatmapDropdown =
+            new Dropdown<ThroughputHeatmapMode>(HeatmapDropdownOption)
+                .Label(BdtLocalization.SettingsThroughputHeatmap.AsFormatted)
+                .LabelWidth(SETTINGS_LABEL_WIDTH)
+                .SetOptions(
+                    ThroughputHeatmapMode.None,
+                    ThroughputHeatmapMode.Relative,
+                    ThroughputHeatmapMode.Capacity)
+                .SetValue(ThroughputHeatmapMode)
+                .OnValueChanged((mode, _) => {
+                    SetThroughputHeatmapMode(mode);
+                    colorblindToggle.Enabled(mode != ThroughputHeatmapMode.None);
+                });
+        root.Add(heatmapDropdown);
+        root.Add(colorblindToggle);
+
+        Toggle showAsPercentToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsThroughputShowAsPercent.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsThroughputShowAsPercentDescription.AsFormatted)
+            .Value(ThroughputShowAsPercent)
+            .OnValueChanged(SetThroughputShowAsPercent);
+        root.Add(showAsPercentToggle);
+
+        BdtKeyBindingField throughputTogglePrimaryField;
+        BdtKeyBindingField throughputToggleSecondaryField;
+        root.Add(BuildHotkeyRow(
+            BdtLocalization.SettingsThroughputToggleHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+            () => ThroughputOverlayToggleHotkey,
+            hotkey =>
+            {
+                ThroughputOverlayToggleHotkey = hotkey;
+                SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
+            },
+            out throughputTogglePrimaryField,
+            out throughputToggleSecondaryField));
+
+        BdtKeyBindingField throughputAoEToolPrimaryField;
+        BdtKeyBindingField throughputAoEToolSecondaryField;
+        root.Add(BuildHotkeyRow(
+            BdtLocalization.SettingsThroughputAoEToolHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+            () => ThroughputAoEToolHotkey,
+            hotkey =>
+            {
+                ThroughputAoEToolHotkey = hotkey;
+                SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, hotkey);
+            },
+            out throughputAoEToolPrimaryField,
+            out throughputAoEToolSecondaryField));
+
         root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -300,13 +444,21 @@ internal static class DesignerToolkitSettings
             numberFormatDropdown.SetValue(MarkdownNumberFormat);
             instantBuildToggle.Value(InstantBuildModeEnabled);
             legacyBeltConfigurationsToggle.Value(LegacyBeltConfigurationsEnabled);
+            throughputOverlayToggle.Value(ThroughputOverlayEnabled);
+            heatmapDropdown.SetValue(ThroughputHeatmapMode);
+            colorblindToggle.Value(ThroughputColorblindMode);
+            colorblindToggle.Enabled(ThroughputHeatmapMode != ThroughputHeatmapMode.None);
+            showAsPercentToggle.Value(ThroughputShowAsPercent);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
             showLayerPrimaryField.Refresh();
             showLayerSecondaryField.Refresh();
             hideLayerPrimaryField.Refresh();
             hideLayerSecondaryField.Refresh();
+            throughputTogglePrimaryField.Refresh();
+            throughputToggleSecondaryField.Refresh();
+            throughputAoEToolPrimaryField.Refresh();
+            throughputAoEToolSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
-            transportCleanupSecondaryField.Refresh();
             transportCleanupSecondaryField.Refresh();
         }));
 
@@ -345,11 +497,19 @@ internal static class DesignerToolkitSettings
             SetInstantBuildMode(false);
             SetLegacyBeltConfigurations(true);
             SetHeightFilterMaxVisibleLevel(6);
+            SetThroughputOverlayEnabled(true);
+            SetThroughputHeatmapMode(ThroughputHeatmapMode.None);
+            SetThroughputColorblindMode(false);
+            SetThroughputShowAsPercent(false);
             HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
             HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
+            ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
+            ThroughputAoEToolHotkey = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
             TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
             SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
             SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
+            SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
+            SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
             SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
             refresh();
             status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
@@ -390,11 +550,23 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out error))
+                return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterShowLayerHotkey, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterHideLayerHotkey, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, out error))
+                return false;
+            if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputOverlayToggleHotkey, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
+                return false;
+            if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputAoEToolHotkey, THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, out error))
                 return false;
 
             if (string.IsNullOrWhiteSpace(s_modDirectory))
@@ -409,6 +581,10 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out bool numberFormatUpdated);
             updated = TryReplaceConfigDefault(updated, INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out bool instantBuildUpdated);
             updated = TryReplaceConfigDefault(updated, LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out bool legacyBeltConfigurationsUpdated);
+            updated = TryReplaceConfigDefault(updated, THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out bool throughputOverlayEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out bool throughputHeatmapModeUpdated);
+            updated = TryReplaceConfigDefault(updated, THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out bool throughputColorblindModeUpdated);
+            updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
             updated = TryReplaceHotkeyConfigDefaults(
                 updated,
                 TransportCleanupHotkey,
@@ -427,6 +603,18 @@ internal static class DesignerToolkitSettings
                 HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY,
                 HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY,
                 out bool hideLayerHotkeyUpdated);
+            updated = TryReplaceHotkeyConfigDefaults(
+                updated,
+                ThroughputOverlayToggleHotkey,
+                THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
+                THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
+                out bool throughputOverlayToggleHotkeyUpdated);
+            updated = TryReplaceHotkeyConfigDefaults(
+                updated,
+                ThroughputAoEToolHotkey,
+                THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY,
+                THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
+                out bool throughputAoEToolHotkeyUpdated);
             if (!languageUpdated)
             {
                 error = "Could not find markdown_table_language default in config.json.";
@@ -447,7 +635,27 @@ internal static class DesignerToolkitSettings
                 error = "Could not find legacy_belt_configurations default in config.json.";
                 return false;
             }
-            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated)
+            if (!throughputOverlayEnabledUpdated)
+            {
+                error = "Could not find throughput_overlay_enabled default in config.json.";
+                return false;
+            }
+            if (!throughputHeatmapModeUpdated)
+            {
+                error = "Could not find throughput_heatmap_mode default in config.json.";
+                return false;
+            }
+            if (!throughputColorblindModeUpdated)
+            {
+                error = "Could not find throughput_colorblind_mode default in config.json.";
+                return false;
+            }
+            if (!throughputShowAsPercentUpdated)
+            {
+                error = "Could not find throughput_show_as_percent default in config.json.";
+                return false;
+            }
+            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated)
             {
                 error = "Could not find hotkey defaults in config.json.";
                 return false;
@@ -486,6 +694,16 @@ internal static class DesignerToolkitSettings
     private static void SetLegacyBeltConfigurations(bool enabled)
     {
         LegacyBeltConfigurationsEnabled = enabled;
+    }
+
+    public static void SetThroughputOverlayEnabled(bool enabled)
+    {
+        if (ThroughputOverlayEnabled == enabled)
+            return;
+
+        ThroughputOverlayEnabled = enabled;
+        try { ThroughputOverlayEnabledChanged?.Invoke(enabled); }
+        catch (Exception ex) { s_log.Warning($"Throughput overlay visibility change handler failed: {ex.Message}"); }
     }
 
     public static void SetHeightFilterMaxVisibleLevel(int level)
@@ -663,12 +881,20 @@ internal static class DesignerToolkitSettings
         MarkdownTableLanguage initialLanguage,
         MarkdownNumberFormat initialNumberFormat,
         bool initialInstantBuildMode,
-        bool initialLegacyBeltConfigurations)
+        bool initialLegacyBeltConfigurations,
+        bool initialThroughputOverlayEnabled,
+        ThroughputHeatmapMode initialThroughputHeatmapMode,
+        bool initialThroughputColorblindMode,
+        bool initialThroughputShowAsPercent)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
         InstantBuildModeEnabled = initialInstantBuildMode;
         LegacyBeltConfigurationsEnabled = initialLegacyBeltConfigurations;
+        ThroughputOverlayEnabled = initialThroughputOverlayEnabled;
+        ThroughputHeatmapMode = initialThroughputHeatmapMode;
+        ThroughputColorblindMode = initialThroughputColorblindMode;
+        ThroughputShowAsPercent = initialThroughputShowAsPercent;
 
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
@@ -694,6 +920,14 @@ internal static class DesignerToolkitSettings
                 LegacyBeltConfigurationsEnabled = legacyBeltConfigurations;
             if (TryGetInt(root, "heightFilterMaxVisibleLevel", out int heightFilterMaxVisibleLevel))
                 HeightFilterMaxVisibleLevel = heightFilterMaxVisibleLevel;
+            if (TryGetBool(root, "throughputOverlayEnabled", out bool throughputOverlayEnabled))
+                ThroughputOverlayEnabled = throughputOverlayEnabled;
+            if (TryGetInt(root, "throughputHeatmapMode", out int heatmapMode))
+                ThroughputHeatmapMode = HeatmapModeFromInt(heatmapMode);
+            if (TryGetBool(root, "throughputColorblindMode", out bool colorblindMode))
+                ThroughputColorblindMode = colorblindMode;
+            if (TryGetBool(root, "throughputShowAsPercent", out bool showAsPercent))
+                ThroughputShowAsPercent = showAsPercent;
         }
         catch (Exception ex)
         {
@@ -711,8 +945,46 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("instantBuildMode", InstantBuildModeEnabled);
         writer.AppendBoolField("legacyBeltConfigurations", LegacyBeltConfigurationsEnabled);
         writer.AppendNumberField("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
+        writer.AppendBoolField("throughputOverlayEnabled", ThroughputOverlayEnabled);
+        writer.AppendNumberField("throughputHeatmapMode", (int)ThroughputHeatmapMode);
+        writer.AppendBoolField("throughputColorblindMode", ThroughputColorblindMode);
+        writer.AppendBoolField("throughputShowAsPercent", ThroughputShowAsPercent);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
+    }
+
+    private static ThroughputHeatmapMode HeatmapModeFromInt(int value)
+    {
+        switch (value)
+        {
+            case (int)ThroughputHeatmapMode.Relative:
+                return ThroughputHeatmapMode.Relative;
+            case (int)ThroughputHeatmapMode.Capacity:
+                return ThroughputHeatmapMode.Capacity;
+            default:
+                return ThroughputHeatmapMode.None;
+        }
+    }
+
+    private static UiComponent HeatmapDropdownOption(
+        ThroughputHeatmapMode mode,
+        int index,
+        bool isInDropdown)
+    {
+        return new Label(HeatmapLabel(mode));
+    }
+
+    private static LocStrFormatted HeatmapLabel(ThroughputHeatmapMode mode)
+    {
+        switch (mode)
+        {
+            case ThroughputHeatmapMode.Relative:
+                return "Relative".AsLoc();
+            case ThroughputHeatmapMode.Capacity:
+                return "Capacity".AsLoc();
+            default:
+                return "None".AsLoc();
+        }
     }
 
     private static void AppendHotkeyFields(

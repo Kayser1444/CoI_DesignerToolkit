@@ -28,6 +28,8 @@ $svTranslations = @{
     "dtk.settings.height_filter_show_hotkey.label" = "Snabbknapp f" + [char]0x00F6 + "r visa niv" + [char]0x00E5
     "dtk.settings.height_filter_hide_hotkey.label" = "Snabbknapp f" + [char]0x00F6 + "r d" + [char]0x00F6 + "lj niv" + [char]0x00E5
     "dtk.settings.global_hotkey.description" = "Konfigurerar tangentbordsgenv" + [char]0x00E4 + "gen som aktiverar eller utl" + [char]0x00F6 + "ser detta verktyg. Detta " + [char]0x00E4 + "r en global inst" + [char]0x00E4 + "llning som g" + [char]0x00E4 + "ller f" + [char]0x00F6 + "r alla sparade spel och sparas direkt i config.json."
+    "dtk.throughput.aoe_tool.global_header" = "Batchinst" + [char]0x00E4 + "llningar"
+    "dtk.throughput.aoe_tool.global_display" = "Visningsstatus: "
 }
 
 # Now process each JSON file in the translations directory
