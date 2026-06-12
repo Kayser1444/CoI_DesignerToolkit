@@ -76,6 +76,26 @@
     "Sod off to the sandbox, you lazy git!"
   ],
   [
+    "dtk.settings.legacy_belt_configurations.label",
+    "Allow curvy incline belts"
+  ],
+  [
+    "dtk.settings.legacy_belt_configurations.description",
+    "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly)."
+  ],
+  [
+    "dtk.rate_limit.title",
+    "Throughput Limiter"
+  ],
+  [
+    "dtk.rate_limit.enable",
+    "Limit throughput"
+  ],
+  [
+    "dtk.rate_limit.items_per_min",
+    "items/min"
+  ],
+  [
     "dtk.settings.transport_construction.heading",
     "TRANSPORT CONSTRUCTION"
   ],
@@ -206,25 +226,5 @@
   [
     "dtk.markdown.per_month.suffix",
     "/ mo"
-  ],
-  [
-    "dtk.rate_limit.enable",
-    "Enable Throughput Limit"
-  ],
-  [
-    "dtk.settings.legacy_belt_configurations.label",
-    "Allow curvy incline belts"
-  ],
-  [
-    "dtk.settings.legacy_belt_configurations.description",
-    "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly)."
-  ],
-  [
-    "dtk.rate_limit.title",
-    "Throughput Limiter"
-  ],
-  [
-    "dtk.rate_limit.items_per_min",
-    "items/min"
   ]
 ]
