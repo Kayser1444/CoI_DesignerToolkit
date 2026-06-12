@@ -2,6 +2,10 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.5.0b [unreleased]
+
+- (New alpha changes go here)
+
 ## v0.5.0a [released]
 
 
