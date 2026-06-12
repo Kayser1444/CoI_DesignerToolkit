@@ -2,6 +2,10 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.5.0a [unreleased]
+
+- 
+
 ## v0.5.0 [released]
 
 - Added **Throughput Limiter** feature: allows setting a custom max throughput (items/min) on any transport, source, or sink via the entity inspector
