@@ -2,7 +2,8 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.5.0a [unreleased]
+## v0.5.0a [released]
+
 
 - Upgraded **Throughput Limiter** UI: the input field now uses the game's LCD display font styling
 - Added `+` and `-` buttons to the Throughput Limiter UI, supporting `Shift` (5x) and `Control` (10x) step modifiers
