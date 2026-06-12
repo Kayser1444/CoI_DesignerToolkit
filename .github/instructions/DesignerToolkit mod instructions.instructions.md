@@ -24,3 +24,9 @@ BDT uses `config.json` for user-configurable settings.
 # Releases
 
 For public releases, review `DesignerToolkit\docs\other\Hub page.md` to incorporate any new player-facing features.
+
+# Features & Cheats
+
+For every feature, scope of availability must be considered. If a feature provides an unfair advantage or could be considered a "cheat" in standard gameplay, it should be confined to **sandbox mode**.
+
+**Important:** Sandbox mode can be enabled (but not disabled) from the console mid-session. Therefore, features must evaluate sandbox availability dynamically (e.g. when opening a panel) rather than caching the value only at mod initialization.
