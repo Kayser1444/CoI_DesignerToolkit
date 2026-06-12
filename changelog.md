@@ -6,6 +6,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 - Upgraded **Throughput Limiter** UI: the input field now uses the game's LCD display font styling
 - Added `+` and `-` buttons to the Throughput Limiter UI, supporting `Shift` (5x) and `Control` (10x) step modifiers
+- Restricted the Throughput Limiter UI controls to **sandbox mode only** (with a tooltip explaining this in standard games)
 
 ## v0.5.0 [released]
 

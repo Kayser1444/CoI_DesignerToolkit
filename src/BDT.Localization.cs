@@ -60,6 +60,8 @@ internal static class BdtLocalization
         Loc.Str("dtk.rate_limit.title", "Throughput Limiter", "Panel title for the throughput limiter inspector.");
     public static LocStr RateLimitEnable =
         Loc.Str("dtk.rate_limit.enable", "Limit throughput", "Checkbox label to enable the throughput limiter.");
+    public static LocStr RateLimitSandboxOnly =
+        Loc.Str("dtk.rate_limit.sandbox_only", "Throughput limiting is only available in sandbox mode.", "Tooltip explaining that the throughput limiter requires sandbox mode.");
     public static LocStr RateLimitItemsPerMin =
         Loc.Str("dtk.rate_limit.items_per_min", "items/min", "Unit label for items per minute in the throughput limiter.");
 

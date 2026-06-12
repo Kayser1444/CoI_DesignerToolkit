@@ -92,6 +92,10 @@
     "Limit throughput"
   ],
   [
+    "dtk.rate_limit.sandbox_only",
+    "Throughput limiting is only available in sandbox mode."
+  ],
+  [
     "dtk.rate_limit.items_per_min",
     "items/min"
   ],

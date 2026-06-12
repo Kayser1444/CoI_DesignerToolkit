@@ -48,6 +48,8 @@ internal static class DesignerToolkitSettings
     private const string INSTANT_BUILD_MODE_KEY = "instant_build_mode";
     private const string LEGACY_BELT_CONFIGURATIONS_KEY = "legacy_belt_configurations";
     private const string TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY = "transport_cleanup_hotkey_primary";
+
+    public static bool IsSandbox { get; internal set; }
     private const string TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY = "transport_cleanup_hotkey_secondary";
     private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY = "height_filter_show_layer_hotkey_primary";
     private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY = "height_filter_show_layer_hotkey_secondary";

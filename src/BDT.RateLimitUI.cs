@@ -50,6 +50,15 @@ public static class RateLimitUI
         row.Add(spacer);
         row.Add(inputRow);
 
+        if (!DesignerToolkitSettings.IsSandbox)
+        {
+            toggle.Enabled(false);
+            toggle.Tooltip(BdtLocalization.RateLimitSandboxOnly.AsFormatted);
+            minusBtn.Enabled(false);
+            plusBtn.Enabled(false);
+            input.Enabled(false);
+        }
+
         int lastKnownLimit = 0;
 
         inspector.Observe(getEntity).Do(entity =>
