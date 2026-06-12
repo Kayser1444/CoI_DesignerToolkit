@@ -131,7 +131,9 @@ public class ThroughputAoEToolWindow : Window
         
         var rightDaysLabel = new Label(BdtLocalization.ThroughputDays.AsFormatted).MarginRight(6.px());
 
-        m_globalDaysInput = new TextField().Width(35.px());
+        m_globalDaysInput = new TextField()
+            .Class(Cls.displayFont, Cls.displayBg)
+            .Width(35.px());
         m_globalDaysInput.Text("30");
         UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(m_globalDaysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
 
