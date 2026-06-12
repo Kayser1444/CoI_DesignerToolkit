@@ -50,15 +50,6 @@ public static class RateLimitUI
         row.Add(spacer);
         row.Add(inputRow);
 
-        if (!DesignerToolkitSettings.IsSandbox)
-        {
-            toggle.Enabled(false);
-            toggle.Tooltip(BdtLocalization.RateLimitSandboxOnly.AsFormatted);
-            minusBtn.Enabled(false);
-            plusBtn.Enabled(false);
-            input.Enabled(false);
-        }
-
         int lastKnownLimit = 0;
 
         inspector.Observe(getEntity).Do(entity =>
@@ -85,6 +76,23 @@ public static class RateLimitUI
             }
 
             int toShow = isEnabled ? currentLimit : (lastKnownLimit > 0 ? lastKnownLimit : defaultMax);
+
+            if (!DesignerToolkitSettings.IsSandbox)
+            {
+                toggle.Enabled(false);
+                toggle.Tooltip(BdtLocalization.RateLimitSandboxOnly.AsFormatted);
+                minusBtn.Enabled(false);
+                plusBtn.Enabled(false);
+                input.Enabled(false);
+            }
+            else
+            {
+                toggle.Enabled(true);
+                toggle.Tooltip(null);
+                minusBtn.Enabled(true);
+                plusBtn.Enabled(true);
+                input.Enabled(true);
+            }
 
             toggle.Value(isEnabled);
             input.Text(toShow.ToString());

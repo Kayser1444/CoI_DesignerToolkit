@@ -49,7 +49,14 @@ internal static class DesignerToolkitSettings
     private const string LEGACY_BELT_CONFIGURATIONS_KEY = "legacy_belt_configurations";
     private const string TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY = "transport_cleanup_hotkey_primary";
 
-    public static bool IsSandbox { get; internal set; }
+    private static Mafi.Core.Game.GameDifficultyConfig? s_difficultyConfig;
+
+    public static void SetDifficultyConfig(Mafi.Core.Game.GameDifficultyConfig config)
+    {
+        s_difficultyConfig = config;
+    }
+
+    public static bool IsSandbox => s_difficultyConfig != null && s_difficultyConfig.IsSandbox;
     private const string TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY = "transport_cleanup_hotkey_secondary";
     private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY = "height_filter_show_layer_hotkey_primary";
     private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY = "height_filter_show_layer_hotkey_secondary";

@@ -94,7 +94,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath);
-        DesignerToolkitSettings.IsSandbox = resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>().IsSandbox;
+        DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
 
         m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
         RateLimitManager.Initialize(m_rateLimitsStateStore);
