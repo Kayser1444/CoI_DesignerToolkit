@@ -2,9 +2,6 @@
 
 Planned and candidate improvements for Designer Toolkit.
 
-## Core principle
-
-**Designer-only, consumer-free.** This mod targets blueprint *creators*. Blueprint *consumers* (players who place blueprints made by others) must never need this mod. Every feature — including any entity manipulation — must produce fully vanilla-compatible blueprint data. If a feature would require the consumer to also have the mod installed, it is out of scope.
 
 ## Planned
 

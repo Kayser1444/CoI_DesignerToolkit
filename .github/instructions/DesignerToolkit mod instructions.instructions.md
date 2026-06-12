@@ -25,6 +25,10 @@ BDT uses `config.json` for user-configurable settings.
 
 For public releases, review `DesignerToolkit\docs\other\Hub page.md` to incorporate any new player-facing features.
 
+# Core Principle
+
+**Designer-only, consumer-free.** This mod targets blueprint *creators*. Blueprint *consumers* (players who place blueprints made by others) must never need this mod. Every feature — including any entity manipulation — must produce fully vanilla-compatible blueprint data. If a feature would require the consumer to also have the mod installed, it is out of scope.
+
 # Features & Cheats
 
 For every feature, scope of availability must be considered. If a feature provides an unfair advantage or could be considered a "cheat" in standard gameplay, it should be confined to **sandbox mode**.
