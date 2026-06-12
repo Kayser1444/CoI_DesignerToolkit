@@ -4,7 +4,8 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.5.0b [unreleased]
 
-- (New alpha changes go here)
+- Left-aligned "Set averaging period" and right-aligned "days" unit label and numeric input controls in the Throughput AoE tool window
+- Styled the averaging days input textfield in the Throughput AoE tool window to use the segmented LCD number style (display font and background)
 
 ## v0.5.0a [released]
 

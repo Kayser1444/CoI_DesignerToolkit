@@ -313,11 +313,11 @@
   ],
   [
     "dtk.throughput.aoe_tool.override_days_label",
-    "Set averaging period"
+    "Ange medelvärdesperiod"
   ],
   [
     "dtk.throughput.days",
-    "days"
+    "dagar"
   ],
   [
     "dtk.throughput.aoe_tool.global_header",
