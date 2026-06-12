@@ -312,8 +312,12 @@
     "Выключить"
   ],
   [
-    "dtk.throughput.aoe_tool.override_days",
-    "Задать дни"
+    "dtk.throughput.aoe_tool.override_days_label",
+    "Задать период усреднения"
+  ],
+  [
+    "dtk.throughput.days",
+    "дней"
   ],
   [
     "dtk.throughput.aoe_tool.global_header",

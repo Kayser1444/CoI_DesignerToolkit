@@ -178,8 +178,10 @@ internal static class BdtLocalization
         Loc.Str("dtk.throughput.aoe_tool.enable", "Enable", "Dropdown option to force enable throughput display.");
     public static LocStr ThroughputAoEToolDisable =
         Loc.Str("dtk.throughput.aoe_tool.disable", "Disable", "Dropdown option to force disable throughput display.");
-    public static LocStr ThroughputAoEToolOverrideDays =
-        Loc.Str("dtk.throughput.aoe_tool.override_days", "Set days", "Checkbox label to override days to average in the area.");
+    public static LocStr ThroughputAoEToolOverrideDaysLabel =
+        Loc.Str("dtk.throughput.aoe_tool.override_days_label", "Set averaging period", "Label for setting the throughput averaging period in the AoE tool bulk panel.");
+    public static LocStr ThroughputDays =
+        Loc.Str("dtk.throughput.days", "days", "Label for days unit.");
     public static LocStr ThroughputAoEToolGlobalActionHeader =
         Loc.Str("dtk.throughput.aoe_tool.global_header", "Batch settings", "Header for the bulk action settings section.");
     public static LocStr ThroughputAoEToolGlobalDisplay =

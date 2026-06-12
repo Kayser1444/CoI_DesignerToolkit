@@ -127,8 +127,10 @@ public class ThroughputAoEToolWindow : Window
         
         // Days row
         var daysRow = new Row().AlignItemsCenter().Padding(2.pt());
-        var setDaysLabel = new Label(BdtLocalization.ThroughputAoEToolOverrideDays.AsFormatted).Width(120.px());
+        var setDaysLabel = new Label(BdtLocalization.ThroughputAoEToolOverrideDaysLabel.AsFormatted);
         
+        var rightDaysLabel = new Label(BdtLocalization.ThroughputDays.AsFormatted).MarginRight(6.px());
+
         m_globalDaysInput = new TextField().Width(35.px());
         m_globalDaysInput.Text("30");
         UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(m_globalDaysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
@@ -143,10 +145,11 @@ public class ThroughputAoEToolWindow : Window
             .MarginLeft(15.px());
 
         daysRow.Add(setDaysLabel);
+        daysRow.Add(new UiComponent().FlexGrow(1f));
+        daysRow.Add(rightDaysLabel);
         daysRow.Add(m_globalDaysMinusBtn);
         daysRow.Add(m_globalDaysInput);
         daysRow.Add(m_globalDaysPlusBtn);
-        daysRow.Add(new UiComponent().FlexGrow(1f));
         daysRow.Add(m_applyBtn);
         col.Add(daysRow);
 

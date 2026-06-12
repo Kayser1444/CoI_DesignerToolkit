@@ -312,8 +312,12 @@
     "Disable"
   ],
   [
-    "dtk.throughput.aoe_tool.override_days",
-    "Set days"
+    "dtk.throughput.aoe_tool.override_days_label",
+    "Set averaging period"
+  ],
+  [
+    "dtk.throughput.days",
+    "days"
   ],
   [
     "dtk.throughput.aoe_tool.global_header",
