@@ -29,12 +29,21 @@ public static class RateLimitUI
         var spacer = new UiComponent().FlexGrow(1f);
 
         var inputRow = new Row(2.pt()).AlignItemsCenter();
+
+        var minusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
+            .Compact().IconSize(14.px());
+        var plusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Plus128.png")
+            .Compact().IconSize(14.px());
+
         var input = new TextField()
-            .Width(45.px());
+            .Class(Cls.displayFont, Cls.displayBg)
+            .Width(50.px());
         UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(input.Element).style.unityTextAlign = TextAnchor.MiddleRight;
         var unitsLabel = new Label(BdtLocalization.RateLimitItemsPerMin).Color(Theme.InactiveColor);
 
+        inputRow.Add(minusBtn);
         inputRow.Add(input);
+        inputRow.Add(plusBtn);
         inputRow.Add(unitsLabel);
 
         row.Add(toggle);
@@ -121,9 +130,32 @@ public static class RateLimitUI
             }
         });
 
+        Action<int> adjustLimit = (sign) =>
+        {
+            if (!toggle.GetValue())
+            {
+                toggle.Value(true);
+            }
+            if (int.TryParse(input.GetText(), out int current))
+            {
+                int next = Math.Max(1, current + sign * ModifierStepSize());
+                updateLimit(next);
+            }
+        };
+
+        minusBtn.OnClick(() => adjustLimit(-1), allowKeyPresses: true);
+        plusBtn.OnClick(() => adjustLimit(1), allowKeyPresses: true);
+
         col.Add(row);
         
         panel.BodyAdd(col);
         return panel;
+    }
+
+    private static int ModifierStepSize()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) return 100;
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) return 10;
+        return 1;
     }
 }
