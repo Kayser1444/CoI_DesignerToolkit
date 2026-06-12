@@ -120,7 +120,7 @@ internal static class DesignerToolkitSettings
     public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
     public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
     public static bool ThroughputOverlayEnabled { get; private set; } = true;
-    public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.None;
+    public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.Capacity;
     public static bool ThroughputColorblindMode { get; private set; } = false;
     public static bool ThroughputShowAsPercent { get; private set; } = false;
 
@@ -160,7 +160,7 @@ internal static class DesignerToolkitSettings
         bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
         bool initialLegacyBeltConfigurations = config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
         bool initialThroughputOverlayEnabled = config.GetBool(THROUGHPUT_OVERLAY_ENABLED_KEY, true);
-        ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, 0));
+        ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode.Capacity));
         bool initialThroughputColorblindMode = config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
         bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
 
@@ -498,7 +498,7 @@ internal static class DesignerToolkitSettings
             SetLegacyBeltConfigurations(true);
             SetHeightFilterMaxVisibleLevel(6);
             SetThroughputOverlayEnabled(true);
-            SetThroughputHeatmapMode(ThroughputHeatmapMode.None);
+            SetThroughputHeatmapMode(ThroughputHeatmapMode.Capacity);
             SetThroughputColorblindMode(false);
             SetThroughputShowAsPercent(false);
             HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;

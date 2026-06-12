@@ -7,6 +7,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Left-aligned "Set averaging period" and right-aligned "days" unit label and numeric input controls in the Throughput AoE tool window
 - Styled the averaging days input textfield in the Throughput AoE tool window to use the segmented LCD number style (display font and background)
 - Updated: translated all remaining untranslated keys across German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese localization files
+- Changed: set default throughput heatmap mode to Capacity
 
 ## v0.5.0a [released]
 
