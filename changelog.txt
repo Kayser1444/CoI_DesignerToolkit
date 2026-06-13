@@ -1,11 +1,11 @@
 v0.6.0 | 2026-06-13
-* Added **Throughput Area Tool** (default `Shift+Alt+T`) to select a region of entities and configure throughput display settings in bulk
+* Consolidated **Throughput Limiter** and Throughput Monitor into a single, unified **Throughput** inspector panel
+* Upgraded the Throughput Limiter input controls with digital LCD styling, interactive step-modifier buttons, and sandbox restriction tooltips
 * Added **Throughput heat-map** settings to color-code overlays by capacity or relative throughput, including colorblind-friendly color options
 * Added **Show throughput as percent** option to display transport overlay values as a percentage of maximum capacity
-* Added a bottleneck glow border behind transport overlays running at near-maximum capacity
-* Upgraded **Throughput Limiter** UI to use the game's digital LCD style and added interactive step-modifier buttons (sandbox mode only)
-* Consolidated Throughput Limiter and Throughput Monitor settings into a single Throughput inspector panel
-* Added UI occlusion checks to automatically hide throughput overlays positioned behind active UI panels
+* Added a pulsing bottleneck glow behind overlays running at near-maximum capacity
+* Added UI occlusion checks to automatically hide throughput overlays rendering behind active UI panels
+* Added **Throughput Area Tool** (default `Shift+Alt+T`) to select a region of entities and configure display settings in bulk
 * Updated translations across all supported languages (German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese)
 
 v0.5.0 | 2026-06-11
