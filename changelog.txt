@@ -1,3 +1,6 @@
+v0.6.1a | 2026-06-13
+* Added entity glowing effects reflecting the current heatmap color logic when the throughput overlay is active
+
 v0.6.1 | 2026-06-13
 * Fixed Throughput Limiter/Monitor inspector panel disappearing when changing maps/saves without restarting the game
 * Fixed negative/zero throughput display values due to incorrect patch execution order

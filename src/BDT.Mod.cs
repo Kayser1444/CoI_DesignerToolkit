@@ -114,7 +114,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         {
             m_throughputWorldRendererGo = new UnityEngine.GameObject("BDT.ThroughputWorldRenderer");
             m_throughputWorldRenderer = m_throughputWorldRendererGo.AddComponent<ThroughputWorldRenderer>();
-            m_throughputWorldRenderer.Setup(resolver.Resolve<EntitiesManager>());
+            m_throughputWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents);
             UnityEngine.Object.DontDestroyOnLoad(m_throughputWorldRendererGo);
         });
         

@@ -75,6 +75,7 @@ internal static class DesignerToolkitSettings
     private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_SHIFT_KEY = "transport_cleanup_hotkey_shift";
     
     private const string THROUGHPUT_OVERLAY_ENABLED_KEY = "throughput_overlay_enabled";
+    private const string THROUGHPUT_GLOW_ENABLED_KEY = "throughput_glow_enabled";
     private const string THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY = "throughput_overlay_toggle_hotkey_primary";
     private const string THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY = "throughput_overlay_toggle_hotkey_secondary";
     private const string THROUGHPUT_HEATMAP_MODE_KEY = "throughput_heatmap_mode";
@@ -120,6 +121,7 @@ internal static class DesignerToolkitSettings
     public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
     public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
     public static bool ThroughputOverlayEnabled { get; private set; } = true;
+    public static bool ThroughputGlowEnabled { get; private set; } = true;
     public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.Capacity;
     public static bool ThroughputColorblindMode { get; private set; } = false;
     public static bool ThroughputShowAsPercent { get; private set; } = false;
@@ -160,6 +162,7 @@ internal static class DesignerToolkitSettings
         bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
         bool initialLegacyBeltConfigurations = config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
         bool initialThroughputOverlayEnabled = config.GetBool(THROUGHPUT_OVERLAY_ENABLED_KEY, true);
+        bool initialThroughputGlowEnabled = config.GetBool(THROUGHPUT_GLOW_ENABLED_KEY, true);
         ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode.Capacity));
         bool initialThroughputColorblindMode = config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
         bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
@@ -211,6 +214,7 @@ internal static class DesignerToolkitSettings
             initialInstantBuildMode,
             initialLegacyBeltConfigurations,
             initialThroughputOverlayEnabled,
+            initialThroughputGlowEnabled,
             initialThroughputHeatmapMode,
             initialThroughputColorblindMode,
             initialThroughputShowAsPercent);
@@ -351,6 +355,13 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetThroughputOverlayEnabled);
         root.Add(throughputOverlayToggle);
 
+        Toggle throughputGlowToggle = new Toggle(standalone: true)
+            .Label(new LocStrFormatted("Enable Heatmap Glow Effect"))
+            .Tooltip(new LocStrFormatted("When the overlay is active, cast a glowing light onto the ground matching the heatmap color. Disable if causing lag."))
+            .Value(ThroughputGlowEnabled)
+            .OnValueChanged(SetThroughputGlowEnabled);
+        root.Add(throughputGlowToggle);
+
         Toggle colorblindToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsThroughputColorblind.AsFormatted)
             .Tooltip(BdtLocalization.SettingsThroughputColorblindDescription.AsFormatted)
@@ -445,6 +456,7 @@ internal static class DesignerToolkitSettings
             instantBuildToggle.Value(InstantBuildModeEnabled);
             legacyBeltConfigurationsToggle.Value(LegacyBeltConfigurationsEnabled);
             throughputOverlayToggle.Value(ThroughputOverlayEnabled);
+            throughputGlowToggle.Value(ThroughputGlowEnabled);
             heatmapDropdown.SetValue(ThroughputHeatmapMode);
             colorblindToggle.Value(ThroughputColorblindMode);
             colorblindToggle.Enabled(ThroughputHeatmapMode != ThroughputHeatmapMode.None);
@@ -498,6 +510,7 @@ internal static class DesignerToolkitSettings
             SetLegacyBeltConfigurations(true);
             SetHeightFilterMaxVisibleLevel(6);
             SetThroughputOverlayEnabled(true);
+            SetThroughputGlowEnabled(true);
             SetThroughputHeatmapMode(ThroughputHeatmapMode.Capacity);
             SetThroughputColorblindMode(false);
             SetThroughputShowAsPercent(false);
@@ -552,6 +565,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out error))
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out error))
@@ -582,6 +597,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out bool instantBuildUpdated);
             updated = TryReplaceConfigDefault(updated, LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out bool legacyBeltConfigurationsUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out bool throughputOverlayEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out bool throughputGlowEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out bool throughputHeatmapModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out bool throughputColorblindModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
@@ -638,6 +654,11 @@ internal static class DesignerToolkitSettings
             if (!throughputOverlayEnabledUpdated)
             {
                 error = "Could not find throughput_overlay_enabled default in config.json.";
+                return false;
+            }
+            if (!throughputGlowEnabledUpdated)
+            {
+                error = "Could not find throughput_glow_enabled default in config.json.";
                 return false;
             }
             if (!throughputHeatmapModeUpdated)
@@ -704,6 +725,11 @@ internal static class DesignerToolkitSettings
         ThroughputOverlayEnabled = enabled;
         try { ThroughputOverlayEnabledChanged?.Invoke(enabled); }
         catch (Exception ex) { s_log.Warning($"Throughput overlay visibility change handler failed: {ex.Message}"); }
+    }
+
+    public static void SetThroughputGlowEnabled(bool enabled)
+    {
+        ThroughputGlowEnabled = enabled;
     }
 
     public static void SetHeightFilterMaxVisibleLevel(int level)
@@ -883,6 +909,7 @@ internal static class DesignerToolkitSettings
         bool initialInstantBuildMode,
         bool initialLegacyBeltConfigurations,
         bool initialThroughputOverlayEnabled,
+        bool initialThroughputGlowEnabled,
         ThroughputHeatmapMode initialThroughputHeatmapMode,
         bool initialThroughputColorblindMode,
         bool initialThroughputShowAsPercent)
@@ -892,6 +919,7 @@ internal static class DesignerToolkitSettings
         InstantBuildModeEnabled = initialInstantBuildMode;
         LegacyBeltConfigurationsEnabled = initialLegacyBeltConfigurations;
         ThroughputOverlayEnabled = initialThroughputOverlayEnabled;
+        ThroughputGlowEnabled = initialThroughputGlowEnabled;
         ThroughputHeatmapMode = initialThroughputHeatmapMode;
         ThroughputColorblindMode = initialThroughputColorblindMode;
         ThroughputShowAsPercent = initialThroughputShowAsPercent;
@@ -922,6 +950,8 @@ internal static class DesignerToolkitSettings
                 HeightFilterMaxVisibleLevel = heightFilterMaxVisibleLevel;
             if (TryGetBool(root, "throughputOverlayEnabled", out bool throughputOverlayEnabled))
                 ThroughputOverlayEnabled = throughputOverlayEnabled;
+            if (TryGetBool(root, "throughputGlowEnabled", out bool throughputGlowEnabled))
+                ThroughputGlowEnabled = throughputGlowEnabled;
             if (TryGetInt(root, "throughputHeatmapMode", out int heatmapMode))
                 ThroughputHeatmapMode = HeatmapModeFromInt(heatmapMode);
             if (TryGetBool(root, "throughputColorblindMode", out bool colorblindMode))
@@ -946,6 +976,7 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("legacyBeltConfigurations", LegacyBeltConfigurationsEnabled);
         writer.AppendNumberField("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
         writer.AppendBoolField("throughputOverlayEnabled", ThroughputOverlayEnabled);
+        writer.AppendBoolField("throughputGlowEnabled", ThroughputGlowEnabled);
         writer.AppendNumberField("throughputHeatmapMode", (int)ThroughputHeatmapMode);
         writer.AppendBoolField("throughputColorblindMode", ThroughputColorblindMode);
         writer.AppendBoolField("throughputShowAsPercent", ThroughputShowAsPercent);

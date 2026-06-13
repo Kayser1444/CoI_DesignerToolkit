@@ -2,6 +2,10 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.6.1a | 2026-06-13
+
+- Added entity glowing effects reflecting the current heatmap color logic when the throughput overlay is active
+
 ## v0.6.1 | 2026-06-13
 
 - Fixed Throughput Limiter/Monitor inspector panel disappearing when changing maps/saves without restarting the game

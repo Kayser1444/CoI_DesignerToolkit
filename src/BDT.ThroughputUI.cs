@@ -10,6 +10,7 @@ using Mafi.Core.Syncers;
 using Mafi.Localization;
 using Mafi.Core.Ports;
 using Mafi.Core.Ports.Io;
+using Mafi.Unity.Entities;
 using Mafi.Unity.UiToolkit;
 using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
@@ -395,14 +396,47 @@ public static class ThroughputUI
 public sealed class ThroughputWorldRenderer : MonoBehaviour
 {
     private EntitiesManager? m_entitiesManager;
+    private EntityHighlighter? m_highlighter;
+    private Mafi.Core.GameLoop.IGameLoopEvents? m_gameLoopEvents;
+    private bool m_isGameLoaded = false;
+    private System.Collections.Generic.HashSet<int> m_highlightedEntities = new System.Collections.Generic.HashSet<int>();
     private Texture2D? m_bgTexture;
     private Texture2D? m_whiteTexture;
     private readonly System.Collections.Generic.List<UnityEngine.UIElements.IPanel> m_cachedPanels = new System.Collections.Generic.List<UnityEngine.UIElements.IPanel>();
     private int m_lastFrameCount = -1;
 
-    public void Setup(EntitiesManager entitiesManager)
+    public void Setup(EntitiesManager entitiesManager, EntityHighlighter highlighter, Mafi.Core.GameLoop.IGameLoopEvents gameLoopEvents)
     {
         m_entitiesManager = entitiesManager;
+        m_highlighter = highlighter;
+        m_gameLoopEvents = gameLoopEvents;
+        
+        m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, OnSyncUpdate);
+    }
+
+    private void OnSyncUpdate(Mafi.Core.GameTime time)
+    {
+        m_isGameLoaded = true;
+        if (m_gameLoopEvents != null)
+        {
+            try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
+        }
+    }
+
+    private void ClearHighlights()
+    {
+        if (m_highlighter == null) return;
+        foreach (int id in m_highlightedEntities)
+        {
+            if (m_entitiesManager != null && m_entitiesManager.TryGetEntity(new EntityId(id), out IEntity e) && !e.IsDestroyed)
+            {
+                if (e is IRenderedEntity re)
+                {
+                    try { m_highlighter.RemoveHighlight(re); } catch { }
+                }
+            }
+        }
+        m_highlightedEntities.Clear();
     }
 
     private void UpdateCachedPanels()
@@ -488,11 +522,18 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
 
     private void OnGUI()
     {
-        if (!DesignerToolkitSettings.ThroughputOverlayEnabled || ThroughputManager.Instance == null || m_entitiesManager == null)
+        if (!m_isGameLoaded || (!DesignerToolkitSettings.ThroughputOverlayEnabled && !DesignerToolkitSettings.ThroughputGlowEnabled) || ThroughputManager.Instance == null || m_entitiesManager == null)
+        {
+            ClearHighlights();
             return;
+        }
 
         var states = ThroughputManager.Instance.GetAllStates();
-        if (states.Count == 0) return;
+        if (states.Count == 0) 
+        {
+            ClearHighlights();
+            return;
+        }
 
         Camera? camera = Camera.main;
         if (camera == null) return;
@@ -545,6 +586,8 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
                 if (avg > maxVal) maxVal = avg;
             }
         }
+
+        var currentHighlights = new System.Collections.Generic.HashSet<int>();
 
         foreach (var kvp in states)
         {
@@ -629,29 +672,63 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
             }
             style.normal.textColor = textColor;
 
-            Rect rect = new Rect(guiX - width / 2f, guiY - height / 2f, width, height);
-
-            if (isOver98)
+            if (m_highlighter != null && DesignerToolkitSettings.ThroughputGlowEnabled && entity is IRenderedEntity renderedEntity)
             {
-                if (m_whiteTexture == null)
-                {
-                    m_whiteTexture = new Texture2D(1, 1);
-                    m_whiteTexture.SetPixel(0, 0, Color.white);
-                    m_whiteTexture.Apply();
-                }
-
-                float pulse = Mathf.PingPong(Time.time * 3f, 1f);
-                Color glowColor = new Color(1.0f, 0.15f, 0.0f, 0.25f + pulse * 0.45f);
-
-                Color origColor = GUI.color;
-                GUI.color = glowColor;
-                Rect glowRect = new Rect(rect.x - 2f, rect.y - 2f, rect.width + 4f, rect.height + 4f);
-                GUI.DrawTexture(glowRect, m_whiteTexture);
-                GUI.color = origColor;
+                int r = (int)(textColor.r * 255f);
+                int g = (int)(textColor.g * 255f);
+                int b = (int)(textColor.b * 255f);
+                
+                // Maximum glow opacity for 98%+ to make them stand out, softer glow for normal entities
+                int alpha = isOver98 ? 255 : 150;
+                ColorRgba highlightColor = new ColorRgba(r, g, b, alpha);
+                try { m_highlighter.Highlight(renderedEntity, highlightColor); } catch { }
+                currentHighlights.Add(entity.Id.Value);
             }
 
-            GUI.Box(rect, GUIContent.none, bgStyle);
-            GUI.Label(rect, text, style);
+            if (DesignerToolkitSettings.ThroughputOverlayEnabled)
+            {
+                Rect rect = new Rect(guiX - width / 2f, guiY - height / 2f, width, height);
+
+                if (isOver98)
+                {
+                    if (m_whiteTexture == null)
+                    {
+                        m_whiteTexture = new Texture2D(1, 1);
+                        m_whiteTexture.SetPixel(0, 0, Color.white);
+                        m_whiteTexture.Apply();
+                    }
+
+                    float pulse = Mathf.PingPong(Time.time * 3f, 1f);
+                    Color glowColor = new Color(1.0f, 0.15f, 0.0f, 0.25f + pulse * 0.45f);
+
+                    Color origColor = GUI.color;
+                    GUI.color = glowColor;
+                    Rect glowRect = new Rect(rect.x - 2f, rect.y - 2f, rect.width + 4f, rect.height + 4f);
+                    GUI.DrawTexture(glowRect, m_whiteTexture);
+                    GUI.color = origColor;
+                }
+
+                GUI.Box(rect, GUIContent.none, bgStyle);
+                GUI.Label(rect, text, style);
+            }
+        }
+
+        if (m_highlighter != null)
+        {
+            foreach (int id in m_highlightedEntities)
+            {
+                if (!currentHighlights.Contains(id))
+                {
+                    if (m_entitiesManager != null && m_entitiesManager.TryGetEntity(new EntityId(id), out IEntity e) && !e.IsDestroyed)
+                    {
+                        if (e is IRenderedEntity re)
+                        {
+                            try { m_highlighter.RemoveHighlight(re); } catch { }
+                        }
+                    }
+                }
+            }
+            m_highlightedEntities = currentHighlights;
         }
     }
 
@@ -665,6 +742,11 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (m_gameLoopEvents != null)
+        {
+            try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
+        }
+        ClearHighlights();
         if (m_bgTexture != null)
         {
             Destroy(m_bgTexture);
