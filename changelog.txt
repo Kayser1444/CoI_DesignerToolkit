@@ -1,5 +1,6 @@
 v0.6.0 | 2026-06-13
-* Consolidated **Throughput Limiter** and Throughput Monitor into a single, unified **Throughput** inspector panel
+* Introduced **Throughput Monitoring** as a new concept to visualize live items/min flow rates on transports and ports
+* Consolidated the new Throughput Monitor and existing **Throughput Limiter** into a single, unified **Throughput** inspector panel
 * Upgraded the Throughput Limiter input controls with digital LCD styling, interactive step-modifier buttons, and sandbox restriction tooltips
 * Added **Throughput heat-map** settings to color-code overlays by capacity or relative throughput, including colorblind-friendly color options
 * Added **Show throughput as percent** option to display transport overlay values as a percentage of maximum capacity
