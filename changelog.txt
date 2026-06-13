@@ -1,5 +1,7 @@
-v0.6.1a | 2026-06-13
+v0.6.2 | 2026-06-13
 * Added entity glowing effects reflecting the current heatmap color logic when the throughput overlay is active
+* Added independent settings toggles for the heatmap glow and the text overlays
+* Restricted the averaging period text input in the Area Tool to strictly numbers (max 360 days) to prevent memory bloat
 
 v0.6.1 | 2026-06-13
 * Fixed Throughput Limiter/Monitor inspector panel disappearing when changing maps/saves without restarting the game
