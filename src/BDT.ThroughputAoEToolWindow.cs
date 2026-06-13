@@ -133,7 +133,9 @@ public class ThroughputAoEToolWindow : Window
 
         m_globalDaysInput = new TextField()
             .Class(Cls.displayFont, Cls.displayBg)
-            .Width(35.px());
+            .Width(35.px())
+            .PositiveIntegersOnly()
+            .OnEditEnd(_ => ClampGlobalDaysInput());
         m_globalDaysInput.Text("30");
         UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(m_globalDaysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
 
@@ -189,6 +191,17 @@ public class ThroughputAoEToolWindow : Window
         }
     }
 
+    private void ClampGlobalDaysInput()
+    {
+        if (m_globalDaysInput == null) return;
+        int days = 30;
+        if (int.TryParse(m_globalDaysInput.GetText(), out int daysVal))
+        {
+            days = Math.Max(1, Math.Min(3600, daysVal));
+        }
+        m_globalDaysInput.Text(days.ToString());
+    }
+
     private void onApplyClick()
     {
         if (m_globalDaysInput == null)
@@ -196,11 +209,8 @@ public class ThroughputAoEToolWindow : Window
             return;
         }
 
-        int days = 30;
-        if (int.TryParse(m_globalDaysInput.GetText(), out int daysVal))
-        {
-            days = Math.Max(1, Math.Min(3600, daysVal));
-        }
+        ClampGlobalDaysInput();
+        int days = int.Parse(m_globalDaysInput.GetText());
 
         foreach (var item in m_itemsColumn)
         {

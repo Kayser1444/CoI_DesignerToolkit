@@ -256,6 +256,14 @@
     "Ativa/desativa as sobreposições de fluxo no mundo. A exibição de entidades individuais ainda deve ser ativada no inspetor ou pela ferramenta de fluxo."
   ],
   [
+    "dtk.settings.throughput_glow.label",
+    "Ativar efeito de brilho do mapa de calor"
+  ],
+  [
+    "dtk.settings.throughput_glow.description",
+    "Lance uma luz brilhante no chão combinando com a cor do mapa de calor. Opera independentemente da sobreposição de texto. Desative se estiver causando atraso."
+  ],
+  [
     "dtk.settings.throughput_toggle_hotkey.label",
     "Atalho de sobreposição de throughput"
   ],

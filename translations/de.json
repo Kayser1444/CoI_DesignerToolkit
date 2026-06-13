@@ -256,6 +256,14 @@
     "Aktiviert/deaktiviert die Durchsatz-Overlays in der Spielwelt. Die Anzeige für einzelne Entitäten muss weiterhin im Inspektor oder über das Durchsatz-Werkzeug aktiviert werden."
   ],
   [
+    "dtk.settings.throughput_glow.label",
+    "Aktivieren Sie den Heatmap-Glüheffekt"
+  ],
+  [
+    "dtk.settings.throughput_glow.description",
+    "Wirf ein leuchtendes Licht auf den Boden, das der Farbe der Heatmap entspricht. Funktioniert unabhängig von der Textüberlagerung. Deaktivieren, wenn es zu Verzögerungen kommt."
+  ],
+  [
     "dtk.settings.throughput_toggle_hotkey.label",
     "Tastenkürzel Durchsatz-Overlay"
   ],

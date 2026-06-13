@@ -256,6 +256,14 @@
     "启用/禁用世界中的吞吐量覆盖层。单个实体的显示仍须在检查器中或通过吞吐量工具开启。"
   ],
   [
+    "dtk.settings.throughput_glow.label",
+    "启用热图发光效果"
+  ],
+  [
+    "dtk.settings.throughput_glow.description",
+    "将发光的光线投射到与热图颜色相匹配的地面上。独立于文本叠加进行操作。如果造成延迟，请禁用。"
+  ],
+  [
     "dtk.settings.throughput_toggle_hotkey.label",
     "吞吐量叠加层快捷键"
   ],

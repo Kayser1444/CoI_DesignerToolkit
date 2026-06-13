@@ -256,6 +256,14 @@
     "Activa/desactiva las superposiciones de rendimiento en el mundo. El interruptor de las entidades individuales aún debe activarse en el inspector o mediante la herramienta de rendimiento."
   ],
   [
+    "dtk.settings.throughput_glow.label",
+    "Habilitar el efecto de brillo del mapa de calor"
+  ],
+  [
+    "dtk.settings.throughput_glow.description",
+    "Proyecta una luz brillante sobre el suelo que coincida con el color del mapa de calor. Funciona independientemente de la superposición de texto. Desactívelo si causa retraso."
+  ],
+  [
     "dtk.settings.throughput_toggle_hotkey.label",
     "Atajo de superposición de rendimiento"
   ],

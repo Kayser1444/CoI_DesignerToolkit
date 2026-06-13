@@ -356,8 +356,8 @@ internal static class DesignerToolkitSettings
         root.Add(throughputOverlayToggle);
 
         Toggle throughputGlowToggle = new Toggle(standalone: true)
-            .Label(new LocStrFormatted("Enable Heatmap Glow Effect"))
-            .Tooltip(new LocStrFormatted("When the overlay is active, cast a glowing light onto the ground matching the heatmap color. Disable if causing lag."))
+            .Label(BdtLocalization.SettingsThroughputGlow.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsThroughputGlowDescription.AsFormatted)
             .Value(ThroughputGlowEnabled)
             .OnValueChanged(SetThroughputGlowEnabled);
         root.Add(throughputGlowToggle);

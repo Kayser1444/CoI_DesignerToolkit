@@ -256,6 +256,14 @@
     "Aktiverar/inaktiverar genomströmningsvyer i världen. Enskilda entiteters visning måste fortfarande slås på i inspektören eller med genomströmningsverktyget."
   ],
   [
+    "dtk.settings.throughput_glow.label",
+    "Aktivera värmekartans glödeffekt"
+  ],
+  [
+    "dtk.settings.throughput_glow.description",
+    "Kasta ett glödande ljus på marken som matchar värmekartans färg. Fungerar oberoende av textöverlagringen. Inaktivera om det orsakar fördröjning."
+  ],
+  [
     "dtk.settings.throughput_toggle_hotkey.label",
     "Snabbknapp för genomströmningsvy"
   ],

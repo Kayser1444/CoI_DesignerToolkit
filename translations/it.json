@@ -256,6 +256,14 @@
     "Attiva/disattiva gli overlay di produttività nel mondo. L'attivazione delle singole entità deve comunque essere effettuata nell'ispettore o tramite lo strumento di produttività."
   ],
   [
+    "dtk.settings.throughput_glow.label",
+    "Abilita l'effetto bagliore della mappa termica"
+  ],
+  [
+    "dtk.settings.throughput_glow.description",
+    "Proietta una luce brillante sul terreno abbinandola al colore della mappa di calore. Funziona indipendentemente dalla sovrapposizione del testo. Disabilita se causa ritardo."
+  ],
+  [
     "dtk.settings.throughput_toggle_hotkey.label",
     "Scorciatoia overlay throughput"
   ],

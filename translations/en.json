@@ -256,6 +256,14 @@
     "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool."
   ],
   [
+    "dtk.settings.throughput_glow.label",
+    "Enable heatmap glow effect"
+  ],
+  [
+    "dtk.settings.throughput_glow.description",
+    "Cast a glowing light onto the ground matching the heatmap color. Operates independently of the text overlay. Disable if causing lag."
+  ],
+  [
     "dtk.settings.throughput_toggle_hotkey.label",
     "Throughput overlay hotkey"
   ],

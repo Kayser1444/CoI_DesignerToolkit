@@ -149,6 +149,10 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.throughput_toggle.label", "Throughput overlay", "Settings row label for throughput overlay toggle.");
     public static LocStr SettingsThroughputToggleDescription =
         Loc.Str("dtk.settings.throughput_toggle.description", "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool.", "Settings row description for throughput overlay visibility.");
+    public static LocStr SettingsThroughputGlow =
+        Loc.Str("dtk.settings.throughput_glow.label", "Enable heatmap glow effect", "Settings row label for heatmap glow toggle.");
+    public static LocStr SettingsThroughputGlowDescription =
+        Loc.Str("dtk.settings.throughput_glow.description", "Cast a glowing light onto the ground matching the heatmap color. Operates independently of the text overlay. Disable if causing lag.", "Settings row description for heatmap glow.");
     public static LocStr SettingsThroughputToggleHotkey =
         Loc.Str("dtk.settings.throughput_toggle_hotkey.label", "Throughput overlay hotkey", "Settings row label for throughput overlay toggle hotkey.");
     public static LocStr SettingsThroughputHeatmap =

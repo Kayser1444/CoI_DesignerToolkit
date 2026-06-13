@@ -1,6 +1,6 @@
 {
   "id": "DesignerToolkit",
-  "version": "0.6.1a",
+  "version": "0.6.2",
   "display_name": "Kayser's Blueprint Designer's Toolkit",
   "description_short": "Update blueprints. Remember folders. Show stats. Copy Markdown. Normalize balancers.",
   "description_long": "<b>Blueprint Designer's Toolkit (BDT)</b>\n\nBlueprint authoring tools for Captain of Industry designers.\n\n- <b>Update blueprint</b>: replace an existing blueprint from a new area selection while preserving name, description, overlap settings, and book position.\n- <b>Remembered folder</b>: reopen the blueprint book where you left it.\n- <b>Operational stats</b>: show workers, electricity, computing, and maintenance in the blueprint detail panel.\n- <b>Copy as Markdown</b>: copy single-blueprint summaries or recursive folder tables to the clipboard for Hub posts and documentation.\n- <b>Symmetric normalization</b>: normalize functionally identical balancer/connector orientations in captured blueprints to improve paste-over behavior.\n\n<i>Designer-only, consumer-free: blueprints remain vanilla-compatible and players using your blueprints do not need this mod installed.</i>",
