@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "设置"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "恢复所有设置的全局模组默认值。（不会自动保存为 config.json。）"
+    "恢复所有设置的全局模组默认值。"
   ],
   [
     "dtk.settings.action.save_as_global",
-    "保存为全局"
+    "保存为 config.json"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "将这些设置全局保存，用于新游戏。"
+    "将这些设置保存到 config.json。它们将用作所有新游戏的默认设置。"
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "切换吞吐量叠加层"
+    "吞吐量覆盖层"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "启用/禁用世界中的吞吐量叠加层。"
+    "启用/禁用世界中的吞吐量覆盖层。单个实体的显示仍须在检查器中或通过吞吐量工具开启。"
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "吞吐量热力图"
+    "吞吐量着色（热力图）"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

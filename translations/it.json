@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "Impostazioni"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Ripristina i valori globali predefiniti del mod per tutte le impostazioni. (Non le salva automaticamente come config.json.)"
+    "Ripristina i valori predefiniti globali della mod per tutte le impostazioni."
   ],
   [
     "dtk.settings.action.save_as_global",
-    "Salva come globale"
+    "Salva come config.json"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "Salva queste impostazioni globalmente per le nuove partite."
+    "Salva queste impostazioni in config.json. Verranno utilizzate come predefinite per tutte le nuove partite."
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Attiva/disattiva overlay throughput"
+    "Overlay di produttività"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Attiva/disattiva gli overlay di throughput nel mondo."
+    "Attiva/disattiva gli overlay di produttività nel mondo. L'attivazione delle singole entità deve comunque essere effettuata nell'ispettore o tramite lo strumento di produttività."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Mappa di calore throughput"
+    "Colorazione di produttività (mappa di calore)"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

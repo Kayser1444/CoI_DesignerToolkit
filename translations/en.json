@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "Settings"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Restore the global mod defaults for all settings. (Does not automatically save them as config.)"
+    "Restore the global mod defaults for all settings."
   ],
   [
     "dtk.settings.action.save_as_global",
-    "Save as global"
+    "Save as config"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "Save these settings globally for new games."
+    "Save these settings to config.json. They will be used as the defaults for all new games."
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Throughput overlay toggle"
+    "Throughput overlay"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Enables/disables the in-world throughput overlays."
+    "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Throughput heat-map"
+    "Throughput coloring (heat map)"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

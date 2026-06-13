@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "Einstellungen"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Stellt die globalen Mod-Standardwerte für alle Einstellungen wieder her. (Speichert sie nicht automatisch als config.json.)"
+    "Stellt die globalen Mod-Standardwerte für alle Einstellungen wieder her."
   ],
   [
     "dtk.settings.action.save_as_global",
-    "Global speichern"
+    "Als config.json speichern"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "Speichert diese Einstellungen global für neue Spiele."
+    "Speichert diese Einstellungen in config.json. Sie werden als Standardwerte für alle neuen Spiele verwendet."
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Durchsatz-Overlay umschalten"
+    "Durchsatz-Overlay"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Aktiviert/deaktiviert die Durchsatz-Overlays in der Spielwelt."
+    "Aktiviert/deaktiviert die Durchsatz-Overlays in der Spielwelt. Die Anzeige für einzelne Entitäten muss weiterhin im Inspektor oder über das Durchsatz-Werkzeug aktiviert werden."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Durchsatz-Heatmap"
+    "Durchsatz-Färbung (Heatmap)"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "Configuración"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Restaura los valores globales predeterminados del mod para todos los ajustes. (No los guarda automáticamente como config.json.)"
+    "Restaurar los valores predeterminados globales de la modificación para todas las configuraciones."
   ],
   [
     "dtk.settings.action.save_as_global",
-    "Guardar como global"
+    "Guardar como config.json"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "Guarda estos ajustes globalmente para partidas nuevas."
+    "Guardar estas configuraciones en config.json. Se utilizarán como valores predeterminados para todos los juegos nuevos."
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Alternar superposición de rendimiento"
+    "Superposición de rendimiento"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Activa/desactiva las superposiciones de rendimiento en el mundo."
+    "Activa/desactiva las superposiciones de rendimiento en el mundo. El interruptor de las entidades individuales aún debe activarse en el inspector o mediante la herramienta de rendimiento."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Mapa de calor de rendimiento"
+    "Coloración de rendimiento (mapa de calor)"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

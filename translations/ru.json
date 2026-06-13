@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "Настройки"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Восстанавливает глобальные значения мода по умолчанию для всех настроек. (Не сохраняет их автоматически как config.json.)"
+    "Восстановить глобальные настройки мода по умолчанию для всех параметров."
   ],
   [
     "dtk.settings.action.save_as_global",
-    "Сохранить глобально"
+    "Сохранить в config.json"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "Сохраняет эти настройки глобально для новых игр."
+    "Сохранить эти настройки в config.json. Они будут использоваться по умолчанию для всех новых игр."
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Переключатель оверлея пропускной способности"
+    "Оверлей пропускной способности"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Включает/выключает оверлеи пропускной способности в мире."
+    "Включает/выключает отображение пропускной способности в мире. Отображение для отдельных объектов все еще должно быть включено в инспекторе или с помощью инструмента пропускной способности."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Тепловая карта пропускной способности"
+    "Цветовая карта пропускной способности"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

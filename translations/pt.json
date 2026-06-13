@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "Configurações"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Restaura os padrões globais do mod para todas as configurações. (Não as salva automaticamente como config.json.)"
+    "Restaurar os padrões globais do mod para todas as configurações."
   ],
   [
     "dtk.settings.action.save_as_global",
-    "Salvar como global"
+    "Salvar como config.json"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "Salva estas configurações globalmente para novos jogos."
+    "Salvar estas configurações em config.json. Elas serão usadas como padrão para todos os novos jogos."
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Alternar sobreposição de throughput"
+    "Sobreposição de fluxo"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Ativa/desativa as sobreposições de throughput no mundo."
+    "Ativa/desativa as sobreposições de fluxo no mundo. A exibição de entidades individuais ainda deve ser ativada no inspetor ou pela ferramenta de fluxo."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Mapa de calor de throughput"
+    "Colorização de fluxo (mapa de calor)"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

@@ -5,7 +5,7 @@
   ],
   [
     "dtk.settings.tab.markdown",
-    "Markdown"
+    "Inställningar"
   ],
   [
     "dtk.settings.markdown_copy.heading",
@@ -141,15 +141,15 @@
   ],
   [
     "dtk.settings.action.restore_defaults.tooltip",
-    "Återställer moddens globala standardvärden för alla inställningar. (Sparar dem inte automatiskt som config.json.)"
+    "Återställer moddens globala standardvärden för alla inställningar."
   ],
   [
     "dtk.settings.action.save_as_global",
-    "Spara globalt"
+    "Spara till config.json"
   ],
   [
     "dtk.settings.action.save_as_global.tooltip",
-    "Sparar dessa inställningar globalt för nya spel."
+    "Sparar dessa inställningar till config.json. De kommer att användas som standard för alla nya spel."
   ],
   [
     "dtk.settings.status.restored_defaults",
@@ -249,11 +249,11 @@
   ],
   [
     "dtk.settings.throughput_toggle.label",
-    "Växla genomströmningsvy"
+    "Genomströmningsvy"
   ],
   [
     "dtk.settings.throughput_toggle.description",
-    "Slår på/av genomströmningsvyer i världen."
+    "Aktiverar/inaktiverar genomströmningsvyer i världen. Enskilda entiteters visning måste fortfarande slås på i inspektören eller med genomströmningsverktyget."
   ],
   [
     "dtk.settings.throughput_toggle_hotkey.label",
@@ -261,7 +261,7 @@
   ],
   [
     "dtk.settings.throughput_heatmap.label",
-    "Färgkarta för genomströmning"
+    "Genomströmningsfärgläggning (färgkarta)"
   ],
   [
     "dtk.settings.throughput_colorblind.label",

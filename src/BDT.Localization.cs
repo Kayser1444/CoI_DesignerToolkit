@@ -146,13 +146,13 @@ internal static class BdtLocalization
     public static LocStr SettingsThroughputHeading =
         Loc.Str("dtk.settings.throughput.heading", "THROUGHPUT", "Settings section heading for throughput settings.");
     public static LocStr SettingsThroughputToggle =
-        Loc.Str("dtk.settings.throughput_toggle.label", "Throughput overlay toggle", "Settings row label for throughput overlay toggle.");
+        Loc.Str("dtk.settings.throughput_toggle.label", "Throughput overlay", "Settings row label for throughput overlay toggle.");
     public static LocStr SettingsThroughputToggleDescription =
-        Loc.Str("dtk.settings.throughput_toggle.description", "Enables/disables the in-world throughput overlays.", "Settings row description for throughput overlay visibility.");
+        Loc.Str("dtk.settings.throughput_toggle.description", "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool.", "Settings row description for throughput overlay visibility.");
     public static LocStr SettingsThroughputToggleHotkey =
         Loc.Str("dtk.settings.throughput_toggle_hotkey.label", "Throughput overlay hotkey", "Settings row label for throughput overlay toggle hotkey.");
     public static LocStr SettingsThroughputHeatmap =
-        Loc.Str("dtk.settings.throughput_heatmap.label", "Throughput heat-map", "Settings row label for throughput heat-map.");
+        Loc.Str("dtk.settings.throughput_heatmap.label", "Throughput coloring (heat map)", "Settings row label for throughput heat-map.");
     public static LocStr SettingsThroughputColorblind =
         Loc.Str("dtk.settings.throughput_colorblind.label", "Colorblind-friendly colors", "Settings row label for colorblind-friendly heatmap colors.");
     public static LocStr SettingsThroughputColorblindDescription =
