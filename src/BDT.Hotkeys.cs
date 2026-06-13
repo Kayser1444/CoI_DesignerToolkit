@@ -203,7 +203,12 @@ internal sealed class BdtKeyBindingField : KeyBindingField
 
             pressedCount++;
             if (!m_keys.Contains(key))
+            {
+                if (!IsModifierKey(key) && m_keys.Any(k => !IsModifierKey(k)))
+                    continue;
+
                 m_keys.Add(key);
+            }
         }
 
         if (previousCount != m_keys.Count)
@@ -214,6 +219,26 @@ internal sealed class BdtKeyBindingField : KeyBindingField
 
         if (m_keys.Count > 0 && pressedCount < m_keys.Count)
             Commit(clear: false);
+    }
+
+    private static bool IsModifierKey(KeyCode key)
+    {
+        switch (key)
+        {
+            case KeyCode.LeftControl:
+            case KeyCode.RightControl:
+            case KeyCode.LeftShift:
+            case KeyCode.RightShift:
+            case KeyCode.LeftAlt:
+            case KeyCode.RightAlt:
+            case KeyCode.LeftMeta:
+            case KeyCode.RightMeta:
+            case KeyCode.LeftWindows:
+            case KeyCode.RightWindows:
+                return true;
+            default:
+                return false;
+        }
     }
 
     private void OnMouseUp(MouseUpEvent evt)
