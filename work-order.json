@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 85,
+  "total_keys": 89,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -10,28 +10,50 @@
     "dtk.settings.number_format.auto"
   ],
   "keys": {
-    "dtk.settings.throughput_glow.label": {
-      "en": "Enable heatmap glow effect",
-      "context": "Settings row label for heatmap glow toggle.",
-      "de": "Aktivieren Sie den Heatmap-Glüheffekt",
-      "es": "Habilitar el efecto de brillo del mapa de calor",
-      "it": "Abilita l'effetto bagliore della mappa termica",
-      "pt": "Ativar efeito de brilho do mapa de calor",
-      "ru": "Включить эффект свечения тепловой карты",
-      "sv": "Aktivera värmekartans glödeffekt",
-      "zh": "启用热图发光效果"
+    "dtk.settings.layout_box.heading": {
+      "en": "LAYOUT",
+      "context": "Settings section heading for layout box mode.",
+      "de": "LAYOUT",
+      "es": "DISPOSICIÓN",
+      "it": "DISPOSIZIONE",
+      "pt": "LAYOUT",
+      "ru": "МАКЕТ",
+      "sv": "LAYOUT",
+      "zh": "布局"
     },
-    "dtk.settings.throughput_glow.description": {
-      "en": "Cast a glowing light onto the ground matching the heatmap color. Operates independently of the text overlay. Disable if causing lag.",
-      "context": "Settings row description for heatmap glow.",
-      "de": "Wirf ein leuchtendes Licht auf den Boden, das der Farbe der Heatmap entspricht. Funktioniert unabhängig von der Textüberlagerung. Deaktivieren, wenn es zu Verzögerungen kommt.",
-      "es": "Proyecta una luz brillante sobre el suelo que coincida con el color del mapa de calor. Funciona independientemente de la superposición de texto. Desactívelo si causa retraso.",
-      "it": "Proietta una luce brillante sul terreno abbinandola al colore della mappa di calore. Funziona indipendentemente dalla sovrapposizione del testo. Disabilita se causa ritardo.",
-      "pt": "Lance uma luz brilhante no chão combinando com a cor do mapa de calor. Opera independentemente da sobreposição de texto. Desative se estiver causando atraso.",
-      "ru": "Направьте на землю светящийся свет, соответствующий цвету тепловой карты. Работает независимо от наложения текста. Отключите, если вызывает задержку.",
-      "sv": "Kasta ett glödande ljus på marken som matchar värmekartans färg. Fungerar oberoende av textöverlagringen. Inaktivera om det orsakar fördröjning.",
-      "zh": "将发光的光线投射到与热图颜色相匹配的地面上。独立于文本叠加进行操作。如果造成延迟，请禁用。"
+    "dtk.settings.layout_box.label": {
+      "en": "Layout box mode",
+      "context": "Settings row label for layout box mode.",
+      "de": "Layoutbox-Modus",
+      "es": "Modo cuadro de diseño",
+      "it": "Modalità casella di layout",
+      "pt": "Modo de caixa de layout",
+      "ru": "Режим макета",
+      "sv": "Layoutboxläge",
+      "zh": "布局框模式"
+    },
+    "dtk.settings.layout_box.description": {
+      "en": "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.",
+      "context": "Settings description for layout box mode.",
+      "de": "Ermöglicht eine Röntgenüberlagerung, die Voxel-Begrenzungsrahmen um Gebäude herum darstellt, um deren Anordnung und Abstände anzuzeigen.",
+      "es": "Permite una superposición de rayos X que representa cuadros delimitadores de vóxeles alrededor de los edificios para mostrar su diseño y espacio libre.",
+      "it": "Abilita una sovrapposizione di raggi X che esegue il rendering dei riquadri di delimitazione dei voxel attorno agli edifici per mostrarne la disposizione e lo spazio libero.",
+      "pt": "Permite que uma sobreposição de raio-X renderize caixas delimitadoras de voxel ao redor de edifícios para mostrar seu layout e espaço livre.",
+      "ru": "Включает наложение рентгеновских лучей, отображающее воксельные рамки вокруг зданий, чтобы показать их планировку и зазор.",
+      "sv": "Möjliggör en röntgenöverlagring som återger voxelbegränsningsrutor runt byggnader för att visa deras layout och utrymme.",
+      "zh": "启用 X 射线叠加渲染建筑物周围的体素边界框，以显示其布局和间隙。"
+    },
+    "dtk.settings.layout_box_hotkey.label": {
+      "en": "Layout box mode hotkey",
+      "context": "Settings row label for layout box mode hotkey.",
+      "de": "Hotkey für den Layoutbox-Modus",
+      "es": "Tecla de acceso rápido al modo cuadro de diseño",
+      "it": "Tasto di scelta rapida della modalità casella di layout",
+      "pt": "Tecla de atalho do modo de caixa de layout",
+      "ru": "Горячая клавиша режима макета",
+      "sv": "Snabbtangent för layoutboxläge",
+      "zh": "布局框模式热键"
     }
   },
-  "keys_needing_translation": 2
+  "keys_needing_translation": 4
 }

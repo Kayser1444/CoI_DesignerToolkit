@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Atalho da ferramenta de throughput"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "LAYOUT"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "Modo de caixa de layout"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "Permite que uma sobreposição de raio-X renderize caixas delimitadoras de voxel ao redor de edifícios para mostrar seu layout e espaço livre."
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "Tecla de atalho do modo de caixa de layout"
   ]
 ]

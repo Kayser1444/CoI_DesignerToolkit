@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "吞吐量工具快捷键"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "布局"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "布局框模式"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "启用 X 射线叠加渲染建筑物周围的体素边界框，以显示其布局和间隙。"
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "布局框模式热键"
   ]
 ]

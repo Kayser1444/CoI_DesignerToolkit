@@ -116,6 +116,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_throughputWorldRenderer = m_throughputWorldRendererGo.AddComponent<ThroughputWorldRenderer>();
             m_throughputWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents);
             UnityEngine.Object.DontDestroyOnLoad(m_throughputWorldRendererGo);
+
+            var layoutBoxRendererGo = new UnityEngine.GameObject("BDT.LayoutBoxRenderer");
+            var layoutBoxRenderer = layoutBoxRendererGo.AddComponent<LayoutBoxRendererMb>();
+            layoutBoxRenderer.Init(resolver.Resolve<IEntitiesManager>());
+            UnityEngine.Object.DontDestroyOnLoad(layoutBoxRendererGo);
         });
         
         var entitiesManager = resolver.Resolve<EntitiesManager>();

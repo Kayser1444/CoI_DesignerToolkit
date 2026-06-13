@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Scorciatoia strumento throughput"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "DISPOSIZIONE"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "Modalità casella di layout"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "Abilita una sovrapposizione di raggi X che esegue il rendering dei riquadri di delimitazione dei voxel attorno agli edifici per mostrarne la disposizione e lo spazio libero."
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "Tasto di scelta rapida della modalità casella di layout"
   ]
 ]

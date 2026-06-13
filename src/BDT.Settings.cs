@@ -83,6 +83,9 @@ internal static class DesignerToolkitSettings
     private const string THROUGHPUT_SHOW_AS_PERCENT_KEY = "throughput_show_as_percent";
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY = "throughput_aoe_tool_hotkey_primary";
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY = "throughput_aoe_tool_hotkey_secondary";
+    private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
+    private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY = "layout_box_mode_toggle_hotkey_primary";
+    private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY = "layout_box_mode_toggle_hotkey_secondary";
 
     private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_KEY = "";
     private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_CTRL_KEY = "";
@@ -106,6 +109,8 @@ internal static class DesignerToolkitSettings
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.T);
     private static readonly BdtHotkey DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY =
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.LeftShift, KeyCode.T);
+    private static readonly BdtHotkey DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY =
+        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.B);
 
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
@@ -125,12 +130,14 @@ internal static class DesignerToolkitSettings
     public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.Capacity;
     public static bool ThroughputColorblindMode { get; private set; } = false;
     public static bool ThroughputShowAsPercent { get; private set; } = false;
+    public static bool LayoutBoxModeEnabled { get; private set; } = false;
 
     public static BdtHotkey TransportCleanupHotkey { get; private set; } = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
     public static BdtHotkey HeightFilterShowLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
     public static BdtHotkey HeightFilterHideLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
     public static BdtHotkey ThroughputOverlayToggleHotkey { get; private set; } = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
     public static BdtHotkey ThroughputAoEToolHotkey { get; private set; } = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
+    public static BdtHotkey LayoutBoxModeToggleHotkey { get; private set; } = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
@@ -151,6 +158,11 @@ internal static class DesignerToolkitSettings
         ThroughputShowAsPercent = enabled;
     }
 
+    public static void SetLayoutBoxModeEnabled(bool enabled)
+    {
+        LayoutBoxModeEnabled = enabled;
+    }
+
 
     public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string modDirectory)
     {
@@ -166,6 +178,7 @@ internal static class DesignerToolkitSettings
         ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode.Capacity));
         bool initialThroughputColorblindMode = config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
         bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
+        bool initialLayoutBoxModeEnabled = config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
 
         BdtHotkey initialTransportCleanupHotkey = HotkeyFromConfig(
             config,
@@ -200,12 +213,19 @@ internal static class DesignerToolkitSettings
             THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
             "", "", "", "",
             DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
+        BdtHotkey initialLayoutBoxModeToggleHotkey = HotkeyFromConfig(
+            config,
+            LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
+            LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
+            "", "", "", "",
+            DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
 
         TransportCleanupHotkey = initialTransportCleanupHotkey;
         HeightFilterShowLayerHotkey = initialShowLayerHotkey;
         HeightFilterHideLayerHotkey = initialHideLayerHotkey;
         ThroughputOverlayToggleHotkey = initialThroughputOverlayToggleHotkey;
         ThroughputAoEToolHotkey = initialThroughputAoEToolHotkey;
+        LayoutBoxModeToggleHotkey = initialLayoutBoxModeToggleHotkey;
 
         LoadFromJsonStore(
             store,
@@ -217,7 +237,8 @@ internal static class DesignerToolkitSettings
             initialThroughputGlowEnabled,
             initialThroughputHeatmapMode,
             initialThroughputColorblindMode,
-            initialThroughputShowAsPercent);
+            initialThroughputShowAsPercent,
+            initialLayoutBoxModeEnabled);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -420,6 +441,34 @@ internal static class DesignerToolkitSettings
             out throughputAoEToolPrimaryField,
             out throughputAoEToolSecondaryField));
 
+        root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        Toggle layoutBoxModeToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsLayoutBoxModeToggle.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsLayoutBoxModeDescription.AsFormatted)
+            .Value(LayoutBoxModeEnabled)
+            .OnValueChanged(SetLayoutBoxModeEnabled);
+        root.Add(layoutBoxModeToggle);
+
+
+
+
+
+        BdtKeyBindingField layoutBoxModePrimaryField;
+        BdtKeyBindingField layoutBoxModeSecondaryField;
+        root.Add(BuildHotkeyRow(
+            BdtLocalization.SettingsLayoutBoxModeHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+            () => LayoutBoxModeToggleHotkey,
+            hotkey =>
+            {
+                LayoutBoxModeToggleHotkey = hotkey;
+                SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
+            },
+            out layoutBoxModePrimaryField,
+            out layoutBoxModeSecondaryField));
+
         root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -461,6 +510,7 @@ internal static class DesignerToolkitSettings
             colorblindToggle.Value(ThroughputColorblindMode);
             colorblindToggle.Enabled(ThroughputHeatmapMode != ThroughputHeatmapMode.None);
             showAsPercentToggle.Value(ThroughputShowAsPercent);
+            layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
             showLayerPrimaryField.Refresh();
             showLayerSecondaryField.Refresh();
@@ -470,6 +520,8 @@ internal static class DesignerToolkitSettings
             throughputToggleSecondaryField.Refresh();
             throughputAoEToolPrimaryField.Refresh();
             throughputAoEToolSecondaryField.Refresh();
+            layoutBoxModePrimaryField.Refresh();
+            layoutBoxModeSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
             transportCleanupSecondaryField.Refresh();
         }));
@@ -518,11 +570,13 @@ internal static class DesignerToolkitSettings
             HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
             ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
             ThroughputAoEToolHotkey = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
+            LayoutBoxModeToggleHotkey = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
             TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
             SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
             SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
+            SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
             SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
             refresh();
             status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
@@ -573,6 +627,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out error))
+                return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterShowLayerHotkey, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, out error))
@@ -582,6 +638,8 @@ internal static class DesignerToolkitSettings
             if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputOverlayToggleHotkey, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputAoEToolHotkey, THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, out error))
+                return false;
+            if (s_config != null && !TrySetHotkeyConfig(s_config, LayoutBoxModeToggleHotkey, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
                 return false;
 
             if (string.IsNullOrWhiteSpace(s_modDirectory))
@@ -601,6 +659,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out bool throughputHeatmapModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out bool throughputColorblindModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
+            updated = TryReplaceConfigDefault(updated, LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out bool layoutBoxModeEnabledUpdated);
             updated = TryReplaceHotkeyConfigDefaults(
                 updated,
                 TransportCleanupHotkey,
@@ -631,6 +690,12 @@ internal static class DesignerToolkitSettings
                 THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY,
                 THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
                 out bool throughputAoEToolHotkeyUpdated);
+            updated = TryReplaceHotkeyConfigDefaults(
+                updated,
+                LayoutBoxModeToggleHotkey,
+                LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
+                LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
+                out bool layoutBoxModeHotkeyUpdated);
             if (!languageUpdated)
             {
                 error = "Could not find markdown_table_language default in config.json.";
@@ -676,7 +741,12 @@ internal static class DesignerToolkitSettings
                 error = "Could not find throughput_show_as_percent default in config.json.";
                 return false;
             }
-            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated)
+            if (!layoutBoxModeEnabledUpdated)
+            {
+                error = "Could not find layout_box_mode_enabled default in config.json.";
+                return false;
+            }
+            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated || !layoutBoxModeHotkeyUpdated)
             {
                 error = "Could not find hotkey defaults in config.json.";
                 return false;
@@ -912,7 +982,8 @@ internal static class DesignerToolkitSettings
         bool initialThroughputGlowEnabled,
         ThroughputHeatmapMode initialThroughputHeatmapMode,
         bool initialThroughputColorblindMode,
-        bool initialThroughputShowAsPercent)
+        bool initialThroughputShowAsPercent,
+        bool initialLayoutBoxModeEnabled)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
@@ -923,6 +994,7 @@ internal static class DesignerToolkitSettings
         ThroughputHeatmapMode = initialThroughputHeatmapMode;
         ThroughputColorblindMode = initialThroughputColorblindMode;
         ThroughputShowAsPercent = initialThroughputShowAsPercent;
+        LayoutBoxModeEnabled = initialLayoutBoxModeEnabled;
 
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
@@ -956,8 +1028,10 @@ internal static class DesignerToolkitSettings
                 ThroughputHeatmapMode = HeatmapModeFromInt(heatmapMode);
             if (TryGetBool(root, "throughputColorblindMode", out bool colorblindMode))
                 ThroughputColorblindMode = colorblindMode;
-            if (TryGetBool(root, "throughputShowAsPercent", out bool showAsPercent))
+             if (TryGetBool(root, "throughputShowAsPercent", out bool showAsPercent))
                 ThroughputShowAsPercent = showAsPercent;
+            if (TryGetBool(root, "layoutBoxModeEnabled", out bool layoutBoxModeEnabled))
+                LayoutBoxModeEnabled = layoutBoxModeEnabled;
         }
         catch (Exception ex)
         {
@@ -980,6 +1054,7 @@ internal static class DesignerToolkitSettings
         writer.AppendNumberField("throughputHeatmapMode", (int)ThroughputHeatmapMode);
         writer.AppendBoolField("throughputColorblindMode", ThroughputColorblindMode);
         writer.AppendBoolField("throughputShowAsPercent", ThroughputShowAsPercent);
+        writer.AppendBoolField("layoutBoxModeEnabled", LayoutBoxModeEnabled);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
     }

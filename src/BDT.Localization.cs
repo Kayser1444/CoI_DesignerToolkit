@@ -192,5 +192,13 @@ internal static class BdtLocalization
         Loc.Str("dtk.throughput.aoe_tool.global_display", "Display state: ", "Label for global display state setting.");
     public static LocStr SettingsThroughputAoEToolHotkey =
         Loc.Str("dtk.settings.throughput_aoe_tool_hotkey.label", "Throughput tool hotkey", "Settings row label for throughput AoE tool toggle hotkey.");
+    public static LocStr SettingsLayoutBoxModeHeading =
+        Loc.Str("dtk.settings.layout_box.heading", "LAYOUT", "Settings section heading for layout box mode.");
+    public static LocStr SettingsLayoutBoxModeToggle =
+        Loc.Str("dtk.settings.layout_box.label", "Layout box mode", "Settings row label for layout box mode.");
+    public static LocStr SettingsLayoutBoxModeDescription =
+        Loc.Str("dtk.settings.layout_box.description", "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.", "Settings description for layout box mode.");
+    public static LocStr SettingsLayoutBoxModeHotkey =
+        Loc.Str("dtk.settings.layout_box_hotkey.label", "Layout box mode hotkey", "Settings row label for layout box mode hotkey.");
 }
 

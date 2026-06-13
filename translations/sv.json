@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Genomströmningsverktyg genväg"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "LAYOUT"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "Layoutboxläge"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "Möjliggör en röntgenöverlagring som återger voxelbegränsningsrutor runt byggnader för att visa deras layout och utrymme."
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "Snabbtangent för layoutboxläge"
   ]
 ]

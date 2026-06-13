@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Горячая клавиша инструмента области"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "МАКЕТ"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "Режим макета"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "Включает наложение рентгеновских лучей, отображающее воксельные рамки вокруг зданий, чтобы показать их планировку и зазор."
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "Горячая клавиша режима макета"
   ]
 ]

@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Atajo de herramienta de rendimiento"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "DISPOSICIÓN"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "Modo cuadro de diseño"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "Permite una superposición de rayos X que representa cuadros delimitadores de vóxeles alrededor de los edificios para mostrar su diseño y espacio libre."
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "Tecla de acceso rápido al modo cuadro de diseño"
   ]
 ]

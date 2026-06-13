@@ -69,6 +69,14 @@
     "default": "",
     "description": "Initial secondary throughput AoE tool hotkey. Leave empty to disable."
   },
+  "layout_box_mode_toggle_hotkey_primary": {
+    "default": "LeftAlt + B",
+    "description": "Initial primary layout box mode toggle hotkey. Leave empty to disable."
+  },
+  "layout_box_mode_toggle_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary layout box mode toggle hotkey. Leave empty to disable."
+  },
   "throughput_heatmap_mode": {
     "default": 2,
     "is_integer": true,
@@ -83,6 +91,10 @@
   "throughput_show_as_percent": {
     "default": false,
     "description": "Initial throughput show as percent mode for saves without BDT settings state."
+  },
+  "layout_box_mode_enabled": {
+    "default": false,
+    "description": "Initial layout box mode visibility state for saves without BDT settings state. When enabled, building occupancy hitboxes will render in 3D."
   },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",

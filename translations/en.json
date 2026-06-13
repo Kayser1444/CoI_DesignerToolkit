@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Throughput tool hotkey"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "LAYOUT"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "Layout box mode"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance."
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "Layout box mode hotkey"
   ]
 ]

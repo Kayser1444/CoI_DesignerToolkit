@@ -4,6 +4,16 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.6.2a [unreleased]
 
+- Added **Layout Box Visualization Mode** (default hotkey `Alt-B`):
+  - Renders building grid clearance / occupancy bounding boxes in 3D.
+  - Separates side walls (transparent light blue) and roof caps (more opaque vibrant amber/yellow) to clearly highlight vertical clearance levels.
+  - Custom manually-built unit cube mesh avoiding external asset reliance.
+  - Optimized rendering using entity-level camera distance culling (350 meters) to keep CPU overhead and C# DrawMesh calls minimal.
+  - Rebuilds cache reactively on entity addition/removal, causing zero garbage collection allocations in `Update()`.
+  - Fully integrated setting toggle and `Alt-B` hotkey in `BDT.Settings.cs` and keybindings list.
+  - Wired up settings state and hotkey persistence to JSON saves and global config.
+  - Fully localized settings and descriptions across German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
+
 ## v0.6.2 [released]
 
 - Added entity glowing effects reflecting the current heatmap color logic when the throughput overlay is active

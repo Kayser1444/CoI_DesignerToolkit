@@ -338,5 +338,21 @@
   [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Tastenkürzel Durchsatz-Werkzeug"
+  ],
+  [
+    "dtk.settings.layout_box.heading",
+    "LAYOUT"
+  ],
+  [
+    "dtk.settings.layout_box.label",
+    "Layoutbox-Modus"
+  ],
+  [
+    "dtk.settings.layout_box.description",
+    "Ermöglicht eine Röntgenüberlagerung, die Voxel-Begrenzungsrahmen um Gebäude herum darstellt, um deren Anordnung und Abstände anzuzeigen."
+  ],
+  [
+    "dtk.settings.layout_box_hotkey.label",
+    "Hotkey für den Layoutbox-Modus"
   ]
 ]
