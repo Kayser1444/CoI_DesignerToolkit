@@ -40,12 +40,14 @@ public class LayoutBoxRendererMb : MonoBehaviour
     private Material m_topMaterial = null!;
     private readonly List<EntityCacheEntry> m_cache = new List<EntityCacheEntry>();
     private IEntitiesManager m_entitiesManager = null!;
+    private ShortcutsManager m_shortcutsManager = null!;
     private bool m_isCacheDirty = true;
     private bool m_initFailed;
 
-    public void Init(IEntitiesManager entitiesManager)
+    public void Init(IEntitiesManager entitiesManager, ShortcutsManager shortcutsManager)
     {
         m_entitiesManager = entitiesManager;
+        m_shortcutsManager = shortcutsManager;
 
         m_entitiesManager.StaticEntityAdded.AddNonSaveable(this, OnEntityChanged);
         m_entitiesManager.StaticEntityRemoved.AddNonSaveable(this, OnEntityChanged);
@@ -189,7 +191,7 @@ public class LayoutBoxRendererMb : MonoBehaviour
     {
         if (m_initFailed) return;
 
-        if (DesignerToolkitSettings.LayoutBoxModeToggleHotkey.IsPressed())
+        if (m_shortcutsManager.IsDown(HotkeysRegistry.LayoutBoxModeToggle))
         {
             DesignerToolkitSettings.SetLayoutBoxModeEnabled(!DesignerToolkitSettings.LayoutBoxModeEnabled);
             m_isCacheDirty = true;

@@ -27,7 +27,7 @@ Planned and candidate improvements for Designer Toolkit.
 * Rename mod to "Blueprint Designer's Toolkit" + thumbnail and stuff
 * Improve the icon in settings
 * Undo features!
-* Heat map of exhaust
+* Heat map of exhaust (ships, vehchles, entities, ground)
 
 
 ## Mori's features

@@ -53,6 +53,10 @@
     "default": true,
     "description": "Initial throughput overlay visibility state for saves without BDT settings state. When enabled, configured throughput overlays will render in-world."
   },
+  "throughput_glow_enabled": {
+    "default": true,
+    "description": "Initial throughput glow visibility state for saves without BDT settings state."
+  },
   "throughput_overlay_toggle_hotkey_primary": {
     "default": "LeftAlt + T",
     "description": "Initial primary throughput overlay toggle hotkey. Leave empty to disable."

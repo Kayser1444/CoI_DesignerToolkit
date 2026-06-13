@@ -84,8 +84,8 @@ internal static class DesignerToolkitSettings
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY = "throughput_aoe_tool_hotkey_primary";
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY = "throughput_aoe_tool_hotkey_secondary";
     private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
-    private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY = "layout_box_mode_toggle_hotkey_primary";
-    private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY = "layout_box_mode_toggle_hotkey_secondary";
+//     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY = "layout_box_mode_toggle_hotkey_primary";
+//     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY = "layout_box_mode_toggle_hotkey_secondary";
 
     private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_KEY = "";
     private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_CTRL_KEY = "";
@@ -109,8 +109,8 @@ internal static class DesignerToolkitSettings
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.T);
     private static readonly BdtHotkey DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY =
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.LeftShift, KeyCode.T);
-    private static readonly BdtHotkey DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.B);
+//     private static readonly BdtHotkey DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY =
+//         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.B);
 
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
@@ -137,7 +137,7 @@ internal static class DesignerToolkitSettings
     public static BdtHotkey HeightFilterHideLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
     public static BdtHotkey ThroughputOverlayToggleHotkey { get; private set; } = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
     public static BdtHotkey ThroughputAoEToolHotkey { get; private set; } = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
-    public static BdtHotkey LayoutBoxModeToggleHotkey { get; private set; } = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
+//     public static BdtHotkey LayoutBoxModeToggleHotkey { get; private set; } = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
@@ -213,19 +213,19 @@ internal static class DesignerToolkitSettings
             THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
             "", "", "", "",
             DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
-        BdtHotkey initialLayoutBoxModeToggleHotkey = HotkeyFromConfig(
-            config,
-            LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
-            LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
-            "", "", "", "",
-            DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
+//         BdtHotkey initialLayoutBoxModeToggleHotkey = HotkeyFromConfig(
+//             config,
+//             LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
+//             LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
+//             "", "", "", "",
+//             DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
 
         TransportCleanupHotkey = initialTransportCleanupHotkey;
         HeightFilterShowLayerHotkey = initialShowLayerHotkey;
         HeightFilterHideLayerHotkey = initialHideLayerHotkey;
         ThroughputOverlayToggleHotkey = initialThroughputOverlayToggleHotkey;
         ThroughputAoEToolHotkey = initialThroughputAoEToolHotkey;
-        LayoutBoxModeToggleHotkey = initialLayoutBoxModeToggleHotkey;
+//         LayoutBoxModeToggleHotkey = initialLayoutBoxModeToggleHotkey;
 
         LoadFromJsonStore(
             store,
@@ -442,32 +442,50 @@ internal static class DesignerToolkitSettings
             out throughputAoEToolSecondaryField));
 
         root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
+            .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
         Toggle layoutBoxModeToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsLayoutBoxModeToggle.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsLayoutBoxModeDescription.AsFormatted)
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsLayoutBoxModeDescription.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
             .Value(LayoutBoxModeEnabled)
             .OnValueChanged(SetLayoutBoxModeEnabled);
-        root.Add(layoutBoxModeToggle);
+
+        var layoutBoxRow = new Row().AlignItemsCenter();
+        layoutBoxRow.Add(layoutBoxModeToggle);
+
+        if (!HotkeysRegistry.LayoutBoxModeToggle.Primary.IsEmpty)
+        {
+            var primaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {HotkeysRegistry.LayoutBoxModeToggle.Primary.ToString()} </b></size></color></mark>");
+            var badgeLabel = new Label(primaryText).MarginLeft(6.pt());
+            layoutBoxRow.Add(badgeLabel);
+        }
+        if (!HotkeysRegistry.LayoutBoxModeToggle.Secondary.IsEmpty)
+        {
+            var secondaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {HotkeysRegistry.LayoutBoxModeToggle.Secondary.ToString()} </b></size></color></mark>");
+            var badgeLabel = new Label(secondaryText).MarginLeft(4.pt());
+            layoutBoxRow.Add(badgeLabel);
+        }
+
+        root.Add(layoutBoxRow);
 
 
 
 
 
-        BdtKeyBindingField layoutBoxModePrimaryField;
-        BdtKeyBindingField layoutBoxModeSecondaryField;
-        root.Add(BuildHotkeyRow(
-            BdtLocalization.SettingsLayoutBoxModeHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => LayoutBoxModeToggleHotkey,
-            hotkey =>
-            {
-                LayoutBoxModeToggleHotkey = hotkey;
-                SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out layoutBoxModePrimaryField,
-            out layoutBoxModeSecondaryField));
+//         BdtKeyBindingField layoutBoxModePrimaryField;
+//         BdtKeyBindingField layoutBoxModeSecondaryField;
+//         root.Add(BuildHotkeyRow(
+//             BdtLocalization.SettingsLayoutBoxModeHotkey.AsFormatted,
+//             BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+//             () => LayoutBoxModeToggleHotkey,
+//             hotkey =>
+//             {
+//                 LayoutBoxModeToggleHotkey = hotkey;
+//                 SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
+//             },
+//             out layoutBoxModePrimaryField,
+//             out layoutBoxModeSecondaryField));
 
         root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -520,8 +538,8 @@ internal static class DesignerToolkitSettings
             throughputToggleSecondaryField.Refresh();
             throughputAoEToolPrimaryField.Refresh();
             throughputAoEToolSecondaryField.Refresh();
-            layoutBoxModePrimaryField.Refresh();
-            layoutBoxModeSecondaryField.Refresh();
+//             layoutBoxModePrimaryField.Refresh();
+//             layoutBoxModeSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
             transportCleanupSecondaryField.Refresh();
         }));
@@ -570,13 +588,13 @@ internal static class DesignerToolkitSettings
             HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
             ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
             ThroughputAoEToolHotkey = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
-            LayoutBoxModeToggleHotkey = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
+//             LayoutBoxModeToggleHotkey = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
             TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
             SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
             SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
-            SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
+//             SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
             SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
             refresh();
             status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
@@ -639,8 +657,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputAoEToolHotkey, THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, out error))
                 return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, LayoutBoxModeToggleHotkey, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
-                return false;
+//             if (s_config != null && !TrySetHotkeyConfig(s_config, LayoutBoxModeToggleHotkey, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
+//                 return false;
 
             if (string.IsNullOrWhiteSpace(s_modDirectory))
             {
@@ -690,12 +708,12 @@ internal static class DesignerToolkitSettings
                 THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY,
                 THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
                 out bool throughputAoEToolHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                LayoutBoxModeToggleHotkey,
-                LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
-                LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
-                out bool layoutBoxModeHotkeyUpdated);
+//             updated = TryReplaceHotkeyConfigDefaults(
+//                 updated,
+//                 LayoutBoxModeToggleHotkey,
+//                 LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
+//                 LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
+//                 out bool layoutBoxModeHotkeyUpdated);
             if (!languageUpdated)
             {
                 error = "Could not find markdown_table_language default in config.json.";
@@ -746,7 +764,7 @@ internal static class DesignerToolkitSettings
                 error = "Could not find layout_box_mode_enabled default in config.json.";
                 return false;
             }
-            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated || !layoutBoxModeHotkeyUpdated)
+            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated )
             {
                 error = "Could not find hotkey defaults in config.json.";
                 return false;

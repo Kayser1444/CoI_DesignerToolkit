@@ -21,6 +21,7 @@ using Mafi.Core.Simulation;
 using Mafi.Core.Utils;
 using Mafi.Unity;
 using Mafi.Unity.Entities;
+using Mafi.Unity.InputControl;
 using Mafi.Unity.Ui.Hud;
 using Mafi.Unity.UiToolkit;
 using CoI.AutoHelpers.Localization;
@@ -79,6 +80,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         RateLimitPatches.Apply(m_harmony);
         ThroughputPatches.Apply(m_harmony);
         ThroughputInspectorPatches.Apply(m_harmony);
+        ShortcutsManagerPatches.Apply(m_harmony);
+        CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
@@ -119,7 +122,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
             var layoutBoxRendererGo = new UnityEngine.GameObject("BDT.LayoutBoxRenderer");
             var layoutBoxRenderer = layoutBoxRendererGo.AddComponent<LayoutBoxRendererMb>();
-            layoutBoxRenderer.Init(resolver.Resolve<IEntitiesManager>());
+            layoutBoxRenderer.Init(resolver.Resolve<IEntitiesManager>(), resolver.Resolve<ShortcutsManager>());
             UnityEngine.Object.DontDestroyOnLoad(layoutBoxRendererGo);
         });
         

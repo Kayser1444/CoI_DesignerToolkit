@@ -43,6 +43,11 @@ internal readonly struct BdtHotkey
         return IsPressed(Primary) || IsPressed(Secondary);
     }
 
+    public bool IsHeld()
+    {
+        return IsHeld(Primary) || IsHeld(Secondary);
+    }
+
     public BdtHotkey WithPrimary(KeyBinding binding)
     {
         return new BdtHotkey(new KeyBindings(MODE, binding, Secondary));
@@ -153,6 +158,48 @@ internal readonly struct BdtHotkey
 
         return true;
     }
+
+    public static bool IsHeld(KeyBinding binding)
+    {
+        if (binding.IsEmpty)
+            return false;
+
+        ImmutableArray<KeyCode> keys = binding.Keys;
+        KeyCode trigger = keys.Last;
+        if (!Input.GetKey(trigger))
+            return false;
+
+        for (int i = 0; i < keys.Length - 1; i++)
+        {
+            if (!Input.GetKey(keys[i]))
+                return false;
+        }
+
+        // Check if any standard modifier is pressed that is NOT in the hotkey keys
+        bool hasCtrl = false;
+        bool hasAlt = false;
+        bool hasShift = false;
+
+        for (int i = 0; i < keys.Length; i++)
+        {
+            KeyCode k = keys[i];
+            if (k == KeyCode.LeftControl || k == KeyCode.RightControl)
+                hasCtrl = true;
+            else if (k == KeyCode.LeftAlt || k == KeyCode.RightAlt)
+                hasAlt = true;
+            else if (k == KeyCode.LeftShift || k == KeyCode.RightShift)
+                hasShift = true;
+        }
+
+        if (!hasCtrl && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+            return false;
+        if (!hasAlt && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)))
+            return false;
+        if (!hasShift && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            return false;
+
+        return true;
+    }
 }
 
 internal sealed class BdtKeyBindingField : KeyBindingField
@@ -163,6 +210,8 @@ internal sealed class BdtKeyBindingField : KeyBindingField
     private readonly List<KeyCode> m_keys = new List<KeyCode>();
 
     private bool m_isEditing;
+
+    public BdtHotkey Hotkey => m_getHotkey();
 
     public BdtKeyBindingField(Func<BdtHotkey> getHotkey, Action<BdtHotkey> setHotkey, bool isPrimary)
     {
@@ -347,6 +396,52 @@ internal sealed class BdtKeyBindingUpdateHost : MonoBehaviour
     public static void Remove(BdtKeyBindingField field)
     {
         s_fields.Remove(field);
+    }
+
+    public static bool IsAnySupersetHeld(KeyBinding vanillaBinding)
+    {
+        if (vanillaBinding.IsEmpty)
+            return false;
+
+        BdtHotkey[] activeHotkeys = new[]
+        {
+            DesignerToolkitSettings.TransportCleanupHotkey,
+            DesignerToolkitSettings.HeightFilterShowLayerHotkey,
+            DesignerToolkitSettings.HeightFilterHideLayerHotkey,
+            DesignerToolkitSettings.ThroughputOverlayToggleHotkey,
+            DesignerToolkitSettings.ThroughputAoEToolHotkey
+//             DesignerToolkitSettings.LayoutBoxModeToggleHotkey
+        };
+
+        foreach (var hotkey in activeHotkeys)
+        {
+            if (IsSuperset(vanillaBinding, hotkey.Primary) && BdtHotkey.IsHeld(hotkey.Primary))
+                return true;
+
+            if (IsSuperset(vanillaBinding, hotkey.Secondary) && BdtHotkey.IsHeld(hotkey.Secondary))
+                return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsSuperset(KeyBinding vanilla, KeyBinding bdt)
+    {
+        if (bdt.IsEmpty || vanilla.IsEmpty)
+            return false;
+
+        // A superset must have MORE keys than the subset
+        if (bdt.Keys.Length <= vanilla.Keys.Length)
+            return false;
+
+        // BDT must contain ALL vanilla keys
+        foreach (var k in vanilla.Keys)
+        {
+            if (!bdt.Keys.Contains(k))
+                return false;
+        }
+
+        return true;
     }
 
     private static void EnsureInstance()

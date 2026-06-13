@@ -2,7 +2,11 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.6.2a [packaged]
+## v0.6.2b [in-progress]
+
+- Restricted custom keybinding registration in the settings UI to allow at most one non-modifier key (trigger key) to match vanilla constraints.
+
+## v0.6.2a [released]
 
 - Added **Layout Box Visualization Mode** (default hotkey `Alt-B`):
   - Renders building grid clearance / occupancy bounding boxes in 3D.
