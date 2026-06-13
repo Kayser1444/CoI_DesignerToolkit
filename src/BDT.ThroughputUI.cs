@@ -267,7 +267,7 @@ public static class ThroughputUI
             if (manager == null) return;
 
             var state = manager.GetOrCreateState(entity.Id.Value);
-            state.DaysToAverage = Math.Max(1, Math.Min(3600, val));
+            state.DaysToAverage = Math.Max(1, Math.Min(360, val));
             state.RecalculateAverage();
             monitorInput.Text(state.DaysToAverage.ToString());
             manager.SaveConfigState();
@@ -308,7 +308,7 @@ public static class ThroughputUI
                 if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) step = 10;
                 else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) step = 5;
 
-                int next = Math.Max(1, Math.Min(3600, current + sign * step));
+                int next = Math.Max(1, Math.Min(360, current + sign * step));
                 updateDays(next);
             }
         };

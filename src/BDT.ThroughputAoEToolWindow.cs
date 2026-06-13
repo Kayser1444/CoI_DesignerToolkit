@@ -168,7 +168,7 @@ public class ThroughputAoEToolWindow : Window
                 if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) step = 10;
                 else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) step = 5;
 
-                int next = Math.Max(1, Math.Min(3600, current + sign * step));
+                int next = Math.Max(1, Math.Min(360, current + sign * step));
                 m_globalDaysInput.Text(next.ToString());
             }
         };
@@ -197,7 +197,7 @@ public class ThroughputAoEToolWindow : Window
         int days = 30;
         if (int.TryParse(m_globalDaysInput.GetText(), out int daysVal))
         {
-            days = Math.Max(1, Math.Min(3600, daysVal));
+            days = Math.Max(1, Math.Min(360, daysVal));
         }
         m_globalDaysInput.Text(days.ToString());
     }
