@@ -2,6 +2,11 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.6.1 | 2026-06-13
+
+- Fixed Throughput Limiter/Monitor inspector panel disappearing when changing maps/saves without restarting the game
+- Fixed negative/zero throughput display values due to incorrect patch execution order
+
 ## v0.6.0 [packaged]
 
 - Left-aligned "Set averaging period" and right-aligned "days" unit label and numeric input controls in the Throughput AoE tool window

@@ -6,19 +6,27 @@ Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, documenting, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
+## 🆕 New in 0.6.0: Throughput monitoring
+
+BDT 0.6.0 turns throughput from a single limiter control into a full inspection workflow for blueprint testing.
+
+You can now display live items/min flow rates directly over transports, sources, sinks, and ports; color-code those overlays as a heat map; switch values to percent of maximum capacity; and configure whole selected areas at once with the new Throughput Area Tool.
+
+> **Image placeholder:** 0.6.0 throughput overview. Capture a dense running factory section with several transport overlays visible, mixed colors from the heat map, and the **Configure Throughput in Area** window open after selecting a region.
+
 ## ✨ Feature List
 
-- \[🔁 Update blueprint\]
-- \[📂 Remembered blueprint folder\]
-- \[📊 Blueprint operational stats\]
-- \[📝 Copy as Markdown\]
-- \[🧩 Symmetric entity normalization\]
-- \[⚡ Instant build mode\]
-- \[🧹 Transport cleanup tool\]
-- \[👁️ Height filter\]
-- \[🚦 Throughput Limiter\]
-- \[🚧 Legacy Belt Configurations\]
-- \[⚙️ Mod settings\]
+- [🔁 Update blueprint]
+- [📂 Remembered blueprint folder]
+- [📊 Blueprint operational stats]
+- [📝 Copy as Markdown]
+- [🧩 Symmetric entity normalization]
+- [⚡ Instant build mode]
+- [🧹 Transport cleanup tool]
+- [👁️ Height filter]
+- [🚦 Throughput tools]
+- [🚧 Legacy Belt Configurations]
+- [⚙️ Mod settings]
 
 ### 🔁 Update blueprint
 
@@ -156,9 +164,35 @@ These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. H
 
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
-### 🚦 Throughput Limiter
+### 🚦 Throughput tools
 
-BDT allows you to restrict the flow rate of transports directly via the inspector UI. A new "Throughput Limiter" panel is added to supported transports where you can enable the limit and set a maximum throughput in items/min. Limits are saved per entity but not preserved in blueprints.
+BDT adds a unified **Throughput** inspector panel for supported transports, sources, sinks, and ports. It combines live monitoring with the existing sandbox-only limiter controls, so you can see what a design is actually moving and, in sandbox mode, test how it behaves under custom capacity limits.
+
+The throughput monitor can display averaged flow rates in the world as either:
+
+- absolute throughput in items/min
+- percent of the entity's maximum capacity
+
+You can choose how many days each entity should average over, making it easier to smooth out short production bursts or inspect a design's recent behavior.
+
+> **Image placeholder:** Throughput inspector panel. Capture one selected belt/source/sink with the unified **Throughput** panel visible, showing **Display throughput**, averaging days, and limiter controls.
+
+The in-world overlay can also be color-coded with **Throughput coloring (heat map)**:
+
+- **Capacity** mode colors by the entity's maximum transport capacity.
+- **Relative** mode colors by how heavily the entity is being used.
+- A colorblind-friendly blue/yellow/red palette is available in Mod Settings.
+- Near-saturated entities get a pulsing bottleneck glow, making cramped parts of a design easier to spot.
+
+> **Image placeholder:** Heat-map comparison. Capture a working belt/pipe/port layout with clear low, medium, and high throughput colors. If possible, include one near-capacity segment with the bottleneck glow.
+
+For larger designs, the new **Throughput Area Tool** lets you drag-select a region and configure throughput display settings in bulk. The default hotkey is `Shift+Alt+T`.
+
+The area window groups selected entities by type, lets you toggle display visibility per group, and can apply a shared averaging period without closing the window. This is useful when you want to light up a full bus, production block, or testing rig without clicking every belt and pipe one by one.
+
+> **Image placeholder:** Throughput Area Tool. Capture an area selection around many entities with the bulk configuration window open, showing grouped transport types, checkboxes, and the **Set averaging period** controls.
+
+Throughput limiting remains available in sandbox mode. Limits are saved per entity but are not preserved in blueprints.
 
 This allows you to test your designs thoroughly before capturing the blueprint.
 
@@ -192,6 +226,8 @@ BDT adds a **Mod Settings** panel, accessible from the top-right **M** button in
 | **Local separators** | Force current-language separators everywhere |
 
 Settings are stored per save file. The `markdown_table_language` and `markdown_number_format` keys in `config.json` set the initial values for saves that have no stored settings yet.
+
+The **Throughput** settings control the global overlay, overlay hotkey, heat-map mode, colorblind-friendly colors, percent display, and the Throughput Area Tool hotkey.
 
 ## 📌 Notes
 

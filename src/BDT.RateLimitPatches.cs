@@ -19,7 +19,6 @@ namespace CoIDesignerToolkit;
 public static class RateLimitPatches
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.RateLimitPatches");
-    private static bool s_patched = false;
 
     private static MethodInfo? s_productsManagerProductCreated;
     private static MethodInfo? s_singleCounterReportValue;
@@ -27,21 +26,23 @@ public static class RateLimitPatches
 
     public static void Apply(Harmony harmony)
     {
-        if (s_patched) return;
-        s_patched = true;
-
         try
         {
-            s_productsManagerProductCreated = typeof(IProductsManager).GetMethod("ProductCreated", 
-                BindingFlags.Instance | BindingFlags.Public, 
-                null, 
-                new Type[] { typeof(ProductProto), typeof(Quantity), typeof(CreateReason) }, 
-                null);
-            var singleCounterType = typeof(ProductsSourceEntity).Assembly.GetType("Mafi.Core.Simulation.SingleCounter");
-            if (singleCounterType != null)
-                s_singleCounterReportValue = singleCounterType.GetMethod("ReportValue", BindingFlags.Instance | BindingFlags.Public);
-            
-            s_tpCounterSource = typeof(ProductsSourceEntity).GetField("m_tpCounter", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (s_productsManagerProductCreated == null) {
+                s_productsManagerProductCreated = typeof(IProductsManager).GetMethod("ProductCreated", 
+                    BindingFlags.Instance | BindingFlags.Public, 
+                    null, 
+                    new Type[] { typeof(ProductProto), typeof(Quantity), typeof(CreateReason) }, 
+                    null);
+            }
+            if (s_singleCounterReportValue == null) {
+                var singleCounterType = typeof(ProductsSourceEntity).Assembly.GetType("Mafi.Core.Simulation.SingleCounter");
+                if (singleCounterType != null)
+                    s_singleCounterReportValue = singleCounterType.GetMethod("ReportValue", BindingFlags.Instance | BindingFlags.Public);
+            }
+            if (s_tpCounterSource == null) {
+                s_tpCounterSource = typeof(ProductsSourceEntity).GetField("m_tpCounter", BindingFlags.Instance | BindingFlags.NonPublic);
+            }
 
             var simUpdateInterface = typeof(IEntityWithSimUpdate);
             var simUpdateMethod = simUpdateInterface.GetMethod("SimUpdate");

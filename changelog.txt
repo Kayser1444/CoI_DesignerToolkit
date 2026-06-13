@@ -1,3 +1,7 @@
+v0.6.1 | 2026-06-13
+* Fixed Throughput Limiter/Monitor inspector panel disappearing when changing maps/saves without restarting the game
+* Fixed negative/zero throughput display values due to incorrect patch execution order
+
 v0.6.0 | 2026-06-13
 * Introduced **Throughput Monitoring** as a new concept to visualize live items/min flow rates on transports and ports
 * Consolidated the new Throughput Monitor and existing **Throughput Limiter** into a single, unified **Throughput** inspector panel

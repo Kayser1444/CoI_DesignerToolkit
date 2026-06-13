@@ -20,12 +20,9 @@ namespace CoIDesignerToolkit;
 public static class ThroughputPatches
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.ThroughputPatches");
-    private static bool s_patched = false;
 
     public static void Apply(Harmony harmony)
     {
-        if (s_patched) return;
-        s_patched = true;
 
         try
         {
@@ -111,6 +108,7 @@ public static class ThroughputPatches
             if (targetMethod != null)
             {
                 var postfix = new HarmonyMethod(typeof(ThroughputPatches), nameof(ReceiveAsMuchAsFromPortPostfix));
+                postfix.priority = Priority.High;
                 harmony.Patch(targetMethod, postfix: postfix);
                 s_log.Info($"Patched ReceiveAsMuchAsFromPort on {type.Name}");
             }

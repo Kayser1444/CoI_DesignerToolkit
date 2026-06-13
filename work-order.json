@@ -1,0 +1,92 @@
+{
+  "mod": "DesignerToolkit",
+  "source_file": "src\\BDT.Localization.cs",
+  "total_keys": 83,
+  "skip_keys": [
+    "dtk.mod.name",
+    "dtk.rate_limit.items_per_min",
+    "dtk.settings.language.hybrid",
+    "dtk.settings.language.local",
+    "dtk.settings.number_format.auto"
+  ],
+  "keys": {
+    "dtk.settings.tab.markdown": {
+      "en": "Settings",
+      "context": "Settings tab title for BDT settings.",
+      "de": "Einstellungen",
+      "es": "Configuración",
+      "it": "Impostazioni",
+      "pt": "Configurações",
+      "ru": "Настройки",
+      "sv": "Inställningar",
+      "zh": "设置"
+    },
+    "dtk.settings.action.restore_defaults.tooltip": {
+      "en": "Restore the global mod defaults for all settings.",
+      "context": "Tooltip for restoring default settings.",
+      "de": "Stellt die globalen Mod-Standardwerte für alle Einstellungen wieder her.",
+      "es": "Restaurar los valores predeterminados globales de la modificación para todas las configuraciones.",
+      "it": "Ripristina i valori predefiniti globali della mod per tutte le impostazioni.",
+      "pt": "Restaurar os padrões globais do mod para todas as configurações.",
+      "ru": "Восстановить глобальные настройки мода по умолчанию для всех параметров.",
+      "sv": "Återställer moddens globala standardvärden för alla inställningar.",
+      "zh": "恢复所有设置的全局模组默认值。"
+    },
+    "dtk.settings.action.save_as_global": {
+      "en": "Save as config",
+      "context": "Button label for saving settings as config default.",
+      "de": "Als config.json speichern",
+      "es": "Guardar como config.json",
+      "it": "Salva come config.json",
+      "pt": "Salvar como config.json",
+      "ru": "Сохранить в config.json",
+      "sv": "Spara till config.json",
+      "zh": "保存为 config.json"
+    },
+    "dtk.settings.action.save_as_global.tooltip": {
+      "en": "Save these settings to config.json. They will be used as the defaults for all new games.",
+      "context": "Tooltip for saving settings as config default.",
+      "de": "Speichert diese Einstellungen in config.json. Sie werden als Standardwerte für alle neuen Spiele verwendet.",
+      "es": "Guardar estas configuraciones en config.json. Se utilizarán como valores predeterminados para todos los juegos nuevos.",
+      "it": "Salva queste impostazioni in config.json. Verranno utilizzate come predefinite per tutte le nuove partite.",
+      "pt": "Salvar estas configurações em config.json. Elas serão usadas como padrão para todos os novos jogos.",
+      "ru": "Сохранить эти настройки в config.json. Они будут использоваться по умолчанию для всех новых игр.",
+      "sv": "Sparar dessa inställningar till config.json. De kommer att användas som standard för alla nya spel.",
+      "zh": "将这些设置保存到 config.json。它们将用作所有新游戏的默认设置。"
+    },
+    "dtk.settings.throughput_toggle.label": {
+      "en": "Throughput overlay",
+      "context": "Settings row label for throughput overlay toggle.",
+      "de": "Durchsatz-Overlay",
+      "es": "Superposición de rendimiento",
+      "it": "Overlay di produttività",
+      "pt": "Sobreposição de fluxo",
+      "ru": "Оверлей пропускной способности",
+      "sv": "Genomströmningsvy",
+      "zh": "吞吐量覆盖层"
+    },
+    "dtk.settings.throughput_toggle.description": {
+      "en": "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool.",
+      "context": "Settings row description for throughput overlay visibility.",
+      "de": "Aktiviert/deaktiviert die Durchsatz-Overlays in der Spielwelt. Die Anzeige für einzelne Entitäten muss weiterhin im Inspektor oder über das Durchsatz-Werkzeug aktiviert werden.",
+      "es": "Activa/desactiva las superposiciones de rendimiento en el mundo. El interruptor de las entidades individuales aún debe activarse en el inspector o mediante la herramienta de rendimiento.",
+      "it": "Attiva/disattiva gli overlay di produttività nel mondo. L'attivazione delle singole entità deve comunque essere effettuata nell'ispettore o tramite lo strumento di produttività.",
+      "pt": "Ativa/desativa as sobreposições de fluxo no mundo. A exibição de entidades individuais ainda deve ser ativada no inspetor ou pela ferramenta de fluxo.",
+      "ru": "Включает/выключает отображение пропускной способности в мире. Отображение для отдельных объектов все еще должно быть включено в инспекторе или с помощью инструмента пропускной способности.",
+      "sv": "Aktiverar/inaktiverar genomströmningsvyer i världen. Enskilda entiteters visning måste fortfarande slås på i inspektören eller med genomströmningsverktyget.",
+      "zh": "启用/禁用世界中的吞吐量覆盖层。单个实体的显示仍须在检查器中或通过吞吐量工具开启。"
+    },
+    "dtk.settings.throughput_heatmap.label": {
+      "en": "Throughput coloring (heat map)",
+      "context": "Settings row label for throughput heat-map.",
+      "de": "Durchsatz-Färbung (Heatmap)",
+      "es": "Coloración de rendimiento (mapa de calor)",
+      "it": "Colorazione di produttività (mappa di calore)",
+      "pt": "Colorização de fluxo (mapa de calor)",
+      "ru": "Цветовая карта пропускной способности",
+      "sv": "Genomströmningsfärgläggning (färgkarta)",
+      "zh": "吞吐量着色（热力图）"
+    }
+  },
+  "keys_needing_translation": 7
+}
