@@ -275,6 +275,10 @@ public static class ThroughputUI
         monitorToggle.OnValueChanged(isOn => 
         {
             updateDisplay(isOn);
+            if (isOn && !DesignerToolkitSettings.ThroughputOverlayEnabled)
+            {
+                DesignerToolkitSettings.SetThroughputOverlayEnabled(true);
+            }
         });
 
         monitorInput.OnValueChanged((text) => 
