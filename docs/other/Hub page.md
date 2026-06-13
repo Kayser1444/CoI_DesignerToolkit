@@ -10,9 +10,9 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 
 BDT 0.6.0 turns throughput from a single limiter control into a full inspection workflow for blueprint testing.
 
-You can now display live items/min flow rates directly over transports, sources, sinks, and ports; color-code those overlays as a heat map; switch values to percent of maximum capacity; and configure whole selected areas at once with the new Throughput Area Tool.
+You can now display live items/min flow rates directly over transports, sources, sinks, and ports; make entities glow as a throughput heat map; switch values to percent of maximum capacity; and configure whole selected areas at once with the new Throughput Area Tool.
 
-> **Image placeholder:** 0.6.0 throughput overview. Capture a dense running factory section with several transport overlays visible, mixed colors from the heat map, and the **Configure Throughput in Area** window open after selecting a region.
+![image.png](/content-images/02b14618ac2ad76734545c73a4c53120522fd11e2810bbb3de95aa0870f324ce/image.png)
 
 ## ✨ Feature List
 
@@ -166,7 +166,7 @@ Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
 ### 🚦 Throughput tools
 
-BDT adds a unified **Throughput** inspector panel for supported transports, sources, sinks, and ports. It combines live monitoring with the existing sandbox-only limiter controls, so you can see what a design is actually moving and, in sandbox mode, test how it behaves under custom capacity limits.
+BDT adds a unified **Throughput** inspector panel for transport entities: belts, pipes, channels, sources, sinks, lifts, balancers, sorters, and connectors. It combines live monitoring with the existing sandbox-only limiter controls, so you can see what a design is actually moving and, in sandbox mode, test how it behaves under custom capacity limits, or measure its output precisely.
 
 The throughput monitor can display averaged flow rates in the world as either:
 
@@ -175,22 +175,22 @@ The throughput monitor can display averaged flow rates in the world as either:
 
 You can choose how many days each entity should average over, making it easier to smooth out short production bursts or inspect a design's recent behavior.
 
-> **Image placeholder:** Throughput inspector panel. Capture one selected belt/source/sink with the unified **Throughput** panel visible, showing **Display throughput**, averaging days, and limiter controls.
+![image.png](/content-images/85bf7e25f9d01b7ef2b8abec9e767fad4bd4478202e2b1910d8ab08aa609fb6e/image.png)
 
-The in-world overlay can also be color-coded with **Throughput coloring (heat map)**:
+The in-world overlay can also turn the selected entities themselves into a glowing **Throughput coloring (heat map)**. Instead of only tinting the numbers, BDT lights up the belts, pipes, ports, and layout entities underneath them, so busy lanes and starving lines are visible at a glance even in a dense blueprint test rig.
 
-- **Capacity** mode colors by the entity's maximum transport capacity.
-- **Relative** mode colors by how heavily the entity is being used.
+- **Capacity** mode colors the entity glow by the entity's maximum transport capacity.
+- **Relative** mode colors the entity glow by how heavily the entity is being used.
 - A colorblind-friendly blue/yellow/red palette is available in Mod Settings.
-- Near-saturated entities get a pulsing bottleneck glow, making cramped parts of a design easier to spot.
+- Near-saturated entities get a stronger pulsing bottleneck glow, making cramped parts of a design easier to spot.
 
-> **Image placeholder:** Heat-map comparison. Capture a working belt/pipe/port layout with clear low, medium, and high throughput colors. If possible, include one near-capacity segment with the bottleneck glow.
+![Skärmbild 2026-06-12 152725.png](/content-images/3adb0d692961a7d53caedb05c3af95fd6eacfa63cc65dd9436fe4d95fd486ea0/Sk%C3%A4rmbild2026-06-12152725.png)
 
 For larger designs, the new **Throughput Area Tool** lets you drag-select a region and configure throughput display settings in bulk. The default hotkey is `Shift+Alt+T`.
 
 The area window groups selected entities by type, lets you toggle display visibility per group, and can apply a shared averaging period without closing the window. This is useful when you want to light up a full bus, production block, or testing rig without clicking every belt and pipe one by one.
 
-> **Image placeholder:** Throughput Area Tool. Capture an area selection around many entities with the bulk configuration window open, showing grouped transport types, checkboxes, and the **Set averaging period** controls.
+![Skärmbild 2026-06-12 154718.png](/content-images/192dd7f98dbf7cd855f7167ae81c4d5be287f75ec27057c714f64a8f1db0ee98/Sk%C3%A4rmbild2026-06-12154718.png)
 
 Throughput limiting remains available in sandbox mode. Limits are saved per entity but are not preserved in blueprints.
 

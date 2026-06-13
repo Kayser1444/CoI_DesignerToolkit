@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.6.2 [packaged]
+## v0.6.2 [released]
 
 - Added entity glowing effects reflecting the current heatmap color logic when the throughput overlay is active
 - Added independent toggles for the heatmap glow and the text overlays
