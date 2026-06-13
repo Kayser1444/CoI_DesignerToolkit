@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.6.2a [unreleased]
+## v0.6.2a [packaged]
 
 - Added **Layout Box Visualization Mode** (default hotkey `Alt-B`):
   - Renders building grid clearance / occupancy bounding boxes in 3D.
