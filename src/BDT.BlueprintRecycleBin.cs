@@ -7,6 +7,7 @@
 // intended to contain only original mod code/configuration; if MaFi Games material
 // is included by mistake, I intend to correct it promptly upon discovery or notice.
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
 using Mafi;
@@ -14,6 +15,7 @@ using Mafi.Collections.ImmutableCollections;
 using Mafi.Core.Entities.Blueprints;
 using Mafi.Localization;
 using Mafi.Unity.Ui.Blueprints;
+using System.Text.RegularExpressions;
 using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
@@ -92,29 +94,30 @@ internal static class BlueprintRecycleBin
             }
 
             // 2. If deleting from within the Recycle Bin folder, allow permanent delete
-            IBlueprintsFolder? recycleBin = FindRecycleBinFolder(root);
-            if (recycleBin != null && (parentFolder == recycleBin || IsAncestorOf(recycleBin, parentFolder)))
+            if (IsInRecycleBin(parentFolder, root))
             {
                 return true;
             }
 
             // 3. Create Recycle Bin if not exists
+            IBlueprintsFolder? recycleBin = FindRecycleBinFolder(root);
             if (recycleBin == null)
             {
                 recycleBin = CreateRecycleBinFolder(__instance, root);
             }
 
-            // 4. Determine unique name with suffix _n (first one _0)
-            string uniqueName = GetUniqueName(recycleBin, item.Name);
+            // 4. Determine unique name with suffix _n (first one _0) in the replicated folder path
+            IBlueprintsFolder targetFolder = ReplicateFolderHierarchy(__instance, recycleBin, parentFolder);
+            string uniqueName = GetUniqueName(targetFolder, item.Name);
 
-            // 5. Copy the item to the Recycle Bin
+            // 5. Copy the item to the Recycle Bin target folder
             if (item is IBlueprint bp)
             {
-                CopyBlueprintToFolder(__instance, bp, recycleBin, uniqueName);
+                CopyBlueprintToFolder(__instance, bp, targetFolder, uniqueName);
             }
             else if (item is IBlueprintsFolder folder)
             {
-                CopyFolderRecursively(__instance, folder, recycleBin, uniqueName);
+                CopyFolderRecursively(__instance, folder, targetFolder, uniqueName);
             }
         }
         catch (Exception ex)
@@ -138,33 +141,10 @@ internal static class BlueprintRecycleBin
             IBlueprintsFolder root = window.BlueprintsLibrary.Root;
             if (root == null) return;
 
-            IBlueprintsFolder? recycleBin = FindRecycleBinFolder(root);
-            
-            // Determine if the CurrentFolder is the Recycle Bin or nested inside it
-            bool inBin = false;
-            if (recycleBin != null)
-            {
-                if (window.CurrentFolder == recycleBin)
-                {
-                    inBin = true;
-                }
-                else
-                {
-                    IBlueprintsFolder? current = window.CurrentFolder.ParentFolder.ValueOrNull;
-                    while (current != null)
-                    {
-                        if (current == recycleBin)
-                        {
-                            inBin = true;
-                            break;
-                        }
-                        current = current.ParentFolder.ValueOrNull;
-                    }
-                }
-            }
+            // Determine if the item being deleted is the Recycle Bin or nested inside it
+            bool inBin = IsInRecycleBin(window.CurrentFolder, root);
 
-            // If we are NOT deleting from within the Recycle Bin, check if the selected item itself is the Recycle Bin folder
-            if (!inBin && recycleBin != null)
+            if (!inBin)
             {
                 var selectedItemField = window.GetType().GetField("m_selectedItem", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (selectedItemField != null)
@@ -183,7 +163,7 @@ internal static class BlueprintRecycleBin
                                 if (folderProp != null)
                                 {
                                     var folder = folderProp.GetValue(tile) as IBlueprintsFolder;
-                                    if (folder != null && (folder == recycleBin || IsAncestorOf(recycleBin, folder)))
+                                    if (folder != null && IsInRecycleBin(folder, root))
                                     {
                                         inBin = true;
                                     }
@@ -206,24 +186,78 @@ internal static class BlueprintRecycleBin
         }
     }
 
+    private static IBlueprintsFolder ReplicateFolderHierarchy(BlueprintsLibrary library, IBlueprintsFolder recycleBin, IBlueprintsFolder parentFolder)
+    {
+        IBlueprintsFolder root = library.Root;
+        if (parentFolder == root)
+        {
+            return recycleBin;
+        }
+
+        var path = new List<IBlueprintsFolder>();
+        IBlueprintsFolder? current = parentFolder;
+        while (current != null && current != root)
+        {
+            if (IsInRecycleBin(current, root))
+            {
+                break;
+            }
+            path.Insert(0, current);
+            current = current.ParentFolder.ValueOrNull;
+        }
+
+        IBlueprintsFolder currentDest = recycleBin;
+        foreach (IBlueprintsFolder pathFolder in path)
+        {
+            IBlueprintsFolder? nextDest = null;
+            for (int i = 0; i < currentDest.Folders.Count; i++)
+            {
+                if (currentDest.Folders[i].Name == pathFolder.Name)
+                {
+                    nextDest = currentDest.Folders[i];
+                    break;
+                }
+            }
+
+            if (nextDest == null)
+            {
+                nextDest = library.AddNewFolder(currentDest);
+                library.RenameItem(nextDest, pathFolder.Name);
+                if (!string.IsNullOrEmpty(pathFolder.Desc))
+                {
+                    library.SetDescription(nextDest, pathFolder.Desc);
+                }
+            }
+            currentDest = nextDest;
+        }
+
+        return currentDest;
+    }
+
+    private static string StripRichText(string input)
+    {
+        if (string.IsNullOrEmpty(input)) return string.Empty;
+        return Regex.Replace(input, "<.*?>", string.Empty);
+    }
+
     private static bool IsRecycleBinFolder(IBlueprintsFolder folder, IBlueprintsFolder root)
     {
         if (folder.ParentFolder.ValueOrNull != root) return false;
         string configName = DesignerToolkitSettings.RecycleBinFolderName;
-        string coloredConfigName = $"<color=grey>{configName}</color>";
-        return folder.Name == configName || folder.Name == "Recycle Bin" ||
-               folder.Name == coloredConfigName || folder.Name == "<color=grey>Recycle Bin</color>";
+        string strippedName = StripRichText(folder.Name);
+        return string.Equals(strippedName, configName, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(strippedName, "Recycle Bin", StringComparison.OrdinalIgnoreCase);
     }
 
     private static IBlueprintsFolder? FindRecycleBinFolder(IBlueprintsFolder root)
     {
         string configName = DesignerToolkitSettings.RecycleBinFolderName;
-        string coloredConfigName = $"<color=grey>{configName}</color>";
         for (int i = 0; i < root.Folders.Count; i++)
         {
             var folder = root.Folders[i];
-            if (folder.Name == configName || folder.Name == "Recycle Bin" ||
-                folder.Name == coloredConfigName || folder.Name == "<color=grey>Recycle Bin</color>")
+            string strippedName = StripRichText(folder.Name);
+            if (string.Equals(strippedName, configName, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(strippedName, "Recycle Bin", StringComparison.OrdinalIgnoreCase))
             {
                 return folder;
             }
@@ -239,12 +273,15 @@ internal static class BlueprintRecycleBin
         return newBin;
     }
 
-    private static bool IsAncestorOf(IBlueprintsFolder ancestor, IBlueprintsFolder folder)
+    private static bool IsInRecycleBin(IBlueprintsFolder folder, IBlueprintsFolder root)
     {
-        IBlueprintsFolder? current = folder.ParentFolder.ValueOrNull;
-        while (current != null)
+        IBlueprintsFolder? current = folder;
+        while (current != null && current != root)
         {
-            if (current == ancestor) return true;
+            if (IsRecycleBinFolder(current, root))
+            {
+                return true;
+            }
             current = current.ParentFolder.ValueOrNull;
         }
         return false;

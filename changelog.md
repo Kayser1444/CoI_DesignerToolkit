@@ -2,14 +2,20 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.6.2b [unreleased]
+## v0.7.0 [packaged]
 
+- Added **Undo Place Blueprint** feature (default hotkey `Ctrl+Z`):
+  - Allows reverting blueprint placement, copy-paste, and force-placement (Shift-click) actions.
+  - Instantly cancels placed ghosts or starts deconstruction of fully built structures (destroys immediately in sandbox mode).
+  - Restores overwritten pre-existing ghosts and entities, and reverts pasted surface designations or decals.
+  - History is kept purely transient (in-memory) and is not serialized into saves, satisfying the mod's save removability constraints.
 - Restricted custom keybinding registration in the settings UI to allow at most one non-modifier key (trigger key) to match vanilla constraints.
 - Added product buffer content display panels to the balancer (`ZipperInspector`) using reflection to read its internal input and circular output buffers.
 - Added a custom Quick Remove (trashcan) button to the balancer content panel, supporting dynamic Upoints cost calculation using `QuickDeliverCostHelper`.
 - Intercepted and handled `QuickRemoveFromEntityCmd` for balancers in `EntitiesCommandsProcessor` prefix patch to cleanly empty their buffers via reflection and consume the required Upoints.
 - Added a **Blueprint Recycle Bin** feature:
   - Automatically copies blueprints or folders to a special root folder (default name `"Recycle Bin"`) when they are deleted or updated.
+  - Replicates the item's original parent folder path inside the Recycle Bin (e.g., deleting `/Temp/ABC/MyBlueprint` moves it to `/Recycle Bin/Temp/ABC/MyBlueprint_0`).
   - Suffixes copies with `_n`, starting with `_0` (e.g. `Name_0`), to avoid collisions.
   - Suppresses the confirmation popup for deletions occurring outside the Recycle Bin folder when enabled.
   - Deletions inside the Recycle Bin folder (or nested inside it), as well as deleting the Recycle Bin folder itself, remain permanent and prompt the default confirmation.
@@ -18,6 +24,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
   - Validates folder names (non-empty, non-whitespace, <= 60 characters) and displays an error state for invalid input.
   - Dynamically renames the Recycle Bin folder in the blueprint library when the folder name setting is modified, unless a folder with the new name already exists.
   - Fully localized settings and tooltips across all supported languages (German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese).
+- Changed the settings tab icon to match the blueprint book toolbar icon.
 - Fixed vertical centering of the power icon and its label in the blueprint detail panel's operational cost summary.
 
 ## v0.6.2a [released]

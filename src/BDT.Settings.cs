@@ -99,7 +99,7 @@ internal static class DesignerToolkitSettings
 
     private const int SETTINGS_SCHEMA_VERSION = 1;
     private const string SETTINGS_TAB_ICON_ASSET =
-        "Assets/Unity/UserInterface/General/Blueprint.svg";
+        "Assets/Unity/UserInterface/Toolbar/Blueprints.svg";
     private static readonly Percent SETTINGS_LABEL_WIDTH = 34.Percent();
     private static readonly Percent SETTINGS_COLUMN_WIDTH = 96.Percent();
     private static readonly Px SETTINGS_SECTION_INDENT = 4.pt();
@@ -182,6 +182,12 @@ internal static class DesignerToolkitSettings
         }
     }
 
+    private static string StripRichText(string input)
+    {
+        if (string.IsNullOrEmpty(input)) return string.Empty;
+        return Regex.Replace(input, "<.*?>", string.Empty);
+    }
+
     private static void UpdateRecycleBinFolderFormatting(BlueprintsLibrary library)
     {
         IBlueprintsFolder root = library.Root;
@@ -195,8 +201,9 @@ internal static class DesignerToolkitSettings
         for (int i = 0; i < root.Folders.Count; i++)
         {
             var folder = root.Folders[i];
-            if (folder.Name == configName || folder.Name == "Recycle Bin" ||
-                folder.Name == coloredName || folder.Name == "<color=grey>Recycle Bin</color>")
+            string strippedName = StripRichText(folder.Name);
+            if (string.Equals(strippedName, configName, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(strippedName, "Recycle Bin", StringComparison.OrdinalIgnoreCase))
             {
                 targetFolder = folder;
                 break;
@@ -240,7 +247,6 @@ internal static class DesignerToolkitSettings
         IBlueprintsFolder root = library.Root;
         if (root == null) return;
 
-        string targetOldName = UseRecycleBin ? $"<color=grey>{oldName}</color>" : oldName;
         string targetNewName = UseRecycleBin ? $"<color=grey>{newName}</color>" : newName;
 
         IBlueprintsFolder? oldFolder = null;
@@ -249,11 +255,13 @@ internal static class DesignerToolkitSettings
         for (int i = 0; i < root.Folders.Count; i++)
         {
             var folder = root.Folders[i];
-            if (folder.Name == oldName || folder.Name == targetOldName)
+            string strippedName = StripRichText(folder.Name);
+            if (string.Equals(strippedName, oldName, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(strippedName, "Recycle Bin", StringComparison.OrdinalIgnoreCase))
             {
                 oldFolder = folder;
             }
-            else if (folder.Name == newName || folder.Name == targetNewName)
+            else if (string.Equals(strippedName, newName, StringComparison.OrdinalIgnoreCase))
             {
                 newFolder = folder;
             }

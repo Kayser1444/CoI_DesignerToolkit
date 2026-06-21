@@ -1,3 +1,12 @@
+v0.7.0 | 2026-06-21
+* Added **Undo Place Blueprint** feature (default hotkey `Ctrl+Z`): reverts blueprint placements, copy-pasting, and force-placements (Shift-click) by canceling placed ghosts, deconstructing fully built structures (or destroying them in sandbox mode), restoring overwritten pre-existing entities or ghosts, and reverting pasted surface designations and decals
+* Added **Layout Box Visualization Mode** (default hotkey `Alt-B`): renders building clearance and occupancy bounding boxes in 3D to clearly highlight vertical clearance levels
+* Added **Blueprint Recycle Bin** feature (configurable in settings): automatically copies blueprints or folders to a special "Recycle Bin" folder when deleted or updated to prevent accidental permanent loss
+* Added product buffer content display panels and a Quick Remove button to the balancer inspector panel to easily empty balancer buffers
+* Restricted custom keybinding registration in the settings UI to allow at most one non-modifier key to match vanilla constraints
+* Changed the settings tab icon to match the blueprint book toolbar icon
+* Fixed: vertical centering of the power icon and its label in the blueprint detail panel's operational cost summary
+
 v0.6.2 | 2026-06-13
 * Added entity glowing effects reflecting the current heatmap color logic when the throughput overlay is active
 * Added independent settings toggles for the heatmap glow and the text overlays
