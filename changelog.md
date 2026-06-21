@@ -2,9 +2,23 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.6.2b [in-progress]
+## v0.6.2b [unreleased]
 
 - Restricted custom keybinding registration in the settings UI to allow at most one non-modifier key (trigger key) to match vanilla constraints.
+- Added product buffer content display panels to the balancer (`ZipperInspector`) using reflection to read its internal input and circular output buffers.
+- Added a custom Quick Remove (trashcan) button to the balancer content panel, supporting dynamic Upoints cost calculation using `QuickDeliverCostHelper`.
+- Intercepted and handled `QuickRemoveFromEntityCmd` for balancers in `EntitiesCommandsProcessor` prefix patch to cleanly empty their buffers via reflection and consume the required Upoints.
+- Added a **Blueprint Recycle Bin** feature:
+  - Automatically copies blueprints or folders to a special root folder (default name `"Recycle Bin"`) when they are deleted or updated.
+  - Suffixes copies with `_n`, starting with `_0` (e.g. `Name_0`), to avoid collisions.
+  - Suppresses the confirmation popup for deletions occurring outside the Recycle Bin folder when enabled.
+  - Deletions inside the Recycle Bin folder (or nested inside it), as well as deleting the Recycle Bin folder itself, remain permanent and prompt the default confirmation.
+  - Encapsulates the Recycle Bin folder name with `<color=grey>...</color>` when active, so it is rendered in grey in the blueprint book UI.
+  - Added setting toggle (`Use recycle bin`) and text input field (`Folder name`) under a new `RECYCLE BIN` section in mod settings.
+  - Validates folder names (non-empty, non-whitespace, <= 60 characters) and displays an error state for invalid input.
+  - Dynamically renames the Recycle Bin folder in the blueprint library when the folder name setting is modified, unless a folder with the new name already exists.
+  - Fully localized settings and tooltips across all supported languages (German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese).
+- Fixed vertical centering of the power icon and its label in the blueprint detail panel's operational cost summary.
 
 ## v0.6.2a [released]
 

@@ -72,6 +72,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     {
         m_harmony = new Harmony("DesignerToolkit");
         BlueprintUpdater.ApplyPatches(m_harmony);
+        BlueprintRecycleBin.ApplyPatches(m_harmony);
         FolderPersistence.ApplyPatches(m_harmony, JsonConfig);
         BlueprintStats.ApplyPatches(m_harmony);
         BlueprintExport.ApplyPatches(m_harmony);
@@ -80,6 +81,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         RateLimitPatches.Apply(m_harmony);
         ThroughputPatches.Apply(m_harmony);
         ThroughputInspectorPatches.Apply(m_harmony);
+        ContentDisplayPatches.Apply(m_harmony);
         ShortcutsManagerPatches.Apply(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
@@ -103,6 +105,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath);
+        DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
         DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
 
         m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);

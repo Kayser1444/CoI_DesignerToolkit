@@ -354,5 +354,25 @@
   [
     "dtk.settings.layout_box_hotkey.label",
     "Tecla de atalho do modo de caixa de layout"
+  ],
+  [
+    "dtk.settings.recycle_bin.heading",
+    "RECICLAGEM"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.label",
+    "Usar lixeira"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.description",
+    "Quando ativado, os blueprints e as pastas são copiados para a lixeira antes da exclusão ou atualização, e o pop-up de confirmação de exclusão é suprimido."
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.label",
+    "Nome da pasta"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.description",
+    "O nome da pasta na raiz do livro do blueprint a ser usada como Lixeira."
   ]
 ]

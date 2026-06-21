@@ -354,5 +354,25 @@
   [
     "dtk.settings.layout_box_hotkey.label",
     "Snabbtangent för layoutboxläge"
+  ],
+  [
+    "dtk.settings.recycle_bin.heading",
+    "ÅTERVINDEN"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.label",
+    "Använd papperskorgen"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.description",
+    "När det är aktiverat kopieras ritningar och mappar till papperskorgen före radering eller uppdateringar, och popup-fönstret för borttagningsbekräftelse döljs."
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.label",
+    "Mappnamn"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.description",
+    "Mappnamnet under ritningsbokroten som ska användas som papperskorgen."
   ]
 ]

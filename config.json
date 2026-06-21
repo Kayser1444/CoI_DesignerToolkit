@@ -100,6 +100,14 @@
     "default": false,
     "description": "Initial layout box mode visibility state for saves without BDT settings state. When enabled, building occupancy hitboxes will render in 3D."
   },
+  "use_recycle_bin": {
+    "default": true,
+    "description": "Initial state for using the blueprint recycle bin. When enabled, deleted or updated blueprints are copied to the recycle bin folder."
+  },
+  "recycle_bin_folder_name": {
+    "default": "Recycle Bin",
+    "description": "Initial folder name for the blueprint recycle bin."
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."

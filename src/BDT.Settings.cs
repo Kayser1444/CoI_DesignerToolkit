@@ -11,6 +11,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Mafi;
 using Mafi.Collections;
+using Mafi.Core.Entities.Blueprints;
 using Mafi.Core.Game;
 using Mafi.Core.Mods;
 using Mafi.Localization;
@@ -84,6 +85,8 @@ internal static class DesignerToolkitSettings
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY = "throughput_aoe_tool_hotkey_primary";
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY = "throughput_aoe_tool_hotkey_secondary";
     private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
+    private const string USE_RECYCLE_BIN_KEY = "use_recycle_bin";
+    private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
 //     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY = "layout_box_mode_toggle_hotkey_primary";
 //     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY = "layout_box_mode_toggle_hotkey_secondary";
 
@@ -131,6 +134,133 @@ internal static class DesignerToolkitSettings
     public static bool ThroughputColorblindMode { get; private set; } = false;
     public static bool ThroughputShowAsPercent { get; private set; } = false;
     public static bool LayoutBoxModeEnabled { get; private set; } = false;
+    public static bool UseRecycleBin { get; private set; } = true;
+    public static string RecycleBinFolderName { get; private set; } = "Recycle Bin";
+
+    private static Func<BlueprintsLibrary>? s_blueprintsLibraryProvider;
+
+    public static void SetBlueprintsLibraryProvider(Func<BlueprintsLibrary> provider)
+    {
+        s_blueprintsLibraryProvider = provider;
+    }
+
+    public static string GetFormattedRecycleBinName()
+    {
+        string name = RecycleBinFolderName;
+        if (UseRecycleBin)
+        {
+            return $"<color=grey>{name}</color>";
+        }
+        return name;
+    }
+
+    private static void SetUseRecycleBin(bool enabled)
+    {
+        if (UseRecycleBin == enabled)
+            return;
+
+        UseRecycleBin = enabled;
+
+        if (s_blueprintsLibraryProvider != null)
+        {
+            try
+            {
+                var library = s_blueprintsLibraryProvider();
+                if (library != null)
+                {
+                    UpdateRecycleBinFolderFormatting(library);
+                }
+            }
+            catch (Exception ex)
+            {
+                s_log.Exception(ex, "Failed to update recycle bin folder formatting on toggle");
+            }
+        }
+    }
+
+    private static void UpdateRecycleBinFolderFormatting(BlueprintsLibrary library)
+    {
+        IBlueprintsFolder root = library.Root;
+        if (root == null) return;
+
+        string configName = RecycleBinFolderName;
+        string coloredName = $"<color=grey>{configName}</color>";
+        string targetName = UseRecycleBin ? coloredName : configName;
+
+        IBlueprintsFolder? targetFolder = null;
+        for (int i = 0; i < root.Folders.Count; i++)
+        {
+            var folder = root.Folders[i];
+            if (folder.Name == configName || folder.Name == "Recycle Bin" ||
+                folder.Name == coloredName || folder.Name == "<color=grey>Recycle Bin</color>")
+            {
+                targetFolder = folder;
+                break;
+            }
+        }
+
+        if (targetFolder != null && targetFolder.Name != targetName)
+        {
+            library.RenameItem(targetFolder, targetName);
+            s_log.Info($"Updated recycle bin folder formatting to '{targetName}'");
+        }
+    }
+
+    private static void SetRecycleBinFolderName(string newName)
+    {
+        if (RecycleBinFolderName == newName)
+            return;
+
+        string oldName = RecycleBinFolderName;
+        RecycleBinFolderName = newName;
+
+        if (s_blueprintsLibraryProvider != null)
+        {
+            try
+            {
+                var library = s_blueprintsLibraryProvider();
+                if (library != null)
+                {
+                    RenameRecycleBinFolder(library, oldName, newName);
+                }
+            }
+            catch (Exception ex)
+            {
+                s_log.Exception(ex, "Failed to rename recycle bin folder on settings change");
+            }
+        }
+    }
+
+    private static void RenameRecycleBinFolder(BlueprintsLibrary library, string oldName, string newName)
+    {
+        IBlueprintsFolder root = library.Root;
+        if (root == null) return;
+
+        string targetOldName = UseRecycleBin ? $"<color=grey>{oldName}</color>" : oldName;
+        string targetNewName = UseRecycleBin ? $"<color=grey>{newName}</color>" : newName;
+
+        IBlueprintsFolder? oldFolder = null;
+        IBlueprintsFolder? newFolder = null;
+
+        for (int i = 0; i < root.Folders.Count; i++)
+        {
+            var folder = root.Folders[i];
+            if (folder.Name == oldName || folder.Name == targetOldName)
+            {
+                oldFolder = folder;
+            }
+            else if (folder.Name == newName || folder.Name == targetNewName)
+            {
+                newFolder = folder;
+            }
+        }
+
+        if (oldFolder != null && newFolder == null)
+        {
+            library.RenameItem(oldFolder, targetNewName);
+            s_log.Info($"Renamed recycle bin folder from '{oldFolder.Name}' to '{targetNewName}'");
+        }
+    }
 
     public static BdtHotkey TransportCleanupHotkey { get; private set; } = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
     public static BdtHotkey HeightFilterShowLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
@@ -220,6 +350,9 @@ internal static class DesignerToolkitSettings
 //             "", "", "", "",
 //             DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
 
+        bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
+        string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
+
         TransportCleanupHotkey = initialTransportCleanupHotkey;
         HeightFilterShowLayerHotkey = initialShowLayerHotkey;
         HeightFilterHideLayerHotkey = initialHideLayerHotkey;
@@ -238,7 +371,9 @@ internal static class DesignerToolkitSettings
             initialThroughputHeatmapMode,
             initialThroughputColorblindMode,
             initialThroughputShowAsPercent,
-            initialLayoutBoxModeEnabled);
+            initialLayoutBoxModeEnabled,
+            initialUseRecycleBin,
+            initialRecycleBinFolderName);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -487,6 +622,34 @@ internal static class DesignerToolkitSettings
 //             out layoutBoxModePrimaryField,
 //             out layoutBoxModeSecondaryField));
 
+        root.Add(new Title(BdtLocalization.SettingsRecycleBinHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        Toggle recycleBinToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsUseRecycleBin.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsUseRecycleBinDescription.AsFormatted)
+            .Value(UseRecycleBin)
+            .OnValueChanged(SetUseRecycleBin);
+        root.Add(recycleBinToggle);
+
+        TextField? recycleBinFolderNameField = null;
+        recycleBinFolderNameField = new TextField()
+            .Label(BdtLocalization.SettingsRecycleBinFolderName.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsRecycleBinFolderNameDescription.AsFormatted)
+            .LabelWidth(SETTINGS_LABEL_WIDTH)
+            .CharLimit(60)
+            .Text(RecycleBinFolderName)
+            .OnEditEnd(name => {
+                bool isValid = !string.IsNullOrWhiteSpace(name) && name.Length <= 60;
+                if (isValid)
+                {
+                    SetRecycleBinFolderName(name);
+                }
+                recycleBinFolderNameField!.MarkAsError(!isValid, "Invalid folder name. Must not be empty and under 60 characters.".AsLoc());
+            });
+        root.Add(recycleBinFolderNameField);
+
         root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -530,6 +693,9 @@ internal static class DesignerToolkitSettings
             showAsPercentToggle.Value(ThroughputShowAsPercent);
             layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
+            recycleBinToggle.Value(UseRecycleBin);
+            recycleBinFolderNameField.Text(RecycleBinFolderName);
+            recycleBinFolderNameField.MarkAsError(false);
             showLayerPrimaryField.Refresh();
             showLayerSecondaryField.Refresh();
             hideLayerPrimaryField.Refresh();
@@ -584,6 +750,8 @@ internal static class DesignerToolkitSettings
             SetThroughputHeatmapMode(ThroughputHeatmapMode.Capacity);
             SetThroughputColorblindMode(false);
             SetThroughputShowAsPercent(false);
+            SetUseRecycleBin(true);
+            SetRecycleBinFolderName("Recycle Bin");
             HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
             HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
             ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
@@ -645,7 +813,9 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out error))
                 return false;
-            if (s_config != null && !s_config.TrySetValue(LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out error))
+            if (s_config != null && !s_config.TrySetValue(USE_RECYCLE_BIN_KEY, UseRecycleBin, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
@@ -678,6 +848,8 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out bool throughputColorblindModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
             updated = TryReplaceConfigDefault(updated, LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out bool layoutBoxModeEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
+            updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
             updated = TryReplaceHotkeyConfigDefaults(
                 updated,
                 TransportCleanupHotkey,
@@ -762,6 +934,16 @@ internal static class DesignerToolkitSettings
             if (!layoutBoxModeEnabledUpdated)
             {
                 error = "Could not find layout_box_mode_enabled default in config.json.";
+                return false;
+            }
+            if (!useRbUpdated)
+            {
+                error = "Could not find use_recycle_bin default in config.json.";
+                return false;
+            }
+            if (!rbNameUpdated)
+            {
+                error = "Could not find recycle_bin_folder_name default in config.json.";
                 return false;
             }
             if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated )
@@ -1001,7 +1183,9 @@ internal static class DesignerToolkitSettings
         ThroughputHeatmapMode initialThroughputHeatmapMode,
         bool initialThroughputColorblindMode,
         bool initialThroughputShowAsPercent,
-        bool initialLayoutBoxModeEnabled)
+        bool initialLayoutBoxModeEnabled,
+        bool initialUseRecycleBin,
+        string initialRecycleBinFolderName)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
@@ -1013,6 +1197,8 @@ internal static class DesignerToolkitSettings
         ThroughputColorblindMode = initialThroughputColorblindMode;
         ThroughputShowAsPercent = initialThroughputShowAsPercent;
         LayoutBoxModeEnabled = initialLayoutBoxModeEnabled;
+        UseRecycleBin = initialUseRecycleBin;
+        RecycleBinFolderName = initialRecycleBinFolderName;
 
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
@@ -1050,6 +1236,10 @@ internal static class DesignerToolkitSettings
                 ThroughputShowAsPercent = showAsPercent;
             if (TryGetBool(root, "layoutBoxModeEnabled", out bool layoutBoxModeEnabled))
                 LayoutBoxModeEnabled = layoutBoxModeEnabled;
+            if (TryGetBool(root, "useRecycleBin", out bool useRecycleBin))
+                UseRecycleBin = useRecycleBin;
+            if (TryGetString(root, "recycleBinFolderName", out string recycleBinFolderName))
+                RecycleBinFolderName = recycleBinFolderName;
         }
         catch (Exception ex)
         {
@@ -1073,6 +1263,8 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("throughputColorblindMode", ThroughputColorblindMode);
         writer.AppendBoolField("throughputShowAsPercent", ThroughputShowAsPercent);
         writer.AppendBoolField("layoutBoxModeEnabled", LayoutBoxModeEnabled);
+        writer.AppendBoolField("useRecycleBin", UseRecycleBin);
+        writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
     }

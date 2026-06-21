@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 89,
+  "total_keys": 94,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -14,46 +14,68 @@
       "en": "LAYOUT",
       "context": "Settings section heading for layout box mode.",
       "de": "LAYOUT",
+      "pt": "LAYOUT",
+      "sv": "LAYOUT",
       "es": "DISPOSICIÓN",
       "it": "DISPOSIZIONE",
-      "pt": "LAYOUT",
       "ru": "МАКЕТ",
-      "sv": "LAYOUT",
       "zh": "布局"
     },
-    "dtk.settings.layout_box.label": {
-      "en": "Layout box mode",
-      "context": "Settings row label for layout box mode.",
-      "de": "Layoutbox-Modus",
-      "es": "Modo cuadro de diseño",
-      "it": "Modalità casella di layout",
-      "pt": "Modo de caixa de layout",
-      "ru": "Режим макета",
-      "sv": "Layoutboxläge",
-      "zh": "布局框模式"
+    "dtk.settings.recycle_bin.heading": {
+      "en": "RECYCLE BIN",
+      "context": "Settings section heading for Recycle Bin settings.",
+      "de": "RECYCLE-BEHÄLTER",
+      "es": "PAPELERA DE RECICLAJE",
+      "it": "CONTENITORE PER IL RICICLAGGIO",
+      "pt": "RECICLAGEM",
+      "ru": "МУСОРНАЯ БАНКА",
+      "sv": "ÅTERVINDEN",
+      "zh": "回收站"
     },
-    "dtk.settings.layout_box.description": {
-      "en": "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.",
-      "context": "Settings description for layout box mode.",
-      "de": "Ermöglicht eine Röntgenüberlagerung, die Voxel-Begrenzungsrahmen um Gebäude herum darstellt, um deren Anordnung und Abstände anzuzeigen.",
-      "es": "Permite una superposición de rayos X que representa cuadros delimitadores de vóxeles alrededor de los edificios para mostrar su diseño y espacio libre.",
-      "it": "Abilita una sovrapposizione di raggi X che esegue il rendering dei riquadri di delimitazione dei voxel attorno agli edifici per mostrarne la disposizione e lo spazio libero.",
-      "pt": "Permite que uma sobreposição de raio-X renderize caixas delimitadoras de voxel ao redor de edifícios para mostrar seu layout e espaço livre.",
-      "ru": "Включает наложение рентгеновских лучей, отображающее воксельные рамки вокруг зданий, чтобы показать их планировку и зазор.",
-      "sv": "Möjliggör en röntgenöverlagring som återger voxelbegränsningsrutor runt byggnader för att visa deras layout och utrymme.",
-      "zh": "启用 X 射线叠加渲染建筑物周围的体素边界框，以显示其布局和间隙。"
+    "dtk.settings.use_recycle_bin.label": {
+      "en": "Use recycle bin",
+      "context": "Settings checkbox label for enabling recycle bin.",
+      "de": "Verwenden Sie den Papierkorb",
+      "es": "Usar papelera de reciclaje",
+      "it": "Usa il cestino",
+      "pt": "Usar lixeira",
+      "ru": "Используйте корзину",
+      "sv": "Använd papperskorgen",
+      "zh": "使用回收站"
     },
-    "dtk.settings.layout_box_hotkey.label": {
-      "en": "Layout box mode hotkey",
-      "context": "Settings row label for layout box mode hotkey.",
-      "de": "Hotkey für den Layoutbox-Modus",
-      "es": "Tecla de acceso rápido al modo cuadro de diseño",
-      "it": "Tasto di scelta rapida della modalità casella di layout",
-      "pt": "Tecla de atalho do modo de caixa de layout",
-      "ru": "Горячая клавиша режима макета",
-      "sv": "Snabbtangent för layoutboxläge",
-      "zh": "布局框模式热键"
+    "dtk.settings.use_recycle_bin.description": {
+      "en": "When enabled, blueprints and folders are copied to the recycle bin before deletion or updates, and the delete confirmation popup is suppressed.",
+      "context": "Settings checkbox description for enabling recycle bin.",
+      "de": "Wenn diese Option aktiviert ist, werden Blueprints und Ordner vor dem Löschen oder Aktualisieren in den Papierkorb kopiert und das Popup zur Bestätigung des Löschvorgangs wird unterdrückt.",
+      "es": "Cuando está habilitado, los planos y las carpetas se copian a la papelera de reciclaje antes de eliminarlos o actualizarlos, y se suprime la ventana emergente de confirmación de eliminación.",
+      "it": "Se abilitati, i progetti e le cartelle vengono copiati nel cestino prima dell'eliminazione o degli aggiornamenti e il popup di conferma dell'eliminazione viene eliminato.",
+      "pt": "Quando ativado, os blueprints e as pastas são copiados para a lixeira antes da exclusão ou atualização, e o pop-up de confirmação de exclusão é suprimido.",
+      "ru": "Если этот параметр включен, чертежи и папки копируются в корзину перед удалением или обновлением, а всплывающее окно подтверждения удаления подавляется.",
+      "sv": "När det är aktiverat kopieras ritningar och mappar till papperskorgen före radering eller uppdateringar, och popup-fönstret för borttagningsbekräftelse döljs.",
+      "zh": "启用后，蓝图和文件夹将在删除或更新之前复制到回收站，并且删除确认弹出窗口将被抑制。"
+    },
+    "dtk.settings.recycle_bin_folder_name.label": {
+      "en": "Folder name",
+      "context": "Settings text field label for recycle bin folder name.",
+      "de": "Ordnername",
+      "es": "Nombre de la carpeta",
+      "it": "Nome della cartella",
+      "pt": "Nome da pasta",
+      "ru": "Имя папки",
+      "sv": "Mappnamn",
+      "zh": "文件夹名称"
+    },
+    "dtk.settings.recycle_bin_folder_name.description": {
+      "en": "The folder name under the blueprint book root to use as the Recycle Bin.",
+      "context": "Settings text field description for recycle bin folder name.",
+      "de": "Der Ordnername im Stammverzeichnis des Blueprint-Books, der als Papierkorb verwendet werden soll.",
+      "es": "El nombre de la carpeta debajo de la raíz del libro de planos que se usará como Papelera de reciclaje.",
+      "it": "Il nome della cartella nella radice del libro dei progetti da utilizzare come Cestino.",
+      "pt": "O nome da pasta na raiz do livro do blueprint a ser usada como Lixeira.",
+      "ru": "Имя папки в корне книги чертежей, которая будет использоваться в качестве корзины.",
+      "sv": "Mappnamnet under ritningsbokroten som ska användas som papperskorgen.",
+      "zh": "蓝图书根目录下用作回收站的文件夹名称。"
     }
   },
-  "keys_needing_translation": 4
+  "keys_needing_translation": 6
 }

@@ -354,5 +354,25 @@
   [
     "dtk.settings.layout_box_hotkey.label",
     "布局框模式热键"
+  ],
+  [
+    "dtk.settings.recycle_bin.heading",
+    "回收站"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.label",
+    "使用回收站"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.description",
+    "启用后，蓝图和文件夹将在删除或更新之前复制到回收站，并且删除确认弹出窗口将被抑制。"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.label",
+    "文件夹名称"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.description",
+    "蓝图书根目录下用作回收站的文件夹名称。"
   ]
 ]

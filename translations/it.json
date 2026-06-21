@@ -354,5 +354,25 @@
   [
     "dtk.settings.layout_box_hotkey.label",
     "Tasto di scelta rapida della modalità casella di layout"
+  ],
+  [
+    "dtk.settings.recycle_bin.heading",
+    "CONTENITORE PER IL RICICLAGGIO"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.label",
+    "Usa il cestino"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.description",
+    "Se abilitati, i progetti e le cartelle vengono copiati nel cestino prima dell'eliminazione o degli aggiornamenti e il popup di conferma dell'eliminazione viene eliminato."
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.label",
+    "Nome della cartella"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.description",
+    "Il nome della cartella nella radice del libro dei progetti da utilizzare come Cestino."
   ]
 ]

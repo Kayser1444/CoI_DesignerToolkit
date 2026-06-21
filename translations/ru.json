@@ -354,5 +354,25 @@
   [
     "dtk.settings.layout_box_hotkey.label",
     "Горячая клавиша режима макета"
+  ],
+  [
+    "dtk.settings.recycle_bin.heading",
+    "МУСОРНАЯ БАНКА"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.label",
+    "Используйте корзину"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.description",
+    "Если этот параметр включен, чертежи и папки копируются в корзину перед удалением или обновлением, а всплывающее окно подтверждения удаления подавляется."
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.label",
+    "Имя папки"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.description",
+    "Имя папки в корне книги чертежей, которая будет использоваться в качестве корзины."
   ]
 ]

@@ -354,5 +354,25 @@
   [
     "dtk.settings.layout_box_hotkey.label",
     "Hotkey für den Layoutbox-Modus"
+  ],
+  [
+    "dtk.settings.recycle_bin.heading",
+    "RECYCLE-BEHÄLTER"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.label",
+    "Verwenden Sie den Papierkorb"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.description",
+    "Wenn diese Option aktiviert ist, werden Blueprints und Ordner vor dem Löschen oder Aktualisieren in den Papierkorb kopiert und das Popup zur Bestätigung des Löschvorgangs wird unterdrückt."
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.label",
+    "Ordnername"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.description",
+    "Der Ordnername im Stammverzeichnis des Blueprint-Books, der als Papierkorb verwendet werden soll."
   ]
 ]

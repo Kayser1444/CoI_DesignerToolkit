@@ -200,5 +200,16 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.layout_box.description", "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.", "Settings description for layout box mode.");
     public static LocStr SettingsLayoutBoxModeHotkey =
         Loc.Str("dtk.settings.layout_box_hotkey.label", "Layout box mode hotkey", "Settings row label for layout box mode hotkey.");
+
+    public static LocStr SettingsRecycleBinHeading =
+        Loc.Str("dtk.settings.recycle_bin.heading", "RECYCLE BIN", "Settings section heading for Recycle Bin settings.");
+    public static LocStr SettingsUseRecycleBin =
+        Loc.Str("dtk.settings.use_recycle_bin.label", "Use recycle bin", "Settings checkbox label for enabling recycle bin.");
+    public static LocStr SettingsUseRecycleBinDescription =
+        Loc.Str("dtk.settings.use_recycle_bin.description", "When enabled, blueprints and folders are copied to the recycle bin before deletion or updates, and the delete confirmation popup is suppressed.", "Settings checkbox description for enabling recycle bin.");
+    public static LocStr SettingsRecycleBinFolderName =
+        Loc.Str("dtk.settings.recycle_bin_folder_name.label", "Folder name", "Settings text field label for recycle bin folder name.");
+    public static LocStr SettingsRecycleBinFolderNameDescription =
+        Loc.Str("dtk.settings.recycle_bin_folder_name.description", "The folder name under the blueprint book root to use as the Recycle Bin.", "Settings text field description for recycle bin folder name.");
 }
 

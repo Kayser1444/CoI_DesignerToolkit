@@ -191,7 +191,7 @@ internal static class BlueprintStats
     private static Column MakeTile(string iconPath, LocStrFormatted value, LocStr tooltip)
     {
         var col = new Column();
-        col.AlignItemsStretch().MarginRight(2.pt());
+        col.AlignItemsCenter().MarginRight(2.pt());
         col.Add(
             new Icon(iconPath).Size(36.px()).Tooltip(tooltip),
             new Label(value).FontBold().TextCenterMiddle().MarginTopBottom(1.pt()));

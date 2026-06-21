@@ -354,5 +354,25 @@
   [
     "dtk.settings.layout_box_hotkey.label",
     "Tecla de acceso rápido al modo cuadro de diseño"
+  ],
+  [
+    "dtk.settings.recycle_bin.heading",
+    "PAPELERA DE RECICLAJE"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.label",
+    "Usar papelera de reciclaje"
+  ],
+  [
+    "dtk.settings.use_recycle_bin.description",
+    "Cuando está habilitado, los planos y las carpetas se copian a la papelera de reciclaje antes de eliminarlos o actualizarlos, y se suprime la ventana emergente de confirmación de eliminación."
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.label",
+    "Nombre de la carpeta"
+  ],
+  [
+    "dtk.settings.recycle_bin_folder_name.description",
+    "El nombre de la carpeta debajo de la raíz del libro de planos que se usará como Papelera de reciclaje."
   ]
 ]
