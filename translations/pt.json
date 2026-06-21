@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "Desfazer: nenhuma ação de posicionamento para reverter."
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "SOBREPOSIÇÃO DE POLUIÇÃO"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "Sobreposição de poluição"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "Ativa/desativa a sobreposição da taxa de poluição mundial. Exibe as médias dos dias configurados."
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "Ativar efeito de brilho do mapa de calor"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "Lançar uma luz brilhante sobre entidades poluentes que correspondam à sua intensidade de emissão. Desative se estiver causando atraso."
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "Período médio"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "Configura a janela deslizante em dias de jogo [0-360] para emissões médias. Definir como 0 desativa completamente a coleta de dados e patches."
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "Mostrar poluição do ar"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "Mostrar poluição do solo e da água"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "Mostrar poluição de veículos e trens"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "Mostrar poluição de navios"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "Tecla de atalho de sobreposição de poluição"
   ]
 ]

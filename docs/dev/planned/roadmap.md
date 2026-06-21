@@ -10,14 +10,10 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [ ] **Batch pasting**: Paste all blueprints inside a folder simultaneously.
 
 ### Entity & Transport Overlays
-- [ ] **Heat map of exhaust**: Visual overlay displaying exhaust/pollution output (for ships, vehicles, entities, and ground).
+- [ ] **Pollution Overlay & Heat Map**: Visual 3D overlay and entity highlight glow displaying current pollution/exhaust output, with separate sub-toggles for air, ground/water, ship, and vehicle emissions.
 
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.
-
-### UX & Polish
-- [ ] **Undo features**: Ability to revert recent placement or editing actions. See [undo-blueprint.md](./undo-blueprint.md) for technical design details.
-- [ ] **Translation checks**: Verify translations of the Mod Settings window title and the Designer Toolkit tab across all supported locales.
 
 ---
 
@@ -31,13 +27,12 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [x] **Sources & Sinks Rate Limiters** (v0.5.0a) — Extended throughput limiter and monitoring capabilities to sandbox sources and sinks.
 - [x] **Mori's Upgrade Hook** (v0.3.0) — Replaced the custom AoE upgrade/downgrade tool with a native hook on the 'i' tool combined with instant build.
 - [x] **Sandbox-Restricted Instant Actions** (v0.5.0a) — Enforced that instant build, upgrade, and downgrade are active only in Sandbox mode.
-- [x] **Content Display on Balancers** (v0.6.2b) — Added product buffer content display panels to the balancer (`ZipperInspector`) using reflection to read its internal input and circular output buffers.
-- [x] **'Recycle Bin'** (v0.6.2b) — Automatically copies deleted/updated blueprints/folders to a recycle bin folder with a configurable name/toggle, suppressing confirmation popups outside of it.
+- [x] **Content Display on Balancers** (v0.7.0) — Added product buffer content display panels to the balancer (`ZipperInspector`) using reflection to read its internal input and circular output buffers.
+- [x] **'Recycle Bin'** (v0.7.0) — Automatically copies deleted/updated blueprints/folders to a recycle bin folder with a configurable name/toggle, suppressing confirmation popups outside of it.
+- [x] **Undo Place Blueprint** (v0.7.0) — Transient, in-memory undo stack (Ctrl+Z) to revert blueprint placements, copy-pasting, and force-placements.
 
 ---
 
 ## Abandoned / Deferred
 
 - [x] **Allow building transports parallel to terrain ramps** — *Abandoned*. Required highly complex modifications to pathfinder and construction helper constraints. Deferred in favor of the more robust `LegacyBeltConfigurations` settings. See architectural notes in [ramp-slope-mode.md](../abandoned/ramp-slope-mode.md).
-
-

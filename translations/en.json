@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "Undo: No placement actions to revert."
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "POLLUTION OVERLAY"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "Pollution overlay"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days."
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "Enable heatmap glow effect"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "Cast a glowing light onto polluting entities matching their emission intensity. Disable if causing lag."
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "Averaging period"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "Configures the sliding window in game days [0-360] to average emissions. Setting this to 0 completely disables data collection and patches."
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "Show air pollution"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "Show ground & water pollution"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "Show vehicle & train pollution"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "Show ship pollution"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "Pollution overlay hotkey"
   ]
 ]

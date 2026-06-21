@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "Rückgängig machen: Es sind keine Platzierungsaktionen rückgängig zu machen."
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "VERSCHMUTZUNGSÜBERLAGERUNG"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "Verschmutzungsüberlagerung"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "Aktiviert/deaktiviert die Überlagerung der Verschmutzungsrate in der Welt. Zeigt Durchschnittswerte über die konfigurierten Tage an."
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "Aktivieren Sie den Heatmap-Glüheffekt"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "Werfen Sie ein leuchtendes Licht auf umweltschädliche Einheiten, die ihrer Emissionsintensität entsprechen. Deaktivieren, wenn es zu Verzögerungen kommt."
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "Mittelungszeitraum"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "Konfiguriert das Schiebefenster in Spieltagen [0-360] auf durchschnittliche Emissionen. Wenn Sie diesen Wert auf 0 setzen, werden die Datenerfassung und Patches vollständig deaktiviert."
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "Luftverschmutzung anzeigen"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "Boden- und Wasserverschmutzung anzeigen"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "Zeigen Sie die Verschmutzung von Fahrzeugen und Zügen an"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "Schiffsverschmutzung anzeigen"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "Hotkey zur Verschmutzungsüberlagerung"
   ]
 ]

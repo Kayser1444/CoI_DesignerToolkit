@@ -22,6 +22,8 @@ using CoI.AutoHelpers.Logging;
 using CoI.AutoHelpers.Persistence;
 using CoI.AutoHelpers.Settings;
 using UnityEngine;
+using Mafi.Unity.Ui.Library;
+using Mafi.Unity.UiToolkit;
 
 namespace CoIDesignerToolkit;
 
@@ -84,6 +86,15 @@ internal static class DesignerToolkitSettings
     private const string THROUGHPUT_SHOW_AS_PERCENT_KEY = "throughput_show_as_percent";
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY = "throughput_aoe_tool_hotkey_primary";
     private const string THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY = "throughput_aoe_tool_hotkey_secondary";
+    private const string POLLUTION_OVERLAY_ENABLED_KEY = "pollution_overlay_enabled";
+    private const string POLLUTION_GLOW_ENABLED_KEY = "pollution_glow_enabled";
+    private const string POLLUTION_DAYS_TO_AVERAGE_KEY = "pollution_days_to_average";
+    private const string POLLUTION_SHOW_AIR_KEY = "pollution_show_air";
+    private const string POLLUTION_SHOW_GROUND_KEY = "pollution_show_ground";
+    private const string POLLUTION_SHOW_VEHICLE_KEY = "pollution_show_vehicle";
+    private const string POLLUTION_SHOW_SHIP_KEY = "pollution_show_ship";
+    private const string POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY = "pollution_overlay_toggle_hotkey_primary";
+    private const string POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY = "pollution_overlay_toggle_hotkey_secondary";
     private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
     private const string USE_RECYCLE_BIN_KEY = "use_recycle_bin";
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
@@ -114,6 +125,8 @@ internal static class DesignerToolkitSettings
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.T);
     private static readonly BdtHotkey DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY =
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.LeftShift, KeyCode.T);
+    private static readonly BdtHotkey DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY =
+        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.P);
 //     private static readonly BdtHotkey DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY =
 //         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.B);
     private static readonly BdtHotkey DEFAULT_UNDO_HOTKEY =
@@ -137,6 +150,13 @@ internal static class DesignerToolkitSettings
     public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.Capacity;
     public static bool ThroughputColorblindMode { get; private set; } = false;
     public static bool ThroughputShowAsPercent { get; private set; } = false;
+    public static bool PollutionOverlayEnabled { get; private set; } = false;
+    public static bool PollutionGlowEnabled { get; private set; } = true;
+    public static int PollutionDaysToAverage { get; private set; } = 30;
+    public static bool PollutionShowAir { get; private set; } = true;
+    public static bool PollutionShowGround { get; private set; } = true;
+    public static bool PollutionShowVehicle { get; private set; } = true;
+    public static bool PollutionShowShip { get; private set; } = true;
     public static bool LayoutBoxModeEnabled { get; private set; } = false;
     public static bool UseRecycleBin { get; private set; } = true;
     public static string RecycleBinFolderName { get; private set; } = "Recycle Bin";
@@ -279,12 +299,15 @@ internal static class DesignerToolkitSettings
     public static BdtHotkey HeightFilterHideLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
     public static BdtHotkey ThroughputOverlayToggleHotkey { get; private set; } = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
     public static BdtHotkey ThroughputAoEToolHotkey { get; private set; } = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
+    public static BdtHotkey PollutionOverlayToggleHotkey { get; private set; } = DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY;
 //     public static BdtHotkey LayoutBoxModeToggleHotkey { get; private set; } = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
     public static BdtHotkey UndoHotkey { get; private set; } = DEFAULT_UNDO_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
     public static event Action<bool>? ThroughputOverlayEnabledChanged;
+    public static event Action<bool>? PollutionOverlayEnabledChanged;
+    public static event Action<int>? PollutionDaysToAverageChanged;
 
     private static void SetThroughputHeatmapMode(ThroughputHeatmapMode mode)
     {
@@ -300,6 +323,35 @@ internal static class DesignerToolkitSettings
     {
         ThroughputShowAsPercent = enabled;
     }
+
+    public static void SetPollutionOverlayEnabled(bool enabled)
+    {
+        if (PollutionOverlayEnabled == enabled)
+            return;
+        PollutionOverlayEnabled = enabled;
+        try { PollutionOverlayEnabledChanged?.Invoke(enabled); }
+        catch (Exception ex) { s_log.Warning($"Error raising PollutionOverlayEnabledChanged: {ex.Message}"); }
+    }
+
+    public static void SetPollutionGlowEnabled(bool enabled)
+    {
+        PollutionGlowEnabled = enabled;
+    }
+
+    public static void SetPollutionDaysToAverage(int days)
+    {
+        days = Math.Max(0, Math.Min(360, days));
+        if (PollutionDaysToAverage == days)
+            return;
+        PollutionDaysToAverage = days;
+        try { PollutionDaysToAverageChanged?.Invoke(days); }
+        catch (Exception ex) { s_log.Warning($"Error raising PollutionDaysToAverageChanged: {ex.Message}"); }
+    }
+
+    public static void SetPollutionShowAir(bool enabled) { PollutionShowAir = enabled; }
+    public static void SetPollutionShowGround(bool enabled) { PollutionShowGround = enabled; }
+    public static void SetPollutionShowVehicle(bool enabled) { PollutionShowVehicle = enabled; }
+    public static void SetPollutionShowShip(bool enabled) { PollutionShowShip = enabled; }
 
     public static void SetLayoutBoxModeEnabled(bool enabled)
     {
@@ -321,6 +373,13 @@ internal static class DesignerToolkitSettings
         ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode.Capacity));
         bool initialThroughputColorblindMode = config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
         bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
+        bool initialPollutionOverlayEnabled = config.GetBool(POLLUTION_OVERLAY_ENABLED_KEY, false);
+        bool initialPollutionGlowEnabled = config.GetBool(POLLUTION_GLOW_ENABLED_KEY, true);
+        int initialPollutionDaysToAverage = config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 30);
+        bool initialPollutionShowAir = config.GetBool(POLLUTION_SHOW_AIR_KEY, true);
+        bool initialPollutionShowGround = config.GetBool(POLLUTION_SHOW_GROUND_KEY, true);
+        bool initialPollutionShowVehicle = config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
+        bool initialPollutionShowShip = config.GetBool(POLLUTION_SHOW_SHIP_KEY, true);
         bool initialLayoutBoxModeEnabled = config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
 
         BdtHotkey initialTransportCleanupHotkey = HotkeyFromConfig(
@@ -356,6 +415,12 @@ internal static class DesignerToolkitSettings
             THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
             "", "", "", "",
             DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
+        BdtHotkey initialPollutionOverlayToggleHotkey = HotkeyFromConfig(
+            config,
+            POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
+            POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
+            "", "", "", "",
+            DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY);
         BdtHotkey initialUndoHotkey = HotkeyFromConfig(
             config,
             UNDO_HOTKEY_PRIMARY_KEY,
@@ -371,6 +436,7 @@ internal static class DesignerToolkitSettings
         HeightFilterHideLayerHotkey = initialHideLayerHotkey;
         ThroughputOverlayToggleHotkey = initialThroughputOverlayToggleHotkey;
         ThroughputAoEToolHotkey = initialThroughputAoEToolHotkey;
+        PollutionOverlayToggleHotkey = initialPollutionOverlayToggleHotkey;
 //         LayoutBoxModeToggleHotkey = initialLayoutBoxModeToggleHotkey;
         UndoHotkey = initialUndoHotkey;
 
@@ -385,6 +451,13 @@ internal static class DesignerToolkitSettings
             initialThroughputHeatmapMode,
             initialThroughputColorblindMode,
             initialThroughputShowAsPercent,
+            initialPollutionOverlayEnabled,
+            initialPollutionGlowEnabled,
+            initialPollutionDaysToAverage,
+            initialPollutionShowAir,
+            initialPollutionShowGround,
+            initialPollutionShowVehicle,
+            initialPollutionShowShip,
             initialLayoutBoxModeEnabled,
             initialUseRecycleBin,
             initialRecycleBinFolderName);
@@ -590,6 +663,123 @@ internal static class DesignerToolkitSettings
             out throughputAoEToolPrimaryField,
             out throughputAoEToolSecondaryField));
 
+        root.Add(new Title(BdtLocalization.SettingsPollutionHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        Toggle pollutionOverlayToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPollutionToggle.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionToggleDescription.AsFormatted)
+            .Value(PollutionOverlayEnabled)
+            .OnValueChanged(SetPollutionOverlayEnabled);
+        root.Add(pollutionOverlayToggle);
+
+        Toggle pollutionGlowToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPollutionGlow.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionGlowDescription.AsFormatted)
+            .Value(PollutionGlowEnabled)
+            .OnValueChanged(SetPollutionGlowEnabled);
+        root.Add(pollutionGlowToggle);
+
+        // --- DAYS TO AVERAGE ---
+        var daysRow = new Row(2.pt()).AlignItemsCenter();
+        var daysLabel = new Label(BdtLocalization.SettingsPollutionDaysToAverage.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionDaysToAverageDescription.AsFormatted)
+            .Width(SETTINGS_LABEL_WIDTH);
+        daysRow.Add(daysLabel);
+
+        var daysSpacer = new UiComponent().FlexGrow(1f);
+        daysRow.Add(daysSpacer);
+
+        var daysControlRow = new Row(2.pt()).AlignItemsCenter();
+
+        var daysMinusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
+            .Compact().IconSize(14.px());
+        var daysPlusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Plus128.png")
+            .Compact().IconSize(14.px());
+
+        TextField daysInput = new TextField()
+            .Class(Cls.displayFont, Cls.displayBg)
+            .Width(45.px());
+        UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(daysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
+        daysInput.Text(PollutionDaysToAverage.ToString());
+
+        daysControlRow.Add(daysMinusBtn);
+        daysControlRow.Add(daysInput);
+        daysControlRow.Add(daysPlusBtn);
+        daysRow.Add(daysControlRow);
+        root.Add(daysRow);
+
+        Action<int> updateDays = (val) =>
+        {
+            SetPollutionDaysToAverage(val);
+            daysInput.Text(PollutionDaysToAverage.ToString());
+        };
+
+        daysInput.OnValueChanged((text) =>
+        {
+            if (int.TryParse(text, out int val))
+            {
+                updateDays(val);
+            }
+        });
+
+        Action<int> adjustDays = (sign) =>
+        {
+            if (int.TryParse(daysInput.GetText(), out int current))
+            {
+                int step = 1;
+                if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) step = 10;
+                else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) step = 5;
+
+                int next = Math.Max(0, Math.Min(360, current + sign * step));
+                updateDays(next);
+            }
+        };
+
+        daysMinusBtn.OnClick(() => adjustDays(-1), allowKeyPresses: true);
+        daysPlusBtn.OnClick(() => adjustDays(1), allowKeyPresses: true);
+
+        // --- SUB-TOGGLES ---
+        Toggle showAirToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPollutionShowAir.AsFormatted)
+            .Value(PollutionShowAir)
+            .OnValueChanged(SetPollutionShowAir);
+        root.Add(showAirToggle);
+
+        Toggle showGroundToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPollutionShowGround.AsFormatted)
+            .Value(PollutionShowGround)
+            .OnValueChanged(SetPollutionShowGround);
+        root.Add(showGroundToggle);
+
+        Toggle showVehicleToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPollutionShowVehicle.AsFormatted)
+            .Value(PollutionShowVehicle)
+            .OnValueChanged(SetPollutionShowVehicle);
+        root.Add(showVehicleToggle);
+
+        Toggle showShipToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPollutionShowShip.AsFormatted)
+            .Value(PollutionShowShip)
+            .OnValueChanged(SetPollutionShowShip);
+        root.Add(showShipToggle);
+
+        // --- HOTKEY ---
+        BdtKeyBindingField pollutionTogglePrimaryField;
+        BdtKeyBindingField pollutionToggleSecondaryField;
+        root.Add(BuildHotkeyRow(
+            BdtLocalization.SettingsPollutionToggleHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+            () => PollutionOverlayToggleHotkey,
+            hotkey =>
+            {
+                PollutionOverlayToggleHotkey = hotkey;
+                SaveGlobalHotkey(POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
+            },
+            out pollutionTogglePrimaryField,
+            out pollutionToggleSecondaryField));
+
         root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -723,6 +913,13 @@ internal static class DesignerToolkitSettings
             colorblindToggle.Value(ThroughputColorblindMode);
             colorblindToggle.Enabled(ThroughputHeatmapMode != ThroughputHeatmapMode.None);
             showAsPercentToggle.Value(ThroughputShowAsPercent);
+            pollutionOverlayToggle.Value(PollutionOverlayEnabled);
+            pollutionGlowToggle.Value(PollutionGlowEnabled);
+            daysInput.Text(PollutionDaysToAverage.ToString());
+            showAirToggle.Value(PollutionShowAir);
+            showGroundToggle.Value(PollutionShowGround);
+            showVehicleToggle.Value(PollutionShowVehicle);
+            showShipToggle.Value(PollutionShowShip);
             layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
             recycleBinToggle.Value(UseRecycleBin);
@@ -738,6 +935,8 @@ internal static class DesignerToolkitSettings
             throughputAoEToolSecondaryField.Refresh();
 //             layoutBoxModePrimaryField.Refresh();
 //             layoutBoxModeSecondaryField.Refresh();
+            pollutionTogglePrimaryField.Refresh();
+            pollutionToggleSecondaryField.Refresh();
             undoPrimaryField.Refresh();
             undoSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
@@ -784,12 +983,20 @@ internal static class DesignerToolkitSettings
             SetThroughputHeatmapMode(ThroughputHeatmapMode.Capacity);
             SetThroughputColorblindMode(false);
             SetThroughputShowAsPercent(false);
+            SetPollutionOverlayEnabled(false);
+            SetPollutionGlowEnabled(true);
+            SetPollutionDaysToAverage(30);
+            SetPollutionShowAir(true);
+            SetPollutionShowGround(true);
+            SetPollutionShowVehicle(true);
+            SetPollutionShowShip(true);
             SetUseRecycleBin(true);
             SetRecycleBinFolderName("Recycle Bin");
             HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
             HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
             ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
             ThroughputAoEToolHotkey = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
+            PollutionOverlayToggleHotkey = DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY;
 //             LayoutBoxModeToggleHotkey = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
             UndoHotkey = DEFAULT_UNDO_HOTKEY;
             TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
@@ -797,6 +1004,7 @@ internal static class DesignerToolkitSettings
             SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
+            SaveGlobalHotkey(POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY);
 //             SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
             SaveGlobalHotkey(UNDO_HOTKEY_PRIMARY_KEY, UNDO_HOTKEY_SECONDARY_KEY, DEFAULT_UNDO_HOTKEY);
             SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
@@ -849,6 +1057,20 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_OVERLAY_ENABLED_KEY, PollutionOverlayEnabled, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_GLOW_ENABLED_KEY, PollutionGlowEnabled, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_DAYS_TO_AVERAGE_KEY, PollutionDaysToAverage, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_AIR_KEY, PollutionShowAir, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_GROUND_KEY, PollutionShowGround, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_VEHICLE_KEY, PollutionShowVehicle, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(USE_RECYCLE_BIN_KEY, UseRecycleBin, out error))
                 return false;
             if (s_config != null && !s_config.TrySetValue(RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out error))
@@ -862,6 +1084,8 @@ internal static class DesignerToolkitSettings
             if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputOverlayToggleHotkey, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputAoEToolHotkey, THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, out error))
+                return false;
+            if (s_config != null && !TrySetHotkeyConfig(s_config, PollutionOverlayToggleHotkey, POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
                 return false;
 //             if (s_config != null && !TrySetHotkeyConfig(s_config, LayoutBoxModeToggleHotkey, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
 //                 return false;
@@ -885,6 +1109,13 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out bool throughputHeatmapModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out bool throughputColorblindModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_OVERLAY_ENABLED_KEY, PollutionOverlayEnabled, out bool pollutionOverlayEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_GLOW_ENABLED_KEY, PollutionGlowEnabled, out bool pollutionGlowEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_DAYS_TO_AVERAGE_KEY, PollutionDaysToAverage, out bool pollutionDaysToAverageUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_AIR_KEY, PollutionShowAir, out bool pollutionShowAirUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_GROUND_KEY, PollutionShowGround, out bool pollutionShowGroundUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_VEHICLE_KEY, PollutionShowVehicle, out bool pollutionShowVehicleUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out bool pollutionShowShipUpdated);
             updated = TryReplaceConfigDefault(updated, LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out bool layoutBoxModeEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
             updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
@@ -918,6 +1149,12 @@ internal static class DesignerToolkitSettings
                 THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY,
                 THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
                 out bool throughputAoEToolHotkeyUpdated);
+            updated = TryReplaceHotkeyConfigDefaults(
+                updated,
+                PollutionOverlayToggleHotkey,
+                POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
+                POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
+                out bool pollutionOverlayToggleHotkeyUpdated);
 //             updated = TryReplaceHotkeyConfigDefaults(
 //                 updated,
 //                 LayoutBoxModeToggleHotkey,
@@ -975,6 +1212,41 @@ internal static class DesignerToolkitSettings
                 error = "Could not find throughput_show_as_percent default in config.json.";
                 return false;
             }
+            if (!pollutionOverlayEnabledUpdated)
+            {
+                error = "Could not find pollution_overlay_enabled default in config.json.";
+                return false;
+            }
+            if (!pollutionGlowEnabledUpdated)
+            {
+                error = "Could not find pollution_glow_enabled default in config.json.";
+                return false;
+            }
+            if (!pollutionDaysToAverageUpdated)
+            {
+                error = "Could not find pollution_days_to_average default in config.json.";
+                return false;
+            }
+            if (!pollutionShowAirUpdated)
+            {
+                error = "Could not find pollution_show_air default in config.json.";
+                return false;
+            }
+            if (!pollutionShowGroundUpdated)
+            {
+                error = "Could not find pollution_show_ground default in config.json.";
+                return false;
+            }
+            if (!pollutionShowVehicleUpdated)
+            {
+                error = "Could not find pollution_show_vehicle default in config.json.";
+                return false;
+            }
+            if (!pollutionShowShipUpdated)
+            {
+                error = "Could not find pollution_show_ship default in config.json.";
+                return false;
+            }
             if (!layoutBoxModeEnabledUpdated)
             {
                 error = "Could not find layout_box_mode_enabled default in config.json.";
@@ -990,7 +1262,7 @@ internal static class DesignerToolkitSettings
                 error = "Could not find recycle_bin_folder_name default in config.json.";
                 return false;
             }
-            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated || !undoHotkeyUpdated)
+            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated || !pollutionOverlayToggleHotkeyUpdated || !undoHotkeyUpdated)
             {
                 error = "Could not find hotkey defaults in config.json.";
                 return false;
@@ -1227,6 +1499,13 @@ internal static class DesignerToolkitSettings
         ThroughputHeatmapMode initialThroughputHeatmapMode,
         bool initialThroughputColorblindMode,
         bool initialThroughputShowAsPercent,
+        bool initialPollutionOverlayEnabled,
+        bool initialPollutionGlowEnabled,
+        int initialPollutionDaysToAverage,
+        bool initialPollutionShowAir,
+        bool initialPollutionShowGround,
+        bool initialPollutionShowVehicle,
+        bool initialPollutionShowShip,
         bool initialLayoutBoxModeEnabled,
         bool initialUseRecycleBin,
         string initialRecycleBinFolderName)
@@ -1240,6 +1519,13 @@ internal static class DesignerToolkitSettings
         ThroughputHeatmapMode = initialThroughputHeatmapMode;
         ThroughputColorblindMode = initialThroughputColorblindMode;
         ThroughputShowAsPercent = initialThroughputShowAsPercent;
+        PollutionOverlayEnabled = initialPollutionOverlayEnabled;
+        PollutionGlowEnabled = initialPollutionGlowEnabled;
+        PollutionDaysToAverage = initialPollutionDaysToAverage;
+        PollutionShowAir = initialPollutionShowAir;
+        PollutionShowGround = initialPollutionShowGround;
+        PollutionShowVehicle = initialPollutionShowVehicle;
+        PollutionShowShip = initialPollutionShowShip;
         LayoutBoxModeEnabled = initialLayoutBoxModeEnabled;
         UseRecycleBin = initialUseRecycleBin;
         RecycleBinFolderName = initialRecycleBinFolderName;
@@ -1278,6 +1564,20 @@ internal static class DesignerToolkitSettings
                 ThroughputColorblindMode = colorblindMode;
              if (TryGetBool(root, "throughputShowAsPercent", out bool showAsPercent))
                 ThroughputShowAsPercent = showAsPercent;
+            if (TryGetBool(root, "pollutionOverlayEnabled", out bool pollutionOverlayEnabled))
+                PollutionOverlayEnabled = pollutionOverlayEnabled;
+            if (TryGetBool(root, "pollutionGlowEnabled", out bool pollutionGlowEnabled))
+                PollutionGlowEnabled = pollutionGlowEnabled;
+            if (TryGetInt(root, "pollutionDaysToAverage", out int pollutionDaysToAverage))
+                PollutionDaysToAverage = pollutionDaysToAverage;
+            if (TryGetBool(root, "pollutionShowAir", out bool pollutionShowAir))
+                PollutionShowAir = pollutionShowAir;
+            if (TryGetBool(root, "pollutionShowGround", out bool pollutionShowGround))
+                PollutionShowGround = pollutionShowGround;
+            if (TryGetBool(root, "pollutionShowVehicle", out bool pollutionShowVehicle))
+                PollutionShowVehicle = pollutionShowVehicle;
+            if (TryGetBool(root, "pollutionShowShip", out bool pollutionShowShip))
+                PollutionShowShip = pollutionShowShip;
             if (TryGetBool(root, "layoutBoxModeEnabled", out bool layoutBoxModeEnabled))
                 LayoutBoxModeEnabled = layoutBoxModeEnabled;
             if (TryGetBool(root, "useRecycleBin", out bool useRecycleBin))
@@ -1306,6 +1606,13 @@ internal static class DesignerToolkitSettings
         writer.AppendNumberField("throughputHeatmapMode", (int)ThroughputHeatmapMode);
         writer.AppendBoolField("throughputColorblindMode", ThroughputColorblindMode);
         writer.AppendBoolField("throughputShowAsPercent", ThroughputShowAsPercent);
+        writer.AppendBoolField("pollutionOverlayEnabled", PollutionOverlayEnabled);
+        writer.AppendBoolField("pollutionGlowEnabled", PollutionGlowEnabled);
+        writer.AppendNumberField("pollutionDaysToAverage", PollutionDaysToAverage);
+        writer.AppendBoolField("pollutionShowAir", PollutionShowAir);
+        writer.AppendBoolField("pollutionShowGround", PollutionShowGround);
+        writer.AppendBoolField("pollutionShowVehicle", PollutionShowVehicle);
+        writer.AppendBoolField("pollutionShowShip", PollutionShowShip);
         writer.AppendBoolField("layoutBoxModeEnabled", LayoutBoxModeEnabled);
         writer.AppendBoolField("useRecycleBin", UseRecycleBin);
         writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);

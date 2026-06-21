@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "Annulla: nessuna azione di posizionamento da annullare."
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "SOVRAPPOSIZIONE INQUINAMENTO"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "Sovrapposizione di inquinamento"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo. Visualizza le medie nei giorni configurati."
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "Abilita l'effetto bagliore della mappa termica"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "Proietta una luce brillante sulle entità inquinanti in base alla loro intensità di emissione. Disabilita se causa ritardo."
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "Periodo di media"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "Configura la finestra scorrevole nei giorni di gioco [0-360] sulle emissioni medie. Impostandolo su 0 si disabilita completamente la raccolta dati e le patch."
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "Mostra l'inquinamento atmosferico"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "Mostra l'inquinamento del suolo e dell'acqua"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "Mostra l'inquinamento dei veicoli e dei treni"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "Mostra l'inquinamento delle navi"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "Tasto di scelta rapida in sovrapposizione sull'inquinamento"
   ]
 ]

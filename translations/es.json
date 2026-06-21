@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "Deshacer: no hay acciones de ubicación para revertir."
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "SUPERPOSICIÓN DE CONTAMINACIÓN"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "Superposición de contaminación"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "Activa/desactiva la superposición de la tasa de contaminación en el mundo. Muestra promedios durante los días configurados."
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "Habilitar el efecto de brillo del mapa de calor"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "Proyecte una luz brillante sobre entidades contaminantes que coincida con su intensidad de emisión. Desactívelo si causa retraso."
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "Período promedio"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "Configura la ventana deslizante en días de juego [0-360] para promediar las emisiones. Establecer esto en 0 deshabilita completamente la recopilación de datos y los parches."
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "Mostrar la contaminación del aire"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "Mostrar la contaminación del suelo y del agua"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "Mostrar la contaminación de vehículos y trenes"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "Mostrar la contaminación de los barcos"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "Tecla de acceso rápido de superposición de contaminación"
   ]
 ]

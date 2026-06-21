@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "Отменить: нет действий по размещению, которые можно было бы отменить."
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "НАЛОЖЕНИЕ ЗАГРЯЗНЕНИЯ"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "Наложение загрязнения"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "Включает/отключает наложение уровня загрязнения в мире. Отображает средние значения за настроенные дни."
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "Включить эффект свечения тепловой карты"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "Направьте светящийся свет на загрязняющие объекты, соответствующий интенсивности их излучения. Отключите, если вызывает задержку."
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "Период усреднения"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "Настраивает скользящее окно в игровых днях [0-360] для среднего уровня выбросов. Установка значения 0 полностью отключает сбор данных и исправления."
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "Показать загрязнение воздуха"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "Показать загрязнение почвы и воды"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "Показать загрязнение транспортных средств и поездов"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "Показать загрязнение корабля"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "Горячая клавиша наложения загрязнения"
   ]
 ]

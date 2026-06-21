@@ -48,6 +48,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private UnityEngine.GameObject? m_throughputWorldRendererGo;
     private ThroughputAoETool? m_throughputAoETool;
     private UndoManager? m_undoManager;
+    private PollutionManager? m_pollutionManager;
+    private PollutionWorldRenderer? m_pollutionWorldRenderer;
+    private UnityEngine.GameObject? m_pollutionWorldRendererGo;
 
     public string Name => "Blueprint Designer's Toolkit";
 
@@ -86,6 +89,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         ContentDisplayPatches.Apply(m_harmony);
         ShortcutsManagerPatches.Apply(m_harmony);
         UndoPatches.Apply(m_harmony);
+        PollutionPatches.Apply(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
 
@@ -118,6 +122,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         m_throughputManager = new ThroughputManager();
         m_throughputManager.Initialize(resolver, m_throughputStateStore);
 
+        m_pollutionManager = new PollutionManager();
+        m_pollutionManager.Initialize(resolver);
+
         var gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
         gameLoopEvents.RegisterRendererInitState(this, () =>
         {
@@ -130,6 +137,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             var layoutBoxRenderer = layoutBoxRendererGo.AddComponent<LayoutBoxRendererMb>();
             layoutBoxRenderer.Init(resolver.Resolve<IEntitiesManager>(), resolver.Resolve<ShortcutsManager>());
             UnityEngine.Object.DontDestroyOnLoad(layoutBoxRendererGo);
+
+            m_pollutionWorldRendererGo = new UnityEngine.GameObject("BDT.PollutionWorldRenderer");
+            m_pollutionWorldRenderer = m_pollutionWorldRendererGo.AddComponent<PollutionWorldRenderer>();
+            m_pollutionWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents);
+            UnityEngine.Object.DontDestroyOnLoad(m_pollutionWorldRendererGo);
         });
         
         var entitiesManager = resolver.Resolve<EntitiesManager>();
@@ -308,6 +320,19 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         {
             m_throughputManager.Dispose();
             m_throughputManager = null;
+        }
+
+        if (m_pollutionWorldRendererGo != null)
+        {
+            UnityEngine.Object.Destroy(m_pollutionWorldRendererGo);
+            m_pollutionWorldRendererGo = null;
+            m_pollutionWorldRenderer = null;
+        }
+
+        if (m_pollutionManager != null)
+        {
+            m_pollutionManager.Dispose();
+            m_pollutionManager = null;
         }
 
         if (m_simLoopEvents != null)

@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "Ångra: Inga placeringsåtgärder att återställa."
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "FÖRORENING OVERLAY"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "Föroreningsöverlägg"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen. Visar medelvärden över de konfigurerade dagarna."
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "Aktivera värmekartans glödeffekt"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "Kasta ett glödande ljus på förorenande enheter som matchar deras utsläppsintensitet. Inaktivera om det orsakar fördröjning."
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "Genomsnittlig period"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "Konfigurerar skjutfönstret i speldagar [0-360] till genomsnittliga utsläpp. Om du ställer in detta till 0 inaktiveras datainsamling och patchar helt."
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "Visa luftföroreningar"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "Visa mark- och vattenföroreningar"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "Visa fordons- och tågföroreningar"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "Visa fartygsföroreningar"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "Hotkey för föroreningar"
   ]
 ]

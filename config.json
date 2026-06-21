@@ -116,6 +116,43 @@
     "default": "",
     "description": "Initial secondary undo placement hotkey. Leave empty to disable."
   },
+  "pollution_overlay_enabled": {
+    "default": false,
+    "description": "Initial pollution overlay visibility state. When enabled, configured pollution overlays will render in-world."
+  },
+  "pollution_glow_enabled": {
+    "default": true,
+    "description": "Initial pollution glow visibility state."
+  },
+  "pollution_days_to_average": {
+    "default": 30,
+    "is_integer": true,
+    "description": "Initial pollution days to average (0-360, 0 disables data collection)."
+  },
+  "pollution_show_air": {
+    "default": true,
+    "description": "Initial state for showing air pollution."
+  },
+  "pollution_show_ground": {
+    "default": true,
+    "description": "Initial state for showing ground and water pollution."
+  },
+  "pollution_show_vehicle": {
+    "default": true,
+    "description": "Initial state for showing vehicle and train pollution."
+  },
+  "pollution_show_ship": {
+    "default": true,
+    "description": "Initial state for showing ship pollution."
+  },
+  "pollution_overlay_toggle_hotkey_primary": {
+    "default": "LeftAlt + P",
+    "description": "Initial primary pollution overlay toggle hotkey. Leave empty to disable."
+  },
+  "pollution_overlay_toggle_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary pollution overlay toggle hotkey. Leave empty to disable."
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."

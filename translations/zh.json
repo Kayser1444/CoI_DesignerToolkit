@@ -390,5 +390,53 @@
   [
     "dtk.undo.no_action",
     "撤消：没有要恢复的放置操作。"
+  ],
+  [
+    "dtk.settings.pollution.heading",
+    "污染叠加"
+  ],
+  [
+    "dtk.settings.pollution_toggle.label",
+    "污染叠加"
+  ],
+  [
+    "dtk.settings.pollution_toggle.description",
+    "启用/禁用世界内污染率叠加。显示配置天数的平均值。"
+  ],
+  [
+    "dtk.settings.pollution_glow.label",
+    "启用热图发光效果"
+  ],
+  [
+    "dtk.settings.pollution_glow.description",
+    "将发光的光投射到与其发射强度相匹配的污染实体上。如果造成延迟，请禁用。"
+  ],
+  [
+    "dtk.settings.pollution_days.label",
+    "平均周期"
+  ],
+  [
+    "dtk.settings.pollution_days.description",
+    "将比赛日 [0-360] 中的滑动窗口配置为平均排放量。将其设置为 0 会完全禁用数据收集和修补。"
+  ],
+  [
+    "dtk.settings.pollution_show_air.label",
+    "显示空气污染情况"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.label",
+    "显示地面和水污染"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.label",
+    "显示车辆和火车污染"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.label",
+    "显示船舶污染情况"
+  ],
+  [
+    "dtk.settings.pollution_toggle_hotkey.label",
+    "污染覆盖热键"
   ]
 ]

@@ -410,6 +410,7 @@ internal sealed class BdtKeyBindingUpdateHost : MonoBehaviour
             DesignerToolkitSettings.HeightFilterHideLayerHotkey,
             DesignerToolkitSettings.ThroughputOverlayToggleHotkey,
             DesignerToolkitSettings.ThroughputAoEToolHotkey,
+            DesignerToolkitSettings.PollutionOverlayToggleHotkey,
 //             DesignerToolkitSettings.LayoutBoxModeToggleHotkey
             DesignerToolkitSettings.UndoHotkey
         };
