@@ -141,12 +141,40 @@ internal static class BlueprintRecycleBin
             IBlueprintsFolder root = window.BlueprintsLibrary.Root;
             if (root == null) return;
 
-            // Determine if the item being deleted is the Recycle Bin or nested inside it
+            // 1. If deleting the Recycle Bin folder itself, always prompt with a confirmation warning, even if it is empty!
+            var selectedItemField = window.GetType().GetField("m_selectedItem", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (selectedItemField != null)
+            {
+                object? selectedItemOpt = selectedItemField.GetValue(window);
+                if (selectedItemOpt != null)
+                {
+                    var hasValueProperty = selectedItemOpt.GetType().GetProperty("HasValue");
+                    if (hasValueProperty != null && (bool)hasValueProperty.GetValue(selectedItemOpt))
+                    {
+                        var valueProperty = selectedItemOpt.GetType().GetProperty("ValueOrNull");
+                        object? tile = valueProperty?.GetValue(selectedItemOpt);
+                        if (tile != null)
+                        {
+                            var folderProp = tile.GetType().GetProperty("Folder", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                            if (folderProp != null)
+                            {
+                                var folder = folderProp.GetValue(tile) as IBlueprintsFolder;
+                                if (folder != null && IsRecycleBinFolder(folder, root))
+                                {
+                                    __result = Mafi.Core.Tr.BlueprintDelete__Confirmation.Format(folder.Name);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Determine if the item being deleted is nested inside the Recycle Bin
             bool inBin = IsInRecycleBin(window.CurrentFolder, root);
 
             if (!inBin)
             {
-                var selectedItemField = window.GetType().GetField("m_selectedItem", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (selectedItemField != null)
                 {
                     object? selectedItemOpt = selectedItemField.GetValue(window);
@@ -155,7 +183,7 @@ internal static class BlueprintRecycleBin
                         var hasValueProperty = selectedItemOpt.GetType().GetProperty("HasValue");
                         if (hasValueProperty != null && (bool)hasValueProperty.GetValue(selectedItemOpt))
                         {
-                            var valueProperty = selectedItemOpt.GetType().GetProperty("Value");
+                            var valueProperty = selectedItemOpt.GetType().GetProperty("ValueOrNull");
                             object? tile = valueProperty?.GetValue(selectedItemOpt);
                             if (tile != null)
                             {
@@ -174,7 +202,7 @@ internal static class BlueprintRecycleBin
                 }
             }
 
-            // If we are NOT deleting from within the Recycle Bin (and not deleting the Recycle Bin itself), suppress confirmation popup
+            // If we are NOT deleting from within the Recycle Bin, suppress confirmation popup
             if (!inBin)
             {
                 __result = LocStrFormatted.Empty;
