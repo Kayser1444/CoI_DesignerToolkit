@@ -374,5 +374,21 @@
   [
     "dtk.settings.recycle_bin_folder_name.description",
     "El nombre de la carpeta debajo de la raíz del libro de planos que se usará como Papelera de reciclaje."
+  ],
+  [
+    "dtk.settings.undo.heading",
+    "DESHACER COLOCACIÓN"
+  ],
+  [
+    "dtk.settings.undo_hotkey.label",
+    "Tecla de acceso directo Deshacer ubicación"
+  ],
+  [
+    "dtk.undo.success",
+    "Deshacer: la ubicación se revirtió correctamente."
+  ],
+  [
+    "dtk.undo.no_action",
+    "Deshacer: no hay acciones de ubicación para revertir."
   ]
 ]

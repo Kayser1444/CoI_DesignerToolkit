@@ -374,5 +374,21 @@
   [
     "dtk.settings.recycle_bin_folder_name.description",
     "Il nome della cartella nella radice del libro dei progetti da utilizzare come Cestino."
+  ],
+  [
+    "dtk.settings.undo.heading",
+    "ANNULLA POSIZIONAMENTO"
+  ],
+  [
+    "dtk.settings.undo_hotkey.label",
+    "Annulla il tasto di scelta rapida per il posizionamento"
+  ],
+  [
+    "dtk.undo.success",
+    "Annulla: posizionamento ripristinato correttamente."
+  ],
+  [
+    "dtk.undo.no_action",
+    "Annulla: nessuna azione di posizionamento da annullare."
   ]
 ]

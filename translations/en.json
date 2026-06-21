@@ -374,5 +374,21 @@
   [
     "dtk.settings.recycle_bin_folder_name.description",
     "The folder name under the blueprint book root to use as the Recycle Bin."
+  ],
+  [
+    "dtk.settings.undo.heading",
+    "UNDO PLACEMENT"
+  ],
+  [
+    "dtk.settings.undo_hotkey.label",
+    "Undo placement hotkey"
+  ],
+  [
+    "dtk.undo.success",
+    "Undo: Placement reverted successfully."
+  ],
+  [
+    "dtk.undo.no_action",
+    "Undo: No placement actions to revert."
   ]
 ]

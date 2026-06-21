@@ -374,5 +374,21 @@
   [
     "dtk.settings.recycle_bin_folder_name.description",
     "蓝图书根目录下用作回收站的文件夹名称。"
+  ],
+  [
+    "dtk.settings.undo.heading",
+    "撤消放置"
+  ],
+  [
+    "dtk.settings.undo_hotkey.label",
+    "撤消放置热键"
+  ],
+  [
+    "dtk.undo.success",
+    "撤消：放置已成功恢复。"
+  ],
+  [
+    "dtk.undo.no_action",
+    "撤消：没有要恢复的放置操作。"
   ]
 ]

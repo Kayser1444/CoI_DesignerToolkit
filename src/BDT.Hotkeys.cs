@@ -409,8 +409,9 @@ internal sealed class BdtKeyBindingUpdateHost : MonoBehaviour
             DesignerToolkitSettings.HeightFilterShowLayerHotkey,
             DesignerToolkitSettings.HeightFilterHideLayerHotkey,
             DesignerToolkitSettings.ThroughputOverlayToggleHotkey,
-            DesignerToolkitSettings.ThroughputAoEToolHotkey
+            DesignerToolkitSettings.ThroughputAoEToolHotkey,
 //             DesignerToolkitSettings.LayoutBoxModeToggleHotkey
+            DesignerToolkitSettings.UndoHotkey
         };
 
         foreach (var hotkey in activeHotkeys)

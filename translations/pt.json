@@ -374,5 +374,21 @@
   [
     "dtk.settings.recycle_bin_folder_name.description",
     "O nome da pasta na raiz do livro do blueprint a ser usada como Lixeira."
+  ],
+  [
+    "dtk.settings.undo.heading",
+    "DESFAZER COLOCAÇÃO"
+  ],
+  [
+    "dtk.settings.undo_hotkey.label",
+    "Desfazer tecla de atalho de posicionamento"
+  ],
+  [
+    "dtk.undo.success",
+    "Desfazer: canal revertido com sucesso."
+  ],
+  [
+    "dtk.undo.no_action",
+    "Desfazer: nenhuma ação de posicionamento para reverter."
   ]
 ]

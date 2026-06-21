@@ -89,6 +89,8 @@ internal static class DesignerToolkitSettings
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
 //     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY = "layout_box_mode_toggle_hotkey_primary";
 //     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY = "layout_box_mode_toggle_hotkey_secondary";
+    private const string UNDO_HOTKEY_PRIMARY_KEY = "undo_hotkey_primary";
+    private const string UNDO_HOTKEY_SECONDARY_KEY = "undo_hotkey_secondary";
 
     private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_KEY = "";
     private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_CTRL_KEY = "";
@@ -114,6 +116,8 @@ internal static class DesignerToolkitSettings
         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.LeftShift, KeyCode.T);
 //     private static readonly BdtHotkey DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY =
 //         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.B);
+    private static readonly BdtHotkey DEFAULT_UNDO_HOTKEY =
+        BdtHotkey.FromPrimaryKeys(KeyCode.LeftControl, KeyCode.Z);
 
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
@@ -268,6 +272,7 @@ internal static class DesignerToolkitSettings
     public static BdtHotkey ThroughputOverlayToggleHotkey { get; private set; } = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
     public static BdtHotkey ThroughputAoEToolHotkey { get; private set; } = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
 //     public static BdtHotkey LayoutBoxModeToggleHotkey { get; private set; } = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
+    public static BdtHotkey UndoHotkey { get; private set; } = DEFAULT_UNDO_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
@@ -343,12 +348,12 @@ internal static class DesignerToolkitSettings
             THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
             "", "", "", "",
             DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
-//         BdtHotkey initialLayoutBoxModeToggleHotkey = HotkeyFromConfig(
-//             config,
-//             LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
-//             LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
-//             "", "", "", "",
-//             DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
+        BdtHotkey initialUndoHotkey = HotkeyFromConfig(
+            config,
+            UNDO_HOTKEY_PRIMARY_KEY,
+            UNDO_HOTKEY_SECONDARY_KEY,
+            "", "", "", "",
+            DEFAULT_UNDO_HOTKEY);
 
         bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
@@ -359,6 +364,7 @@ internal static class DesignerToolkitSettings
         ThroughputOverlayToggleHotkey = initialThroughputOverlayToggleHotkey;
         ThroughputAoEToolHotkey = initialThroughputAoEToolHotkey;
 //         LayoutBoxModeToggleHotkey = initialLayoutBoxModeToggleHotkey;
+        UndoHotkey = initialUndoHotkey;
 
         LoadFromJsonStore(
             store,
@@ -650,6 +656,24 @@ internal static class DesignerToolkitSettings
             });
         root.Add(recycleBinFolderNameField);
 
+        root.Add(new Title(BdtLocalization.SettingsUndoHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        BdtKeyBindingField undoPrimaryField;
+        BdtKeyBindingField undoSecondaryField;
+        root.Add(BuildHotkeyRow(
+            BdtLocalization.SettingsUndoHotkey.AsFormatted,
+            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
+            () => UndoHotkey,
+            hotkey =>
+            {
+                UndoHotkey = hotkey;
+                SaveGlobalHotkey(UNDO_HOTKEY_PRIMARY_KEY, UNDO_HOTKEY_SECONDARY_KEY, hotkey);
+            },
+            out undoPrimaryField,
+            out undoSecondaryField));
+
         root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -706,6 +730,8 @@ internal static class DesignerToolkitSettings
             throughputAoEToolSecondaryField.Refresh();
 //             layoutBoxModePrimaryField.Refresh();
 //             layoutBoxModeSecondaryField.Refresh();
+            undoPrimaryField.Refresh();
+            undoSecondaryField.Refresh();
             transportCleanupPrimaryField.Refresh();
             transportCleanupSecondaryField.Refresh();
         }));
@@ -757,12 +783,14 @@ internal static class DesignerToolkitSettings
             ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
             ThroughputAoEToolHotkey = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
 //             LayoutBoxModeToggleHotkey = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
+            UndoHotkey = DEFAULT_UNDO_HOTKEY;
             TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
             SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
             SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
             SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
 //             SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
+            SaveGlobalHotkey(UNDO_HOTKEY_PRIMARY_KEY, UNDO_HOTKEY_SECONDARY_KEY, DEFAULT_UNDO_HOTKEY);
             SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
             refresh();
             status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
@@ -829,6 +857,8 @@ internal static class DesignerToolkitSettings
                 return false;
 //             if (s_config != null && !TrySetHotkeyConfig(s_config, LayoutBoxModeToggleHotkey, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
 //                 return false;
+            if (s_config != null && !TrySetHotkeyConfig(s_config, UndoHotkey, UNDO_HOTKEY_PRIMARY_KEY, UNDO_HOTKEY_SECONDARY_KEY, out error))
+                return false;
 
             if (string.IsNullOrWhiteSpace(s_modDirectory))
             {
@@ -886,6 +916,12 @@ internal static class DesignerToolkitSettings
 //                 LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
 //                 LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
 //                 out bool layoutBoxModeHotkeyUpdated);
+            updated = TryReplaceHotkeyConfigDefaults(
+                updated,
+                UndoHotkey,
+                UNDO_HOTKEY_PRIMARY_KEY,
+                UNDO_HOTKEY_SECONDARY_KEY,
+                out bool undoHotkeyUpdated);
             if (!languageUpdated)
             {
                 error = "Could not find markdown_table_language default in config.json.";
@@ -946,7 +982,7 @@ internal static class DesignerToolkitSettings
                 error = "Could not find recycle_bin_folder_name default in config.json.";
                 return false;
             }
-            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated )
+            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated || !undoHotkeyUpdated)
             {
                 error = "Could not find hotkey defaults in config.json.";
                 return false;

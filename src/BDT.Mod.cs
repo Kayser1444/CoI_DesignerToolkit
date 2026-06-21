@@ -15,6 +15,7 @@ using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
 using Mafi.Core.Game;
 using Mafi.Core.GameLoop;
+using Mafi.Core.Input;
 using Mafi.Core.Mods;
 using Mafi.Core.Prototypes;
 using Mafi.Core.Simulation;
@@ -46,6 +47,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private ThroughputWorldRenderer? m_throughputWorldRenderer;
     private UnityEngine.GameObject? m_throughputWorldRendererGo;
     private ThroughputAoETool? m_throughputAoETool;
+    private UndoManager? m_undoManager;
 
     public string Name => "Blueprint Designer's Toolkit";
 
@@ -83,6 +85,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         ThroughputInspectorPatches.Apply(m_harmony);
         ContentDisplayPatches.Apply(m_harmony);
         ShortcutsManagerPatches.Apply(m_harmony);
+        UndoPatches.Apply(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
 
@@ -165,6 +168,17 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_heightFilter = new HeightFilter(m_harmony!, resolver.Resolve<IGameLoopEvents>());
         m_heightFilter.Initialize(resolver);
+
+        m_undoManager = new UndoManager(
+            resolver.Resolve<EntitiesManager>(),
+            resolver.Resolve<IConstructionManager>(),
+            resolver.Resolve<IInputScheduler>(),
+            resolver.Resolve<EntitiesCloneConfigHelper>(),
+            resolver.Resolve<IGameLoopEvents>(),
+            resolver.Resolve<ISimLoopEvents>(),
+            resolver.Resolve<UiRoot>()
+        );
+        m_undoManager.Initialize();
 
         ModSettings.EnsureInitialized(
             resolver.Resolve<HudController>(),
@@ -273,6 +287,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         {
             m_heightFilter.Dispose();
             m_heightFilter = null;
+        }
+
+        if (m_undoManager != null)
+        {
+            m_undoManager.Dispose();
+            m_undoManager = null;
         }
 
         RateLimitManager.Clear();

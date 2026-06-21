@@ -374,5 +374,21 @@
   [
     "dtk.settings.recycle_bin_folder_name.description",
     "Mappnamnet under ritningsbokroten som ska användas som papperskorgen."
+  ],
+  [
+    "dtk.settings.undo.heading",
+    "ÅNgra PLACERING"
+  ],
+  [
+    "dtk.settings.undo_hotkey.label",
+    "Ångra snabbknapp för placering"
+  ],
+  [
+    "dtk.undo.success",
+    "Ångra: Placeringen har återställts."
+  ],
+  [
+    "dtk.undo.no_action",
+    "Ångra: Inga placeringsåtgärder att återställa."
   ]
 ]

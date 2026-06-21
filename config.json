@@ -108,6 +108,14 @@
     "default": "Recycle Bin",
     "description": "Initial folder name for the blueprint recycle bin."
   },
+  "undo_hotkey_primary": {
+    "default": "LeftControl + Z",
+    "description": "Initial primary undo placement hotkey. Leave empty to disable."
+  },
+  "undo_hotkey_secondary": {
+    "default": "",
+    "description": "Initial secondary undo placement hotkey. Leave empty to disable."
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."

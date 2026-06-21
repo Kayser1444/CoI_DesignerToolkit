@@ -374,5 +374,21 @@
   [
     "dtk.settings.recycle_bin_folder_name.description",
     "Der Ordnername im Stammverzeichnis des Blueprint-Books, der als Papierkorb verwendet werden soll."
+  ],
+  [
+    "dtk.settings.undo.heading",
+    "Platzierung rückgängig machen"
+  ],
+  [
+    "dtk.settings.undo_hotkey.label",
+    "Platzierungs-Hotkey rückgängig machen"
+  ],
+  [
+    "dtk.undo.success",
+    "Rückgängig machen: Die Platzierung wurde erfolgreich wiederhergestellt."
+  ],
+  [
+    "dtk.undo.no_action",
+    "Rückgängig machen: Es sind keine Platzierungsaktionen rückgängig zu machen."
   ]
 ]

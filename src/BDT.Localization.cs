@@ -211,5 +211,14 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.recycle_bin_folder_name.label", "Folder name", "Settings text field label for recycle bin folder name.");
     public static LocStr SettingsRecycleBinFolderNameDescription =
         Loc.Str("dtk.settings.recycle_bin_folder_name.description", "The folder name under the blueprint book root to use as the Recycle Bin.", "Settings text field description for recycle bin folder name.");
+
+    public static LocStr SettingsUndoHeading =
+        Loc.Str("dtk.settings.undo.heading", "UNDO PLACEMENT", "Settings section heading for Undo settings.");
+    public static LocStr SettingsUndoHotkey =
+        Loc.Str("dtk.settings.undo_hotkey.label", "Undo placement hotkey", "Settings row label for the undo placement hotkey.");
+    public static LocStr UndoSuccessMessage =
+        Loc.Str("dtk.undo.success", "Undo: Placement reverted successfully.", "Toast or message after undoing a placement.");
+    public static LocStr UndoNoActionMessage =
+        Loc.Str("dtk.undo.no_action", "Undo: No placement actions to revert.", "Toast or message when undo queue is empty.");
 }
 
