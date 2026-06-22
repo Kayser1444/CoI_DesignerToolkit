@@ -436,6 +436,10 @@
     "显示船舶污染情况"
   ],
   [
+    "dtk.settings.pollution_show_ship.description",
+    "启用/禁用船舶的世界污染率叠加。使用最近两次同类转换（例如到达或出发）之间消耗的燃油进行计算。"
+  ],
+  [
     "dtk.settings.pollution_toggle_hotkey.label",
     "污染覆盖热键"
   ]

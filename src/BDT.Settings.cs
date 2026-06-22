@@ -761,6 +761,7 @@ internal static class DesignerToolkitSettings
 
         Toggle showShipToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionShowShip.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionShowShipDescription.AsFormatted)
             .Value(PollutionShowShip)
             .OnValueChanged(SetPollutionShowShip);
         root.Add(showShipToggle);

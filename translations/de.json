@@ -436,6 +436,10 @@
     "Schiffsverschmutzung anzeigen"
   ],
   [
+    "dtk.settings.pollution_show_ship.description",
+    "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Schiffe. Berechnet anhand des Kraftstoffverbrauchs zwischen den beiden letzten gleichartigen Übergängen (z. B. Ankunft oder Abflug)."
+  ],
+  [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Hotkey zur Verschmutzungsüberlagerung"
   ]

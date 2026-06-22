@@ -9,6 +9,7 @@ using Mafi.Core.Entities;
 using Mafi.Core.Simulation;
 using Mafi.Core.Entities.Ships;
 using Mafi.Core.Entities.Dynamic;
+using Mafi.Core.PropertiesDb;
 using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
@@ -21,9 +22,27 @@ internal sealed class PollutionManager : IDisposable
     private readonly Dict<int, EntityPollutionState> m_states = new Dict<int, EntityPollutionState>();
     private IEntitiesManager? m_entitiesManager;
 
+    private IProperty<Percent>? m_vehiclesPollutionMultiplier;
+    private IProperty<Percent>? m_trainsPollutionMultiplier;
+    private IProperty<Percent>? m_shipsPollutionMultiplier;
+    private IProperty<Percent>? m_airPollutionMultiplier;
+    private IProperty<Percent>? m_waterPollutionMultiplier;
+    private ISimLoopEvents? m_simLoopEvents;
+
+    private readonly Dict<int, float> m_shipAccumulatedFuel = new Dict<int, float>();
+    private readonly Dict<int, Dict<string, ShipTransitionState>> m_shipTransitions = new Dict<int, Dict<string, ShipTransitionState>>();
+    private readonly Dict<int, Action> m_undockedHandlers = new Dict<int, Action>();
+    private readonly Dict<int, Action> m_arrivedHandlers = new Dict<int, Action>();
+
     public IEntitiesManager? EntitiesManager => m_entitiesManager;
 
     public static PollutionManager? Instance => s_instance;
+
+    public float VehiclesPollutionMultiplier => m_vehiclesPollutionMultiplier?.Value.ToFloat() ?? 1f;
+    public float TrainsPollutionMultiplier => m_trainsPollutionMultiplier?.Value.ToFloat() ?? 1f;
+    public float ShipsPollutionMultiplier => m_shipsPollutionMultiplier?.Value.ToFloat() ?? 1f;
+    public float AirPollutionMultiplier => m_airPollutionMultiplier?.Value.ToFloat() ?? 1f;
+    public float WaterPollutionMultiplier => m_waterPollutionMultiplier?.Value.ToFloat() ?? 1f;
 
     public enum PollutionType
     {
@@ -31,6 +50,13 @@ internal sealed class PollutionManager : IDisposable
         Ground,
         Vehicle,
         Ship
+    }
+
+    public sealed class ShipTransitionState
+    {
+        public int LastTicks;
+        public float LastFuel;
+        public bool HasPrevious;
     }
 
     public sealed class EntityPollutionState
@@ -86,7 +112,21 @@ internal sealed class PollutionManager : IDisposable
             var calendar = resolver.Resolve<Calendar>();
             calendar.NewDay.AddNonSaveable(this, OnNewDay);
             
+            var propsDb = resolver.Resolve<IPropertiesDb>();
+            m_vehiclesPollutionMultiplier = propsDb.GetProperty(IdsCore.PropertyIds.VehiclesPollutionMultiplier);
+            m_trainsPollutionMultiplier = propsDb.GetProperty(IdsCore.PropertyIds.TrainsPollutionMultiplier);
+            m_shipsPollutionMultiplier = propsDb.GetProperty(IdsCore.PropertyIds.ShipsPollutionMultiplier);
+            m_airPollutionMultiplier = propsDb.GetProperty(IdsCore.PropertyIds.AirPollutionMultiplier);
+            m_waterPollutionMultiplier = propsDb.GetProperty(IdsCore.PropertyIds.WaterPollutionMultiplier);
+            m_simLoopEvents = resolver.Resolve<ISimLoopEvents>();
+
             m_entitiesManager.EntityRemoved.AddNonSaveable(this, OnEntityRemoved);
+            m_entitiesManager.EntityAdded.AddNonSaveable(this, OnEntityAdded);
+
+            foreach (Ship ship in m_entitiesManager.GetAllEntitiesOfType<Ship>())
+            {
+                SubscribeToShip(ship);
+            }
 
             s_log.Info("PollutionManager initialized.");
         }
@@ -99,7 +139,32 @@ internal sealed class PollutionManager : IDisposable
     public void Dispose()
     {
         s_instance = null;
+        if (m_entitiesManager != null)
+        {
+            try
+            {
+                m_entitiesManager.EntityAdded.Remove(this, OnEntityAdded);
+            }
+            catch {}
+            try
+            {
+                m_entitiesManager.EntityRemoved.Remove(this, OnEntityRemoved);
+            }
+            catch {}
+            try
+            {
+                foreach (Ship ship in m_entitiesManager.GetAllEntitiesOfType<Ship>())
+                {
+                    UnsubscribeFromShip(ship.Id.Value);
+                }
+            }
+            catch {}
+        }
         m_states.Clear();
+        m_shipTransitions.Clear();
+        m_shipAccumulatedFuel.Clear();
+        m_undockedHandlers.Clear();
+        m_arrivedHandlers.Clear();
         m_entitiesManager = null;
     }
 
@@ -136,12 +201,11 @@ internal sealed class PollutionManager : IDisposable
             return;
         }
 
-        // 1. Nominal Ship Pollution Polling
-        PollShipsNominalPollution();
-
         // 2. Roll history for all states
         foreach (var state in m_states.Values)
         {
+            if (state.Type == PollutionType.Ship) continue;
+
             state.DailyHistory[state.HistoryHead] = state.CurrentDaySum;
             state.HistoryHead = (state.HistoryHead + 1) % 360;
             if (state.HistoryCount < 360)
@@ -153,41 +217,114 @@ internal sealed class PollutionManager : IDisposable
         }
     }
 
-    private void PollShipsNominalPollution()
+    private void OnEntityAdded(IEntity entity)
     {
-        if (m_entitiesManager == null) return;
-
-        try
+        if (entity is Ship ship)
         {
-            foreach (Ship ship in m_entitiesManager.GetAllEntitiesOfType<Ship>())
+            SubscribeToShip(ship);
+        }
+    }
+
+    private void SubscribeToShip(Ship ship)
+    {
+        int shipId = ship.Id.Value;
+        UnsubscribeFromShip(shipId);
+
+        Action undocked = () => HandleShipTransition(ship, "Undocked");
+        Action arrived = () => HandleShipTransition(ship, "ArrivedFromWorld");
+
+        m_undockedHandlers[shipId] = undocked;
+        m_arrivedHandlers[shipId] = arrived;
+
+        ship.OnUndocked += undocked;
+        ship.OnArrivedFromWorld += arrived;
+    }
+
+    private void UnsubscribeFromShip(int shipId)
+    {
+        if (m_entitiesManager != null && m_entitiesManager.TryGetEntity(new EntityId(shipId), out IEntity entity) && entity is Ship ship)
+        {
+            if (m_undockedHandlers.TryGetValue(shipId, out var undocked))
             {
-                if (ship.IsDestroyed || !ship.IsEnabled) continue;
+                ship.OnUndocked -= undocked;
+                m_undockedHandlers.Remove(shipId);
+            }
+            if (m_arrivedHandlers.TryGetValue(shipId, out var arrived))
+            {
+                ship.OnArrivedFromWorld -= arrived;
+                m_arrivedHandlers.Remove(shipId);
+            }
+        }
+    }
 
-                // Ship nominal active rate: if IsEngineOn or IsMoving is true
-                if (ship.IsEngineOn || ship.IsMoving)
+    public void RecordShipFuel(int shipId, float amount)
+    {
+        if (!m_shipAccumulatedFuel.TryGetValue(shipId, out float total))
+        {
+            total = 0f;
+        }
+        m_shipAccumulatedFuel[shipId] = total + amount;
+    }
+
+    private void HandleShipTransition(Ship ship, string transitionType)
+    {
+        if (m_simLoopEvents == null) return;
+
+        int currentTicks = m_simLoopEvents.CurrentStep.Value;
+        int shipId = ship.Id.Value;
+
+        if (!m_shipAccumulatedFuel.TryGetValue(shipId, out float currentFuel))
+        {
+            currentFuel = 0f;
+        }
+
+        if (!m_shipTransitions.TryGetValue(shipId, out var transitions))
+        {
+            transitions = new Dict<string, ShipTransitionState>();
+            m_shipTransitions[shipId] = transitions;
+        }
+
+        if (!transitions.TryGetValue(transitionType, out var transState))
+        {
+            transState = new ShipTransitionState();
+            transitions[transitionType] = transState;
+        }
+
+        if (transState.HasPrevious)
+        {
+            int deltaTicks = currentTicks - transState.LastTicks;
+            float deltaFuel = currentFuel - transState.LastFuel;
+
+            if (deltaTicks > 0 && deltaFuel >= 0f)
+            {
+                var proto = ship.Prototype;
+                if (proto.FuelTankProto.HasValue)
                 {
-                    var proto = ship.Prototype;
-                    if (proto.FuelTankProto.HasValue)
-                    {
-                        var ftp = proto.FuelTankProto.Value;
-                        float capacity = ftp.Capacity.Value;
-                        float ticks = ftp.Duration.Ticks;
-                        float pollutionPercent = ftp.PollutionPercent.ToFloat();
-                        float dailySum = (capacity * 600f) / ticks * pollutionPercent / 30f;
+                    var ftp = proto.FuelTankProto.Value;
+                    float pollutionPercent = ftp.PollutionPercent.ToFloat();
+                    float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
+                    
+                    float pollution = deltaFuel * pollutionPercent * mult;
+                    // Monthly rate: (pollution / deltaTicks) * 600f (where 600 ticks = 30 game days / 1 game month)
+                    float monthlyRate = (pollution / deltaTicks) * 600f;
 
-                        RecordPollution(ship.Id.Value, dailySum, PollutionType.Ship);
-                    }
+                    var state = GetOrCreateState(shipId, PollutionType.Ship);
+                    state.CachedAveragePollution = monthlyRate;
                 }
             }
         }
-        catch (Exception ex)
-        {
-            s_log.Warning($"Error in PollShipsNominalPollution: {ex.Message}");
-        }
+
+        transState.LastTicks = currentTicks;
+        transState.LastFuel = currentFuel;
+        transState.HasPrevious = true;
     }
 
     public void OnEntityRemoved(IEntity entity)
     {
-        m_states.Remove(entity.Id.Value);
+        int id = entity.Id.Value;
+        UnsubscribeFromShip(id);
+        m_states.Remove(id);
+        m_shipTransitions.Remove(id);
+        m_shipAccumulatedFuel.Remove(id);
     }
 }

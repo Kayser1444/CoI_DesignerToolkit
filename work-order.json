@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 110,
+  "total_keys": 111,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -21,138 +21,17 @@
       "ru": "МАКЕТ",
       "zh": "布局"
     },
-    "dtk.settings.pollution.heading": {
-      "en": "POLLUTION OVERLAY",
-      "context": "Settings section heading for pollution overlay settings.",
-      "de": "VERSCHMUTZUNGSÜBERLAGERUNG",
-      "es": "SUPERPOSICIÓN DE CONTAMINACIÓN",
-      "it": "SOVRAPPOSIZIONE INQUINAMENTO",
-      "pt": "SOBREPOSIÇÃO DE POLUIÇÃO",
-      "ru": "НАЛОЖЕНИЕ ЗАГРЯЗНЕНИЯ",
-      "sv": "FÖRORENING OVERLAY",
-      "zh": "污染叠加"
-    },
-    "dtk.settings.pollution_toggle.label": {
-      "en": "Pollution overlay",
-      "context": "Settings row label for pollution overlay toggle.",
-      "de": "Verschmutzungsüberlagerung",
-      "es": "Superposición de contaminación",
-      "it": "Sovrapposizione di inquinamento",
-      "pt": "Sobreposição de poluição",
-      "ru": "Наложение загрязнения",
-      "sv": "Föroreningsöverlägg",
-      "zh": "污染叠加"
-    },
-    "dtk.settings.pollution_toggle.description": {
-      "en": "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days.",
-      "context": "Settings row description for pollution overlay visibility.",
-      "de": "Aktiviert/deaktiviert die Überlagerung der Verschmutzungsrate in der Welt. Zeigt Durchschnittswerte über die konfigurierten Tage an.",
-      "es": "Activa/desactiva la superposición de la tasa de contaminación en el mundo. Muestra promedios durante los días configurados.",
-      "it": "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo. Visualizza le medie nei giorni configurati.",
-      "pt": "Ativa/desativa a sobreposição da taxa de poluição mundial. Exibe as médias dos dias configurados.",
-      "ru": "Включает/отключает наложение уровня загрязнения в мире. Отображает средние значения за настроенные дни.",
-      "sv": "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen. Visar medelvärden över de konfigurerade dagarna.",
-      "zh": "启用/禁用世界内污染率叠加。显示配置天数的平均值。"
-    },
-    "dtk.settings.pollution_glow.label": {
-      "en": "Enable heatmap glow effect",
-      "context": "Settings row label for pollution heatmap glow toggle.",
-      "de": "Aktivieren Sie den Heatmap-Glüheffekt",
-      "es": "Habilitar el efecto de brillo del mapa de calor",
-      "it": "Abilita l'effetto bagliore della mappa termica",
-      "pt": "Ativar efeito de brilho do mapa de calor",
-      "ru": "Включить эффект свечения тепловой карты",
-      "sv": "Aktivera värmekartans glödeffekt",
-      "zh": "启用热图发光效果"
-    },
-    "dtk.settings.pollution_glow.description": {
-      "en": "Cast a glowing light onto polluting entities matching their emission intensity. Disable if causing lag.",
-      "context": "Settings row description for pollution heatmap glow.",
-      "de": "Werfen Sie ein leuchtendes Licht auf umweltschädliche Einheiten, die ihrer Emissionsintensität entsprechen. Deaktivieren, wenn es zu Verzögerungen kommt.",
-      "es": "Proyecte una luz brillante sobre entidades contaminantes que coincida con su intensidad de emisión. Desactívelo si causa retraso.",
-      "it": "Proietta una luce brillante sulle entità inquinanti in base alla loro intensità di emissione. Disabilita se causa ritardo.",
-      "pt": "Lançar uma luz brilhante sobre entidades poluentes que correspondam à sua intensidade de emissão. Desative se estiver causando atraso.",
-      "ru": "Направьте светящийся свет на загрязняющие объекты, соответствующий интенсивности их излучения. Отключите, если вызывает задержку.",
-      "sv": "Kasta ett glödande ljus på förorenande enheter som matchar deras utsläppsintensitet. Inaktivera om det orsakar fördröjning.",
-      "zh": "将发光的光投射到与其发射强度相匹配的污染实体上。如果造成延迟，请禁用。"
-    },
-    "dtk.settings.pollution_days.label": {
-      "en": "Averaging period",
-      "context": "Settings row label for the days to average pollution.",
-      "de": "Mittelungszeitraum",
-      "es": "Período promedio",
-      "it": "Periodo di media",
-      "pt": "Período médio",
-      "ru": "Период усреднения",
-      "sv": "Genomsnittlig period",
-      "zh": "平均周期"
-    },
-    "dtk.settings.pollution_days.description": {
-      "en": "Configures the sliding window in game days [0-360] to average emissions. Setting this to 0 completely disables data collection and patches.",
-      "context": "Settings row description for pollution averaging period.",
-      "de": "Konfiguriert das Schiebefenster in Spieltagen [0-360] auf durchschnittliche Emissionen. Wenn Sie diesen Wert auf 0 setzen, werden die Datenerfassung und Patches vollständig deaktiviert.",
-      "es": "Configura la ventana deslizante en días de juego [0-360] para promediar las emisiones. Establecer esto en 0 deshabilita completamente la recopilación de datos y los parches.",
-      "it": "Configura la finestra scorrevole nei giorni di gioco [0-360] sulle emissioni medie. Impostandolo su 0 si disabilita completamente la raccolta dati e le patch.",
-      "pt": "Configura a janela deslizante em dias de jogo [0-360] para emissões médias. Definir como 0 desativa completamente a coleta de dados e patches.",
-      "ru": "Настраивает скользящее окно в игровых днях [0-360] для среднего уровня выбросов. Установка значения 0 полностью отключает сбор данных и исправления.",
-      "sv": "Konfigurerar skjutfönstret i speldagar [0-360] till genomsnittliga utsläpp. Om du ställer in detta till 0 inaktiveras datainsamling och patchar helt.",
-      "zh": "将比赛日 [0-360] 中的滑动窗口配置为平均排放量。将其设置为 0 会完全禁用数据收集和修补。"
-    },
-    "dtk.settings.pollution_show_air.label": {
-      "en": "Show air pollution",
-      "context": "Settings checkbox label for showing air pollution.",
-      "de": "Luftverschmutzung anzeigen",
-      "es": "Mostrar la contaminación del aire",
-      "it": "Mostra l'inquinamento atmosferico",
-      "pt": "Mostrar poluição do ar",
-      "ru": "Показать загрязнение воздуха",
-      "sv": "Visa luftföroreningar",
-      "zh": "显示空气污染情况"
-    },
-    "dtk.settings.pollution_show_ground.label": {
-      "en": "Show ground & water pollution",
-      "context": "Settings checkbox label for showing ground & water pollution.",
-      "de": "Boden- und Wasserverschmutzung anzeigen",
-      "es": "Mostrar la contaminación del suelo y del agua",
-      "it": "Mostra l'inquinamento del suolo e dell'acqua",
-      "pt": "Mostrar poluição do solo e da água",
-      "ru": "Показать загрязнение почвы и воды",
-      "sv": "Visa mark- och vattenföroreningar",
-      "zh": "显示地面和水污染"
-    },
-    "dtk.settings.pollution_show_vehicle.label": {
-      "en": "Show vehicle & train pollution",
-      "context": "Settings checkbox label for showing vehicle & train pollution.",
-      "de": "Zeigen Sie die Verschmutzung von Fahrzeugen und Zügen an",
-      "es": "Mostrar la contaminación de vehículos y trenes",
-      "it": "Mostra l'inquinamento dei veicoli e dei treni",
-      "pt": "Mostrar poluição de veículos e trens",
-      "ru": "Показать загрязнение транспортных средств и поездов",
-      "sv": "Visa fordons- och tågföroreningar",
-      "zh": "显示车辆和火车污染"
-    },
-    "dtk.settings.pollution_show_ship.label": {
-      "en": "Show ship pollution",
-      "context": "Settings checkbox label for showing ship pollution.",
-      "de": "Schiffsverschmutzung anzeigen",
-      "es": "Mostrar la contaminación de los barcos",
-      "it": "Mostra l'inquinamento delle navi",
-      "pt": "Mostrar poluição de navios",
-      "ru": "Показать загрязнение корабля",
-      "sv": "Visa fartygsföroreningar",
-      "zh": "显示船舶污染情况"
-    },
-    "dtk.settings.pollution_toggle_hotkey.label": {
-      "en": "Pollution overlay hotkey",
-      "context": "Settings row label for pollution overlay toggle hotkey.",
-      "de": "Hotkey zur Verschmutzungsüberlagerung",
-      "es": "Tecla de acceso rápido de superposición de contaminación",
-      "it": "Tasto di scelta rapida in sovrapposizione sull'inquinamento",
-      "pt": "Tecla de atalho de sobreposição de poluição",
-      "ru": "Горячая клавиша наложения загрязнения",
-      "sv": "Hotkey för föroreningar",
-      "zh": "污染覆盖热键"
+    "dtk.settings.pollution_show_ship.description": {
+      "en": "Enables/disables the in-world pollution rate overlay for ships. Calculated using the fuel consumed between the two latest transitions of the same kind (e.g. arrivals or departures).",
+      "context": "Settings checkbox description for showing ship pollution.",
+      "de": "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Schiffe. Berechnet anhand des Kraftstoffverbrauchs zwischen den beiden letzten gleichartigen Übergängen (z. B. Ankunft oder Abflug).",
+      "es": "Activa/desactiva la superposición de la tasa de contaminación mundial para barcos. Calculado utilizando el combustible consumido entre las dos últimas transiciones del mismo tipo (por ejemplo, llegadas o salidas).",
+      "it": "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per le navi. Calcolato utilizzando il carburante consumato tra le due ultime transizioni dello stesso tipo (ad esempio arrivi o partenze).",
+      "pt": "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Calculado com base no combustível consumido entre as duas últimas transições do mesmo tipo (por exemplo, chegadas ou partidas).",
+      "ru": "Включает/выключает наложение уровня загрязнения в мире для кораблей. Рассчитывается с использованием топлива, израсходованного между двумя последними переходами одного и того же типа (например, прибытием или отправлением).",
+      "sv": "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fartyg. Beräknat med bränsle som förbrukats mellan de två senaste övergångarna av samma slag (t.ex. ankomster eller avgångar).",
+      "zh": "启用/禁用船舶的世界污染率叠加。使用最近两次同类转换（例如到达或出发）之间消耗的燃油进行计算。"
     }
   },
-  "keys_needing_translation": 13
+  "keys_needing_translation": 2
 }

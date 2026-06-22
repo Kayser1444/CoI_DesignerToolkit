@@ -13,6 +13,8 @@ using Mafi.Core.Entities.Dynamic;
 using Mafi.Core.Factory.Machines;
 using Mafi.Core.Trains;
 using Mafi.Core.Vehicles;
+using Mafi.Core.Buildings.Cargo.Ships;
+using Mafi.Core.Products;
 using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
@@ -90,6 +92,20 @@ public static class PollutionPatches
                 s_log.Warning("FuelTank.ConsumeFuelPerUpdate(VehicleFuelConsumption) not found!");
             }
 
+            var consumeFuelShip = typeof(CargoShipV2).GetMethod(
+                "ConsumeFuel",
+                BindingFlags.Instance | BindingFlags.Public);
+            if (consumeFuelShip != null)
+            {
+                harmony.Patch(consumeFuelShip,
+                    prefix: new HarmonyMethod(typeof(CargoShipV2_ConsumeFuel_Patch), nameof(CargoShipV2_ConsumeFuel_Patch.Prefix)));
+                s_log.Info("Patched CargoShipV2.ConsumeFuel.");
+            }
+            else
+            {
+                s_log.Warning("CargoShipV2.ConsumeFuel not found!");
+            }
+
             s_log.Info("Pollution patches applied successfully.");
         }
         catch (Exception ex)
@@ -159,7 +175,8 @@ public static class PollutionPatches
                     Quantity accepted = quantity - __result;
                     if (accepted.IsPositive)
                     {
-                        PollutionManager.Instance?.RecordPollution(CurrentExecutingMachine.Id.Value, accepted.Value, PollutionManager.PollutionType.Air);
+                        float mult = PollutionManager.Instance?.AirPollutionMultiplier ?? 1f;
+                        PollutionManager.Instance?.RecordPollution(CurrentExecutingMachine.Id.Value, accepted.Value * mult, PollutionManager.PollutionType.Air);
                     }
                 }
                 else if (product.Id == IdsCore.Products.PollutedWater)
@@ -167,7 +184,8 @@ public static class PollutionPatches
                     Quantity accepted = quantity - __result;
                     if (accepted.IsPositive)
                     {
-                        PollutionManager.Instance?.RecordPollution(CurrentExecutingMachine.Id.Value, accepted.Value, PollutionManager.PollutionType.Ground);
+                        float mult = PollutionManager.Instance?.WaterPollutionMultiplier ?? 1f;
+                        PollutionManager.Instance?.RecordPollution(CurrentExecutingMachine.Id.Value, accepted.Value * mult, PollutionManager.PollutionType.Ground);
                     }
                 }
             }
@@ -198,8 +216,18 @@ public static class PollutionPatches
                     float multiplier = tank.m_fuelConsumptionMultiplier.Value.ToFloat();
                     float consumedTicks = consumptionPercent.ToFloat() * multiplier;
 
-                    // pollution = (consumedTicks / duration) * capacity * pollutionPercent
-                    float pollution = (consumedTicks / duration) * capacity * pollutionPercent;
+                    float mult = 1f;
+                    if (entity is Vehicle)
+                    {
+                        mult = PollutionManager.Instance.VehiclesPollutionMultiplier * PollutionManager.Instance.AirPollutionMultiplier;
+                    }
+                    else if (entity is Locomotive)
+                    {
+                        mult = PollutionManager.Instance.TrainsPollutionMultiplier * PollutionManager.Instance.AirPollutionMultiplier;
+                    }
+
+                    // pollution = (consumedTicks / duration) * capacity * pollutionPercent * mult
+                    float pollution = (consumedTicks / duration) * capacity * pollutionPercent * mult;
 
                     PollutionManager.Instance.RecordPollution(entity.Id.Value, pollution, PollutionManager.PollutionType.Vehicle);
                 }
@@ -225,6 +253,17 @@ public static class PollutionPatches
         {
             Percent consumptionPercent = (consumption != VehicleFuelConsumption.Idle) ? Percent.Hundred : __instance.Proto.IdleFuelConsumption;
             RecordFuelPollution(__instance, consumptionPercent);
+        }
+    }
+
+    public static class CargoShipV2_ConsumeFuel_Patch
+    {
+        public static void Prefix(CargoShipV2 __instance, Quantity toConsume)
+        {
+            if (toConsume.IsPositive && PollutionManager.Instance != null)
+            {
+                PollutionManager.Instance.RecordShipFuel(__instance.Id.Value, toConsume.Value);
+            }
         }
     }
 }

@@ -436,6 +436,10 @@
     "Mostrar poluição de navios"
   ],
   [
+    "dtk.settings.pollution_show_ship.description",
+    "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Calculado com base no combustível consumido entre as duas últimas transições do mesmo tipo (por exemplo, chegadas ou partidas)."
+  ],
+  [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Tecla de atalho de sobreposição de poluição"
   ]

@@ -436,6 +436,10 @@
     "Mostra l'inquinamento delle navi"
   ],
   [
+    "dtk.settings.pollution_show_ship.description",
+    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per le navi. Calcolato utilizzando il carburante consumato tra le due ultime transizioni dello stesso tipo (ad esempio arrivi o partenze)."
+  ],
+  [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Tasto di scelta rapida in sovrapposizione sull'inquinamento"
   ]

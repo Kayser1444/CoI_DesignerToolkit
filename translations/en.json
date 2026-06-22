@@ -401,7 +401,7 @@
   ],
   [
     "dtk.settings.pollution_toggle.description",
-    "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days."
+    "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days. These values include the effects of game difficulty settings and researched pollution-reduction technologies."
   ],
   [
     "dtk.settings.pollution_glow.label",
@@ -434,6 +434,10 @@
   [
     "dtk.settings.pollution_show_ship.label",
     "Show ship pollution"
+  ],
+  [
+    "dtk.settings.pollution_show_ship.description",
+    "Enables/disables the in-world pollution rate overlay for ships. Calculated using the fuel consumed between the two latest transitions of the same kind (e.g. arrivals or departures)."
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",

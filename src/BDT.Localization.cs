@@ -226,7 +226,7 @@ internal static class BdtLocalization
     public static LocStr SettingsPollutionToggle =
         Loc.Str("dtk.settings.pollution_toggle.label", "Pollution overlay", "Settings row label for pollution overlay toggle.");
     public static LocStr SettingsPollutionToggleDescription =
-        Loc.Str("dtk.settings.pollution_toggle.description", "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days.", "Settings row description for pollution overlay visibility.");
+        Loc.Str("dtk.settings.pollution_toggle.description", "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days. These values include the effects of game difficulty settings and researched pollution-reduction technologies.", "Settings row description for pollution overlay visibility.");
     public static LocStr SettingsPollutionGlow =
         Loc.Str("dtk.settings.pollution_glow.label", "Enable heatmap glow effect", "Settings row label for pollution heatmap glow toggle.");
     public static LocStr SettingsPollutionGlowDescription =
@@ -243,6 +243,8 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.pollution_show_vehicle.label", "Show vehicle & train pollution", "Settings checkbox label for showing vehicle & train pollution.");
     public static LocStr SettingsPollutionShowShip =
         Loc.Str("dtk.settings.pollution_show_ship.label", "Show ship pollution", "Settings checkbox label for showing ship pollution.");
+    public static LocStr SettingsPollutionShowShipDescription =
+        Loc.Str("dtk.settings.pollution_show_ship.description", "Enables/disables the in-world pollution rate overlay for ships. Calculated using the fuel consumed between the two latest transitions of the same kind (e.g. arrivals or departures).", "Settings checkbox description for showing ship pollution.");
     public static LocStr SettingsPollutionToggleHotkey =
         Loc.Str("dtk.settings.pollution_toggle_hotkey.label", "Pollution overlay hotkey", "Settings row label for pollution overlay toggle hotkey.");
 }

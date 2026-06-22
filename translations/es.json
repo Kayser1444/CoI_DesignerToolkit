@@ -436,6 +436,10 @@
     "Mostrar la contaminación de los barcos"
   ],
   [
+    "dtk.settings.pollution_show_ship.description",
+    "Activa/desactiva la superposición de la tasa de contaminación mundial para barcos. Calculado utilizando el combustible consumido entre las dos últimas transiciones del mismo tipo (por ejemplo, llegadas o salidas)."
+  ],
+  [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Tecla de acceso rápido de superposición de contaminación"
   ]
