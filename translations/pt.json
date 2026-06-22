@@ -456,11 +456,11 @@
     "Espaçamento (em blocos) entre plantas colocadas lado a lado durante a colagem em lote [0-12]."
   ],
   [
-    "dtk.blueprint.paste_all.button",
-    "Colar tudo"
+    "dtk.blueprint.place_all.button",
+    "Coloque tudo"
   ],
   [
-    "dtk.blueprint.paste_all.tooltip",
-    "Cole fantasmas de todos os designs lado a lado nesta pasta para revisá-los."
+    "dtk.blueprint.place_all.tooltip",
+    "Coloque todos os projetos nesta pasta."
   ]
 ]

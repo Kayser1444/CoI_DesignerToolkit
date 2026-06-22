@@ -456,11 +456,11 @@
     "Avstånd (i brickor) mellan ritningar placerade sida vid sida under batchklistring [0-12]."
   ],
   [
-    "dtk.blueprint.paste_all.button",
-    "Klistra in alla"
+    "dtk.blueprint.place_all.button",
+    "Placera alla"
   ],
   [
-    "dtk.blueprint.paste_all.tooltip",
-    "Klistra in spöken av alla mönster i den här mappen sida vid sida för att granska dem."
+    "dtk.blueprint.place_all.tooltip",
+    "Lägg alla ritningar i den här mappen."
   ]
 ]

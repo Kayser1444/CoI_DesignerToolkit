@@ -76,7 +76,7 @@ internal static class BlueprintExport
     {
         public IBlueprintsFolder? Folder;
         public ButtonIconText? CopyBtn;
-        public ButtonIconText? PasteBtn;
+        public ButtonIconText? PlaceBtn;
     }
 
     private static readonly ConditionalWeakTable<object, FolderState> s_folderStates =
@@ -250,11 +250,11 @@ internal static class BlueprintExport
 
             folderState.CopyBtn = copyBtn;
 
-            var pasteBtn = new ButtonIconText(Button.Primary, "Assets/Unity/UserInterface/General/Build.svg", BdtLocalization.PasteAllButton.AsFormatted)
-                .Tooltip(BdtLocalization.PasteAllTooltip.AsFormatted)
+            var placeBtn = new ButtonIconText(Button.Primary, "Assets/Unity/UserInterface/General/Build.svg", BdtLocalization.PlaceAllButton.AsFormatted)
+                .Tooltip(BdtLocalization.PlaceAllTooltip.AsFormatted)
                 .Visible(false);
 
-            pasteBtn.OnClick(() =>
+            placeBtn.OnClick(() =>
             {
                 if (folderState.Folder == null) return;
                 try
@@ -263,16 +263,16 @@ internal static class BlueprintExport
                 }
                 catch (Exception ex)
                 {
-                    s_log.Exception(ex, "OnFolderPasteClick");
+                    s_log.Exception(ex, "OnFolderPlaceClick");
                 }
             });
 
-            folderState.PasteBtn = pasteBtn;
+            folderState.PlaceBtn = placeBtn;
 
             // Wrap in a row so the button doesn't stretch to fill the column width.
             var btnRow = new Row(2.pt()).AlignItemsCenterMiddle().MarginTop(2.pt());
             btnRow.Add(copyBtn);
-            btnRow.Add(pasteBtn);
+            btnRow.Add(placeBtn);
             detail.Add(btnRow);
         }
         catch (Exception ex)
@@ -290,7 +290,7 @@ internal static class BlueprintExport
             bool hasAnyBps = folder != null && HasAnyBlueprints(folder);
             bool hasDirectBps = folder != null && folder.Blueprints.Count > 0;
             folderState.CopyBtn?.Visible(hasAnyBps);
-            folderState.PasteBtn?.Visible(hasDirectBps);
+            folderState.PlaceBtn?.Visible(hasDirectBps);
         }
         catch (Exception ex)
         {
@@ -735,6 +735,8 @@ internal static class BlueprintExport
             var copiedDecals = new Lyst<TileSurfaceCopyPasteData>();
 
             int currentX = 0;
+            int currentRowY = 0;
+            int currentRowMaxHeight = 0;
             int spacing = DesignerToolkitSettings.BlueprintSpacing;
 
             foreach (IBlueprint blueprint in blueprints)
@@ -794,7 +796,23 @@ internal static class BlueprintExport
                 }
 
                 int width = maxX - minX + 1;
-                RelTile3i offset = new RelTile3i(currentX - minX, -minY, 0);
+                int height = maxY - minY + 1;
+
+                if (currentX > 0 && currentX + width > 512)
+                {
+                    currentRowY += currentRowMaxHeight + spacing;
+                    currentX = 0;
+                    currentRowMaxHeight = 0;
+                }
+
+                if (currentRowY + height > 512)
+                {
+                    // Exceeds the 512x512 grid limit, crop remaining blueprints
+                    break;
+                }
+
+                RelTile3i offset = new RelTile3i(currentX - minX, currentRowY - minY, 0);
+                currentRowMaxHeight = Math.Max(currentRowMaxHeight, height);
 
                 foreach (EntityConfigData item in blueprint.Items)
                 {

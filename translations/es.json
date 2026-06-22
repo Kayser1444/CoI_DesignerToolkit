@@ -456,11 +456,11 @@
     "Espaciado (en mosaicos) entre planos colocados uno al lado del otro durante el pegado por lotes [0-12]."
   ],
   [
-    "dtk.blueprint.paste_all.button",
-    "Pegar todo"
+    "dtk.blueprint.place_all.button",
+    "Colocar todo"
   ],
   [
-    "dtk.blueprint.paste_all.tooltip",
-    "Pegue fantasmas de todos los diseños en esta carpeta uno al lado del otro para revisarlos."
+    "dtk.blueprint.place_all.tooltip",
+    "Coloque todos los planos en esta carpeta."
   ]
 ]

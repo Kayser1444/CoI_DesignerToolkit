@@ -453,14 +453,14 @@
   ],
   [
     "dtk.settings.blueprint_spacing.description",
-    "Spacing (in tiles) between blueprints placed side-by-side during batch pasting [0-12]."
+    "Spacing (in tiles) between blueprints placed side-by-side during batch placing [0-12]."
   ],
   [
-    "dtk.blueprint.paste_all.button",
-    "Paste all"
+    "dtk.blueprint.place_all.button",
+    "Place all"
   ],
   [
-    "dtk.blueprint.paste_all.tooltip",
-    "Paste ghosts of all designs in this folder side-by-side to review them."
+    "dtk.blueprint.place_all.tooltip",
+    "Place all blueprints in this folder."
   ]
 ]

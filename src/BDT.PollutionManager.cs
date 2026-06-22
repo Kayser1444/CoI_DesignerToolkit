@@ -188,55 +188,79 @@ internal sealed class PollutionManager : IDisposable
     {
     }
 
-    public float GetShipPredictedPollution(Mafi.Core.Buildings.Cargo.Ships.CargoShipV2 cargoShip)
+    public float GetShipPredictedPollution(Ship ship)
     {
-        if (cargoShip.IsDestroyed || !cargoShip.IsEnabled) return 0f;
+        if (ship.IsDestroyed || !ship.IsEnabled) return 0f;
 
-        var fuelData = cargoShip.FuelData;
-        if (fuelData == null)
+        if (ship is Mafi.Core.Buildings.Cargo.Ships.CargoShipV2 cargoShip)
         {
-            return 0f;
-        }
+            var fuelData = cargoShip.FuelData;
+            if (fuelData == null)
+            {
+                return 0f;
+            }
 
-        float pollutionPercent = fuelData.PollutionPercent.ToFloat();
-        float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
+            float pollutionPercent = fuelData.PollutionPercent.ToFloat();
+            float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
 
-        float fuelPerJourney = 0f;
-        var jobProvider = cargoShip.JobProvider as Mafi.Core.Buildings.Cargo.Ships.CargoShipAssignedToDockJobProviderBase;
-        if (jobProvider != null)
-        {
-            fuelPerJourney = jobProvider.FuelPerJourneyNeeded().Value;
+            float fuelPerJourney = 0f;
+            var jobProvider = cargoShip.JobProvider as Mafi.Core.Buildings.Cargo.Ships.CargoShipAssignedToDockJobProviderBase;
+            if (jobProvider != null)
+            {
+                fuelPerJourney = jobProvider.FuelPerJourneyNeeded().Value;
+            }
+            else
+            {
+                // fallback prediction formula matching game mechanics
+                var proto = cargoShip.Prototype;
+                float baseFuel = fuelData.FuelPerJourneyBase.Value;
+                float perModuleFuel = fuelData.FuelPerJourneyPerModule.Value;
+                float capacityMult = proto.CapacityMultiplier.ToFloat();
+                int nonEmptyModulesCount = cargoShip.NonEmptyModules.Count;
+                
+                float val = baseFuel + (nonEmptyModulesCount * perModuleFuel) * capacityMult;
+                val *= cargoShip.FuelConsumptionMultiplier.Value.ToFloat();
+                if (cargoShip.IsFuelReductionEnabled)
+                {
+                    val *= Mafi.Core.Buildings.Cargo.Ships.CargoShipV2.SAVER_FUEL_MULT.ToFloat();
+                }
+                fuelPerJourney = val;
+            }
+
+            if (fuelPerJourney <= 0)
+            {
+                return 0f;
+            }
+
+            // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
+            float pollution = fuelPerJourney * pollutionPercent * 0.6f * mult;
+            var duration = cargoShip.JourneyDuration;
+            float roundTripTicks = (duration.HasValue && duration.Value.Ticks > 0) ? duration.Value.Ticks : 1800f;
+
+            // monthlyRate = (pollution / roundTripTicks) * 600 ticks per month
+            return (pollution / roundTripTicks) * 600f;
         }
         else
         {
-            // fallback prediction formula matching game mechanics
-            var proto = cargoShip.Prototype;
-            float baseFuel = fuelData.FuelPerJourneyBase.Value;
-            float perModuleFuel = fuelData.FuelPerJourneyPerModule.Value;
-            float capacityMult = proto.CapacityMultiplier.ToFloat();
-            int nonEmptyModulesCount = cargoShip.NonEmptyModules.Count;
-            
-            float val = baseFuel + (nonEmptyModulesCount * perModuleFuel) * capacityMult;
-            val *= cargoShip.FuelConsumptionMultiplier.Value.ToFloat();
-            if (cargoShip.IsFuelReductionEnabled)
+            // Fallback for explorer ship (BattleShip) and other types
+            var proto = ship.Prototype;
+            if (proto.FuelTankProto.HasValue && (ship.IsEngineOn || ship.IsMoving))
             {
-                val *= Mafi.Core.Buildings.Cargo.Ships.CargoShipV2.SAVER_FUEL_MULT.ToFloat();
+                var ftp = proto.FuelTankProto.Value;
+                float capacity = ftp.Capacity.Value;
+                float ticks = ftp.Duration.Ticks;
+                float pollutionPercent = ftp.PollutionPercent.ToFloat();
+                float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
+
+                // Monthly nominal active rate: (capacity * 600) / ticks * pollutionPercent * mult
+                if (ticks > 0)
+                {
+                    return (capacity * 600f) / ticks * pollutionPercent * mult;
+                }
             }
-            fuelPerJourney = val;
         }
 
-        if (fuelPerJourney <= 0)
-        {
-            return 0f;
-        }
-
-        // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
-        float pollution = fuelPerJourney * pollutionPercent * 0.6f * mult;
-        var duration = cargoShip.JourneyDuration;
-        float roundTripTicks = (duration.HasValue && duration.Value.Ticks > 0) ? duration.Value.Ticks : 1800f;
-
-        // monthlyRate = (pollution / roundTripTicks) * 600 ticks per month
-        return (pollution / roundTripTicks) * 600f;
+        return 0f;
     }
 
     public void OnEntityRemoved(IEntity entity)

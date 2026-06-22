@@ -456,11 +456,11 @@
     "批量粘贴期间并排放置的蓝图之间的间距（以图块为单位）[0-12]。"
   ],
   [
-    "dtk.blueprint.paste_all.button",
-    "全部粘贴"
+    "dtk.blueprint.place_all.button",
+    "全部放置"
   ],
   [
-    "dtk.blueprint.paste_all.tooltip",
-    "将所有设计的重影并排粘贴到此文件夹中以进行查看。"
+    "dtk.blueprint.place_all.tooltip",
+    "将所有蓝图放入此文件夹中。"
   ]
 ]

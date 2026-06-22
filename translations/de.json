@@ -456,11 +456,11 @@
     "Abstand (in Kacheln) zwischen nebeneinander platzierten Blaupausen beim Stapeleinfügen [0-12]."
   ],
   [
-    "dtk.blueprint.paste_all.button",
-    "Alles einfügen"
+    "dtk.blueprint.place_all.button",
+    "Alles platzieren"
   ],
   [
-    "dtk.blueprint.paste_all.tooltip",
-    "Fügen Sie Geister aller Designs in diesem Ordner nebeneinander ein, um sie zu überprüfen."
+    "dtk.blueprint.place_all.tooltip",
+    "Legen Sie alle Blaupausen in diesen Ordner."
   ]
 ]

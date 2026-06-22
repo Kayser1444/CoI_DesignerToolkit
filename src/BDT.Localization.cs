@@ -253,10 +253,10 @@ internal static class BdtLocalization
     public static LocStr SettingsBlueprintSpacingLabel =
         Loc.Str("dtk.settings.blueprint_spacing.label", "Blueprint spacing", "Settings row label for blueprint spacing.");
     public static LocStr SettingsBlueprintSpacingDescription =
-        Loc.Str("dtk.settings.blueprint_spacing.description", "Spacing (in tiles) between blueprints placed side-by-side during batch pasting [0-12].", "Settings row description for blueprint spacing.");
-    public static LocStr PasteAllButton =
-        Loc.Str("dtk.blueprint.paste_all.button", "Paste all", "Button label for pasting ghosts of all designs in the folder.");
-    public static LocStr PasteAllTooltip =
-        Loc.Str("dtk.blueprint.paste_all.tooltip", "Paste ghosts of all designs in this folder side-by-side to review them.", "Tooltip for pasting all blueprints in a folder.");
+        Loc.Str("dtk.settings.blueprint_spacing.description", "Spacing (in tiles) between blueprints placed side-by-side during batch placing [0-12].", "Settings row description for blueprint spacing.");
+    public static LocStr PlaceAllButton =
+        Loc.Str("dtk.blueprint.place_all.button", "Place all", "Button label for placing ghosts of all designs in the folder.");
+    public static LocStr PlaceAllTooltip =
+        Loc.Str("dtk.blueprint.place_all.tooltip", "Place all blueprints in this folder.", "Tooltip for placing all blueprints in a folder.");
 }
 

@@ -456,11 +456,11 @@
     "Spaziatura (in tessere) tra i progetti affiancati durante l'incollaggio batch [0-12]."
   ],
   [
-    "dtk.blueprint.paste_all.button",
-    "Incolla tutto"
+    "dtk.blueprint.place_all.button",
+    "Posiziona tutto"
   ],
   [
-    "dtk.blueprint.paste_all.tooltip",
-    "Incolla i fantasmi di tutti i disegni in questa cartella uno accanto all'altro per rivederli."
+    "dtk.blueprint.place_all.tooltip",
+    "Metti tutti i progetti in questa cartella."
   ]
 ]
