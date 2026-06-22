@@ -2,7 +2,23 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.7.0 [packaged]
+## v0.7.0a [unreleased]
+
+- Added **Batch Placing** feature for blueprint folders ("Place all" button):
+  - Spawns ghosts of all direct child blueprints side-by-side in a single cursor placement.
+  - Automatically wraps blueprints into multiple rows if the total width of a row exceeds **512 tiles** (the game's standard limit).
+  - Automatically crops (skips) remaining blueprints in the folder if the total height of the batch grid would exceed **512 tiles**, staying safely within placement limits.
+- Added **Blueprint Spacing** setting under a new `PLACE FOLDER` section in mod settings:
+  - Configurable spacing parameter ranging from `0` to `12` tiles (default `6`).
+  - Limits are enforced on user input and adjust buttons.
+  - Fully localized in all supported languages (including Swedish).
+- Fixed: Pollution overlay ship tracking reworked from stateless prediction to history-based daily recording:
+  - **Main ship (BattleShip)** now correctly shows pollution instead of `0.0`, via a `FuelStatsCollector.ReportFuelUseAndDestroy` Harmony prefix that intercepts `FuelUsedBy.BattleShip` events.
+  - **Cargo ships** now track real fuel consumption via a `CargoShipV2.ConsumeFuel` Harmony prefix instead of stateless route-rate prediction.
+  - Docked ships' average pollution now decays naturally over the configured averaging period, matching the behavior of vehicles and factories.
+  - Ship pollution history now rolls over in `OnNewDay` alongside all other entity types (removed the `PollutionType.Ship` skip).
+
+## v0.7.0 [released]
 
 - Added **Undo Place Blueprint** feature (default hotkey `Ctrl+Z`):
   - Allows reverting blueprint placement, copy-paste, and force-placement (Shift-click) actions.

@@ -1,6 +1,3 @@
-// CoI Designer Toolkit
-// Copyright (c) 2026 Kayser1444
-// Licensed under the MIT License.
 using System;
 using Mafi;
 using Mafi.Collections;
@@ -10,6 +7,7 @@ using Mafi.Core.Simulation;
 using Mafi.Core.Entities.Ships;
 using Mafi.Core.Entities.Dynamic;
 using Mafi.Core.PropertiesDb;
+using Mafi.Core.Prototypes;
 using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
@@ -28,6 +26,7 @@ internal sealed class PollutionManager : IDisposable
     private IProperty<Percent>? m_airPollutionMultiplier;
     private IProperty<Percent>? m_waterPollutionMultiplier;
     private ISimLoopEvents? m_simLoopEvents;
+    private float m_dieselPollutionPercent = 1f;
 
     public IEntitiesManager? EntitiesManager => m_entitiesManager;
 
@@ -38,6 +37,7 @@ internal sealed class PollutionManager : IDisposable
     public float ShipsPollutionMultiplier => m_shipsPollutionMultiplier?.Value.ToFloat() ?? 1f;
     public float AirPollutionMultiplier => m_airPollutionMultiplier?.Value.ToFloat() ?? 1f;
     public float WaterPollutionMultiplier => m_waterPollutionMultiplier?.Value.ToFloat() ?? 1f;
+    public float DieselPollutionPercent => m_dieselPollutionPercent;
 
     public enum PollutionType
     {
@@ -112,6 +112,17 @@ internal sealed class PollutionManager : IDisposable
 
             m_entitiesManager.EntityRemoved.AddNonSaveable(this, OnEntityRemoved);
 
+            var protosDb = resolver.Resolve<ProtosDb>();
+            foreach (var proto in protosDb.All<FuelTankProto>())
+            {
+                if (proto.Product.Id == IdsCore.Products.Diesel)
+                {
+                    m_dieselPollutionPercent = proto.PollutionPercent.ToFloat();
+                    s_log.Info($"Found Diesel pollution percent: {m_dieselPollutionPercent}");
+                    break;
+                }
+            }
+
             s_log.Info("PollutionManager initialized.");
         }
         catch (Exception ex)
@@ -171,8 +182,6 @@ internal sealed class PollutionManager : IDisposable
         // 2. Roll history for all states
         foreach (var state in m_states.Values)
         {
-            if (state.Type == PollutionType.Ship) continue;
-
             state.DailyHistory[state.HistoryHead] = state.CurrentDaySum;
             state.HistoryHead = (state.HistoryHead + 1) % 360;
             if (state.HistoryCount < 360)
@@ -186,81 +195,6 @@ internal sealed class PollutionManager : IDisposable
 
     private void OnEntityAdded(IEntity entity)
     {
-    }
-
-    public float GetShipPredictedPollution(Ship ship)
-    {
-        if (ship.IsDestroyed || !ship.IsEnabled) return 0f;
-
-        if (ship is Mafi.Core.Buildings.Cargo.Ships.CargoShipV2 cargoShip)
-        {
-            var fuelData = cargoShip.FuelData;
-            if (fuelData == null)
-            {
-                return 0f;
-            }
-
-            float pollutionPercent = fuelData.PollutionPercent.ToFloat();
-            float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
-
-            float fuelPerJourney = 0f;
-            var jobProvider = cargoShip.JobProvider as Mafi.Core.Buildings.Cargo.Ships.CargoShipAssignedToDockJobProviderBase;
-            if (jobProvider != null)
-            {
-                fuelPerJourney = jobProvider.FuelPerJourneyNeeded().Value;
-            }
-            else
-            {
-                // fallback prediction formula matching game mechanics
-                var proto = cargoShip.Prototype;
-                float baseFuel = fuelData.FuelPerJourneyBase.Value;
-                float perModuleFuel = fuelData.FuelPerJourneyPerModule.Value;
-                float capacityMult = proto.CapacityMultiplier.ToFloat();
-                int nonEmptyModulesCount = cargoShip.NonEmptyModules.Count;
-                
-                float val = baseFuel + (nonEmptyModulesCount * perModuleFuel) * capacityMult;
-                val *= cargoShip.FuelConsumptionMultiplier.Value.ToFloat();
-                if (cargoShip.IsFuelReductionEnabled)
-                {
-                    val *= Mafi.Core.Buildings.Cargo.Ships.CargoShipV2.SAVER_FUEL_MULT.ToFloat();
-                }
-                fuelPerJourney = val;
-            }
-
-            if (fuelPerJourney <= 0)
-            {
-                return 0f;
-            }
-
-            // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
-            float pollution = fuelPerJourney * pollutionPercent * 0.6f * mult;
-            var duration = cargoShip.JourneyDuration;
-            float roundTripTicks = (duration.HasValue && duration.Value.Ticks > 0) ? duration.Value.Ticks : 1800f;
-
-            // monthlyRate = (pollution / roundTripTicks) * 600 ticks per month
-            return (pollution / roundTripTicks) * 600f;
-        }
-        else
-        {
-            // Fallback for explorer ship (BattleShip) and other types
-            var proto = ship.Prototype;
-            if (proto.FuelTankProto.HasValue && (ship.IsEngineOn || ship.IsMoving))
-            {
-                var ftp = proto.FuelTankProto.Value;
-                float capacity = ftp.Capacity.Value;
-                float ticks = ftp.Duration.Ticks;
-                float pollutionPercent = ftp.PollutionPercent.ToFloat();
-                float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
-
-                // Monthly nominal active rate: (capacity * 600) / ticks * pollutionPercent * mult
-                if (ticks > 0)
-                {
-                    return (capacity * 600f) / ticks * pollutionPercent * mult;
-                }
-            }
-        }
-
-        return 0f;
     }
 
     public void OnEntityRemoved(IEntity entity)

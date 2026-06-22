@@ -14,6 +14,9 @@ using Mafi.Core.Factory.Machines;
 using Mafi.Core.Trains;
 using Mafi.Core.Vehicles;
 using Mafi.Core.Products;
+using Mafi.Core.Buildings.Cargo.Ships;
+using Mafi.Core.World;
+using Mafi.Core.Stats;
 using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
@@ -89,6 +92,34 @@ public static class PollutionPatches
             else
             {
                 s_log.Warning("FuelTank.ConsumeFuelPerUpdate(VehicleFuelConsumption) not found!");
+            }
+
+            var consumeFuel = typeof(CargoShipV2).GetMethod(
+                nameof(CargoShipV2.ConsumeFuel),
+                new[] { typeof(Quantity) });
+            if (consumeFuel != null)
+            {
+                harmony.Patch(consumeFuel,
+                    prefix: new HarmonyMethod(typeof(CargoShipV2_ConsumeFuel_Patch), nameof(CargoShipV2_ConsumeFuel_Patch.Prefix)));
+                s_log.Info("Patched CargoShipV2.ConsumeFuel.");
+            }
+            else
+            {
+                s_log.Warning("CargoShipV2.ConsumeFuel not found!");
+            }
+
+            var reportFuelUseAndDestroy = typeof(FuelStatsCollector).GetMethod(
+                nameof(FuelStatsCollector.ReportFuelUseAndDestroy),
+                new[] { typeof(ProductProto), typeof(Quantity), typeof(FuelUsedBy) });
+            if (reportFuelUseAndDestroy != null)
+            {
+                harmony.Patch(reportFuelUseAndDestroy,
+                    prefix: new HarmonyMethod(typeof(FuelStatsCollector_ReportFuelUseAndDestroy_Patch), nameof(FuelStatsCollector_ReportFuelUseAndDestroy_Patch.Prefix)));
+                s_log.Info("Patched FuelStatsCollector.ReportFuelUseAndDestroy.");
+            }
+            else
+            {
+                s_log.Warning("FuelStatsCollector.ReportFuelUseAndDestroy not found!");
             }
 
             s_log.Info("Pollution patches applied successfully.");
@@ -238,6 +269,69 @@ public static class PollutionPatches
         {
             Percent consumptionPercent = (consumption != VehicleFuelConsumption.Idle) ? Percent.Hundred : __instance.Proto.IdleFuelConsumption;
             RecordFuelPollution(__instance, consumptionPercent);
+        }
+    }
+
+    public static class CargoShipV2_ConsumeFuel_Patch
+    {
+        public static void Prefix(CargoShipV2 __instance, Quantity toConsume)
+        {
+            try
+            {
+                if (DesignerToolkitSettings.PollutionDaysToAverage > 0 && PollutionManager.Instance != null)
+                {
+                    var fuelData = __instance.FuelData;
+                    if (fuelData != null)
+                    {
+                        float pollutionPercent = fuelData.PollutionPercent.ToFloat();
+                        float mult = PollutionManager.Instance.ShipsPollutionMultiplier * PollutionManager.Instance.AirPollutionMultiplier;
+                        
+                        // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
+                        float pollution = toConsume.Value * pollutionPercent * 0.6f * mult;
+                        
+                        PollutionManager.Instance.RecordPollution(__instance.Id.Value, pollution, PollutionManager.PollutionType.Ship);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                s_log.Warning($"Error in CargoShipV2.ConsumeFuel patch: {ex}");
+            }
+        }
+    }
+
+    public static class FuelStatsCollector_ReportFuelUseAndDestroy_Patch
+    {
+        public static void Prefix(ProductProto product, Quantity quantity, FuelUsedBy reason)
+        {
+            try
+            {
+                if (DesignerToolkitSettings.PollutionDaysToAverage > 0 && PollutionManager.Instance != null && reason == FuelUsedBy.BattleShip)
+                {
+                    var em = PollutionManager.Instance.EntitiesManager;
+                    if (em != null)
+                    {
+                        foreach (var ship in em.GetAllEntitiesOfType<BattleShip>())
+                        {
+                            if (!ship.IsDestroyed && ship.IsEnabled)
+                            {
+                                float dieselPollutionPercent = PollutionManager.Instance.DieselPollutionPercent;
+                                float mult = PollutionManager.Instance.ShipsPollutionMultiplier * PollutionManager.Instance.AirPollutionMultiplier;
+                                
+                                // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
+                                float pollution = quantity.Value * dieselPollutionPercent * 0.6f * mult;
+                                
+                                PollutionManager.Instance.RecordPollution(ship.Id.Value, pollution, PollutionManager.PollutionType.Ship);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                s_log.Warning($"Error in FuelStatsCollector.ReportFuelUseAndDestroy patch: {ex}");
+            }
         }
     }
 }

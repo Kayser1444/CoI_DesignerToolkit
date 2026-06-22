@@ -245,7 +245,11 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             foreach (var s in m_entitiesManager.GetAllEntitiesOfType<Ship>())
             {
                 if (s.IsDestroyed || !s.IsEnabled) continue;
-                float avg = PollutionManager.Instance?.GetShipPredictedPollution(s) ?? 0f;
+                float avg = 0f;
+                if (states.TryGetValue(s.Id.Value, out var state))
+                {
+                    avg = state.CachedAveragePollution;
+                }
                 targets.Add(new RenderTarget { Entity = s, AveragePollution = avg, Type = PollutionManager.PollutionType.Ship });
             }
         }
