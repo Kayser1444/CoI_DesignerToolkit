@@ -192,20 +192,13 @@ internal sealed class PollutionManager : IDisposable
     {
         if (cargoShip.IsDestroyed || !cargoShip.IsEnabled) return 0f;
 
-        var duration = cargoShip.JourneyDuration;
-        if (!duration.HasValue || duration.Value.Ticks <= 0)
+        var fuelData = cargoShip.FuelData;
+        if (fuelData == null)
         {
             return 0f;
         }
 
-        var proto = cargoShip.Prototype;
-        if (!proto.FuelTankProto.HasValue)
-        {
-            return 0f;
-        }
-
-        var ftp = proto.FuelTankProto.Value;
-        float pollutionPercent = ftp.PollutionPercent.ToFloat();
+        float pollutionPercent = fuelData.PollutionPercent.ToFloat();
         float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
 
         float fuelPerJourney = 0f;
@@ -217,7 +210,7 @@ internal sealed class PollutionManager : IDisposable
         else
         {
             // fallback prediction formula matching game mechanics
-            var fuelData = cargoShip.FuelData;
+            var proto = cargoShip.Prototype;
             float baseFuel = fuelData.FuelPerJourneyBase.Value;
             float perModuleFuel = fuelData.FuelPerJourneyPerModule.Value;
             float capacityMult = proto.CapacityMultiplier.ToFloat();
@@ -239,7 +232,8 @@ internal sealed class PollutionManager : IDisposable
 
         // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
         float pollution = fuelPerJourney * pollutionPercent * 0.6f * mult;
-        float roundTripTicks = duration.Value.Ticks;
+        var duration = cargoShip.JourneyDuration;
+        float roundTripTicks = (duration.HasValue && duration.Value.Ticks > 0) ? duration.Value.Ticks : 1800f;
 
         // monthlyRate = (pollution / roundTripTicks) * 600 ticks per month
         return (pollution / roundTripTicks) * 600f;
