@@ -437,10 +437,30 @@
   ],
   [
     "dtk.settings.pollution_show_ship.description",
-    "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Calculado com base no combustível consumido entre as duas últimas transições do mesmo tipo (por exemplo, chegadas ou partidas)."
+    "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Exibe a taxa de poluição prevista com base no tempo de ida e volta da rota de carga atual e no consumo de combustível. Esses valores incluem os efeitos das configurações de dificuldade do jogo e das tecnologias pesquisadas de redução da poluição."
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Tecla de atalho de sobreposição de poluição"
+  ],
+  [
+    "dtk.settings.place_folder.heading",
+    "COLOCAR PASTA"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.label",
+    "Espaçamento do projeto"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.description",
+    "Espaçamento (em blocos) entre plantas colocadas lado a lado durante a colagem em lote [0-12]."
+  ],
+  [
+    "dtk.blueprint.paste_all.button",
+    "Colar tudo"
+  ],
+  [
+    "dtk.blueprint.paste_all.tooltip",
+    "Cole fantasmas de todos os designs lado a lado nesta pasta para revisá-los."
   ]
 ]

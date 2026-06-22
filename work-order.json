@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 111,
+  "total_keys": 116,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -22,15 +22,15 @@
       "zh": "布局"
     },
     "dtk.settings.pollution_show_ship.description": {
-      "en": "Enables/disables the in-world pollution rate overlay for ships. Calculated using the fuel consumed between the two latest transitions of the same kind (e.g. arrivals or departures).",
+      "en": "Enables/disables the in-world pollution rate overlay for ships. Displays the predicted pollution rate based on the current cargo route's round-trip time and fuel consumption. These values include the effects of game difficulty settings and researched pollution-reduction technologies.",
       "context": "Settings checkbox description for showing ship pollution.",
-      "de": "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Schiffe. Berechnet anhand des Kraftstoffverbrauchs zwischen den beiden letzten gleichartigen Übergängen (z. B. Ankunft oder Abflug).",
-      "es": "Activa/desactiva la superposición de la tasa de contaminación mundial para barcos. Calculado utilizando el combustible consumido entre las dos últimas transiciones del mismo tipo (por ejemplo, llegadas o salidas).",
-      "it": "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per le navi. Calcolato utilizzando il carburante consumato tra le due ultime transizioni dello stesso tipo (ad esempio arrivi o partenze).",
-      "pt": "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Calculado com base no combustível consumido entre as duas últimas transições do mesmo tipo (por exemplo, chegadas ou partidas).",
-      "ru": "Включает/выключает наложение уровня загрязнения в мире для кораблей. Рассчитывается с использованием топлива, израсходованного между двумя последними переходами одного и того же типа (например, прибытием или отправлением).",
-      "sv": "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fartyg. Beräknat med bränsle som förbrukats mellan de två senaste övergångarna av samma slag (t.ex. ankomster eller avgångar).",
-      "zh": "启用/禁用船舶的世界污染率叠加。使用最近两次同类转换（例如到达或出发）之间消耗的燃油进行计算。"
+      "de": "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Schiffe. Zeigt die prognostizierte Verschmutzungsrate basierend auf der Hin- und Rückfahrtzeit und dem Kraftstoffverbrauch der aktuellen Frachtroute an. Diese Werte umfassen die Auswirkungen von Spielschwierigkeitseinstellungen und erforschten Technologien zur Reduzierung der Umweltverschmutzung.",
+      "es": "Activa/desactiva la superposición de la tasa de contaminación mundial para barcos. Muestra la tasa de contaminación prevista en función del tiempo de ida y vuelta de la ruta de carga actual y el consumo de combustible. Estos valores incluyen los efectos de la configuración de dificultad del juego y las tecnologías de reducción de la contaminación investigadas.",
+      "it": "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per le navi. Visualizza il tasso di inquinamento previsto in base al tempo di andata e ritorno della rotta cargo corrente e al consumo di carburante. Questi valori includono gli effetti delle impostazioni di difficoltà del gioco e delle tecnologie ricercate per la riduzione dell'inquinamento.",
+      "pt": "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Exibe a taxa de poluição prevista com base no tempo de ida e volta da rota de carga atual e no consumo de combustível. Esses valores incluem os efeitos das configurações de dificuldade do jogo e das tecnologias pesquisadas de redução da poluição.",
+      "ru": "Включает/выключает наложение уровня загрязнения в мире для кораблей. Отображает прогнозируемый уровень загрязнения на основе времени туда и обратно текущего грузового маршрута и расхода топлива. Эти значения включают в себя влияние настроек сложности игры и исследованных технологий снижения загрязнения.",
+      "sv": "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fartyg. Visar den förväntade föroreningsgraden baserat på den aktuella lastruttens tur och returtid och bränsleförbrukning. Dessa värden inkluderar effekterna av spelsvårighetsinställningar och undersökt teknik för att minska föroreningar.",
+      "zh": "启用/禁用船舶的世界污染率叠加。显示根据当前货运航线的往返时间和燃油消耗预测的污染率。这些值包括游戏难度设置和研究的污染减少技术的影响。"
     }
   },
   "keys_needing_translation": 2

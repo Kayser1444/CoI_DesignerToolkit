@@ -29,11 +29,6 @@ internal sealed class PollutionManager : IDisposable
     private IProperty<Percent>? m_waterPollutionMultiplier;
     private ISimLoopEvents? m_simLoopEvents;
 
-    private readonly Dict<int, float> m_shipAccumulatedFuel = new Dict<int, float>();
-    private readonly Dict<int, Dict<string, ShipTransitionState>> m_shipTransitions = new Dict<int, Dict<string, ShipTransitionState>>();
-    private readonly Dict<int, Action> m_undockedHandlers = new Dict<int, Action>();
-    private readonly Dict<int, Action> m_arrivedHandlers = new Dict<int, Action>();
-
     public IEntitiesManager? EntitiesManager => m_entitiesManager;
 
     public static PollutionManager? Instance => s_instance;
@@ -52,12 +47,7 @@ internal sealed class PollutionManager : IDisposable
         Ship
     }
 
-    public sealed class ShipTransitionState
-    {
-        public int LastTicks;
-        public float LastFuel;
-        public bool HasPrevious;
-    }
+
 
     public sealed class EntityPollutionState
     {
@@ -121,12 +111,6 @@ internal sealed class PollutionManager : IDisposable
             m_simLoopEvents = resolver.Resolve<ISimLoopEvents>();
 
             m_entitiesManager.EntityRemoved.AddNonSaveable(this, OnEntityRemoved);
-            m_entitiesManager.EntityAdded.AddNonSaveable(this, OnEntityAdded);
-
-            foreach (Ship ship in m_entitiesManager.GetAllEntitiesOfType<Ship>())
-            {
-                SubscribeToShip(ship);
-            }
 
             s_log.Info("PollutionManager initialized.");
         }
@@ -143,28 +127,11 @@ internal sealed class PollutionManager : IDisposable
         {
             try
             {
-                m_entitiesManager.EntityAdded.Remove(this, OnEntityAdded);
-            }
-            catch {}
-            try
-            {
                 m_entitiesManager.EntityRemoved.Remove(this, OnEntityRemoved);
-            }
-            catch {}
-            try
-            {
-                foreach (Ship ship in m_entitiesManager.GetAllEntitiesOfType<Ship>())
-                {
-                    UnsubscribeFromShip(ship.Id.Value);
-                }
             }
             catch {}
         }
         m_states.Clear();
-        m_shipTransitions.Clear();
-        m_shipAccumulatedFuel.Clear();
-        m_undockedHandlers.Clear();
-        m_arrivedHandlers.Clear();
         m_entitiesManager = null;
     }
 
@@ -219,112 +186,68 @@ internal sealed class PollutionManager : IDisposable
 
     private void OnEntityAdded(IEntity entity)
     {
-        if (entity is Ship ship)
+    }
+
+    public float GetShipPredictedPollution(Mafi.Core.Buildings.Cargo.Ships.CargoShipV2 cargoShip)
+    {
+        if (cargoShip.IsDestroyed || !cargoShip.IsEnabled) return 0f;
+
+        var duration = cargoShip.JourneyDuration;
+        if (!duration.HasValue || duration.Value.Ticks <= 0)
         {
-            SubscribeToShip(ship);
+            return 0f;
         }
-    }
 
-    private void SubscribeToShip(Ship ship)
-    {
-        int shipId = ship.Id.Value;
-        UnsubscribeFromShip(shipId);
-
-        Action undocked = () => HandleShipTransition(ship, "Undocked");
-        Action arrived = () => HandleShipTransition(ship, "ArrivedFromWorld");
-
-        m_undockedHandlers[shipId] = undocked;
-        m_arrivedHandlers[shipId] = arrived;
-
-        ship.OnUndocked += undocked;
-        ship.OnArrivedFromWorld += arrived;
-    }
-
-    private void UnsubscribeFromShip(int shipId)
-    {
-        if (m_entitiesManager != null && m_entitiesManager.TryGetEntity(new EntityId(shipId), out IEntity entity) && entity is Ship ship)
+        var proto = cargoShip.Prototype;
+        if (!proto.FuelTankProto.HasValue)
         {
-            if (m_undockedHandlers.TryGetValue(shipId, out var undocked))
+            return 0f;
+        }
+
+        var ftp = proto.FuelTankProto.Value;
+        float pollutionPercent = ftp.PollutionPercent.ToFloat();
+        float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
+
+        float fuelPerJourney = 0f;
+        var jobProvider = cargoShip.JobProvider as Mafi.Core.Buildings.Cargo.Ships.CargoShipAssignedToDockJobProviderBase;
+        if (jobProvider != null)
+        {
+            fuelPerJourney = jobProvider.FuelPerJourneyNeeded().Value;
+        }
+        else
+        {
+            // fallback prediction formula matching game mechanics
+            var fuelData = cargoShip.FuelData;
+            float baseFuel = fuelData.FuelPerJourneyBase.Value;
+            float perModuleFuel = fuelData.FuelPerJourneyPerModule.Value;
+            float capacityMult = proto.CapacityMultiplier.ToFloat();
+            int nonEmptyModulesCount = cargoShip.NonEmptyModules.Count;
+            
+            float val = baseFuel + (nonEmptyModulesCount * perModuleFuel) * capacityMult;
+            val *= cargoShip.FuelConsumptionMultiplier.Value.ToFloat();
+            if (cargoShip.IsFuelReductionEnabled)
             {
-                ship.OnUndocked -= undocked;
-                m_undockedHandlers.Remove(shipId);
+                val *= Mafi.Core.Buildings.Cargo.Ships.CargoShipV2.SAVER_FUEL_MULT.ToFloat();
             }
-            if (m_arrivedHandlers.TryGetValue(shipId, out var arrived))
-            {
-                ship.OnArrivedFromWorld -= arrived;
-                m_arrivedHandlers.Remove(shipId);
-            }
+            fuelPerJourney = val;
         }
-    }
 
-    public void RecordShipFuel(int shipId, float amount)
-    {
-        if (!m_shipAccumulatedFuel.TryGetValue(shipId, out float total))
+        if (fuelPerJourney <= 0)
         {
-            total = 0f;
-        }
-        m_shipAccumulatedFuel[shipId] = total + amount;
-    }
-
-    private void HandleShipTransition(Ship ship, string transitionType)
-    {
-        if (m_simLoopEvents == null) return;
-
-        int currentTicks = m_simLoopEvents.CurrentStep.Value;
-        int shipId = ship.Id.Value;
-
-        if (!m_shipAccumulatedFuel.TryGetValue(shipId, out float currentFuel))
-        {
-            currentFuel = 0f;
+            return 0f;
         }
 
-        if (!m_shipTransitions.TryGetValue(shipId, out var transitions))
-        {
-            transitions = new Dict<string, ShipTransitionState>();
-            m_shipTransitions[shipId] = transitions;
-        }
+        // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
+        float pollution = fuelPerJourney * pollutionPercent * 0.6f * mult;
+        float roundTripTicks = duration.Value.Ticks;
 
-        if (!transitions.TryGetValue(transitionType, out var transState))
-        {
-            transState = new ShipTransitionState();
-            transitions[transitionType] = transState;
-        }
-
-        if (transState.HasPrevious)
-        {
-            int deltaTicks = currentTicks - transState.LastTicks;
-            float deltaFuel = currentFuel - transState.LastFuel;
-
-            if (deltaTicks > 0 && deltaFuel >= 0f)
-            {
-                var proto = ship.Prototype;
-                if (proto.FuelTankProto.HasValue)
-                {
-                    var ftp = proto.FuelTankProto.Value;
-                    float pollutionPercent = ftp.PollutionPercent.ToFloat();
-                    float mult = ShipsPollutionMultiplier * AirPollutionMultiplier;
-                    
-                    float pollution = deltaFuel * pollutionPercent * mult;
-                    // Monthly rate: (pollution / deltaTicks) * 600f (where 600 ticks = 30 game days / 1 game month)
-                    float monthlyRate = (pollution / deltaTicks) * 600f;
-
-                    var state = GetOrCreateState(shipId, PollutionType.Ship);
-                    state.CachedAveragePollution = monthlyRate;
-                }
-            }
-        }
-
-        transState.LastTicks = currentTicks;
-        transState.LastFuel = currentFuel;
-        transState.HasPrevious = true;
+        // monthlyRate = (pollution / roundTripTicks) * 600 ticks per month
+        return (pollution / roundTripTicks) * 600f;
     }
 
     public void OnEntityRemoved(IEntity entity)
     {
         int id = entity.Id.Value;
-        UnsubscribeFromShip(id);
         m_states.Remove(id);
-        m_shipTransitions.Remove(id);
-        m_shipAccumulatedFuel.Remove(id);
     }
 }

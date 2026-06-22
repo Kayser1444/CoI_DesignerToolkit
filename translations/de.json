@@ -437,10 +437,30 @@
   ],
   [
     "dtk.settings.pollution_show_ship.description",
-    "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Schiffe. Berechnet anhand des Kraftstoffverbrauchs zwischen den beiden letzten gleichartigen Übergängen (z. B. Ankunft oder Abflug)."
+    "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Schiffe. Zeigt die prognostizierte Verschmutzungsrate basierend auf der Hin- und Rückfahrtzeit und dem Kraftstoffverbrauch der aktuellen Frachtroute an. Diese Werte umfassen die Auswirkungen von Spielschwierigkeitseinstellungen und erforschten Technologien zur Reduzierung der Umweltverschmutzung."
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Hotkey zur Verschmutzungsüberlagerung"
+  ],
+  [
+    "dtk.settings.place_folder.heading",
+    "ORDNER PLATZIEREN"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.label",
+    "Blaupausenabstand"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.description",
+    "Abstand (in Kacheln) zwischen nebeneinander platzierten Blaupausen beim Stapeleinfügen [0-12]."
+  ],
+  [
+    "dtk.blueprint.paste_all.button",
+    "Alles einfügen"
+  ],
+  [
+    "dtk.blueprint.paste_all.tooltip",
+    "Fügen Sie Geister aller Designs in diesem Ordner nebeneinander ein, um sie zu überprüfen."
   ]
 ]

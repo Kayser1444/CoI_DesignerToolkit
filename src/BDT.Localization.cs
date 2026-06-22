@@ -244,8 +244,19 @@ internal static class BdtLocalization
     public static LocStr SettingsPollutionShowShip =
         Loc.Str("dtk.settings.pollution_show_ship.label", "Show ship pollution", "Settings checkbox label for showing ship pollution.");
     public static LocStr SettingsPollutionShowShipDescription =
-        Loc.Str("dtk.settings.pollution_show_ship.description", "Enables/disables the in-world pollution rate overlay for ships. Calculated using the fuel consumed between the two latest transitions of the same kind (e.g. arrivals or departures).", "Settings checkbox description for showing ship pollution.");
+        Loc.Str("dtk.settings.pollution_show_ship.description", "Enables/disables the in-world pollution rate overlay for ships. Displays the predicted pollution rate based on the current cargo route's round-trip time and fuel consumption. These values include the effects of game difficulty settings and researched pollution-reduction technologies.", "Settings checkbox description for showing ship pollution.");
     public static LocStr SettingsPollutionToggleHotkey =
         Loc.Str("dtk.settings.pollution_toggle_hotkey.label", "Pollution overlay hotkey", "Settings row label for pollution overlay toggle hotkey.");
+
+    public static LocStr SettingsPlaceFolderHeading =
+        Loc.Str("dtk.settings.place_folder.heading", "PLACE FOLDER", "Settings section heading for place folder settings.");
+    public static LocStr SettingsBlueprintSpacingLabel =
+        Loc.Str("dtk.settings.blueprint_spacing.label", "Blueprint spacing", "Settings row label for blueprint spacing.");
+    public static LocStr SettingsBlueprintSpacingDescription =
+        Loc.Str("dtk.settings.blueprint_spacing.description", "Spacing (in tiles) between blueprints placed side-by-side during batch pasting [0-12].", "Settings row description for blueprint spacing.");
+    public static LocStr PasteAllButton =
+        Loc.Str("dtk.blueprint.paste_all.button", "Paste all", "Button label for pasting ghosts of all designs in the folder.");
+    public static LocStr PasteAllTooltip =
+        Loc.Str("dtk.blueprint.paste_all.tooltip", "Paste ghosts of all designs in this folder side-by-side to review them.", "Tooltip for pasting all blueprints in a folder.");
 }
 

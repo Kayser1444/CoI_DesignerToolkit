@@ -4,6 +4,12 @@
 //
 // Unofficial mod for Captain of Industry. Captain of Industry, MaFi Games, and
 // related trademarks, code, and assets belong to MaFi Games. This repository is
+// CoI Designer Toolkit
+// Copyright (c) 2026 Kayser1444
+// Licensed under the MIT License.
+//
+// Unofficial mod for Captain of Industry. Captain of Industry, MaFi Games, and
+// related trademarks, code, and assets belong to MaFi Games. This repository is
 // intended to contain only original mod code/configuration; if MaFi Games material
 // is included by mistake, I intend to correct it promptly upon discovery or notice.
 using System;
@@ -14,6 +20,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using HarmonyLib;
 using Mafi;
+using Mafi.Collections;
 using Mafi.Core;
 using Mafi.Core.Economy;
 using Mafi.Core.Entities;
@@ -23,11 +30,16 @@ using Mafi.Core.Factory.Transports;
 using Mafi.Core.Maintenance;
 using Mafi.Core.Products;
 using Mafi.Core.Prototypes;
+using Mafi.Core.Terrain;
+using Mafi.Core.Terrain.Surfaces;
 using Mafi.Localization;
 using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
 using CoI.AutoHelpers.Logging;
 using UnityEngine;
+using Mafi.Unity.Ui.Blueprints;
+using Mafi.Unity.Ui.Controllers.LayoutEntityPlacing;
+using Mafi.Unity.Ui.Controllers.Tools;
 
 namespace CoIDesignerToolkit;
 
@@ -64,6 +76,7 @@ internal static class BlueprintExport
     {
         public IBlueprintsFolder? Folder;
         public ButtonIconText? CopyBtn;
+        public ButtonIconText? PasteBtn;
     }
 
     private static readonly ConditionalWeakTable<object, FolderState> s_folderStates =
@@ -213,7 +226,7 @@ internal static class BlueprintExport
     {
         try
         {
-            var detail = (Column)__instance;
+            var detail = (BlueprintFolderDetail)__instance;
             var folderState = new FolderState();
             s_folderStates.Add(__instance, folderState);
 
@@ -236,9 +249,30 @@ internal static class BlueprintExport
             });
 
             folderState.CopyBtn = copyBtn;
+
+            var pasteBtn = new ButtonIconText(Button.Primary, "Assets/Unity/UserInterface/General/Build.svg", BdtLocalization.PasteAllButton.AsFormatted)
+                .Tooltip(BdtLocalization.PasteAllTooltip.AsFormatted)
+                .Visible(false);
+
+            pasteBtn.OnClick(() =>
+            {
+                if (folderState.Folder == null) return;
+                try
+                {
+                    StartBatchPlacement(detail.Window, folderState.Folder);
+                }
+                catch (Exception ex)
+                {
+                    s_log.Exception(ex, "OnFolderPasteClick");
+                }
+            });
+
+            folderState.PasteBtn = pasteBtn;
+
             // Wrap in a row so the button doesn't stretch to fill the column width.
             var btnRow = new Row(2.pt()).AlignItemsCenterMiddle().MarginTop(2.pt());
             btnRow.Add(copyBtn);
+            btnRow.Add(pasteBtn);
             detail.Add(btnRow);
         }
         catch (Exception ex)
@@ -253,7 +287,10 @@ internal static class BlueprintExport
         {
             if (!s_folderStates.TryGetValue(__instance, out FolderState folderState)) return;
             folderState.Folder = folder;
-            folderState.CopyBtn?.Visible(folder != null && HasAnyBlueprints(folder));
+            bool hasAnyBps = folder != null && HasAnyBlueprints(folder);
+            bool hasDirectBps = folder != null && folder.Blueprints.Count > 0;
+            folderState.CopyBtn?.Visible(hasAnyBps);
+            folderState.PasteBtn?.Visible(hasDirectBps);
         }
         catch (Exception ex)
         {
@@ -678,6 +715,182 @@ internal static class BlueprintExport
             case MarkdownRenderLanguage.English:
             default:
                 return english;
+        }
+    }
+
+    private static void StartBatchPlacement(BlueprintsWindow window, IBlueprintsFolder folder)
+    {
+        try
+        {
+            var blueprints = folder.Blueprints;
+            if (blueprints.IsEmpty()) return;
+
+            var controller = window.m_controller;
+            var unlockedDb = window.m_unlockedProtosDb;
+            var filterBox = window.m_filterBox;
+            var entityPlacer = controller.m_entityPlacer;
+
+            var copiedConfigs = new Lyst<EntityConfigData>();
+            var copiedSurfaces = new Lyst<TileSurfaceCopyPasteData>();
+            var copiedDecals = new Lyst<TileSurfaceCopyPasteData>();
+
+            int currentX = 0;
+            int spacing = DesignerToolkitSettings.BlueprintSpacing;
+
+            foreach (IBlueprint blueprint in blueprints)
+            {
+                int minX = int.MaxValue;
+                int maxX = int.MinValue;
+                int minY = int.MaxValue;
+                int maxY = int.MinValue;
+
+                Action<int, int> updatePoint = (x, y) =>
+                {
+                    if (x < minX) minX = x;
+                    if (x > maxX) maxX = x;
+                    if (y < minY) minY = y;
+                    if (y > maxY) maxY = y;
+                };
+
+                foreach (EntityConfigData item in blueprint.Items)
+                {
+                    if (item.Prototype.IsNone) continue;
+                    if (item.Transform.HasValue)
+                    {
+                        var p = item.Transform.Value.Position;
+                        updatePoint(p.X, p.Y);
+                    }
+                    if (item.Trajectory.HasValue)
+                    {
+                        foreach (var p in item.Trajectory.Value.Pivots)
+                        {
+                            updatePoint(p.X, p.Y);
+                        }
+                    }
+                    if (item.Pillars.HasValue)
+                    {
+                        foreach (var p in item.Pillars.Value)
+                        {
+                            updatePoint(p.X, p.Y);
+                        }
+                    }
+                }
+
+                foreach (var surface in blueprint.Surfaces)
+                {
+                    updatePoint(surface.Position.X, surface.Position.Y);
+                    updatePoint(surface.Position.X + surface.Width - 1, surface.Position.Y + surface.Height - 1);
+                }
+                foreach (var decal in blueprint.Decals)
+                {
+                    updatePoint(decal.Position.X, decal.Position.Y);
+                    updatePoint(decal.Position.X + decal.Width - 1, decal.Position.Y + decal.Height - 1);
+                }
+
+                if (minX == int.MaxValue)
+                {
+                    // Empty blueprint, skip
+                    continue;
+                }
+
+                int width = maxX - minX + 1;
+                RelTile3i offset = new RelTile3i(currentX - minX, -minY, 0);
+
+                foreach (EntityConfigData item in blueprint.Items)
+                {
+                    if (item.Prototype.IsNone) continue;
+                    Proto proto = item.Prototype.Value;
+                    EntityConfigData copy;
+                    if (proto.IsLockedOrUnavailable)
+                    {
+                        var downgrade = unlockedDb.GetNearestUnlockedDowngradeFor(proto);
+                        if (downgrade.HasValue)
+                        {
+                            copy = item.CreateCopyWithNewProto(downgrade.Value);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        copy = item.CreateCopy();
+                    }
+
+                    if (copy.Transform.HasValue)
+                    {
+                        copy.Transform = copy.Transform.Value.OffsetBy(offset);
+                    }
+                    if (copy.Trajectory.HasValue)
+                    {
+                        var oldTraj = copy.Trajectory.Value;
+                        var newPivots = oldTraj.Pivots.Map(p => p + offset);
+                        if (TransportTrajectory.TryCreateFromPivots(
+                            oldTraj.TransportProto,
+                            newPivots,
+                            oldTraj.StartDirection,
+                            oldTraj.EndDirection,
+                            out var newTraj,
+                            out var error,
+                            ignoreSoftConstraints: true,
+                            allowDenormalizedStartEndDirections: true))
+                        {
+                            copy.Trajectory = newTraj;
+                        }
+                    }
+                    if (copy.Pillars.HasValue)
+                    {
+                        copy.Pillars = copy.Pillars.Value.Map(p => new Tile2i(p.X + offset.X, p.Y + offset.Y));
+                    }
+
+                    copiedConfigs.Add(copy);
+                }
+
+                if (filterBox.AreSurfacesAllowed)
+                {
+                    foreach (var surface in blueprint.Surfaces)
+                    {
+                        if (surface.SurfaceData.SurfaceSlimId != TileSurfaceSlimId.PhantomId)
+                        {
+                            copiedSurfaces.Add(surface.NormalizePosition(offset.Xy));
+                        }
+                    }
+                }
+                if (filterBox.AreDecalsAllowed)
+                {
+                    foreach (var decal in blueprint.Decals)
+                    {
+                        if (decal.SurfaceData.DecalSlimId != TileSurfaceDecalSlimId.PhantomId)
+                        {
+                            copiedDecals.Add(decal.NormalizePosition(offset.Xy));
+                        }
+                    }
+                }
+
+                currentX += width + spacing;
+            }
+
+            if (copiedConfigs.Count > 0 || copiedSurfaces.Count > 0 || copiedDecals.Count > 0)
+            {
+                entityPlacer.Activate(controller, controller.blueprintPlaced, controller.blueprintPlacementCancelled);
+                entityPlacer.SetEntitiesToClone(
+                    copiedConfigs,
+                    copiedSurfaces.ToImmutableArray(),
+                    copiedDecals.ToImmutableArray(),
+                    StaticEntityMassPlacer.ApplyConfigMode.ApplyIfNotDisabled,
+                    isHeightNormalizedToZero: true,
+                    skipAddToHistory: false,
+                    removalMode: false,
+                    overlapDeltaX: 0,
+                    overlapDeltaY: 0
+                );
+                window.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            s_log.Exception(ex, "StartBatchPlacement");
         }
     }
 }

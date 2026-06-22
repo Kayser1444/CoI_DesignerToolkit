@@ -437,10 +437,30 @@
   ],
   [
     "dtk.settings.pollution_show_ship.description",
-    "启用/禁用船舶的世界污染率叠加。使用最近两次同类转换（例如到达或出发）之间消耗的燃油进行计算。"
+    "启用/禁用船舶的世界污染率叠加。显示根据当前货运航线的往返时间和燃油消耗预测的污染率。这些值包括游戏难度设置和研究的污染减少技术的影响。"
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
     "污染覆盖热键"
+  ],
+  [
+    "dtk.settings.place_folder.heading",
+    "放置文件夹"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.label",
+    "蓝图间距"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.description",
+    "批量粘贴期间并排放置的蓝图之间的间距（以图块为单位）[0-12]。"
+  ],
+  [
+    "dtk.blueprint.paste_all.button",
+    "全部粘贴"
+  ],
+  [
+    "dtk.blueprint.paste_all.tooltip",
+    "将所有设计的重影并排粘贴到此文件夹中以进行查看。"
   ]
 ]

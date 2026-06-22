@@ -13,7 +13,6 @@ using Mafi.Core.Entities.Dynamic;
 using Mafi.Core.Factory.Machines;
 using Mafi.Core.Trains;
 using Mafi.Core.Vehicles;
-using Mafi.Core.Buildings.Cargo.Ships;
 using Mafi.Core.Products;
 using CoI.AutoHelpers.Logging;
 
@@ -90,20 +89,6 @@ public static class PollutionPatches
             else
             {
                 s_log.Warning("FuelTank.ConsumeFuelPerUpdate(VehicleFuelConsumption) not found!");
-            }
-
-            var consumeFuelShip = typeof(CargoShipV2).GetMethod(
-                "ConsumeFuel",
-                BindingFlags.Instance | BindingFlags.Public);
-            if (consumeFuelShip != null)
-            {
-                harmony.Patch(consumeFuelShip,
-                    prefix: new HarmonyMethod(typeof(CargoShipV2_ConsumeFuel_Patch), nameof(CargoShipV2_ConsumeFuel_Patch.Prefix)));
-                s_log.Info("Patched CargoShipV2.ConsumeFuel.");
-            }
-            else
-            {
-                s_log.Warning("CargoShipV2.ConsumeFuel not found!");
             }
 
             s_log.Info("Pollution patches applied successfully.");
@@ -253,17 +238,6 @@ public static class PollutionPatches
         {
             Percent consumptionPercent = (consumption != VehicleFuelConsumption.Idle) ? Percent.Hundred : __instance.Proto.IdleFuelConsumption;
             RecordFuelPollution(__instance, consumptionPercent);
-        }
-    }
-
-    public static class CargoShipV2_ConsumeFuel_Patch
-    {
-        public static void Prefix(CargoShipV2 __instance, Quantity toConsume)
-        {
-            if (toConsume.IsPositive && PollutionManager.Instance != null)
-            {
-                PollutionManager.Instance.RecordShipFuel(__instance.Id.Value, toConsume.Value);
-            }
         }
     }
 }

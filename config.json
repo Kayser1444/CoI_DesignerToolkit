@@ -3,6 +3,13 @@
     "default": "",
     "description": "Do not delete — stores the last-open blueprint book folder so the mod can restore it on load."
   },
+  "blueprint_spacing": {
+    "default": 6,
+    "is_integer": true,
+    "description": "Initial blueprint spacing parameter [0-12] for batch pasting.",
+    "min": 0,
+    "max": 12
+  },
   "markdown_table_language": {
     "default": 0,
     "is_integer": true,

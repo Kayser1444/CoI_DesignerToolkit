@@ -437,10 +437,30 @@
   ],
   [
     "dtk.settings.pollution_show_ship.description",
-    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per le navi. Calcolato utilizzando il carburante consumato tra le due ultime transizioni dello stesso tipo (ad esempio arrivi o partenze)."
+    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per le navi. Visualizza il tasso di inquinamento previsto in base al tempo di andata e ritorno della rotta cargo corrente e al consumo di carburante. Questi valori includono gli effetti delle impostazioni di difficoltà del gioco e delle tecnologie ricercate per la riduzione dell'inquinamento."
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Tasto di scelta rapida in sovrapposizione sull'inquinamento"
+  ],
+  [
+    "dtk.settings.place_folder.heading",
+    "POSIZIONARE CARTELLA"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.label",
+    "Spaziatura del progetto"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.description",
+    "Spaziatura (in tessere) tra i progetti affiancati durante l'incollaggio batch [0-12]."
+  ],
+  [
+    "dtk.blueprint.paste_all.button",
+    "Incolla tutto"
+  ],
+  [
+    "dtk.blueprint.paste_all.tooltip",
+    "Incolla i fantasmi di tutti i disegni in questa cartella uno accanto all'altro per rivederli."
   ]
 ]

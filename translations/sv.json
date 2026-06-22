@@ -437,10 +437,30 @@
   ],
   [
     "dtk.settings.pollution_show_ship.description",
-    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fartyg. Beräknat med bränsle som förbrukats mellan de två senaste övergångarna av samma slag (t.ex. ankomster eller avgångar)."
+    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fartyg. Visar den förväntade föroreningsgraden baserat på den aktuella lastruttens tur och returtid och bränsleförbrukning. Dessa värden inkluderar effekterna av spelsvårighetsinställningar och undersökt teknik för att minska föroreningar."
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Hotkey för föroreningar"
+  ],
+  [
+    "dtk.settings.place_folder.heading",
+    "PLACERA MAPP"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.label",
+    "Ritningsavstånd"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.description",
+    "Avstånd (i brickor) mellan ritningar placerade sida vid sida under batchklistring [0-12]."
+  ],
+  [
+    "dtk.blueprint.paste_all.button",
+    "Klistra in alla"
+  ],
+  [
+    "dtk.blueprint.paste_all.tooltip",
+    "Klistra in spöken av alla mönster i den här mappen sida vid sida för att granska dem."
   ]
 ]

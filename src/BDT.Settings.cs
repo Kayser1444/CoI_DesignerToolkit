@@ -98,6 +98,7 @@ internal static class DesignerToolkitSettings
     private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
     private const string USE_RECYCLE_BIN_KEY = "use_recycle_bin";
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
+    private const string BLUEPRINT_SPACING_KEY = "blueprint_spacing";
 //     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY = "layout_box_mode_toggle_hotkey_primary";
 //     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY = "layout_box_mode_toggle_hotkey_secondary";
     private const string UNDO_HOTKEY_PRIMARY_KEY = "undo_hotkey_primary";
@@ -160,6 +161,7 @@ internal static class DesignerToolkitSettings
     public static bool LayoutBoxModeEnabled { get; private set; } = false;
     public static bool UseRecycleBin { get; private set; } = true;
     public static string RecycleBinFolderName { get; private set; } = "Recycle Bin";
+    public static int BlueprintSpacing { get; private set; } = 6;
 
     private static Func<BlueprintsLibrary>? s_blueprintsLibraryProvider;
 
@@ -176,6 +178,11 @@ internal static class DesignerToolkitSettings
             return $"<color=grey>{name}</color>";
         }
         return name;
+    }
+
+    private static void SetBlueprintSpacing(int spacing)
+    {
+        BlueprintSpacing = Math.Max(0, Math.Min(12, spacing));
     }
 
     private static void SetUseRecycleBin(bool enabled)
@@ -430,6 +437,7 @@ internal static class DesignerToolkitSettings
 
         bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
+        int initialBlueprintSpacing = config.GetInt(BLUEPRINT_SPACING_KEY, 6);
 
         TransportCleanupHotkey = initialTransportCleanupHotkey;
         HeightFilterShowLayerHotkey = initialShowLayerHotkey;
@@ -460,7 +468,8 @@ internal static class DesignerToolkitSettings
             initialPollutionShowShip,
             initialLayoutBoxModeEnabled,
             initialUseRecycleBin,
-            initialRecycleBinFolderName);
+            initialRecycleBinFolderName,
+            initialBlueprintSpacing);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -855,6 +864,66 @@ internal static class DesignerToolkitSettings
             });
         root.Add(recycleBinFolderNameField);
 
+        root.Add(new Title(BdtLocalization.SettingsPlaceFolderHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        // --- BLUEPRINT SPACING ---
+        var spacingRow = new Row(2.pt()).AlignItemsCenter();
+        var spacingLabel = new Label(BdtLocalization.SettingsBlueprintSpacingLabel.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsBlueprintSpacingDescription.AsFormatted)
+            .Width(SETTINGS_LABEL_WIDTH);
+        spacingRow.Add(spacingLabel);
+
+        var spacingSpacer = new UiComponent().FlexGrow(1f);
+        spacingRow.Add(spacingSpacer);
+
+        var spacingControlRow = new Row(2.pt()).AlignItemsCenter();
+
+        var spacingMinusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
+            .Compact().IconSize(14.px());
+        var spacingPlusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Plus128.png")
+            .Compact().IconSize(14.px());
+
+        TextField spacingInput = new TextField()
+            .Class(Cls.displayFont, Cls.displayBg)
+            .Width(45.px());
+        UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(spacingInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
+        spacingInput.Text(BlueprintSpacing.ToString());
+
+        spacingControlRow.Add(spacingMinusBtn);
+        spacingControlRow.Add(spacingInput);
+        spacingControlRow.Add(spacingPlusBtn);
+        spacingRow.Add(spacingControlRow);
+        root.Add(spacingRow);
+
+        Action<int> updateSpacing = (val) =>
+        {
+            SetBlueprintSpacing(val);
+            spacingInput.Text(BlueprintSpacing.ToString());
+        };
+
+        spacingInput.OnValueChanged((text) =>
+        {
+            if (int.TryParse(text, out int val))
+            {
+                updateSpacing(val);
+            }
+        });
+
+        Action<int> adjustSpacing = (sign) =>
+        {
+            if (int.TryParse(spacingInput.GetText(), out int current))
+            {
+                int step = 1;
+                int next = Math.Max(0, Math.Min(12, current + sign * step));
+                updateSpacing(next);
+            }
+        };
+
+        spacingMinusBtn.OnClick(() => adjustSpacing(-1), allowKeyPresses: true);
+        spacingPlusBtn.OnClick(() => adjustSpacing(1), allowKeyPresses: true);
+
         root.Add(new Title(BdtLocalization.SettingsUndoHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -926,6 +995,7 @@ internal static class DesignerToolkitSettings
             recycleBinToggle.Value(UseRecycleBin);
             recycleBinFolderNameField.Text(RecycleBinFolderName);
             recycleBinFolderNameField.MarkAsError(false);
+            spacingInput.Text(BlueprintSpacing.ToString());
             showLayerPrimaryField.Refresh();
             showLayerSecondaryField.Refresh();
             hideLayerPrimaryField.Refresh();
@@ -993,6 +1063,7 @@ internal static class DesignerToolkitSettings
             SetPollutionShowShip(true);
             SetUseRecycleBin(true);
             SetRecycleBinFolderName("Recycle Bin");
+            SetBlueprintSpacing(6);
             HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
             HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
             ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
@@ -1076,6 +1147,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(BLUEPRINT_SPACING_KEY, BlueprintSpacing, out error))
+                return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
                 return false;
             if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterShowLayerHotkey, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, out error))
@@ -1120,6 +1193,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out bool layoutBoxModeEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
             updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
+            updated = TryReplaceConfigDefault(updated, BLUEPRINT_SPACING_KEY, BlueprintSpacing, out bool blueprintSpacingUpdated);
             updated = TryReplaceHotkeyConfigDefaults(
                 updated,
                 TransportCleanupHotkey,
@@ -1261,6 +1335,11 @@ internal static class DesignerToolkitSettings
             if (!rbNameUpdated)
             {
                 error = "Could not find recycle_bin_folder_name default in config.json.";
+                return false;
+            }
+            if (!blueprintSpacingUpdated)
+            {
+                error = "Could not find blueprint_spacing default in config.json.";
                 return false;
             }
             if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated || !pollutionOverlayToggleHotkeyUpdated || !undoHotkeyUpdated)
@@ -1509,7 +1588,8 @@ internal static class DesignerToolkitSettings
         bool initialPollutionShowShip,
         bool initialLayoutBoxModeEnabled,
         bool initialUseRecycleBin,
-        string initialRecycleBinFolderName)
+        string initialRecycleBinFolderName,
+        int initialBlueprintSpacing)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
@@ -1530,6 +1610,7 @@ internal static class DesignerToolkitSettings
         LayoutBoxModeEnabled = initialLayoutBoxModeEnabled;
         UseRecycleBin = initialUseRecycleBin;
         RecycleBinFolderName = initialRecycleBinFolderName;
+        BlueprintSpacing = initialBlueprintSpacing;
 
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
@@ -1585,6 +1666,8 @@ internal static class DesignerToolkitSettings
                 UseRecycleBin = useRecycleBin;
             if (TryGetString(root, "recycleBinFolderName", out string recycleBinFolderName))
                 RecycleBinFolderName = recycleBinFolderName;
+            if (TryGetInt(root, "blueprintSpacing", out int blueprintSpacing))
+                BlueprintSpacing = blueprintSpacing;
         }
         catch (Exception ex)
         {
@@ -1617,6 +1700,7 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("layoutBoxModeEnabled", LayoutBoxModeEnabled);
         writer.AppendBoolField("useRecycleBin", UseRecycleBin);
         writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);
+        writer.AppendNumberField("blueprintSpacing", BlueprintSpacing);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
     }

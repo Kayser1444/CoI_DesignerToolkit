@@ -437,10 +437,30 @@
   ],
   [
     "dtk.settings.pollution_show_ship.description",
-    "Activa/desactiva la superposición de la tasa de contaminación mundial para barcos. Calculado utilizando el combustible consumido entre las dos últimas transiciones del mismo tipo (por ejemplo, llegadas o salidas)."
+    "Activa/desactiva la superposición de la tasa de contaminación mundial para barcos. Muestra la tasa de contaminación prevista en función del tiempo de ida y vuelta de la ruta de carga actual y el consumo de combustible. Estos valores incluyen los efectos de la configuración de dificultad del juego y las tecnologías de reducción de la contaminación investigadas."
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
     "Tecla de acceso rápido de superposición de contaminación"
+  ],
+  [
+    "dtk.settings.place_folder.heading",
+    "COLOCAR CARPETA"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.label",
+    "Espaciado de planos"
+  ],
+  [
+    "dtk.settings.blueprint_spacing.description",
+    "Espaciado (en mosaicos) entre planos colocados uno al lado del otro durante el pegado por lotes [0-12]."
+  ],
+  [
+    "dtk.blueprint.paste_all.button",
+    "Pegar todo"
+  ],
+  [
+    "dtk.blueprint.paste_all.tooltip",
+    "Pegue fantasmas de todos los diseños en esta carpeta uno al lado del otro para revisarlos."
   ]
 ]

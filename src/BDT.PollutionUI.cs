@@ -246,9 +246,9 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             {
                 if (s.IsDestroyed || !s.IsEnabled) continue;
                 float avg = 0f;
-                if (states.TryGetValue(s.Id.Value, out var state))
+                if (s is Mafi.Core.Buildings.Cargo.Ships.CargoShipV2 cargoShip)
                 {
-                    avg = state.CachedAveragePollution;
+                    avg = PollutionManager.Instance?.GetShipPredictedPollution(cargoShip) ?? 0f;
                 }
                 targets.Add(new RenderTarget { Entity = s, AveragePollution = avg, Type = PollutionManager.PollutionType.Ship });
             }
