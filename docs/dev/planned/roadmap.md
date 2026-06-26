@@ -10,7 +10,8 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [ ] **Batch pasting**: Paste all blueprints inside a folder simultaneously.
 
 ### Entity & Transport Overlays
-- [ ] **Pollution Overlay & Heat Map**: Visual 3D overlay and entity highlight glow displaying current pollution/exhaust output, with separate sub-toggles for air, ground/water, ship, and vehicle emissions.
+- [ ] **Pollution Overlay & Heat Map**: Work in progress. Visual 3D overlay and entity highlight glow displaying current pollution/exhaust output, with separate sub-toggles for air, ground/water, ship, and vehicle emissions. Implementation/configuration exists in-tree, but this is not considered complete player-facing documentation or a finished feature yet.
+- [ ] **Throughput AoE select/deselect all**: Add select all and deselect all controls to the Throughput Area Tool monitor list so designers can quickly toggle every selected entity/group before applying bulk display settings.
 
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.
@@ -30,6 +31,7 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [x] **Content Display on Balancers** (v0.7.0) — Added product buffer content display panels to the balancer (`ZipperInspector`) using reflection to read its internal input and circular output buffers.
 - [x] **'Recycle Bin'** (v0.7.0) — Automatically copies deleted/updated blueprints/folders to a recycle bin folder with a configurable name/toggle, suppressing confirmation popups outside of it.
 - [x] **Undo Place Blueprint** (v0.7.0) — Transient, in-memory undo stack (Ctrl+Z) to revert blueprint placements, copy-pasting, and force-placements.
+- [x] **Layout Box Visualization Mode** (v0.6.2a) — Renders building clearance and occupancy bounding boxes in 3D.
 
 ---
 
