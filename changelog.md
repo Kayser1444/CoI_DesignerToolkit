@@ -2,17 +2,6 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.8.2
-
-- Fixed `NullReferenceException` during shutdown/unload in `HeightFilter`:
-  - Added an early-out guard to `ShowAllHidden()` to safely abort restoring hidden visuals if the renderer subsystems are already disposed, eliminating shutdown warning spam.
-- Fixed `Outer enumerator finished first?` multi-threading assertion in `PollutionWorldRenderer`:
-  - Cached active moving entities (vehicles, locomotives, and ships) during `OnSyncUpdate` on the main thread.
-  - Read from this cached snapshot list in `OnGUI()` instead of calling `GetAllEntitiesOfType<T>()` concurrently with the simulation thread.
-- Fixed event unregistration assertions and warnings:
-  - Tracked `SyncUpdate` registration state in `ThroughputWorldRenderer` and `PollutionWorldRenderer` to prevent calling `RemoveNonSaveable` on already unregistered callbacks.
-  - Changed `PollutionManager` event unregistration to call `RemoveNonSaveable` instead of `Remove` to match its `AddNonSaveable` registration.
-
 ## v0.8.1 [packaged]
 
 - Added **Throughput AoE select/deselect all** checkbox to the Throughput Area Tool window:
@@ -22,6 +11,14 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Added screen-space label tracking for long transports (conveyors and pipes):
   - Dynamically floats the overlay text to the nearest visible segment on screen so labels stay visible while zoomed in.
   - Automatically falls back to the center tile when all segments are off-screen or the camera distance exceeds 400 meters.
+- Fixed `NullReferenceException` during shutdown/unload in `HeightFilter`:
+  - Added an early-out guard to `ShowAllHidden()` to safely abort restoring hidden visuals if the renderer subsystems are already disposed, eliminating shutdown warning spam.
+- Fixed `Outer enumerator finished first?` multi-threading assertion in `PollutionWorldRenderer`:
+  - Cached active moving entities (vehicles, locomotives, and ships) during `OnSyncUpdate` on the main thread.
+  - Read from this cached snapshot list in `OnGUI()` instead of calling `GetAllEntitiesOfType<T>()` concurrently with the simulation thread.
+- Fixed event unregistration assertions and warnings:
+  - Tracked `SyncUpdate` registration state in `ThroughputWorldRenderer` and `PollutionWorldRenderer` to prevent calling `RemoveNonSaveable` on already unregistered callbacks.
+  - Changed `PollutionManager` event unregistration to call `RemoveNonSaveable` instead of `Remove` to match its `AddNonSaveable` registration.
 
 ## v0.8.0 [released]
 
