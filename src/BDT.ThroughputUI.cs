@@ -399,6 +399,7 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
     private EntityHighlighter? m_highlighter;
     private Mafi.Core.GameLoop.IGameLoopEvents? m_gameLoopEvents;
     private bool m_isGameLoaded = false;
+    private bool m_isSyncUpdateRegistered = false;
     private System.Collections.Generic.HashSet<int> m_highlightedEntities = new System.Collections.Generic.HashSet<int>();
     private Texture2D? m_bgTexture;
     private Texture2D? m_whiteTexture;
@@ -412,14 +413,20 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
         m_gameLoopEvents = gameLoopEvents;
         
         m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, OnSyncUpdate);
+        m_isSyncUpdateRegistered = true;
     }
 
     private void OnSyncUpdate(Mafi.Core.GameTime time)
     {
         m_isGameLoaded = true;
-        if (m_gameLoopEvents != null)
+        if (m_gameLoopEvents != null && m_isSyncUpdateRegistered)
         {
-            try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
+            try 
+            { 
+                m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate);
+                m_isSyncUpdateRegistered = false;
+            } 
+            catch { }
         }
     }
 
@@ -788,9 +795,10 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (m_gameLoopEvents != null)
+        if (m_gameLoopEvents != null && m_isSyncUpdateRegistered)
         {
             try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
+            m_isSyncUpdateRegistered = false;
         }
         ClearHighlights();
         if (m_bgTexture != null)

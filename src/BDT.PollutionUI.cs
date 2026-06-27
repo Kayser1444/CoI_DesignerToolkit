@@ -32,6 +32,8 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
     private IGameLoopEvents? m_gameLoopEvents;
 
     private bool m_isGameLoaded;
+    private readonly List<IEntity> m_cachedMovingEntities = new List<IEntity>();
+    private bool m_isSyncUpdateRegistered;
     private Texture2D? m_bgTexture;
     private Texture2D? m_whiteTexture;
     private Texture2D? m_glowTexture;
@@ -46,14 +48,38 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         m_gameLoopEvents = gameLoopEvents;
 
         m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, OnSyncUpdate);
+        m_isSyncUpdateRegistered = true;
     }
 
     private void OnSyncUpdate(Mafi.Core.GameTime time)
     {
         m_isGameLoaded = true;
-        if (m_gameLoopEvents != null)
+
+        // Cache active moving entities on the main thread during a safe update step
+        m_cachedMovingEntities.Clear();
+        if (m_entitiesManager != null && (DesignerToolkitSettings.PollutionOverlayEnabled || DesignerToolkitSettings.PollutionGlowEnabled))
         {
-            try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
+            if (DesignerToolkitSettings.PollutionShowVehicle)
+            {
+                foreach (var v in m_entitiesManager.GetAllEntitiesOfType<Vehicle>())
+                {
+                    if (v.IsDestroyed || !v.IsEnabled) continue;
+                    m_cachedMovingEntities.Add(v);
+                }
+                foreach (var l in m_entitiesManager.GetAllEntitiesOfType<Locomotive>())
+                {
+                    if (l.IsDestroyed || !l.IsEnabled) continue;
+                    m_cachedMovingEntities.Add(l);
+                }
+            }
+            if (DesignerToolkitSettings.PollutionShowShip)
+            {
+                foreach (var s in m_entitiesManager.GetAllEntitiesOfType<Ship>())
+                {
+                    if (s.IsDestroyed || !s.IsEnabled) continue;
+                    m_cachedMovingEntities.Add(s);
+                }
+            }
         }
     }
 
@@ -215,44 +241,18 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             }
         }
 
-        // 2. Vehicles / Locomotives
-        if (DesignerToolkitSettings.PollutionShowVehicle)
+        // 2 & 3. Cached moving entities (Vehicles, Locomotives, Ships)
+        foreach (var entity in m_cachedMovingEntities)
         {
-            foreach (var v in m_entitiesManager.GetAllEntitiesOfType<Vehicle>())
+            if (entity.IsDestroyed) continue;
+            float avg = 0f;
+            if (states.TryGetValue(entity.Id.Value, out var state))
             {
-                if (v.IsDestroyed || !v.IsEnabled) continue;
-                float avg = 0f;
-                if (states.TryGetValue(v.Id.Value, out var state))
-                {
-                    avg = state.CachedAveragePollution;
-                }
-                targets.Add(new RenderTarget { Entity = v, AveragePollution = avg, Type = PollutionManager.PollutionType.Vehicle });
+                avg = state.CachedAveragePollution;
             }
-            foreach (var l in m_entitiesManager.GetAllEntitiesOfType<Locomotive>())
-            {
-                if (l.IsDestroyed || !l.IsEnabled) continue;
-                float avg = 0f;
-                if (states.TryGetValue(l.Id.Value, out var state))
-                {
-                    avg = state.CachedAveragePollution;
-                }
-                targets.Add(new RenderTarget { Entity = l, AveragePollution = avg, Type = PollutionManager.PollutionType.Vehicle });
-            }
-        }
 
-        // 3. Ships
-        if (DesignerToolkitSettings.PollutionShowShip)
-        {
-            foreach (var s in m_entitiesManager.GetAllEntitiesOfType<Ship>())
-            {
-                if (s.IsDestroyed || !s.IsEnabled) continue;
-                float avg = 0f;
-                if (states.TryGetValue(s.Id.Value, out var state))
-                {
-                    avg = state.CachedAveragePollution;
-                }
-                targets.Add(new RenderTarget { Entity = s, AveragePollution = avg, Type = PollutionManager.PollutionType.Ship });
-            }
+            var type = (entity is Ship) ? PollutionManager.PollutionType.Ship : PollutionManager.PollutionType.Vehicle;
+            targets.Add(new RenderTarget { Entity = entity, AveragePollution = avg, Type = type });
         }
 
         if (targets.Count == 0)
@@ -453,9 +453,10 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (m_gameLoopEvents != null)
+        if (m_gameLoopEvents != null && m_isSyncUpdateRegistered)
         {
             try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
+            m_isSyncUpdateRegistered = false;
         }
         ClearHighlights();
         if (m_bgTexture != null)

@@ -622,6 +622,20 @@ namespace CoIDesignerToolkit
         {
             if (m_transportsManager == null) return;
 
+            // If the renderer components are already torn down (e.g. during scene unload),
+            // skip restoring the visuals to avoid cascades of shutdown warnings/exceptions.
+            if (s_transportsRenderer == null ||
+                s_pillarsRenderer == null ||
+                s_pillarsRenderer.m_transportsConstructionHelper == null ||
+                s_pillarsRenderer.m_chunksRenderer == null ||
+                s_pillarsRenderer.m_pillarsChunks == null)
+            {
+                m_hiddenTransportIds.Clear();
+                m_hiddenPillarIds.Clear();
+                m_hiddenLayoutEntityIds.Clear();
+                return;
+            }
+
             try
             {
                 // Restore hidden transports

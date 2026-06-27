@@ -138,7 +138,7 @@ internal sealed class PollutionManager : IDisposable
         {
             try
             {
-                m_entitiesManager.EntityRemoved.Remove(this, OnEntityRemoved);
+                m_entitiesManager.EntityRemoved.RemoveNonSaveable(this, OnEntityRemoved);
             }
             catch {}
         }
