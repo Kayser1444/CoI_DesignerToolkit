@@ -1,10 +1,7 @@
 v0.8.0 | 2026-06-27
 * Added **Batch Placing** feature for blueprint folders: place all blueprints in a folder side-by-side in a single cursor placement, automatically wrapping or cropping to stay within the game's placement limits
-* Added **Blueprint Spacing** setting under PLACE FOLDER in mod settings: configure spacing between blueprints in batch placement (from 0 to 12 tiles)
 * Added **Pollution Labels** overlay: floating world-space labels displaying average emissions (items/min) above factories, outfalls, vehicles, locomotives, and ships
 * Added **Pollution Heat Map** glow: screen-space and 3D white glow overlays indicating relative emission levels across all active categories, dynamically scaled by camera zoom to ensure visibility at distance
-* Added settings to independently configure text and glow overlays, toggling and filtering by source types (Air, Ground/Water, Vehicles, Ships)
-* Fixed: vehicle pollution scaling bug in stats tracking
 
 v0.7.0 | 2026-06-21
 * Added **Undo Place Blueprint** feature (default hotkey `Ctrl+Z`): reverts blueprint placements, copy-pasting, and force-placements (Shift-click) by canceling placed ghosts, deconstructing fully built structures (or destroying them in sandbox mode), restoring overwritten pre-existing entities or ghosts, and reverting pasted surface designations and decals
