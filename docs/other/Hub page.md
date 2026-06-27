@@ -6,11 +6,9 @@ Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, documenting, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
-## 🆕 New in 0.6.0: Throughput monitoring
+## 🆕 New in 0.7.0: undo, recycle bin, and layout boxes
 
-BDT 0.6.0 turns throughput from a single limiter control into a full inspection workflow for blueprint testing.
-
-You can now display live items/min flow rates directly over transports, sources, sinks, and ports; make entities glow as a throughput heat map; switch values to percent of maximum capacity; and configure whole selected areas at once with the new Throughput Area Tool.
+BDT 0.7.0 adds a blueprint placement undo stack, a configurable blueprint recycle bin, and layout box visualization for building clearance planning. Throughput monitoring from 0.6.x remains available for testing transport flow with overlays, heat-map coloring, and bulk area configuration.
 
 ![image.png](/content-images/02b14618ac2ad76734545c73a4c53120522fd11e2810bbb3de95aa0870f324ce/image.png)
 
@@ -24,6 +22,9 @@ You can now display live items/min flow rates directly over transports, sources,
 - [⚡ Instant build mode]
 - [🧹 Transport cleanup tool]
 - [👁️ Height filter]
+- [↩️ Undo place blueprint]
+- [♻️ Blueprint recycle bin]
+- [📦 Layout box mode]
 - [🚦 Throughput tools]
 - [🚧 Legacy Belt Configurations]
 - [⚙️ Mod settings]
@@ -47,7 +48,16 @@ This is meant for the usual blueprint-authoring loop: find a small mistake, fix 
 
 ![remembered-blueprint-folder.png](/content-images/bd11e3f67062aa6a456a334fd50decd89667a29c4f4eda166bfff902f968fc91/remembered-blueprint-folder.png)
 
-BDT remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created. The folder path is stored in the vanilla save file. This allows you to store different currently open blueprint book page in different save games.
+BDT remembers the last blueprint book folder you opened and restores it the next time the blueprint window is created. The folder path is stored in `config.json`. If a folder is renamed or removed, BDT gracefully falls back to the deepest folder it can still find.
+
+
+### ↩️ Undo place blueprint
+
+BDT adds an in-memory undo stack for blueprint placement, copy-paste, and force-placement actions. The default hotkey is `Ctrl+Z`. Undo can cancel placed ghosts, deconstruct or sandbox-destroy newly placed structures, restore overwritten pre-existing ghosts or entities, and revert pasted surface designations or decals. Undo history is transient and is not saved into save files.
+
+### ♻️ Blueprint recycle bin
+
+BDT can copy deleted or updated blueprints/folders into a configurable root-level recycle bin folder before the original action completes. The copy preserves the original parent folder path under the recycle bin and adds numeric suffixes to avoid name collisions. Deletions inside the recycle bin remain permanent and use the normal confirmation popup.
 
 ### 📊 Blueprint operational stats
 
@@ -164,6 +174,11 @@ These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. H
 
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
+
+### 📦 Layout box mode
+
+Layout Box Mode renders 3D building footprint and clearance boxes so designers can see where elevated pipes, belts, and other transports can pass over existing structures. The default toggle hotkey is `Alt+B`.
+
 ### 🚦 Throughput tools
 
 BDT adds a unified **Throughput** inspector panel for transport entities: belts, pipes, channels, sources, sinks, lifts, balancers, sorters, and connectors. It combines live monitoring with the existing sandbox-only limiter controls, so you can see what a design is actually moving and, in sandbox mode, test how it behaves under custom capacity limits, or measure its output precisely.
@@ -229,6 +244,10 @@ Settings are stored per save file. The `markdown_table_language` and `markdown_n
 
 The **Throughput** settings control the global overlay, overlay hotkey, heat-map mode, colorblind-friendly colors, percent display, and the Throughput Area Tool hotkey.
 
+## 🚧 Work in progress
+
+Pollution heat map/overlay is currently work in progress. It may have settings or implementation code in development builds, but it should not be treated as a completed player-facing feature yet.
+
 ## 📌 Notes
 
 - Compatible with vanilla saves.
@@ -245,7 +264,7 @@ The **Throughput** settings control the global overlay, overlay hotkey, heat-map
 
 ## 📜 License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](../../LICENSE).
 
 ## ⚖️ Attribution and trademarks
 
