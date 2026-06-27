@@ -57,7 +57,7 @@
     "description": "Initial secondary height filter hide layer hotkey. Leave empty to disable the secondary binding."
   },
   "throughput_overlay_enabled": {
-    "default": true,
+    "default": false,
     "description": "Initial throughput overlay visibility state for saves without BDT settings state. When enabled, configured throughput overlays will render in-world."
   },
   "throughput_glow_enabled": {
@@ -124,7 +124,7 @@
     "description": "Initial secondary undo placement hotkey. Leave empty to disable."
   },
   "pollution_overlay_enabled": {
-    "default": false,
+    "default": true,
     "description": "Initial pollution overlay visibility state. When enabled, configured pollution overlays will render in-world."
   },
   "pollution_glow_enabled": {
@@ -132,7 +132,7 @@
     "description": "Initial pollution glow visibility state."
   },
   "pollution_days_to_average": {
-    "default": 30,
+    "default": 360,
     "is_integer": true,
     "description": "Initial pollution days to average (0-360, 0 disables data collection)."
   },

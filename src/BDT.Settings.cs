@@ -153,7 +153,7 @@ internal static class DesignerToolkitSettings
     public static bool ThroughputShowAsPercent { get; private set; } = false;
     public static bool PollutionOverlayEnabled { get; private set; } = false;
     public static bool PollutionGlowEnabled { get; private set; } = true;
-    public static int PollutionDaysToAverage { get; private set; } = 30;
+    public static int PollutionDaysToAverage { get; private set; } = 360;
     public static bool PollutionShowAir { get; private set; } = true;
     public static bool PollutionShowGround { get; private set; } = true;
     public static bool PollutionShowVehicle { get; private set; } = true;
@@ -382,7 +382,7 @@ internal static class DesignerToolkitSettings
         bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
         bool initialPollutionOverlayEnabled = config.GetBool(POLLUTION_OVERLAY_ENABLED_KEY, false);
         bool initialPollutionGlowEnabled = config.GetBool(POLLUTION_GLOW_ENABLED_KEY, true);
-        int initialPollutionDaysToAverage = config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 30);
+        int initialPollutionDaysToAverage = config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 360);
         bool initialPollutionShowAir = config.GetBool(POLLUTION_SHOW_AIR_KEY, true);
         bool initialPollutionShowGround = config.GetBool(POLLUTION_SHOW_GROUND_KEY, true);
         bool initialPollutionShowVehicle = config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
@@ -752,18 +752,21 @@ internal static class DesignerToolkitSettings
         // --- SUB-TOGGLES ---
         Toggle showAirToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionShowAir.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionShowAirDescription.AsFormatted)
             .Value(PollutionShowAir)
             .OnValueChanged(SetPollutionShowAir);
         root.Add(showAirToggle);
 
         Toggle showGroundToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionShowGround.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionShowGroundDescription.AsFormatted)
             .Value(PollutionShowGround)
             .OnValueChanged(SetPollutionShowGround);
         root.Add(showGroundToggle);
 
         Toggle showVehicleToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionShowVehicle.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionShowVehicleDescription.AsFormatted)
             .Value(PollutionShowVehicle)
             .OnValueChanged(SetPollutionShowVehicle);
         root.Add(showVehicleToggle);

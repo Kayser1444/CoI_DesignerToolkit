@@ -34,6 +34,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
     private bool m_isGameLoaded;
     private Texture2D? m_bgTexture;
     private Texture2D? m_whiteTexture;
+    private Texture2D? m_glowTexture;
     private readonly HashSet<int> m_highlightedEntities = new HashSet<int>();
     private readonly List<IPanel> m_cachedPanels = new List<IPanel>();
     private int m_lastFrameCount = -1;
@@ -260,18 +261,20 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             return;
         }
 
-        float minVal = float.MaxValue;
-        float maxVal = float.MinValue;
+        float globalMin = float.MaxValue;
+        float globalMax = float.MinValue;
 
-        // Calculate min/max for relative scaling based on targets
+        // Calculate min/max for relative scaling using a common pool across all active/toggled-on layers
         foreach (var target in targets)
         {
             float avg = target.AveragePollution;
-            if (avg < minVal) minVal = avg;
-            if (avg > maxVal) maxVal = avg;
+            if (avg < globalMin) globalMin = avg;
+            if (avg > globalMax) globalMax = avg;
         }
 
         var currentHighlights = new HashSet<int>();
+
+        var drawTargets = new List<DrawTarget>();
 
         foreach (var target in targets)
         {
@@ -309,27 +312,80 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             float width = size.x + 8f;
             float height = size.y + 2f;
 
-            float t = (maxVal > minVal) ? (avg - minVal) / (maxVal - minVal) : 0f;
+            float t = (globalMax > globalMin) ? (avg - globalMin) / (globalMax - globalMin) : (globalMax > 0f ? 1f : 0f);
             Color textColor = InterpolateColor(t);
-            style.normal.textColor = textColor;
 
             // Only highlight/glow entities that have avg > 0
             if (avg > 0f && m_highlighter != null && DesignerToolkitSettings.PollutionGlowEnabled && entity is IRenderedEntity renderedEntity)
             {
-                int r = (int)(textColor.r * 255f);
-                int g = (int)(textColor.g * 255f);
-                int b = (int)(textColor.b * 255f);
-                
-                ColorRgba highlightColor = new ColorRgba(r, g, b, 150);
-                try { m_highlighter.Highlight(renderedEntity, highlightColor); } catch { }
-                currentHighlights.Add(entity.Id.Value);
+                // The game's 3D selection outline replacement shader does not support alpha blending (rendering a solid silhouette),
+                // so we skip highlighting minor polluters (t < 0.1) entirely to prevent them from generating massive halos.
+                if (t >= 0.1f)
+                {
+                    int alpha = (int)(t * 215f);
+                    ColorRgba highlightColor = new ColorRgba(255, 255, 255, alpha);
+                    try { m_highlighter.Highlight(renderedEntity, highlightColor); } catch { }
+                    currentHighlights.Add(entity.Id.Value);
+                }
             }
 
-            if (DesignerToolkitSettings.PollutionOverlayEnabled)
+            float heightVal = camera.transform.position.y;
+            
+            // Scale radius based on both camera height and relative pollution level t
+            float minRadius = 15f;
+            float maxRadiusVal = Mathf.Lerp(30f, 90f, (heightVal - 30f) / 200f);
+            maxRadiusVal = Mathf.Clamp(maxRadiusVal, 30f, 90f);
+            float radius = Mathf.Lerp(minRadius, maxRadiusVal, t);
+
+            // Scale opacity based on both camera height and relative pollution level t
+            float maxOpacityVal = Mathf.Lerp(0.15f, 0.85f, (heightVal - 30f) / 200f);
+            maxOpacityVal = Mathf.Clamp(maxOpacityVal, 0.15f, 0.85f);
+            float opacity = Mathf.Lerp(0.02f, maxOpacityVal, t);
+
+            drawTargets.Add(new DrawTarget
             {
-                Rect rect = new Rect(guiX - width / 2f, guiY - height / 2f, width, height);
+                GuiX = guiX,
+                GuiY = guiY,
+                Width = width,
+                Height = height,
+                Text = text,
+                TextColor = textColor,
+                Avg = avg,
+                Radius = radius,
+                Opacity = opacity
+            });
+        }
+
+        // Pass 1: Draw all 2D screen-space glow textures (drawn at the bottom layer)
+        if (DesignerToolkitSettings.PollutionGlowEnabled)
+        {
+            if (m_glowTexture == null)
+            {
+                m_glowTexture = CreateGlowTexture(64);
+            }
+
+            Color oldColor = GUI.color;
+            foreach (var dt in drawTargets)
+            {
+                if (dt.Avg > 0f)
+                {
+                    Rect glowRect = new Rect(dt.GuiX - dt.Radius, dt.GuiY - dt.Radius, dt.Radius * 2f, dt.Radius * 2f);
+                    GUI.color = new Color(1f, 1f, 1f, dt.Opacity);
+                    GUI.DrawTexture(glowRect, m_glowTexture);
+                }
+            }
+            GUI.color = oldColor;
+        }
+
+        // Pass 2: Draw all overlay text boxes (drawn on top of all glows)
+        if (DesignerToolkitSettings.PollutionOverlayEnabled)
+        {
+            foreach (var dt in drawTargets)
+            {
+                style.normal.textColor = dt.TextColor;
+                Rect rect = new Rect(dt.GuiX - dt.Width / 2f, dt.GuiY - dt.Height / 2f, dt.Width, dt.Height);
                 GUI.Box(rect, GUIContent.none, bgStyle);
-                GUI.Label(rect, text, style);
+                GUI.Label(rect, dt.Text, style);
             }
         }
 
@@ -353,6 +409,8 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             {
                 m_highlightedEntities.Add(id);
             }
+
+            // Glow parameters are no longer globally overridden, so no restoration is needed.
         }
     }
 
@@ -362,6 +420,35 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         {
             DesignerToolkitSettings.SetPollutionOverlayEnabled(!DesignerToolkitSettings.PollutionOverlayEnabled);
         }
+    }
+
+    private Texture2D CreateGlowTexture(int size)
+    {
+        Texture2D tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+        float center = size / 2f;
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                float dx = x - center;
+                float dy = y - center;
+                float dist = Mathf.Sqrt(dx * dx + dy * dy);
+                float maxDist = size / 2f;
+                if (dist > maxDist)
+                {
+                    tex.SetPixel(x, y, Color.clear);
+                }
+                else
+                {
+                    // Radial falloff with smoothstep
+                    float alpha = Mathf.Clamp01(1f - (dist / maxDist));
+                    alpha = alpha * alpha * (3f - 2f * alpha);
+                    tex.SetPixel(x, y, new Color(1f, 1f, 1f, alpha));
+                }
+            }
+        }
+        tex.Apply();
+        return tex;
     }
 
     private void OnDestroy()
@@ -381,5 +468,23 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             Destroy(m_whiteTexture);
             m_whiteTexture = null;
         }
+        if (m_glowTexture != null)
+        {
+            Destroy(m_glowTexture);
+            m_glowTexture = null;
+        }
+    }
+
+    private struct DrawTarget
+    {
+        public float GuiX;
+        public float GuiY;
+        public float Width;
+        public float Height;
+        public string Text;
+        public Color TextColor;
+        public float Avg;
+        public float Radius;
+        public float Opacity;
     }
 }

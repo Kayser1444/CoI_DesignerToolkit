@@ -237,10 +237,16 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.pollution_days.description", "Configures the sliding window in game days [0-360] to average emissions. Setting this to 0 completely disables data collection and patches.", "Settings row description for pollution averaging period.");
     public static LocStr SettingsPollutionShowAir =
         Loc.Str("dtk.settings.pollution_show_air.label", "Show air pollution", "Settings checkbox label for showing air pollution.");
+    public static LocStr SettingsPollutionShowAirDescription =
+        Loc.Str("dtk.settings.pollution_show_air.description", "Enables/disables the in-world pollution rate overlay for gaseous air emissions (smokestacks/flares).", "Settings checkbox description for showing air pollution.");
     public static LocStr SettingsPollutionShowGround =
-        Loc.Str("dtk.settings.pollution_show_ground.label", "Show ground & water pollution", "Settings checkbox label for showing ground & water pollution.");
+        Loc.Str("dtk.settings.pollution_show_ground.label", "Show water pollution", "Settings checkbox label for showing water pollution.");
+    public static LocStr SettingsPollutionShowGroundDescription =
+        Loc.Str("dtk.settings.pollution_show_ground.description", "Enables/disables the in-world pollution rate overlay for liquid water discharges (wastewater outfalls).", "Settings checkbox description for showing water pollution.");
     public static LocStr SettingsPollutionShowVehicle =
         Loc.Str("dtk.settings.pollution_show_vehicle.label", "Show vehicle & train pollution", "Settings checkbox label for showing vehicle & train pollution.");
+    public static LocStr SettingsPollutionShowVehicleDescription =
+        Loc.Str("dtk.settings.pollution_show_vehicle.description", "Enables/disables the in-world pollution rate overlay for vehicles and locomotives.", "Settings checkbox description for showing vehicle pollution.");
     public static LocStr SettingsPollutionShowShip =
         Loc.Str("dtk.settings.pollution_show_ship.label", "Show ship pollution", "Settings checkbox label for showing ship pollution.");
     public static LocStr SettingsPollutionShowShipDescription =

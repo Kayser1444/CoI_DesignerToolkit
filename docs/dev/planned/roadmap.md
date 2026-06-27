@@ -10,7 +10,7 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [ ] **Batch pasting**: Paste all blueprints inside a folder simultaneously.
 
 ### Entity & Transport Overlays
-- [ ] **Pollution Overlay & Heat Map**: Visual 3D overlay and entity highlight glow displaying current pollution/exhaust output, with separate sub-toggles for air, ground/water, ship, and vehicle emissions.
+- [ ] **Ground Pollution (Solid Waste)**: Create a new overlay category for ground pollution caused by solid waste dumping (garbage, toxic waste, slag, etc.), separating it from water pollution.
 
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.
@@ -19,6 +19,7 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 
 ## Completed Features
 
+- [x] **Pollution Overlay & Heat Map** (v0.8.0) — Visual 3D overlay and entity highlight glow displaying current pollution/exhaust output, with separate sub-toggles for air, water, ship, and vehicle emissions.
 - [x] **Rename Mod & Branding** (v0.3.0) — Renamed the mod to "Blueprint Designer's Toolkit" (BDT), updating the settings tab, thumbnail, and metadata.
 - [x] **Settings Icon Upgrade** (v0.2.0a) — Integrated with the shared settings window using the AutoHelpers icon handoff so tab icons render properly.
 - [x] **Buildable U1 Transports** (v0.3.0) — Added support for building U1 transports.

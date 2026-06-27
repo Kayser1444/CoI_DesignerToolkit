@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.7.0a [unreleased]
+## v0.8.0 [packaged]
 
 - Added **Batch Placing** feature for blueprint folders ("Place all" button):
   - Spawns ghosts of all direct child blueprints side-by-side in a single cursor placement.
@@ -12,11 +12,26 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
   - Configurable spacing parameter ranging from `0` to `12` tiles (default `6`).
   - Limits are enforced on user input and adjust buttons.
   - Fully localized in all supported languages (including Swedish).
-- Fixed: Pollution overlay ship tracking reworked from stateless prediction to history-based daily recording:
-  - **Main ship (BattleShip)** now correctly shows pollution instead of `0.0`, via a `FuelStatsCollector.ReportFuelUseAndDestroy` Harmony prefix that intercepts `FuelUsedBy.BattleShip` events.
-  - **Cargo ships** now track real fuel consumption via a `CargoShipV2.ConsumeFuel` Harmony prefix instead of stateless route-rate prediction.
-  - Docked ships' average pollution now decays naturally over the configured averaging period, matching the behavior of vehicles and factories.
-  - Ship pollution history now rolls over in `OnNewDay` alongside all other entity types (removed the `PollutionType.Ship` skip).
+- Added **Pollution Labels** overlay feature:
+  - Renders per-entity average pollution rates (items/min) as floating world-space labels above factories, outfalls, vehicles, locomotives, and ships.
+  - Labels are color-coded on a green → orange → red gradient relative to the min/max pollution across all visible entities.
+  - Includes UI occlusion checks to hide labels behind active game windows/panels.
+  - Togglable via hotkey; independent toggle for label text vs. entity glow.
+  - Filters by pollution source type: Air, Ground, Vehicle, and Ship, each independently togglable in settings.
+- Added **Pollution Heat Map** glow feature:
+  - Applies `EntityHighlighter` glow to polluting entities.
+  - Scaled the glow color to a pure white gradient, fading from high opacity (for heavy emitters) to transparent (for zero/low emitters).
+  - Dynamically upscales the game's global glow outline radius (blur size and passes) when the overlay is active, restoring vanilla settings upon deactivation.
+  - Independent toggle from the text overlay, allowing glow-only or labels-only display.
+- Added pollution tracking system (`PollutionManager`) with history-based daily recording:
+  - Tracks factories, outfalls (air/ground), vehicles, locomotives, and ships.
+  - Configurable averaging period (days) shared with the throughput system.
+  - Reworked ship tracking from stateless prediction to history-based daily recording:
+    - **Main ship (BattleShip)** pollution tracked via a `FuelStatsCollector.ReportFuelUseAndDestroy` Harmony prefix that intercepts `FuelUsedBy.BattleShip` events.
+    - **Cargo ships** track real fuel consumption via a `CargoShipV2.ConsumeFuel` Harmony prefix instead of stateless route-rate prediction.
+    - Docked ships' average pollution decays naturally over the configured averaging period, matching vehicle and factory behavior.
+    - Ship pollution history rolls over in `OnNewDay` alongside all other entity types (removed the `PollutionType.Ship` skip).
+  - Fixed: 10,000× vehicle pollution scaling bug.
 
 ## v0.7.0 [released]
 
