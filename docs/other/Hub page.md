@@ -4,12 +4,6 @@ Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, documenting, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
 
-## 🆕 New in 0.8.0: batch placing and pollution overlays
-
-BDT 0.8.0 introduces batch blueprint placement, configurable spacing between batch elements, floating world-space average pollution labels, and dynamic screen-space pollution glow mapping.
-
-![image.png](/content-images/02b14618ac2ad76734545c73a4c53120522fd11e2810bbb3de95aa0870f324ce/image.png)
-
 ## ✨ Feature List
 
 - [🔁 Update blueprint](#-update-blueprint)
