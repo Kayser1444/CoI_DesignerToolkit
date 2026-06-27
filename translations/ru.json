@@ -336,6 +336,10 @@
     "Состояние отображения: "
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "Выбрать/отменить выбор всего"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Горячая клавиша инструмента области"
   ],
@@ -424,12 +428,24 @@
     "Показать загрязнение воздуха"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "Включает/отключает наложение уровня загрязнения в мире для газообразных выбросов в воздух (дымовые трубы/факелы)."
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
     "Показать загрязнение почвы и воды"
   ],
   [
+    "dtk.settings.pollution_show_ground.description",
+    "Включает/отключает наложение уровня загрязнения в мире для сбросов жидких вод (сбросов сточных вод)."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Показать загрязнение транспортных средств и поездов"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "Включает/отключает наложение уровня загрязнения в мире для транспортных средств и локомотивов."
   ],
   [
     "dtk.settings.pollution_show_ship.label",

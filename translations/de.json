@@ -336,6 +336,10 @@
     "Anzeigestatus: "
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "Alle auswählen/abwählen"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Tastenkürzel Durchsatz-Werkzeug"
   ],
@@ -424,12 +428,24 @@
     "Luftverschmutzung anzeigen"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für gasförmige Luftemissionen (Schornsteine/Fackeln)."
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
     "Boden- und Wasserverschmutzung anzeigen"
   ],
   [
+    "dtk.settings.pollution_show_ground.description",
+    "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für flüssige Wassereinleitungen (Abwasseraustritte)."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Zeigen Sie die Verschmutzung von Fahrzeugen und Zügen an"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Fahrzeuge und Lokomotiven."
   ],
   [
     "dtk.settings.pollution_show_ship.label",

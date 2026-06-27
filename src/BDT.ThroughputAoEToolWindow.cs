@@ -30,7 +30,7 @@ public class ThroughputAoEToolWindow : Window
 
         public bool IsChecked => m_checkbox.GetValue();
 
-        public ThroughputAoEItem(UiContext context, EntityProto proto, IEnumerable<IEntity> entities)
+        public ThroughputAoEItem(UiContext context, EntityProto proto, IEnumerable<IEntity> entities, Action onChanged)
         {
             m_proto = proto;
             m_entities = new Lyst<IEntity>(entities);
@@ -61,6 +61,7 @@ public class ThroughputAoEToolWindow : Window
                     state.DisplayThroughput = isOn;
                 }
                 manager.SaveConfigState();
+                onChanged();
             });
 
             var icon = new Icon().Size(36.px());
@@ -76,6 +77,20 @@ public class ThroughputAoEToolWindow : Window
             Add(countLabel);
             Add(icon);
             Add(nameLabel);
+        }
+
+        public void SetChecked(bool isOn)
+        {
+            m_checkbox.Value(isOn);
+
+            var manager = ThroughputManager.Instance;
+            if (manager == null) return;
+            foreach (var entity in m_entities)
+            {
+                var state = manager.GetOrCreateState(entity.Id.Value);
+                state.DisplayThroughput = isOn;
+            }
+            manager.SaveConfigState();
         }
 
         public void ApplyDays(int days)
@@ -102,6 +117,9 @@ public class ThroughputAoEToolWindow : Window
     private ButtonIcon? m_globalDaysMinusBtn;
     private ButtonIcon? m_globalDaysPlusBtn;
 
+    private Toggle? m_masterToggle;
+    private bool m_isUpdatingStates;
+
     public ThroughputAoEToolWindow(UiContext context)
         : base(BdtLocalization.ThroughputAoEToolWindowTitle.AsFormatted)
     {
@@ -109,7 +127,17 @@ public class ThroughputAoEToolWindow : Window
         MakeMovable();
         WindowSize(540.px(), Px.Auto);
 
+        var selectionRow = new Row().AlignItemsCenter().Padding(4.pt()).PaddingLeft(9.px()).Gap(6.px());
+        m_masterToggle = new Toggle(standalone: true);
+        m_masterToggle.OnValueChanged(isOn => SetAllChecked(isOn));
+        
+        var selectAllLabel = new Label(BdtLocalization.ThroughputAoEToolSelectAllLabel.AsFormatted).MarginLeft(4.px());
+        selectionRow.Add(m_masterToggle);
+        selectionRow.Add(selectAllLabel);
+
         AddBodySingle(
+            selectionRow,
+            new HorizontalDivider().MarginTopBottom(4.pt()),
             m_itemsColumn = new ScrollColumn().Gap(1.pt()).MaxHeight(300.px()),
             BuildGlobalActionsPanel(),
             new PanelFooterRow().BodyAdd(
@@ -117,6 +145,56 @@ public class ThroughputAoEToolWindow : Window
                 new ButtonText(Button.General, BdtLocalization.ThroughputAoEToolClose.AsFormatted, Close)
             )
         );
+    }
+
+    private void SetAllChecked(bool isOn)
+    {
+        if (m_isUpdatingStates) return;
+        m_isUpdatingStates = true;
+        try
+        {
+            foreach (var item in m_itemsColumn)
+            {
+                if (item is ThroughputAoEItem aoeItem)
+                {
+                    aoeItem.SetChecked(isOn);
+                }
+            }
+        }
+        finally
+        {
+            m_isUpdatingStates = false;
+        }
+    }
+
+    private void UpdateMasterToggleState()
+    {
+        if (m_isUpdatingStates || m_masterToggle == null) return;
+        m_isUpdatingStates = true;
+        try
+        {
+            bool allChecked = true;
+            int count = 0;
+            foreach (var item in m_itemsColumn)
+            {
+                if (item is ThroughputAoEItem aoeItem)
+                {
+                    count++;
+                    if (!aoeItem.IsChecked)
+                    {
+                        allChecked = false;
+                    }
+                }
+            }
+            if (count > 0)
+            {
+                m_masterToggle.Value(allChecked);
+            }
+        }
+        finally
+        {
+            m_isUpdatingStates = false;
+        }
     }
 
     private UiComponent BuildGlobalActionsPanel()
@@ -187,8 +265,9 @@ public class ThroughputAoEToolWindow : Window
         {
             var firstEntity = group.First();
             var proto = m_context.ProtosDb.GetOrThrow<EntityProto>(firstEntity.Prototype.Id);
-            m_itemsColumn.Add(new ThroughputAoEItem(m_context, proto, group));
+            m_itemsColumn.Add(new ThroughputAoEItem(m_context, proto, group, UpdateMasterToggleState));
         }
+        UpdateMasterToggleState();
     }
 
     private void ClampGlobalDaysInput()
@@ -227,3 +306,4 @@ public class ThroughputAoEToolWindow : Window
         }
     }
 }
+

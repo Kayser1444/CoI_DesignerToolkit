@@ -336,6 +336,10 @@
     "Visningsstatus: "
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "Markera/avmarkera alla"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Genomströmningsverktyg genväg"
   ],
@@ -424,12 +428,24 @@
     "Visa luftföroreningar"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för gasformiga luftutsläpp (skorsten/backlor)."
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
     "Visa mark- och vattenföroreningar"
   ],
   [
+    "dtk.settings.pollution_show_ground.description",
+    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för utsläpp av flytande vatten (avloppsvatten)."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Visa fordons- och tågföroreningar"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fordon och lok."
   ],
   [
     "dtk.settings.pollution_show_ship.label",

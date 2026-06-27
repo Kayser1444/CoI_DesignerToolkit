@@ -336,6 +336,10 @@
     "Display state: "
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "Select / deselect all"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Throughput tool hotkey"
   ],
@@ -424,12 +428,24 @@
     "Show air pollution"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "Enables/disables the in-world pollution rate overlay for gaseous air emissions (smokestacks/flares)."
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
-    "Show ground & water pollution"
+    "Show water pollution"
+  ],
+  [
+    "dtk.settings.pollution_show_ground.description",
+    "Enables/disables the in-world pollution rate overlay for liquid water discharges (wastewater outfalls)."
   ],
   [
     "dtk.settings.pollution_show_vehicle.label",
     "Show vehicle & train pollution"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "Enables/disables the in-world pollution rate overlay for vehicles and locomotives."
   ],
   [
     "dtk.settings.pollution_show_ship.label",

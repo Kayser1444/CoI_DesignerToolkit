@@ -336,6 +336,10 @@
     "Stato visualizzazione: "
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "Seleziona/deseleziona tutto"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Scorciatoia strumento throughput"
   ],
@@ -424,12 +428,24 @@
     "Mostra l'inquinamento atmosferico"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "Abilita/disabilita la sovrapposizione del tasso di inquinamento a livello mondiale per le emissioni atmosferiche gassose (camini/torce)."
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
     "Mostra l'inquinamento del suolo e dell'acqua"
   ],
   [
+    "dtk.settings.pollution_show_ground.description",
+    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per gli scarichi di acqua liquida (scarichi delle acque reflue)."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Mostra l'inquinamento dei veicoli e dei treni"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per veicoli e locomotive."
   ],
   [
     "dtk.settings.pollution_show_ship.label",

@@ -336,6 +336,10 @@
     "Estado de exibição: "
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "Selecionar/desmarcar tudo"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Atalho da ferramenta de throughput"
   ],
@@ -424,12 +428,24 @@
     "Mostrar poluição do ar"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "Ativa/desativa a sobreposição da taxa de poluição mundial para emissões atmosféricas gasosas (chaminés/chamas)."
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
     "Mostrar poluição do solo e da água"
   ],
   [
+    "dtk.settings.pollution_show_ground.description",
+    "Ativa/desativa a sobreposição da taxa de poluição mundial para descargas de água líquida (emissários de águas residuais)."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Mostrar poluição de veículos e trens"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "Ativa/desativa a sobreposição da taxa de poluição mundial para veículos e locomotivas."
   ],
   [
     "dtk.settings.pollution_show_ship.label",

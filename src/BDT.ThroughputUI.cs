@@ -520,6 +520,58 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
         }
     }
 
+    private Vector3 GetLabelWorldPosition(IStaticEntity staticEntity, Camera camera)
+    {
+        Tile3i tile = staticEntity.CenterTile;
+        Vector3 defaultPos = new Vector3(tile.X * 2f, tile.Z * 2f, tile.Y * 2f);
+        defaultPos.y += 1.3f;
+
+        if (staticEntity is Mafi.Core.Factory.Transports.Transport transport && transport.Trajectory != null)
+        {
+            float distSq = (camera.transform.position - defaultPos).sqrMagnitude;
+            if (distSq > 400f * 400f)
+            {
+                return defaultPos;
+            }
+
+            var waypoints = transport.Trajectory.Waypoints;
+            if (waypoints.Length > 0)
+            {
+                Vector3 bestWorldPos = Vector3.zero;
+                float minDistanceSq = float.MaxValue;
+                bool foundOnScreen = false;
+                int step = Math.Max(1, waypoints.Length / 30);
+                for (int i = 0; i < waypoints.Length; i += step)
+                {
+                    var wp = waypoints[i];
+                    Vector3 wpWorldPos = new Vector3(wp.Position.X.ToFloat() * 2f, wp.Position.Z.ToFloat() * 2f, wp.Position.Y.ToFloat() * 2f);
+                    wpWorldPos.y += 1.3f;
+
+                    Vector3 scrPos = camera.WorldToScreenPoint(wpWorldPos);
+                    if (scrPos.z > 0 && scrPos.x >= 0 && scrPos.x <= Screen.width && scrPos.y >= 0 && scrPos.y <= Screen.height)
+                    {
+                        if (!IsPositionOverUI(scrPos))
+                        {
+                            float dSq = (scrPos.x - Screen.width / 2f) * (scrPos.x - Screen.width / 2f) + (scrPos.y - Screen.height / 2f) * (scrPos.y - Screen.height / 2f);
+                            if (dSq < minDistanceSq)
+                            {
+                                minDistanceSq = dSq;
+                                bestWorldPos = wpWorldPos;
+                                foundOnScreen = true;
+                            }
+                        }
+                    }
+                }
+                if (foundOnScreen)
+                {
+                    return bestWorldPos;
+                }
+            }
+        }
+
+        return defaultPos;
+    }
+
     private void OnGUI()
     {
         if (!m_isGameLoaded || (!DesignerToolkitSettings.ThroughputOverlayEnabled && !DesignerToolkitSettings.ThroughputGlowEnabled) || ThroughputManager.Instance == null || m_entitiesManager == null)
@@ -573,9 +625,7 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
 
                 if (!(entity is IStaticEntity staticEntity)) continue;
 
-                Tile3i tile = staticEntity.CenterTile;
-                Vector3 worldPos = new Vector3(tile.X * 2f, tile.Z * 2f, tile.Y * 2f);
-                worldPos.y += 1.3f;
+                Vector3 worldPos = GetLabelWorldPosition(staticEntity, camera);
 
                 Vector3 screenPos = camera.WorldToScreenPoint(worldPos);
                 if (screenPos.z < 0) continue;
@@ -598,11 +648,7 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
                 continue;
 
             if (!(entity is IStaticEntity staticEntity)) continue;
-            Tile3i tile = staticEntity.CenterTile;
-            Vector3 worldPos = new Vector3(tile.X * 2f, tile.Z * 2f, tile.Y * 2f);
-            
-            // Adjust position vertically based on height to float nicely above
-            worldPos.y += 1.3f;
+            Vector3 worldPos = GetLabelWorldPosition(staticEntity, camera);
 
             Vector3 screenPos = camera.WorldToScreenPoint(worldPos);
             if (screenPos.z < 0) continue; // Skip behind camera

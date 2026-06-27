@@ -2,7 +2,17 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.8.0 [packaged]
+## v0.8.1 [packaged]
+
+- Added **Throughput AoE select/deselect all** checkbox to the Throughput Area Tool window:
+  - Aligns vertically with the child list item checkboxes and features a horizontal separator below.
+  - Toggles the display state of all selected items/groups in bulk.
+  - Updates automatically when individual rows are manually checked or unchecked.
+- Added screen-space label tracking for long transports (conveyors and pipes):
+  - Dynamically floats the overlay text to the nearest visible segment on screen so labels stay visible while zoomed in.
+  - Automatically falls back to the center tile when all segments are off-screen or the camera distance exceeds 400 meters.
+
+## v0.8.0 [released]
 
 - Added **Batch Placing** feature for blueprint folders ("Place all" button):
   - Spawns ghosts of all direct child blueprints side-by-side in a single cursor placement.

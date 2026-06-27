@@ -336,6 +336,10 @@
     "显示状态："
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "全选/取消全选"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "吞吐量工具快捷键"
   ],
@@ -424,12 +428,24 @@
     "显示空气污染情况"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "启用/禁用气体空气排放（烟囱/火炬）的世界污染率叠加。"
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
     "显示地面和水污染"
   ],
   [
+    "dtk.settings.pollution_show_ground.description",
+    "启用/禁用液态水排放（废水排放口）的世界污染率叠加。"
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "显示车辆和火车污染"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "启用/禁用车辆和机车的世界污染率叠加。"
   ],
   [
     "dtk.settings.pollution_show_ship.label",

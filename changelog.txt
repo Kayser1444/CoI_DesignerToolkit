@@ -1,3 +1,7 @@
+v0.8.1 | 2026-06-27
+* Added a master **Select / deselect all** checkbox to the Throughput Area Tool window to toggle the display state of all selected items in bulk
+* Added dynamic screen-space label tracking for long transports: throughput labels slide along conveyors and pipes to stay visible on screen, falling back to the center of the transport when zoomed out or far away
+
 v0.8.0 | 2026-06-27
 * Added **Batch Placing** feature for blueprint folders: place all blueprints in a folder side-by-side in a single cursor placement, automatically wrapping or cropping to stay within the game's placement limits
 * Added **Pollution Labels** overlay: floating world-space labels displaying average emissions (items/min) above factories, outfalls, vehicles, locomotives, and ships

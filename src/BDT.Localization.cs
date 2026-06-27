@@ -190,6 +190,8 @@ internal static class BdtLocalization
         Loc.Str("dtk.throughput.aoe_tool.global_header", "Batch settings", "Header for the bulk action settings section.");
     public static LocStr ThroughputAoEToolGlobalDisplay =
         Loc.Str("dtk.throughput.aoe_tool.global_display", "Display state: ", "Label for global display state setting.");
+    public static LocStr ThroughputAoEToolSelectAllLabel =
+        Loc.Str("dtk.throughput.aoe_tool.select_all_label", "Select / deselect all", "Label next to the master checkbox to toggle all items.");
     public static LocStr SettingsThroughputAoEToolHotkey =
         Loc.Str("dtk.settings.throughput_aoe_tool_hotkey.label", "Throughput tool hotkey", "Settings row label for throughput AoE tool toggle hotkey.");
     public static LocStr SettingsLayoutBoxModeHeading =

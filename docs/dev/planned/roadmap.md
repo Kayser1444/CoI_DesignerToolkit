@@ -7,11 +7,9 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 ### Blueprint & File Management
 - [ ] **Blueprint editor**: Inspect and edit blueprints directly in-game.
 - [ ] **Blueprint terrain designations**: Support copying, pasting, and blueprinting of terrain designations.
-- [ ] **Batch pasting**: Paste all blueprints inside a folder simultaneously.
 
 ### Entity & Transport Overlays
 - [ ] **Ground Pollution (Solid Waste)**: Create a new overlay category for ground pollution caused by solid waste dumping (garbage, toxic waste, slag, etc.), separating it from water pollution.
-- [ ] **Throughput AoE select/deselect all**: Add select all and deselect all controls to the Throughput Area Tool monitor list so designers can quickly toggle every selected entity/group before applying bulk display settings.
 
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.
@@ -20,6 +18,8 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 
 ## Completed Features
 
+- [x] **Throughput AoE Select/Deselect All** (v0.8.1) — Add a master select/deselect all checkbox and a divider to the Throughput Area Tool window, vertically aligned, and implement screen-space label tracking for long transports.
+- [x] **Batch Placing** (v0.8.0) — Place/paste all blueprints inside a folder simultaneously in a grid layout with automatic wrapping, cropping, and configurable spacing.
 - [x] **Pollution Overlay & Heat Map** (v0.8.0) — Visual 3D overlay and entity highlight glow displaying current pollution/exhaust output, with separate sub-toggles for air, water, ship, and vehicle emissions.
 - [x] **Rename Mod & Branding** (v0.3.0) — Renamed the mod to "Blueprint Designer's Toolkit" (BDT), updating the settings tab, thumbnail, and metadata.
 - [x] **Settings Icon Upgrade** (v0.2.0a) — Integrated with the shared settings window using the AutoHelpers icon handoff so tab icons render properly.

@@ -336,6 +336,10 @@
     "Estado de visualización: "
   ],
   [
+    "dtk.throughput.aoe_tool.select_all_label",
+    "Seleccionar/deseleccionar todo"
+  ],
+  [
     "dtk.settings.throughput_aoe_tool_hotkey.label",
     "Atajo de herramienta de rendimiento"
   ],
@@ -424,12 +428,24 @@
     "Mostrar la contaminación del aire"
   ],
   [
+    "dtk.settings.pollution_show_air.description",
+    "Activa/desactiva la superposición de la tasa de contaminación mundial para emisiones gaseosas al aire (chimeneas/bengalas)."
+  ],
+  [
     "dtk.settings.pollution_show_ground.label",
     "Mostrar la contaminación del suelo y del agua"
   ],
   [
+    "dtk.settings.pollution_show_ground.description",
+    "Habilita/deshabilita la superposición de la tasa de contaminación mundial para descargas de agua líquida (emisarios de aguas residuales)."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Mostrar la contaminación de vehículos y trenes"
+  ],
+  [
+    "dtk.settings.pollution_show_vehicle.description",
+    "Activa/desactiva la superposición de la tasa de contaminación mundial para vehículos y locomotoras."
   ],
   [
     "dtk.settings.pollution_show_ship.label",
