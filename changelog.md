@@ -4,6 +4,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.8.1 [packaged]
 
+- Changed default pollution settings so that both the pollution overlay and the heat map (glow) are off by default.
 - Added **Throughput AoE select/deselect all** checkbox to the Throughput Area Tool window:
   - Aligns vertically with the child list item checkboxes and features a horizontal separator below.
   - Toggles the display state of all selected items/groups in bulk.

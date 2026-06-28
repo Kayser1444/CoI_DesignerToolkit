@@ -1,4 +1,5 @@
-v0.8.1 | 2026-06-27
+v0.8.1 | 2026-06-28
+* Changed default pollution settings so that both the pollution overlay and the heat map (glow) are off by default
 * Added a master **Select / deselect all** checkbox to the Throughput Area Tool window to toggle the display state of all selected items in bulk
 * Added dynamic screen-space label tracking for long transports: throughput labels slide along conveyors and pipes to stay visible on screen, falling back to the center of the transport when zoomed out or far away
 

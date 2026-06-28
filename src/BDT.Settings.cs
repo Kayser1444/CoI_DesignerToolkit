@@ -152,7 +152,7 @@ internal static class DesignerToolkitSettings
     public static bool ThroughputColorblindMode { get; private set; } = false;
     public static bool ThroughputShowAsPercent { get; private set; } = false;
     public static bool PollutionOverlayEnabled { get; private set; } = false;
-    public static bool PollutionGlowEnabled { get; private set; } = true;
+    public static bool PollutionGlowEnabled { get; private set; } = false;
     public static int PollutionDaysToAverage { get; private set; } = 360;
     public static bool PollutionShowAir { get; private set; } = true;
     public static bool PollutionShowGround { get; private set; } = true;
@@ -381,7 +381,7 @@ internal static class DesignerToolkitSettings
         bool initialThroughputColorblindMode = config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
         bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
         bool initialPollutionOverlayEnabled = config.GetBool(POLLUTION_OVERLAY_ENABLED_KEY, false);
-        bool initialPollutionGlowEnabled = config.GetBool(POLLUTION_GLOW_ENABLED_KEY, true);
+        bool initialPollutionGlowEnabled = config.GetBool(POLLUTION_GLOW_ENABLED_KEY, false);
         int initialPollutionDaysToAverage = config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 360);
         bool initialPollutionShowAir = config.GetBool(POLLUTION_SHOW_AIR_KEY, true);
         bool initialPollutionShowGround = config.GetBool(POLLUTION_SHOW_GROUND_KEY, true);
@@ -1058,7 +1058,7 @@ internal static class DesignerToolkitSettings
             SetThroughputColorblindMode(false);
             SetThroughputShowAsPercent(false);
             SetPollutionOverlayEnabled(false);
-            SetPollutionGlowEnabled(true);
+            SetPollutionGlowEnabled(false);
             SetPollutionDaysToAverage(30);
             SetPollutionShowAir(true);
             SetPollutionShowGround(true);

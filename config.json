@@ -124,11 +124,11 @@
     "description": "Initial secondary undo placement hotkey. Leave empty to disable."
   },
   "pollution_overlay_enabled": {
-    "default": true,
+    "default": false,
     "description": "Initial pollution overlay visibility state. When enabled, configured pollution overlays will render in-world."
   },
   "pollution_glow_enabled": {
-    "default": true,
+    "default": false,
     "description": "Initial pollution glow visibility state."
   },
   "pollution_days_to_average": {
