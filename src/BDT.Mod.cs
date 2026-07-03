@@ -105,6 +105,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     {
         s_log.Info($"[BDT] Blueprint Designer's Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
 
+        ApplyAutoHelpersLocalization();
         RegisterAutoHelpersLocalizationLateApply(resolver);
 
         m_simLoopEvents = resolver.Resolve<ISimLoopEvents>();
