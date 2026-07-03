@@ -1,3 +1,7 @@
+v0.8.2 | Unreleased
+* Fixed: AutoHelpers localization is now applied before registering the Mod Settings tab, preventing duplicate English/localized settings tabs in localized languages
+* Updated the translated mod name across supported non-English languages
+
 v0.8.1 | 2026-06-28
 * Changed default pollution settings so that both the pollution overlay and the heat map (glow) are off by default
 * Added a master **Select / deselect all** checkbox to the Throughput Area Tool window to toggle the display state of all selected items in bulk
