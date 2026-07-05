@@ -110,7 +110,7 @@ internal class ThroughputAoETool : BaseEntityCursorInputController<IAreaSelectab
 
     private void OnGlobalInputUpdate(GameTime gameTime)
     {
-        if (DesignerToolkitSettings.ThroughputAoEToolHotkey.IsPressed())
+        if (HotkeysRegistry.IsPressed(HotkeysRegistry.ThroughputAoETool))
         {
             Context.InputMgr.ToggleController(this);
         }
