@@ -361,7 +361,7 @@
   ],
   [
     "dtk.settings.recycle_bin.heading",
-    "RECICLAGEM"
+    "LIXEIRA"
   ],
   [
     "dtk.settings.use_recycle_bin.label",
@@ -385,11 +385,11 @@
   ],
   [
     "dtk.settings.undo_hotkey.label",
-    "Desfazer tecla de atalho de posicionamento"
+    "Atalho para desfazer colocação"
   ],
   [
     "dtk.undo.success",
-    "Desfazer: canal revertido com sucesso."
+    "Desfazer: colocação revertida com sucesso."
   ],
   [
     "dtk.undo.no_action",
@@ -405,7 +405,7 @@
   ],
   [
     "dtk.settings.pollution_toggle.description",
-    "Ativa/desativa a sobreposição da taxa de poluição mundial. Exibe as médias dos dias configurados."
+    "Ativa/desativa a sobreposição da taxa de poluição no mundo. Exibe médias ao longo dos dias configurados. Esses valores incluem os efeitos das configurações de dificuldade do jogo e das tecnologias pesquisadas de redução da poluição."
   ],
   [
     "dtk.settings.pollution_glow.label",
@@ -413,15 +413,15 @@
   ],
   [
     "dtk.settings.pollution_glow.description",
-    "Lançar uma luz brilhante sobre entidades poluentes que correspondam à sua intensidade de emissão. Desative se estiver causando atraso."
+    "Projeta uma luz brilhante sobre entidades poluentes, correspondente à intensidade de emissão delas. Desative se estiver causando lentidão."
   ],
   [
     "dtk.settings.pollution_days.label",
-    "Período médio"
+    "Período de média"
   ],
   [
     "dtk.settings.pollution_days.description",
-    "Configura a janela deslizante em dias de jogo [0-360] para emissões médias. Definir como 0 desativa completamente a coleta de dados e patches."
+    "Configura a janela deslizante em dias de jogo [0-360] para calcular a média das emissões. Definir como 0 desativa completamente a coleta de dados e os patches."
   ],
   [
     "dtk.settings.pollution_show_air.label",
@@ -433,7 +433,7 @@
   ],
   [
     "dtk.settings.pollution_show_ground.label",
-    "Mostrar poluição do solo e da água"
+    "Mostrar poluição da água"
   ],
   [
     "dtk.settings.pollution_show_ground.description",
@@ -457,7 +457,7 @@
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
-    "Tecla de atalho de sobreposição de poluição"
+    "Atalho da sobreposição de poluição"
   ],
   [
     "dtk.settings.place_folder.heading",
@@ -465,18 +465,18 @@
   ],
   [
     "dtk.settings.blueprint_spacing.label",
-    "Espaçamento do projeto"
+    "Espaçamento da planta"
   ],
   [
     "dtk.settings.blueprint_spacing.description",
-    "Espaçamento (em blocos) entre plantas colocadas lado a lado durante a colagem em lote [0-12]."
+    "Espaçamento (em blocos) entre plantas colocadas lado a lado durante a colocação em lote [0-12]."
   ],
   [
     "dtk.blueprint.place_all.button",
-    "Coloque tudo"
+    "Colocar tudo"
   ],
   [
     "dtk.blueprint.place_all.tooltip",
-    "Coloque todos os projetos nesta pasta."
+    "Colocar todas as plantas nesta pasta."
   ]
 ]

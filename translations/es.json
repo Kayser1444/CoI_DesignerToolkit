@@ -385,11 +385,11 @@
   ],
   [
     "dtk.settings.undo_hotkey.label",
-    "Tecla de acceso directo Deshacer ubicación"
+    "Atajo para deshacer colocación"
   ],
   [
     "dtk.undo.success",
-    "Deshacer: la ubicación se revirtió correctamente."
+    "Deshacer: colocación revertida correctamente."
   ],
   [
     "dtk.undo.no_action",
@@ -405,7 +405,7 @@
   ],
   [
     "dtk.settings.pollution_toggle.description",
-    "Activa/desactiva la superposición de la tasa de contaminación en el mundo. Muestra promedios durante los días configurados."
+    "Activa/desactiva la superposición de tasa de contaminación en el mundo. Muestra promedios durante los días configurados. Estos valores incluyen los efectos de la dificultad del juego y las tecnologías investigadas de reducción de contaminación."
   ],
   [
     "dtk.settings.pollution_glow.label",
@@ -413,15 +413,15 @@
   ],
   [
     "dtk.settings.pollution_glow.description",
-    "Proyecte una luz brillante sobre entidades contaminantes que coincida con su intensidad de emisión. Desactívelo si causa retraso."
+    "Proyecta una luz brillante sobre las entidades contaminantes, acorde con su intensidad de emisión. Desactívalo si causa retrasos."
   ],
   [
     "dtk.settings.pollution_days.label",
-    "Período promedio"
+    "Período de promedio"
   ],
   [
     "dtk.settings.pollution_days.description",
-    "Configura la ventana deslizante en días de juego [0-360] para promediar las emisiones. Establecer esto en 0 deshabilita completamente la recopilación de datos y los parches."
+    "Configura la ventana deslizante en días de juego [0-360] para promediar las emisiones. Establecerlo en 0 deshabilita completamente la recopilación de datos y los parches."
   ],
   [
     "dtk.settings.pollution_show_air.label",
@@ -433,7 +433,7 @@
   ],
   [
     "dtk.settings.pollution_show_ground.label",
-    "Mostrar la contaminación del suelo y del agua"
+    "Mostrar contaminación del agua"
   ],
   [
     "dtk.settings.pollution_show_ground.description",
@@ -445,7 +445,7 @@
   ],
   [
     "dtk.settings.pollution_show_vehicle.description",
-    "Activa/desactiva la superposición de la tasa de contaminación mundial para vehículos y locomotoras."
+    "Activa/desactiva la superposición de tasa de contaminación en el mundo para vehículos y locomotoras."
   ],
   [
     "dtk.settings.pollution_show_ship.label",
@@ -457,7 +457,7 @@
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
-    "Tecla de acceso rápido de superposición de contaminación"
+    "Atajo de superposición de contaminación"
   ],
   [
     "dtk.settings.place_folder.heading",
@@ -469,7 +469,7 @@
   ],
   [
     "dtk.settings.blueprint_spacing.description",
-    "Espaciado (en mosaicos) entre planos colocados uno al lado del otro durante el pegado por lotes [0-12]."
+    "Espaciado (en casillas) entre planos colocados uno al lado del otro durante la colocación por lotes [0-12]."
   ],
   [
     "dtk.blueprint.place_all.button",
@@ -477,6 +477,6 @@
   ],
   [
     "dtk.blueprint.place_all.tooltip",
-    "Coloque todos los planos en esta carpeta."
+    "Colocar todos los planos en esta carpeta."
   ]
 ]

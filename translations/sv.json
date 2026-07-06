@@ -361,7 +361,7 @@
   ],
   [
     "dtk.settings.recycle_bin.heading",
-    "ÅTERVINDEN"
+    "PAPPERSKORG"
   ],
   [
     "dtk.settings.use_recycle_bin.label",
@@ -381,11 +381,11 @@
   ],
   [
     "dtk.settings.undo.heading",
-    "ÅNgra PLACERING"
+    "ÅNGRA PLACERING"
   ],
   [
     "dtk.settings.undo_hotkey.label",
-    "Ångra snabbknapp för placering"
+    "Snabbknapp för att ångra placering"
   ],
   [
     "dtk.undo.success",
@@ -397,7 +397,7 @@
   ],
   [
     "dtk.settings.pollution.heading",
-    "FÖRORENING OVERLAY"
+    "FÖRORENINGSÖVERLÄGG"
   ],
   [
     "dtk.settings.pollution_toggle.label",
@@ -405,7 +405,7 @@
   ],
   [
     "dtk.settings.pollution_toggle.description",
-    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen. Visar medelvärden över de konfigurerade dagarna."
+    "Aktiverar/inaktiverar överlägget för föroreningshastighet i världen. Visar medelvärden över de konfigurerade dagarna. Dessa värden inkluderar effekterna av spelets svårighetsinställningar och undersökta tekniker för att minska föroreningar."
   ],
   [
     "dtk.settings.pollution_glow.label",
@@ -413,15 +413,15 @@
   ],
   [
     "dtk.settings.pollution_glow.description",
-    "Kasta ett glödande ljus på förorenande enheter som matchar deras utsläppsintensitet. Inaktivera om det orsakar fördröjning."
+    "Kastar ett glödande ljus på förorenande enheter som matchar deras utsläppsintensitet. Inaktivera om det orsakar fördröjning."
   ],
   [
     "dtk.settings.pollution_days.label",
-    "Genomsnittlig period"
+    "Genomsnittsperiod"
   ],
   [
     "dtk.settings.pollution_days.description",
-    "Konfigurerar skjutfönstret i speldagar [0-360] till genomsnittliga utsläpp. Om du ställer in detta till 0 inaktiveras datainsamling och patchar helt."
+    "Konfigurerar det glidande fönstret i speldagar [0-360] för att beräkna genomsnittliga utsläpp. Om detta ställs in på 0 inaktiveras datainsamling och patchar helt."
   ],
   [
     "dtk.settings.pollution_show_air.label",
@@ -429,15 +429,15 @@
   ],
   [
     "dtk.settings.pollution_show_air.description",
-    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för gasformiga luftutsläpp (skorsten/backlor)."
+    "Aktiverar/inaktiverar överlägget för föroreningshastighet i världen för gasformiga luftutsläpp (skorstenar/facklor)."
   ],
   [
     "dtk.settings.pollution_show_ground.label",
-    "Visa mark- och vattenföroreningar"
+    "Visa vattenföroreningar"
   ],
   [
     "dtk.settings.pollution_show_ground.description",
-    "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för utsläpp av flytande vatten (avloppsvatten)."
+    "Aktiverar/inaktiverar överlägget för föroreningshastighet i världen för utsläpp av flytande vatten (avloppsutlopp)."
   ],
   [
     "dtk.settings.pollution_show_vehicle.label",
@@ -457,7 +457,7 @@
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
-    "Hotkey för föroreningar"
+    "Snabbknapp för föroreningsöverlägg"
   ],
   [
     "dtk.settings.place_folder.heading",
@@ -469,7 +469,7 @@
   ],
   [
     "dtk.settings.blueprint_spacing.description",
-    "Avstånd (i brickor) mellan ritningar placerade sida vid sida under batchklistring [0-12]."
+    "Avstånd (i rutor) mellan ritningar placerade sida vid sida vid batchplacering [0-12]."
   ],
   [
     "dtk.blueprint.place_all.button",
@@ -477,6 +477,6 @@
   ],
   [
     "dtk.blueprint.place_all.tooltip",
-    "Lägg alla ritningar i den här mappen."
+    "Placera alla ritningar i den här mappen."
   ]
 ]
