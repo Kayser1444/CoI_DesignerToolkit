@@ -405,7 +405,7 @@
   ],
   [
     "dtk.settings.pollution_toggle.description",
-    "启用/禁用世界内污染率叠加。显示配置天数的平均值。"
+    "启用/禁用世界内污染率叠加。显示配置天数内的平均值。这些值包括游戏难度设置和已研究污染减排技术的影响。"
   ],
   [
     "dtk.settings.pollution_glow.label",
@@ -413,7 +413,7 @@
   ],
   [
     "dtk.settings.pollution_glow.description",
-    "将发光的光投射到与其发射强度相匹配的污染实体上。如果造成延迟，请禁用。"
+    "向污染实体投射与其排放强度相匹配的发光光照。如果造成卡顿，请禁用。"
   ],
   [
     "dtk.settings.pollution_days.label",
@@ -421,7 +421,7 @@
   ],
   [
     "dtk.settings.pollution_days.description",
-    "将比赛日 [0-360] 中的滑动窗口配置为平均排放量。将其设置为 0 会完全禁用数据收集和修补。"
+    "配置用于平均排放量的滑动窗口（游戏天数 [0-360]）。将其设置为 0 会完全禁用数据收集和补丁。"
   ],
   [
     "dtk.settings.pollution_show_air.label",
@@ -433,7 +433,7 @@
   ],
   [
     "dtk.settings.pollution_show_ground.label",
-    "显示地面和水污染"
+    "显示水污染"
   ],
   [
     "dtk.settings.pollution_show_ground.description",
@@ -449,7 +449,7 @@
   ],
   [
     "dtk.settings.pollution_show_ship.label",
-    "显示船舶污染情况"
+    "显示船舶污染"
   ],
   [
     "dtk.settings.pollution_show_ship.description",
@@ -457,7 +457,7 @@
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
-    "污染覆盖热键"
+    "污染叠加快捷键"
   ],
   [
     "dtk.settings.place_folder.heading",
@@ -469,7 +469,7 @@
   ],
   [
     "dtk.settings.blueprint_spacing.description",
-    "批量粘贴期间并排放置的蓝图之间的间距（以图块为单位）[0-12]。"
+    "批量放置期间并排放置的蓝图之间的间距（以格为单位）[0-12]。"
   ],
   [
     "dtk.blueprint.place_all.button",
@@ -477,6 +477,6 @@
   ],
   [
     "dtk.blueprint.place_all.tooltip",
-    "将所有蓝图放入此文件夹中。"
+    "放置此文件夹中的所有蓝图。"
   ]
 ]

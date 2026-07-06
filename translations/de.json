@@ -361,11 +361,11 @@
   ],
   [
     "dtk.settings.recycle_bin.heading",
-    "RECYCLE-BEHÄLTER"
+    "PAPIERKORB"
   ],
   [
     "dtk.settings.use_recycle_bin.label",
-    "Verwenden Sie den Papierkorb"
+    "Papierkorb verwenden"
   ],
   [
     "dtk.settings.use_recycle_bin.description",
@@ -389,7 +389,7 @@
   ],
   [
     "dtk.undo.success",
-    "Rückgängig machen: Die Platzierung wurde erfolgreich wiederhergestellt."
+    "Rückgängig: Platzierung erfolgreich rückgängig gemacht."
   ],
   [
     "dtk.undo.no_action",
@@ -405,15 +405,15 @@
   ],
   [
     "dtk.settings.pollution_toggle.description",
-    "Aktiviert/deaktiviert die Überlagerung der Verschmutzungsrate in der Welt. Zeigt Durchschnittswerte über die konfigurierten Tage an."
+    "Aktiviert/deaktiviert die Verschmutzungsraten-Überlagerung in der Welt. Zeigt Durchschnittswerte über die konfigurierten Tage an. Diese Werte berücksichtigen die Auswirkungen der Schwierigkeitsgradeinstellungen und erforschter Technologien zur Verringerung der Umweltverschmutzung."
   ],
   [
     "dtk.settings.pollution_glow.label",
-    "Aktivieren Sie den Heatmap-Glüheffekt"
+    "Heatmap-Leuchteffekt aktivieren"
   ],
   [
     "dtk.settings.pollution_glow.description",
-    "Werfen Sie ein leuchtendes Licht auf umweltschädliche Einheiten, die ihrer Emissionsintensität entsprechen. Deaktivieren, wenn es zu Verzögerungen kommt."
+    "Wirft ein leuchtendes Licht auf verschmutzende Entitäten, passend zu ihrer Emissionsintensität. Deaktivieren, falls dies Verzögerungen verursacht."
   ],
   [
     "dtk.settings.pollution_days.label",
@@ -421,7 +421,7 @@
   ],
   [
     "dtk.settings.pollution_days.description",
-    "Konfiguriert das Schiebefenster in Spieltagen [0-360] auf durchschnittliche Emissionen. Wenn Sie diesen Wert auf 0 setzen, werden die Datenerfassung und Patches vollständig deaktiviert."
+    "Konfiguriert das gleitende Fenster in Spieltagen [0-360], über das Emissionen gemittelt werden. Wird dieser Wert auf 0 gesetzt, werden Datenerfassung und Patches vollständig deaktiviert."
   ],
   [
     "dtk.settings.pollution_show_air.label",
@@ -441,7 +441,7 @@
   ],
   [
     "dtk.settings.pollution_show_vehicle.label",
-    "Zeigen Sie die Verschmutzung von Fahrzeugen und Zügen an"
+    "Fahrzeug- und Zugverschmutzung anzeigen"
   ],
   [
     "dtk.settings.pollution_show_vehicle.description",
@@ -477,6 +477,6 @@
   ],
   [
     "dtk.blueprint.place_all.tooltip",
-    "Legen Sie alle Blaupausen in diesen Ordner."
+    "Alle Blaupausen in diesem Ordner platzieren."
   ]
 ]

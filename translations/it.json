@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "Tasto di scelta rapida della modalità casella di layout"
+    "Scorciatoia modalità riquadro layout"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -385,11 +385,11 @@
   ],
   [
     "dtk.settings.undo_hotkey.label",
-    "Annulla il tasto di scelta rapida per il posizionamento"
+    "Scorciatoia annulla posizionamento"
   ],
   [
     "dtk.undo.success",
-    "Annulla: posizionamento ripristinato correttamente."
+    "Annulla: posizionamento annullato correttamente."
   ],
   [
     "dtk.undo.no_action",
@@ -405,7 +405,7 @@
   ],
   [
     "dtk.settings.pollution_toggle.description",
-    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo. Visualizza le medie nei giorni configurati."
+    "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo. Mostra le medie sui giorni configurati. Questi valori includono gli effetti delle impostazioni di difficoltà del gioco e delle tecnologie ricercate per ridurre l’inquinamento."
   ],
   [
     "dtk.settings.pollution_glow.label",
@@ -413,7 +413,7 @@
   ],
   [
     "dtk.settings.pollution_glow.description",
-    "Proietta una luce brillante sulle entità inquinanti in base alla loro intensità di emissione. Disabilita se causa ritardo."
+    "Proietta una luce brillante sulle entità inquinanti in base alla loro intensità di emissione. Disabilita se causa rallentamenti."
   ],
   [
     "dtk.settings.pollution_days.label",
@@ -421,7 +421,7 @@
   ],
   [
     "dtk.settings.pollution_days.description",
-    "Configura la finestra scorrevole nei giorni di gioco [0-360] sulle emissioni medie. Impostandolo su 0 si disabilita completamente la raccolta dati e le patch."
+    "Configura la finestra scorrevole in giorni di gioco [0-360] su cui mediare le emissioni. Impostarlo su 0 disabilita completamente la raccolta dati e le patch."
   ],
   [
     "dtk.settings.pollution_show_air.label",
@@ -433,7 +433,7 @@
   ],
   [
     "dtk.settings.pollution_show_ground.label",
-    "Mostra l'inquinamento del suolo e dell'acqua"
+    "Mostra inquinamento dell’acqua"
   ],
   [
     "dtk.settings.pollution_show_ground.description",
@@ -457,11 +457,11 @@
   ],
   [
     "dtk.settings.pollution_toggle_hotkey.label",
-    "Tasto di scelta rapida in sovrapposizione sull'inquinamento"
+    "Scorciatoia sovrapposizione inquinamento"
   ],
   [
     "dtk.settings.place_folder.heading",
-    "POSIZIONARE CARTELLA"
+    "POSIZIONA CARTELLA"
   ],
   [
     "dtk.settings.blueprint_spacing.label",
@@ -469,7 +469,7 @@
   ],
   [
     "dtk.settings.blueprint_spacing.description",
-    "Spaziatura (in tessere) tra i progetti affiancati durante l'incollaggio batch [0-12]."
+    "Spaziatura (in caselle) tra i progetti affiancati durante il posizionamento in batch [0-12]."
   ],
   [
     "dtk.blueprint.place_all.button",
@@ -477,6 +477,6 @@
   ],
   [
     "dtk.blueprint.place_all.tooltip",
-    "Metti tutti i progetti in questa cartella."
+    "Posiziona tutti i progetti in questa cartella."
   ]
 ]
