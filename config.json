@@ -32,30 +32,6 @@
     "default": true,
     "description": "Initial state for legacy belt configurations (Update 1 style transport construction that allows turning and inclining/declining on the same tile)."
   },
-  "transport_cleanup_hotkey_primary": {
-    "default": "LeftAlt + Delete",
-    "description": "Initial primary transport cleanup hotkey for saves without BDT settings state. Leave empty to disable the primary binding."
-  },
-  "transport_cleanup_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary transport cleanup hotkey for saves without BDT settings state. Leave empty to disable the secondary binding."
-  },
-  "height_filter_show_layer_hotkey_primary": {
-    "default": "PageUp",
-    "description": "Initial primary height filter show layer hotkey. Leave empty to disable the primary binding."
-  },
-  "height_filter_show_layer_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary height filter show layer hotkey. Leave empty to disable the secondary binding."
-  },
-  "height_filter_hide_layer_hotkey_primary": {
-    "default": "PageDown",
-    "description": "Initial primary height filter hide layer hotkey. Leave empty to disable the primary binding."
-  },
-  "height_filter_hide_layer_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary height filter hide layer hotkey. Leave empty to disable the secondary binding."
-  },
   "throughput_overlay_enabled": {
     "default": false,
     "description": "Initial throughput overlay visibility state for saves without BDT settings state. When enabled, configured throughput overlays will render in-world."
@@ -63,30 +39,6 @@
   "throughput_glow_enabled": {
     "default": true,
     "description": "Initial throughput glow visibility state for saves without BDT settings state."
-  },
-  "throughput_overlay_toggle_hotkey_primary": {
-    "default": "LeftAlt + T",
-    "description": "Initial primary throughput overlay toggle hotkey. Leave empty to disable."
-  },
-  "throughput_overlay_toggle_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary throughput overlay toggle hotkey. Leave empty to disable."
-  },
-  "throughput_aoe_tool_hotkey_primary": {
-    "default": "LeftShift + LeftAlt + T",
-    "description": "Initial primary throughput AoE tool hotkey. Leave empty to disable."
-  },
-  "throughput_aoe_tool_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary throughput AoE tool hotkey. Leave empty to disable."
-  },
-  "layout_box_mode_toggle_hotkey_primary": {
-    "default": "LeftAlt + B",
-    "description": "Initial primary layout box mode toggle hotkey. Leave empty to disable."
-  },
-  "layout_box_mode_toggle_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary layout box mode toggle hotkey. Leave empty to disable."
   },
   "throughput_heatmap_mode": {
     "default": 2,
@@ -114,14 +66,6 @@
   "recycle_bin_folder_name": {
     "default": "Recycle Bin",
     "description": "Initial folder name for the blueprint recycle bin."
-  },
-  "undo_hotkey_primary": {
-    "default": "LeftControl + Z",
-    "description": "Initial primary undo placement hotkey. Leave empty to disable."
-  },
-  "undo_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary undo placement hotkey. Leave empty to disable."
   },
   "pollution_overlay_enabled": {
     "default": false,
@@ -151,14 +95,6 @@
   "pollution_show_ship": {
     "default": true,
     "description": "Initial state for showing ship pollution."
-  },
-  "pollution_overlay_toggle_hotkey_primary": {
-    "default": "LeftAlt + P",
-    "description": "Initial primary pollution overlay toggle hotkey. Leave empty to disable."
-  },
-  "pollution_overlay_toggle_hotkey_secondary": {
-    "default": "",
-    "description": "Initial secondary pollution overlay toggle hotkey. Leave empty to disable."
   },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
