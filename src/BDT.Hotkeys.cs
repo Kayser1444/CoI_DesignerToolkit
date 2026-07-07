@@ -405,14 +405,14 @@ internal sealed class BdtKeyBindingUpdateHost : MonoBehaviour
 
         BdtHotkey[] activeHotkeys = new[]
         {
-            DesignerToolkitSettings.TransportCleanupHotkey,
-            DesignerToolkitSettings.HeightFilterShowLayerHotkey,
-            DesignerToolkitSettings.HeightFilterHideLayerHotkey,
-            DesignerToolkitSettings.ThroughputOverlayToggleHotkey,
-            DesignerToolkitSettings.ThroughputAoEToolHotkey,
-            DesignerToolkitSettings.PollutionOverlayToggleHotkey,
-//             DesignerToolkitSettings.LayoutBoxModeToggleHotkey
-            DesignerToolkitSettings.UndoHotkey
+            new BdtHotkey(HotkeysRegistry.TransportCleanup),
+            new BdtHotkey(HotkeysRegistry.HeightFilterShowLayer),
+            new BdtHotkey(HotkeysRegistry.HeightFilterHideLayer),
+            new BdtHotkey(HotkeysRegistry.ThroughputOverlayToggle),
+            new BdtHotkey(HotkeysRegistry.ThroughputAoETool),
+            new BdtHotkey(HotkeysRegistry.PollutionOverlayToggle),
+            new BdtHotkey(HotkeysRegistry.LayoutBoxModeToggle),
+            new BdtHotkey(HotkeysRegistry.UndoPlacement)
         };
 
         foreach (var hotkey in activeHotkeys)

@@ -787,7 +787,7 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
 
     private void Update()
     {
-        if (DesignerToolkitSettings.ThroughputOverlayToggleHotkey.IsPressed())
+        if (HotkeysRegistry.IsPressed(HotkeysRegistry.ThroughputOverlayToggle))
         {
             DesignerToolkitSettings.SetThroughputOverlayEnabled(!DesignerToolkitSettings.ThroughputOverlayEnabled);
         }

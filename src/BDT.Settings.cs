@@ -24,6 +24,7 @@ using CoI.AutoHelpers.Settings;
 using UnityEngine;
 using Mafi.Unity.Ui.Library;
 using Mafi.Unity.UiToolkit;
+using Mafi.Unity.InputControl;
 
 namespace CoIDesignerToolkit;
 
@@ -568,33 +569,13 @@ internal static class DesignerToolkitSettings
             .OnValueChanged((level, _) => SetHeightFilterMaxVisibleLevel(level));
         root.Add(heightFilterDropdown);
 
-        BdtKeyBindingField showLayerPrimaryField;
-        BdtKeyBindingField showLayerSecondaryField;
-        root.Add(BuildHotkeyRow(
+        root.Add(BuildVanillaHotkeyRow(
             BdtLocalization.SettingsHeightFilterShowHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => HeightFilterShowLayerHotkey,
-            hotkey =>
-            {
-                HeightFilterShowLayerHotkey = hotkey;
-                SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out showLayerPrimaryField,
-            out showLayerSecondaryField));
+            HotkeysRegistry.HeightFilterShowLayer));
 
-        BdtKeyBindingField hideLayerPrimaryField;
-        BdtKeyBindingField hideLayerSecondaryField;
-        root.Add(BuildHotkeyRow(
+        root.Add(BuildVanillaHotkeyRow(
             BdtLocalization.SettingsHeightFilterHideHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => HeightFilterHideLayerHotkey,
-            hotkey =>
-            {
-                HeightFilterHideLayerHotkey = hotkey;
-                SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out hideLayerPrimaryField,
-            out hideLayerSecondaryField));
+            HotkeysRegistry.HeightFilterHideLayer));
 
         root.Add(new Title(BdtLocalization.SettingsThroughputHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -644,33 +625,13 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetThroughputShowAsPercent);
         root.Add(showAsPercentToggle);
 
-        BdtKeyBindingField throughputTogglePrimaryField;
-        BdtKeyBindingField throughputToggleSecondaryField;
-        root.Add(BuildHotkeyRow(
+        root.Add(BuildVanillaHotkeyRow(
             BdtLocalization.SettingsThroughputToggleHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => ThroughputOverlayToggleHotkey,
-            hotkey =>
-            {
-                ThroughputOverlayToggleHotkey = hotkey;
-                SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out throughputTogglePrimaryField,
-            out throughputToggleSecondaryField));
+            HotkeysRegistry.ThroughputOverlayToggle));
 
-        BdtKeyBindingField throughputAoEToolPrimaryField;
-        BdtKeyBindingField throughputAoEToolSecondaryField;
-        root.Add(BuildHotkeyRow(
+        root.Add(BuildVanillaHotkeyRow(
             BdtLocalization.SettingsThroughputAoEToolHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => ThroughputAoEToolHotkey,
-            hotkey =>
-            {
-                ThroughputAoEToolHotkey = hotkey;
-                SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out throughputAoEToolPrimaryField,
-            out throughputAoEToolSecondaryField));
+            HotkeysRegistry.ThroughputAoETool));
 
         root.Add(new Title(BdtLocalization.SettingsPollutionHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -778,20 +739,9 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetPollutionShowShip);
         root.Add(showShipToggle);
 
-        // --- HOTKEY ---
-        BdtKeyBindingField pollutionTogglePrimaryField;
-        BdtKeyBindingField pollutionToggleSecondaryField;
-        root.Add(BuildHotkeyRow(
+        root.Add(BuildVanillaHotkeyRow(
             BdtLocalization.SettingsPollutionToggleHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => PollutionOverlayToggleHotkey,
-            hotkey =>
-            {
-                PollutionOverlayToggleHotkey = hotkey;
-                SaveGlobalHotkey(POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out pollutionTogglePrimaryField,
-            out pollutionToggleSecondaryField));
+            HotkeysRegistry.PollutionOverlayToggle));
 
         root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -805,19 +755,7 @@ internal static class DesignerToolkitSettings
 
         var layoutBoxRow = new Row().AlignItemsCenter();
         layoutBoxRow.Add(layoutBoxModeToggle);
-
-        if (!HotkeysRegistry.LayoutBoxModeToggle.Primary.IsEmpty)
-        {
-            var primaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {HotkeysRegistry.LayoutBoxModeToggle.Primary.ToString()} </b></size></color></mark>");
-            var badgeLabel = new Label(primaryText).MarginLeft(6.pt());
-            layoutBoxRow.Add(badgeLabel);
-        }
-        if (!HotkeysRegistry.LayoutBoxModeToggle.Secondary.IsEmpty)
-        {
-            var secondaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {HotkeysRegistry.LayoutBoxModeToggle.Secondary.ToString()} </b></size></color></mark>");
-            var badgeLabel = new Label(secondaryText).MarginLeft(4.pt());
-            layoutBoxRow.Add(badgeLabel);
-        }
+        AddHotkeyBadges(layoutBoxRow, HotkeysRegistry.LayoutBoxModeToggle);
 
         root.Add(layoutBoxRow);
 
@@ -931,19 +869,9 @@ internal static class DesignerToolkitSettings
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
-        BdtKeyBindingField undoPrimaryField;
-        BdtKeyBindingField undoSecondaryField;
-        root.Add(BuildHotkeyRow(
+        root.Add(BuildVanillaHotkeyRow(
             BdtLocalization.SettingsUndoHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => UndoHotkey,
-            hotkey =>
-            {
-                UndoHotkey = hotkey;
-                SaveGlobalHotkey(UNDO_HOTKEY_PRIMARY_KEY, UNDO_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out undoPrimaryField,
-            out undoSecondaryField));
+            HotkeysRegistry.UndoPlacement));
 
         root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -960,19 +888,9 @@ internal static class DesignerToolkitSettings
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
-        BdtKeyBindingField transportCleanupPrimaryField;
-        BdtKeyBindingField transportCleanupSecondaryField;
-        root.Add(BuildHotkeyRow(
+        root.Add(BuildVanillaHotkeyRow(
             BdtLocalization.SettingsTransportCleanupHotkey.AsFormatted,
-            BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-            () => TransportCleanupHotkey,
-            hotkey =>
-            {
-                TransportCleanupHotkey = hotkey;
-                SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, hotkey);
-            },
-            out transportCleanupPrimaryField,
-            out transportCleanupSecondaryField));
+            HotkeysRegistry.TransportCleanup));
 
         root.Add(BuildFooter(() =>
         {
@@ -999,25 +917,36 @@ internal static class DesignerToolkitSettings
             recycleBinFolderNameField.Text(RecycleBinFolderName);
             recycleBinFolderNameField.MarkAsError(false);
             spacingInput.Text(BlueprintSpacing.ToString());
-            showLayerPrimaryField.Refresh();
-            showLayerSecondaryField.Refresh();
-            hideLayerPrimaryField.Refresh();
-            hideLayerSecondaryField.Refresh();
-            throughputTogglePrimaryField.Refresh();
-            throughputToggleSecondaryField.Refresh();
-            throughputAoEToolPrimaryField.Refresh();
-            throughputAoEToolSecondaryField.Refresh();
 //             layoutBoxModePrimaryField.Refresh();
 //             layoutBoxModeSecondaryField.Refresh();
-            pollutionTogglePrimaryField.Refresh();
-            pollutionToggleSecondaryField.Refresh();
-            undoPrimaryField.Refresh();
-            undoSecondaryField.Refresh();
-            transportCleanupPrimaryField.Refresh();
-            transportCleanupSecondaryField.Refresh();
         }));
 
         return root;
+    }
+
+    private static Row BuildVanillaHotkeyRow(LocStrFormatted label, KeyBindings bindings)
+    {
+        var row = new Row().AlignItemsCenter();
+        row.Add(new Label(label)
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
+            .NoShrink()
+            .Width(SETTINGS_LABEL_WIDTH));
+        AddHotkeyBadges(row, bindings);
+        return row;
+    }
+
+    private static void AddHotkeyBadges(Row row, KeyBindings bindings)
+    {
+        if (!bindings.Primary.IsEmpty)
+        {
+            var primaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {bindings.Primary.ToString()} </b></size></color></mark>");
+            row.Add(new Label(primaryText).MarginLeft(6.pt()));
+        }
+        if (!bindings.Secondary.IsEmpty)
+        {
+            var secondaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {bindings.Secondary.ToString()} </b></size></color></mark>");
+            row.Add(new Label(secondaryText).MarginLeft(4.pt()));
+        }
     }
 
     private static Row BuildHotkeyRow(

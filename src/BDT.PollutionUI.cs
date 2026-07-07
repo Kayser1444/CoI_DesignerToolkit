@@ -416,7 +416,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
 
     private void Update()
     {
-        if (DesignerToolkitSettings.PollutionOverlayToggleHotkey.IsPressed())
+        if (HotkeysRegistry.IsPressed(HotkeysRegistry.PollutionOverlayToggle))
         {
             DesignerToolkitSettings.SetPollutionOverlayEnabled(!DesignerToolkitSettings.PollutionOverlayEnabled);
         }

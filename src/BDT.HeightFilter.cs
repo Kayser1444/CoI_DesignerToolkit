@@ -198,7 +198,7 @@ namespace CoIDesignerToolkit
 
         private void OnInputUpdate(GameTime _)
         {
-            if (DesignerToolkitSettings.HeightFilterShowLayerHotkey.IsPressed())
+            if (HotkeysRegistry.IsPressed(HotkeysRegistry.HeightFilterShowLayer))
             {
                 int current = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
                 if (current < 6)
@@ -207,7 +207,7 @@ namespace CoIDesignerToolkit
                     s_log.Info($"Show layer shortcut pressed. Max visible level set to: {DesignerToolkitSettings.HeightFilterMaxVisibleLevel}");
                 }
             }
-            else if (DesignerToolkitSettings.HeightFilterHideLayerHotkey.IsPressed())
+            else if (HotkeysRegistry.IsPressed(HotkeysRegistry.HeightFilterHideLayer))
             {
                 int current = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
                 if (current > 0)
