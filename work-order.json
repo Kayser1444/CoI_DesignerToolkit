@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 120,
+  "total_keys": 125,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -10,17 +10,6 @@
     "dtk.settings.number_format.auto"
   ],
   "keys": {
-    "dtk.settings.global_hotkey.description": {
-      "en": "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.",
-      "context": "Settings row description for global hotkeys.",
-      "de": "Diese Tastenkombination ist im Steuersystem des Spiels registriert und kann in den Vanilla-Einstellungen | konfiguriert werden Menü „Steuerung“.",
-      "es": "Esta combinación de teclas está registrada en el sistema de controles del juego y se puede configurar en Configuración básica | Menú de controles.",
-      "it": "Questa combinazione di tasti è registrata con il sistema di controllo del gioco e può essere configurata nelle Impostazioni Vanilla | Menù controlli.",
-      "pt": "Este atalho de teclado é registrado no sistema de controles do jogo e pode ser configurado em Configurações | Menu de controles.",
-      "ru": "Эта комбинация клавиш зарегистрирована в системе управления игрой и может быть настроена в стандартных настройках | Меню управления.",
-      "sv": "Denna nyckelbindning är registrerad med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn.",
-      "zh": "此按键绑定已在游戏的控制系统中注册，并且可以在香草设置 | 中进行配置。控制菜单。"
-    },
     "dtk.settings.layout_box.heading": {
       "en": "LAYOUT",
       "context": "Settings section heading for layout box mode.",
@@ -33,5 +22,5 @@
       "zh": "布局"
     }
   },
-  "keys_needing_translation": 2
+  "keys_needing_translation": 1
 }

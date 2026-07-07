@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "Разместить все чертежи в этой папке."
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "Все"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "Эти сочетания клавиш зарегистрированы в системе управления игрой и могут быть настроены в стандартных настройках | Меню управления."
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "Нет"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "Относительная"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "Пропускная способность"
   ]
 ]

@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "放置此文件夹中的所有蓝图。"
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "全部"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "这些快捷键已注册到游戏的控制系统中，可以在原版 设置 | 控制 菜单中进行配置。"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "无"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "相对"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "容量"
   ]
 ]

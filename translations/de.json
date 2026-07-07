@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "Alle Blaupausen in diesem Ordner platzieren."
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "Alle"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "Diese Tastenkombinationen werden im Steuersystem des Spiels registriert und können im originalen Menü Einstellungen | Steuerung konfiguriert werden."
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "Keine"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "Relativ"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "Kapazität"
   ]
 ]

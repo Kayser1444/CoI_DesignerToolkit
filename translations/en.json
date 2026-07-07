@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "Place all blueprints in this folder."
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "All"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "These keybinds are registered with the game's controls system and can be configured in the vanilla Settings | Controls menu."
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "None"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "Relative"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "Capacity"
   ]
 ]

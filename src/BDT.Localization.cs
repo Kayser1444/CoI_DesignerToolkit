@@ -266,5 +266,20 @@ internal static class BdtLocalization
         Loc.Str("dtk.blueprint.place_all.button", "Place all", "Button label for placing ghosts of all designs in the folder.");
     public static LocStr PlaceAllTooltip =
         Loc.Str("dtk.blueprint.place_all.tooltip", "Place all blueprints in this folder.", "Tooltip for placing all blueprints in a folder.");
+
+    public static LocStr SettingsHeightFilterAll =
+        Loc.Str("dtk.settings.height_filter.all", "All", "Dropdown option for all height filter layers.");
+    
+    public static LocStr SettingsHeightFilterControlsTooltip =
+        Loc.Str("dtk.settings.height_filter.controls_tooltip", "These keybinds are registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Tooltip noting that height filter keybinds are configured in vanilla Settings | Controls.");
+
+    public static LocStr SettingsThroughputHeatmapNone =
+        Loc.Str("dtk.settings.throughput_heatmap.none", "None", "Dropdown option for no heatmap.");
+
+    public static LocStr SettingsThroughputHeatmapRelative =
+        Loc.Str("dtk.settings.throughput_heatmap.relative", "Relative", "Dropdown option for relative heatmap.");
+
+    public static LocStr SettingsThroughputHeatmapCapacity =
+        Loc.Str("dtk.settings.throughput_heatmap.capacity", "Capacity", "Dropdown option for capacity heatmap.");
 }
 

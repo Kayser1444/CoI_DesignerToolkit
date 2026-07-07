@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "Posiziona tutti i progetti in questa cartella."
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "Tutti"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "Queste combinazioni di tasti sono registrate con il sistema di controllo del gioco e possono essere configurate nelle Impostazioni Vanilla | Menù controlli."
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "Nessuno"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "Relativo"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "Capacità"
   ]
 ]

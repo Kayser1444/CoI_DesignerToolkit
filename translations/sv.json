@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "Placera alla ritningar i den här mappen."
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "Alla"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "Dessa nyckelbindningar är registrerade med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn."
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "Ingen"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "Relativ"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "Kapacitet"
   ]
 ]

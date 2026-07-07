@@ -457,7 +457,7 @@ internal static class DesignerToolkitSettings
 
         Dropdown<int> heightFilterDropdown = new Dropdown<int>(HeightFilterDropdownOption)
             .Label(BdtLocalization.SettingsHeightFilterMaxVisible.AsFormatted)
-            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsHeightFilterMaxVisibleDescription.TranslatedString + "\n\nThe show/hide layer keybinds can be configured in the vanilla Settings | Controls menu."))
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsHeightFilterMaxVisibleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsHeightFilterControlsTooltip.TranslatedString))
             .LabelWidth(SETTINGS_LABEL_WIDTH)
             .SetOptions(0, 1, 2, 3, 4, 5, 6)
             .SetValue(HeightFilterMaxVisibleLevel)
@@ -470,7 +470,7 @@ internal static class DesignerToolkitSettings
 
         Toggle throughputOverlayToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsThroughputToggle.AsFormatted)
-            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsThroughputToggleDescription.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsThroughputToggleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
             .Value(ThroughputOverlayEnabled)
             .OnValueChanged(SetThroughputOverlayEnabled);
 
@@ -522,7 +522,7 @@ internal static class DesignerToolkitSettings
 
         Toggle pollutionOverlayToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionToggle.AsFormatted)
-            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsPollutionToggleDescription.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsPollutionToggleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
             .Value(PollutionOverlayEnabled)
             .OnValueChanged(SetPollutionOverlayEnabled);
 
@@ -632,7 +632,7 @@ internal static class DesignerToolkitSettings
 
         Toggle layoutBoxModeToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsLayoutBoxModeToggle.AsFormatted)
-            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsLayoutBoxModeDescription.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsLayoutBoxModeDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
             .Value(LayoutBoxModeEnabled)
             .OnValueChanged(SetLayoutBoxModeEnabled);
 
@@ -791,16 +791,7 @@ internal static class DesignerToolkitSettings
         return root;
     }
 
-    private static Row BuildVanillaHotkeyRow(LocStrFormatted label, KeyBindings bindings)
-    {
-        var row = new Row().AlignItemsCenter();
-        row.Add(new Label(label)
-            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
-            .NoShrink()
-            .Width(SETTINGS_LABEL_WIDTH));
-        AddHotkeyBadges(row, bindings);
-        return row;
-    }
+
 
     private static void AddHotkeyBadges(Row row, KeyBindings bindings)
     {
@@ -1107,7 +1098,7 @@ internal static class DesignerToolkitSettings
 
     private static UiComponent HeightFilterDropdownOption(int level, int index, bool isInDropdown)
     {
-        string labelText = level == 6 ? "All" : level.ToString();
+        string labelText = level == 6 ? BdtLocalization.SettingsHeightFilterAll.TranslatedString : level.ToString();
         return new Label(labelText.AsLoc());
     }
 
@@ -1337,11 +1328,11 @@ internal static class DesignerToolkitSettings
         switch (mode)
         {
             case ThroughputHeatmapMode.Relative:
-                return "Relative".AsLoc();
+                return BdtLocalization.SettingsThroughputHeatmapRelative.AsFormatted;
             case ThroughputHeatmapMode.Capacity:
-                return "Capacity".AsLoc();
+                return BdtLocalization.SettingsThroughputHeatmapCapacity.AsFormatted;
             default:
-                return "None".AsLoc();
+                return BdtLocalization.SettingsThroughputHeatmapNone.AsFormatted;
         }
     }
 

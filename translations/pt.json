@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "Colocar todas as plantas nesta pasta."
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "Todos"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "Esses atalhos de teclado são registrados no sistema de controles do jogo e podem ser configurados em Configurações | Menu de controles."
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "Nenhum"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "Relativo"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "Capacidade"
   ]
 ]

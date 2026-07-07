@@ -478,5 +478,25 @@
   [
     "dtk.blueprint.place_all.tooltip",
     "Colocar todos los planos en esta carpeta."
+  ],
+  [
+    "dtk.settings.height_filter.all",
+    "Todos"
+  ],
+  [
+    "dtk.settings.height_filter.controls_tooltip",
+    "Estas combinaciones de teclas están registradas en el sistema de controles del juego y se pueden configurar en Configuración básica | Menú de controles."
+  ],
+  [
+    "dtk.settings.throughput_heatmap.none",
+    "Ninguno"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.relative",
+    "Relativo"
+  ],
+  [
+    "dtk.settings.throughput_heatmap.capacity",
+    "Capacidad"
   ]
 ]
