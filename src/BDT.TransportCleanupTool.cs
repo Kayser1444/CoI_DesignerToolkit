@@ -104,7 +104,7 @@ internal sealed class TransportCleanupTool : IDisposable
             return;
         }
 
-        if (DesignerToolkitSettings.TransportCleanupHotkey.IsPressed())
+        if (HotkeysRegistry.IsPressed(HotkeysRegistry.TransportCleanup))
         {
             Activate();
             return;

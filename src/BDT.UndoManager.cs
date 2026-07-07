@@ -233,7 +233,7 @@ internal sealed class UndoManager : IDisposable
 
     private void OnInputUpdate(GameTime _)
     {
-        if (DesignerToolkitSettings.UndoHotkey.IsPressed())
+        if (HotkeysRegistry.IsPressed(HotkeysRegistry.UndoPlacement))
         {
             lock (m_lock)
             {
