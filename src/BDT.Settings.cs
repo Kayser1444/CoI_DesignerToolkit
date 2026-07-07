@@ -795,9 +795,13 @@ internal static class DesignerToolkitSettings
 
     private static void AddHotkeyBadges(Row row, KeyBindings bindings)
     {
-        if (!bindings.IsEmpty)
+        if (!bindings.Primary.IsEmpty)
         {
-            row.Add(new KeyBindUi().SetKeys(bindings).MarginLeft(6.pt()));
+            row.Add(new KeyBindUi().SetKeys(bindings.Primary.Keys.ToArray()).MarginLeft(6.pt()));
+        }
+        if (!bindings.Secondary.IsEmpty)
+        {
+            row.Add(new KeyBindUi().SetKeys(bindings.Secondary.Keys.ToArray()).MarginLeft(4.pt()));
         }
     }
 
