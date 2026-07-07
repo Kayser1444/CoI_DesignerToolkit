@@ -1,7 +1,10 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.2 [packaged]
+## v0.8.3 [unreleased]
+
+
+## v0.8.2 [released]
 
 - Added audible feedback when activating or toggling mod tools/overlays via hotkeys:
   - Fetched and initialized the vanilla `ButtonClick.prefab` UI sound from `AudioDb`.
