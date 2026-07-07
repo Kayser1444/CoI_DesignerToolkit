@@ -498,5 +498,9 @@
   [
     "dtk.settings.throughput_heatmap.capacity",
     "容量"
+  ],
+  [
+    "dtk.settings.hotkey.or",
+    "或者"
   ]
 ]

@@ -799,6 +799,12 @@ internal static class DesignerToolkitSettings
         {
             row.Add(new KeyBindUi().SetKeys(bindings.Primary.Keys.ToArray()).MarginLeft(6.pt()));
         }
+        if (!bindings.Primary.IsEmpty && !bindings.Secondary.IsEmpty)
+        {
+            row.Add(new Label(BdtLocalization.SettingsHotkeyOr.AsFormatted)
+                .Color(Mafi.Unity.UiToolkit.Theme.InactiveColor)
+                .MarginLeft(4.pt()));
+        }
         if (!bindings.Secondary.IsEmpty)
         {
             row.Add(new KeyBindUi().SetKeys(bindings.Secondary.Keys.ToArray()).MarginLeft(4.pt()));

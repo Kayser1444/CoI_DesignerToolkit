@@ -498,5 +498,9 @@
   [
     "dtk.settings.throughput_heatmap.capacity",
     "Пропускная способность"
+  ],
+  [
+    "dtk.settings.hotkey.or",
+    "или"
   ]
 ]

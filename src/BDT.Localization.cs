@@ -281,5 +281,8 @@ internal static class BdtLocalization
 
     public static LocStr SettingsThroughputHeatmapCapacity =
         Loc.Str("dtk.settings.throughput_heatmap.capacity", "Capacity", "Dropdown option for capacity heatmap.");
+
+    public static LocStr SettingsHotkeyOr =
+        Loc.Str("dtk.settings.hotkey.or", "or", "Word 'or' separating hotkeys.");
 }
 

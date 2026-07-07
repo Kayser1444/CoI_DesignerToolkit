@@ -498,5 +498,9 @@
   [
     "dtk.settings.throughput_heatmap.capacity",
     "Capacity"
+  ],
+  [
+    "dtk.settings.hotkey.or",
+    "or"
   ]
 ]
