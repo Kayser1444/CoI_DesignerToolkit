@@ -97,7 +97,7 @@
   ],
   [
     "dtk.rate_limit.items_per_min",
-    "items/min"
+    "st/min"
   ],
   [
     "dtk.settings.transport_construction.heading",
