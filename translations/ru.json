@@ -349,7 +349,7 @@
   ],
   [
     "dtk.settings.layout_box.label",
-    "Режим рамки макета"
+    "Переключить наложение рамки макета"
   ],
   [
     "dtk.settings.layout_box.description",
@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "Горячая клавиша режима рамки макета"
+    "Переключить горячую клавишу наложения поля макета"
   ],
   [
     "dtk.settings.recycle_bin.heading",

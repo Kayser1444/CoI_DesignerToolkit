@@ -349,7 +349,7 @@
   ],
   [
     "dtk.settings.layout_box.label",
-    "Modalità casella di layout"
+    "Attiva/disattiva la sovrapposizione della casella di layout"
   ],
   [
     "dtk.settings.layout_box.description",
@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "Scorciatoia modalità riquadro layout"
+    "Attiva/disattiva il tasto di scelta rapida sovrapposizione della casella di layout"
   ],
   [
     "dtk.settings.recycle_bin.heading",

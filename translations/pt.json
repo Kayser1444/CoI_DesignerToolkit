@@ -349,7 +349,7 @@
   ],
   [
     "dtk.settings.layout_box.label",
-    "Modo de caixa de layout"
+    "Alternar sobreposição da caixa de layout"
   ],
   [
     "dtk.settings.layout_box.description",
@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "Tecla de atalho do modo de caixa de layout"
+    "Alternar tecla de atalho de sobreposição da caixa de layout"
   ],
   [
     "dtk.settings.recycle_bin.heading",

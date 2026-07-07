@@ -349,7 +349,7 @@
   ],
   [
     "dtk.settings.layout_box.label",
-    "布局框模式"
+    "切换布局框叠加层"
   ],
   [
     "dtk.settings.layout_box.description",
@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "布局框模式热键"
+    "切换布局框叠加层热键"
   ],
   [
     "dtk.settings.recycle_bin.heading",

@@ -349,7 +349,7 @@
   ],
   [
     "dtk.settings.layout_box.label",
-    "Layoutbox-Modus"
+    "Layoutbox-Überlagerung umschalten"
   ],
   [
     "dtk.settings.layout_box.description",
@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "Hotkey für den Layoutbox-Modus"
+    "Hotkey zum Umschalten der Layoutbox-Überlagerung"
   ],
   [
     "dtk.settings.recycle_bin.heading",

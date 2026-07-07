@@ -349,7 +349,7 @@
   ],
   [
     "dtk.settings.layout_box.label",
-    "Layoutboxläge"
+    "Växla layoutbox-överlägg"
   ],
   [
     "dtk.settings.layout_box.description",
@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "Snabbtangent för layoutboxläge"
+    "Snabbtangent för att växla layoutbox-överlägg"
   ],
   [
     "dtk.settings.recycle_bin.heading",

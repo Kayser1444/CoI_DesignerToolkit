@@ -349,7 +349,7 @@
   ],
   [
     "dtk.settings.layout_box.label",
-    "Modo cuadro de diseño"
+    "Alternar superposición de cuadro de diseño"
   ],
   [
     "dtk.settings.layout_box.description",
@@ -357,7 +357,7 @@
   ],
   [
     "dtk.settings.layout_box_hotkey.label",
-    "Tecla de acceso rápido al modo cuadro de diseño"
+    "Alternar tecla de acceso rápido de superposición de cuadro de diseño"
   ],
   [
     "dtk.settings.recycle_bin.heading",

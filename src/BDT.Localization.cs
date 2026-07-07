@@ -197,11 +197,11 @@ internal static class BdtLocalization
     public static LocStr SettingsLayoutBoxModeHeading =
         Loc.Str("dtk.settings.layout_box.heading", "LAYOUT", "Settings section heading for layout box mode.");
     public static LocStr SettingsLayoutBoxModeToggle =
-        Loc.Str("dtk.settings.layout_box.label", "Layout box mode", "Settings row label for layout box mode.");
+        Loc.Str("dtk.settings.layout_box.label", "Toggle layout box overlay", "Settings row label for layout box mode.");
     public static LocStr SettingsLayoutBoxModeDescription =
         Loc.Str("dtk.settings.layout_box.description", "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.", "Settings description for layout box mode.");
     public static LocStr SettingsLayoutBoxModeHotkey =
-        Loc.Str("dtk.settings.layout_box_hotkey.label", "Layout box mode hotkey", "Settings row label for layout box mode hotkey.");
+        Loc.Str("dtk.settings.layout_box_hotkey.label", "Toggle layout box overlay hotkey", "Settings row label for layout box mode hotkey.");
 
     public static LocStr SettingsRecycleBinHeading =
         Loc.Str("dtk.settings.recycle_bin.heading", "RECYCLE BIN", "Settings section heading for Recycle Bin settings.");
