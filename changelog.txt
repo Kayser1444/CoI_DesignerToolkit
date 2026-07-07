@@ -1,4 +1,7 @@
-v0.8.2 | Unreleased
+v0.8.2 | 2026-07-07
+* Integrated mod hotkeys into the game's native Controls menu (under Settings | Controls) where they can be customized alongside vanilla controls
+* Redesigned the mod settings UI to inline keybind badges onto their corresponding toggle rows and cleaned up redundant rows
+* Added audible click feedback when using mod hotkeys
 * Fixed: AutoHelpers localization is now applied before registering the Mod Settings tab, preventing duplicate English/localized settings tabs in localized languages
 * Updated the translated mod name across supported non-English languages
 
