@@ -133,7 +133,7 @@
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Configura la scorciatoia da tastiera che attiva o avvia questo strumento. È un'impostazione globale che si applica a tutti i salvataggi ed è salvata direttamente in config.json."
+    "Questa combinazione di tasti è registrata con il sistema di controllo del gioco e può essere configurata nelle Impostazioni Vanilla | Menù controlli."
   ],
   [
     "dtk.settings.action.restore_defaults",

@@ -84,7 +84,7 @@ internal static class BdtLocalization
     public static LocStr SettingsHeightFilterHideHotkey =
         Loc.Str("dtk.settings.height_filter_hide_hotkey.label", "Hide layer hotkey", "Settings row label for height filter hide layer hotkey.");
     public static LocStr SettingsGlobalHotkeyTooltip =
-        Loc.Str("dtk.settings.global_hotkey.description", "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json.", "Settings row description for global hotkeys.");
+        Loc.Str("dtk.settings.global_hotkey.description", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
     public static LocStr SettingsRestoreDefaults =
         Loc.Str("dtk.settings.action.restore_defaults", "Restore defaults", "Button label for restoring default settings.");
     public static LocStr SettingsRestoreDefaultsTooltip =

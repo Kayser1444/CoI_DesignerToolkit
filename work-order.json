@@ -10,16 +10,16 @@
     "dtk.settings.number_format.auto"
   ],
   "keys": {
-    "dtk.throughput.aoe_tool.select_all_label": {
-      "en": "Select / deselect all",
-      "context": "Label next to the master checkbox to toggle all items.",
-      "de": "Alle auswählen/abwählen",
-      "es": "Seleccionar/deseleccionar todo",
-      "it": "Seleziona/deseleziona tutto",
-      "pt": "Selecionar/desmarcar tudo",
-      "ru": "Выбрать/отменить выбор всего",
-      "sv": "Markera/avmarkera alla",
-      "zh": "全选/取消全选"
+    "dtk.settings.global_hotkey.description": {
+      "en": "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.",
+      "context": "Settings row description for global hotkeys.",
+      "de": "Diese Tastenkombination ist im Steuersystem des Spiels registriert und kann in den Vanilla-Einstellungen | konfiguriert werden Menü „Steuerung“.",
+      "es": "Esta combinación de teclas está registrada en el sistema de controles del juego y se puede configurar en Configuración básica | Menú de controles.",
+      "it": "Questa combinazione di tasti è registrata con il sistema di controllo del gioco e può essere configurata nelle Impostazioni Vanilla | Menù controlli.",
+      "pt": "Este atalho de teclado é registrado no sistema de controles do jogo e pode ser configurado em Configurações | Menu de controles.",
+      "ru": "Эта комбинация клавиш зарегистрирована в системе управления игрой и может быть настроена в стандартных настройках | Меню управления.",
+      "sv": "Denna nyckelbindning är registrerad med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn.",
+      "zh": "此按键绑定已在游戏的控制系统中注册，并且可以在香草设置 | 中进行配置。控制菜单。"
     },
     "dtk.settings.layout_box.heading": {
       "en": "LAYOUT",
@@ -31,40 +31,7 @@
       "it": "DISPOSIZIONE",
       "ru": "МАКЕТ",
       "zh": "布局"
-    },
-    "dtk.settings.pollution_show_air.description": {
-      "en": "Enables/disables the in-world pollution rate overlay for gaseous air emissions (smokestacks/flares).",
-      "context": "Settings checkbox description for showing air pollution.",
-      "de": "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für gasförmige Luftemissionen (Schornsteine/Fackeln).",
-      "es": "Activa/desactiva la superposición de la tasa de contaminación mundial para emisiones gaseosas al aire (chimeneas/bengalas).",
-      "it": "Abilita/disabilita la sovrapposizione del tasso di inquinamento a livello mondiale per le emissioni atmosferiche gassose (camini/torce).",
-      "pt": "Ativa/desativa a sobreposição da taxa de poluição mundial para emissões atmosféricas gasosas (chaminés/chamas).",
-      "ru": "Включает/отключает наложение уровня загрязнения в мире для газообразных выбросов в воздух (дымовые трубы/факелы).",
-      "sv": "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för gasformiga luftutsläpp (skorsten/backlor).",
-      "zh": "启用/禁用气体空气排放（烟囱/火炬）的世界污染率叠加。"
-    },
-    "dtk.settings.pollution_show_ground.description": {
-      "en": "Enables/disables the in-world pollution rate overlay for liquid water discharges (wastewater outfalls).",
-      "context": "Settings checkbox description for showing water pollution.",
-      "de": "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für flüssige Wassereinleitungen (Abwasseraustritte).",
-      "es": "Habilita/deshabilita la superposición de la tasa de contaminación mundial para descargas de agua líquida (emisarios de aguas residuales).",
-      "it": "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per gli scarichi di acqua liquida (scarichi delle acque reflue).",
-      "pt": "Ativa/desativa a sobreposição da taxa de poluição mundial para descargas de água líquida (emissários de águas residuais).",
-      "ru": "Включает/отключает наложение уровня загрязнения в мире для сбросов жидких вод (сбросов сточных вод).",
-      "sv": "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för utsläpp av flytande vatten (avloppsvatten).",
-      "zh": "启用/禁用液态水排放（废水排放口）的世界污染率叠加。"
-    },
-    "dtk.settings.pollution_show_vehicle.description": {
-      "en": "Enables/disables the in-world pollution rate overlay for vehicles and locomotives.",
-      "context": "Settings checkbox description for showing vehicle pollution.",
-      "de": "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Fahrzeuge und Lokomotiven.",
-      "es": "Activa/desactiva la superposición de la tasa de contaminación mundial para vehículos y locomotoras.",
-      "it": "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per veicoli e locomotive.",
-      "pt": "Ativa/desativa a sobreposição da taxa de poluição mundial para veículos e locomotivas.",
-      "ru": "Включает/отключает наложение уровня загрязнения в мире для транспортных средств и локомотивов.",
-      "sv": "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fordon och lok.",
-      "zh": "启用/禁用车辆和机车的世界污染率叠加。"
     }
   },
-  "keys_needing_translation": 5
+  "keys_needing_translation": 2
 }

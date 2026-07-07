@@ -789,6 +789,7 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
     {
         if (HotkeysRegistry.IsPressed(HotkeysRegistry.ThroughputOverlayToggle))
         {
+            HotkeysRegistry.PlayClickSound();
             DesignerToolkitSettings.SetThroughputOverlayEnabled(!DesignerToolkitSettings.ThroughputOverlayEnabled);
         }
     }

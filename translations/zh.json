@@ -133,7 +133,7 @@
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "配置激活或触发此工具的键盘快捷键。这是一个全局设置，适用于所有存档，并直接保存到config.json中。"
+    "此按键绑定已在游戏的控制系统中注册，并且可以在香草设置 | 中进行配置。控制菜单。"
   ],
   [
     "dtk.settings.action.restore_defaults",

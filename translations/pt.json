@@ -133,7 +133,7 @@
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Configura o atalho de teclado que ativa ou aciona esta ferramenta. Esta é uma configuração global que se aplica a todos os saves e é salva diretamente em config.json."
+    "Este atalho de teclado é registrado no sistema de controles do jogo e pode ser configurado em Configurações | Menu de controles."
   ],
   [
     "dtk.settings.action.restore_defaults",

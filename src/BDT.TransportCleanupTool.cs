@@ -106,6 +106,7 @@ internal sealed class TransportCleanupTool : IDisposable
 
         if (HotkeysRegistry.IsPressed(HotkeysRegistry.TransportCleanup))
         {
+            HotkeysRegistry.PlayClickSound();
             Activate();
             return;
         }

@@ -237,6 +237,10 @@ internal sealed class UndoManager : IDisposable
         {
             lock (m_lock)
             {
+                if (m_undoStack.Count > 0)
+                {
+                    HotkeysRegistry.PlayClickSound();
+                }
                 m_pendingUndo = true;
             }
         }

@@ -133,7 +133,7 @@
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Konfiguriert das Tastenkürzel, das dieses Werkzeug aktiviert oder auslöst. Dies ist eine globale Einstellung, die für alle Spielstände gilt und direkt in config.json gespeichert wird."
+    "Diese Tastenkombination ist im Steuersystem des Spiels registriert und kann in den Vanilla-Einstellungen | konfiguriert werden Menü „Steuerung“."
   ],
   [
     "dtk.settings.action.restore_defaults",

@@ -133,7 +133,7 @@
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Configures the keyboard shortcut that arms or triggers this tool. This is a global setting that applies to all saves and is saved directly to config.json."
+    "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu."
   ],
   [
     "dtk.settings.action.restore_defaults",

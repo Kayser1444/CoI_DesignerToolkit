@@ -418,6 +418,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
     {
         if (HotkeysRegistry.IsPressed(HotkeysRegistry.PollutionOverlayToggle))
         {
+            HotkeysRegistry.PlayClickSound();
             DesignerToolkitSettings.SetPollutionOverlayEnabled(!DesignerToolkitSettings.PollutionOverlayEnabled);
         }
     }

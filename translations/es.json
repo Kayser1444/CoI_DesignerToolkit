@@ -133,7 +133,7 @@
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Configura el atajo de teclado que activa o dispara esta herramienta. Esta es una configuración global que se aplica a todas las partidas y se guarda directamente en config.json."
+    "Esta combinación de teclas está registrada en el sistema de controles del juego y se puede configurar en Configuración básica | Menú de controles."
   ],
   [
     "dtk.settings.action.restore_defaults",

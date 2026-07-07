@@ -193,6 +193,7 @@ public class LayoutBoxRendererMb : MonoBehaviour
 
         if (m_shortcutsManager.IsDown(HotkeysRegistry.LayoutBoxModeToggle))
         {
+            HotkeysRegistry.PlayClickSound();
             DesignerToolkitSettings.SetLayoutBoxModeEnabled(!DesignerToolkitSettings.LayoutBoxModeEnabled);
             m_isCacheDirty = true;
             Log.Info($"[LayoutBoxMode] Toggled to {DesignerToolkitSettings.LayoutBoxModeEnabled}");

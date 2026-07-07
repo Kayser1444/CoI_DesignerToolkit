@@ -133,7 +133,7 @@
   ],
   [
     "dtk.settings.global_hotkey.description",
-    "Konfigurerar tangentbordsgenvägen som aktiverar eller utlöser detta verktyg. Detta är en global inställning som gäller för alla sparade spel och sparas direkt i config.json."
+    "Denna nyckelbindning är registrerad med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn."
   ],
   [
     "dtk.settings.action.restore_defaults",

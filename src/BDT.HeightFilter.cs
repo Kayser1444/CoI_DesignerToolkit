@@ -200,6 +200,7 @@ namespace CoIDesignerToolkit
         {
             if (HotkeysRegistry.IsPressed(HotkeysRegistry.HeightFilterShowLayer))
             {
+                HotkeysRegistry.PlayClickSound();
                 int current = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
                 if (current < 6)
                 {
@@ -209,6 +210,7 @@ namespace CoIDesignerToolkit
             }
             else if (HotkeysRegistry.IsPressed(HotkeysRegistry.HeightFilterHideLayer))
             {
+                HotkeysRegistry.PlayClickSound();
                 int current = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
                 if (current > 0)
                 {

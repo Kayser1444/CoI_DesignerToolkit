@@ -3,6 +3,16 @@
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 ## v0.8.2 [unreleased]
 
+- Added audible feedback when activating or toggling mod tools/overlays via hotkeys:
+  - Fetched and initialized the vanilla `ButtonClick.prefab` UI sound from `AudioDb`.
+  - Configured height filter, throughput, pollution, layout box, area selection, transport cleanup, and undo keybinds to play the standard click sound.
+- Integrated mod hotkeys into the native Captain of Industry controls customization system:
+  - Centralized and registered all hotkeys as native keybindings under a custom category.
+  - Renamed and formatted keybind labels using sentence case (e.g., *Transport cleanup tool*, *Toggle throughput overlay*, *Toggle pollution overlay*).
+  - Clarified Throughput tool keybinding description to "Activates" rather than "Toggles" the throughput area selection tool.
+- Redesigned the mod settings UI to inline keybind badges onto their respective toggles and removed redundant hotkey-only rows and headings.
+- Cleaned up obsolete config loading, saving, resetting, and serialization code from `BDT.Settings.cs`.
+- Synchronized translation files using `translate.py` to localize the updated keybind tooltip description across Swedish, German, Spanish, Portuguese, Russian, Italian, and Chinese.
 - Fixed: Applied `AutoHelpers` localization before registering the Mod Settings tab, preventing duplicate English/localized settings tabs in localized languages.
 - Translated the mod name across all supported non-English locales (German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese) and polished translation consistency.
 

@@ -115,6 +115,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath);
         DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
         DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
+        HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.Audio.AudioDb>());
 
         m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
         RateLimitManager.Initialize(m_rateLimitsStateStore);

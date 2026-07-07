@@ -58,7 +58,6 @@ internal static class DesignerToolkitSettings
     private const string MARKDOWN_NUMBER_FORMAT_KEY = "markdown_number_format";
     private const string INSTANT_BUILD_MODE_KEY = "instant_build_mode";
     private const string LEGACY_BELT_CONFIGURATIONS_KEY = "legacy_belt_configurations";
-    private const string TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY = "transport_cleanup_hotkey_primary";
 
     private static Mafi.Core.Game.GameDifficultyConfig? s_difficultyConfig;
 
@@ -68,25 +67,12 @@ internal static class DesignerToolkitSettings
     }
 
     public static bool IsSandbox => s_difficultyConfig != null && s_difficultyConfig.IsSandbox;
-    private const string TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY = "transport_cleanup_hotkey_secondary";
-    private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY = "height_filter_show_layer_hotkey_primary";
-    private const string HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY = "height_filter_show_layer_hotkey_secondary";
-    private const string HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY = "height_filter_hide_layer_hotkey_primary";
-    private const string HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY = "height_filter_hide_layer_hotkey_secondary";
-    private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_KEY = "transport_cleanup_hotkey_key";
-    private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_CTRL_KEY = "transport_cleanup_hotkey_ctrl";
-    private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_ALT_KEY = "transport_cleanup_hotkey_alt";
-    private const string LEGACY_TRANSPORT_CLEANUP_HOTKEY_SHIFT_KEY = "transport_cleanup_hotkey_shift";
     
     private const string THROUGHPUT_OVERLAY_ENABLED_KEY = "throughput_overlay_enabled";
     private const string THROUGHPUT_GLOW_ENABLED_KEY = "throughput_glow_enabled";
-    private const string THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY = "throughput_overlay_toggle_hotkey_primary";
-    private const string THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY = "throughput_overlay_toggle_hotkey_secondary";
     private const string THROUGHPUT_HEATMAP_MODE_KEY = "throughput_heatmap_mode";
     private const string THROUGHPUT_COLORBLIND_MODE_KEY = "throughput_colorblind_mode";
     private const string THROUGHPUT_SHOW_AS_PERCENT_KEY = "throughput_show_as_percent";
-    private const string THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY = "throughput_aoe_tool_hotkey_primary";
-    private const string THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY = "throughput_aoe_tool_hotkey_secondary";
     private const string POLLUTION_OVERLAY_ENABLED_KEY = "pollution_overlay_enabled";
     private const string POLLUTION_GLOW_ENABLED_KEY = "pollution_glow_enabled";
     private const string POLLUTION_DAYS_TO_AVERAGE_KEY = "pollution_days_to_average";
@@ -94,21 +80,10 @@ internal static class DesignerToolkitSettings
     private const string POLLUTION_SHOW_GROUND_KEY = "pollution_show_ground";
     private const string POLLUTION_SHOW_VEHICLE_KEY = "pollution_show_vehicle";
     private const string POLLUTION_SHOW_SHIP_KEY = "pollution_show_ship";
-    private const string POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY = "pollution_overlay_toggle_hotkey_primary";
-    private const string POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY = "pollution_overlay_toggle_hotkey_secondary";
     private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
     private const string USE_RECYCLE_BIN_KEY = "use_recycle_bin";
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
     private const string BLUEPRINT_SPACING_KEY = "blueprint_spacing";
-//     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY = "layout_box_mode_toggle_hotkey_primary";
-//     private const string LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY = "layout_box_mode_toggle_hotkey_secondary";
-    private const string UNDO_HOTKEY_PRIMARY_KEY = "undo_hotkey_primary";
-    private const string UNDO_HOTKEY_SECONDARY_KEY = "undo_hotkey_secondary";
-
-    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_KEY = "";
-    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_CTRL_KEY = "";
-    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_ALT_KEY = "";
-    private const string LEGACY_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SHIFT_KEY = "";
 
     private const int SETTINGS_SCHEMA_VERSION = 1;
     private const string SETTINGS_TAB_ICON_ASSET =
@@ -117,22 +92,6 @@ internal static class DesignerToolkitSettings
     private static readonly Percent SETTINGS_COLUMN_WIDTH = 96.Percent();
     private static readonly Px SETTINGS_SECTION_INDENT = 4.pt();
     private static readonly Px SETTINGS_OPTIONS_GAP = 2.pt();
-    private static readonly BdtHotkey DEFAULT_TRANSPORT_CLEANUP_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.Delete);
-    private static readonly BdtHotkey DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.PageUp);
-    private static readonly BdtHotkey DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.PageDown);
-    private static readonly BdtHotkey DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.T);
-    private static readonly BdtHotkey DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.LeftShift, KeyCode.T);
-    private static readonly BdtHotkey DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.P);
-//     private static readonly BdtHotkey DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY =
-//         BdtHotkey.FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.B);
-    private static readonly BdtHotkey DEFAULT_UNDO_HOTKEY =
-        BdtHotkey.FromPrimaryKeys(KeyCode.LeftControl, KeyCode.Z);
 
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
@@ -302,14 +261,6 @@ internal static class DesignerToolkitSettings
         }
     }
 
-    public static BdtHotkey TransportCleanupHotkey { get; private set; } = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
-    public static BdtHotkey HeightFilterShowLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
-    public static BdtHotkey HeightFilterHideLayerHotkey { get; private set; } = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
-    public static BdtHotkey ThroughputOverlayToggleHotkey { get; private set; } = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
-    public static BdtHotkey ThroughputAoEToolHotkey { get; private set; } = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
-    public static BdtHotkey PollutionOverlayToggleHotkey { get; private set; } = DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY;
-//     public static BdtHotkey LayoutBoxModeToggleHotkey { get; private set; } = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
-    public static BdtHotkey UndoHotkey { get; private set; } = DEFAULT_UNDO_HOTKEY;
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
@@ -389,65 +340,9 @@ internal static class DesignerToolkitSettings
         bool initialPollutionShowVehicle = config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
         bool initialPollutionShowShip = config.GetBool(POLLUTION_SHOW_SHIP_KEY, true);
         bool initialLayoutBoxModeEnabled = config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
-
-        BdtHotkey initialTransportCleanupHotkey = HotkeyFromConfig(
-            config,
-            TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY,
-            TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY,
-            LEGACY_TRANSPORT_CLEANUP_HOTKEY_KEY,
-            LEGACY_TRANSPORT_CLEANUP_HOTKEY_CTRL_KEY,
-            LEGACY_TRANSPORT_CLEANUP_HOTKEY_ALT_KEY,
-            LEGACY_TRANSPORT_CLEANUP_HOTKEY_SHIFT_KEY,
-            DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
-        BdtHotkey initialShowLayerHotkey = HotkeyFromConfig(
-            config,
-            HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY,
-            HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY,
-            "", "", "", "",
-            DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
-        BdtHotkey initialHideLayerHotkey = HotkeyFromConfig(
-            config,
-            HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY,
-            HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY,
-            "", "", "", "",
-            DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
-        BdtHotkey initialThroughputOverlayToggleHotkey = HotkeyFromConfig(
-            config,
-            THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
-            THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
-            "", "", "", "",
-            DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
-        BdtHotkey initialThroughputAoEToolHotkey = HotkeyFromConfig(
-            config,
-            THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY,
-            THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
-            "", "", "", "",
-            DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
-        BdtHotkey initialPollutionOverlayToggleHotkey = HotkeyFromConfig(
-            config,
-            POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
-            POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
-            "", "", "", "",
-            DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY);
-        BdtHotkey initialUndoHotkey = HotkeyFromConfig(
-            config,
-            UNDO_HOTKEY_PRIMARY_KEY,
-            UNDO_HOTKEY_SECONDARY_KEY,
-            "", "", "", "",
-            DEFAULT_UNDO_HOTKEY);
-
         bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
         int initialBlueprintSpacing = config.GetInt(BLUEPRINT_SPACING_KEY, 6);
-
-        TransportCleanupHotkey = initialTransportCleanupHotkey;
-        HeightFilterShowLayerHotkey = initialShowLayerHotkey;
-        HeightFilterHideLayerHotkey = initialHideLayerHotkey;
-        ThroughputOverlayToggleHotkey = initialThroughputOverlayToggleHotkey;
-        ThroughputAoEToolHotkey = initialThroughputAoEToolHotkey;
-        PollutionOverlayToggleHotkey = initialPollutionOverlayToggleHotkey;
-//         LayoutBoxModeToggleHotkey = initialLayoutBoxModeToggleHotkey;
-        UndoHotkey = initialUndoHotkey;
 
         LoadFromJsonStore(
             store,
@@ -562,20 +457,12 @@ internal static class DesignerToolkitSettings
 
         Dropdown<int> heightFilterDropdown = new Dropdown<int>(HeightFilterDropdownOption)
             .Label(BdtLocalization.SettingsHeightFilterMaxVisible.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsHeightFilterMaxVisibleDescription.AsFormatted)
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsHeightFilterMaxVisibleDescription.TranslatedString + "\n\nThe show/hide layer keybinds can be configured in the vanilla Settings | Controls menu."))
             .LabelWidth(SETTINGS_LABEL_WIDTH)
             .SetOptions(0, 1, 2, 3, 4, 5, 6)
             .SetValue(HeightFilterMaxVisibleLevel)
             .OnValueChanged((level, _) => SetHeightFilterMaxVisibleLevel(level));
         root.Add(heightFilterDropdown);
-
-        root.Add(BuildVanillaHotkeyRow(
-            BdtLocalization.SettingsHeightFilterShowHotkey.AsFormatted,
-            HotkeysRegistry.HeightFilterShowLayer));
-
-        root.Add(BuildVanillaHotkeyRow(
-            BdtLocalization.SettingsHeightFilterHideHotkey.AsFormatted,
-            HotkeysRegistry.HeightFilterHideLayer));
 
         root.Add(new Title(BdtLocalization.SettingsThroughputHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -583,10 +470,14 @@ internal static class DesignerToolkitSettings
 
         Toggle throughputOverlayToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsThroughputToggle.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsThroughputToggleDescription.AsFormatted)
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsThroughputToggleDescription.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
             .Value(ThroughputOverlayEnabled)
             .OnValueChanged(SetThroughputOverlayEnabled);
-        root.Add(throughputOverlayToggle);
+
+        var throughputOverlayRow = new Row().AlignItemsCenter();
+        throughputOverlayRow.Add(throughputOverlayToggle);
+        AddHotkeyBadges(throughputOverlayRow, HotkeysRegistry.ThroughputOverlayToggle);
+        root.Add(throughputOverlayRow);
 
         Toggle throughputGlowToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsThroughputGlow.AsFormatted)
@@ -625,24 +516,20 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetThroughputShowAsPercent);
         root.Add(showAsPercentToggle);
 
-        root.Add(BuildVanillaHotkeyRow(
-            BdtLocalization.SettingsThroughputToggleHotkey.AsFormatted,
-            HotkeysRegistry.ThroughputOverlayToggle));
-
-        root.Add(BuildVanillaHotkeyRow(
-            BdtLocalization.SettingsThroughputAoEToolHotkey.AsFormatted,
-            HotkeysRegistry.ThroughputAoETool));
-
         root.Add(new Title(BdtLocalization.SettingsPollutionHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
         Toggle pollutionOverlayToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionToggle.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsPollutionToggleDescription.AsFormatted)
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsPollutionToggleDescription.TranslatedString + "\n\nThis keybind can be configured in the vanilla Settings | Controls menu."))
             .Value(PollutionOverlayEnabled)
             .OnValueChanged(SetPollutionOverlayEnabled);
-        root.Add(pollutionOverlayToggle);
+
+        var pollutionOverlayRow = new Row().AlignItemsCenter();
+        pollutionOverlayRow.Add(pollutionOverlayToggle);
+        AddHotkeyBadges(pollutionOverlayRow, HotkeysRegistry.PollutionOverlayToggle);
+        root.Add(pollutionOverlayRow);
 
         Toggle pollutionGlowToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionGlow.AsFormatted)
@@ -738,10 +625,6 @@ internal static class DesignerToolkitSettings
             .Value(PollutionShowShip)
             .OnValueChanged(SetPollutionShowShip);
         root.Add(showShipToggle);
-
-        root.Add(BuildVanillaHotkeyRow(
-            BdtLocalization.SettingsPollutionToggleHotkey.AsFormatted,
-            HotkeysRegistry.PollutionOverlayToggle));
 
         root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -865,14 +748,6 @@ internal static class DesignerToolkitSettings
         spacingMinusBtn.OnClick(() => adjustSpacing(-1), allowKeyPresses: true);
         spacingPlusBtn.OnClick(() => adjustSpacing(1), allowKeyPresses: true);
 
-        root.Add(new Title(BdtLocalization.SettingsUndoHeading.AsFormatted)
-            .MarginTop(4.pt())
-            .MarginLeft(-SETTINGS_SECTION_INDENT));
-
-        root.Add(BuildVanillaHotkeyRow(
-            BdtLocalization.SettingsUndoHotkey.AsFormatted,
-            HotkeysRegistry.UndoPlacement));
-
         root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -883,14 +758,6 @@ internal static class DesignerToolkitSettings
             .Value(LegacyBeltConfigurationsEnabled)
             .OnValueChanged(SetLegacyBeltConfigurations);
         root.Add(legacyBeltConfigurationsToggle);
-
-        root.Add(new Title(BdtLocalization.SettingsTransportCleanupHeading.AsFormatted)
-            .MarginTop(4.pt())
-            .MarginLeft(-SETTINGS_SECTION_INDENT));
-
-        root.Add(BuildVanillaHotkeyRow(
-            BdtLocalization.SettingsTransportCleanupHotkey.AsFormatted,
-            HotkeysRegistry.TransportCleanup));
 
         root.Add(BuildFooter(() =>
         {
@@ -949,26 +816,7 @@ internal static class DesignerToolkitSettings
         }
     }
 
-    private static Row BuildHotkeyRow(
-        LocStrFormatted label,
-        LocStrFormatted tooltip,
-        Func<BdtHotkey> getHotkey,
-        Action<BdtHotkey> setHotkey,
-        out BdtKeyBindingField primaryField,
-        out BdtKeyBindingField secondaryField)
-    {
-        primaryField = new BdtKeyBindingField(getHotkey, setHotkey, isPrimary: true);
-        secondaryField = new BdtKeyBindingField(getHotkey, setHotkey, isPrimary: false);
-        return new Row(2.pt())
-        {
-            new Label(label)
-                .Tooltip(tooltip)
-                .NoShrink()
-                .Width(SETTINGS_LABEL_WIDTH),
-            primaryField,
-            secondaryField,
-        };
-    }
+
 
     private static PanelFooterRow BuildFooter(Action refresh)
     {
@@ -996,22 +844,6 @@ internal static class DesignerToolkitSettings
             SetUseRecycleBin(true);
             SetRecycleBinFolderName("Recycle Bin");
             SetBlueprintSpacing(6);
-            HeightFilterShowLayerHotkey = DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY;
-            HeightFilterHideLayerHotkey = DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY;
-            ThroughputOverlayToggleHotkey = DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY;
-            ThroughputAoEToolHotkey = DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY;
-            PollutionOverlayToggleHotkey = DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY;
-//             LayoutBoxModeToggleHotkey = DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY;
-            UndoHotkey = DEFAULT_UNDO_HOTKEY;
-            TransportCleanupHotkey = DEFAULT_TRANSPORT_CLEANUP_HOTKEY;
-            SaveGlobalHotkey(HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_SHOW_LAYER_HOTKEY);
-            SaveGlobalHotkey(HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, DEFAULT_HEIGHT_FILTER_HIDE_LAYER_HOTKEY);
-            SaveGlobalHotkey(THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_OVERLAY_TOGGLE_HOTKEY);
-            SaveGlobalHotkey(THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, DEFAULT_THROUGHPUT_AOE_TOOL_HOTKEY);
-            SaveGlobalHotkey(POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_POLLUTION_OVERLAY_TOGGLE_HOTKEY);
-//             SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, DEFAULT_LAYOUT_BOX_MODE_TOGGLE_HOTKEY);
-            SaveGlobalHotkey(UNDO_HOTKEY_PRIMARY_KEY, UNDO_HOTKEY_SECONDARY_KEY, DEFAULT_UNDO_HOTKEY);
-            SaveGlobalHotkey(TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, DEFAULT_TRANSPORT_CLEANUP_HOTKEY);
             refresh();
             status.Value(BdtLocalization.SettingsRestoredDefaults.AsFormatted);
         }).Tooltip(BdtLocalization.SettingsRestoreDefaultsTooltip.AsFormatted);
@@ -1081,22 +913,7 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(BLUEPRINT_SPACING_KEY, BlueprintSpacing, out error))
                 return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, TransportCleanupHotkey, TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY, TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY, out error))
-                return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterShowLayerHotkey, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY, out error))
-                return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, HeightFilterHideLayerHotkey, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY, HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY, out error))
-                return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputOverlayToggleHotkey, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
-                return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, ThroughputAoEToolHotkey, THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY, THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY, out error))
-                return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, PollutionOverlayToggleHotkey, POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY, POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
-                return false;
-//             if (s_config != null && !TrySetHotkeyConfig(s_config, LayoutBoxModeToggleHotkey, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, out error))
-//                 return false;
-            if (s_config != null && !TrySetHotkeyConfig(s_config, UndoHotkey, UNDO_HOTKEY_PRIMARY_KEY, UNDO_HOTKEY_SECONDARY_KEY, out error))
-                return false;
+
 
             if (string.IsNullOrWhiteSpace(s_modDirectory))
             {
@@ -1126,54 +943,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
             updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
             updated = TryReplaceConfigDefault(updated, BLUEPRINT_SPACING_KEY, BlueprintSpacing, out bool blueprintSpacingUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                TransportCleanupHotkey,
-                TRANSPORT_CLEANUP_HOTKEY_PRIMARY_KEY,
-                TRANSPORT_CLEANUP_HOTKEY_SECONDARY_KEY,
-                out bool transportCleanupHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                HeightFilterShowLayerHotkey,
-                HEIGHT_FILTER_SHOW_LAYER_HOTKEY_PRIMARY_KEY,
-                HEIGHT_FILTER_SHOW_LAYER_HOTKEY_SECONDARY_KEY,
-                out bool showLayerHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                HeightFilterHideLayerHotkey,
-                HEIGHT_FILTER_HIDE_LAYER_HOTKEY_PRIMARY_KEY,
-                HEIGHT_FILTER_HIDE_LAYER_HOTKEY_SECONDARY_KEY,
-                out bool hideLayerHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                ThroughputOverlayToggleHotkey,
-                THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
-                THROUGHPUT_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
-                out bool throughputOverlayToggleHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                ThroughputAoEToolHotkey,
-                THROUGHPUT_AOE_TOOL_HOTKEY_PRIMARY_KEY,
-                THROUGHPUT_AOE_TOOL_HOTKEY_SECONDARY_KEY,
-                out bool throughputAoEToolHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                PollutionOverlayToggleHotkey,
-                POLLUTION_OVERLAY_TOGGLE_HOTKEY_PRIMARY_KEY,
-                POLLUTION_OVERLAY_TOGGLE_HOTKEY_SECONDARY_KEY,
-                out bool pollutionOverlayToggleHotkeyUpdated);
-//             updated = TryReplaceHotkeyConfigDefaults(
-//                 updated,
-//                 LayoutBoxModeToggleHotkey,
-//                 LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY,
-//                 LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY,
-//                 out bool layoutBoxModeHotkeyUpdated);
-            updated = TryReplaceHotkeyConfigDefaults(
-                updated,
-                UndoHotkey,
-                UNDO_HOTKEY_PRIMARY_KEY,
-                UNDO_HOTKEY_SECONDARY_KEY,
-                out bool undoHotkeyUpdated);
+
             if (!languageUpdated)
             {
                 error = "Could not find markdown_table_language default in config.json.";
@@ -1274,11 +1044,6 @@ internal static class DesignerToolkitSettings
                 error = "Could not find blueprint_spacing default in config.json.";
                 return false;
             }
-            if (!transportCleanupHotkeyUpdated || !showLayerHotkeyUpdated || !hideLayerHotkeyUpdated || !throughputOverlayToggleHotkeyUpdated || !throughputAoEToolHotkeyUpdated || !pollutionOverlayToggleHotkeyUpdated || !undoHotkeyUpdated)
-            {
-                error = "Could not find hotkey defaults in config.json.";
-                return false;
-            }
 
             File.WriteAllText(path, updated, new System.Text.UTF8Encoding(false));
             return true;
@@ -1346,98 +1111,7 @@ internal static class DesignerToolkitSettings
         return new Label(labelText.AsLoc());
     }
 
-    private static void SaveGlobalHotkey(string primaryKey, string secondaryKey, BdtHotkey hotkey)
-    {
-        if (s_config == null || string.IsNullOrWhiteSpace(s_modDirectory))
-            return;
 
-        try
-        {
-            string error;
-            if (!s_config.TrySetValue(primaryKey, hotkey.PrimaryConfigString(), out error))
-            {
-                s_log.Warning($"Failed to set config value {primaryKey}: {error}");
-                return;
-            }
-            if (!s_config.TrySetValue(secondaryKey, hotkey.SecondaryConfigString(), out error))
-            {
-                s_log.Warning($"Failed to set config value {secondaryKey}: {error}");
-                return;
-            }
-
-            string path = Path.Combine(s_modDirectory, "config.json");
-            string json = File.ReadAllText(path);
-            string updated = TryReplaceHotkeyConfigDefaults(json, hotkey, primaryKey, secondaryKey, out bool updatedOK);
-            if (updatedOK)
-            {
-                File.WriteAllText(path, updated, new System.Text.UTF8Encoding(false));
-                s_log.Info($"Successfully wrote global hotkey {primaryKey} to config.json");
-            }
-            else
-            {
-                s_log.Warning($"Could not find default value for {primaryKey}/{secondaryKey} in config.json to replace.");
-            }
-        }
-        catch (Exception ex)
-        {
-            s_log.Warning($"Failed to save hotkey {primaryKey} to config.json: {ex.Message}");
-        }
-    }
-
-    private static bool TrySetHotkeyConfig(
-        ModJsonConfig config,
-        BdtHotkey hotkey,
-        string primaryKey,
-        string secondaryKey,
-        out string error)
-    {
-        if (!config.TrySetValue(primaryKey, hotkey.PrimaryConfigString(), out error))
-            return false;
-        if (!config.TrySetValue(secondaryKey, hotkey.SecondaryConfigString(), out error))
-            return false;
-
-        return true;
-    }
-
-    private static BdtHotkey HotkeyFromConfig(
-        ModJsonConfig config,
-        string primaryKey,
-        string secondaryKey,
-        string legacyKeyKey,
-        string legacyCtrlKey,
-        string legacyAltKey,
-        string legacyShiftKey,
-        BdtHotkey fallback)
-    {
-        string primary = config.GetString(primaryKey, fallback.PrimaryConfigString());
-        string secondary = config.GetString(secondaryKey, fallback.SecondaryConfigString());
-        BdtHotkey fromStrings = BdtHotkey.FromConfigStrings(primary, secondary, fallback);
-
-        if (primary != fallback.PrimaryConfigString() || secondary != fallback.SecondaryConfigString())
-            return fromStrings;
-
-        if (!ConfigHasValue(config, legacyKeyKey))
-            return fromStrings;
-
-        return BdtHotkey.FromLegacy(
-            KeyCodeFromInt(config.GetInt(legacyKeyKey, 0), KeyCode.None),
-            config.GetBool(legacyCtrlKey, false),
-            config.GetBool(legacyAltKey, false),
-            config.GetBool(legacyShiftKey, false));
-    }
-
-    private static string TryReplaceHotkeyConfigDefaults(
-        string json,
-        BdtHotkey hotkey,
-        string primaryKey,
-        string secondaryKey,
-        out bool updated)
-    {
-        string result = TryReplaceConfigDefault(json, primaryKey, hotkey.PrimaryConfigString(), out bool primaryUpdated);
-        result = TryReplaceConfigDefault(result, secondaryKey, hotkey.SecondaryConfigString(), out bool secondaryUpdated);
-        updated = primaryUpdated && secondaryUpdated;
-        return result;
-    }
 
     private static string TryReplaceConfigDefault(string json, string key, int value, out bool updated)
     {

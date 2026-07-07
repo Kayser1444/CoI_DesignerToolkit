@@ -112,6 +112,7 @@ internal class ThroughputAoETool : BaseEntityCursorInputController<IAreaSelectab
     {
         if (HotkeysRegistry.IsPressed(HotkeysRegistry.ThroughputAoETool))
         {
+            HotkeysRegistry.PlayClickSound();
             Context.InputMgr.ToggleController(this);
         }
     }
