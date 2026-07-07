@@ -795,15 +795,9 @@ internal static class DesignerToolkitSettings
 
     private static void AddHotkeyBadges(Row row, KeyBindings bindings)
     {
-        if (!bindings.Primary.IsEmpty)
+        if (!bindings.IsEmpty)
         {
-            var primaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {bindings.Primary.ToString()} </b></size></color></mark>");
-            row.Add(new Label(primaryText).MarginLeft(6.pt()));
-        }
-        if (!bindings.Secondary.IsEmpty)
-        {
-            var secondaryText = new LocStrFormatted($"<mark=#36383EAA><color=#E2E2E2><size=90%><b> {bindings.Secondary.ToString()} </b></size></color></mark>");
-            row.Add(new Label(secondaryText).MarginLeft(4.pt()));
+            row.Add(new KeyBindUi().SetKeys(bindings).MarginLeft(6.pt()));
         }
     }
 
