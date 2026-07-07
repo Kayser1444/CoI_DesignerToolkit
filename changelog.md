@@ -1,6 +1,10 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
+## v0.8.2 [unreleased]
+
+- Fixed: Applied `AutoHelpers` localization before registering the Mod Settings tab, preventing duplicate English/localized settings tabs in localized languages.
+- Translated the mod name across all supported non-English locales (German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese) and polished translation consistency.
 
 ## v0.8.1 [packaged]
 
