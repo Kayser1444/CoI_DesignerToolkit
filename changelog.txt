@@ -1,3 +1,8 @@
+v0.8.3 | 2026-07-07
+* Extracted and fully localized settings dropdown option labels (All, None, Relative, Capacity) and keybind tooltips
+* Cleaned up obsolete hotkey settings and descriptions from config.json
+* Merged high-quality, game-accurate Russian translation and terminology improvements
+
 v0.8.2 | 2026-07-07
 * Integrated mod hotkeys into the game's native Controls menu (under Settings | Controls) where they can be customized alongside vanilla controls
 * Redesigned the mod settings UI to inline keybind badges onto their corresponding toggle rows and cleaned up redundant rows
