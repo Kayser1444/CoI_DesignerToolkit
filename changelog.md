@@ -3,7 +3,13 @@
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 ## v0.8.3 [unreleased]
 
-
+- Localized settings dropdown option labels and hotkey description tooltips:
+  - Extracted and registered translation keys for height filter and throughput heatmap options (*All*, *None*, *Relative*, and *Capacity*).
+  - Wired tooltips in mod settings to append native, fully localized keybind customization reminders.
+- Cleaned up obsolete hotkey default configuration settings and descriptions from `config.json`.
+- Merged and integrated Russian terminology improvements from PR #2 to ensure high-quality and game-accurate localizations:
+  - Fixed various semantic inaccuracies and formatting issues.
+  - Adjusted dropdown and tooltip phrasing for Swedish, German, Spanish, Portuguese, Italian, and Chinese.
 ## v0.8.2 [released]
 
 - Added audible feedback when activating or toggling mod tools/overlays via hotkeys:
