@@ -37,7 +37,7 @@
     "description": "Initial throughput overlay visibility state for saves without BDT settings state. When enabled, configured throughput overlays will render in-world."
   },
   "throughput_glow_enabled": {
-    "default": true,
+    "default": false,
     "description": "Initial throughput glow visibility state for saves without BDT settings state."
   },
   "throughput_heatmap_mode": {
