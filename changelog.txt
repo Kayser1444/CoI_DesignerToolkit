@@ -1,5 +1,6 @@
 v0.8.4 | 2026-07-07
 * Replaced custom text keybind badges in Settings rows with the native KeyBindUi component to perfectly match the vanilla style
+* Fixed: Release ZIP files now extract correctly on Linux
 
 v0.8.3 | 2026-07-07
 * Extracted and fully localized settings dropdown option labels (All, None, Relative, Capacity) and keybind tooltips

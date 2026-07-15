@@ -4,6 +4,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 ## v0.8.4 [packaged]
 
 - Replaced custom TMPro-based keybind badge markup in Settings rows with the game's native `KeyBindUi` component to perfectly match the vanilla visual style.
+- Fixed release ZIP entry paths to use portable forward slashes, allowing reliable extraction on Linux.
 
 
 ## v0.8.3 [released]
