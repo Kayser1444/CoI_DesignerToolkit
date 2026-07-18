@@ -45,12 +45,8 @@ internal static class FolderPersistence
                 return;
             }
 
-            s_setFolderMethod = windowType.GetMethod(
-                "setFolder",
-                BindingFlags.Instance | BindingFlags.NonPublic,
-                null,
-                new[] { typeof(IBlueprintsFolder) },
-                null);
+            s_setFolderMethod = GameApiCompat.FindBlueprintSetFolderMethod(
+                windowType, out Type setFolderHostType);
 
             if (s_setFolderMethod == null)
             {
@@ -104,7 +100,8 @@ internal static class FolderPersistence
                 return;
             }
 
-            s_setFolderMethod.Invoke(window, new object[] { target });
+            object targetHost = GameApiCompat.GetSetFolderTarget(window, s_setFolderMethod);
+            s_setFolderMethod.Invoke(targetHost, new object[] { target });
             s_log.Info($"CtorPostfix: navigated to '{target.Name}'");
         }
         catch (Exception ex)
@@ -119,8 +116,8 @@ internal static class FolderPersistence
         try
         {
             if (s_config == null) return;
-            var window = (BlueprintsWindow)__instance;
-            string path = BuildPath(window.CurrentFolder, window.BlueprintsLibrary.Root);
+            BlueprintsLibrary library = GameApiCompat.GetBlueprintsLibrary(__instance);
+            string path = BuildPath(GameApiCompat.GetCurrentFolder(__instance), library.Root);
             bool ok = s_config.TrySetValue(CONFIG_KEY, path, out string err);
             s_log.Info($"SetFolderPostfix: saved path='{path}', ok={ok}" + (ok ? "" : $", err={err}"));
         }

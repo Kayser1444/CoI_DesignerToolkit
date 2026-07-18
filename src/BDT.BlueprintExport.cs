@@ -259,7 +259,7 @@ internal static class BlueprintExport
                 if (folderState.Folder == null) return;
                 try
                 {
-                    StartBatchPlacement(detail.Window, folderState.Folder);
+                    StartBatchPlacement(GameApiCompat.GetBlueprintsWindow(detail), folderState.Folder);
                 }
                 catch (Exception ex)
                 {
@@ -725,10 +725,10 @@ internal static class BlueprintExport
             var blueprints = folder.Blueprints;
             if (blueprints.IsEmpty()) return;
 
-            var controller = window.m_controller;
-            var unlockedDb = window.m_unlockedProtosDb;
-            var filterBox = window.m_filterBox;
-            var entityPlacer = controller.m_entityPlacer;
+            var controller = GameApiCompat.GetBlueprintController(window);
+            var unlockedDb = GameApiCompat.GetUnlockedProtosDb(window);
+            var filterBox = GameApiCompat.GetBlueprintFilterBox(window);
+            var entityPlacer = GameApiCompat.GetBlueprintEntityPlacer(controller);
 
             var copiedConfigs = new Lyst<EntityConfigData>();
             var copiedSurfaces = new Lyst<TileSurfaceCopyPasteData>();

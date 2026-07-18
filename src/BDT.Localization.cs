@@ -76,7 +76,7 @@ internal static class BdtLocalization
     public static LocStr SettingsHeightFilterHeading =
         Loc.Str("dtk.settings.height_filter.heading", "HEIGHT FILTER", "Settings section heading for height filter settings.");
     public static LocStr SettingsHeightFilterMaxVisible =
-        Loc.Str("dtk.settings.height_filter_max_visible.label", "Max visible layer", "Settings row label for max visible layer.");
+        Loc.Str("dtk.settings.height_filter_max_visible.label", "Visible layers", "Settings row label for visible layers.");
     public static LocStr SettingsHeightFilterMaxVisibleDescription =
         Loc.Str("dtk.settings.height_filter_max_visible.description", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
     public static LocStr SettingsHeightFilterShowHotkey =
@@ -285,4 +285,3 @@ internal static class BdtLocalization
     public static LocStr SettingsHotkeyOr =
         Loc.Str("dtk.settings.hotkey.or", "or", "Word 'or' separating hotkeys.");
 }
-

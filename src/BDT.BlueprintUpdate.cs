@@ -73,8 +73,10 @@ internal static class BlueprintUpdater
         {
             var window = (BlueprintsWindow)__instance;
 
-            // m_placementPanel[0] is the inner Row that contains the Place and Demolish buttons.
-            UiComponent innerRow = window.m_placementPanel[0];
+            // m_placementPanel moved from BlueprintsWindow to BlueprintsLibraryTab in 0.8.6.
+            // The old host is still Update 4.1, so remove this compatibility call
+            // only when Update 4.1 itself is no longer supported; see GameApiCompat.
+            UiComponent innerRow = GameApiCompat.GetPlacementPanelFirstChild(window);
 
             var updateBtn = new ButtonIconText(Button.Primary, REPLACE_ICON, "Update".AsLoc())
                 .Tooltip("Update selected blueprint from a new area selection".AsLoc());
@@ -91,11 +93,11 @@ internal static class BlueprintUpdater
 
     private static void OnUpdateClick(BlueprintsWindow window, BlueprintCreationController blueprintCreationController)
     {
-        if (!(window.m_selectedItem.ValueOrNull is BlueprintsWindow.BlueprintTile tile))
+        if (!GameApiCompat.TryGetSelectedBlueprint(window, out IBlueprint blueprint))
             return;
 
-        IBlueprint blueprint = tile.Blueprint;
-        IBlueprintsFolder folder = window.CurrentFolder;
+        object host = GameApiCompat.GetBlueprintLibraryHost(window);
+        IBlueprintsFolder folder = GameApiCompat.GetCurrentFolder(host);
 
         // Capture metadata before the selection tool deactivates the window.
         string name = blueprint.Name;
@@ -136,10 +138,10 @@ internal static class BlueprintUpdater
 
                     // Signal the window to auto-select the new blueprint on re-activation,
                     // which drives a Detail panel refresh.
-                    window.m_newItem = newBpOpt.As<IBlueprintItem>();
+                    GameApiCompat.SetNewBlueprintItem(window, newBpOpt.As<IBlueprintItem>());
                 }
 
-                window.m_controller.ActivateSelf();
+                GameApiCompat.ActivateBlueprintController(window);
             });
     }
 }

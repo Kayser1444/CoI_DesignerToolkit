@@ -16,6 +16,7 @@ using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
 using Mafi.Unity.Ui.Library;
 using UnityEngine;
+using EntityId = Mafi.Core.EntityId;
 
 namespace CoIDesignerToolkit;
 

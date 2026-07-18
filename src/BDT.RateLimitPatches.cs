@@ -20,7 +20,6 @@ public static class RateLimitPatches
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.RateLimitPatches");
 
-    private static MethodInfo? s_productsManagerProductCreated;
     private static MethodInfo? s_singleCounterReportValue;
     private static FieldInfo? s_tpCounterSource;
 
@@ -28,15 +27,14 @@ public static class RateLimitPatches
     {
         try
         {
-            if (s_productsManagerProductCreated == null) {
-                s_productsManagerProductCreated = typeof(IProductsManager).GetMethod("ProductCreated", 
-                    BindingFlags.Instance | BindingFlags.Public, 
-                    null, 
-                    new Type[] { typeof(ProductProto), typeof(Quantity), typeof(CreateReason) }, 
-                    null);
-            }
             if (s_singleCounterReportValue == null) {
-                var singleCounterType = typeof(ProductsSourceEntity).Assembly.GetType("Mafi.Core.Simulation.SingleCounter");
+                // Update 4.1 (through 0.8.5) uses the Simulation namespace;
+                // 0.8.6 uses Factory. This fallback must remain when only
+                // pre-4.1 support is dropped.
+                // TODO(COI-DROP-4.1): Keep only the Factory type once Update 4.1
+                // itself is outside the supported range.
+                var singleCounterType = typeof(ProductsSourceEntity).Assembly.GetType("Mafi.Core.Simulation.SingleCounter")
+                    ?? typeof(ProductsSourceEntity).Assembly.GetType("Mafi.Core.Factory.SingleCounter");
                 if (singleCounterType != null)
                     s_singleCounterReportValue = singleCounterType.GetMethod("ReportValue", BindingFlags.Instance | BindingFlags.Public);
             }
@@ -99,21 +97,31 @@ public static class RateLimitPatches
             while (enumerator.MoveNext())
             {
                 IoPortData current = enumerator.Current;
-                if (current.AllowedProductType == __instance.ProvidedProduct.Value.Type)
+                if (current.AllowedProductType.Equals(__instance.ProvidedProduct.Value.Type))
                 {
                     generated += new Quantity(toGenerate) - current.SendAsMuchAs(new Quantity(toGenerate).Of(__instance.ProvidedProduct.Value));
                 }
             }
             providedLastTickProp?.SetValue(__instance, generated);
             
-            if (s_productsManagerProductCreated != null)
-                s_productsManagerProductCreated.Invoke(__instance.Context.ProductsManager, new object[] { __instance.ProvidedProduct.Value, generated, CreateReason.Cheated });
+            GameApiCompat.ProductCreated(
+                __instance.Context.ProductsManager,
+                __instance.ProvidedProduct.Value,
+                generated,
+                CreateReason.Cheated);
 
             if (s_tpCounterSource != null && s_singleCounterReportValue != null)
             {
                 var tpCounter = s_tpCounterSource.GetValue(__instance);
                 if (tpCounter != null)
+                {
                     s_singleCounterReportValue.Invoke(tpCounter, new object[] { (ushort)generated.Value });
+                    // SingleCounter is a struct in 0.8.6, so reflection mutates a boxed copy.
+                    // Writing it back is harmless on the class-based Update 4.1 shape.
+                    // TODO(COI-DROP-4.1): Remove reflection and the boxed write-back
+                    // when the 0.8.6+ SingleCounter API is the only supported shape.
+                    s_tpCounterSource.SetValue(__instance, tpCounter);
+                }
             }
         }
         catch (Exception ex)
@@ -143,7 +151,11 @@ public static class RateLimitPatches
         }
 
         var toConsume = new ProductQuantity(pq.Product, new Quantity(allowed));
-        __instance.Context.ProductsManager.ProductDestroyed(toConsume, DestroyReason.Cheated);
+        GameApiCompat.ProductDestroyed(
+            __instance.Context.ProductsManager,
+            toConsume.Product,
+            toConsume.Quantity,
+            DestroyReason.Cheated);
 
         var consumedLastTickProp = typeof(ProductsSinkEntity).GetProperty("ConsumedLastTick", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         if (consumedLastTickProp != null)

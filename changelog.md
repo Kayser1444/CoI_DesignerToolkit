@@ -3,6 +3,7 @@
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 ## v0.8.4 [packaged]
 
+- Changed the minimum supported Captain of Industry version to 0.8.5. Older versions may still work, but are unsupported and untested.
 - Replaced custom TMPro-based keybind badge markup in Settings rows with the game's native `KeyBindUi` component to perfectly match the vanilla visual style.
 - Fixed release ZIP entry paths to use portable forward slashes, allowing reliable extraction on Linux.
 - Updated the German, Portuguese, and Swedish layout-box headings.

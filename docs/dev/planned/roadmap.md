@@ -10,9 +10,13 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 
 ### Entity & Transport Overlays
 - [ ] **Ground Pollution (Solid Waste)**: Create a new overlay category for ground pollution caused by solid waste dumping (garbage, toxic waste, slag, etc.), separating it from water pollution.
+- [ ] **Transport Height-Routing Modifier**: Add a modifier key to choose whether transports match the target height as soon as possible or lazily.
 
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.
+
+### Maintenance
+- [ ] **Visible startup banner**: Emit the BDT version and DLL build timestamp during renderer initialization, after `also_log_to_console` is enabled, so it appears in the in-game console as well as the file log; remove the duplicated `[BDT]` prefix at the same time.
 
 ---
 

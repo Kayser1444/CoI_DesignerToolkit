@@ -214,7 +214,7 @@ The pollution heat map/overlay is currently work in progress. Configuration keys
 
 - Compatible with vanilla saves.
 - Can be added to or removed from existing saves.
-- Requires Captain of Industry `0.8.2` or newer.
+- Requires Captain of Industry `0.8.5` or newer; older versions may work but are not supported or tested.
 - Verified with Captain of Industry through `0.8.5`.
 - Blueprint consumers do not need this mod installed.
 - UI translations are included for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.

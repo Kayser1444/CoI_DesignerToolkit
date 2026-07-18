@@ -55,7 +55,10 @@ internal static class BlueprintRecycleBin
 
             var deleteConfirmMethod = windowType.GetMethod(
                 "deleteConfirm",
-                BindingFlags.Instance | BindingFlags.NonPublic);
+                BindingFlags.Instance | BindingFlags.NonPublic)
+                ?? windowType.Assembly
+                    .GetType("Mafi.Unity.Ui.Blueprints.BlueprintsLibraryTab")?
+                    .GetMethod("deleteConfirm", BindingFlags.Instance | BindingFlags.NonPublic);
 
             if (deleteConfirmMethod == null)
             {
@@ -65,7 +68,7 @@ internal static class BlueprintRecycleBin
             {
                 harmony.Patch(deleteConfirmMethod,
                     postfix: new HarmonyMethod(typeof(BlueprintRecycleBin), nameof(DeleteConfirmPostfix)));
-                s_log.Info("Patched BlueprintsWindow.deleteConfirm for confirmation suppression.");
+                s_log.Info("Patched blueprint library deleteConfirm for confirmation suppression.");
             }
         }
         catch (Exception ex)
@@ -137,68 +140,32 @@ internal static class BlueprintRecycleBin
                 return;
             }
 
-            var window = (BlueprintsWindow)__instance;
-            IBlueprintsFolder root = window.BlueprintsLibrary.Root;
+            IBlueprintsFolder root = GameApiCompat.GetBlueprintsLibrary(__instance).Root;
             if (root == null) return;
 
             // 1. If deleting the Recycle Bin folder itself, always prompt with a confirmation warning, even if it is empty!
-            var selectedItemField = window.GetType().GetField("m_selectedItem", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (selectedItemField != null)
+            object? tile = GameApiCompat.GetSelectedBlueprintTile(__instance);
+            if (tile != null)
             {
-                object? selectedItemOpt = selectedItemField.GetValue(window);
-                if (selectedItemOpt != null)
+                var folderProp = tile.GetType().GetProperty("Folder", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var folder = folderProp?.GetValue(tile) as IBlueprintsFolder;
+                if (folder != null && IsRecycleBinFolder(folder, root))
                 {
-                    var hasValueProperty = selectedItemOpt.GetType().GetProperty("HasValue");
-                    if (hasValueProperty != null && (bool)hasValueProperty.GetValue(selectedItemOpt))
-                    {
-                        var valueProperty = selectedItemOpt.GetType().GetProperty("ValueOrNull");
-                        object? tile = valueProperty?.GetValue(selectedItemOpt);
-                        if (tile != null)
-                        {
-                            var folderProp = tile.GetType().GetProperty("Folder", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                            if (folderProp != null)
-                            {
-                                var folder = folderProp.GetValue(tile) as IBlueprintsFolder;
-                                if (folder != null && IsRecycleBinFolder(folder, root))
-                                {
-                                    __result = Mafi.Core.Tr.BlueprintDelete__Confirmation.Format(folder.Name);
-                                    return;
-                                }
-                            }
-                        }
-                    }
+                    __result = Mafi.Core.Tr.BlueprintDelete__Confirmation.Format(folder.Name);
+                    return;
                 }
             }
 
             // Determine if the item being deleted is nested inside the Recycle Bin
-            bool inBin = IsInRecycleBin(window.CurrentFolder, root);
+            bool inBin = IsInRecycleBin(GameApiCompat.GetCurrentFolder(__instance), root);
 
-            if (!inBin)
+            if (!inBin && tile != null)
             {
-                if (selectedItemField != null)
+                var folderProp = tile.GetType().GetProperty("Folder", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var folder = folderProp?.GetValue(tile) as IBlueprintsFolder;
+                if (folder != null && IsInRecycleBin(folder, root))
                 {
-                    object? selectedItemOpt = selectedItemField.GetValue(window);
-                    if (selectedItemOpt != null)
-                    {
-                        var hasValueProperty = selectedItemOpt.GetType().GetProperty("HasValue");
-                        if (hasValueProperty != null && (bool)hasValueProperty.GetValue(selectedItemOpt))
-                        {
-                            var valueProperty = selectedItemOpt.GetType().GetProperty("ValueOrNull");
-                            object? tile = valueProperty?.GetValue(selectedItemOpt);
-                            if (tile != null)
-                            {
-                                var folderProp = tile.GetType().GetProperty("Folder", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                                if (folderProp != null)
-                                {
-                                    var folder = folderProp.GetValue(tile) as IBlueprintsFolder;
-                                    if (folder != null && IsInRecycleBin(folder, root))
-                                    {
-                                        inBin = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    inBin = true;
                 }
             }
 

@@ -117,7 +117,7 @@
   ],
   [
     "dtk.settings.height_filter_max_visible.label",
-    "最大可见层级"
+    "可见层级"
   ],
   [
     "dtk.settings.height_filter_max_visible.description",

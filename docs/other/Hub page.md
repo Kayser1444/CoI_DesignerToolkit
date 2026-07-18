@@ -267,7 +267,7 @@ The **Throughput** settings control the global overlay, overlay hotkey, heat-map
 
 - Compatible with vanilla saves.
 - Can be added to or removed from existing saves.
-- Requires Captain of Industry `0.8.2` or newer.
+- Requires Captain of Industry `0.8.5` or newer; older versions may work but are not supported or tested.
 - Blueprint consumers do not need this mod installed.
 - UI translations included for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
 

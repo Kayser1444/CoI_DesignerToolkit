@@ -17,6 +17,7 @@ using Mafi.Core.Simulation;
 using Mafi.Unity.Entities;
 using CoI.AutoHelpers.Logging;
 using UnityEngine;
+using EntityId = Mafi.Core.EntityId;
 
 namespace CoIDesignerToolkit;
 

@@ -186,7 +186,11 @@ internal sealed class InstantBuildMode : IDisposable
                     Quantity quantity = buffer.RemoveAll();
                     if (quantity.IsPositive)
                     {
-                        storageBase.Context.ProductsManager.ProductDestroyed(buffer.Product, quantity, DestroyReason.Cleared);
+                        GameApiCompat.ProductDestroyed(
+                            storageBase.Context.ProductsManager,
+                            buffer.Product,
+                            quantity,
+                            DestroyReason.Cleared);
                         s_log.Info($"InstantBuild: Cleared {quantity} of {buffer.Product} from storage {storageBase.Id} to allow deconstruction.");
                     }
                 }
