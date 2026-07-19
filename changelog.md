@@ -3,7 +3,7 @@
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 ## v0.8.5 [packaged]
 
-- Updated for compatibility with Captain of Industry Update 2 (v0.8.5+), introducing a game API compatibility layer.
+- Updated for compatibility with Captain of Industry Update 4.2 (v0.8.6), introducing a game API compatibility layer.
 - Updated the minimum supported game version to 0.8.5.
 - Rendered both primary and secondary hotkeys using native `KeyBindUi`, separated by a localized "or" label.
 - Renamed layout box tool settings and hotkey label to "Toggle layout box overlay".
