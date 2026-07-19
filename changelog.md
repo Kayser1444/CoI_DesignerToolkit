@@ -1,12 +1,22 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.4 [packaged]
+## v0.8.5 [packaged]
 
-- Changed the minimum supported Captain of Industry version to 0.8.5. Older versions may still work, but are unsupported and untested.
+- Updated for compatibility with Captain of Industry Update 2 (v0.8.5+), introducing a game API compatibility layer.
+- Updated the minimum supported game version to 0.8.5.
+- Rendered both primary and secondary hotkeys using native `KeyBindUi`, separated by a localized "or" label.
+- Renamed layout box tool settings and hotkey label to "Toggle layout box overlay".
+- Updated the pollution glow (heat map) setting to be off by default.
+- Fixed Swedish translation for "items/min" to "st/min".
+- Updated German, Portuguese, and Swedish layout-box headings and completed other translations.
+- Improved the mod's short description in manifest.json.
+- Fixed release ZIP entry paths to use portable forward slashes, ensuring reliable extraction on Linux.
+
+
+## v0.8.4 [released]
+
 - Replaced custom TMPro-based keybind badge markup in Settings rows with the game's native `KeyBindUi` component to perfectly match the vanilla visual style.
-- Fixed release ZIP entry paths to use portable forward slashes, allowing reliable extraction on Linux.
-- Updated the German, Portuguese, and Swedish layout-box headings.
 
 
 ## v0.8.3 [released]

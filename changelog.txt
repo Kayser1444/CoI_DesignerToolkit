@@ -1,8 +1,15 @@
+v0.8.5 | 2026-07-19
+* Added compatibility update for Captain of Industry Update 2 (v0.8.5+)
+* Render both primary and secondary hotkeys using native KeyBindUi, separated by a localized 'or' label
+* Renamed layout box mode toggle to 'Toggle layout box overlay'
+* Changed default pollution setting so the heat map (glow) is off by default
+* Fixed Swedish translation for 'items/min' to 'st/min'
+* Fixed release ZIP entry paths to use portable forward slashes for Linux compatibility
+* Updated German, Portuguese, and Swedish layout-box headings and completed release translations
+* Improved short mod description
+
 v0.8.4 | 2026-07-07
-* Changed: Minimum supported Captain of Industry version is now 0.8.5; older versions may still work but are unsupported and untested
 * Replaced custom text keybind badges in Settings rows with the native KeyBindUi component to perfectly match the vanilla style
-* Fixed: Release ZIP files now extract correctly on Linux
-* Updated German, Portuguese, and Swedish translations
 
 v0.8.3 | 2026-07-07
 * Extracted and fully localized settings dropdown option labels (All, None, Relative, Capacity) and keybind tooltips
