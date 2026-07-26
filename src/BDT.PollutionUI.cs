@@ -167,18 +167,12 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
     private static Color InterpolateColor(float t)
     {
         t = Mathf.Clamp01(t);
-        Color c1 = new Color(0.18f, 0.80f, 0.44f); // Green
-        Color c2 = new Color(0.95f, 0.61f, 0.07f); // Orange
-        Color c3 = new Color(0.91f, 0.30f, 0.24f); // Red
 
-        if (t <= 0.5f)
-        {
-            return Color.Lerp(c1, c2, t * 2f);
-        }
-        else
-        {
-            return Color.Lerp(c2, c3, (t - 0.5f) * 2f);
-        }
+        // Keep pollution visually separate from the green/orange/red throughput
+        // heatmap. The light end is pure white so the largest polluter remains
+        // the strongest label, while the dark end stays readable on the black box.
+        Color lowPollution = new Color(0.55f, 0.55f, 0.55f);
+        return Color.Lerp(lowPollution, Color.white, t);
     }
 
     private struct RenderTarget
@@ -208,7 +202,9 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         // Overlay Style setup
         GUIStyle style = new GUIStyle(GUI.skin.label);
         style.fontSize = 11;
-        style.fontStyle = UnityEngine.FontStyle.Bold;
+        // Throughput labels use upright bold text. Italics provide a second,
+        // color-independent cue when both overlays are displayed together.
+        style.fontStyle = UnityEngine.FontStyle.BoldAndItalic;
         style.alignment = TextAnchor.MiddleCenter;
         style.normal.textColor = Color.white;
 
