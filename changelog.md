@@ -4,7 +4,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 ## v0.8.6 [packaged]
 
 - Updated max verified game version compatibility to 0.8.6b.
-- Compacted pollution rate text format to `P: X.X` to clearly distinguish pollution labels from throughput labels (`X.X / min`).
+- Compacted pollution rate text format to `[X.X]` to clearly distinguish pollution labels from throughput labels (`X.X / min`) without language-specific prefixes.
 - Adjusted pollution text font style to bold and lightened low-pollution label color to improve text legibility on dark overlay background boxes.
 
 

@@ -301,7 +301,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             float guiY = Screen.height - screenPos.y;
 
             float avg = target.AveragePollution;
-            string text = "P: " + avg.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo);
+            string text = "[" + avg.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo) + "]";
 
             Vector2 size = style.CalcSize(new GUIContent(text));
             float width = size.x + 8f;

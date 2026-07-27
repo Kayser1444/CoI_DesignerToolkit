@@ -1,6 +1,6 @@
 v0.8.6 | 2026-07-27
 * Updated max verified game version compatibility to 0.8.6b
-* Refined pollution overlay text format to 'P: X.X' for compact display and clear distinction from throughput labels
+* Refined pollution overlay text format to '[X.X]' for compact display and language-agnostic distinction from throughput labels
 * Lightened pollution overlay label color to improve legibility on dark background boxes
 
 v0.8.5 | 2026-07-19
