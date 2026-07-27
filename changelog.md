@@ -1,7 +1,14 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.5 [packaged]
+## v0.8.6 [packaged]
+
+- Updated max verified game version compatibility to 0.8.6b.
+- Compacted pollution rate text format to `P: X.X` to clearly distinguish pollution labels from throughput labels (`X.X / min`).
+- Adjusted pollution text font style to bold and lightened low-pollution label color to improve text legibility on dark overlay background boxes.
+
+
+## v0.8.5 [released]
 
 - Updated for compatibility with Captain of Industry Update 4.2 (v0.8.6), introducing a game API compatibility layer.
 - Updated the minimum supported game version to 0.8.5.
@@ -9,14 +16,13 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Renamed layout box tool settings and hotkey label to "Toggle layout box overlay".
 - Updated the pollution glow (heat map) setting to be off by default.
 - Fixed Swedish translation for "items/min" to "st/min".
-- Updated German, Portuguese, and Swedish layout-box headings and completed other translations.
 - Improved the mod's short description in manifest.json.
-- Fixed release ZIP entry paths to use portable forward slashes, ensuring reliable extraction on Linux.
 
 
 ## v0.8.4 [released]
-
+- Fixed release ZIP entry paths to use portable forward slashes, ensuring reliable extraction on Linux.
 - Replaced custom TMPro-based keybind badge markup in Settings rows with the game's native `KeyBindUi` component to perfectly match the vanilla visual style.
+- Updated German, Portuguese, and Swedish layout-box headings and completed other translations.
 
 
 ## v0.8.3 [released]

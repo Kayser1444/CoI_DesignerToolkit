@@ -1,3 +1,8 @@
+v0.8.6 | 2026-07-27
+* Updated max verified game version compatibility to 0.8.6b
+* Refined pollution overlay text format to 'P: X.X' for compact display and clear distinction from throughput labels
+* Lightened pollution overlay label color to improve legibility on dark background boxes
+
 v0.8.5 | 2026-07-19
 * Added compatibility update for Captain of Industry Update 4.2 (v0.8.6)
 * Render both primary and secondary hotkeys using native KeyBindUi, separated by a localized 'or' label
