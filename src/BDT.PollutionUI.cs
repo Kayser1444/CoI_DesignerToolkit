@@ -170,8 +170,8 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
 
         // Keep pollution visually separate from the green/orange/red throughput
         // heatmap. The light end is pure white so the largest polluter remains
-        // the strongest label, while the dark end stays readable on the black box.
-        Color lowPollution = new Color(0.55f, 0.55f, 0.55f);
+        // the strongest label, while the lower end uses a balanced light-grey for legibility.
+        Color lowPollution = new Color(0.70f, 0.70f, 0.70f);
         return Color.Lerp(lowPollution, Color.white, t);
     }
 
@@ -202,9 +202,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         // Overlay Style setup
         GUIStyle style = new GUIStyle(GUI.skin.label);
         style.fontSize = 11;
-        // Throughput labels use upright bold text. Italics provide a second,
-        // color-independent cue when both overlays are displayed together.
-        style.fontStyle = UnityEngine.FontStyle.BoldAndItalic;
+        style.fontStyle = UnityEngine.FontStyle.Bold;
         style.alignment = TextAnchor.MiddleCenter;
         style.normal.textColor = Color.white;
 
@@ -303,7 +301,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             float guiY = Screen.height - screenPos.y;
 
             float avg = target.AveragePollution;
-            string text = avg.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo) + " / min";
+            string text = "P: " + avg.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo);
 
             Vector2 size = style.CalcSize(new GUIContent(text));
             float width = size.x + 8f;
