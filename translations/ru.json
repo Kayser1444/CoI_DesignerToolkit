@@ -1,506 +1,506 @@
 [
-  [
-    "dtk.mod.name",
-    "Инструментарий дизайнера чертежей"
-  ],
-  [
-    "dtk.settings.tab.markdown",
-    "Настройки"
-  ],
-  [
-    "dtk.settings.markdown_copy.heading",
-    "Копирование в Markdown"
-  ],
-  [
-    "dtk.settings.markdown_table_language.label",
-    "Язык таблицы Markdown"
-  ],
-  [
-    "dtk.settings.markdown_table_language.description",
-    "Определяет, какой язык будут использовать заголовки таблиц Markdown и названия продуктов/объектов."
-  ],
-  [
-    "dtk.settings.markdown_table_language.pending",
-    "Английский, Русский, Оба и Гибридный режимы подключены к экспорту Markdown."
-  ],
-  [
-    "dtk.settings.markdown_number_format.label",
-    "Формат чисел Markdown"
-  ],
-  [
-    "dtk.settings.markdown_number_format.description",
-    "Управляет разделителями десятичных и тысячных знаков в экспортируемых файлах Markdown. Автоматический режим соответствует языку отображаемой таблицы: в таблицах на английском языке используются разделители en-US, а в локальных таблицах — текущий язык игры."
-  ],
-  [
-    "dtk.settings.language.english",
-    "Английский"
-  ],
-  [
-    "dtk.settings.language.local",
-    "Русский"
-  ],
-  [
-    "dtk.settings.language.both",
-    "Оба"
-  ],
-  [
-    "dtk.settings.language.hybrid",
-    "Гибридный"
-  ],
-  [
-    "dtk.settings.number_format.auto",
-    "Авто"
-  ],
-  [
-    "dtk.settings.number_format.english",
-    "Английские разделители"
-  ],
-  [
-    "dtk.settings.number_format.local",
-    "Русские разделители"
-  ],
-  [
-    "dtk.settings.instant_build.heading",
-    "МГНОВЕННОЕ СТРОИТЕЛЬСТВО"
-  ],
-  [
-    "dtk.settings.instant_build_mode.label",
-    "Режим мгновенного строительства"
-  ],
-  [
-    "dtk.settings.instant_build_mode.description",
-    "Автоматически и мгновенно завершает строительство, демонтаж, улучшения и понижения без материалов, рабочих и Единства (даже на паузе). Включение этой функции также отключает функцию мгновенного строительства в игре."
-  ],
-  [
-    "dtk.settings.instant_build_mode.sandbox_only",
-    "Проваливай в песочницу, лентяй!"
-  ],
-  [
-    "dtk.settings.legacy_belt_configurations.label",
-    "Разрешить изогнутые наклонные ленты"
-  ],
-  [
-    "dtk.settings.legacy_belt_configurations.description",
-    "Включает стиль строительства транспортёров в стиле «Обновления 1», позволяя транспортёрам поворачивать и подниматься/опускаться на одной клетке (делая возможным строительство изогнутых наклонных лент напрямую)."
-  ],
-  [
-    "dtk.rate_limit.title",
-    "Ограничитель пропускной способности"
-  ],
-  [
-    "dtk.rate_limit.enable",
-    "Ограничить пропускную способность"
-  ],
-  [
-    "dtk.rate_limit.sandbox_only",
-    "Ограничение пропускной способности доступно только в режиме песочницы."
-  ],
-  [
-    "dtk.rate_limit.items_per_min",
-    "ед./мин"
-  ],
-  [
-    "dtk.settings.transport_construction.heading",
-    "СТРОИТЕЛЬСТВО ТРАНСПОРТЁРОВ"
-  ],
-  [
-    "dtk.settings.transport_cleanup.heading",
-    "ОЧИСТКА ТРАНСПОРТЁРОВ"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Горячая клавиша очистки транспортёров"
-  ],
-  [
-    "dtk.settings.height_filter.heading",
-    "ФИЛЬТР ВЫСОТЫ"
-  ],
-  [
-    "dtk.settings.height_filter_max_visible.label",
-    "Видимые уровни"
-  ],
-  [
-    "dtk.settings.height_filter_max_visible.description",
-    "Ограничивает уровень высоты транспортёров, строений и опор, отображаемых в мире."
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "Горячая клавиша показа уровня"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "Горячая клавиша скрытия уровня"
-  ],
-  [
-    "dtk.settings.global_hotkey.description",
-    "Эта комбинация клавиш зарегистрирована в системе управления игрой и может быть настроена в стандартных настройках | Меню управления."
-  ],
-  [
-    "dtk.settings.action.restore_defaults",
-    "Восстановить значения по умолчанию"
-  ],
-  [
-    "dtk.settings.action.restore_defaults.tooltip",
-    "Восстановить глобальные настройки мода по умолчанию для всех параметров."
-  ],
-  [
-    "dtk.settings.action.save_as_global",
-    "Сохранить как конфиг"
-  ],
-  [
-    "dtk.settings.action.save_as_global.tooltip",
-    "Сохраняет эти настройки в config.json. Они будут использоваться как значения по умолчанию для всех новых игр."
-  ],
-  [
-    "dtk.settings.status.restored_defaults",
-    "Встроенные значения по умолчанию восстановлены в памяти."
-  ],
-  [
-    "dtk.settings.status.saved_to_config",
-    "Сохранено в config.json."
-  ],
-  [
-    "dtk.settings.status.save_failed",
-    "Не удалось сохранить: {0}"
-  ],
-  [
-    "dtk.settings.status.store_not_initialized",
-    "Не удалось сохранить: хранилище настроек не инициализировано."
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.button",
-    "Скопировать как Markdown"
-  ],
-  [
-    "dtk.blueprint.copy_as_markdown.tooltip",
-    "Копирует статистику чертежа в буфер обмена в виде таблицы Markdown, готовой для вставки в Hub."
-  ],
-  [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
-    "Копирует список чертежей папки в виде таблицы Markdown в буфер обмена."
-  ],
-  [
-    "dtk.markdown.components.heading",
-    "Компоненты"
-  ],
-  [
-    "dtk.markdown.construction.heading",
-    "Строительство"
-  ],
-  [
-    "dtk.markdown.operational.heading",
-    "Эксплуатация"
-  ],
-  [
-    "dtk.markdown.entity.header",
-    "Объект"
-  ],
-  [
-    "dtk.markdown.count.header",
-    "Количество"
-  ],
-  [
-    "dtk.markdown.product.header",
-    "Продукт"
-  ],
-  [
-    "dtk.markdown.quantity.header",
-    "Количество"
-  ],
-  [
-    "dtk.markdown.property.header",
-    "Свойство"
-  ],
-  [
-    "dtk.markdown.value.header",
-    "Значение"
-  ],
-  [
-    "dtk.markdown.blueprint.header",
-    "Чертёж"
-  ],
-  [
-    "dtk.markdown.folder.header",
-    "Папка"
-  ],
-  [
-    "dtk.markdown.entities.stat",
-    "Объекты"
-  ],
-  [
-    "dtk.markdown.per_month.suffix",
-    "/ мес."
-  ],
-  [
-    "dtk.throughput.title",
-    "Пропускная способность"
-  ],
-  [
-    "dtk.throughput.display",
-    "Отображать пропускную способность"
-  ],
-  [
-    "dtk.throughput.days_to_average",
-    "дней для усреднения"
-  ],
-  [
-    "dtk.settings.throughput.heading",
-    "ПРОПУСКНАЯ СПОСОБНОСТЬ"
-  ],
-  [
-    "dtk.settings.throughput_toggle.label",
-    "Наложение пропускной способности"
-  ],
-  [
-    "dtk.settings.throughput_toggle.description",
-    "Включает/выключает отображение наложения пропускной способности в мире. Отображение для отдельных объектов все еще должно быть включено в инспекторе или с помощью инструмента пропускной способности."
-  ],
-  [
-    "dtk.settings.throughput_glow.label",
-    "Включить эффект свечения тепловой карты"
-  ],
-  [
-    "dtk.settings.throughput_glow.description",
-    "Отбрасывает на землю светящийся свет, соответствующий цвету тепловой карты. Работает независимо от текстового наложения. Отключите, если вызывает задержку/лаги."
-  ],
-  [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "Горячая клавиша наложения пропускной способности"
-  ],
-  [
-    "dtk.settings.throughput_heatmap.label",
-    "Окраска пропускной способности (тепловая карта)"
-  ],
-  [
-    "dtk.settings.throughput_colorblind.label",
-    "Цвета для дальтоников"
-  ],
-  [
-    "dtk.settings.throughput_colorblind.description",
-    "Меняет градиенты тепловой карты с Зелёный-Оранжевый-Красный на Синий-Жёлтый-Красный для лучшей видимости."
-  ],
-  [
-    "dtk.settings.throughput_show_as_percent.label",
-    "Показывать пропускную способность в процентах"
-  ],
-  [
-    "dtk.settings.throughput_show_as_percent.description",
-    "Переключает формат отображения пропускной способности в мире с абсолютных чисел (ед./мин.) на процент от максимальной мощности объекта."
-  ],
-  [
-    "dtk.throughput.aoe_tool.name",
-    "Инструмент выделения области пропускной способности"
-  ],
-  [
-    "dtk.throughput.aoe_tool.tooltip",
-    "Нажмите и протяните, чтобы выбрать область, затем настройте параметры отображения пропускной способности для всех выбранных объектов по типу."
-  ],
-  [
-    "dtk.throughput.aoe_tool.window_title",
-    "Настройка пропускной способности в области"
-  ],
-  [
-    "dtk.throughput.aoe_tool.apply",
-    "Применить"
-  ],
-  [
-    "dtk.throughput.aoe_tool.close",
-    "Закрыть"
-  ],
-  [
-    "dtk.throughput.aoe_tool.no_change",
-    "Без изменений"
-  ],
-  [
-    "dtk.throughput.aoe_tool.enable",
-    "Включить"
-  ],
-  [
-    "dtk.throughput.aoe_tool.disable",
-    "Выключить"
-  ],
-  [
-    "dtk.throughput.aoe_tool.override_days_label",
-    "Установить период усреднения"
-  ],
-  [
-    "dtk.throughput.days",
-    "дней"
-  ],
-  [
-    "dtk.throughput.aoe_tool.global_header",
-    "Групповые настройки"
-  ],
-  [
-    "dtk.throughput.aoe_tool.global_display",
-    "Состояние отображения: "
-  ],
-  [
-    "dtk.throughput.aoe_tool.select_all_label",
-    "Выбрать/отменить выбор всего"
-  ],
-  [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Горячая клавиша инструмента выбора области"
-  ],
-  [
-    "dtk.settings.layout_box.heading",
-    "МАКЕТ"
-  ],
-  [
-    "dtk.settings.layout_box.label",
-    "Переключить наложение рамки макета"
-  ],
-  [
-    "dtk.settings.layout_box.description",
-    "Включает наложение рентгеновских лучей, отображающее воксельные рамки вокруг зданий, чтобы показать их планировку и зазор."
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "Переключить горячую клавишу наложения поля макета"
-  ],
-  [
-    "dtk.settings.recycle_bin.heading",
-    "МУСОРНАЯ КОРЗИНА"
-  ],
-  [
-    "dtk.settings.use_recycle_bin.label",
-    "Использовать корзину"
-  ],
-  [
-    "dtk.settings.use_recycle_bin.description",
-    "Если этот параметр включен, чертежи и папки копируются в корзину перед удалением или обновлением, а всплывающее окно подтверждения удаления подавляется."
-  ],
-  [
-    "dtk.settings.recycle_bin_folder_name.label",
-    "Название папки"
-  ],
-  [
-    "dtk.settings.recycle_bin_folder_name.description",
-    "Название папки в корне книги чертежей, которая будет использоваться в качестве корзины."
-  ],
-  [
-    "dtk.settings.undo.heading",
-    "ОТМЕНА РАЗМЕЩЕНИЯ"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "Горячая клавиша отмены размещения"
-  ],
-  [
-    "dtk.undo.success",
-    "Отмена: размещение успешно отменено."
-  ],
-  [
-    "dtk.undo.no_action",
-    "Отмена: нет действий по размещению, которые можно было бы отменить."
-  ],
-  [
-    "dtk.settings.pollution.heading",
-    "НАЛОЖЕНИЕ ЗАГРЯЗНЕНИЯ"
-  ],
-  [
-    "dtk.settings.pollution_toggle.label",
-    "Наложение загрязнения"
-  ],
-  [
-    "dtk.settings.pollution_toggle.description",
-    "Включает/отключает отображение уровня загрязнения в игровом мире. Отображает средние значения за заданные дни. Эти значения учитывают влияние настроек сложности игры и исследованных технологий снижения загрязнения."
-  ],
-  [
-    "dtk.settings.pollution_glow.label",
-    "Включить эффект свечения тепловой карты"
-  ],
-  [
-    "dtk.settings.pollution_glow.description",
-    "Подсветить светом загрязняющие окружающую среду объекты, соответствующие интенсивности их излучения. Отключите, если это вызывает задержки."
-  ],
-  [
-    "dtk.settings.pollution_days.label",
-    "Период усреднения"
-  ],
-  [
-    "dtk.settings.pollution_days.description",
-    "Настраивает скользящее окно в игровых днях [0-360] для усреднения выбросов. Установка значения 0 полностью отключает сбор данных и исправления."
-  ],
-  [
-    "dtk.settings.pollution_show_air.label",
-    "Показать загрязнение воздуха"
-  ],
-  [
-    "dtk.settings.pollution_show_air.description",
-    "Включает/отключает наложение уровня загрязнения в мире для газообразных выбросов в воздух (дымовые трубы/факелы)."
-  ],
-  [
-    "dtk.settings.pollution_show_ground.label",
-    "Показать загрязнение воды"
-  ],
-  [
-    "dtk.settings.pollution_show_ground.description",
-    "Включает/отключает наложение уровня загрязнения в мире для сбросов жидких вод (сбросов сточных вод)."
-  ],
-  [
-    "dtk.settings.pollution_show_vehicle.label",
-    "Показать загрязнение транспортных средств и поездов"
-  ],
-  [
-    "dtk.settings.pollution_show_vehicle.description",
-    "Включает/отключает наложение уровня загрязнения в мире для транспортных средств и локомотивов."
-  ],
-  [
-    "dtk.settings.pollution_show_ship.label",
-    "Показать загрязнение от кораблей"
-  ],
-  [
-    "dtk.settings.pollution_show_ship.description",
-    "Включает/выключает наложение уровня загрязнения в мире для кораблей. Отображает прогнозируемый уровень загрязнения на основе времени текущего грузового маршрута (туда и обратно) и расхода топлива. Эти значения учитывают влияние настроек сложности игры и исследованных технологий снижения загрязнения."
-  ],
-  [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "Горячая клавиша наложения загрязнения"
-  ],
-  [
-    "dtk.settings.place_folder.heading",
-    "РАЗМЕСТИТЬ ПАПКУ"
-  ],
-  [
-    "dtk.settings.blueprint_spacing.label",
-    "Расстояние между чертежами"
-  ],
-  [
-    "dtk.settings.blueprint_spacing.description",
-    "Расстояние (в плитках) между чертежами, расположенными рядом друг с другом во время пакетной вставки [0–12]."
-  ],
-  [
-    "dtk.blueprint.place_all.button",
-    "Разместить все"
-  ],
-  [
-    "dtk.blueprint.place_all.tooltip",
-    "Разместить все чертежи в эту папку."
-  ],
-  [
-    "dtk.settings.height_filter.all",
-    "Все"
-  ],
-  [
-    "dtk.settings.height_filter.controls_tooltip",
-    "Эти сочетания клавиш зарегистрированы в системе управления игрой и могут быть настроены в стандартных настройках | Меню управления."
-  ],
-  [
-    "dtk.settings.throughput_heatmap.none",
-    "Нет"
-  ],
-  [
-    "dtk.settings.throughput_heatmap.relative",
-    "Относительная"
-  ],
-  [
-    "dtk.settings.throughput_heatmap.capacity",
-    "Пропускная способность"
-  ],
-  [
-    "dtk.settings.hotkey.or",
-    "или"
-  ]
+    [
+        "dtk.mod.name",
+        "Инструментарий дизайнера чертежей"
+    ],
+    [
+        "dtk.settings.tab.markdown",
+        "Настройки"
+    ],
+    [
+        "dtk.settings.markdown_copy.heading",
+        "Копирование в Markdown"
+    ],
+    [
+        "dtk.settings.markdown_table_language.label",
+        "Язык таблицы Markdown"
+    ],
+    [
+        "dtk.settings.markdown_table_language.description",
+        "Определяет, какой язык будут использовать заголовки таблиц Markdown и названия продуктов/объектов."
+    ],
+    [
+        "dtk.settings.markdown_table_language.pending",
+        "Английский, Русский, Оба и Гибридный режимы подключены к экспорту Markdown."
+    ],
+    [
+        "dtk.settings.markdown_number_format.label",
+        "Формат чисел Markdown"
+    ],
+    [
+        "dtk.settings.markdown_number_format.description",
+        "Управляет разделителями десятичных и тысячных знаков в экспортируемых файлах Markdown. Автоматический режим соответствует языку отображаемой таблицы: в таблицах на английском языке используются разделители en-US, а в локальных таблицах — текущий язык игры."
+    ],
+    [
+        "dtk.settings.language.english",
+        "Английский"
+    ],
+    [
+        "dtk.settings.language.local",
+        "Русский"
+    ],
+    [
+        "dtk.settings.language.both",
+        "Оба"
+    ],
+    [
+        "dtk.settings.language.hybrid",
+        "Гибридный"
+    ],
+    [
+        "dtk.settings.number_format.auto",
+        "Авто"
+    ],
+    [
+        "dtk.settings.number_format.english",
+        "Английские разделители"
+    ],
+    [
+        "dtk.settings.number_format.local",
+        "Русские разделители"
+    ],
+    [
+        "dtk.settings.instant_build.heading",
+        "МГНОВЕННОЕ СТРОИТЕЛЬСТВО"
+    ],
+    [
+        "dtk.settings.instant_build_mode.label",
+        "Режим мгновенного строительства"
+    ],
+    [
+        "dtk.settings.instant_build_mode.description",
+        "Автоматически и мгновенно завершает строительство, демонтаж, улучшения и понижения без материалов, рабочих и «Единства» (даже на паузе). Включение этой функции также отключает функцию мгновенного строительства в игре."
+    ],
+    [
+        "dtk.settings.instant_build_mode.sandbox_only",
+        "Проваливай в песочницу, лентяй!"
+    ],
+    [
+        "dtk.settings.legacy_belt_configurations.label",
+        "Разрешить изогнутые наклонные ленты"
+    ],
+    [
+        "dtk.settings.legacy_belt_configurations.description",
+        "Включает стиль строительства транспортёров в стиле «Обновления 1», позволяя транспортёрам поворачивать и подниматься/опускаться на одной клетке (делая возможным строительство изогнутых наклонных лент напрямую)."
+    ],
+    [
+        "dtk.rate_limit.title",
+        "Ограничитель пропускной способности"
+    ],
+    [
+        "dtk.rate_limit.enable",
+        "Ограничить пропускную способность"
+    ],
+    [
+        "dtk.rate_limit.sandbox_only",
+        "Ограничение пропускной способности доступно только в режиме песочницы."
+    ],
+    [
+        "dtk.rate_limit.items_per_min",
+        "ед./мин"
+    ],
+    [
+        "dtk.settings.transport_construction.heading",
+        "СТРОИТЕЛЬСТВО ТРАНСПОРТЁРОВ"
+    ],
+    [
+        "dtk.settings.transport_cleanup.heading",
+        "ОЧИСТКА ТРАНСПОРТЁРОВ"
+    ],
+    [
+        "dtk.settings.transport_cleanup_hotkey.label",
+        "Горячая клавиша очистки транспортёров"
+    ],
+    [
+        "dtk.settings.height_filter.heading",
+        "ФИЛЬТР ВЫСОТЫ"
+    ],
+    [
+        "dtk.settings.height_filter_max_visible.label",
+        "Видимые уровни"
+    ],
+    [
+        "dtk.settings.height_filter_max_visible.description",
+        "Ограничивает уровень высоты транспортёров, строений и опор, отображаемых в мире."
+    ],
+    [
+        "dtk.settings.height_filter_show_hotkey.label",
+        "Горячая клавиша показа уровня"
+    ],
+    [
+        "dtk.settings.height_filter_hide_hotkey.label",
+        "Горячая клавиша скрытия уровня"
+    ],
+    [
+        "dtk.settings.global_hotkey.description",
+        "Эта комбинация клавиш зарегистрирована в системе управления игрой и может быть настроена в стандартных настройках | Меню управления."
+    ],
+    [
+        "dtk.settings.action.restore_defaults",
+        "Восстановить значения по умолчанию"
+    ],
+    [
+        "dtk.settings.action.restore_defaults.tooltip",
+        "Восстановить глобальные настройки мода по умолчанию для всех параметров."
+    ],
+    [
+        "dtk.settings.action.save_as_global",
+        "Сохранить как конфиг"
+    ],
+    [
+        "dtk.settings.action.save_as_global.tooltip",
+        "Сохраняет эти настройки в «config.json». Они будут использоваться как значения по умолчанию для всех новых игр."
+    ],
+    [
+        "dtk.settings.status.restored_defaults",
+        "Встроенные значения по умолчанию восстановлены в памяти."
+    ],
+    [
+        "dtk.settings.status.saved_to_config",
+        "Сохранено в «config.json»."
+    ],
+    [
+        "dtk.settings.status.save_failed",
+        "Не удалось сохранить: {0}"
+    ],
+    [
+        "dtk.settings.status.store_not_initialized",
+        "Не удалось сохранить: хранилище настроек не инициализировано."
+    ],
+    [
+        "dtk.blueprint.copy_as_markdown.button",
+        "Скопировать как Markdown"
+    ],
+    [
+        "dtk.blueprint.copy_as_markdown.tooltip",
+        "Копирует статистику чертежа в буфер обмена, в виде таблицы Markdown, готовой для вставки в Hub."
+    ],
+    [
+        "dtk.blueprint.copy_folder_as_markdown.tooltip",
+        "Копирует список чертежей папки в виде таблицы Markdown в буфер обмена."
+    ],
+    [
+        "dtk.markdown.components.heading",
+        "Компоненты"
+    ],
+    [
+        "dtk.markdown.construction.heading",
+        "Строительство"
+    ],
+    [
+        "dtk.markdown.operational.heading",
+        "Эксплуатация"
+    ],
+    [
+        "dtk.markdown.entity.header",
+        "Объект"
+    ],
+    [
+        "dtk.markdown.count.header",
+        "Количество"
+    ],
+    [
+        "dtk.markdown.product.header",
+        "Продукт"
+    ],
+    [
+        "dtk.markdown.quantity.header",
+        "Количество"
+    ],
+    [
+        "dtk.markdown.property.header",
+        "Свойство"
+    ],
+    [
+        "dtk.markdown.value.header",
+        "Значение"
+    ],
+    [
+        "dtk.markdown.blueprint.header",
+        "Чертёж"
+    ],
+    [
+        "dtk.markdown.folder.header",
+        "Папка"
+    ],
+    [
+        "dtk.markdown.entities.stat",
+        "Объекты"
+    ],
+    [
+        "dtk.markdown.per_month.suffix",
+        "/ мес."
+    ],
+    [
+        "dtk.throughput.title",
+        "Пропускная способность"
+    ],
+    [
+        "dtk.throughput.display",
+        "Отображать пропускную способность"
+    ],
+    [
+        "dtk.throughput.days_to_average",
+        "дней для усреднения"
+    ],
+    [
+        "dtk.settings.throughput.heading",
+        "ПРОПУСКНАЯ СПОСОБНОСТЬ"
+    ],
+    [
+        "dtk.settings.throughput_toggle.label",
+        "Наложение пропускной способности"
+    ],
+    [
+        "dtk.settings.throughput_toggle.description",
+        "Включает/отключает отображение наложения пропускной способности в мире. Отображение для отдельных объектов все еще должно быть включено в интерфейсе или с помощью инструмента пропускной способности."
+    ],
+    [
+        "dtk.settings.throughput_glow.label",
+        "Включить эффект свечения тепловой карты"
+    ],
+    [
+        "dtk.settings.throughput_glow.description",
+        "Отбрасывает на землю светящийся свет, соответствующий цвету тепловой карты. Работает независимо от текстового наложения. Отключите, если вызывает задержку/лаги."
+    ],
+    [
+        "dtk.settings.throughput_toggle_hotkey.label",
+        "Горячая клавиша наложения пропускной способности"
+    ],
+    [
+        "dtk.settings.throughput_heatmap.label",
+        "Окраска пропускной способности (тепловая карта)"
+    ],
+    [
+        "dtk.settings.throughput_colorblind.label",
+        "Цвета для дальтоников"
+    ],
+    [
+        "dtk.settings.throughput_colorblind.description",
+        "Меняет градиенты тепловой карты с «<color=#00FF00>Зелёный</color>-<color=#FFA500>Оранжевый</color>-<color=#FF0000>Красный</color>» на «<color=#0000FF>Синий</color>-<color=#FFFF00>Жёлтый</color>-<color=#FF0000>Красный</color>» для лучшей видимости."
+    ],
+    [
+        "dtk.settings.throughput_show_as_percent.label",
+        "Показывать пропускную способность в процентах"
+    ],
+    [
+        "dtk.settings.throughput_show_as_percent.description",
+        "Переключает формат отображения пропускной способности в мире с абсолютных чисел (ед./мин.) на процент от максимальной мощности объекта."
+    ],
+    [
+        "dtk.throughput.aoe_tool.name",
+        "Инструмент выделения области пропускной способности"
+    ],
+    [
+        "dtk.throughput.aoe_tool.tooltip",
+        "Нажмите и протяните, чтобы выбрать область, затем настройте параметры отображения пропускной способности для всех выбранных объектов по типу."
+    ],
+    [
+        "dtk.throughput.aoe_tool.window_title",
+        "Настройка пропускной способности в области"
+    ],
+    [
+        "dtk.throughput.aoe_tool.apply",
+        "Применить"
+    ],
+    [
+        "dtk.throughput.aoe_tool.close",
+        "Закрыть"
+    ],
+    [
+        "dtk.throughput.aoe_tool.no_change",
+        "Без изменений"
+    ],
+    [
+        "dtk.throughput.aoe_tool.enable",
+        "Включить"
+    ],
+    [
+        "dtk.throughput.aoe_tool.disable",
+        "Отключить"
+    ],
+    [
+        "dtk.throughput.aoe_tool.override_days_label",
+        "Установить период усреднения"
+    ],
+    [
+        "dtk.throughput.days",
+        "дней"
+    ],
+    [
+        "dtk.throughput.aoe_tool.global_header",
+        "Групповые настройки"
+    ],
+    [
+        "dtk.throughput.aoe_tool.global_display",
+        "Состояние отображения: "
+    ],
+    [
+        "dtk.throughput.aoe_tool.select_all_label",
+        "Выбрать/отменить выбор всего"
+    ],
+    [
+        "dtk.settings.throughput_aoe_tool_hotkey.label",
+        "Горячая клавиша инструмента выбора области"
+    ],
+    [
+        "dtk.settings.layout_box.heading",
+        "МАКЕТ"
+    ],
+    [
+        "dtk.settings.layout_box.label",
+        "Режим рамки макета"
+    ],
+    [
+        "dtk.settings.layout_box.description",
+        "Включает наложение рентгеновских лучей, отображающее воксельные рамки вокруг зданий, чтобы показать их планировку и зазор."
+    ],
+    [
+        "dtk.settings.layout_box_hotkey.label",
+        "Горячая клавиша режима рамки макета"
+    ],
+    [
+        "dtk.settings.recycle_bin.heading",
+        "МУСОРНАЯ КОРЗИНА"
+    ],
+    [
+        "dtk.settings.use_recycle_bin.label",
+        "Использовать корзину"
+    ],
+    [
+        "dtk.settings.use_recycle_bin.description",
+        "Если этот параметр включен, чертежи и папки копируются в корзину перед удалением или обновлением, а всплывающее окно подтверждения удаления подавляется."
+    ],
+    [
+        "dtk.settings.recycle_bin_folder_name.label",
+        "Название папки"
+    ],
+    [
+        "dtk.settings.recycle_bin_folder_name.description",
+        "Название папки в корне книги чертежей, которая будет использоваться в качестве корзины."
+    ],
+    [
+        "dtk.settings.undo.heading",
+        "ОТМЕНА РАЗМЕЩЕНИЯ"
+    ],
+    [
+        "dtk.settings.undo_hotkey.label",
+        "Горячая клавиша отмены размещения"
+    ],
+    [
+        "dtk.undo.success",
+        "Отмена: размещение успешно отменено."
+    ],
+    [
+        "dtk.undo.no_action",
+        "Отмена: нет действий по размещению, которые можно было бы отменить."
+    ],
+    [
+        "dtk.settings.pollution.heading",
+        "НАЛОЖЕНИЕ ЗАГРЯЗНЕНИЯ"
+    ],
+    [
+        "dtk.settings.pollution_toggle.label",
+        "Наложение загрязнения"
+    ],
+    [
+        "dtk.settings.pollution_toggle.description",
+        "Включает/отключает отображение уровня загрязнения в игровом мире. Отображает средние значения за заданные дни. Эти значения учитывают влияние настроек сложности игры и исследованных технологий снижения загрязнения."
+    ],
+    [
+        "dtk.settings.pollution_glow.label",
+        "Включить эффект свечения тепловой карты"
+    ],
+    [
+        "dtk.settings.pollution_glow.description",
+        "Подсветить светом загрязняющие окружающую среду объекты, соответствующие интенсивности их излучения. Отключите, если это вызывает задержки."
+    ],
+    [
+        "dtk.settings.pollution_days.label",
+        "Период усреднения"
+    ],
+    [
+        "dtk.settings.pollution_days.description",
+        "Настраивает скользящее окно в игровых днях [0-360] для усреднения выбросов. Установка значения 0 полностью отключает сбор данных и исправления."
+    ],
+    [
+        "dtk.settings.pollution_show_air.label",
+        "Показать загрязнение воздуха"
+    ],
+    [
+        "dtk.settings.pollution_show_air.description",
+        "Включает/отключает наложение уровня загрязнения в мире для газообразных выбросов в воздух (дымовые трубы/факелы)."
+    ],
+    [
+        "dtk.settings.pollution_show_ground.label",
+        "Показать загрязнение воды"
+    ],
+    [
+        "dtk.settings.pollution_show_ground.description",
+        "Включает/отключает наложение уровня загрязнения в мире для сбросов жидкостей (сбросов сточных вод)."
+    ],
+    [
+        "dtk.settings.pollution_show_vehicle.label",
+        "Показать загрязнение от техники и поездов"
+    ],
+    [
+        "dtk.settings.pollution_show_vehicle.description",
+        "Включает/отключает наложение уровня загрязнения в мире для транспортных средств и локомотивов."
+    ],
+    [
+        "dtk.settings.pollution_show_ship.label",
+        "Показать загрязнение от кораблей"
+    ],
+    [
+        "dtk.settings.pollution_show_ship.description",
+        "Включает/отключает наложение уровня загрязнения в мире, для кораблей и грузовых судов. Отображает прогнозируемый уровень загрязнения на основе времени текущего грузового маршрута (туда и обратно) и расхода топлива. Эти значения учитывают влияние настроек сложности игры и исследованных технологий снижения загрязнения."
+    ],
+    [
+        "dtk.settings.pollution_toggle_hotkey.label",
+        "Горячая клавиша наложения загрязнения"
+    ],
+    [
+        "dtk.settings.place_folder.heading",
+        "РАЗМЕСТИТЬ ПАПКУ"
+    ],
+    [
+        "dtk.settings.blueprint_spacing.label",
+        "Расстояние между чертежами"
+    ],
+    [
+        "dtk.settings.blueprint_spacing.description",
+        "Расстояние (в плитках) между чертежами, расположенными рядом друг с другом во время пакетной вставки [0–12]."
+    ],
+    [
+        "dtk.blueprint.place_all.button",
+        "Разместить все"
+    ],
+    [
+        "dtk.blueprint.place_all.tooltip",
+        "Разместить все чертежи в эту папку."
+    ],
+    [
+        "dtk.settings.height_filter.all",
+        "Все"
+    ],
+    [
+        "dtk.settings.height_filter.controls_tooltip",
+        "Эти сочетания клавиш зарегистрированы в системе управления игрой и могут быть настроены в стандартных настройках | Меню управления."
+    ],
+    [
+        "dtk.settings.throughput_heatmap.none",
+        "Нет"
+    ],
+    [
+        "dtk.settings.throughput_heatmap.relative",
+        "Относительная"
+    ],
+    [
+        "dtk.settings.throughput_heatmap.capacity",
+        "Пропускная способность"
+    ],
+    [
+        "dtk.settings.hotkey.or",
+        "или"
+    ]
 ]

@@ -3,6 +3,7 @@
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 ## v0.8.7 [unreleased]
 
+* Improved: Replaced the Russian translation with the reviewed community-provided localization.
 
 ## v0.8.6 [released]
 
