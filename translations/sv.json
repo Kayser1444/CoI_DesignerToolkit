@@ -444,6 +444,14 @@
     "Aktiverar/inaktiverar överlägget för föroreningshastighet i världen för utsläpp av flytande vatten (avloppsutlopp)."
   ],
   [
+    "dtk.settings.pollution_show_solid_waste.label",
+    "Visa markföroreningar (deponi)"
+  ],
+  [
+    "dtk.settings.pollution_show_solid_waste.description",
+    "Aktiverar/inaktiverar föroreningsöverlagringen i världen för dumpning av fast avfall i terräng (aktiv deponi). Överlagringsetiketter är formaterade som [Förorening(plattor)]."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Visa fordons- och tågföroreningar"
   ],

@@ -145,7 +145,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
             m_pollutionWorldRendererGo = new UnityEngine.GameObject("BDT.PollutionWorldRenderer");
             m_pollutionWorldRenderer = m_pollutionWorldRendererGo.AddComponent<PollutionWorldRenderer>();
-            m_pollutionWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents);
+            m_pollutionWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents, resolver.Resolve<Mafi.Core.Terrain.TerrainManager>(), resolver.Resolve<Mafi.Core.Prototypes.ProtosDb>(), resolver.Resolve<Mafi.Core.PropertiesDb.IPropertiesDb>());
             UnityEngine.Object.DontDestroyOnLoad(m_pollutionWorldRendererGo);
         });
         

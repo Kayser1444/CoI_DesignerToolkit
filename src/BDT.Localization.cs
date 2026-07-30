@@ -248,6 +248,10 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.pollution_show_ground.label", "Show water pollution", "Settings checkbox label for showing water pollution.");
     public static LocStr SettingsPollutionShowGroundDescription =
         Loc.Str("dtk.settings.pollution_show_ground.description", "Enables/disables the in-world pollution rate overlay for liquid water discharges (wastewater outfalls).", "Settings checkbox description for showing water pollution.");
+    public static LocStr SettingsPollutionShowSolidWaste =
+        Loc.Str("dtk.settings.pollution_show_solid_waste.label", "Show ground pollution (landfill)", "Settings checkbox label for showing ground pollution from landfill.");
+    public static LocStr SettingsPollutionShowSolidWasteDescription =
+        Loc.Str("dtk.settings.pollution_show_solid_waste.description", "Enables/disables the in-world pollution overlay for solid waste dumping on terrain (active landfill). Overlay labels are formatted as [Pollution(Tiles)].", "Settings checkbox description for showing ground landfill pollution.");
     public static LocStr SettingsPollutionShowVehicle =
         Loc.Str("dtk.settings.pollution_show_vehicle.label", "Show vehicle & train pollution", "Settings checkbox label for showing vehicle & train pollution.");
     public static LocStr SettingsPollutionShowVehicleDescription =

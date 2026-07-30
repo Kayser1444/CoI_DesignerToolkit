@@ -1,3 +1,8 @@
+v0.8.8 | 2026-07-30
+* Added Ground Pollution (Solid Waste / Landfill) overlay category to visualize solid waste dumping on terrain
+* Implemented terrain landfill scanning and heap clustering displaying overlay markers formatted as '[Pollution(Tiles)]'
+* Fixed: Height Routing modifier hardcoded Alt fallback so unmapping the hotkey in Controls menu properly releases the Alt key
+
 v0.8.7 | 2026-07-30
 * Added Transport Height-Routing Modifier to choose whether belts & pipes match target height as soon as possible (ASAP) or lazily (holding Alt or toggling the toolbar ramp button)
 * Updated Russian translation with reviewed community-provided localization

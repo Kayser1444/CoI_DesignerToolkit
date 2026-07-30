@@ -43,6 +43,7 @@ internal sealed class PollutionManager : IDisposable
     {
         Air,
         Ground,
+        SolidWaste,
         Vehicle,
         Ship
     }

@@ -12,6 +12,9 @@ using Mafi.Core.Entities.Ships;
 using Mafi.Core.Trains;
 using Mafi.Core.Vehicles;
 using Mafi.Core.GameLoop;
+using Mafi.Core.Terrain;
+using Mafi.Core.Prototypes;
+using Mafi.Core.Products;
 using Mafi.Localization;
 using Mafi.Unity.Entities;
 using Mafi.Unity.UiToolkit;
@@ -24,6 +27,14 @@ using UnityEngine.UIElements;
 
 namespace CoIDesignerToolkit;
 
+public sealed class LandfillCluster
+{
+    public Vector3 CenterWorldPos;
+    public int TileCount;
+    public float TotalThickness;
+    public readonly List<Vector3> TilePositions = new List<Vector3>();
+}
+
 public sealed class PollutionWorldRenderer : MonoBehaviour
 {
     private static readonly CoI.AutoHelpers.Logging.ModLogger s_log = new CoI.AutoHelpers.Logging.ModLogger("BDT.PollutionWorldRenderer");
@@ -31,9 +42,14 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
     private IEntitiesManager? m_entitiesManager;
     private EntityHighlighter? m_highlighter;
     private IGameLoopEvents? m_gameLoopEvents;
+    private TerrainManager? m_terrainManager;
+    private TerrainMaterialProto? m_landfillProto;
+    private TerrainMaterialSlimId? m_landfillSlimId;
+    private float m_landfillPollutionMultiplier = 1f;
 
     private bool m_isGameLoaded;
     private readonly List<IEntity> m_cachedMovingEntities = new List<IEntity>();
+    private readonly List<LandfillCluster> m_cachedLandfillClusters = new List<LandfillCluster>();
     private bool m_isSyncUpdateRegistered;
     private Texture2D? m_bgTexture;
     private Texture2D? m_whiteTexture;
@@ -42,11 +58,30 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
     private readonly List<IPanel> m_cachedPanels = new List<IPanel>();
     private int m_lastFrameCount = -1;
 
-    public void Setup(IEntitiesManager entitiesManager, EntityHighlighter highlighter, IGameLoopEvents gameLoopEvents)
+    public void Setup(IEntitiesManager entitiesManager, EntityHighlighter highlighter, IGameLoopEvents gameLoopEvents, TerrainManager? terrainManager = null, ProtosDb? protosDb = null, Mafi.Core.PropertiesDb.IPropertiesDb? propertiesDb = null)
     {
         m_entitiesManager = entitiesManager;
         m_highlighter = highlighter;
         m_gameLoopEvents = gameLoopEvents;
+        m_terrainManager = terrainManager;
+
+        if (protosDb != null)
+        {
+            if (protosDb.TryGetProto<TerrainMaterialProto>(IdsCore.TerrainMaterials.Landfill, out var landfillProto))
+            {
+                m_landfillProto = landfillProto;
+                m_landfillSlimId = landfillProto.SlimId;
+            }
+        }
+
+        if (propertiesDb != null)
+        {
+            try
+            {
+                m_landfillPollutionMultiplier = propertiesDb.GetProperty(IdsCore.PropertyIds.LandfillPollutionMultiplier).Value.ToFloat();
+            }
+            catch { }
+        }
 
         m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, OnSyncUpdate);
         m_isSyncUpdateRegistered = true;
@@ -79,6 +114,83 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
                 {
                     if (s.IsDestroyed || !s.IsEnabled) continue;
                     m_cachedMovingEntities.Add(s);
+                }
+            }
+        }
+
+        // Cache active landfill terrain clusters
+        m_cachedLandfillClusters.Clear();
+        if (m_terrainManager != null && m_landfillSlimId.HasValue && DesignerToolkitSettings.PollutionShowSolidWaste && (DesignerToolkitSettings.PollutionOverlayEnabled || DesignerToolkitSettings.PollutionGlowEnabled))
+        {
+            Camera cam = Camera.main;
+            if (cam != null)
+            {
+                Vector3 camPos = cam.transform.position;
+                Vector3 camFwd = cam.transform.forward;
+                float distance = (camFwd.y != 0f) ? -camPos.y / camFwd.y : 0f;
+                if (distance < 0f) distance = 40f;
+                Vector3 focusPos = camPos + camFwd * distance;
+
+                int centerTileX = Mathf.Clamp((int)(focusPos.x / 2f), 0, m_terrainManager.TerrainSize.X - 1);
+                int centerTileY = Mathf.Clamp((int)(focusPos.z / 2f), 0, m_terrainManager.TerrainSize.Y - 1);
+
+                int radius = Mathf.Clamp((int)(camPos.y * 0.8f + 40f), 40, 120);
+
+                int minX = Math.Max(0, centerTileX - radius);
+                int maxX = Math.Min(m_terrainManager.TerrainSize.X - 1, centerTileX + radius);
+                int minY = Math.Max(0, centerTileY - radius);
+                int maxY = Math.Min(m_terrainManager.TerrainSize.Y - 1, centerTileY + radius);
+
+                TerrainMaterialSlimId targetSlimId = m_landfillSlimId.Value;
+                var activeTilePositions = new List<(Vector3 Pos, float Thickness)>();
+
+                for (int x = minX; x <= maxX; x++)
+                {
+                    for (int y = minY; y <= maxY; y++)
+                    {
+                        var tileIndex = m_terrainManager.GetTileIndex(new Tile2i(x, y));
+                        TileMaterialLayers layers = m_terrainManager.GetLayersRawData(tileIndex);
+                        if (layers.First.SlimId == targetSlimId && layers.First.Thickness.IsPositive)
+                        {
+                            HeightTilesF height = m_terrainManager.GetHeight(tileIndex);
+                            Vector3 worldPos = new Vector3(x * 2f + 1f, height.Value.ToFloat() * 2f + 0.3f, y * 2f + 1f);
+                            activeTilePositions.Add((worldPos, layers.First.Thickness.Value.ToFloat()));
+                        }
+                    }
+                }
+
+                foreach (var item in activeTilePositions)
+                {
+                    LandfillCluster? bestCluster = null;
+                    float bestDist = 12f; // 12m radius for clustering adjacent landfill tiles
+                    foreach (var cluster in m_cachedLandfillClusters)
+                    {
+                        float dist = Vector3.Distance(item.Pos, cluster.CenterWorldPos);
+                        if (dist < bestDist)
+                        {
+                            bestDist = dist;
+                            bestCluster = cluster;
+                        }
+                    }
+
+                    if (bestCluster != null)
+                    {
+                        bestCluster.TilePositions.Add(item.Pos);
+                        bestCluster.TotalThickness += item.Thickness;
+                        bestCluster.TileCount++;
+                        bestCluster.CenterWorldPos = (bestCluster.CenterWorldPos * (bestCluster.TileCount - 1) + item.Pos) / bestCluster.TileCount;
+                    }
+                    else
+                    {
+                        var newCluster = new LandfillCluster
+                        {
+                            CenterWorldPos = item.Pos,
+                            TileCount = 1,
+                            TotalThickness = item.Thickness
+                        };
+                        newCluster.TilePositions.Add(item.Pos);
+                        m_cachedLandfillClusters.Add(newCluster);
+                    }
                 }
             }
         }
@@ -148,16 +260,17 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
                 while (element != null)
                 {
                     if (element.ClassListContains("window") || 
-                        element.ClassListContains("panel") || 
-                        element.ClassListContains("panelHud") || 
-                        element.ClassListContains("floater") || 
-                        element.ClassListContains("frostedPanel"))
+                        element.ClassListContains("modal") || 
+                        element.ClassListContains("panel") ||
+                        element.ClassListContains("toolbar") ||
+                        element.name.Contains("Window") ||
+                        element.name.Contains("Panel"))
                     {
                         return true;
                     }
                     element = element.parent;
                 }
-                return false; // Found an element in this panel but it's not a blocking window/panel
+                return false;
             }
         }
 
@@ -177,14 +290,17 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
 
     private struct RenderTarget
     {
-        public IEntity Entity;
+        public IEntity? Entity;
+        public Vector3? CustomWorldPos;
         public float AveragePollution;
         public PollutionManager.PollutionType Type;
+        public string? CustomText;
+        public LandfillCluster? Cluster;
     }
 
     private void OnGUI()
     {
-        if (!m_isGameLoaded || (!DesignerToolkitSettings.PollutionOverlayEnabled && !DesignerToolkitSettings.PollutionGlowEnabled) || PollutionManager.Instance == null || m_entitiesManager == null)
+        if (!m_isGameLoaded || (!DesignerToolkitSettings.PollutionOverlayEnabled && !DesignerToolkitSettings.PollutionGlowEnabled) || PollutionManager.Instance == null)
         {
             ClearHighlights();
             return;
@@ -221,22 +337,26 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         var states = PollutionManager.Instance.GetAllStates();
 
         // 1. Static targets (machines/outfalls) with recorded average > 0
-        foreach (var kvp in states)
+        if (m_entitiesManager != null)
         {
-            var state = kvp.Value;
-            if (state.Type == PollutionManager.PollutionType.Air && !DesignerToolkitSettings.PollutionShowAir) continue;
-            if (state.Type == PollutionManager.PollutionType.Ground && !DesignerToolkitSettings.PollutionShowGround) continue;
-
-            if (state.Type == PollutionManager.PollutionType.Air || state.Type == PollutionManager.PollutionType.Ground)
+            foreach (var kvp in states)
             {
-                if (state.CachedAveragePollution > 0f && m_entitiesManager.TryGetEntity(new EntityId(kvp.Key), out IEntity entity) && !entity.IsDestroyed)
+                var state = kvp.Value;
+                if (state.Type == PollutionManager.PollutionType.Air && !DesignerToolkitSettings.PollutionShowAir) continue;
+                if (state.Type == PollutionManager.PollutionType.Ground && !DesignerToolkitSettings.PollutionShowGround) continue;
+                if (state.Type == PollutionManager.PollutionType.SolidWaste && !DesignerToolkitSettings.PollutionShowSolidWaste) continue;
+
+                if (state.Type == PollutionManager.PollutionType.Air || state.Type == PollutionManager.PollutionType.Ground || state.Type == PollutionManager.PollutionType.SolidWaste)
                 {
-                    targets.Add(new RenderTarget { Entity = entity, AveragePollution = state.CachedAveragePollution, Type = state.Type });
+                    if (state.CachedAveragePollution > 0f && m_entitiesManager.TryGetEntity(new EntityId(kvp.Key), out IEntity entity) && !entity.IsDestroyed)
+                    {
+                        targets.Add(new RenderTarget { Entity = entity, AveragePollution = state.CachedAveragePollution, Type = state.Type });
+                    }
                 }
             }
         }
 
-        // 2 & 3. Cached moving entities (Vehicles, Locomotives, Ships)
+        // 2. Cached moving entities (Vehicles, Locomotives, Ships)
         foreach (var entity in m_cachedMovingEntities)
         {
             if (entity.IsDestroyed) continue;
@@ -250,6 +370,26 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             targets.Add(new RenderTarget { Entity = entity, AveragePollution = avg, Type = type });
         }
 
+        // 3. Landfill terrain clusters
+        if (DesignerToolkitSettings.PollutionShowSolidWaste)
+        {
+            foreach (var cluster in m_cachedLandfillClusters)
+            {
+                float qty = (m_landfillProto != null) ? m_landfillProto.ThicknessToQuantity(new ThicknessTilesF(cluster.TotalThickness.ToFix32())).Value.ToFloat() : cluster.TotalThickness;
+                float pollution = qty * m_landfillPollutionMultiplier;
+                string pollutionStr = pollution.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo);
+
+                targets.Add(new RenderTarget
+                {
+                    CustomWorldPos = cluster.CenterWorldPos,
+                    AveragePollution = pollution,
+                    Type = PollutionManager.PollutionType.SolidWaste,
+                    CustomText = $"[{pollutionStr}({cluster.TileCount})]",
+                    Cluster = cluster
+                });
+            }
+        }
+
         if (targets.Count == 0)
         {
             ClearHighlights();
@@ -259,7 +399,6 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         float globalMin = float.MaxValue;
         float globalMax = float.MinValue;
 
-        // Calculate min/max for relative scaling using a common pool across all active/toggled-on layers
         foreach (var target in targets)
         {
             float avg = target.AveragePollution;
@@ -268,19 +407,21 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         }
 
         var currentHighlights = new HashSet<int>();
-
         var drawTargets = new List<DrawTarget>();
 
         foreach (var target in targets)
         {
-            IEntity entity = target.Entity;
             Vector3 worldPos;
-            if (entity is IStaticEntity staticEntity)
+            if (target.CustomWorldPos.HasValue)
+            {
+                worldPos = target.CustomWorldPos.Value;
+            }
+            else if (target.Entity is IStaticEntity staticEntity)
             {
                 Tile3i tile = staticEntity.CenterTile;
                 worldPos = new Vector3(tile.X * 2f, tile.Z * 2f, tile.Y * 2f);
             }
-            else if (entity is IEntityWithPosition ePos)
+            else if (target.Entity is IEntityWithPosition ePos)
             {
                 Tile3f pos = ePos.Position3f;
                 worldPos = new Vector3(pos.X.ToFloat() * 2f, pos.Z.ToFloat() * 2f, pos.Y.ToFloat() * 2f);
@@ -301,7 +442,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             float guiY = Screen.height - screenPos.y;
 
             float avg = target.AveragePollution;
-            string text = "[" + avg.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo) + "]";
+            string text = target.CustomText ?? ("[" + avg.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo) + "]");
 
             Vector2 size = style.CalcSize(new GUIContent(text));
             float width = size.x + 8f;
@@ -311,16 +452,14 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             Color textColor = InterpolateColor(t);
 
             // Only highlight/glow entities that have avg > 0
-            if (avg > 0f && m_highlighter != null && DesignerToolkitSettings.PollutionGlowEnabled && entity is IRenderedEntity renderedEntity)
+            if (target.Entity != null && avg > 0f && m_highlighter != null && DesignerToolkitSettings.PollutionGlowEnabled && target.Entity is IRenderedEntity renderedEntity)
             {
-                // The game's 3D selection outline replacement shader does not support alpha blending (rendering a solid silhouette),
-                // so we skip highlighting minor polluters (t < 0.1) entirely to prevent them from generating massive halos.
                 if (t >= 0.1f)
                 {
                     int alpha = (int)(t * 215f);
                     ColorRgba highlightColor = new ColorRgba(255, 255, 255, alpha);
                     try { m_highlighter.Highlight(renderedEntity, highlightColor); } catch { }
-                    currentHighlights.Add(entity.Id.Value);
+                    currentHighlights.Add(target.Entity.Id.Value);
                 }
             }
 
@@ -347,7 +486,8 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
                 TextColor = textColor,
                 Avg = avg,
                 Radius = radius,
-                Opacity = opacity
+                Opacity = opacity,
+                Cluster = target.Cluster
             });
         }
 
@@ -364,9 +504,28 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             {
                 if (dt.Avg > 0f)
                 {
-                    Rect glowRect = new Rect(dt.GuiX - dt.Radius, dt.GuiY - dt.Radius, dt.Radius * 2f, dt.Radius * 2f);
-                    GUI.color = new Color(1f, 1f, 1f, dt.Opacity);
-                    GUI.DrawTexture(glowRect, m_glowTexture);
+                    if (dt.Cluster != null)
+                    {
+                        foreach (var tilePos in dt.Cluster.TilePositions)
+                        {
+                            Vector3 tileScreen = camera.WorldToScreenPoint(tilePos);
+                            if (tileScreen.z > 0 && !IsPositionOverUI(tileScreen))
+                            {
+                                float gx = tileScreen.x;
+                                float gy = Screen.height - tileScreen.y;
+                                float tileRadius = Mathf.Clamp(dt.Radius * 0.7f, 15f, 40f);
+                                Rect glowRect = new Rect(gx - tileRadius, gy - tileRadius, tileRadius * 2f, tileRadius * 2f);
+                                GUI.color = new Color(1f, 1f, 1f, dt.Opacity * 0.7f);
+                                GUI.DrawTexture(glowRect, m_glowTexture);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Rect glowRect = new Rect(dt.GuiX - dt.Radius, dt.GuiY - dt.Radius, dt.Radius * 2f, dt.Radius * 2f);
+                        GUI.color = new Color(1f, 1f, 1f, dt.Opacity);
+                        GUI.DrawTexture(glowRect, m_glowTexture);
+                    }
                 }
             }
             GUI.color = oldColor;
@@ -390,7 +549,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             {
                 if (!currentHighlights.Contains(id))
                 {
-                    if (m_entitiesManager.TryGetEntity(new EntityId(id), out IEntity e) && !e.IsDestroyed)
+                    if (m_entitiesManager != null && m_entitiesManager.TryGetEntity(new EntityId(id), out IEntity e) && !e.IsDestroyed)
                     {
                         if (e is IRenderedEntity re)
                         {
@@ -404,8 +563,6 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             {
                 m_highlightedEntities.Add(id);
             }
-
-            // Glow parameters are no longer globally overridden, so no restoration is needed.
         }
     }
 
@@ -483,5 +640,6 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         public float Avg;
         public float Radius;
         public float Opacity;
+        public LandfillCluster? Cluster;
     }
 }

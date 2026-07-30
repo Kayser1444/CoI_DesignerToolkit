@@ -444,6 +444,14 @@
     "启用/禁用液态水排放（废水排放口）的世界污染率叠加。"
   ],
   [
+    "dtk.settings.pollution_show_solid_waste.label",
+    "显示地面污染（垃圾填埋场）"
+  ],
+  [
+    "dtk.settings.pollution_show_solid_waste.description",
+    "启用/禁用地形上固体废物倾倒的世界污染叠加（活跃垃圾填埋场）。叠加标签的格式为[污染(瓷砖)]。"
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "显示车辆和火车污染"
   ],

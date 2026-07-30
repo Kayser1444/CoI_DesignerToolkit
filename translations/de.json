@@ -444,6 +444,14 @@
     "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für flüssige Wassereinleitungen (Abwasseraustritte)."
   ],
   [
+    "dtk.settings.pollution_show_solid_waste.label",
+    "Bodenverschmutzung (Deponie) anzeigen"
+  ],
+  [
+    "dtk.settings.pollution_show_solid_waste.description",
+    "Aktiviert/deaktiviert die In-World-Verschmutzungsüberlagerung für die Entsorgung fester Abfälle auf dem Gelände (aktive Deponie). Overlay-Beschriftungen sind als [Verschmutzung (Kacheln)] formatiert."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Fahrzeug- und Zugverschmutzung anzeigen"
   ],

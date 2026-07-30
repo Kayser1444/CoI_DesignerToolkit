@@ -1,8 +1,12 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.8 [unreleased]
+## v0.8.8 [packaged]
 
+- Added Ground Pollution (Solid Waste / Landfill) overlay category to BDT's pollution tools (`Show ground pollution (landfill)` setting toggle, localized strings, config store, and map overlay filtering).
+- Implemented terrain landfill tile scanning and heap clustering to render pollution glow highlights and summary labels (`[Pollution(Tiles)]`, e.g. `[24.5(21)]`) for waste dumped directly on terrain.
+- Added tooltip explanation for `[Pollution(Tiles)]` label formatting in setting description.
+- Restored light-grey to white color interpolation for pollution overlay labels to preserve visual contrast against green/red throughput heatmaps.
 - Fixed Height Routing modifier hardcoded Alt fallback so unmapping the hotkey in Controls menu properly releases the Alt key.
 
 ## v0.8.7 [released]

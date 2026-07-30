@@ -444,6 +444,14 @@
     "Ativa/desativa a sobreposição da taxa de poluição mundial para descargas de água líquida (emissários de águas residuais)."
   ],
   [
+    "dtk.settings.pollution_show_solid_waste.label",
+    "Mostrar poluição do solo (aterro sanitário)"
+  ],
+  [
+    "dtk.settings.pollution_show_solid_waste.description",
+    "Ativa/desativa a sobreposição de poluição mundial para despejo de resíduos sólidos no terreno (aterro ativo). Os rótulos de sobreposição são formatados como [Pollution(Tiles)]."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Mostrar poluição de veículos e trens"
   ],

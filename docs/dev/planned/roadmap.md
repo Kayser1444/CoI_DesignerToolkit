@@ -9,7 +9,7 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [ ] **Blueprint terrain designations**: Support copying, pasting, and blueprinting of terrain designations.
 
 ### Entity & Transport Overlays
-- [ ] **Ground Pollution (Solid Waste)**: Create a new overlay category for ground pollution caused by solid waste dumping (garbage, toxic waste, slag, etc.), separating it from water pollution.
+- [ ] **Ground Pollution (Solid Waste)**: Create a visual terrain overlay displaying active `Landfill` ground pollution caused by solid waste dumping, excluding weathered `LandfillOld` and buried landfill layers.
 
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.

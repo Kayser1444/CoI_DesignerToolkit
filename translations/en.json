@@ -444,6 +444,14 @@
     "Enables/disables the in-world pollution rate overlay for liquid water discharges (wastewater outfalls)."
   ],
   [
+    "dtk.settings.pollution_show_solid_waste.label",
+    "Show ground pollution (landfill)"
+  ],
+  [
+    "dtk.settings.pollution_show_solid_waste.description",
+    "Enables/disables the in-world pollution overlay for solid waste dumping on terrain (active landfill). Overlay labels are formatted as [Pollution(Tiles)]."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Show vehicle & train pollution"
   ],

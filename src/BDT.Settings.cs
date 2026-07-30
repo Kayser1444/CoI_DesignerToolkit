@@ -78,6 +78,7 @@ internal static class DesignerToolkitSettings
     private const string POLLUTION_DAYS_TO_AVERAGE_KEY = "pollution_days_to_average";
     private const string POLLUTION_SHOW_AIR_KEY = "pollution_show_air";
     private const string POLLUTION_SHOW_GROUND_KEY = "pollution_show_ground";
+    private const string POLLUTION_SHOW_SOLID_WASTE_KEY = "pollution_show_solid_waste";
     private const string POLLUTION_SHOW_VEHICLE_KEY = "pollution_show_vehicle";
     private const string POLLUTION_SHOW_SHIP_KEY = "pollution_show_ship";
     private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
@@ -116,6 +117,7 @@ internal static class DesignerToolkitSettings
     public static int PollutionDaysToAverage { get; private set; } = 360;
     public static bool PollutionShowAir { get; private set; } = true;
     public static bool PollutionShowGround { get; private set; } = true;
+    public static bool PollutionShowSolidWaste { get; private set; } = true;
     public static bool PollutionShowVehicle { get; private set; } = true;
     public static bool PollutionShowShip { get; private set; } = true;
     public static bool LayoutBoxModeEnabled { get; private set; } = false;
@@ -309,6 +311,7 @@ internal static class DesignerToolkitSettings
 
     public static void SetPollutionShowAir(bool enabled) { PollutionShowAir = enabled; }
     public static void SetPollutionShowGround(bool enabled) { PollutionShowGround = enabled; }
+    public static void SetPollutionShowSolidWaste(bool enabled) { PollutionShowSolidWaste = enabled; }
     public static void SetPollutionShowVehicle(bool enabled) { PollutionShowVehicle = enabled; }
     public static void SetPollutionShowShip(bool enabled) { PollutionShowShip = enabled; }
 
@@ -337,6 +340,7 @@ internal static class DesignerToolkitSettings
         int initialPollutionDaysToAverage = config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 360);
         bool initialPollutionShowAir = config.GetBool(POLLUTION_SHOW_AIR_KEY, true);
         bool initialPollutionShowGround = config.GetBool(POLLUTION_SHOW_GROUND_KEY, true);
+        bool initialPollutionShowSolidWaste = config.GetBool(POLLUTION_SHOW_SOLID_WASTE_KEY, true);
         bool initialPollutionShowVehicle = config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
         bool initialPollutionShowShip = config.GetBool(POLLUTION_SHOW_SHIP_KEY, true);
         bool initialLayoutBoxModeEnabled = config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
@@ -360,6 +364,7 @@ internal static class DesignerToolkitSettings
             initialPollutionDaysToAverage,
             initialPollutionShowAir,
             initialPollutionShowGround,
+            initialPollutionShowSolidWaste,
             initialPollutionShowVehicle,
             initialPollutionShowShip,
             initialLayoutBoxModeEnabled,
@@ -612,6 +617,13 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetPollutionShowGround);
         root.Add(showGroundToggle);
 
+        Toggle showSolidWasteToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPollutionShowSolidWaste.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPollutionShowSolidWasteDescription.AsFormatted)
+            .Value(PollutionShowSolidWaste)
+            .OnValueChanged(SetPollutionShowSolidWaste);
+        root.Add(showSolidWasteToggle);
+
         Toggle showVehicleToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPollutionShowVehicle.AsFormatted)
             .Tooltip(BdtLocalization.SettingsPollutionShowVehicleDescription.AsFormatted)
@@ -776,6 +788,7 @@ internal static class DesignerToolkitSettings
             daysInput.Text(PollutionDaysToAverage.ToString());
             showAirToggle.Value(PollutionShowAir);
             showGroundToggle.Value(PollutionShowGround);
+            showSolidWasteToggle.Value(PollutionShowSolidWaste);
             showVehicleToggle.Value(PollutionShowVehicle);
             showShipToggle.Value(PollutionShowShip);
             layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
@@ -834,6 +847,7 @@ internal static class DesignerToolkitSettings
             SetPollutionDaysToAverage(30);
             SetPollutionShowAir(true);
             SetPollutionShowGround(true);
+            SetPollutionShowSolidWaste(true);
             SetPollutionShowVehicle(true);
             SetPollutionShowShip(true);
             SetUseRecycleBin(true);
@@ -898,6 +912,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_GROUND_KEY, PollutionShowGround, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_SOLID_WASTE_KEY, PollutionShowSolidWaste, out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_VEHICLE_KEY, PollutionShowVehicle, out error))
                 return false;
             if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out error))
@@ -932,6 +948,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, POLLUTION_DAYS_TO_AVERAGE_KEY, PollutionDaysToAverage, out bool pollutionDaysToAverageUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_AIR_KEY, PollutionShowAir, out bool pollutionShowAirUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_GROUND_KEY, PollutionShowGround, out bool pollutionShowGroundUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_SOLID_WASTE_KEY, PollutionShowSolidWaste, out bool pollutionShowSolidWasteUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_VEHICLE_KEY, PollutionShowVehicle, out bool pollutionShowVehicleUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out bool pollutionShowShipUpdated);
             updated = TryReplaceConfigDefault(updated, LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out bool layoutBoxModeEnabledUpdated);
@@ -1185,6 +1202,7 @@ internal static class DesignerToolkitSettings
         int initialPollutionDaysToAverage,
         bool initialPollutionShowAir,
         bool initialPollutionShowGround,
+        bool initialPollutionShowSolidWaste,
         bool initialPollutionShowVehicle,
         bool initialPollutionShowShip,
         bool initialLayoutBoxModeEnabled,
@@ -1206,6 +1224,7 @@ internal static class DesignerToolkitSettings
         PollutionDaysToAverage = initialPollutionDaysToAverage;
         PollutionShowAir = initialPollutionShowAir;
         PollutionShowGround = initialPollutionShowGround;
+        PollutionShowSolidWaste = initialPollutionShowSolidWaste;
         PollutionShowVehicle = initialPollutionShowVehicle;
         PollutionShowShip = initialPollutionShowShip;
         LayoutBoxModeEnabled = initialLayoutBoxModeEnabled;
@@ -1257,6 +1276,8 @@ internal static class DesignerToolkitSettings
                 PollutionShowAir = pollutionShowAir;
             if (TryGetBool(root, "pollutionShowGround", out bool pollutionShowGround))
                 PollutionShowGround = pollutionShowGround;
+            if (TryGetBool(root, "pollutionShowSolidWaste", out bool pollutionShowSolidWaste))
+                PollutionShowSolidWaste = pollutionShowSolidWaste;
             if (TryGetBool(root, "pollutionShowVehicle", out bool pollutionShowVehicle))
                 PollutionShowVehicle = pollutionShowVehicle;
             if (TryGetBool(root, "pollutionShowShip", out bool pollutionShowShip))
@@ -1296,6 +1317,7 @@ internal static class DesignerToolkitSettings
         writer.AppendNumberField("pollutionDaysToAverage", PollutionDaysToAverage);
         writer.AppendBoolField("pollutionShowAir", PollutionShowAir);
         writer.AppendBoolField("pollutionShowGround", PollutionShowGround);
+        writer.AppendBoolField("pollutionShowSolidWaste", PollutionShowSolidWaste);
         writer.AppendBoolField("pollutionShowVehicle", PollutionShowVehicle);
         writer.AppendBoolField("pollutionShowShip", PollutionShowShip);
         writer.AppendBoolField("layoutBoxModeEnabled", LayoutBoxModeEnabled);

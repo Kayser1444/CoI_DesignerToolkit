@@ -444,6 +444,14 @@
     "Habilita/deshabilita la superposición de la tasa de contaminación mundial para descargas de agua líquida (emisarios de aguas residuales)."
   ],
   [
+    "dtk.settings.pollution_show_solid_waste.label",
+    "Mostrar contaminación del suelo (vertedero)"
+  ],
+  [
+    "dtk.settings.pollution_show_solid_waste.description",
+    "Activa/desactiva la superposición de contaminación en el mundo para el vertido de residuos sólidos en el terreno (vertedero activo). Las etiquetas superpuestas tienen el formato [Contaminación (mosaicos)]."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Mostrar la contaminación de vehículos y trenes"
   ],

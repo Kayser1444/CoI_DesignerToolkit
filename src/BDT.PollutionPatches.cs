@@ -204,6 +204,14 @@ public static class PollutionPatches
                         PollutionManager.Instance?.RecordPollution(CurrentExecutingMachine.Id.Value, accepted.Value * mult, PollutionManager.PollutionType.Ground);
                     }
                 }
+                else if (product.Id == IdsCore.Products.Waste)
+                {
+                    Quantity accepted = quantity - __result;
+                    if (accepted.IsPositive)
+                    {
+                        PollutionManager.Instance?.RecordPollution(CurrentExecutingMachine.Id.Value, accepted.Value, PollutionManager.PollutionType.SolidWaste);
+                    }
+                }
             }
         }
     }

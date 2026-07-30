@@ -444,6 +444,14 @@
     "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per gli scarichi di acqua liquida (scarichi delle acque reflue)."
   ],
   [
+    "dtk.settings.pollution_show_solid_waste.label",
+    "Mostra inquinamento del suolo (discarica)"
+  ],
+  [
+    "dtk.settings.pollution_show_solid_waste.description",
+    "Abilita/disabilita la sovrapposizione dell'inquinamento nel mondo per lo scarico di rifiuti solidi sul terreno (discarica attiva). Le etichette in sovrapposizione sono formattate come [Inquinamento(Riquadri)]."
+  ],
+  [
     "dtk.settings.pollution_show_vehicle.label",
     "Mostra l'inquinamento dei veicoli e dei treni"
   ],
