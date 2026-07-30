@@ -104,6 +104,10 @@
     "CONSTRUCCIÓN DE TRANSPORTE"
   ],
   [
+    "dtk.height_routing.tooltip",
+    "Mantenga presionada o presione la tecla de acceso directo para alternar la coincidencia de altura diferida. De forma predeterminada, las correas y tuberías coinciden con la altura objetivo lo antes posible. Cuando esto está habilitado, las correas y tuberías permanecerán en su altura inicial durante el mayor tiempo posible antes de cambiar de elevación."
+  ],
+  [
     "dtk.settings.transport_cleanup.heading",
     "LIMPIEZA DE TRANSPORTE"
   ],

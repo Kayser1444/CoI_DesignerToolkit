@@ -34,6 +34,9 @@ public static class HotkeysRegistry
     [Kb(BDT_CATEGORY, "Bdt_UndoPlacement", "Undo placement", "Undoes the last BDT placement action", false, false, null)]
     public static KeyBindings UndoPlacement { get; set; } = FromPrimaryKeys(KeyCode.LeftControl, KeyCode.Z);
 
+    [Kb(BDT_CATEGORY, "Bdt_TransportLazyHeight", "Transport lazy height routing", "Holds lazy height matching mode while placing transports (Alt)", true, false, null)]
+    public static KeyBindings TransportLazyHeight { get; set; } = FromKeys(KeyCode.LeftAlt, KeyCode.RightAlt);
+
     public static void Initialize(AudioDb audioDb)
     {
         try
@@ -59,11 +62,24 @@ public static class HotkeysRegistry
         return new BdtHotkey(bindings).IsPressed();
     }
 
+    public static bool IsHeld(KeyBindings bindings)
+    {
+        return new BdtHotkey(bindings).IsHeld();
+    }
+
     private static KeyBindings FromPrimaryKeys(params KeyCode[] keys)
     {
         return new KeyBindings(
             ShortcutMode.Game,
             new KeyBinding(BDT_CATEGORY, keys.ToImmutableArray()),
             KeyBinding.Empty(BDT_CATEGORY));
+    }
+
+    private static KeyBindings FromKeys(KeyCode primaryKey, KeyCode secondaryKey)
+    {
+        return new KeyBindings(
+            ShortcutMode.Game,
+            new KeyBinding(BDT_CATEGORY, ImmutableArray.Create(primaryKey)),
+            new KeyBinding(BDT_CATEGORY, ImmutableArray.Create(secondaryKey)));
     }
 }

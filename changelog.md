@@ -4,6 +4,8 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 ## v0.8.7 [unreleased]
 
 * Improved: Replaced the Russian translation with the reviewed community-provided localization.
+- Updated startup banner logging to execute auto console mirroring and emit version and DLL timestamp during renderer initialization so it is visible in the in-game console without a duplicated `[BDT]` prefix.
+- Added Transport Height-Routing Modifier (ASAP vs. Lazy height matching) allowing players to hold Alt (or click the toolbar ramp icon to toggle) while placing belts & pipes to keep them at their starting height for as long as possible before changing elevation.
 
 ## v0.8.6 [released]
 

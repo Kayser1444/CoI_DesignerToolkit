@@ -104,6 +104,10 @@
     "TRANSPORTBAU"
   ],
   [
+    "dtk.height_routing.tooltip",
+    "Halten Sie die Tastenkombination gedrückt oder drücken Sie sie, um die verzögerte Höhenanpassung umzuschalten. Standardmäßig passen sich Riemen und Rohre so schnell wie möglich der Zielhöhe an. Wenn diese Option aktiviert ist, bleiben Bänder und Rohre so lange wie möglich auf ihrer Ausgangshöhe, bevor sie die Höhe ändern."
+  ],
+  [
     "dtk.settings.transport_cleanup.heading",
     "TRANSPORT-BEREINIGUNG"
   ],

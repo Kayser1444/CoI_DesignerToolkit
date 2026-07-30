@@ -1,3 +1,7 @@
+v0.8.7 | 2026-07-30
+* Added Transport Height-Routing Modifier to choose whether belts & pipes match target height as soon as possible (ASAP) or lazily (holding Alt or toggling the toolbar ramp button)
+* Updated Russian translation with reviewed community-provided localization
+
 v0.8.6 | 2026-07-27
 * Updated max verified game version compatibility to 0.8.6b
 * Refined pollution overlay text format to '[X.X]' for compact display and language-agnostic distinction from throughput labels

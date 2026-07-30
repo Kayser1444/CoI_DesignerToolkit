@@ -68,6 +68,9 @@ internal static class BdtLocalization
     public static LocStr SettingsTransportConstructionHeading =
         Loc.Str("dtk.settings.transport_construction.heading", "TRANSPORT CONSTRUCTION", "Settings section heading for transport construction settings.");
 
+    public static LocStr HeightRoutingTooltip =
+        Loc.Str("dtk.height_routing.tooltip", "Hold or press the shortcut key to toggle lazy height matching. By default belts & pipes match target height as soon as possible. When this is enabled, belts & pipes will stay at their starting height for as long as possible before changing elevation.", "Tooltip for lazy height matching shortcut in transport placement tool.");
+
     public static LocStr SettingsTransportCleanupHeading =
         Loc.Str("dtk.settings.transport_cleanup.heading", "TRANSPORT CLEANUP", "Settings section heading for transport cleanup settings.");
 

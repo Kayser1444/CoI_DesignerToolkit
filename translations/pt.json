@@ -104,6 +104,10 @@
     "CONSTRUÇÃO DE TRANSPORTE"
   ],
   [
+    "dtk.height_routing.tooltip",
+    "Segure ou pressione a tecla de atalho para alternar a correspondência de altura lenta. Por padrão, as correias e os tubos correspondem à altura alvo o mais rápido possível. Quando ativado, as correias e os tubos permanecerão na altura inicial pelo maior tempo possível antes de alterar a elevação."
+  ],
+  [
     "dtk.settings.transport_cleanup.heading",
     "LIMPEZA DE TRANSPORTE"
   ],

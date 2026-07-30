@@ -104,6 +104,10 @@
     "TRANSPORTKONSTRUKTION"
   ],
   [
+    "dtk.height_routing.tooltip",
+    "Håll ned eller tryck på kortkommandot för att växla mellan lat höjdmatchning. Som standard matchar bälten och rör målhöjden så snart som möjligt. När detta är aktiverat kommer bälten och rör att hålla sig på starthöjden så länge som möjligt innan höjden ändras."
+  ],
+  [
     "dtk.settings.transport_cleanup.heading",
     "TRANSPORTSTÄDNING"
   ],

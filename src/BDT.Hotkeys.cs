@@ -412,7 +412,8 @@ internal sealed class BdtKeyBindingUpdateHost : MonoBehaviour
             new BdtHotkey(HotkeysRegistry.ThroughputAoETool),
             new BdtHotkey(HotkeysRegistry.PollutionOverlayToggle),
             new BdtHotkey(HotkeysRegistry.LayoutBoxModeToggle),
-            new BdtHotkey(HotkeysRegistry.UndoPlacement)
+            new BdtHotkey(HotkeysRegistry.UndoPlacement),
+            new BdtHotkey(HotkeysRegistry.TransportLazyHeight)
         };
 
         foreach (var hotkey in activeHotkeys)

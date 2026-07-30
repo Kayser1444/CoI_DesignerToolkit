@@ -104,6 +104,10 @@
     "COSTRUZIONE TRASPORTI"
   ],
   [
+    "dtk.height_routing.tooltip",
+    "Tieni premuto o premi il tasto di scelta rapida per attivare/disattivare la corrispondenza pigra dell'altezza. Per impostazione predefinita, nastri e tubi corrispondono all'altezza target il prima possibile. Quando questa opzione è abilitata, i nastri e i tubi rimarranno alla loro altezza iniziale il più a lungo possibile prima di cambiare elevazione."
+  ],
+  [
     "dtk.settings.transport_cleanup.heading",
     "PULIZIA TRASPORTI"
   ],

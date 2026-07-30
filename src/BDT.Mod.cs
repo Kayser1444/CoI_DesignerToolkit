@@ -11,6 +11,7 @@ using System.IO;
 using HarmonyLib;
 using Mafi;
 using Mafi.Collections;
+using Mafi.Core.Console;
 using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
 using Mafi.Core.Game;
@@ -90,6 +91,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         ShortcutsManagerPatches.Apply(m_harmony);
         UndoPatches.Apply(m_harmony);
         PollutionPatches.Apply(m_harmony);
+        HeightRoutingPatches.Apply(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
 
@@ -103,7 +105,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
     {
-        s_log.Info($"[BDT] Blueprint Designer's Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
+        s_log.EnableConsoleLogging();
+        s_log.RegisterAutoConsoleMirroring(this, resolver.Resolve<IGameLoopEvents>(), resolver.Resolve<GameConsoleCommandsExecutor>());
 
         ApplyAutoHelpersLocalization();
         RegisterAutoHelpersLocalizationLateApply(resolver);
@@ -234,6 +237,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         IGameLoopEvents gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
         gameLoopEvents.RegisterRendererInitState(this, () =>
         {
+            s_log.Info($"Blueprint Designer's Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
             s_log.Info("Localization: late apply at renderer init state.");
             ApplyAutoHelpersLocalization();
         });

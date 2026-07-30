@@ -104,6 +104,10 @@
     "传输建造"
   ],
   [
+    "dtk.height_routing.tooltip",
+    "按住或按快捷键可切换延迟高度匹配。默认情况下，传送带和管道会尽快匹配目标高度。启用此功能后，传送带和管道将在更改标高之前尽可能长时间地保持在起始高度。"
+  ],
+  [
     "dtk.settings.transport_cleanup.heading",
     "传输清理"
   ],

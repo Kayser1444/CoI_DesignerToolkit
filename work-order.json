@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 126,
+  "total_keys": 127,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -10,16 +10,16 @@
     "dtk.settings.number_format.auto"
   ],
   "keys": {
-    "dtk.settings.layout_box.heading": {
-      "en": "LAYOUT",
-      "context": "Settings section heading for layout box mode.",
-      "de": "LAYOUT",
-      "pt": "LAYOUT",
-      "sv": "LAYOUT",
-      "es": "DISPOSICIÓN",
-      "it": "DISPOSIZIONE",
-      "ru": "МАКЕТ",
-      "zh": "布局"
+    "dtk.height_routing.tooltip": {
+      "en": "Hold or press the shortcut key to toggle lazy height matching. By default belts & pipes match target height as soon as possible. When this is enabled, belts & pipes will stay at their starting height for as long as possible before changing elevation.",
+      "context": "Tooltip for lazy height matching shortcut in transport placement tool.",
+      "de": "Halten Sie die Tastenkombination gedrückt oder drücken Sie sie, um die verzögerte Höhenanpassung umzuschalten. Standardmäßig passen sich Riemen und Rohre so schnell wie möglich der Zielhöhe an. Wenn diese Option aktiviert ist, bleiben Bänder und Rohre so lange wie möglich auf ihrer Ausgangshöhe, bevor sie die Höhe ändern.",
+      "es": "Mantenga presionada o presione la tecla de acceso directo para alternar la coincidencia de altura diferida. De forma predeterminada, las correas y tuberías coinciden con la altura objetivo lo antes posible. Cuando esto está habilitado, las correas y tuberías permanecerán en su altura inicial durante el mayor tiempo posible antes de cambiar de elevación.",
+      "it": "Tieni premuto o premi il tasto di scelta rapida per attivare/disattivare la corrispondenza pigra dell'altezza. Per impostazione predefinita, nastri e tubi corrispondono all'altezza target il prima possibile. Quando questa opzione è abilitata, i nastri e i tubi rimarranno alla loro altezza iniziale il più a lungo possibile prima di cambiare elevazione.",
+      "pt": "Segure ou pressione a tecla de atalho para alternar a correspondência de altura lenta. Por padrão, as correias e os tubos correspondem à altura alvo o mais rápido possível. Quando ativado, as correias e os tubos permanecerão na altura inicial pelo maior tempo possível antes de alterar a elevação.",
+      "ru": "Удерживайте или нажмите горячую клавишу, чтобы переключить ленивое сопоставление высоты. По умолчанию ремни и трубы соответствуют целевой высоте как можно скорее. Когда эта опция включена, ленты и трубы будут оставаться на исходной высоте как можно дольше, прежде чем изменить высоту.",
+      "sv": "Håll ned eller tryck på kortkommandot för att växla mellan lat höjdmatchning. Som standard matchar bälten och rör målhöjden så snart som möjligt. När detta är aktiverat kommer bälten och rör att hålla sig på starthöjden så länge som möjligt innan höjden ändras.",
+      "zh": "按住或按快捷键可切换延迟高度匹配。默认情况下，传送带和管道会尽快匹配目标高度。启用此功能后，传送带和管道将在更改标高之前尽可能长时间地保持在起始高度。"
     }
   },
   "keys_needing_translation": 1
