@@ -1,7 +1,9 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.9a [unreleased]
+## v0.8.9 [packaged]
+
+- Fixed ground landfill pollution overlay rate calculation and tile clustering to report steady monthly emission rates and track sub-surface landfill layers across the 4-year recovery period.
 
 ## v0.8.8 [released]
 

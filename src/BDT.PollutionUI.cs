@@ -50,6 +50,10 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
     private bool m_isGameLoaded;
     private readonly List<IEntity> m_cachedMovingEntities = new List<IEntity>();
     private readonly List<LandfillCluster> m_cachedLandfillClusters = new List<LandfillCluster>();
+    private readonly Dictionary<Tile2i, (Vector3 Pos, float Thickness)> m_tileMap = new Dictionary<Tile2i, (Vector3 Pos, float Thickness)>();
+    private readonly HashSet<Tile2i> m_visitedSet = new HashSet<Tile2i>();
+    private readonly Queue<Tile2i> m_bfsQueue = new Queue<Tile2i>();
+    private int m_landfillScanCounter;
     private bool m_isSyncUpdateRegistered;
     private Texture2D? m_bgTexture;
     private Texture2D? m_whiteTexture;
@@ -118,78 +122,97 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             }
         }
 
-        // Cache active landfill terrain clusters
-        m_cachedLandfillClusters.Clear();
-        if (m_terrainManager != null && m_landfillSlimId.HasValue && DesignerToolkitSettings.PollutionShowSolidWaste && (DesignerToolkitSettings.PollutionOverlayEnabled || DesignerToolkitSettings.PollutionGlowEnabled))
+        // Cache active landfill terrain clusters (throttled to once every 10 ticks / ~0.5s to minimize CPU overhead)
+        m_landfillScanCounter++;
+        if (m_landfillScanCounter % 10 == 0)
         {
-            Camera cam = Camera.main;
-            if (cam != null)
+            m_cachedLandfillClusters.Clear();
+            if (m_terrainManager != null && m_landfillSlimId.HasValue && DesignerToolkitSettings.PollutionShowSolidWaste && (DesignerToolkitSettings.PollutionOverlayEnabled || DesignerToolkitSettings.PollutionGlowEnabled))
             {
-                Vector3 camPos = cam.transform.position;
-                Vector3 camFwd = cam.transform.forward;
-                float distance = (camFwd.y != 0f) ? -camPos.y / camFwd.y : 0f;
-                if (distance < 0f) distance = 40f;
-                Vector3 focusPos = camPos + camFwd * distance;
-
-                int centerTileX = Mathf.Clamp((int)(focusPos.x / 2f), 0, m_terrainManager.TerrainSize.X - 1);
-                int centerTileY = Mathf.Clamp((int)(focusPos.z / 2f), 0, m_terrainManager.TerrainSize.Y - 1);
-
-                int radius = Mathf.Clamp((int)(camPos.y * 0.8f + 40f), 40, 120);
-
-                int minX = Math.Max(0, centerTileX - radius);
-                int maxX = Math.Min(m_terrainManager.TerrainSize.X - 1, centerTileX + radius);
-                int minY = Math.Max(0, centerTileY - radius);
-                int maxY = Math.Min(m_terrainManager.TerrainSize.Y - 1, centerTileY + radius);
-
-                TerrainMaterialSlimId targetSlimId = m_landfillSlimId.Value;
-                var activeTilePositions = new List<(Vector3 Pos, float Thickness)>();
-
-                for (int x = minX; x <= maxX; x++)
+                Camera cam = Camera.main;
+                if (cam != null)
                 {
-                    for (int y = minY; y <= maxY; y++)
-                    {
-                        var tileIndex = m_terrainManager.GetTileIndex(new Tile2i(x, y));
-                        TileMaterialLayers layers = m_terrainManager.GetLayersRawData(tileIndex);
-                        if (layers.First.SlimId == targetSlimId && layers.First.Thickness.IsPositive)
-                        {
-                            HeightTilesF height = m_terrainManager.GetHeight(tileIndex);
-                            Vector3 worldPos = new Vector3(x * 2f + 1f, height.Value.ToFloat() * 2f + 0.3f, y * 2f + 1f);
-                            activeTilePositions.Add((worldPos, layers.First.Thickness.Value.ToFloat()));
-                        }
-                    }
-                }
+                    Vector3 camPos = cam.transform.position;
+                    Vector3 camFwd = cam.transform.forward;
+                    float distance = (camFwd.y != 0f) ? -camPos.y / camFwd.y : 0f;
+                    if (distance < 0f) distance = 40f;
+                    Vector3 focusPos = camPos + camFwd * distance;
 
-                foreach (var item in activeTilePositions)
-                {
-                    LandfillCluster? bestCluster = null;
-                    float bestDist = 12f; // 12m radius for clustering adjacent landfill tiles
-                    foreach (var cluster in m_cachedLandfillClusters)
+                    int centerTileX = Mathf.Clamp((int)(focusPos.x / 2f), 0, m_terrainManager.TerrainSize.X - 1);
+                    int centerTileY = Mathf.Clamp((int)(focusPos.z / 2f), 0, m_terrainManager.TerrainSize.Y - 1);
+
+                    int radius = Mathf.Clamp((int)(camPos.y * 0.8f + 40f), 40, 120);
+
+                    int minX = Math.Max(0, centerTileX - radius);
+                    int maxX = Math.Min(m_terrainManager.TerrainSize.X - 1, centerTileX + radius);
+                    int minY = Math.Max(0, centerTileY - radius);
+                    int maxY = Math.Min(m_terrainManager.TerrainSize.Y - 1, centerTileY + radius);
+
+                    TerrainMaterialSlimId targetSlimId = m_landfillSlimId.Value;
+                    m_tileMap.Clear();
+
+                    for (int x = minX; x <= maxX; x++)
                     {
-                        float dist = Vector3.Distance(item.Pos, cluster.CenterWorldPos);
-                        if (dist < bestDist)
+                        for (int y = minY; y <= maxY; y++)
                         {
-                            bestDist = dist;
-                            bestCluster = cluster;
+                            var tileCoord = new Tile2i(x, y);
+                            var tileIndex = m_terrainManager.GetTileIndex(tileCoord);
+                            TileMaterialLayers layers = m_terrainManager.GetLayersRawData(tileIndex);
+                            if (TryGetActiveLandfillThickness(layers, targetSlimId, out float activeThickness))
+                            {
+                                HeightTilesF height = m_terrainManager.GetHeight(tileIndex);
+                                Vector3 worldPos = new Vector3(x * 2f + 1f, height.Value.ToFloat() * 2f + 0.3f, y * 2f + 1f);
+                                m_tileMap[tileCoord] = (worldPos, activeThickness);
+                            }
                         }
                     }
 
-                    if (bestCluster != null)
+                    m_visitedSet.Clear();
+
+                    foreach (var kvp in m_tileMap)
                     {
-                        bestCluster.TilePositions.Add(item.Pos);
-                        bestCluster.TotalThickness += item.Thickness;
-                        bestCluster.TileCount++;
-                        bestCluster.CenterWorldPos = (bestCluster.CenterWorldPos * (bestCluster.TileCount - 1) + item.Pos) / bestCluster.TileCount;
-                    }
-                    else
-                    {
-                        var newCluster = new LandfillCluster
+                        Tile2i startTile = kvp.Key;
+                        if (m_visitedSet.Contains(startTile)) continue;
+
+                        var cluster = new LandfillCluster();
+                        m_bfsQueue.Clear();
+
+                        m_bfsQueue.Enqueue(startTile);
+                        m_visitedSet.Add(startTile);
+
+                        Vector3 sumPos = Vector3.zero;
+
+                        while (m_bfsQueue.Count > 0)
                         {
-                            CenterWorldPos = item.Pos,
-                            TileCount = 1,
-                            TotalThickness = item.Thickness
-                        };
-                        newCluster.TilePositions.Add(item.Pos);
-                        m_cachedLandfillClusters.Add(newCluster);
+                            Tile2i current = m_bfsQueue.Dequeue();
+                            var data = m_tileMap[current];
+
+                            cluster.TilePositions.Add(data.Pos);
+                            cluster.TotalThickness += data.Thickness;
+                            cluster.TileCount++;
+                            sumPos += data.Pos;
+
+                            // Check 8-neighbor tiles plus up to 2-tile distance to bridge small gaps
+                            for (int dx = -2; dx <= 2; dx++)
+                            {
+                                for (int dy = -2; dy <= 2; dy++)
+                                {
+                                    if (dx == 0 && dy == 0) continue;
+                                    Tile2i neighbor = new Tile2i(current.X + dx, current.Y + dy);
+                                    if (m_tileMap.ContainsKey(neighbor) && !m_visitedSet.Contains(neighbor))
+                                    {
+                                        m_visitedSet.Add(neighbor);
+                                        m_bfsQueue.Enqueue(neighbor);
+                                    }
+                                }
+                            }
+                        }
+
+                        if (cluster.TileCount > 0)
+                        {
+                            cluster.CenterWorldPos = sumPos / cluster.TileCount;
+                            m_cachedLandfillClusters.Add(cluster);
+                        }
                     }
                 }
             }
@@ -275,6 +298,56 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         }
 
         return false;
+    }
+
+    private static bool TryGetActiveLandfillThickness(TileMaterialLayers layers, TerrainMaterialSlimId targetSlimId, out float activeThickness)
+    {
+        activeThickness = 0f;
+        if (layers.Count <= 0) return false;
+
+        ThicknessTilesF coverDepth = ThicknessTilesF.Zero;
+        ThicknessTilesF maxDepth = ThicknessTilesF.One; // MAX_RECOVERY_DEPTH = 1.0 tiles
+
+        // Layer 1
+        if (coverDepth < maxDepth)
+        {
+            if (layers.First.SlimId == targetSlimId && layers.First.Thickness.IsPositive)
+            {
+                activeThickness += layers.First.Thickness.Value.ToFloat();
+            }
+            coverDepth += layers.First.Thickness;
+        }
+
+        // Layer 2
+        if (layers.Count >= 2 && coverDepth < maxDepth)
+        {
+            if (layers.Second.SlimId == targetSlimId && layers.Second.Thickness.IsPositive)
+            {
+                activeThickness += layers.Second.Thickness.Value.ToFloat();
+            }
+            coverDepth += layers.Second.Thickness;
+        }
+
+        // Layer 3
+        if (layers.Count >= 3 && coverDepth < maxDepth)
+        {
+            if (layers.Third.SlimId == targetSlimId && layers.Third.Thickness.IsPositive)
+            {
+                activeThickness += layers.Third.Thickness.Value.ToFloat();
+            }
+            coverDepth += layers.Third.Thickness;
+        }
+
+        // Layer 4
+        if (layers.Count >= 4 && coverDepth < maxDepth)
+        {
+            if (layers.Fourth.SlimId == targetSlimId && layers.Fourth.Thickness.IsPositive)
+            {
+                activeThickness += layers.Fourth.Thickness.Value.ToFloat();
+            }
+        }
+
+        return activeThickness > 0f;
     }
 
     private static Color InterpolateColor(float t)
@@ -373,16 +446,20 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
         // 3. Landfill terrain clusters
         if (DesignerToolkitSettings.PollutionShowSolidWaste)
         {
+            float recoveryMonths = (m_landfillProto != null && m_landfillProto.DisruptionRecoveryTime.Months > Fix32.Zero) ? m_landfillProto.DisruptionRecoveryTime.Months.ToFloat() : 48f;
             foreach (var cluster in m_cachedLandfillClusters)
             {
-                float qty = (m_landfillProto != null) ? m_landfillProto.ThicknessToQuantity(new ThicknessTilesF(cluster.TotalThickness.ToFix32())).Value.ToFloat() : cluster.TotalThickness;
-                float pollution = qty * m_landfillPollutionMultiplier;
-                string pollutionStr = pollution.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo);
+                // Calculate quantity based on active landfill tile count (standard 1.0 tile thickness)
+                float totalQty = (m_landfillProto != null) ? m_landfillProto.ThicknessToQuantity(new ThicknessTilesF(cluster.TileCount.ToFix32())).Value.ToFloat() : (cluster.TileCount * 10f);
+                
+                // Landfill weathers over its prototype DisruptionRecoveryTime (default 48 months / 4 years). The monthly pollution emission rate remains constant:
+                float monthlyPollutionRate = (totalQty / recoveryMonths) * m_landfillPollutionMultiplier;
+                string pollutionStr = monthlyPollutionRate.ToString("0.0", Mafi.Localization.LocalizationManager.CurrentCultureInfo);
 
                 targets.Add(new RenderTarget
                 {
                     CustomWorldPos = cluster.CenterWorldPos,
-                    AveragePollution = pollution,
+                    AveragePollution = monthlyPollutionRate,
                     Type = PollutionManager.PollutionType.SolidWaste,
                     CustomText = $"[{pollutionStr}({cluster.TileCount})]",
                     Cluster = cluster
