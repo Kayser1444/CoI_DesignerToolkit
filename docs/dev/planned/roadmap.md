@@ -8,9 +8,6 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [ ] **Blueprint editor**: Inspect and edit blueprints directly in-game.
 - [ ] **Blueprint terrain designations**: Support copying, pasting, and blueprinting of terrain designations.
 
-### Entity & Transport Overlays
-- [ ] **Ground Pollution (Solid Waste)**: Create a visual terrain overlay displaying active `Landfill` ground pollution caused by solid waste dumping, excluding weathered `LandfillOld` and buried landfill layers.
-
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.
 
@@ -18,6 +15,7 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 
 ## Completed Features
 
+- [x] **Ground Pollution (Solid Waste / Landfill)** (v0.8.8) — Visual terrain overlay displaying active `Landfill` ground pollution caused by solid waste dumping, with terrain tile scanning, cluster label formatting (`[Pollution(Tiles)]`), and toggle setting.
 - [x] **Visible Startup Banner** — Emit BDT version and DLL build timestamp during renderer initialization after `also_log_to_console` is enabled, without duplicated `[BDT]` prefix.
 - [x] **Transport Height-Routing Modifier** — Add a modifier key (`Alt`) and toolbox toggle to choose whether transports match the target height as soon as possible (ASAP) or lazily.
 - [x] **Throughput AoE Select/Deselect All** (v0.8.1) — Add a master select/deselect all checkbox and a divider to the Throughput Area Tool window, vertically aligned, and implement screen-space label tracking for long transports.
