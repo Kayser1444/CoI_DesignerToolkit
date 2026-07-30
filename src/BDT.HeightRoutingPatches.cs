@@ -247,9 +247,7 @@ internal static class HeightRoutingPatches
             s_lazyHeightBtn.Update(manager);
         }
 
-        bool isHotKeyHeld = manager != null
-            ? manager.IsOn(HotkeysRegistry.TransportLazyHeight)
-            : (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt));
+        bool isHotKeyHeld = manager != null && manager.IsOn(HotkeysRegistry.TransportLazyHeight);
 
         bool newState = isHotKeyHeld || s_manualToggleState;
 

@@ -35,7 +35,7 @@ public static class HotkeysRegistry
     public static KeyBindings UndoPlacement { get; set; } = FromPrimaryKeys(KeyCode.LeftControl, KeyCode.Z);
 
     [Kb(BDT_CATEGORY, "Bdt_TransportLazyHeight", "Transport lazy height routing", "Holds lazy height matching mode while placing transports (Alt)", true, false, null)]
-    public static KeyBindings TransportLazyHeight { get; set; } = FromKeys(KeyCode.LeftAlt, KeyCode.RightAlt);
+    public static KeyBindings TransportLazyHeight { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt);
 
     public static void Initialize(AudioDb audioDb)
     {
