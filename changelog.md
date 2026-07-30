@@ -1,7 +1,7 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.7 [unreleased]
+## v0.8.7 [packaged]
 
 * Improved: Replaced the Russian translation with the reviewed community-provided localization.
 - Updated startup banner logging to execute auto console mirroring and emit version and DLL timestamp during renderer initialization so it is visible in the in-game console without a duplicated `[BDT]` prefix.
