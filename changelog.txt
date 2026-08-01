@@ -1,3 +1,7 @@
+v0.8.10 | 2026-08-01
+* Added initial game startup configuration parameters to start new games paused and automatically create an initial autosave on first unpause
+* Preserved initial setup modifications when reloading initial saves by generating unique autosaves (Initial (1), Initial (2)) upon unpausing
+
 v0.8.9 | 2026-07-30
 * Fixed: Ground pollution overlay calculation and tile clustering to report steady monthly emission rates and track sub-surface landfill layers across the 4-year recovery period
 

@@ -124,6 +124,7 @@ internal static class DesignerToolkitSettings
     public static bool UseRecycleBin { get; private set; } = true;
     public static string RecycleBinFolderName { get; private set; } = "Recycle Bin";
     public static int BlueprintSpacing { get; private set; } = 6;
+    public static bool IsFirstUnpausePending { get; set; } = true;
 
     private static Func<BlueprintsLibrary>? s_blueprintsLibraryProvider;
 
@@ -321,11 +322,12 @@ internal static class DesignerToolkitSettings
     }
 
 
-    public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string modDirectory)
+    public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string modDirectory, bool gameWasLoaded)
     {
         s_config = config;
         s_store = store;
         s_modDirectory = modDirectory;
+        IsFirstUnpausePending = !gameWasLoaded;
         MarkdownTableLanguage initialLanguage = FromInt(config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
         MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
         bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
@@ -348,8 +350,38 @@ internal static class DesignerToolkitSettings
         string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
         int initialBlueprintSpacing = config.GetInt(BLUEPRINT_SPACING_KEY, 6);
 
+        LoadFromStore();
+    }
+
+    public static void LoadFromStore()
+    {
+        if (s_store == null || s_config == null)
+            return;
+
+        MarkdownTableLanguage initialLanguage = FromInt(s_config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
+        MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(s_config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
+        bool initialInstantBuildMode = s_config.GetBool(INSTANT_BUILD_MODE_KEY, false);
+        bool initialLegacyBeltConfigurations = s_config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
+        bool initialThroughputOverlayEnabled = s_config.GetBool(THROUGHPUT_OVERLAY_ENABLED_KEY, true);
+        bool initialThroughputGlowEnabled = s_config.GetBool(THROUGHPUT_GLOW_ENABLED_KEY, true);
+        ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(s_config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode.Capacity));
+        bool initialThroughputColorblindMode = s_config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
+        bool initialThroughputShowAsPercent = s_config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
+        bool initialPollutionOverlayEnabled = s_config.GetBool(POLLUTION_OVERLAY_ENABLED_KEY, false);
+        bool initialPollutionGlowEnabled = s_config.GetBool(POLLUTION_GLOW_ENABLED_KEY, false);
+        int initialPollutionDaysToAverage = s_config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 360);
+        bool initialPollutionShowAir = s_config.GetBool(POLLUTION_SHOW_AIR_KEY, true);
+        bool initialPollutionShowGround = s_config.GetBool(POLLUTION_SHOW_GROUND_KEY, true);
+        bool initialPollutionShowSolidWaste = s_config.GetBool(POLLUTION_SHOW_SOLID_WASTE_KEY, true);
+        bool initialPollutionShowVehicle = s_config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
+        bool initialPollutionShowShip = s_config.GetBool(POLLUTION_SHOW_SHIP_KEY, true);
+        bool initialLayoutBoxModeEnabled = s_config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
+        bool initialUseRecycleBin = s_config.GetBool(USE_RECYCLE_BIN_KEY, true);
+        string initialRecycleBinFolderName = s_config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
+        int initialBlueprintSpacing = s_config.GetInt(BLUEPRINT_SPACING_KEY, 6);
+
         LoadFromJsonStore(
-            store,
+            s_store,
             initialLanguage,
             initialNumberFormat,
             initialInstantBuildMode,
@@ -1290,6 +1322,8 @@ internal static class DesignerToolkitSettings
                 RecycleBinFolderName = recycleBinFolderName;
             if (TryGetInt(root, "blueprintSpacing", out int blueprintSpacing))
                 BlueprintSpacing = blueprintSpacing;
+            if (TryGetBool(root, "isFirstUnpausePending", out bool firstUnpausePending))
+                IsFirstUnpausePending = firstUnpausePending;
         }
         catch (Exception ex)
         {
@@ -1324,6 +1358,7 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("useRecycleBin", UseRecycleBin);
         writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);
         writer.AppendNumberField("blueprintSpacing", BlueprintSpacing);
+        writer.AppendBoolField("isFirstUnpausePending", IsFirstUnpausePending);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
     }

@@ -11,6 +11,7 @@ using System.IO;
 using HarmonyLib;
 using Mafi;
 using Mafi.Collections;
+using Mafi.Core;
 using Mafi.Core.Console;
 using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
@@ -19,6 +20,7 @@ using Mafi.Core.GameLoop;
 using Mafi.Core.Input;
 using Mafi.Core.Mods;
 using Mafi.Core.Prototypes;
+using Mafi.Core.SaveGame;
 using Mafi.Core.Simulation;
 using Mafi.Core.Utils;
 using Mafi.Unity;
@@ -38,6 +40,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private static readonly ModLogger s_log = new ModLogger("BDT");
     private Harmony? m_harmony;
     private ISimLoopEvents? m_simLoopEvents;
+    private IGameLoopEvents? m_gameLoopEvents;
     private IModStateJsonStore? m_settingsStateStore;
     private InstantBuildMode? m_instantBuildMode;
     private TransportCleanupTool? m_transportCleanupTool;
@@ -52,6 +55,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private PollutionManager? m_pollutionManager;
     private PollutionWorldRenderer? m_pollutionWorldRenderer;
     private UnityEngine.GameObject? m_pollutionWorldRendererGo;
+    private Action<GameTime>? m_firstUnpauseAutosaveHandler;
+    private bool m_isInitialSaveInProgress;
 
     public string Name => "Blueprint Designer's Toolkit";
 
@@ -111,11 +116,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         ApplyAutoHelpersLocalization();
         RegisterAutoHelpersLocalizationLateApply(resolver);
 
+        m_gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
         m_simLoopEvents = resolver.Resolve<ISimLoopEvents>();
         m_simLoopEvents.BeforeSave.AddNonSaveable(this, beforeSave);
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
-        DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath);
+        DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath, gameWasLoaded);
         DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
         DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
         HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.Audio.AudioDb>());
@@ -202,6 +208,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<UiRoot>(),
             resolver.Resolve<IRootEscapeManager>());
         ModSettings.RegisterTab(DesignerToolkitSettings.BuildSettingsTab(resolver));
+
+        InitializeNewGameOptions(resolver, gameWasLoaded);
     }
 
     public void MigrateJsonConfig(VersionSlim savedVersion, Dict<string, object> savedValues)
@@ -220,6 +228,13 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             ?? ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         m_settingsStateStore = store;
         DesignerToolkitSettings.SaveToJsonStore(store);
+
+        if (m_isInitialSaveInProgress)
+        {
+            m_isInitialSaveInProgress = false;
+            DesignerToolkitSettings.IsFirstUnpausePending = false;
+            s_log.Info("Initial save blob written with isFirstUnpausePending=true; runtime flag now cleared to false for active session.");
+        }
 
         // Rate limits save automatically when modified, but just in case:
         IModStateJsonStore rateStore = m_rateLimitsStateStore
@@ -341,11 +356,126 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_pollutionManager = null;
         }
 
+        removeFirstUnpauseHandler(m_gameLoopEvents);
+        m_gameLoopEvents = null;
+
         if (m_simLoopEvents != null)
         {
             try { m_simLoopEvents.BeforeSave.RemoveNonSaveable(this, beforeSave); }
             catch { }
             m_simLoopEvents = null;
+        }
+    }
+
+    private void InitializeNewGameOptions(DependencyResolver resolver, bool gameWasLoaded)
+    {
+        bool startNewGamePaused = JsonConfig.GetBool("startNewGamePaused", JsonConfig.GetBool("start_new_game_paused", true));
+        string saveGameOnFirstDayAs = JsonConfig.GetString("saveGameOnFirstDayAs", JsonConfig.GetString("save_game_on_first_day_as", "Initial"));
+
+        IGameLoopEvents gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
+        gameLoopEvents.RegisterRendererInitState(this, () =>
+        {
+            DesignerToolkitSettings.LoadFromStore();
+            s_log.Info($"New game initialization (renderer init): startNewGamePaused={startNewGamePaused}, saveGameOnFirstDayAs='{saveGameOnFirstDayAs}', gameWasLoaded={gameWasLoaded}, isFirstUnpausePending={DesignerToolkitSettings.IsFirstUnpausePending}");
+
+            if (!gameWasLoaded && startNewGamePaused)
+            {
+                try
+                {
+                    IInputScheduler inputScheduler = resolver.Resolve<IInputScheduler>();
+                    inputScheduler.ScheduleInputCmd(new SetSimPauseStateCmd(isPaused: true));
+                    s_log.Info("New game start (renderer init): scheduled initial pause command.");
+                }
+                catch (Exception ex)
+                {
+                    s_log.Exception(ex, "Failed to schedule initial pause command on new game start.");
+                }
+            }
+
+            if (DesignerToolkitSettings.IsFirstUnpausePending && !string.IsNullOrWhiteSpace(saveGameOnFirstDayAs))
+            {
+                SetupFirstUnpauseAutosave(resolver, saveGameOnFirstDayAs.Trim(), !gameWasLoaded && startNewGamePaused);
+            }
+        });
+    }
+
+    private void SetupFirstUnpauseAutosave(DependencyResolver resolver, string saveName, bool startNewGamePaused)
+    {
+        IGameLoopEvents gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
+        ISimLoopEvents simLoopEvents = resolver.Resolve<ISimLoopEvents>();
+        ISaveManager saveManager = resolver.Resolve<ISaveManager>();
+        IFileSystemHelper fsHelper = resolver.Resolve<IFileSystemHelper>();
+        GameNameConfig gameNameConfig = resolver.Resolve<GameNameConfig>();
+
+        bool initialPauseConfirmed = !startNewGamePaused;
+        bool saveRequested = false;
+
+        m_firstUnpauseAutosaveHandler = _ =>
+        {
+            if (saveRequested)
+                return;
+
+            if (!initialPauseConfirmed)
+            {
+                if (simLoopEvents.IsSimPaused)
+                {
+                    initialPauseConfirmed = true;
+                    s_log.Info("Initial game pause state confirmed active. Waiting for player unpause.");
+                }
+                return;
+            }
+
+            if (!simLoopEvents.IsSimPaused)
+            {
+                saveRequested = true;
+                removeFirstUnpauseHandler(gameLoopEvents);
+
+                string uniqueSaveName = GetUniqueSaveName(fsHelper, saveName, gameNameConfig.GameName);
+                s_log.Info($"First unpause by player detected: requesting initial save '{uniqueSaveName}'.");
+                try
+                {
+                    m_isInitialSaveInProgress = true;
+                    DesignerToolkitSettings.IsFirstUnpausePending = true;
+                    saveManager.RequestGameSave(uniqueSaveName);
+                }
+                catch (Exception ex)
+                {
+                    s_log.Exception(ex, $"Failed to request initial game save '{uniqueSaveName}'.");
+                    m_isInitialSaveInProgress = false;
+                    DesignerToolkitSettings.IsFirstUnpausePending = false;
+                }
+            }
+        };
+
+        gameLoopEvents.SyncUpdateStart.AddNonSaveable(this, m_firstUnpauseAutosaveHandler);
+    }
+
+    private static string GetUniqueSaveName(IFileSystemHelper fsHelper, string baseSaveName, string gameName)
+    {
+        string candidateName = baseSaveName;
+        string saveFilePath = fsHelper.GetSaveFilePath(candidateName, gameName);
+        int counter = 1;
+
+        while (File.Exists(saveFilePath))
+        {
+            candidateName = $"{baseSaveName} ({counter})";
+            saveFilePath = fsHelper.GetSaveFilePath(candidateName, gameName);
+            counter++;
+        }
+
+        return candidateName;
+    }
+
+    private void removeFirstUnpauseHandler(IGameLoopEvents? gameLoopEvents)
+    {
+        if (m_firstUnpauseAutosaveHandler != null && gameLoopEvents != null)
+        {
+            try
+            {
+                gameLoopEvents.SyncUpdateStart.RemoveNonSaveable(this, m_firstUnpauseAutosaveHandler);
+            }
+            catch { }
+            m_firstUnpauseAutosaveHandler = null;
         }
     }
 }

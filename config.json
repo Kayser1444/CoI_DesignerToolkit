@@ -1,7 +1,11 @@
 {
-  "last_blueprint_folder": {
-    "default": "",
-    "description": "Do not delete — stores the last-open blueprint book folder so the mod can restore it on load."
+  "startNewGamePaused": {
+    "default": true,
+    "description": "When starting a new game, automatically pause simulation at tick 0."
+  },
+  "saveGameOnFirstDayAs": {
+    "default": "Initial",
+    "description": "When starting a new game, create an initial autosave under this name when first unpaused (blank disables)."
   },
   "blueprint_spacing": {
     "default": 6,
@@ -107,7 +111,9 @@
   "bdtThroughputConfigStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit throughput configurations state. Editing may reset saved BDT throughput configs."
+  },
+  "last_blueprint_folder": {
+    "default": "",
+    "description": "Do not delete — stores the last-open blueprint book folder so the mod can restore it on load."
   }
 }
-
-

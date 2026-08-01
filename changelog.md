@@ -1,7 +1,14 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.10 [unreleased]
+## v0.8.10 [packaged]
+
+- Added initial game startup options controlled via `config.json`:
+  - `startNewGamePaused` (`bool`, default `true`): starts new games paused at tick 0.
+  - `saveGameOnFirstDayAs` (`string`, default `"Initial"`): automatically creates an initial autosave under the configured save game name when a new game is first unpaused (blank string disables).
+- Improved initial autosave handling on first unpause:
+  - Replaced tick-delay logic with a two-stage state machine that confirms the initial pause state before waiting for the player to unpause, ensuring all building setup performed while paused is captured at tick 0 without losing any simulation ticks.
+  - Coupled `isFirstUnpausePending` flag reset directly into `beforeSave()` after state JSON serialization completes, guaranteeing `Initial.spnt` is saved to disk with `isFirstUnpausePending: true` so reloaded initial saves automatically create a new autosave (`Initial (1)`, `Initial (2)`, etc.) when unpaused.
 
 ## v0.8.9 [released]
 
