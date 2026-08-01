@@ -9,29 +9,6 @@
     "dtk.settings.language.local",
     "dtk.settings.number_format.auto"
   ],
-  "keys": {
-    "dtk.settings.pollution_show_solid_waste.label": {
-      "en": "Show ground pollution (landfill)",
-      "context": "Settings checkbox label for showing ground pollution from landfill.",
-      "de": "Bodenverschmutzung (Deponie) anzeigen",
-      "es": "Mostrar contaminación del suelo (vertedero)",
-      "it": "Mostra inquinamento del suolo (discarica)",
-      "pt": "Mostrar poluição do solo (aterro sanitário)",
-      "ru": "Показать загрязнение почвы (свалка)",
-      "sv": "Visa markföroreningar (deponi)",
-      "zh": "显示地面污染（垃圾填埋场）"
-    },
-    "dtk.settings.pollution_show_solid_waste.description": {
-      "en": "Enables/disables the in-world pollution overlay for solid waste dumping on terrain (active landfill). Overlay labels are formatted as [Pollution(Tiles)].",
-      "context": "Settings checkbox description for showing ground landfill pollution.",
-      "de": "Aktiviert/deaktiviert die In-World-Verschmutzungsüberlagerung für die Entsorgung fester Abfälle auf dem Gelände (aktive Deponie). Overlay-Beschriftungen sind als [Verschmutzung (Kacheln)] formatiert.",
-      "es": "Activa/desactiva la superposición de contaminación en el mundo para el vertido de residuos sólidos en el terreno (vertedero activo). Las etiquetas superpuestas tienen el formato [Contaminación (mosaicos)].",
-      "it": "Abilita/disabilita la sovrapposizione dell'inquinamento nel mondo per lo scarico di rifiuti solidi sul terreno (discarica attiva). Le etichette in sovrapposizione sono formattate come [Inquinamento(Riquadri)].",
-      "pt": "Ativa/desativa a sobreposição de poluição mundial para despejo de resíduos sólidos no terreno (aterro ativo). Os rótulos de sobreposição são formatados como [Pollution(Tiles)].",
-      "ru": "Включает/отключает наложение загрязнения в мире для сброса твердых отходов на местности (активная свалка). Метки наложения имеют формат [Загрязнение (Плитки)].",
-      "sv": "Aktiverar/inaktiverar föroreningsöverlagringen i världen för dumpning av fast avfall i terräng (aktiv deponi). Överlagringsetiketter är formaterade som [Förorening(plattor)].",
-      "zh": "启用/禁用地形上固体废物倾倒的世界污染叠加（活跃垃圾填埋场）。叠加标签的格式为[污染(瓷砖)]。"
-    }
-  },
-  "keys_needing_translation": 2
+  "keys": {},
+  "keys_needing_translation": 0
 }
