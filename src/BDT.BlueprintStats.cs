@@ -41,13 +41,11 @@ internal static class BlueprintStats
     private const string ICON_ELECTRICITY = "Assets/Unity/UserInterface/General/ElectricityColored.svg";
     private const string ICON_COMPUTING   = "Assets/Unity/UserInterface/General/Computing128.png";
 
-    // BlueprintDetail adds children in this order (single Add() call, then a second):
-    //   [0] Title  [1] m_items  [2] m_costToBuildTitle  [3] m_costRow
-    //   [4] m_failedToLoadTitle  [5] m_failedToLoadData  [6] DescField  [7] row (bottom)
-    // We rename [2] and insert our ops section at index 4 (just after m_costRow).
-    private const int OPS_SECTION_INSERT_INDEX = 4;
-    // Index of m_costToBuildTitle inside BlueprintDetail's child list.
-    private const int COST_TITLE_INDEX = 2;
+    // Current BlueprintDetail stores the item/cost/missing-content controls in a
+    // nested BlueprintContentSummary at child index 2. Older game versions put
+    // those controls directly on BlueprintDetail, so the helper below supports
+    // both layouts.
+    private const int CONTENT_INDEX = 2;
 
     internal static void ApplyPatches(Harmony harmony)
     {
@@ -98,8 +96,11 @@ internal static class BlueprintStats
         {
             var detail = (Column)__instance;
 
-            // Rename the vanilla "Cost:" label to "Construction cost:".
-            ((IComponentWithText)detail[COST_TITLE_INDEX]).SetValue("Construction cost:".AsLoc());
+            // Rename the vanilla "Cost:" label to "Construction cost:". In
+            // current builds it is nested inside BlueprintContentSummary;
+            // directly casting detail[2] was the source of the reported
+            // InvalidCastException.
+            RenameConstructionCost(detail);
 
             // Build an ops section: heading + tiles row, hidden until a blueprint with stats is shown.
             var tilesRow = new Row().Wrap().MarginTop(1.pt());
@@ -110,12 +111,35 @@ internal static class BlueprintStats
                 new Label("Operational cost:".AsLoc()).FontBold(),
                 tilesRow);
 
-            detail.InsertAt(OPS_SECTION_INSERT_INDEX, opsSection);
+            // Put operational stats immediately after the content/cost block.
+            // The fallback keeps compatibility with the older flattened layout.
+            int insertIndex = detail.ChildrenCount;
+            if (detail.ChildrenCount > CONTENT_INDEX)
+                insertIndex = detail[CONTENT_INDEX] is Column ? CONTENT_INDEX + 1 : CONTENT_INDEX + 2;
+            detail.InsertAt(Math.Min(insertIndex, detail.ChildrenCount), opsSection);
             s_opsSections.Add(__instance, opsSection);
         }
         catch (Exception ex)
         {
             s_log.Exception(ex, "DetailCtorPostfix");
+        }
+    }
+
+    private static void RenameConstructionCost(Column detail)
+    {
+        if (detail.ChildrenCount <= CONTENT_INDEX)
+            return;
+
+        if (detail[CONTENT_INDEX] is IComponentWithText directCostTitle)
+        {
+            directCostTitle.SetValue("Construction cost:".AsLoc());
+            return;
+        }
+
+        if (detail[CONTENT_INDEX] is Column content && content.ChildrenCount > 1 &&
+            content[1] is IComponentWithText nestedCostTitle)
+        {
+            nestedCostTitle.SetValue("Construction cost:".AsLoc());
         }
     }
 
