@@ -269,7 +269,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             return;
         }
 
-        string[] jsonFiles = Directory.GetFiles(translationsDirectory, "*.json", SearchOption.TopDirectoryOnly);
+        string[] jsonFiles = Array.FindAll(
+            Directory.GetFiles(translationsDirectory, "*.json", SearchOption.TopDirectoryOnly),
+            filePath => !Path.GetFileName(filePath).StartsWith(".", StringComparison.Ordinal));
         Array.Sort(jsonFiles, StringComparer.OrdinalIgnoreCase);
         if (jsonFiles.Length == 0)
             s_log.Warning("Localization: no translation JSON files found.");
