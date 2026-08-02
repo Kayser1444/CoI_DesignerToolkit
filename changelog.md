@@ -1,6 +1,8 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
+## v0.8.12 [unreleased]
+
 ## v0.8.11 [released]
 
 - Fixed: Dot-prefixed translation metadata is excluded from runtime localization scans and release packages.
