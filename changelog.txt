@@ -1,3 +1,6 @@
+v0.8.11 | 2026-08-02
+* Fixed: Blueprint operational stats no longer fail when opening blueprint details on current game versions
+
 v0.8.10 | 2026-08-01
 * Added initial game startup configuration parameters to start new games paused and automatically create an initial autosave on first unpause
 * Preserved initial setup modifications when reloading initial saves by generating unique autosaves (Initial (1), Initial (2)) upon unpausing
