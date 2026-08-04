@@ -1,7 +1,6 @@
 v0.8.12 | 2026-08-04
 * Added a compact icon-only Update blueprint control beside the vanilla Place button
 * Added localized Update blueprint tooltip text across all supported languages
-* Fixed: Update blueprint is hidden when a blueprint folder is selected
 
 v0.8.11 | 2026-08-02
 * Fixed: Blueprint operational stats no longer fail when opening blueprint details on current game versions
