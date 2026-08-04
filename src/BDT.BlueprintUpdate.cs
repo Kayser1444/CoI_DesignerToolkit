@@ -78,12 +78,16 @@ internal static class BlueprintUpdater
             // only when Update 4.1 itself is no longer supported; see GameApiCompat.
             UiComponent innerRow = GameApiCompat.GetPlacementPanelFirstChild(window);
 
-            var updateBtn = new ButtonIconText(Button.Primary, REPLACE_ICON, "Update".AsLoc())
-                .Tooltip("Update selected blueprint from a new area selection".AsLoc());
+            var updateBtn = new ButtonIcon(Button.Primary, REPLACE_ICON)
+                .MarginLeft(2.pt())
+                .Tooltip(BdtLocalization.UpdateBlueprintTooltip.AsFormatted);
             updateBtn.OnClick(() => OnUpdateClick(window, blueprintCreationController));
 
-            innerRow.Add(new VerticalDivider().MarginLeftRight(2.pt()));
-            innerRow.Add(updateBtn);
+            // Keep the button inside the vanilla placement panel so it follows the
+            // game's blueprint-only visibility and bottom-edge padding.
+            // The first child is the vanilla Place/deconstruction row. Insert the
+            // icon after Place; the small margin replaces the added spacer line.
+            innerRow.InsertAt(1, updateBtn);
         }
         catch (Exception ex)
         {

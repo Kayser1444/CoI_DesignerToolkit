@@ -273,6 +273,8 @@ internal static class BdtLocalization
         Loc.Str("dtk.blueprint.place_all.button", "Place all", "Button label for placing ghosts of all designs in the folder.");
     public static LocStr PlaceAllTooltip =
         Loc.Str("dtk.blueprint.place_all.tooltip", "Place all blueprints in this folder.", "Tooltip for placing all blueprints in a folder.");
+    public static LocStr UpdateBlueprintTooltip =
+        Loc.Str("dtk.blueprint.update.tooltip", "Update the selected blueprint from a new area selection.", "Tooltip for updating the selected blueprint from a new area selection.");
 
     public static LocStr SettingsHeightFilterAll =
         Loc.Str("dtk.settings.height_filter.all", "All", "Dropdown option for all height filter layers.");

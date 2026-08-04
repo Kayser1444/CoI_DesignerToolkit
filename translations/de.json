@@ -492,6 +492,10 @@
     "Alle Blaupausen in diesem Ordner platzieren."
   ],
   [
+    "dtk.blueprint.update.tooltip",
+    "Die ausgewählte Blaupause aus einer neuen Flächenauswahl aktualisieren."
+  ],
+  [
     "dtk.settings.height_filter.all",
     "Alle"
   ],

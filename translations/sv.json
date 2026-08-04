@@ -492,6 +492,10 @@
     "Placera alla ritningar i den här mappen."
   ],
   [
+    "dtk.blueprint.update.tooltip",
+    "Uppdatera den valda ritningen från ett nytt områdesval."
+  ],
+  [
     "dtk.settings.height_filter.all",
     "Alla"
   ],

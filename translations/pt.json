@@ -492,6 +492,10 @@
     "Colocar todas as plantas nesta pasta."
   ],
   [
+    "dtk.blueprint.update.tooltip",
+    "Atualiza o plano selecionado a partir de uma nova seleção de área."
+  ],
+  [
     "dtk.settings.height_filter.all",
     "Todos"
   ],

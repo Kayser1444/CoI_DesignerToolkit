@@ -492,6 +492,10 @@
     "Place all blueprints in this folder."
   ],
   [
+    "dtk.blueprint.update.tooltip",
+    "Update the selected blueprint from a new area selection."
+  ],
+  [
     "dtk.settings.height_filter.all",
     "All"
   ],

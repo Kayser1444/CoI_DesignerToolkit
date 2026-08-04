@@ -492,6 +492,10 @@
     "Colocar todos los planos en esta carpeta."
   ],
   [
+    "dtk.blueprint.update.tooltip",
+    "Actualiza el plano seleccionado a partir de una nueva selección de área."
+  ],
+  [
     "dtk.settings.height_filter.all",
     "Todos"
   ],

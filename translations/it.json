@@ -492,6 +492,10 @@
     "Posiziona tutti i progetti in questa cartella."
   ],
   [
+    "dtk.blueprint.update.tooltip",
+    "Aggiorna il progetto selezionato da una nuova selezione dell'area."
+  ],
+  [
     "dtk.settings.height_filter.all",
     "Tutti"
   ],

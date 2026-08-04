@@ -492,6 +492,10 @@
     "放置此文件夹中的所有蓝图。"
   ],
   [
+    "dtk.blueprint.update.tooltip",
+    "根据新的区域选择更新所选蓝图。"
+  ],
+  [
     "dtk.settings.height_filter.all",
     "全部"
   ],
