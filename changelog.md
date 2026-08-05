@@ -1,11 +1,10 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.12 [unreleased]
+## v0.8.12 [released]
 
 - Added localized tooltip text for the Update blueprint action across all supported languages.
 - Changed the Update blueprint control to a compact icon-only button positioned immediately after the vanilla Place button.
-- Fixed: The Update blueprint control is hidden when a blueprint folder is selected.
 - Refined Update blueprint spacing to match the surrounding vanilla blueprint-book controls.
 
 ## v0.8.11 [released]
