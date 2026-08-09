@@ -1,3 +1,13 @@
+v0.8.13 | 2026-08-09
+* Added a Radiation Overlay that displays unsafe radioactive inventory at daily vanilla radiation sample points
+* Added configurable radiation averaging, translationless #N.D# labels, and optional green entity glow
+* Added radiation source coverage for flat conveyors and trucks
+* Fixed: Radiation and pollution overlays remain visible while the BDT Mod Settings window is open
+* Fixed: Radiation entity glow is removed when its source entity is deleted
+* Fixed: Radiation heat-map scaling uses zero as its baseline instead of the lowest currently visible source
+* Fixed: Right Alt keybindings no longer capture synthetic Ctrl and AltGr aliases
+* Fixed: Lazy height routing uses the vanilla transport modifier sound
+
 v0.8.12 | 2026-08-04
 * Added a compact icon-only Update blueprint control beside the vanilla Place button
 * Added localized Update blueprint tooltip text across all supported languages

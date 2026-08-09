@@ -472,6 +472,38 @@
     "Atajo de superposición de contaminación"
   ],
   [
+    "dtk.settings.radiation.heading",
+    "SUPERPOSICIÓN DE RADIACIÓN"
+  ],
+  [
+    "dtk.settings.radiation_toggle.label",
+    "Superposición de radiación"
+  ],
+  [
+    "dtk.settings.radiation_toggle.description",
+    "Muestra la cantidad promedio de producto radiactivo inseguro retenido por cada entidad en los puntos de muestreo diarios utilizados por la superposición."
+  ],
+  [
+    "dtk.settings.radiation_glow.label",
+    "Habilitar el efecto de brillo del mapa de calor"
+  ],
+  [
+    "dtk.settings.radiation_glow.description",
+    "Resalta y agrega un brillo a las entidades de acuerdo con su inventario radiactivo inseguro muestreado. Desactívelo si causa retraso."
+  ],
+  [
+    "dtk.settings.radiation_days.label",
+    "Período promedio"
+  ],
+  [
+    "dtk.settings.radiation_days.description",
+    "Configura la ventana deslizante en los días de juego [0-360] para promediar el inventario radiactivo inseguro muestreado. Establecer esto en 0 deshabilita la recopilación de datos."
+  ],
+  [
+    "dtk.settings.radiation_toggle_hotkey.label",
+    "Tecla de acceso rápido de superposición de radiación"
+  ],
+  [
     "dtk.settings.place_folder.heading",
     "COLOCAR CARPETA"
   ],

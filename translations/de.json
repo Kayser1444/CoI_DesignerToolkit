@@ -472,6 +472,38 @@
     "Hotkey zur Verschmutzungsüberlagerung"
   ],
   [
+    "dtk.settings.radiation.heading",
+    "STRAHLUNGSÜBERLAGERUNG"
+  ],
+  [
+    "dtk.settings.radiation_toggle.label",
+    "Strahlungsüberlagerung"
+  ],
+  [
+    "dtk.settings.radiation_toggle.description",
+    "Zeigt die durchschnittliche Menge unsicherer radioaktiver Produkte an, die von jeder Entität an den von der Überlagerung verwendeten täglichen Probenpunkten gehalten wird."
+  ],
+  [
+    "dtk.settings.radiation_glow.label",
+    "Aktivieren Sie den Heatmap-Glüheffekt"
+  ],
+  [
+    "dtk.settings.radiation_glow.description",
+    "Hebt Entitäten entsprechend ihrem beprobten unsicheren radioaktiven Inventar hervor und verleiht ihnen Glanz. Deaktivieren, wenn es zu Verzögerungen kommt."
+  ],
+  [
+    "dtk.settings.radiation_days.label",
+    "Mittelungszeitraum"
+  ],
+  [
+    "dtk.settings.radiation_days.description",
+    "Konfiguriert das Schiebefenster in Spieltagen [0-360], um den Durchschnitt der entnommenen unsicheren radioaktiven Inventare zu ermitteln. Wenn Sie diesen Wert auf 0 setzen, wird die Datenerfassung deaktiviert."
+  ],
+  [
+    "dtk.settings.radiation_toggle_hotkey.label",
+    "Hotkey für Strahlungsüberlagerung"
+  ],
+  [
     "dtk.settings.place_folder.heading",
     "ORDNER PLATZIEREN"
   ],

@@ -472,6 +472,38 @@
     "Snabbknapp för föroreningsöverlägg"
   ],
   [
+    "dtk.settings.radiation.heading",
+    "STRÅLNING OVERLAY"
+  ],
+  [
+    "dtk.settings.radiation_toggle.label",
+    "Strålningsöverlägg"
+  ],
+  [
+    "dtk.settings.radiation_toggle.description",
+    "Visar den genomsnittliga mängden osäkra radioaktiva produkter som innehas av varje enhet vid de dagliga provpunkterna som används av överlägget."
+  ],
+  [
+    "dtk.settings.radiation_glow.label",
+    "Aktivera värmekartans glödeffekt"
+  ],
+  [
+    "dtk.settings.radiation_glow.description",
+    "Framhäver och ger en glöd till enheter enligt deras provtagna osäkra radioaktiva inventarier. Inaktivera om det orsakar fördröjning."
+  ],
+  [
+    "dtk.settings.radiation_days.label",
+    "Genomsnittlig period"
+  ],
+  [
+    "dtk.settings.radiation_days.description",
+    "Konfigurerar det skjutbara fönstret i speldagar [0-360] till genomsnittligt samplat osäkert radioaktivt inventarium. Om du ställer in detta till 0 inaktiveras datainsamling."
+  ],
+  [
+    "dtk.settings.radiation_toggle_hotkey.label",
+    "Strålningsöverlägg snabbtangent"
+  ],
+  [
     "dtk.settings.place_folder.heading",
     "PLACERA MAPP"
   ],

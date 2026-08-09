@@ -472,6 +472,38 @@
     "Scorciatoia sovrapposizione inquinamento"
   ],
   [
+    "dtk.settings.radiation.heading",
+    "SOVRAPPOSIZIONE RADIAZIONE"
+  ],
+  [
+    "dtk.settings.radiation_toggle.label",
+    "Sovrapposizione di radiazioni"
+  ],
+  [
+    "dtk.settings.radiation_toggle.description",
+    "Mostra la quantità media di prodotto radioattivo non sicuro detenuto da ciascuna entità nei punti di campionamento giornalieri utilizzati dalla sovrapposizione."
+  ],
+  [
+    "dtk.settings.radiation_glow.label",
+    "Abilita l'effetto bagliore della mappa termica"
+  ],
+  [
+    "dtk.settings.radiation_glow.description",
+    "Evidenzia e aggiunge un bagliore alle entità in base al loro inventario radioattivo non sicuro campionato. Disabilita se causa ritardo."
+  ],
+  [
+    "dtk.settings.radiation_days.label",
+    "Periodo di media"
+  ],
+  [
+    "dtk.settings.radiation_days.description",
+    "Configura la finestra scorrevole nei giorni di gioco [0-360] per calcolare la media dell'inventario radioattivo non sicuro campionato. Impostandolo su 0 si disabilita la raccolta dei dati."
+  ],
+  [
+    "dtk.settings.radiation_toggle_hotkey.label",
+    "Tasto di scelta rapida per la sovrapposizione delle radiazioni"
+  ],
+  [
     "dtk.settings.place_folder.heading",
     "POSIZIONA CARTELLA"
   ],

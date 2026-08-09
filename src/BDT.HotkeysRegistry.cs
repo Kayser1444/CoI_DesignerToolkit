@@ -29,6 +29,9 @@ public static class HotkeysRegistry
     [Kb(BDT_CATEGORY, "Bdt_PollutionOverlayToggle", "Toggle pollution overlay", "Toggles the pollution overlay", false, false, null)]
     public static KeyBindings PollutionOverlayToggle { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.P);
 
+    [Kb(BDT_CATEGORY, "Bdt_RadiationOverlayToggle", "Toggle radiation overlay", "Toggles the radiation overlay", false, false, null)]
+    public static KeyBindings RadiationOverlayToggle { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.R);
+
     [Kb(BDT_CATEGORY, "Bdt_LayoutBoxMode", "Toggle layout box overlay", "Toggles layout box overlay", false, false, null)]
     public static KeyBindings LayoutBoxModeToggle { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.B);
 

@@ -3,6 +3,14 @@
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 ## v0.8.13 [unreleased]
 
+- Added a daily-sampled **Radiation Overlay** for unsafe radioactive inventory, using the same `Calendar.NewDay` boundary as vanilla radiation accounting.
+- Added radiation settings for overlay visibility, green entity glow, and a configurable `0-360` day averaging window (default `30`; `0` disables collection).
+- Added local source coverage for machines, ordinary storage, flat conveyors, trucks, connectors, lifts, and other supported transport buffers; vanilla-safe reactor and radioactive-waste-storage buffers are excluded.
+- Added translationless radiation labels in the `#N.D#` format and translated all new settings strings across the supported locales.
+- Fixed: Radiation and pollution overlays remain visible while the BDT Mod Settings window is open.
+- Fixed: Radiation screen glow is centered on the source entity rather than its label.
+- Fixed: Radiation entity glow is removed when the source entity is deleted.
+- Fixed: Radiation heat-map scaling uses a fixed zero baseline and scales sources against the strongest current source.
 - Fixed: Right Alt keybindings no longer capture the keyboard layout's synthetic Ctrl and AltGr aliases.
 - Fixed: Lazy height routing now uses the vanilla transport modifier sound when held, released, or toggled instead of the generic button click sound.
 

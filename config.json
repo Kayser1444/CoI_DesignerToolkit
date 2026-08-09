@@ -100,6 +100,19 @@
     "default": true,
     "description": "Initial state for showing ship pollution."
   },
+  "radiation_overlay_enabled": {
+    "default": false,
+    "description": "Initial radiation overlay visibility state. When enabled, sampled unsafe radioactive inventory will render in-world."
+  },
+  "radiation_glow_enabled": {
+    "default": false,
+    "description": "Initial radiation glow visibility state."
+  },
+  "radiation_days_to_average": {
+    "default": 30,
+    "is_integer": true,
+    "description": "Initial radiation days to average (0-360, 0 disables data collection)."
+  },
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."

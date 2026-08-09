@@ -472,6 +472,38 @@
     "污染叠加快捷键"
   ],
   [
+    "dtk.settings.radiation.heading",
+    "辐射叠加"
+  ],
+  [
+    "dtk.settings.radiation_toggle.label",
+    "辐射叠加"
+  ],
+  [
+    "dtk.settings.radiation_toggle.description",
+    "显示每个实体在覆盖层使用的每日采样点持有的不安全放射性产品的平均数量。"
+  ],
+  [
+    "dtk.settings.radiation_glow.label",
+    "启用热图发光效果"
+  ],
+  [
+    "dtk.settings.radiation_glow.description",
+    "根据采样的不安全放射性库存，突出显示实体并为其添加发光效果。如果造成延迟，请禁用。"
+  ],
+  [
+    "dtk.settings.radiation_days.label",
+    "平均周期"
+  ],
+  [
+    "dtk.settings.radiation_days.description",
+    "配置游戏日 [0-360] 内的滑动窗口以平均采样的不安全放射性库存。将其设置为 0 将禁用数据收集。"
+  ],
+  [
+    "dtk.settings.radiation_toggle_hotkey.label",
+    "辐射叠加热键"
+  ],
+  [
     "dtk.settings.place_folder.heading",
     "放置文件夹"
   ],

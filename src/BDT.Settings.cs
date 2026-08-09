@@ -81,6 +81,9 @@ internal static class DesignerToolkitSettings
     private const string POLLUTION_SHOW_SOLID_WASTE_KEY = "pollution_show_solid_waste";
     private const string POLLUTION_SHOW_VEHICLE_KEY = "pollution_show_vehicle";
     private const string POLLUTION_SHOW_SHIP_KEY = "pollution_show_ship";
+    private const string RADIATION_OVERLAY_ENABLED_KEY = "radiation_overlay_enabled";
+    private const string RADIATION_GLOW_ENABLED_KEY = "radiation_glow_enabled";
+    private const string RADIATION_DAYS_TO_AVERAGE_KEY = "radiation_days_to_average";
     private const string LAYOUT_BOX_MODE_ENABLED_KEY = "layout_box_mode_enabled";
     private const string USE_RECYCLE_BIN_KEY = "use_recycle_bin";
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
@@ -120,6 +123,9 @@ internal static class DesignerToolkitSettings
     public static bool PollutionShowSolidWaste { get; private set; } = true;
     public static bool PollutionShowVehicle { get; private set; } = true;
     public static bool PollutionShowShip { get; private set; } = true;
+    public static bool RadiationOverlayEnabled { get; private set; } = false;
+    public static bool RadiationGlowEnabled { get; private set; } = false;
+    public static int RadiationDaysToAverage { get; private set; } = 30;
     public static bool LayoutBoxModeEnabled { get; private set; } = false;
     public static bool UseRecycleBin { get; private set; } = true;
     public static string RecycleBinFolderName { get; private set; } = "Recycle Bin";
@@ -316,6 +322,10 @@ internal static class DesignerToolkitSettings
     public static void SetPollutionShowVehicle(bool enabled) { PollutionShowVehicle = enabled; }
     public static void SetPollutionShowShip(bool enabled) { PollutionShowShip = enabled; }
 
+    public static void SetRadiationOverlayEnabled(bool enabled) { RadiationOverlayEnabled = enabled; }
+    public static void SetRadiationGlowEnabled(bool enabled) { RadiationGlowEnabled = enabled; }
+    public static void SetRadiationDaysToAverage(int days) { RadiationDaysToAverage = Math.Max(0, Math.Min(360, days)); }
+
     public static void SetLayoutBoxModeEnabled(bool enabled)
     {
         LayoutBoxModeEnabled = enabled;
@@ -345,6 +355,9 @@ internal static class DesignerToolkitSettings
         bool initialPollutionShowSolidWaste = config.GetBool(POLLUTION_SHOW_SOLID_WASTE_KEY, true);
         bool initialPollutionShowVehicle = config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
         bool initialPollutionShowShip = config.GetBool(POLLUTION_SHOW_SHIP_KEY, true);
+        bool initialRadiationOverlayEnabled = config.GetBool(RADIATION_OVERLAY_ENABLED_KEY, false);
+        bool initialRadiationGlowEnabled = config.GetBool(RADIATION_GLOW_ENABLED_KEY, false);
+        int initialRadiationDaysToAverage = config.GetInt(RADIATION_DAYS_TO_AVERAGE_KEY, 30);
         bool initialLayoutBoxModeEnabled = config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
         bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
@@ -375,6 +388,9 @@ internal static class DesignerToolkitSettings
         bool initialPollutionShowSolidWaste = s_config.GetBool(POLLUTION_SHOW_SOLID_WASTE_KEY, true);
         bool initialPollutionShowVehicle = s_config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
         bool initialPollutionShowShip = s_config.GetBool(POLLUTION_SHOW_SHIP_KEY, true);
+        bool initialRadiationOverlayEnabled = s_config.GetBool(RADIATION_OVERLAY_ENABLED_KEY, false);
+        bool initialRadiationGlowEnabled = s_config.GetBool(RADIATION_GLOW_ENABLED_KEY, false);
+        int initialRadiationDaysToAverage = s_config.GetInt(RADIATION_DAYS_TO_AVERAGE_KEY, 30);
         bool initialLayoutBoxModeEnabled = s_config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
         bool initialUseRecycleBin = s_config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = s_config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
@@ -399,6 +415,9 @@ internal static class DesignerToolkitSettings
             initialPollutionShowSolidWaste,
             initialPollutionShowVehicle,
             initialPollutionShowShip,
+            initialRadiationOverlayEnabled,
+            initialRadiationGlowEnabled,
+            initialRadiationDaysToAverage,
             initialLayoutBoxModeEnabled,
             initialUseRecycleBin,
             initialRecycleBinFolderName,
@@ -670,6 +689,51 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetPollutionShowShip);
         root.Add(showShipToggle);
 
+        root.Add(new Title(BdtLocalization.SettingsRadiationHeading.AsFormatted)
+            .MarginTop(4.pt())
+            .MarginLeft(-SETTINGS_SECTION_INDENT));
+
+        Toggle radiationOverlayToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsRadiationToggle.AsFormatted)
+            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsRadiationToggleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
+            .Value(RadiationOverlayEnabled)
+            .OnValueChanged(SetRadiationOverlayEnabled);
+
+        var radiationOverlayRow = new Row().AlignItemsCenter();
+        radiationOverlayRow.Add(radiationOverlayToggle);
+        AddHotkeyBadges(radiationOverlayRow, HotkeysRegistry.RadiationOverlayToggle);
+        root.Add(radiationOverlayRow);
+
+        Toggle radiationGlowToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsRadiationGlow.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsRadiationGlowDescription.AsFormatted)
+            .Value(RadiationGlowEnabled)
+            .OnValueChanged(SetRadiationGlowEnabled);
+        root.Add(radiationGlowToggle);
+
+        var radiationDaysRow = new Row(2.pt()).AlignItemsCenter();
+        var radiationDaysLabel = new Label(BdtLocalization.SettingsRadiationDaysToAverage.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsRadiationDaysToAverageDescription.AsFormatted)
+            .Width(SETTINGS_LABEL_WIDTH);
+        radiationDaysRow.Add(radiationDaysLabel);
+        radiationDaysRow.Add(new UiComponent().FlexGrow(1f));
+
+        TextField radiationDaysInput = new TextField()
+            .Class(Cls.displayFont, Cls.displayBg)
+            .Width(45.px());
+        UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(radiationDaysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
+        radiationDaysInput.Text(RadiationDaysToAverage.ToString());
+        radiationDaysInput.OnValueChanged(text =>
+        {
+            if (int.TryParse(text, out int value))
+            {
+                SetRadiationDaysToAverage(value);
+                radiationDaysInput.Text(RadiationDaysToAverage.ToString());
+            }
+        });
+        radiationDaysRow.Add(radiationDaysInput);
+        root.Add(radiationDaysRow);
+
         root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -823,6 +887,9 @@ internal static class DesignerToolkitSettings
             showSolidWasteToggle.Value(PollutionShowSolidWaste);
             showVehicleToggle.Value(PollutionShowVehicle);
             showShipToggle.Value(PollutionShowShip);
+            radiationOverlayToggle.Value(RadiationOverlayEnabled);
+            radiationGlowToggle.Value(RadiationGlowEnabled);
+            radiationDaysInput.Text(RadiationDaysToAverage.ToString());
             layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
             recycleBinToggle.Value(UseRecycleBin);
@@ -882,6 +949,9 @@ internal static class DesignerToolkitSettings
             SetPollutionShowSolidWaste(true);
             SetPollutionShowVehicle(true);
             SetPollutionShowShip(true);
+            SetRadiationOverlayEnabled(false);
+            SetRadiationGlowEnabled(false);
+            SetRadiationDaysToAverage(30);
             SetUseRecycleBin(true);
             SetRecycleBinFolderName("Recycle Bin");
             SetBlueprintSpacing(6);
@@ -950,6 +1020,12 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(RADIATION_OVERLAY_ENABLED_KEY, RadiationOverlayEnabled, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(RADIATION_GLOW_ENABLED_KEY, RadiationGlowEnabled, out error))
+                return false;
+            if (s_config != null && !s_config.TrySetValue(RADIATION_DAYS_TO_AVERAGE_KEY, RadiationDaysToAverage, out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(USE_RECYCLE_BIN_KEY, UseRecycleBin, out error))
                 return false;
             if (s_config != null && !s_config.TrySetValue(RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out error))
@@ -983,6 +1059,9 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_SOLID_WASTE_KEY, PollutionShowSolidWaste, out bool pollutionShowSolidWasteUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_VEHICLE_KEY, PollutionShowVehicle, out bool pollutionShowVehicleUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out bool pollutionShowShipUpdated);
+            updated = TryReplaceConfigDefault(updated, RADIATION_OVERLAY_ENABLED_KEY, RadiationOverlayEnabled, out bool radiationOverlayEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, RADIATION_GLOW_ENABLED_KEY, RadiationGlowEnabled, out bool radiationGlowEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, RADIATION_DAYS_TO_AVERAGE_KEY, RadiationDaysToAverage, out bool radiationDaysToAverageUpdated);
             updated = TryReplaceConfigDefault(updated, LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out bool layoutBoxModeEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
             updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
@@ -1066,6 +1145,21 @@ internal static class DesignerToolkitSettings
             if (!pollutionShowShipUpdated)
             {
                 error = "Could not find pollution_show_ship default in config.json.";
+                return false;
+            }
+            if (!radiationOverlayEnabledUpdated)
+            {
+                error = "Could not find radiation_overlay_enabled default in config.json.";
+                return false;
+            }
+            if (!radiationGlowEnabledUpdated)
+            {
+                error = "Could not find radiation_glow_enabled default in config.json.";
+                return false;
+            }
+            if (!radiationDaysToAverageUpdated)
+            {
+                error = "Could not find radiation_days_to_average default in config.json.";
                 return false;
             }
             if (!layoutBoxModeEnabledUpdated)
@@ -1237,6 +1331,9 @@ internal static class DesignerToolkitSettings
         bool initialPollutionShowSolidWaste,
         bool initialPollutionShowVehicle,
         bool initialPollutionShowShip,
+        bool initialRadiationOverlayEnabled,
+        bool initialRadiationGlowEnabled,
+        int initialRadiationDaysToAverage,
         bool initialLayoutBoxModeEnabled,
         bool initialUseRecycleBin,
         string initialRecycleBinFolderName,
@@ -1259,6 +1356,9 @@ internal static class DesignerToolkitSettings
         PollutionShowSolidWaste = initialPollutionShowSolidWaste;
         PollutionShowVehicle = initialPollutionShowVehicle;
         PollutionShowShip = initialPollutionShowShip;
+        RadiationOverlayEnabled = initialRadiationOverlayEnabled;
+        RadiationGlowEnabled = initialRadiationGlowEnabled;
+        RadiationDaysToAverage = Math.Max(0, Math.Min(360, initialRadiationDaysToAverage));
         LayoutBoxModeEnabled = initialLayoutBoxModeEnabled;
         UseRecycleBin = initialUseRecycleBin;
         RecycleBinFolderName = initialRecycleBinFolderName;
@@ -1314,6 +1414,12 @@ internal static class DesignerToolkitSettings
                 PollutionShowVehicle = pollutionShowVehicle;
             if (TryGetBool(root, "pollutionShowShip", out bool pollutionShowShip))
                 PollutionShowShip = pollutionShowShip;
+            if (TryGetBool(root, "radiationOverlayEnabled", out bool radiationOverlayEnabled))
+                RadiationOverlayEnabled = radiationOverlayEnabled;
+            if (TryGetBool(root, "radiationGlowEnabled", out bool radiationGlowEnabled))
+                RadiationGlowEnabled = radiationGlowEnabled;
+            if (TryGetInt(root, "radiationDaysToAverage", out int radiationDaysToAverage))
+                RadiationDaysToAverage = Math.Max(0, Math.Min(360, radiationDaysToAverage));
             if (TryGetBool(root, "layoutBoxModeEnabled", out bool layoutBoxModeEnabled))
                 LayoutBoxModeEnabled = layoutBoxModeEnabled;
             if (TryGetBool(root, "useRecycleBin", out bool useRecycleBin))
@@ -1354,6 +1460,9 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("pollutionShowSolidWaste", PollutionShowSolidWaste);
         writer.AppendBoolField("pollutionShowVehicle", PollutionShowVehicle);
         writer.AppendBoolField("pollutionShowShip", PollutionShowShip);
+        writer.AppendBoolField("radiationOverlayEnabled", RadiationOverlayEnabled);
+        writer.AppendBoolField("radiationGlowEnabled", RadiationGlowEnabled);
+        writer.AppendNumberField("radiationDaysToAverage", RadiationDaysToAverage);
         writer.AppendBoolField("layoutBoxModeEnabled", LayoutBoxModeEnabled);
         writer.AppendBoolField("useRecycleBin", UseRecycleBin);
         writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);

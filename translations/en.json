@@ -472,6 +472,38 @@
     "Pollution overlay hotkey"
   ],
   [
+    "dtk.settings.radiation.heading",
+    "RADIATION OVERLAY"
+  ],
+  [
+    "dtk.settings.radiation_toggle.label",
+    "Radiation overlay"
+  ],
+  [
+    "dtk.settings.radiation_toggle.description",
+    "Shows the average amount of unsafe radioactive product held by each entity at the daily sample points used by the overlay."
+  ],
+  [
+    "dtk.settings.radiation_glow.label",
+    "Enable heatmap glow effect"
+  ],
+  [
+    "dtk.settings.radiation_glow.description",
+    "Highlights and adds a glow to entities according to their sampled unsafe radioactive inventory. Disable if causing lag."
+  ],
+  [
+    "dtk.settings.radiation_days.label",
+    "Averaging period"
+  ],
+  [
+    "dtk.settings.radiation_days.description",
+    "Configures the sliding window in game days [0-360] to average sampled unsafe radioactive inventory. Setting this to 0 disables data collection."
+  ],
+  [
+    "dtk.settings.radiation_toggle_hotkey.label",
+    "Radiation overlay hotkey"
+  ],
+  [
     "dtk.settings.place_folder.heading",
     "PLACE FOLDER"
   ],

@@ -55,6 +55,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private PollutionManager? m_pollutionManager;
     private PollutionWorldRenderer? m_pollutionWorldRenderer;
     private UnityEngine.GameObject? m_pollutionWorldRendererGo;
+    private RadiationManager? m_radiationManager;
+    private RadiationWorldRenderer? m_radiationWorldRenderer;
+    private UnityEngine.GameObject? m_radiationWorldRendererGo;
     private Action<GameTime>? m_firstUnpauseAutosaveHandler;
     private bool m_isInitialSaveInProgress;
 
@@ -136,6 +139,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         m_pollutionManager = new PollutionManager();
         m_pollutionManager.Initialize(resolver);
 
+        m_radiationManager = new RadiationManager();
+        m_radiationManager.Initialize(resolver);
+
         var gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
         gameLoopEvents.RegisterRendererInitState(this, () =>
         {
@@ -153,6 +159,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_pollutionWorldRenderer = m_pollutionWorldRendererGo.AddComponent<PollutionWorldRenderer>();
             m_pollutionWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents, resolver.Resolve<Mafi.Core.Terrain.TerrainManager>(), resolver.Resolve<Mafi.Core.Prototypes.ProtosDb>(), resolver.Resolve<Mafi.Core.PropertiesDb.IPropertiesDb>());
             UnityEngine.Object.DontDestroyOnLoad(m_pollutionWorldRendererGo);
+
+            m_radiationWorldRendererGo = new UnityEngine.GameObject("BDT.RadiationWorldRenderer");
+            m_radiationWorldRenderer = m_radiationWorldRendererGo.AddComponent<RadiationWorldRenderer>();
+            m_radiationWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents);
+            UnityEngine.Object.DontDestroyOnLoad(m_radiationWorldRendererGo);
         });
         
         var entitiesManager = resolver.Resolve<EntitiesManager>();
@@ -356,6 +367,19 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         {
             m_pollutionManager.Dispose();
             m_pollutionManager = null;
+        }
+
+        if (m_radiationWorldRendererGo != null)
+        {
+            UnityEngine.Object.Destroy(m_radiationWorldRendererGo);
+            m_radiationWorldRendererGo = null;
+            m_radiationWorldRenderer = null;
+        }
+
+        if (m_radiationManager != null)
+        {
+            m_radiationManager.Dispose();
+            m_radiationManager = null;
         }
 
         removeFirstUnpauseHandler(m_gameLoopEvents);

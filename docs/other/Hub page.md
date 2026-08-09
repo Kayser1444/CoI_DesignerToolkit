@@ -198,6 +198,15 @@ BDT features a real-time **Pollution Overlay** and **Heat Map** system to monito
 - **Dynamic Camera-Zoom Scaling**: Opacity and glow radius scale up dynamically as the camera zooms out, ensuring indicators remain bold and readable from high altitudes.
 - **Filters & Configurable Averaging**: Customize average calculations (default 360 days) and toggle Air, Ground/Water, Vehicle, or Ship overlays independently.
 
+### ☢ Radiation overlay
+
+BDT also includes a **Radiation Overlay** for locating unsafe radioactive inventory during design testing. It samples at the same daily boundary as vanilla radiation accounting and displays local amounts using translationless `#N.D#` labels.
+
+- **Local source coverage**: Inspects supported machines, storage buffers, connectors, lifts, flat conveyors, and trucks. Reactor and radioactive-waste-storage buffers are excluded as vanilla-safe storage.
+- **Green entity glow**: Optionally highlights the source entity or vehicle itself, with intensity scaled against the strongest currently visible source and a fixed zero baseline.
+- **Configurable averaging**: Uses a sliding window of `0` to `360` game days, defaulting to 30 days. Setting it to `0` disables data collection.
+- **Hotkey**: Toggle the overlay with `Alt+R`.
+
 ### 🚦 Throughput tools
 
 BDT adds a unified **Throughput** inspector panel for transport entities: belts, pipes, channels, sources, sinks, lifts, balancers, sorters, and connectors. It combines live monitoring with the existing sandbox-only limiter controls, so you can see what a design is actually moving and, in sandbox mode, test how it behaves under custom capacity limits, or measure its output precisely.

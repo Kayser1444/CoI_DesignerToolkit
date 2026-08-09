@@ -203,12 +203,15 @@ Additional player-facing notes live in [`docs/player`](docs/player):
 - [Layout Box Mode](docs/player/layout-box-mode.md)
 - [Transport Cleanup Tool](docs/player/transport-cleanup-tool.md)
 - [Throughput Tools](docs/player/throughput-tools.md)
+- [Environmental Overlays](docs/player/environment-overlays.md)
 - [Undo Place Blueprint](docs/player/undo-place-blueprint.md)
 - [Blueprint Recycle Bin](docs/player/blueprint-recycle-bin.md)
 
-## Work in progress
+### Environmental overlays
 
-The pollution heat map/overlay is currently work in progress. Configuration keys and implementation code may exist in the repository, but this feature should not be presented as a completed player-facing feature yet.
+BDT includes pollution and radiation overlays for inspecting environmental sources while testing a design. Pollution labels and heat maps show averaged emissions from buildings, terrain dumping, transports, vehicles, locomotives, and ships. The radiation overlay shows unsafe radioactive inventory at the local source, including supported buildings, storage buffers, flat conveyors, trucks, connectors, and lifts.
+
+Radiation is sampled at the same daily boundary used by vanilla radiation accounting. It supports configurable averaging, translationless `#N.D#` labels, and optional green highlighting on the source entity. See [Environmental overlays](docs/player/environment-overlays.md) for the settings and source-coverage details.
 
 ## Notes
 

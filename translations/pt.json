@@ -472,6 +472,38 @@
     "Atalho da sobreposição de poluição"
   ],
   [
+    "dtk.settings.radiation.heading",
+    "SOBREPOSIÇÃO DE RADIAÇÃO"
+  ],
+  [
+    "dtk.settings.radiation_toggle.label",
+    "Sobreposição de radiação"
+  ],
+  [
+    "dtk.settings.radiation_toggle.description",
+    "Mostra a quantidade média de produto radioativo inseguro mantido por cada entidade nos pontos de amostragem diários usados ​​pela sobreposição."
+  ],
+  [
+    "dtk.settings.radiation_glow.label",
+    "Ativar efeito de brilho do mapa de calor"
+  ],
+  [
+    "dtk.settings.radiation_glow.description",
+    "Destaca e adiciona brilho às entidades de acordo com seu inventário radioativo inseguro amostrado. Desative se estiver causando atraso."
+  ],
+  [
+    "dtk.settings.radiation_days.label",
+    "Período médio"
+  ],
+  [
+    "dtk.settings.radiation_days.description",
+    "Configura a janela deslizante em dias de jogo [0-360] para calcular a média do inventário radioativo inseguro amostrado. Definir como 0 desativa a coleta de dados."
+  ],
+  [
+    "dtk.settings.radiation_toggle_hotkey.label",
+    "Tecla de atalho de sobreposição de radiação"
+  ],
+  [
     "dtk.settings.place_folder.heading",
     "COLOCAR PASTA"
   ],

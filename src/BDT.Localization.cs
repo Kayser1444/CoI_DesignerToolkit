@@ -263,6 +263,23 @@ internal static class BdtLocalization
     public static LocStr SettingsPollutionToggleHotkey =
         Loc.Str("dtk.settings.pollution_toggle_hotkey.label", "Pollution overlay hotkey", "Settings row label for pollution overlay toggle hotkey.");
 
+    public static LocStr SettingsRadiationHeading =
+        Loc.Str("dtk.settings.radiation.heading", "RADIATION OVERLAY", "Settings section heading for radiation overlay settings.");
+    public static LocStr SettingsRadiationToggle =
+        Loc.Str("dtk.settings.radiation_toggle.label", "Radiation overlay", "Settings row label for radiation overlay toggle.");
+    public static LocStr SettingsRadiationToggleDescription =
+        Loc.Str("dtk.settings.radiation_toggle.description", "Shows the average amount of unsafe radioactive product held by each entity at the daily sample points used by the overlay.", "Settings row description for radiation overlay visibility.");
+    public static LocStr SettingsRadiationGlow =
+        Loc.Str("dtk.settings.radiation_glow.label", "Enable heatmap glow effect", "Settings row label for radiation heatmap glow toggle.");
+    public static LocStr SettingsRadiationGlowDescription =
+        Loc.Str("dtk.settings.radiation_glow.description", "Highlights and adds a glow to entities according to their sampled unsafe radioactive inventory. Disable if causing lag.", "Settings row description for radiation heatmap glow.");
+    public static LocStr SettingsRadiationDaysToAverage =
+        Loc.Str("dtk.settings.radiation_days.label", "Averaging period", "Settings row label for the days to average radiation.");
+    public static LocStr SettingsRadiationDaysToAverageDescription =
+        Loc.Str("dtk.settings.radiation_days.description", "Configures the sliding window in game days [0-360] to average sampled unsafe radioactive inventory. Setting this to 0 disables data collection.", "Settings row description for radiation averaging period.");
+    public static LocStr SettingsRadiationToggleHotkey =
+        Loc.Str("dtk.settings.radiation_toggle_hotkey.label", "Radiation overlay hotkey", "Settings row label for radiation overlay toggle hotkey.");
+
     public static LocStr SettingsPlaceFolderHeading =
         Loc.Str("dtk.settings.place_folder.heading", "PLACE FOLDER", "Settings section heading for place folder settings.");
     public static LocStr SettingsBlueprintSpacingLabel =

@@ -513,7 +513,6 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
 
             Vector3 screenPos = camera.WorldToScreenPoint(worldPos);
             if (screenPos.z < 0) continue; // Skip behind camera
-            if (IsPositionOverUI(screenPos)) continue;
 
             float guiX = screenPos.x;
             float guiY = Screen.height - screenPos.y;
@@ -586,7 +585,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
                         foreach (var tilePos in dt.Cluster.TilePositions)
                         {
                             Vector3 tileScreen = camera.WorldToScreenPoint(tilePos);
-                            if (tileScreen.z > 0 && !IsPositionOverUI(tileScreen))
+                            if (tileScreen.z > 0)
                             {
                                 float gx = tileScreen.x;
                                 float gy = Screen.height - tileScreen.y;
