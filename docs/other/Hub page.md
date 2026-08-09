@@ -1,3 +1,5 @@
+![social media.png](/content-images/a69a7b522d692bec57bf8fc14cef9749d5a87949d008149f9f58f685f041c87f/socialmedia.png)
+
 # 🧰 Kayser's Blueprint Designer's Toolkit
 
 Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
@@ -6,22 +8,23 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 
 ## ✨ Feature List
 
-- [🔁 Update blueprint](#-update-blueprint)
-- [📂 Remembered blueprint folder](#-remembered-blueprint-folder)
-- [↩️ Undo place blueprint](#-undo-place-blueprint)
-- [♻️ Blueprint recycle bin](#-blueprint-recycle-bin)
-- [📊 Blueprint operational stats](#-blueprint-operational-stats)
-- [📝 Copy as Markdown](#-copy-as-markdown)
-- [🧩 Symmetric entity normalization](#-symmetric-entity-normalization)
-- [⚡ Instant build mode](#-instant-build-mode)
-- [🧹 Transport cleanup tool](#-transport-cleanup-tool)
-- [👁️ Height filter](#-height-filter)
-- [📦 Layout box mode](#-layout-box-mode)
-- [📤 Batch placing](#-batch-placing)
-- [🏭 Pollution overlay](#-pollution-overlay)
-- [🚦 Throughput tools](#-throughput-tools)
-- [🚧 Legacy Belt Configurations](#-legacy-belt-configurations)
-- [⚙️ Mod settings](#-mod-settings)
+- [🔁 Update blueprint](#update-blueprint)
+- [📂 Remembered blueprint folder](#remembered-blueprint-folder)
+- [↩️ Undo place blueprint](#undo-place-blueprint)
+- [♻️ Blueprint recycle bin](#blueprint-recycle-bin)
+- [📊 Blueprint operational stats](#blueprint-operational-stats)
+- [📝 Copy as Markdown](#copy-as-markdown)
+- [🧩 Symmetric entity normalization](#symmetric-entity-normalization)
+- [⚡ Instant build mode](#instant-build-mode)
+- [🧹 Transport cleanup tool](#transport-cleanup-tool)
+- [👁️ Height filter](#height-filter)
+- [📦 Layout box mode](#layout-box-mode)
+- [📤 Batch placing](#batch-placing)
+- [🏭 Pollution overlay](#pollution-overlay)
+- [☢ Radiation overlay](#radiation-overlay)
+- [🚦 Throughput tools](#throughput-tools)
+- [🚧 Legacy Belt Configurations](#legacy-belt-configurations)
+- [⚙️ Mod settings](#mod-settings)
 
 ### 🔁 Update blueprint
 
@@ -46,13 +49,13 @@ BDT remembers the last blueprint book folder you opened and restores it the next
 
 ### ↩️ Undo place blueprint
 
-![undo-place-blueprint.png](placeholder-undo-place-blueprint.png)
+![image.png](/content-images/6317e39203bb1c4943a13793c1b1692303f59c9871e8c8b0126cf60f16fc5dff/image.png)
 
 BDT adds an in-memory undo stack for blueprint placement, copy-paste, and force-placement actions. The default hotkey is `Ctrl+Z`. Undo can cancel placed ghosts, deconstruct or sandbox-destroy newly placed structures, restore overwritten pre-existing ghosts or entities, and revert pasted surface designations or decals. Undo history is transient and is not saved into save files.
 
 ### ♻️ Blueprint recycle bin
 
-![blueprint-recycle-bin.png](placeholder-blueprint-recycle-bin.png)
+![image.png](/content-images/1c6083abec1bcd0151d2850c5ed3c7cc6acd8077a1a6a38f24a07fa71e9c856c/image.png)
 
 BDT can copy deleted or updated blueprints/folders into a configurable root-level recycle bin folder before the original action completes. The copy preserves the original parent folder path under the recycle bin and adds numeric suffixes to avoid name collisions. Deletions inside the recycle bin remain permanent and use the normal confirmation popup.
 
@@ -60,7 +63,7 @@ BDT can copy deleted or updated blueprints/folders into a configurable root-leve
 
 The blueprint detail panel now also shows **Operational cost**.
 
-![blueprint-operational-stats.png](/content-images/d476e2ab7976bb3130040d62a6d987f3bc9d95ddd0e116b5f20daf867f3e5190/blueprint-operational-stats.png)
+![image.png](/content-images/28270ee822ebebec10052cc074ece1569a38ba91f7dc2640066033dcb2783cdd/image.png)
 
 When a selected blueprint contains relevant entities, BDT adds a compact operational summary row showing:
 
@@ -173,15 +176,18 @@ Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
 ### 📦 Layout box mode
 
-![layout-box-mode.png](placeholder-layout-box-mode.png)
+![image.png](/content-images/c132fa98f4cf9395821cd90133eabea05bd866ec9957af03839b48b0ba35abfe/image.png)
 
 Layout Box Mode renders 3D building footprint and clearance boxes so designers can see where elevated pipes, belts, and other transports can pass over existing structures. The default toggle hotkey is `Alt+B`.
 
 ### 📤 Batch placing
 
-![batch-placing.png](placeholder-batch-placing.png)
+![image.png](/content-images/9966d6fee3221ccbe2a4ea3f9fdb51456953db13a29b2ac8dd07b6715e36af78/image.png)
+
+![image.png](/content-images/1f910df1211d43d36d1baf76176a46b90da28169cf9038d8b65dc9e30e121055/image.png)
 
 BDT introduces a **Place all** button inside the blueprint folder detail panel. Clicking this spawns ghosts of all direct child blueprints side-by-side in a single cursor placement.
+
 - Blueprints are organized in a grid layout.
 - If the total width of a row exceeds **512 tiles**, BDT automatically wraps placements to a new row.
 - If the total height exceeds **512 tiles**, BDT automatically crops remaining blueprints to stay safely within the game's placement limits.
@@ -189,16 +195,19 @@ BDT introduces a **Place all** button inside the blueprint folder detail panel. 
 
 ### 🏭 Pollution overlay
 
-![pollution-overlay.png](placeholder-pollution-overlay.png)
+![image.png](/content-images/2bd33bff2e2d2c752e2c6174827bac57bbb6c62bacdcddda1a709492b33237aa/image.png)
 
 BDT features a real-time **Pollution Overlay** and **Heat Map** system to monitor and visualize island exhaust rates.
-- **Pollution Labels**: Displays daily-averaged emission rates (items/min) as floating world-space labels above factories, waste outfalls, vehicles, locomotives, and ships. 
+
+- **Pollution Labels**: Displays daily-averaged emission rates (items/min) as floating world-space labels above factories, waste outfalls, vehicles, locomotives, and ships.
 - **Heat Map Glow**: Renders screen-space and 3D white glow outlines indicating relative emission rates. Low emitters receive tiny, whisper-thin backing glows, while major polluters project wide, prominent white halos.
 - **Common Comparison Pool**: Emissions are scaled linearly against a shared global pool of all currently active layers, allowing players to compare different pollution types (like wastewater outfalls against diesel exhausts). Hiding specific layers in settings dynamically re-calculates the comparison pool.
 - **Dynamic Camera-Zoom Scaling**: Opacity and glow radius scale up dynamically as the camera zooms out, ensuring indicators remain bold and readable from high altitudes.
 - **Filters & Configurable Averaging**: Customize average calculations (default 360 days) and toggle Air, Ground/Water, Vehicle, or Ship overlays independently.
 
 ### ☢ Radiation overlay
+
+![radiation-overlay.png]()
 
 BDT also includes a **Radiation Overlay** for locating unsafe radioactive inventory during design testing. It samples at the same daily boundary as vanilla radiation accounting and displays local amounts using translationless `#N.D#` labels.
 
@@ -276,7 +285,7 @@ The **Throughput** settings control the global overlay, overlay hotkey, heat-map
 
 - Compatible with vanilla saves.
 - Can be added to or removed from existing saves.
-- Requires Captain of Industry `0.8.5` or newer; older versions may work but are not supported or tested.
+- Requires Captain of Industry `0.8.2` or newer.
 - Blueprint consumers do not need this mod installed.
 - UI translations included for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
 

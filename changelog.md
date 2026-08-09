@@ -1,7 +1,7 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
-## v0.8.13 [packaged]
+## v0.8.13 [released]
 
 - Added a daily-sampled **Radiation Overlay** for unsafe radioactive inventory, using the same `Calendar.NewDay` boundary as vanilla radiation accounting.
 - Added radiation settings for overlay visibility, green entity glow, and a configurable `0-360` day averaging window (default `30`; `0` disables collection).
