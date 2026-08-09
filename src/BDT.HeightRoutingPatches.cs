@@ -206,7 +206,6 @@ internal static class HeightRoutingPatches
     private static void OnToolboxBtnClick()
     {
         s_manualToggleState = !s_manualToggleState;
-        HotkeysRegistry.PlayClickSound();
     }
 
     private static void TransportBuildController_InputUpdate_Postfix(TransportBuildController __instance, ref bool __result)
@@ -255,6 +254,7 @@ internal static class HeightRoutingPatches
         {
             IsLazyHeightActive = newState;
             s_lastMousePosField?.SetValue(__instance, Vector3.zero);
+            HotkeysRegistry.PlayTransportModifierSound();
             __result = true;
         }
 

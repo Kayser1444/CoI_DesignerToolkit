@@ -3,6 +3,9 @@
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 ## v0.8.13 [unreleased]
 
+- Fixed: Right Alt keybindings no longer capture the keyboard layout's synthetic Ctrl and AltGr aliases.
+- Fixed: Lazy height routing now uses the vanilla transport modifier sound when held, released, or toggled instead of the generic button click sound.
+
 ## v0.8.12 [released]
 
 - Added localized tooltip text for the Update blueprint action across all supported languages.

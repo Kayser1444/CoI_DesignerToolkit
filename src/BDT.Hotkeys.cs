@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CoI.AutoHelpers.InputControl;
 using Mafi;
 using Mafi.Collections.ImmutableCollections;
 using Mafi.Localization;
@@ -124,12 +125,12 @@ internal readonly struct BdtHotkey
 
         ImmutableArray<KeyCode> keys = binding.Keys;
         KeyCode trigger = keys.Last;
-        if (!Input.GetKeyDown(trigger))
+        if (!CustomKeybindsInjector.IsLogicalKeyDownThisFrame(trigger))
             return false;
 
         for (int i = 0; i < keys.Length - 1; i++)
         {
-            if (!Input.GetKey(keys[i]))
+            if (!CustomKeybindsInjector.IsLogicalKeyDown(keys[i]))
                 return false;
         }
 
@@ -149,11 +150,11 @@ internal readonly struct BdtHotkey
                 hasShift = true;
         }
 
-        if (!hasCtrl && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+        if (!hasCtrl && (CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.LeftControl) || CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.RightControl)))
             return false;
-        if (!hasAlt && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)))
+        if (!hasAlt && (CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.LeftAlt) || CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.RightAlt)))
             return false;
-        if (!hasShift && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        if (!hasShift && (CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.LeftShift) || CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.RightShift)))
             return false;
 
         return true;
@@ -166,12 +167,12 @@ internal readonly struct BdtHotkey
 
         ImmutableArray<KeyCode> keys = binding.Keys;
         KeyCode trigger = keys.Last;
-        if (!Input.GetKey(trigger))
+        if (!CustomKeybindsInjector.IsLogicalKeyDown(trigger))
             return false;
 
         for (int i = 0; i < keys.Length - 1; i++)
         {
-            if (!Input.GetKey(keys[i]))
+            if (!CustomKeybindsInjector.IsLogicalKeyDown(keys[i]))
                 return false;
         }
 
@@ -191,11 +192,11 @@ internal readonly struct BdtHotkey
                 hasShift = true;
         }
 
-        if (!hasCtrl && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+        if (!hasCtrl && (CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.LeftControl) || CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.RightControl)))
             return false;
-        if (!hasAlt && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)))
+        if (!hasAlt && (CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.LeftAlt) || CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.RightAlt)))
             return false;
-        if (!hasShift && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        if (!hasShift && (CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.LeftShift) || CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.RightShift)))
             return false;
 
         return true;
@@ -237,7 +238,7 @@ internal sealed class BdtKeyBindingField : KeyBindingField
         if (!m_isEditing)
             return;
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (CustomKeybindsInjector.IsLogicalKeyDown(KeyCode.Escape))
         {
             Cancel();
             return;
@@ -247,7 +248,7 @@ internal sealed class BdtKeyBindingField : KeyBindingField
         int previousCount = m_keys.Count;
         foreach (KeyCode key in ShortcutsMap.AllKeys)
         {
-            if (!Input.GetKey(key))
+            if (!CustomKeybindsInjector.IsLogicalKeyDown(key))
                 continue;
 
             pressedCount++;
