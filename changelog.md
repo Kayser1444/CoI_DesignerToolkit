@@ -4,6 +4,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 ## v0.8.13 [unreleased]
 
 - Fixed: Right Alt keybindings no longer capture the keyboard layout's synthetic Ctrl and AltGr aliases.
+- Fixed: Lazy height routing now uses the vanilla transport modifier sound when held, released, or toggled instead of the generic button click sound.
 
 ## v0.8.12 [released]
 

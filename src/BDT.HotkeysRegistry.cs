@@ -9,6 +9,7 @@ public static class HotkeysRegistry
 {
     private const KbCategory BDT_CATEGORY = (KbCategory)100;
     private static AudioSource? s_clickSound;
+    private static AudioSource? s_transportModifierSound;
 
     [Kb(BDT_CATEGORY, "Bdt_TransportCleanup", "Transport cleanup tool", "Activates the transport cleanup selection tool", false, false, null)]
     public static KeyBindings TransportCleanup { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.Delete);
@@ -42,6 +43,7 @@ public static class HotkeysRegistry
         try
         {
             s_clickSound = audioDb.GetSharedAudioUi("Assets/Unity/UserInterface/Audio/ButtonClick.prefab");
+            s_transportModifierSound = audioDb.GetSharedAudioUi("Assets/Unity/UserInterface/Audio/Rotate.prefab");
         }
         catch (System.Exception ex)
         {
@@ -54,6 +56,14 @@ public static class HotkeysRegistry
         if (s_clickSound != null)
         {
             s_clickSound.Play();
+        }
+    }
+
+    public static void PlayTransportModifierSound()
+    {
+        if (s_transportModifierSound != null)
+        {
+            s_transportModifierSound.Play();
         }
     }
 
