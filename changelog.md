@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.9.0 [unreleased]
+## v0.9.0 [packaged]
 
 - Added a shared regular/quick product-removal domain for transports, lifts, connectors, sorters, balancers, and explicitly registered modded entities.
 - Added vanilla-style regular removal to built-in logistics entities that previously supported only quick removal; regular orders block normal input/output until their one-shot product scope is emptied or cancelled.
