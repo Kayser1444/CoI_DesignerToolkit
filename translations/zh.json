@@ -348,6 +348,58 @@
     "吞吐量工具快捷键"
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.name",
+    "删除该区域的产品"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.window_title",
+    "删除该区域的产品"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.select_all",
+    "选择/取消选择所有实体类型"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.connector",
+    "连接器"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.balancer",
+    "平衡器"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "快速移除"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "发送所选实体中所有产品的删除订单。"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "立即从所选实体中删除显示的 Unity 成本的所有产品。"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "取消当前的删除订单。"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "当前没有可取消的删除订单。"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "没有实体成为目标。"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "没有要删除的产品。"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "没有足够的 Unity 来快速删除所选产品。"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "布局"
   ],

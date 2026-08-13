@@ -348,6 +348,58 @@
     "Горячая клавиша инструмента выбора области"
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.name",
+    "Удалить продукты в зоне"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.window_title",
+    "Удалить продукты в зоне"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.select_all",
+    "Выбрать/отменить выбор всех типов объектов"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.connector",
+    "Узел"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.balancer",
+    "Распределитель"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "Мгновенный вывоз"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "Отправляет заказы на удаление для всех продуктов в выбранных объектах."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "Немедленно удаляет все продукты из выбранных объектов по указанной стоимости Unity."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "Отменяет текущие заказы на удаление."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "Нет текущих заказов на удаление, которые можно было бы отменить."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "Ни одна сущность не является целью."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "Нет товаров, которые можно было бы удалить."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "Недостаточно Unity для быстрого удаления выбранных товаров."
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "МАКЕТ"
   ],

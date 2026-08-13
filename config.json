@@ -125,6 +125,10 @@
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit throughput configurations state. Editing may reset saved BDT throughput configs."
   },
+  "bdtTransportRemovalOrdersStateJson": {
+    "default": "{\"schemaVersion\":1,\"orders\":[]}",
+    "description": "Internal per-save Designer Toolkit transport product-removal order state. Editing may reset active removal orders."
+  },
   "last_blueprint_folder": {
     "default": "",
     "description": "Do not delete — stores the last-open blueprint book folder so the mod can restore it on load."

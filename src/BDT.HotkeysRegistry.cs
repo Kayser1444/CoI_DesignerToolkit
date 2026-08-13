@@ -26,6 +26,9 @@ public static class HotkeysRegistry
     [Kb(BDT_CATEGORY, "Bdt_ThroughputAoETool", "Throughput tool", "Activates the throughput area selection tool", false, false, null)]
     public static KeyBindings ThroughputAoETool { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.LeftShift, KeyCode.T);
 
+    [Kb(BDT_CATEGORY, "Bdt_TransportProductRemovalAoETool", "Remove products in area", "Activates the area product-removal tool", false, false, null)]
+    public static KeyBindings TransportProductRemovalAoETool { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.Backspace);
+
     [Kb(BDT_CATEGORY, "Bdt_PollutionOverlayToggle", "Toggle pollution overlay", "Toggles the pollution overlay", false, false, null)]
     public static KeyBindings PollutionOverlayToggle { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.P);
 

@@ -17,6 +17,7 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - [🧩 Symmetric entity normalization](#symmetric-entity-normalization)
 - [⚡ Instant build mode](#instant-build-mode)
 - [🧹 Transport cleanup tool](#transport-cleanup-tool)
+- [🗑️ Transport product removal](#transport-product-removal)
 - [👁️ Height filter](#height-filter)
 - [📦 Layout box mode](#layout-box-mode)
 - [📤 Batch placing](#batch-placing)
@@ -160,6 +161,18 @@ BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool 
 The hotkey can be changed in BDT's mod settings under **TRANSPORT CLEANUP**.
 
 Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
+
+### 🗑️ Transport product removal
+
+BDT adds regular product removal to lifts, connectors, sorters, and balancers, placing it beside the familiar quick-removal action in their inspectors. Regular removal mirrors vanilla transports: eligible products are discarded immediately and truck-loadable products wait for normal vehicle collection. The entity does not accept or output products until that one-shot removal order is empty or cancelled.
+
+The **Remove products in area** tool (default hotkey `Alt+Backspace`) lets you drag across a complete design and handle those products in bulk. The dialog highlights the selected entities, lets you toggle individual entity types, previews all affected products graphically, and provides three live actions:
+
+- **Remove** sends or refreshes regular removal orders
+- **Quick remove** clears the selected products immediately for the displayed Unity cost
+- **Cancel** cancels active regular removal orders in the selection
+
+Regular removal orders persist through saving and reloading while BDT remains installed. Product sources and sinks are intentionally excluded.
 
 ### 👁️ Height filter
 

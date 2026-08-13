@@ -14,3 +14,6 @@
 - [ ] Fake-adapter tests verify successful registration, both removal modes, inspector eligibility, malformed registration rejection, cleanup, and safe exclusion.
 - [ ] The documented contract clearly identifies the behaviors that require validation against a real third-party mod; no untestable mod-specific assumptions are encoded.
 
+## Comments
+
+- 2026-08-13: Implemented the prototype-keyed `TransportProductRemovalAdapterRegistry`, disposable runtime registrations, complete regular/quick/gating adapter contract, validation and fail-closed diagnostics, external quick-command handling, and the public `TransportProductRemovalUi.AddCombinedRemovalControl(...)` inspector seam. Built-in adapters remain authoritative and are checked before external registrations. `dotnet build DesignerToolkit.sln -c Debug` passes with zero warnings. Runtime validation against a real third-party entity remains outstanding; this workspace has no game integration-test harness.

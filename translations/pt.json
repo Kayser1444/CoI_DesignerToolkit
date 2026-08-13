@@ -348,6 +348,58 @@
     "Atalho da ferramenta de throughput"
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.name",
+    "Remover produtos da área"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.window_title",
+    "Remover produtos da área"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.select_all",
+    "Marcar/desmarcar todos os tipos de entidade"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.connector",
+    "Conector"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.balancer",
+    "Distribuidor"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "Remoção rápida"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "Envia pedidos de retirada para todos os produtos nas entidades selecionadas."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "Remove imediatamente todos os produtos das entidades selecionadas pelo custo de Unity mostrado."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "Cancela os pedidos de remoção atuais."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "Nenhum pedido de remoção atual para cancelar."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "Nenhuma entidade é alvo."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "Não há produtos para remover."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "Unity insuficiente para remover rapidamente os produtos selecionados."
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "CAIXAS DE LAYOUT"
   ],

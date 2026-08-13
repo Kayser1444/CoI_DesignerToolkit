@@ -8,6 +8,10 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 - [ ] **Blueprint editor**: Inspect and edit blueprints directly in-game.
 - [ ] **Blueprint terrain designations**: Support copying, pasting, and blueprinting of terrain designations.
 
+### Transport Tools
+- [ ] **Quick replace**: Replace a transport piece with another compatible piece by removing the existing piece and building the replacement (for example, replace a belt piece with a balancer).
+- [ ] **Remove a specific product from transport entities**: Extend product removal so the player can choose one buffered product instead of clearing the whole entity. Support entity-level regular and quick removal plus product selection/filtering in the unified AoE removal dialog. Build on the whole-entity removal domain, adapters, accounting, persistence, and selection behavior. Tracked as ticket `07-remove-specific-product.md` in the AoE transport-removal ticket set.
+
 ### Markdown & Hub Integration
 - [ ] **Auto-publish**: Automatically publish blueprints directly from the game to the hub.
 
@@ -15,6 +19,7 @@ Planned and candidate improvements for Blueprint Designer's Toolkit.
 
 ## Completed Features
 
+- [x] **Transport product removal** (v0.9.0) — Added regular and quick removal across supported transport entities, a unified area tool with filters and product preview, save-persistent one-shot regular orders, and an explicit adapter API for compatible modded entities.
 - [x] **Ground Pollution (Solid Waste / Landfill)** (v0.8.8) — Visual terrain overlay displaying active `Landfill` ground pollution caused by solid waste dumping, with terrain tile scanning, cluster label formatting (`[Pollution(Tiles)]`), and toggle setting.
 - [x] **Visible Startup Banner** — Emit BDT version and DLL build timestamp during renderer initialization after `also_log_to_console` is enabled, without duplicated `[BDT]` prefix.
 - [x] **Transport Height-Routing Modifier** — Add a modifier key (`Alt`) and toolbox toggle to choose whether transports match the target height as soon as possible (ASAP) or lazily.

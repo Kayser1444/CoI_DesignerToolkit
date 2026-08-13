@@ -21,6 +21,13 @@ dotnet build DesignerToolkit.sln -c Debug
 
 BDT uses `config.json` for user-configurable settings.
 
+# Game UI text
+
+Use sentence case for player-facing game UI text, matching vanilla Captain of
+Industry. This includes window and panel headings, action buttons, toolbar
+tooltips, settings labels, and contextual messages. Preserve normal casing only
+for proper nouns, abbreviations, and game-defined terminology.
+
 # Releases
 
 For public releases, review `DesignerToolkit\docs\other\Hub page.md` to incorporate any new player-facing features.

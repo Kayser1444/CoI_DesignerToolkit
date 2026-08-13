@@ -1,6 +1,20 @@
 # Blueprint Designer's Toolkit Private Changelog
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
+
+## v0.9.0 [unreleased]
+
+- Added a shared regular/quick product-removal domain for transports, lifts, connectors, sorters, balancers, and explicitly registered modded entities.
+- Added vanilla-style regular removal to built-in logistics entities that previously supported only quick removal; regular orders block normal input/output until their one-shot product scope is emptied or cancelled.
+- Added combined inspector removal controls with live quick-removal cost and regular-order cancellation.
+- Added the **Remove products in area** tool, defaulting to `Alt+Backspace`, with native overlap selection, world highlighting, entity-type toggles, graphical product totals, and live action counts.
+- Added regular, quick, and cancel batch commands with live Unity affordability checks and vanilla sandbox handling.
+- Persisted active regular-removal scopes through the vanilla per-mod config cache and detached runtime clearing buffers during save serialization.
+- Added `ITransportProductRemovalAdapter`, `TransportProductRemovalAdapterRegistry`, and `TransportProductRemovalUi` as the explicit integration seam for compatible modded entities.
+- Added full translations for the new UI across German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
+- Verified regular and quick removal on native transports, connectors, sorters, lifts, and balancers; verified save/quit/reload restoration and safe loading after removing the mod.
+- Manual limitation: explicit third-party adapter integration remains untested because no compatible external test mod is currently available.
+
 ## v0.8.13 [released]
 
 - Added a daily-sampled **Radiation Overlay** for unsafe radioactive inventory, using the same `Calendar.NewDay` boundary as vanilla radiation accounting.

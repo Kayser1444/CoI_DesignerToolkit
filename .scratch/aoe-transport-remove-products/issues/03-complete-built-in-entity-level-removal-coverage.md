@@ -15,3 +15,7 @@
 - [ ] Integration tests verify every built-in adapter drains pending/input/output buffers while preserving queue order and cached quantities.
 - [ ] Tests verify that each supported inspector contributes exactly one combined removal interaction.
 
+## Comments
+
+- 2026-08-12: Implemented explicit Lift, MiniZipper, and Sorter buffer adapters, shared regular-removal lifecycle/persistence, simulation input/output gating, native quick-removal supersession, and combined inspector controls. `dotnet build DesignerToolkit.sln -c Debug` passes with zero warnings. Runtime validation remains required because this repository has no game integration-test harness.
+- 2026-08-12: Runtime follow-up found that skipped Lift simulation left its previous animation running; gated Lift updates now explicitly pause the animation provider. Fertilizer II instant removal on pipe entities was verified against vanilla `Transport.RequestProductsRemoval`: discardable non-waste products are intentionally cleared before considering truck loadability. A reported loose-product pickup delay did not reproduce; trace confirmed successful output-buffer registration and subsequent truck pickup.

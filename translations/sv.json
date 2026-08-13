@@ -348,6 +348,58 @@
     "Genomströmningsverktyg genväg"
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.name",
+    "Ta bort produkter i området"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.window_title",
+    "Ta bort produkter i området"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.select_all",
+    "Välj/avmarkera alla entitetstyper"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.connector",
+    "Koppling"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.balancer",
+    "Balanserare"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "Snabb bortforsling"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "Skickar borttagningsbeställningar för alla produkter i de valda enheterna."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "Tar omedelbart bort alla produkter från de valda enheterna för den visade Unity-kostnaden."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "Avbryter nuvarande borttagningsbeställningar."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "Inga aktuella borttagningsbeställningar att avbryta."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "Inga enheter är inriktade på."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "Inga produkter att ta bort."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "Inte tillräckligt med Unity för att snabbt ta bort de valda produkterna."
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "LAYOUTRUTOR"
   ],

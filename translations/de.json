@@ -348,6 +348,58 @@
     "Tastenkürzel Durchsatz-Werkzeug"
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.name",
+    "Entfernen Sie Produkte aus dem Bereich"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.window_title",
+    "Entfernen Sie Produkte aus dem Bereich"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.select_all",
+    "Alle Entitätstypen auswählen/abwählen"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.connector",
+    "Verbinder"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.balancer",
+    "Ausgleicher"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "Schnell entfernen"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "Sendet Entfernungsaufträge für alle Produkte in den ausgewählten Einheiten."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "Entfernt sofort alle Produkte aus den ausgewählten Einheiten für die angezeigten Unity-Kosten."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "Bricht die aktuellen Entfernungsaufträge ab."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "Derzeit liegen keine Entfernungsaufträge zum Stornieren vor."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "Es werden keine Entitäten anvisiert."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "Keine Produkte zum Entfernen."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "Unity reicht nicht aus, um die ausgewählten Produkte schnell zu entfernen."
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "ANORDNUNGSRAHMEN"
   ],

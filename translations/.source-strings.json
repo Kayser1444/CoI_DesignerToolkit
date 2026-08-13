@@ -130,6 +130,18 @@
   "dtk.throughput.days_to_average": "days to average",
   "dtk.throughput.display": "Display throughput",
   "dtk.throughput.title": "Throughput",
+  "dtk.transport_product_removal.aoe_tool.cancel_tooltip": "Cancels the current remove orders.",
+  "dtk.transport_product_removal.aoe_tool.connector": "Connector",
+  "dtk.transport_product_removal.aoe_tool.name": "Remove products in area",
+  "dtk.transport_product_removal.aoe_tool.no_entities_tooltip": "No entities are targeted.",
+  "dtk.transport_product_removal.aoe_tool.no_products_tooltip": "No products to remove.",
+  "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip": "Not enough Unity to quick remove the selected products.",
+  "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip": "No current remove orders to cancel.",
+  "dtk.transport_product_removal.aoe_tool.quick_remove": "Quick remove",
+  "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip": "Immediately removes all products from the selected entities for the shown Unity cost.",
+  "dtk.transport_product_removal.aoe_tool.remove_tooltip": "Sends remove orders for all products in the selected entities.",
+  "dtk.transport_product_removal.aoe_tool.select_all": "Select / deselect all entity types",
+  "dtk.transport_product_removal.aoe_tool.window_title": "Remove products in area",
   "dtk.undo.no_action": "Undo: No placement actions to revert.",
   "dtk.undo.success": "Undo: Placement reverted successfully."
 }

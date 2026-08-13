@@ -348,6 +348,58 @@
     "Scorciatoia strumento throughput"
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.name",
+    "Rimuovere i prodotti nell'area"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.window_title",
+    "Rimuovere i prodotti nell'area"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.select_all",
+    "Seleziona/deseleziona tutti i tipi di entità"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.connector",
+    "Connettore"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.balancer",
+    "Bilanciatore"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "Rimozione rapida"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "Invia ordini di rimozione per tutti i prodotti nelle entità selezionate."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "Rimuove immediatamente tutti i prodotti dalle entità selezionate per il costo in Unity mostrato."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "Annulla gli ordini di rimozione correnti."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "Nessun ordine di rimozione corrente da annullare."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "Nessuna entità viene presa di mira."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "Nessun prodotto da rimuovere."
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "Unity insufficiente per rimuovere rapidamente i prodotti selezionati."
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "DISPOSIZIONE"
   ],

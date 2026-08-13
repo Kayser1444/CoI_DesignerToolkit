@@ -197,6 +197,40 @@ internal static class BdtLocalization
         Loc.Str("dtk.throughput.aoe_tool.select_all_label", "Select / deselect all", "Label next to the master checkbox to toggle all items.");
     public static LocStr SettingsThroughputAoEToolHotkey =
         Loc.Str("dtk.settings.throughput_aoe_tool_hotkey.label", "Throughput tool hotkey", "Settings row label for throughput AoE tool toggle hotkey.");
+
+    public static LocStr TransportProductRemovalAoEToolName =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.name", "Remove products in area", "Name of the transport product-removal AoE tool.");
+    public static LocStr TransportProductRemovalAoEToolWindowTitle =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.window_title", "Remove products in area", "Title of the transport product-removal AoE window.");
+    public static LocStr TransportProductRemovalAoESelectAll =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.select_all", "Select / deselect all entity types", "Label for the AoE product-removal entity-type master toggle.");
+    public static LocStr TransportProductRemovalAoEConnector =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.connector", "Connector", "Player-facing name for mini-zippers in the AoE product-removal entity-type list.");
+    public static LocStr TransportProductRemovalAoEBalancer =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.balancer", "Balancer", "Player-facing name for zippers in the AoE product-removal entity-type list.");
+    public static LocStr1 TransportProductRemovalAoERemoveCount =
+        Loc.Str1("dtk.transport_product_removal.aoe_tool.remove_count", "Remove ({0})", "Regular AoE product-removal button. {0} = entity count eligible for a regular removal request.");
+    public static LocStr1 TransportProductRemovalAoECancelCount =
+        Loc.Str1("dtk.transport_product_removal.aoe_tool.cancel_count", "Cancel ({0})", "Cancel regular AoE product-removal button. {0} = active order count.");
+    public static LocStr TransportProductRemovalAoEQuickRemove =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.quick_remove", "Quick remove", "Quick AoE product-removal button label.");
+    public static LocStr TransportProductRemovalAoERemoveTooltip =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.remove_tooltip", "Sends remove orders for all products in the selected entities.", "Tooltip for the regular AoE product-removal button.");
+    public static LocStr TransportProductRemovalAoEQuickRemoveTooltip =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.quick_remove_tooltip", "Immediately removes all products from the selected entities for the shown Unity cost.", "Tooltip for the quick AoE product-removal button.");
+    public static LocStr TransportProductRemovalAoECancelTooltip =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.cancel_tooltip", "Cancels the current remove orders.", "Tooltip for the enabled cancel AoE product-removal button.");
+    public static LocStr TransportProductRemovalAoENothingToCancelTooltip =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip", "No current remove orders to cancel.", "Tooltip for the disabled cancel AoE product-removal button.");
+    public static LocStr TransportProductRemovalAoENoEntitiesTooltip =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.no_entities_tooltip", "No entities are targeted.", "Tooltip when an AoE product-removal action has no targeted entities.");
+    public static LocStr TransportProductRemovalAoENoProductsTooltip =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.no_products_tooltip", "No products to remove.", "Tooltip when an AoE product-removal action has no products to remove.");
+    public static LocStr TransportProductRemovalAoENotEnoughUnityTooltip =
+        Loc.Str("dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip", "Not enough Unity to quick remove the selected products.", "Tooltip when the quick AoE product-removal action is unaffordable.");
+    public static LocStr1 TransportProductRemovalAoEProductsToRemove =
+        Loc.Str1("dtk.transport_product_removal.aoe_tool.products_to_remove", "Products to remove ({0} total)", "AoE product preview title. {0} = total buffered product quantity.");
+
     public static LocStr SettingsLayoutBoxModeHeading =
         Loc.Str("dtk.settings.layout_box.heading", "LAYOUT", "Settings section heading for layout box mode.");
     public static LocStr SettingsLayoutBoxModeToggle =

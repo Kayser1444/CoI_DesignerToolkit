@@ -1,3 +1,9 @@
+v0.9.0 | 2026-08-13
+* Added regular product-removal controls for lifts, connectors, sorters, and balancers alongside their quick-removal actions
+* Added a Remove products in area tool with entity-type filters, product previews, regular removal, quick removal, and order cancellation
+* Preserved active regular-removal orders across saves while preventing entities from accepting or outputting products until their one-shot removal scope is emptied
+* Added an opt-in adapter API for compatible modded transport entities
+
 v0.8.13 | 2026-08-09
 * Added a Radiation Overlay that displays unsafe radioactive inventory at daily vanilla radiation sample points
 * Added configurable radiation averaging, translationless #N.D# labels, and optional green entity glow

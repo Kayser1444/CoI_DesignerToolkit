@@ -10,8 +10,11 @@ using Mafi.Collections;
 using Mafi.Core;
 using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
+using Mafi.Core.Factory.Lifts;
+using Mafi.Core.Factory.Sorters;
 using Mafi.Core.Factory.Zippers;
 using Mafi.Core.Input;
+using Mafi.Core.Ports;
 using Mafi.Core.Products;
 using Mafi.Core.Syncers;
 using Mafi.Localization;
@@ -20,6 +23,7 @@ using Mafi.Unity.Ui.Library.Inspectors;
 using Mafi.Unity.UiToolkit;
 using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
+using Mafi.Unity.UiToolkit.Library.FloatingPanel;
 using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
@@ -28,353 +32,353 @@ public static class ContentDisplayPatches
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.ContentDisplayPatches");
 
-    private static readonly FieldInfo s_inputBufferField = typeof(Zipper).GetField("m_inputBuffer", BindingFlags.Instance | BindingFlags.NonPublic);
-    private static readonly FieldInfo s_outputBufferField = typeof(Zipper).GetField("m_outputBuffer", BindingFlags.Instance | BindingFlags.NonPublic);
-
     public static void Apply(Harmony harmony)
     {
         try
         {
-            var assembly = typeof(Mafi.Unity.Entities.EntityMb).Assembly;
-            var type = assembly.GetType("Mafi.Unity.Ui.Inspectors.ZipperInspector");
-            if (type == null)
-            {
-                s_log.Warning("ZipperInspector type not found");
-                return;
-            }
+            Assembly assembly = typeof(Mafi.Unity.Entities.EntityMb).Assembly;
+            PatchSimulationMethods(harmony);
 
-            var ctors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            if (ctors.Length > 0)
-            {
-                harmony.Patch(ctors[0], postfix: new HarmonyMethod(typeof(ContentDisplayPatches), nameof(ZipperInspectorCtorPostfix)));
-                s_log.Info("Patched constructor for ZipperInspector");
-            }
-
-            // Patch EntitiesCommandsProcessor to intercept QuickRemoveFromEntityCmd for Zippers
-            var processorType = typeof(EntitiesCommandsProcessor);
-            var invokeMethod = processorType.GetMethod("Invoke", new Type[] { typeof(QuickRemoveFromEntityCmd) });
-            if (invokeMethod != null)
-            {
-                harmony.Patch(invokeMethod, prefix: new HarmonyMethod(typeof(ContentDisplayPatches), nameof(QuickRemovePrefix)));
-                s_log.Info("Patched EntitiesCommandsProcessor.Invoke(QuickRemoveFromEntityCmd) prefix");
-            }
+            MethodInfo? quickRemoveInvoke = typeof(EntitiesCommandsProcessor).GetMethod(
+                "Invoke",
+                new[] { typeof(QuickRemoveFromEntityCmd) });
+            if (quickRemoveInvoke != null)
+                harmony.Patch(
+                    quickRemoveInvoke,
+                    prefix: new HarmonyMethod(typeof(ContentDisplayPatches), nameof(QuickRemovePrefix)),
+                    postfix: new HarmonyMethod(typeof(ContentDisplayPatches), nameof(QuickRemovePostfix)));
             else
-            {
                 s_log.Warning("EntitiesCommandsProcessor.Invoke(QuickRemoveFromEntityCmd) not found");
-            }
+
+            PatchInspectorConstructor(harmony, assembly, "Mafi.Unity.Ui.Inspectors.ZipperInspector", nameof(ZipperInspectorCtorPostfix));
+            PatchInspectorConstructor(harmony, assembly, "Mafi.Unity.Ui.Inspectors.LiftInspector", nameof(LiftInspectorCtorPostfix));
+            PatchInspectorConstructor(harmony, assembly, "Mafi.Unity.Ui.Inspectors.MiniZipperInspector", nameof(MiniZipperInspectorCtorPostfix));
+            PatchInspectorConstructor(harmony, assembly, "Mafi.Unity.Ui.Inspectors.SorterInspector", nameof(SorterInspectorCtorPostfix));
         }
         catch (Exception ex)
         {
-            s_log.Warning($"Failed to apply ContentDisplayPatches: {ex.Message}");
+            s_log.Warning($"Failed to apply ContentDisplayPatches: {ex}");
         }
+    }
+
+    private static void PatchInspectorConstructor(Harmony harmony, Assembly assembly, string typeName, string postfixName)
+    {
+        Type? type = assembly.GetType(typeName);
+        ConstructorInfo[] constructors = type?.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            ?? Array.Empty<ConstructorInfo>();
+        if (constructors.Length == 0)
+        {
+            s_log.Warning($"{typeName} constructor not found");
+            return;
+        }
+        harmony.Patch(constructors[0], postfix: new HarmonyMethod(typeof(ContentDisplayPatches), postfixName));
+    }
+
+    private static void PatchSimulationMethods(Harmony harmony)
+    {
+        Type[] supportedTypes = { typeof(Zipper), typeof(Lift), typeof(MiniZipper), typeof(Sorter) };
+        foreach (Type supportedType in supportedTypes)
+        {
+            PatchInterfaceMethod(harmony, supportedType, typeof(IEntityWithSimUpdate), "SimUpdate", nameof(SimUpdatePrefix));
+            PatchInterfaceMethod(harmony, supportedType, typeof(IEntityWithPorts), "ReceiveAsMuchAsFromPort", nameof(ReceivePrefix));
+            PatchInterfaceMethod(harmony, supportedType, typeof(IEntityWithPortsEarlyExit), "CouldReceiveFromPortEarlyExit", nameof(CouldReceivePrefix));
+        }
+    }
+
+    private static void PatchInterfaceMethod(
+        Harmony harmony,
+        Type entityType,
+        Type interfaceType,
+        string methodName,
+        string prefixName)
+    {
+        if (!interfaceType.IsAssignableFrom(entityType))
+            return;
+        MethodInfo? interfaceMethod = interfaceType.GetMethod(methodName);
+        if (interfaceMethod == null)
+            return;
+        InterfaceMapping map = entityType.GetInterfaceMap(interfaceType);
+        int index = Array.IndexOf(map.InterfaceMethods, interfaceMethod);
+        if (index >= 0)
+            harmony.Patch(map.TargetMethods[index], prefix: new HarmonyMethod(typeof(ContentDisplayPatches), prefixName));
     }
 
     private static void ZipperInspectorCtorPostfix(object __instance)
     {
         try
         {
-            var zipperInspector = __instance as BaseInspector<Zipper>;
-            if (zipperInspector == null) return;
+            if (__instance is not BaseInspector<Zipper> inspector || GetMainBody(__instance) is not Column mainBody)
+                return;
 
-            var inspectorType = __instance.GetType();
-            FieldInfo? mainBodyField = null;
-            var searchType = inspectorType;
-            while (searchType != null && mainBodyField == null)
+            BufferWithMultipleProductsUi bufferUi = new BufferWithMultipleProductsUi();
+            PanelWithHeader panel = new PanelWithHeader();
+            panel.Title(Tr.TransportedProducts);
+            panel.BodyAdd(bufferUi);
+            mainBody.Add(panel);
+            AddRemovalControl(bufferUi, inspector.Context.InputScheduler, () => inspector.Entity, absolute: true);
+
+            Lyst<ProductQuantity> productsCache = new Lyst<ProductQuantity>();
+            Dict<ProductProto, Quantity> products = new Dict<ProductProto, Quantity>();
+            inspector.Observe(() => TransportProductRemovalManager.GetBufferStateHash(inspector.Entity)).Do(delegate
             {
-                mainBodyField = searchType.GetField("MainBody", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                searchType = searchType.BaseType;
-            }
-
-            if (mainBodyField == null) return;
-
-            var mainBody = mainBodyField.GetValue(__instance) as Column;
-            if (mainBody != null)
-            {
-                var bufferUi = new BufferWithMultipleProductsUi();
-                var panel = new PanelWithHeader();
-                panel.Title(Tr.TransportedProducts);
-                panel.BodyAdd(bufferUi);
-
-                mainBody.Add(panel);
-
-                // Add the custom Quick Remove button
-                AddQuickRemoveButtonForZipper(bufferUi, zipperInspector.Context.InputScheduler, () => zipperInspector.Entity);
-
-                var productsCache = new Lyst<ProductQuantity>();
-                var dict = new Dict<ProductProto, Quantity>();
-
-                zipperInspector.Observe(() => GetBufferStateHash(zipperInspector.Entity))
-                    .Do(delegate
-                    {
-                        var zipper = zipperInspector.Entity;
-                        if (zipper == null || zipper.IsDestroyed) return;
-
-                        productsCache.Clear();
-                        dict.Clear();
-
-                        if (s_inputBufferField != null)
-                        {
-                            var inputBuf = s_inputBufferField.GetValue(zipper) as ProductQuantity[];
-                            if (inputBuf != null)
-                            {
-                                for (int i = 0; i < inputBuf.Length; i++)
-                                {
-                                    var pq = inputBuf[i];
-                                    if (pq.IsNotEmpty)
-                                    {
-                                        if (dict.TryGetValue(pq.Product, out var existingQty))
-                                        {
-                                            dict[pq.Product] = existingQty + pq.Quantity;
-                                        }
-                                        else
-                                        {
-                                            dict.Add(pq.Product, pq.Quantity);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (s_outputBufferField != null)
-                        {
-                            var outputBuf = s_outputBufferField.GetValue(zipper) as Queueue<ZipBuffProduct>;
-                            if (outputBuf != null)
-                            {
-                                var enumerator = outputBuf.GetEnumerator();
-                                while (enumerator.MoveNext())
-                                {
-                                    var item = enumerator.Current;
-                                    if (item.ProductQuantity.IsNotEmpty)
-                                    {
-                                        if (dict.TryGetValue(item.ProductQuantity.Product, out var existingQty))
-                                        {
-                                            dict[item.ProductQuantity.Product] = existingQty + item.ProductQuantity.Quantity;
-                                        }
-                                        else
-                                        {
-                                            dict.Add(item.ProductQuantity.Product, item.ProductQuantity.Quantity);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        foreach (var kvp in dict)
-                        {
-                            productsCache.Add(kvp.Key.WithQuantity(kvp.Value));
-                        }
-
-                        bufferUi.SetProducts(productsCache, zipper.MaxBufferSize);
-                    });
-            }
+                Zipper zipper = inspector.Entity;
+                if (zipper == null || zipper.IsDestroyed)
+                    return;
+                productsCache.Clear();
+                TransportProductRemovalManager.AddBufferedProducts(zipper, products);
+                foreach (KeyValuePair<ProductProto, Quantity> product in products)
+                    productsCache.Add(product.Key.WithQuantity(product.Value));
+                bufferUi.SetProducts(productsCache, TransportProductRemovalManager.GetMaxBufferSize(zipper));
+            });
         }
         catch (Exception ex)
         {
-            s_log.Warning($"Error in ZipperInspectorCtorPostfix: {ex}");
+            s_log.Warning($"Error extending ZipperInspector: {ex}");
         }
     }
 
-    private static void AddQuickRemoveButtonForZipper(BufferWithMultipleProductsUi buffer, IInputScheduler scheduler, Func<Zipper> zipperProvider)
+    private static void MiniZipperInspectorCtorPostfix(object __instance)
     {
-        ButtonIcon quickRemoveBtn;
-        UpointsButtonFloater quickRemoveBtnFloater;
-
-        buffer.Add(quickRemoveBtn = new ButtonIcon(Button.Unity, "Assets/Unity/UserInterface/General/Trash128.png")
-            .AbsolutePosition(right: 4, top: 4)
-            .OnClick((Action)delegate
-            {
-                var zipper = zipperProvider();
-                if (zipper != null)
-                {
-                    scheduler.ScheduleInputCmd(new QuickRemoveFromEntityCmd(zipper.Id));
-                }
-            }, false));
-
-        quickRemoveBtnFloater = quickRemoveBtn.AttachUpointsFloater().Title(Tr.QuickRemove__Action);
-
-        buffer.Observe(delegate
-        {
-            var zipper = zipperProvider();
-            if (zipper == null || zipper.IsDestroyed) return Make.Kvp(Upoints.Zero, false);
-            bool canAfford;
-            Upoints quickRemoveCost = GetZipperQuickRemoveCost(zipper, out canAfford);
-            return Make.Kvp(quickRemoveCost, canAfford);
-        }).Do(delegate(KeyValuePair<Upoints, bool> result)
-        {
-            Upoints key = result.Key;
-            if (key.IsPositive)
-            {
-                quickRemoveBtnFloater.Cost(key);
-            }
-            quickRemoveBtn.Visible(key.IsPositive);
-            quickRemoveBtn.Enabled(result.Value);
-        });
+        if (__instance is BaseInspector<MiniZipper> inspector)
+            ReplaceBufferQuickControl(__instance, inspector.Context.InputScheduler, () => inspector.Entity, nameof(MiniZipper));
     }
 
-    private static Upoints GetZipperQuickRemoveCost(Zipper zipper, out bool canAfford)
+    private static void SorterInspectorCtorPostfix(object __instance)
     {
-        canAfford = false;
-        Quantity totalQty = Quantity.Zero;
-
-        if (s_inputBufferField != null)
-        {
-            var inputBuf = s_inputBufferField.GetValue(zipper) as ProductQuantity[];
-            if (inputBuf != null)
-            {
-                for (int i = 0; i < inputBuf.Length; i++)
-                {
-                    totalQty += inputBuf[i].Quantity;
-                }
-            }
-        }
-
-        if (s_outputBufferField != null)
-        {
-            var outputBuf = s_outputBufferField.GetValue(zipper) as Queueue<ZipBuffProduct>;
-            if (outputBuf != null)
-            {
-                var enumerator = outputBuf.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    totalQty += enumerator.Current.ProductQuantity.Quantity;
-                }
-            }
-        }
-
-        var upointsManager = zipper.Context.UpointsManager;
-        Upoints cost = QuickDeliverCostHelper.QuantityToUnityCost(totalQty.Value, upointsManager.QuickActionCostMultiplier, applyDiscount: true) ?? Upoints.Zero;
-        canAfford = upointsManager.CanConsume(cost);
-        return cost;
+        if (__instance is BaseInspector<Sorter> inspector)
+            ReplaceBufferQuickControl(__instance, inspector.Context.InputScheduler, () => inspector.Entity, nameof(Sorter));
     }
 
-    private static void ClearZipperProducts(Zipper zipper)
-    {
-        if (zipper == null || zipper.IsDestroyed) return;
-
-        var assetTransactionManager = zipper.Context.AssetTransactionManager;
-
-        // Clear input buffer
-        if (s_inputBufferField != null)
-        {
-            var inputBuf = s_inputBufferField.GetValue(zipper) as ProductQuantity[];
-            if (inputBuf != null)
-            {
-                for (int i = 0; i < inputBuf.Length; i++)
-                {
-                    var pq = inputBuf[i];
-                    if (pq.IsNotEmpty)
-                    {
-                        assetTransactionManager.StoreClearedProduct(pq);
-                        inputBuf[i] = ProductQuantity.None;
-                    }
-                }
-            }
-        }
-
-        SetBackingField(zipper, "QuantityInInputBuffer", Quantity.Zero);
-
-        // Clear output buffer
-        if (s_outputBufferField != null)
-        {
-            var outputBuf = s_outputBufferField.GetValue(zipper) as Queueue<ZipBuffProduct>;
-            if (outputBuf != null)
-            {
-                var enumerator = outputBuf.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    var item = enumerator.Current;
-                    if (item.ProductQuantity.IsNotEmpty)
-                    {
-                        assetTransactionManager.StoreClearedProduct(item.ProductQuantity);
-                    }
-                }
-                outputBuf.Clear();
-            }
-        }
-
-        SetBackingField(zipper, "QuantityInOutputBuffer", Quantity.Zero);
-    }
-
-    private static void SetBackingField(object obj, string propertyName, object value)
-    {
-        var field = obj.GetType().GetField($"<{propertyName}>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic);
-        if (field != null)
-        {
-            field.SetValue(obj, value);
-        }
-        else
-        {
-            s_log.Warning($"Backing field for property {propertyName} not found");
-        }
-    }
-
-    private static int GetBufferStateHash(Zipper? zipper)
-    {
-        if (zipper == null || zipper.IsDestroyed) return 0;
-
-        int hash = 17;
-        hash = hash * 31 + zipper.TotalQuantityInBuffers.Value.GetHashCode();
-        hash = hash * 31 + zipper.MaxBufferSize.Value.GetHashCode();
-
-        if (s_inputBufferField != null)
-        {
-            var inputBuf = s_inputBufferField.GetValue(zipper) as ProductQuantity[];
-            if (inputBuf != null)
-            {
-                for (int i = 0; i < inputBuf.Length; i++)
-                {
-                    var pq = inputBuf[i];
-                    if (pq.IsNotEmpty)
-                    {
-                        hash = hash * 31 + pq.Product.Id.Value.GetHashCode();
-                        hash = hash * 31 + pq.Quantity.Value.GetHashCode();
-                    }
-                }
-            }
-        }
-
-        if (s_outputBufferField != null)
-        {
-            var outputBuf = s_outputBufferField.GetValue(zipper) as Queueue<ZipBuffProduct>;
-            if (outputBuf != null)
-            {
-                var enumerator = outputBuf.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    var item = enumerator.Current;
-                    if (item.ProductQuantity.IsNotEmpty)
-                    {
-                        hash = hash * 31 + item.ProductQuantity.Product.Id.Value.GetHashCode();
-                        hash = hash * 31 + item.ProductQuantity.Quantity.Value.GetHashCode();
-                    }
-                }
-            }
-        }
-
-        return hash;
-    }
-
-    public static bool QuickRemovePrefix(EntitiesCommandsProcessor __instance, QuickRemoveFromEntityCmd cmd, EntitiesManager ___m_entitiesManager)
+    private static void LiftInspectorCtorPostfix(object __instance)
     {
         try
         {
-            if (___m_entitiesManager.TryGetEntity<Zipper>(cmd.EntityId, out var zipper))
+            if (__instance is not BaseInspector<Lift> inspector || GetMainBody(__instance) is not UiComponent mainBody)
+                return;
+
+            Row? actionRow = null;
+            foreach (Row row in FindDescendants<Row>(mainBody))
             {
-                bool canAfford;
-                Upoints cost = GetZipperQuickRemoveCost(zipper, out canAfford);
-                if (!cost.IsNotPositive && canAfford)
+                List<ButtonIcon> buttons = DirectChildren<ButtonIcon>(row);
+                if (buttons.Count < 2)
+                    continue;
+                buttons[buttons.Count - 1].RemoveFromHierarchy();
+                actionRow = row;
+                break;
+            }
+            if (actionRow == null)
+            {
+                s_log.Warning("Lift inspector action row was not found; combined removal control was not installed.");
+                return;
+            }
+            AddRemovalControl(actionRow, inspector.Context.InputScheduler, () => inspector.Entity, absolute: false);
+        }
+        catch (Exception ex)
+        {
+            s_log.Warning($"Error extending LiftInspector: {ex}");
+        }
+    }
+
+    private static void ReplaceBufferQuickControl<T>(
+        object inspector,
+        IInputScheduler scheduler,
+        Func<T> entityProvider,
+        string adapterName)
+        where T : class, IEntity
+    {
+        try
+        {
+            if (GetMainBody(inspector) is not UiComponent mainBody)
+                return;
+            BufferWithMultipleProductsUi? buffer = null;
+            foreach (BufferWithMultipleProductsUi candidate in FindDescendants<BufferWithMultipleProductsUi>(mainBody))
+            {
+                buffer = candidate;
+                break;
+            }
+            if (buffer == null)
+            {
+                s_log.Warning($"{adapterName} product buffer UI was not found; combined removal control was not installed.");
+                return;
+            }
+            foreach (ButtonIcon button in DirectChildren<ButtonIcon>(buffer))
+                button.RemoveFromHierarchy();
+            AddRemovalControl(buffer, scheduler, () => entityProvider(), absolute: true);
+        }
+        catch (Exception ex)
+        {
+            s_log.Warning($"Error extending {adapterName} inspector: {ex}");
+        }
+    }
+
+    public static void AddRemovalControl(
+        UiComponent parent,
+        IInputScheduler scheduler,
+        Func<IEntity?> entityProvider,
+        bool absolute)
+    {
+        Label removalLabel = new Label();
+        ButtonIcon removalButton = new ButtonIcon(Button.Danger, "Assets/Unity/UserInterface/General/Trash128.png");
+        if (absolute)
+            removalButton.AbsolutePosition(right: 4, top: 4);
+        else
+            removalButton.Medium();
+        removalButton.Toggleable().OnClick((Action)delegate
+        {
+            IEntity? entity = entityProvider();
+            if (entity != null)
+                scheduler.ScheduleInputCmd(new TransportProductRemovalCmd(entity.Id));
+        }, false);
+        parent.Add(removalButton);
+
+        ButtonTextUpoints quickRemoveButton = new ButtonTextUpoints(
+            Tr.QuickRemove__Action,
+            "Assets/Unity/UserInterface/General/Trash128.png")
+            .Compact()
+            .Tooltip(Tr.QuickRemove__Action)
+            .OnClick((Action)delegate
+            {
+                IEntity? entity = entityProvider();
+                if (entity != null)
+                    scheduler.ScheduleInputCmd(new QuickRemoveFromEntityCmd(entity.Id));
+            }, false);
+        removalButton.FloaterInteractive(new Column(2.pt()) { removalLabel, quickRemoveButton });
+
+        parent.Observe(delegate
+        {
+            IEntity? entity = entityProvider();
+            return entity != null && TransportProductRemovalManager.IsRegularRemovalActive(entity);
+        }).Observe(delegate
+        {
+            IEntity? entity = entityProvider();
+            return entity != null && TransportProductRemovalManager.HasBufferedProducts(entity);
+        }).Do(delegate(bool isRemoving, bool hasProducts)
+        {
+            removalLabel.Value(isRemoving ? Tr.RemoveProducts__Stop : Tr.RemoveProducts__Tooltip);
+            removalButton.Selected(isRemoving);
+            removalButton.Enabled(isRemoving || hasProducts);
+        });
+
+        parent.Observe(delegate
+        {
+            IEntity? entity = entityProvider();
+            if (entity == null || entity.IsDestroyed)
+                return Make.Kvp(Upoints.Zero, false);
+            Upoints cost = TransportProductRemovalManager.GetQuickRemoveCost(entity, out bool canAfford);
+            return Make.Kvp(cost, canAfford);
+        }).Do(delegate(KeyValuePair<Upoints, bool> result)
+        {
+            quickRemoveButton.SetCost(result.Key);
+            quickRemoveButton.Visible(result.Key.IsPositive);
+            quickRemoveButton.Enabled(result.Value);
+        });
+    }
+
+    private static UiComponent? GetMainBody(object inspector)
+    {
+        Type? type = inspector.GetType();
+        while (type != null)
+        {
+            FieldInfo? field = type.GetField("MainBody", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (field?.GetValue(inspector) is UiComponent component)
+                return component;
+            type = type.BaseType;
+        }
+        return null;
+    }
+
+    private static List<T> DirectChildren<T>(UiComponent parent) where T : UiComponent
+    {
+        List<T> result = new List<T>();
+        foreach (UiComponent child in parent)
+        {
+            if (child is T match)
+                result.Add(match);
+        }
+        return result;
+    }
+
+    private static IEnumerable<T> FindDescendants<T>(UiComponent parent) where T : UiComponent
+    {
+        foreach (UiComponent child in parent)
+        {
+            if (child is T match)
+                yield return match;
+            foreach (T descendant in FindDescendants<T>(child))
+                yield return descendant;
+        }
+    }
+
+    public static bool QuickRemovePrefix(QuickRemoveFromEntityCmd cmd, EntitiesManager ___m_entitiesManager, out bool __state)
+    {
+        __state = false;
+        try
+        {
+            if (___m_entitiesManager.TryGetEntity<IEntity>(cmd.EntityId, out IEntity entity) &&
+                TransportProductRemovalManager.SupportsEntity(entity))
+            {
+                if (entity is Zipper || TransportProductRemovalManager.IsExternalAdapter(entity))
                 {
-                    zipper.Context.UpointsManager.ConsumeExactly(IdsCore.UpointsCategories.QuickRemove, cost);
-                    ClearZipperProducts(zipper);
+                    TransportProductRemovalManager.QuickRemove(entity);
+                    cmd.SetResultSuccess(entity.Id);
+                    return false;
                 }
-                cmd.SetResultSuccess(zipper.Id);
-                return false; // skip original method
+
+                if (TransportProductRemovalManager.IsRegularRemovalActive(entity))
+                {
+                    Upoints cost = TransportProductRemovalManager.GetQuickRemoveCost(entity, out bool canAfford);
+                    __state = cost.IsPositive && canAfford;
+                }
+                return true;
             }
         }
         catch (Exception ex)
         {
-            s_log.Warning($"Error in QuickRemovePrefix: {ex}");
+            s_log.Warning($"Error handling quick product removal: {ex}");
         }
         return true;
+    }
+
+    public static void QuickRemovePostfix(
+        QuickRemoveFromEntityCmd cmd,
+        EntitiesManager ___m_entitiesManager,
+        bool __state)
+    {
+        if (!__state)
+            return;
+
+        try
+        {
+            if (___m_entitiesManager.TryGetEntity<IEntity>(cmd.EntityId, out IEntity entity))
+                TransportProductRemovalManager.Cancel(entity.Id);
+        }
+        catch (Exception ex)
+        {
+            s_log.Warning($"Failed to clean up regular removal after successful quick removal: {ex}");
+        }
+    }
+
+    public static bool SimUpdatePrefix(IEntity __instance)
+    {
+        bool isActive = TransportProductRemovalManager.IsRegularRemovalActive(__instance);
+        if (isActive && __instance is Lift lift)
+            lift.AnimationStatesProvider.Pause();
+        return !isActive;
+    }
+
+    public static bool ReceivePrefix(IEntity __instance, ProductQuantity pq, ref Quantity __result)
+    {
+        if (!TransportProductRemovalManager.IsRegularRemovalActive(__instance))
+            return true;
+        __result = pq.Quantity;
+        return false;
+    }
+
+    public static bool CouldReceivePrefix(IEntity __instance, ref bool __result)
+    {
+        if (!TransportProductRemovalManager.IsRegularRemovalActive(__instance))
+            return true;
+        __result = false;
+        return false;
     }
 }

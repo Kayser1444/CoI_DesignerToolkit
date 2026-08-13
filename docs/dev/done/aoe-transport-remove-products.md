@@ -1,13 +1,13 @@
-# AoE Remove Products from Transport
+# Transport product removal
 
-**Status:** Reviewed design draft
+**Status:** Implemented for v0.9.0
 
-BDT should add entity-level and area-level support for two removal modes:
+BDT provides entity-level and area-level support for two removal modes:
 
 - **Regular remove** mirrors vanilla `ClearTransportCmd`: discard eligible non-waste products immediately and expose truck-loadable products to normal vehicle logistics.
 - **Quick remove** mirrors vanilla `QuickRemoveFromEntityCmd`: immediately clear all buffered products for the standard quantity-based Upoint cost.
 
-Both AoE tools target the same entity set:
+The single AoE removal tool supports both modes and targets the same entity set:
 
 | Entity | Vanilla regular remove | Vanilla quick remove | BDT work |
 | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ Sandbox product sources and sinks are excluded. A modded entity is eligible only
 
 ## Architecture and delivery order
 
-The four feature sections below are a specification order, not a strictly linear implementation order. Mirroring the vanilla inspector couples regular and quick removal at entity level, so the first implementation milestone must cross both entity-level sections.
+The three feature sections below are a specification order, not a strictly linear implementation order. Mirroring the vanilla inspector couples regular and quick removal at entity level, so the first implementation milestone must cross both entity-level sections.
 
 ```mermaid
 flowchart LR
@@ -29,18 +29,18 @@ flowchart LR
     P["Persisted model and save lifecycle"] --> B
     B --> C["Simulation input commands"]
     B --> D["Inspector integration"]
-    C --> E["AoE quick remove"]
-    C --> F["AoE regular remove"]
-    S["Shared whole-entity area selection"] --> E
-    S --> F
+    C --> E["AoE removal tool and dialog"]
+    S["Whole-entity area selection"] --> E
+    E --> F["Quick batch command"]
+    E --> G["Regular batch command"]
 ```
 
 Recommended implementation milestones:
 
 1. Build the removal domain module, adapter registry, persisted model, save lifecycle, and simulation commands.
 2. Implement regular and quick behavior per entity together with one paired inspector integration.
-3. Add AoE quick removal and its live confirmation transaction.
-4. Add AoE regular removal using the same selection and command seams.
+3. Add the single AoE removal tool, entity-type filters, dialog, and one shared batch-command seam for both actions.
+4. Verify the regular and quick actions together against native transports, built-in adapters, and registered modded adapters.
 
 ### Removal domain module
 
@@ -134,7 +134,9 @@ The cache contains a versioned list of intent records, each containing:
 
 It does not contain vehicle IDs, job IDs, reservations, buffer references, or runtime adapter instances. It does contain the remaining removal scope per product so restoration cannot target more products than the original one-shot order.
 
-When an order is rebuilt, each product is capped to `min(current quantity, persisted remaining quantity)`. If less or none of that product remains, the missing quantity is treated as already fulfilled and is not awaited. Newly arriving products are never added to the scope. Units of the same product have no stable identity, so BDT cannot distinguish original units from replacements that arrived while BDT was absent; the persisted quantity cap is the conservative recoverable rule.
+When an order is rebuilt, each product is capped to `min(current quantity, persisted remaining quantity)`. If less or none of that product remains, the missing quantity is treated as already fulfilled and is not awaited. Newly arriving products are never added to the scope. Units of the same product have no stable identity, so BDT cannot distinguish original units from replacements that appeared between a save and its later load; the persisted quantity cap is the conservative recoverable rule.
+
+Persistence assumes BDT is present when both saving and loading. If the player removes BDT, loads and saves the world without it, and later reinstalls BDT, vanilla has purged or reset BDT's mod-config cache. BDT then behaves as a fresh installation and does not restore earlier removal orders. Features must not attempt to carry BDT-owned state across gameplay saved while BDT was absent.
 
 Order changes update in-memory state and mark the cache dirty. `beforeSave` serializes the current state and calls `ModSaveLifecycle.BeforeVanillaSave()`. Each BDT clearing-buffer registration is a save-detached vanilla attachment. `ISaveManager.OnSaveDone` must call `ModSaveLifecycle.AfterVanillaSave()` so only attachments detached for that save are reattached, whether the save succeeded or failed.
 
@@ -142,7 +144,7 @@ BDT does not currently subscribe to `ISaveManager.OnSaveDone`; adding and correc
 
 On load, the persisted model resolves entities by ID, validates prototype IDs, and rebuilds active orders from current vanilla buffers. World termination and mod disposal unregister all callbacks, cancel runtime jobs, remove gates, and clear strong entity references.
 
-This preserves active orders across manual saves and autosaves without cancelling them from the player’s perspective. If BDT was absent, restoration uses the persisted per-product scope and never waits for missing quantities.
+This preserves active orders across manual saves and autosaves without cancelling them from the player’s perspective. On restoration while BDT remains present, the persisted per-product scope ensures missing quantities are never awaited.
 
 Failure handling:
 
@@ -171,13 +173,13 @@ Vanilla already supports quick removal for transports, lifts, mini-zippers, and 
 
 Use vanilla `IUpointsManager.CanConsume` and `ConsumeExactly` semantics. `CanConsume` already returns true when sandbox `IgnoreMissingUnity` is enabled. `ConsumeExactly` removes whatever Unity is present, leaves the balance at zero, and accounts for the full requested action cost without creating a negative balance. BDT should not implement a separate balance clamp.
 
-Modded entities require an explicit quick-removal adapter as well as a regular-removal adapter. Entities that support only one mode are excluded from both AoE tools.
+Modded entities require an explicit quick-removal adapter as well as a regular-removal adapter. Entities that support only one mode are excluded from the AoE removal tool.
 
-## AoE Quick remove
+## AoE removal tool and dialog
 
-The AoE quick tool has a visible entry in the vanilla tools toolbar and a configurable hotkey, defaulting to `Alt+Shift+Backspace`. It uses BDT’s native area-selection controller pattern, and its toolbar entry is adjacent to the regular-removal tool.
+BDT exposes one AoE removal toolbar entry and one configurable hotkey, defaulting to `Alt+Backspace`. Activating it starts the area-selection controller. Completing a selection opens a dialog modeled on vanilla's AoE upgrade flow; selection itself does not remove products.
 
-Both tools use vanilla’s trash icon. The quick-removal entry is distinguished by a Unity-colored accent or badge rather than unrelated artwork.
+The toolbar entry uses vanilla's trash icon. The dialog presents regular and quick removal as one paired interaction, following the same trash/Unity-cost icon language as the entity inspectors.
 
 ### Selection
 
@@ -186,28 +188,38 @@ Both tools use vanilla’s trash icon. The quick-removal entry is distinguished 
 - `selectedPartialTransports` must be normalized to each `SubTransport.OriginalTransport`, merged with `selectedEntities`, and deduplicated by entity ID. Ignoring the partial-transport list would omit belts and pipes that intersect the area without being returned as whole entities.
 - Only entities with both validated regular and quick capabilities appear in the target set.
 - Sources and sinks are excluded.
-- The selected ID set is fixed when the drag completes. Buffered quantities, costs, validity, and affordability remain live while the confirmation is open.
+- The selected whole-entity ID set is fixed when the drag completes. Buffered quantities, costs, validity, and affordability remain live while the dialog is open.
 
-### Confirmation
+### Entity-type filters
 
-The confirmation panel shows the current selected entities, buffered products, and total Upoint cost.
+The dialog groups selected targets by supported entity type and provides a toggle for each type: Transport, Lift, Zipper, MiniZipper, and Sorter. Modded adapters contribute their explicit registered type or prototype grouping.
 
-- Simulation continues while the panel is open.
-- Counts and cost update live.
-- Confirmation schedules one serializable batch input command. The command processor re-resolves all IDs, reruns adapter preflight, recomputes per-entity quantities and costs, and performs the final affordability check on the simulation thread.
+- Every type present in the selection is enabled by default.
+- Disabling a type excludes all selected entities of that type from both actions without changing the fixed area selection.
+- Types absent from the selection are hidden or disabled.
+- Counts, buffered products, active regular-order state, and quick cost reflect only currently enabled types.
+- Changing a type toggle updates the dialog immediately and does not schedule a simulation command.
+
+### Paired removal actions
+
+The dialog provides **Remove**, **Cancel remove**, and quick-removal actions. **Remove** uses the normal trash treatment and always issues a regular-removal request instead of toggling based on existing state. Like `Transport.RequestProductsRemoval`, reissuing replaces an existing request with one scoped from current contents. **Cancel remove** cancels active regular-removal orders and is hidden when none of the enabled targets has one. The quick action displays its live Unity cost and affordability. Any action closes the dialog after its command is scheduled.
+
+Simulation continues while the dialog is open.
+
+#### Quick removal
+
+- The quick action schedules one serializable batch input command containing the enabled target IDs. The command processor re-resolves all IDs, reruns adapter preflight, recomputes per-entity quantities and costs, and performs the final affordability check on the simulation thread.
 - If the player cannot afford the total, no regular orders are cancelled, no products are cleared, and no Unity is consumed.
-- When sandbox **Ignore lack of Unity** is enabled, vanilla `CanConsume` keeps Confirm enabled regardless of balance and vanilla `ConsumeExactly` leaves the balance at zero when it is insufficient.
-- Entities demolished or otherwise invalidated while the panel is open are revalidated and silently omitted before confirmation.
+- When sandbox **Ignore lack of Unity** is enabled, vanilla `CanConsume` keeps the quick action enabled regardless of balance and vanilla `ConsumeExactly` leaves the balance at zero when it is insufficient.
+- Entities demolished or otherwise invalidated while the dialog is open are revalidated and silently omitted when the action executes.
 - No player-facing success, skip, or failure summary is shown; diagnostics remain in the log.
 - “All-or-nothing” guarantees affordability atomicity, not rollback after an unforeseen implementation fault. The processor preflights every target first; if an adapter still throws during execution, it logs the entity/prototype/adapter failure, continues with independent targets, and charges only for entities successfully cleared.
 
-## AoE regular remove
+#### Regular removal
 
-The AoE regular tool has a visible entry in the vanilla tools toolbar and a configurable hotkey, defaulting to `Alt+Backspace`. It uses the same normalized whole-entity selection and target validation as AoE quick remove, and its toolbar entry is adjacent to the quick-removal tool.
-
-- The operation is applied on selection release; there is no confirmation panel.
-- Selection release schedules one serializable batch input command; it does not mutate removal state from the UI callback.
-- The command processor re-resolves and deduplicates IDs. Each selected entity toggles independently: inactive starts an order, active cancels it.
+- **Remove** schedules one serializable batch input command containing the enabled target IDs; neither selection nor filter changes mutate removal state.
+- The command processor re-resolves and deduplicates IDs. Each selected entity independently receives a removal request. Existing native and BDT requests are replaced from current contents rather than interpreted as cancellation.
+- **Cancel remove** schedules an explicit cancellation batch for the enabled target IDs and cancels every active native or BDT order in that set. It is hidden when that set contains no active order.
 - Mixed selections are supported.
 - Empty entities, unsupported entities, and entities whose adapter cannot be safely created are silently skipped from the player’s perspective.
 - For `Transport` IDs, the batch processor delegates to `IsProductsRemovalInProgress`, `RequestProductsRemoval`, and `CancelProductsRemoval`, exactly matching `ClearTransportCmd`; native transport state remains the source of truth and is not cached by BDT.
@@ -217,7 +229,7 @@ The AoE regular tool has a visible entry in the vanilla tools toolbar and a conf
 
 ## Modded entity adapter contract
 
-The adapter seam is justified by the five vanilla entity shapes and the explicit modded-entity extension requirement. Registration is keyed by stable prototype ID and supplies an adapter factory for the current world.
+The adapter seam is justified by the five vanilla entity shapes and the explicit modded-entity extension requirement. Registration is keyed by stable prototype ID and supplies an adapter factory for the current world. The runtime API is `TransportProductRemovalAdapterRegistry.Register(prototypeId, factory)`, which returns a disposable registration handle; registrations are runtime metadata and are never serialized.
 
 An eligible adapter must provide all of the following:
 
@@ -229,8 +241,14 @@ An eligible adapter must provide all of the following:
 - clean up idempotently on cancellation, save detachment, destruction, world termination, and adapter failure;
 - support both regular and quick modes.
 - provide a safe inspector insertion point for the combined removal control.
+- explicitly identify infinite product-source or product-sink behavior so BDT
+  can reject those adapters even when they otherwise satisfy the contract.
 
-Registration or preflight failure excludes the entity from both AoE tools, leaves it ungated, and writes an error-level diagnostic containing entity ID, prototype ID, and adapter kind. The player receives no custom notification.
+The adapter must expose a stable adapter kind and inspector group ID, match the entity and prototype passed to its factory, and report validity only while its private buffer shape is safe to use. BDT validates these invariants before creating an order. The registering mod should keep the returned registration handle and dispose it with its own runtime lifecycle.
+
+BDT does not discover arbitrary third-party inspector types. The registering mod patches its own inspector and calls `TransportProductRemovalUi.AddCombinedRemovalControl(parent, scheduler, entityProvider)` at the supported buffer-panel insertion point. The helper contributes the same combined regular/quick interaction used by built-in inspectors; the adapter's inspector-support flag makes this requirement explicit and is required for AoE eligibility.
+
+Registration or preflight failure excludes the entity from the AoE removal tool, leaves it ungated, and writes an error-level diagnostic containing entity ID, prototype ID, and adapter kind when the failure is encountered during an operation. The player receives no custom notification.
 
 ## Verification strategy
 
@@ -241,7 +259,7 @@ The removal domain module’s interface is the primary test surface. Tests shoul
 - no-op for empty or unsupported-only contents;
 - synchronous completion for discardable-only contents;
 - active-order lifecycle for truck-loadable contents;
-- mixed active/inactive batch toggling;
+- mixed active/inactive batch removal requests and explicit batch cancellation;
 - quick removal leaves an unaffordable regular order intact;
 - successful quick removal cancels regular removal first;
 - an unexpected quick-removal failure does not prevent independent targets from completing and is not charged;
@@ -255,15 +273,18 @@ The removal domain module’s interface is the primary test surface. Tests shoul
 - inspector integration creates exactly one regular/quick control and reflects active/cost state;
 - UI actions schedule commands and perform no direct simulation mutation;
 - partial transport selection resolves to one whole parent transport;
+- the single AoE toolbar entry opens one post-selection dialog with entity-type filters and paired regular/quick actions;
+- changing type filters updates counts and quick cost without changing the fixed selection or simulation state;
 - manual save and autosave detach and reattach active orders without losing intent;
 - failed saves still reattach through `OnSaveDone`;
 - load rebuilds orders and transient vehicle jobs from the persisted model;
 - removing BDT leaves a vanilla-loadable save with no BDT runtime objects in vanilla graphs;
-- reinstalling BDT follows the resolution chosen for one-shot scope after mod absence.
+- removing BDT allows the save to load normally; after that world is re-saved without BDT, reinstalling BDT starts with no prior removal order.
 
 ## Acceptance criteria
 
-- Regular and quick AoE tools target the same supported entities.
+- One AoE removal tool and dialog exposes both regular and quick removal for the same supported entities.
+- Entity-type toggles filter both actions consistently and default to enabled for every selected type.
 - Regular removal never clears products that vanilla regular removal would leave behind.
 - Active regular removal blocks normal port input/output without changing vanilla enabled/paused state.
 - Quick removal clears all buffered products and charges the standard cost.

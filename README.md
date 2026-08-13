@@ -17,6 +17,7 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 - [Symmetric entity normalization](#symmetric-entity-normalization)
 - [Instant build mode](#instant-build-mode)
 - [Transport cleanup tool](#transport-cleanup-tool)
+- [Transport product removal](#transport-product-removal)
 - [Height filter](#height-filter)
 - [Layout box mode](#layout-box-mode)
 - [Throughput tools](#throughput-tools)
@@ -149,6 +150,14 @@ BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. After armi
 This is useful before capturing a blueprint because it can strip accidental dangling belts and pipes without touching connected transport lines.
 
 See [Transport Cleanup Tool](docs/player/transport-cleanup-tool.md) for selection rules.
+
+### Transport product removal
+
+BDT extends vanilla product removal to lifts, connectors, sorters, and balancers. Their inspectors provide regular removal and quick removal together: regular removal discards eligible products or waits for trucks to collect them, while quick removal clears products immediately for the displayed Unity cost.
+
+The **Remove products in area** tool (default hotkey `Alt+Backspace`) applies the same actions across a drag-selected area. Its dialog can include or exclude each selected entity type, previews the products and quantities that will be affected, and offers **Remove**, **Quick remove**, and **Cancel** actions. Active regular-removal orders survive save and reload while BDT remains installed.
+
+See [Transport product removal](docs/player/transport-product-removal.md) for operation and persistence details.
 
 ### Height filter
 

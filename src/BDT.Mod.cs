@@ -23,6 +23,7 @@ using Mafi.Core.Prototypes;
 using Mafi.Core.SaveGame;
 using Mafi.Core.Simulation;
 using Mafi.Core.Utils;
+using Mafi.Core.Vehicles;
 using Mafi.Unity;
 using Mafi.Unity.Entities;
 using Mafi.Unity.InputControl;
@@ -38,9 +39,11 @@ namespace CoIDesignerToolkit;
 public sealed class DesignerToolkitMod : IMod, IDisposable
 {
     private static readonly ModLogger s_log = new ModLogger("BDT");
+    private readonly ModSaveLifecycle m_removalSaveLifecycle = new ModSaveLifecycle();
     private Harmony? m_harmony;
     private ISimLoopEvents? m_simLoopEvents;
     private IGameLoopEvents? m_gameLoopEvents;
+    private ISaveManager? m_saveManager;
     private IModStateJsonStore? m_settingsStateStore;
     private InstantBuildMode? m_instantBuildMode;
     private TransportCleanupTool? m_transportCleanupTool;
@@ -51,6 +54,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private ThroughputWorldRenderer? m_throughputWorldRenderer;
     private UnityEngine.GameObject? m_throughputWorldRendererGo;
     private ThroughputAoETool? m_throughputAoETool;
+    private TransportProductRemovalAoETool? m_transportProductRemovalAoETool;
     private UndoManager? m_undoManager;
     private PollutionManager? m_pollutionManager;
     private PollutionWorldRenderer? m_pollutionWorldRenderer;
@@ -105,6 +109,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
     {
+        depBuilder.RegisterDependency<TransportProductRemovalCommandsProcessor>().AsAllInterfaces();
+        depBuilder.RegisterDependency<TransportProductRemovalBatchCommandsProcessor>().AsAllInterfaces();
     }
 
     public void EarlyInit(DependencyResolver resolver)
@@ -121,7 +127,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
         m_simLoopEvents = resolver.Resolve<ISimLoopEvents>();
+        m_saveManager = resolver.Resolve<ISaveManager>();
         m_simLoopEvents.BeforeSave.AddNonSaveable(this, beforeSave);
+        m_saveManager.OnSaveDone += onSaveDone;
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath, gameWasLoaded);
@@ -168,6 +176,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         
         var entitiesManager = resolver.Resolve<EntitiesManager>();
         entitiesManager.EntityRemoved.AddNonSaveable(this, RateLimitManager.OnEntityRemoved);
+        TransportProductRemovalManager.Initialize(
+            entitiesManager,
+            resolver.Resolve<IVehicleBuffersRegistry>(),
+            m_removalSaveLifecycle.VanillaAttachments,
+            ModStateJsonStores.CreateDefault(JsonConfig, TransportProductRemovalManager.CONFIG_KEY));
+        entitiesManager.EntityRemoved.AddNonSaveable(this, TransportProductRemovalManager.OnEntityRemoved);
 
         object? instaBuildManager = resolver.TryResolve(typeof(InstaBuildManager)).ValueOrNull;
         m_instantBuildMode = new InstantBuildMode(
@@ -199,6 +213,18 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>(),
             resolver.Resolve<IGameLoopEvents>());
         m_throughputAoETool.Initialize();
+
+        m_transportProductRemovalAoETool = new TransportProductRemovalAoETool(
+            resolver.Resolve<Mafi.Unity.Ui.Hud.ToolbarHud>(),
+            resolver.Resolve<Mafi.Unity.Ui.UiContext>(),
+            resolver.Resolve<Mafi.Unity.InputControl.CursorPickingManager>(),
+            resolver.Resolve<Mafi.Unity.UiStatic.Cursors.CursorManager>(),
+            resolver.Resolve<Mafi.Unity.InputControl.AreaTool.AreaSelectionToolFactory>(),
+            resolver.Resolve<IEntitiesManager>(),
+            resolver.Resolve<NewInstanceOf<EntityHighlighter>>(),
+            resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>(),
+            resolver.Resolve<IGameLoopEvents>());
+        m_transportProductRemovalAoETool.Initialize();
 
         m_heightFilter = new HeightFilter(m_harmony!, resolver.Resolve<IGameLoopEvents>());
         m_heightFilter.Initialize(resolver);
@@ -235,6 +261,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     private void beforeSave()
     {
+        TransportProductRemovalManager.SaveState();
+        m_removalSaveLifecycle.BeforeVanillaSave();
+
         IModStateJsonStore store = m_settingsStateStore
             ?? ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
         m_settingsStateStore = store;
@@ -256,6 +285,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         {
             m_throughputManager.SaveConfigState();
         }
+
+    }
+
+    private void onSaveDone(SaveResult result)
+    {
+        m_removalSaveLifecycle.AfterVanillaSave();
     }
 
     private void RegisterAutoHelpersLocalizationLateApply(DependencyResolver resolver)
@@ -310,6 +345,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     private void unsubscribeWorldEvents()
     {
+        TransportProductRemovalManager.Clear();
+
         if (m_instantBuildMode != null)
         {
             DesignerToolkitSettings.InstantBuildModeChanged -= m_instantBuildMode.OnSettingsChanged;
@@ -327,6 +364,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         {
             m_throughputAoETool.Dispose();
             m_throughputAoETool = null;
+        }
+
+        if (m_transportProductRemovalAoETool != null)
+        {
+            m_transportProductRemovalAoETool.Dispose();
+            m_transportProductRemovalAoETool = null;
         }
 
         if (m_heightFilter != null)
@@ -391,6 +434,16 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             catch { }
             m_simLoopEvents = null;
         }
+
+        if (m_saveManager != null)
+        {
+            try { m_saveManager.OnSaveDone -= onSaveDone; }
+            catch { }
+            m_saveManager = null;
+        }
+
+        try { m_removalSaveLifecycle.DisposeRuntime(); }
+        catch { }
     }
 
     private void InitializeNewGameOptions(DependencyResolver resolver, bool gameWasLoaded)
