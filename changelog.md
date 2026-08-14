@@ -2,6 +2,8 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.9.1 [unreleased]
+
 ## v0.9.0 [released]
 
 - Updated the maximum verified Captain of Industry version to `0.8.7a`.
