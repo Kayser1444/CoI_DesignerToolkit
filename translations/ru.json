@@ -108,14 +108,6 @@
     "Удерживайте или нажмите горячую клавишу, чтобы переключить ленивое сопоставление высоты. По умолчанию ремни и трубы соответствуют целевой высоте как можно скорее. Когда эта опция включена, ленты и трубы будут оставаться на исходной высоте как можно дольше, прежде чем изменить высоту."
   ],
   [
-    "dtk.settings.transport_cleanup.heading",
-    "ОЧИСТКА ТРАНСПОРТЁРОВ"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Горячая клавиша очистки транспортёров"
-  ],
-  [
     "dtk.settings.height_filter.heading",
     "ФИЛЬТР ВЫСОТЫ"
   ],
@@ -126,14 +118,6 @@
   [
     "dtk.settings.height_filter_max_visible.description",
     "Ограничивает уровень высоты транспортёров, строений и опор, отображаемых в мире."
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "Горячая клавиша показа уровня"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "Горячая клавиша скрытия уровня"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -182,6 +166,14 @@
   [
     "dtk.blueprint.copy_folder_as_markdown.tooltip",
     "Копирует список чертежей папки в виде таблицы Markdown в буфер обмена."
+  ],
+  [
+    "dtk.blueprint.construction_cost",
+    "Стоимость строительства:"
+  ],
+  [
+    "dtk.blueprint.operational_cost",
+    "Эксплуатационная стоимость:"
   ],
   [
     "dtk.markdown.components.heading",
@@ -268,10 +260,6 @@
     "Отбрасывает на землю светящийся свет, соответствующий цвету тепловой карты. Работает независимо от текстового наложения. Отключите, если вызывает задержку/лаги."
   ],
   [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "Горячая клавиша наложения пропускной способности"
-  ],
-  [
     "dtk.settings.throughput_heatmap.label",
     "Окраска пропускной способности (тепловая карта)"
   ],
@@ -344,10 +332,6 @@
     "Выбрать/отменить выбор всего"
   ],
   [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Горячая клавиша инструмента выбора области"
-  ],
-  [
     "dtk.transport_product_removal.aoe_tool.name",
     "Удалить продукты в зоне"
   ],
@@ -366,6 +350,14 @@
   [
     "dtk.transport_product_removal.aoe_tool.balancer",
     "Распределитель"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "Удалить ({0})"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "Отмена ({0})"
   ],
   [
     "dtk.transport_product_removal.aoe_tool.quick_remove",
@@ -400,6 +392,10 @@
     "Недостаточно Unity для быстрого удаления выбранных товаров."
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "Товары для удаления (всего {0})"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "МАКЕТ"
   ],
@@ -410,10 +406,6 @@
   [
     "dtk.settings.layout_box.description",
     "Включает наложение рентгеновских лучей, отображающее воксельные рамки вокруг зданий, чтобы показать их планировку и зазор."
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "Горячая клавиша режима рамки макета"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -436,12 +428,8 @@
     "Название папки в корне книги чертежей, которая будет использоваться в качестве корзины."
   ],
   [
-    "dtk.settings.undo.heading",
-    "ОТМЕНА РАЗМЕЩЕНИЯ"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "Горячая клавиша отмены размещения"
+    "dtk.settings.recycle_bin_folder_name.invalid",
+    "Неверное имя папки. Не должно быть пустым и не должно содержать более 60 символов."
   ],
   [
     "dtk.undo.success",
@@ -520,10 +508,6 @@
     "Включает/отключает наложение уровня загрязнения в мире, для кораблей и грузовых судов. Отображает прогнозируемый уровень загрязнения на основе времени текущего грузового маршрута (туда и обратно) и расхода топлива. Эти значения учитывают влияние настроек сложности игры и исследованных технологий снижения загрязнения."
   ],
   [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "Горячая клавиша наложения загрязнения"
-  ],
-  [
     "dtk.settings.radiation.heading",
     "НАЛОЖЕНИЕ РАДИАЦИИ"
   ],
@@ -550,10 +534,6 @@
   [
     "dtk.settings.radiation_days.description",
     "Настраивает скользящее окно в игровых днях [0–360] для усреднения выборочного небезопасного радиоактивного инвентаря. Установка значения 0 отключает сбор данных."
-  ],
-  [
-    "dtk.settings.radiation_toggle_hotkey.label",
-    "Горячая клавиша наложения радиации"
   ],
   [
     "dtk.settings.place_folder.heading",

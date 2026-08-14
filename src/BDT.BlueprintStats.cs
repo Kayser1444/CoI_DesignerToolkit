@@ -108,7 +108,7 @@ internal static class BlueprintStats
                 .MarginTop(2.pt())
                 .Visible(false);
             opsSection.Add(
-                new Label("Operational cost:".AsLoc()).FontBold(),
+                new Label(BdtLocalization.BlueprintOperationalCost.AsFormatted).FontBold(),
                 tilesRow);
 
             // Put operational stats immediately after the content/cost block.
@@ -132,14 +132,14 @@ internal static class BlueprintStats
 
         if (detail[CONTENT_INDEX] is IComponentWithText directCostTitle)
         {
-            directCostTitle.SetValue("Construction cost:".AsLoc());
+            directCostTitle.SetValue(BdtLocalization.BlueprintConstructionCost.AsFormatted);
             return;
         }
 
         if (detail[CONTENT_INDEX] is Column content && content.ChildrenCount > 1 &&
             content[1] is IComponentWithText nestedCostTitle)
         {
-            nestedCostTitle.SetValue("Construction cost:".AsLoc());
+            nestedCostTitle.SetValue(BdtLocalization.BlueprintConstructionCost.AsFormatted);
         }
     }
 

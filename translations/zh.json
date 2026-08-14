@@ -108,14 +108,6 @@
     "按住或按快捷键可切换延迟高度匹配。默认情况下，传送带和管道会尽快匹配目标高度。启用此功能后，传送带和管道将在更改标高之前尽可能长时间地保持在起始高度。"
   ],
   [
-    "dtk.settings.transport_cleanup.heading",
-    "传输清理"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "传输清理快捷键"
-  ],
-  [
     "dtk.settings.height_filter.heading",
     "高度过滤器"
   ],
@@ -126,14 +118,6 @@
   [
     "dtk.settings.height_filter_max_visible.description",
     "限制世界中渲染的传输、结构和支柱的高度层级。"
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "显示层级快捷键"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "隐藏层级快捷键"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -182,6 +166,14 @@
   [
     "dtk.blueprint.copy_folder_as_markdown.tooltip",
     "将文件夹中的蓝图列表作为 Markdown 表格复制到剪贴板。"
+  ],
+  [
+    "dtk.blueprint.construction_cost",
+    "建设成本："
+  ],
+  [
+    "dtk.blueprint.operational_cost",
+    "运营成本："
   ],
   [
     "dtk.markdown.components.heading",
@@ -268,10 +260,6 @@
     "将发光的光线投射到与热图颜色相匹配的地面上。独立于文本叠加进行操作。如果造成延迟，请禁用。"
   ],
   [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "吞吐量叠加层快捷键"
-  ],
-  [
     "dtk.settings.throughput_heatmap.label",
     "吞吐量着色（热力图）"
   ],
@@ -344,10 +332,6 @@
     "全选/取消全选"
   ],
   [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "吞吐量工具快捷键"
-  ],
-  [
     "dtk.transport_product_removal.aoe_tool.name",
     "删除该区域的产品"
   ],
@@ -366,6 +350,14 @@
   [
     "dtk.transport_product_removal.aoe_tool.balancer",
     "平衡器"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "删除 ({0})"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "取消 ({0})"
   ],
   [
     "dtk.transport_product_removal.aoe_tool.quick_remove",
@@ -400,6 +392,10 @@
     "没有足够的 Unity 来快速删除所选产品。"
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "要删除的产品（共 {0} 个）"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "布局"
   ],
@@ -410,10 +406,6 @@
   [
     "dtk.settings.layout_box.description",
     "启用 X 射线叠加渲染建筑物周围的体素边界框，以显示其布局和间隙。"
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "切换布局框叠加层热键"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -436,12 +428,8 @@
     "蓝图书根目录下用作回收站的文件夹名称。"
   ],
   [
-    "dtk.settings.undo.heading",
-    "撤消放置"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "撤消放置热键"
+    "dtk.settings.recycle_bin_folder_name.invalid",
+    "文件夹名称无效。不得为空且长度不得超过 60 个字符。"
   ],
   [
     "dtk.undo.success",
@@ -520,10 +508,6 @@
     "启用/禁用船舶的世界污染率叠加。显示根据当前货运航线的往返时间和燃油消耗预测的污染率。这些值包括游戏难度设置和研究的污染减少技术的影响。"
   ],
   [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "污染叠加快捷键"
-  ],
-  [
     "dtk.settings.radiation.heading",
     "辐射叠加"
   ],
@@ -550,10 +534,6 @@
   [
     "dtk.settings.radiation_days.description",
     "配置游戏日 [0-360] 内的滑动窗口以平均采样的不安全放射性库存。将其设置为 0 将禁用数据收集。"
-  ],
-  [
-    "dtk.settings.radiation_toggle_hotkey.label",
-    "辐射叠加热键"
   ],
   [
     "dtk.settings.place_folder.heading",

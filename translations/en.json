@@ -108,14 +108,6 @@
     "Hold or press the shortcut key to toggle lazy height matching. By default belts & pipes match target height as soon as possible. When this is enabled, belts & pipes will stay at their starting height for as long as possible before changing elevation."
   ],
   [
-    "dtk.settings.transport_cleanup.heading",
-    "TRANSPORT CLEANUP"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Transport cleanup hotkey"
-  ],
-  [
     "dtk.settings.height_filter.heading",
     "HEIGHT FILTER"
   ],
@@ -126,14 +118,6 @@
   [
     "dtk.settings.height_filter_max_visible.description",
     "Limits the height level of transports, structures, and pillars rendered in the world."
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "Show layer hotkey"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "Hide layer hotkey"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -182,6 +166,14 @@
   [
     "dtk.blueprint.copy_folder_as_markdown.tooltip",
     "Copy folder blueprint list as a Markdown table to the clipboard."
+  ],
+  [
+    "dtk.blueprint.construction_cost",
+    "Construction cost:"
+  ],
+  [
+    "dtk.blueprint.operational_cost",
+    "Operational cost:"
   ],
   [
     "dtk.markdown.components.heading",
@@ -268,10 +260,6 @@
     "Cast a glowing light onto the ground matching the heatmap color. Operates independently of the text overlay. Disable if causing lag."
   ],
   [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "Throughput overlay hotkey"
-  ],
-  [
     "dtk.settings.throughput_heatmap.label",
     "Throughput coloring (heat map)"
   ],
@@ -344,10 +332,6 @@
     "Select / deselect all"
   ],
   [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Throughput tool hotkey"
-  ],
-  [
     "dtk.transport_product_removal.aoe_tool.name",
     "Remove products in area"
   ],
@@ -366,6 +350,14 @@
   [
     "dtk.transport_product_removal.aoe_tool.balancer",
     "Balancer"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "Remove ({0})"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "Cancel ({0})"
   ],
   [
     "dtk.transport_product_removal.aoe_tool.quick_remove",
@@ -400,6 +392,10 @@
     "Not enough Unity to quick remove the selected products."
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "Products to remove ({0} total)"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "LAYOUT"
   ],
@@ -410,10 +406,6 @@
   [
     "dtk.settings.layout_box.description",
     "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance."
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "Toggle layout box overlay hotkey"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -436,12 +428,8 @@
     "The folder name under the blueprint book root to use as the Recycle Bin."
   ],
   [
-    "dtk.settings.undo.heading",
-    "UNDO PLACEMENT"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "Undo placement hotkey"
+    "dtk.settings.recycle_bin_folder_name.invalid",
+    "Invalid folder name. Must not be empty and under 60 characters."
   ],
   [
     "dtk.undo.success",
@@ -520,10 +508,6 @@
     "Enables/disables the in-world pollution rate overlay for ships. Displays the predicted pollution rate based on the current cargo route's round-trip time and fuel consumption. These values include the effects of game difficulty settings and researched pollution-reduction technologies."
   ],
   [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "Pollution overlay hotkey"
-  ],
-  [
     "dtk.settings.radiation.heading",
     "RADIATION OVERLAY"
   ],
@@ -550,10 +534,6 @@
   [
     "dtk.settings.radiation_days.description",
     "Configures the sliding window in game days [0-360] to average sampled unsafe radioactive inventory. Setting this to 0 disables data collection."
-  ],
-  [
-    "dtk.settings.radiation_toggle_hotkey.label",
-    "Radiation overlay hotkey"
   ],
   [
     "dtk.settings.place_folder.heading",

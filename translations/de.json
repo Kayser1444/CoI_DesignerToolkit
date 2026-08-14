@@ -108,14 +108,6 @@
     "Halten Sie die Tastenkombination gedrückt oder drücken Sie sie, um die verzögerte Höhenanpassung umzuschalten. Standardmäßig passen sich Riemen und Rohre so schnell wie möglich der Zielhöhe an. Wenn diese Option aktiviert ist, bleiben Bänder und Rohre so lange wie möglich auf ihrer Ausgangshöhe, bevor sie die Höhe ändern."
   ],
   [
-    "dtk.settings.transport_cleanup.heading",
-    "TRANSPORT-BEREINIGUNG"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Tastenkürzel Bereinigung"
-  ],
-  [
     "dtk.settings.height_filter.heading",
     "HÖHENFILTER"
   ],
@@ -126,14 +118,6 @@
   [
     "dtk.settings.height_filter_max_visible.description",
     "Begrenzt die Höhenebene von Transporten, Bauwerken und Pfeilern, die in der Welt gerendert werden."
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "Tastenkürzel Ebene einblenden"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "Tastenkürzel Ebene ausblenden"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -182,6 +166,14 @@
   [
     "dtk.blueprint.copy_folder_as_markdown.tooltip",
     "Kopiert die Blaupausenliste des Ordners als Markdown-Tabelle in die Zwischenablage."
+  ],
+  [
+    "dtk.blueprint.construction_cost",
+    "Baukosten:"
+  ],
+  [
+    "dtk.blueprint.operational_cost",
+    "Betriebskosten:"
   ],
   [
     "dtk.markdown.components.heading",
@@ -268,10 +260,6 @@
     "Wirf ein leuchtendes Licht auf den Boden, das der Farbe der Heatmap entspricht. Funktioniert unabhängig von der Textüberlagerung. Deaktivieren, wenn es zu Verzögerungen kommt."
   ],
   [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "Tastenkürzel Durchsatz-Overlay"
-  ],
-  [
     "dtk.settings.throughput_heatmap.label",
     "Durchsatz-Färbung (Heatmap)"
   ],
@@ -344,10 +332,6 @@
     "Alle auswählen/abwählen"
   ],
   [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Tastenkürzel Durchsatz-Werkzeug"
-  ],
-  [
     "dtk.transport_product_removal.aoe_tool.name",
     "Entfernen Sie Produkte aus dem Bereich"
   ],
@@ -366,6 +350,14 @@
   [
     "dtk.transport_product_removal.aoe_tool.balancer",
     "Ausgleicher"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "Entfernen ({0})"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "Abbrechen ({0})"
   ],
   [
     "dtk.transport_product_removal.aoe_tool.quick_remove",
@@ -400,6 +392,10 @@
     "Unity reicht nicht aus, um die ausgewählten Produkte schnell zu entfernen."
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "Zu entfernende Produkte (insgesamt {0})"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "ANORDNUNGSRAHMEN"
   ],
@@ -410,10 +406,6 @@
   [
     "dtk.settings.layout_box.description",
     "Ermöglicht eine Röntgenüberlagerung, die Voxel-Begrenzungsrahmen um Gebäude herum darstellt, um deren Anordnung und Abstände anzuzeigen."
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "Hotkey zum Umschalten der Layoutbox-Überlagerung"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -436,12 +428,8 @@
     "Der Ordnername im Stammverzeichnis des Blueprint-Books, der als Papierkorb verwendet werden soll."
   ],
   [
-    "dtk.settings.undo.heading",
-    "Platzierung rückgängig machen"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "Platzierungs-Hotkey rückgängig machen"
+    "dtk.settings.recycle_bin_folder_name.invalid",
+    "Ungültiger Ordnername. Darf nicht leer sein und darf nicht länger als 60 Zeichen sein."
   ],
   [
     "dtk.undo.success",
@@ -520,10 +508,6 @@
     "Aktiviert/deaktiviert die In-World-Überlagerung der Verschmutzungsrate für Schiffe. Zeigt die prognostizierte Verschmutzungsrate basierend auf der Hin- und Rückfahrtzeit und dem Kraftstoffverbrauch der aktuellen Frachtroute an. Diese Werte umfassen die Auswirkungen von Spielschwierigkeitseinstellungen und erforschten Technologien zur Reduzierung der Umweltverschmutzung."
   ],
   [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "Hotkey zur Verschmutzungsüberlagerung"
-  ],
-  [
     "dtk.settings.radiation.heading",
     "STRAHLUNGSÜBERLAGERUNG"
   ],
@@ -550,10 +534,6 @@
   [
     "dtk.settings.radiation_days.description",
     "Konfiguriert das Schiebefenster in Spieltagen [0-360], um den Durchschnitt der entnommenen unsicheren radioaktiven Inventare zu ermitteln. Wenn Sie diesen Wert auf 0 setzen, wird die Datenerfassung deaktiviert."
-  ],
-  [
-    "dtk.settings.radiation_toggle_hotkey.label",
-    "Hotkey für Strahlungsüberlagerung"
   ],
   [
     "dtk.settings.place_folder.heading",

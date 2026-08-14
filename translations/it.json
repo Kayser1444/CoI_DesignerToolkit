@@ -108,14 +108,6 @@
     "Tieni premuto o premi il tasto di scelta rapida per attivare/disattivare la corrispondenza pigra dell'altezza. Per impostazione predefinita, nastri e tubi corrispondono all'altezza target il prima possibile. Quando questa opzione è abilitata, i nastri e i tubi rimarranno alla loro altezza iniziale il più a lungo possibile prima di cambiare elevazione."
   ],
   [
-    "dtk.settings.transport_cleanup.heading",
-    "PULIZIA TRASPORTI"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Scorciatoia pulizia trasporti"
-  ],
-  [
     "dtk.settings.height_filter.heading",
     "FILTRO ALTEZZA"
   ],
@@ -126,14 +118,6 @@
   [
     "dtk.settings.height_filter_max_visible.description",
     "Limita il livello di altezza di trasporti, strutture e pilastri visualizzati nel mondo."
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "Scorciatoia mostra livello"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "Scorciatoia nascondi livello"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -182,6 +166,14 @@
   [
     "dtk.blueprint.copy_folder_as_markdown.tooltip",
     "Copia l'elenco dei progetti della cartella come tabella Markdown negli appunti."
+  ],
+  [
+    "dtk.blueprint.construction_cost",
+    "Costo di costruzione:"
+  ],
+  [
+    "dtk.blueprint.operational_cost",
+    "Costo operativo:"
   ],
   [
     "dtk.markdown.components.heading",
@@ -268,10 +260,6 @@
     "Proietta una luce brillante sul terreno abbinandola al colore della mappa di calore. Funziona indipendentemente dalla sovrapposizione del testo. Disabilita se causa ritardo."
   ],
   [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "Scorciatoia overlay throughput"
-  ],
-  [
     "dtk.settings.throughput_heatmap.label",
     "Colorazione di produttività (mappa di calore)"
   ],
@@ -344,10 +332,6 @@
     "Seleziona/deseleziona tutto"
   ],
   [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Scorciatoia strumento throughput"
-  ],
-  [
     "dtk.transport_product_removal.aoe_tool.name",
     "Rimuovere i prodotti nell'area"
   ],
@@ -366,6 +350,14 @@
   [
     "dtk.transport_product_removal.aoe_tool.balancer",
     "Bilanciatore"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "Rimuovi ({0})"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "Annulla ({0})"
   ],
   [
     "dtk.transport_product_removal.aoe_tool.quick_remove",
@@ -400,6 +392,10 @@
     "Unity insufficiente per rimuovere rapidamente i prodotti selezionati."
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "Prodotti da rimuovere ({0} totale)"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "DISPOSIZIONE"
   ],
@@ -410,10 +406,6 @@
   [
     "dtk.settings.layout_box.description",
     "Abilita una sovrapposizione di raggi X che esegue il rendering dei riquadri di delimitazione dei voxel attorno agli edifici per mostrarne la disposizione e lo spazio libero."
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "Attiva/disattiva il tasto di scelta rapida sovrapposizione della casella di layout"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -436,12 +428,8 @@
     "Il nome della cartella nella radice del libro dei progetti da utilizzare come Cestino."
   ],
   [
-    "dtk.settings.undo.heading",
-    "ANNULLA POSIZIONAMENTO"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "Scorciatoia annulla posizionamento"
+    "dtk.settings.recycle_bin_folder_name.invalid",
+    "Nome della cartella non valido. Non deve essere vuoto né contenere più di 60 caratteri."
   ],
   [
     "dtk.undo.success",
@@ -520,10 +508,6 @@
     "Abilita/disabilita la sovrapposizione del tasso di inquinamento nel mondo per le navi. Visualizza il tasso di inquinamento previsto in base al tempo di andata e ritorno della rotta cargo corrente e al consumo di carburante. Questi valori includono gli effetti delle impostazioni di difficoltà del gioco e delle tecnologie ricercate per la riduzione dell'inquinamento."
   ],
   [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "Scorciatoia sovrapposizione inquinamento"
-  ],
-  [
     "dtk.settings.radiation.heading",
     "SOVRAPPOSIZIONE RADIAZIONE"
   ],
@@ -550,10 +534,6 @@
   [
     "dtk.settings.radiation_days.description",
     "Configura la finestra scorrevole nei giorni di gioco [0-360] per calcolare la media dell'inventario radioattivo non sicuro campionato. Impostandolo su 0 si disabilita la raccolta dei dati."
-  ],
-  [
-    "dtk.settings.radiation_toggle_hotkey.label",
-    "Tasto di scelta rapida per la sovrapposizione delle radiazioni"
   ],
   [
     "dtk.settings.place_folder.heading",

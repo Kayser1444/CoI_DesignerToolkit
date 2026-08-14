@@ -108,14 +108,6 @@
     "Segure ou pressione a tecla de atalho para alternar a correspondência de altura lenta. Por padrão, as correias e os tubos correspondem à altura alvo o mais rápido possível. Quando ativado, as correias e os tubos permanecerão na altura inicial pelo maior tempo possível antes de alterar a elevação."
   ],
   [
-    "dtk.settings.transport_cleanup.heading",
-    "LIMPEZA DE TRANSPORTE"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Atalho de limpeza de transporte"
-  ],
-  [
     "dtk.settings.height_filter.heading",
     "FILTRO DE ALTURA"
   ],
@@ -126,14 +118,6 @@
   [
     "dtk.settings.height_filter_max_visible.description",
     "Limita o nível de altura de transportes, estruturas e pilares renderizados no mundo."
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "Atalho para mostrar camada"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "Atalho para ocultar camada"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -182,6 +166,14 @@
   [
     "dtk.blueprint.copy_folder_as_markdown.tooltip",
     "Copia a lista de planos da pasta como uma tabela Markdown para a área de transferência."
+  ],
+  [
+    "dtk.blueprint.construction_cost",
+    "Custo de construção:"
+  ],
+  [
+    "dtk.blueprint.operational_cost",
+    "Custo operacional:"
   ],
   [
     "dtk.markdown.components.heading",
@@ -268,10 +260,6 @@
     "Lance uma luz brilhante no chão combinando com a cor do mapa de calor. Opera independentemente da sobreposição de texto. Desative se estiver causando atraso."
   ],
   [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "Atalho de sobreposição de throughput"
-  ],
-  [
     "dtk.settings.throughput_heatmap.label",
     "Colorização de fluxo (mapa de calor)"
   ],
@@ -344,10 +332,6 @@
     "Selecionar/desmarcar tudo"
   ],
   [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Atalho da ferramenta de throughput"
-  ],
-  [
     "dtk.transport_product_removal.aoe_tool.name",
     "Remover produtos da área"
   ],
@@ -366,6 +350,14 @@
   [
     "dtk.transport_product_removal.aoe_tool.balancer",
     "Distribuidor"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "Remover ({0})"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "Cancelar ({0})"
   ],
   [
     "dtk.transport_product_removal.aoe_tool.quick_remove",
@@ -400,6 +392,10 @@
     "Unity insuficiente para remover rapidamente os produtos selecionados."
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "Produtos a serem removidos ({0} total)"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "CAIXAS DE LAYOUT"
   ],
@@ -410,10 +406,6 @@
   [
     "dtk.settings.layout_box.description",
     "Permite que uma sobreposição de raio-X renderize caixas delimitadoras de voxel ao redor de edifícios para mostrar seu layout e espaço livre."
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "Alternar tecla de atalho de sobreposição da caixa de layout"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -436,12 +428,8 @@
     "O nome da pasta na raiz do livro do blueprint a ser usada como Lixeira."
   ],
   [
-    "dtk.settings.undo.heading",
-    "DESFAZER COLOCAÇÃO"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "Atalho para desfazer colocação"
+    "dtk.settings.recycle_bin_folder_name.invalid",
+    "Nome de pasta inválido. Não deve estar vazio nem ter mais de 60 caracteres."
   ],
   [
     "dtk.undo.success",
@@ -520,10 +508,6 @@
     "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Exibe a taxa de poluição prevista com base no tempo de ida e volta da rota de carga atual e no consumo de combustível. Esses valores incluem os efeitos das configurações de dificuldade do jogo e das tecnologias pesquisadas de redução da poluição."
   ],
   [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "Atalho da sobreposição de poluição"
-  ],
-  [
     "dtk.settings.radiation.heading",
     "SOBREPOSIÇÃO DE RADIAÇÃO"
   ],
@@ -550,10 +534,6 @@
   [
     "dtk.settings.radiation_days.description",
     "Configura a janela deslizante em dias de jogo [0-360] para calcular a média do inventário radioativo inseguro amostrado. Definir como 0 desativa a coleta de dados."
-  ],
-  [
-    "dtk.settings.radiation_toggle_hotkey.label",
-    "Tecla de atalho de sobreposição de radiação"
   ],
   [
     "dtk.settings.place_folder.heading",

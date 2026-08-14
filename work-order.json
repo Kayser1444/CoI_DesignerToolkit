@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 151,
+  "total_keys": 146,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",

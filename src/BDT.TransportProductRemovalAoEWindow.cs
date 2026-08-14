@@ -118,15 +118,16 @@ internal sealed class TransportProductRemovalAoEWindow : Window
                 "Assets/Unity/UserInterface/General/Trash128.png")
             .OnClick(ScheduleQuickRemoval);
 
-        m_regularButton.Width(145.px()).Height(38.px());
-        m_quickButton.Width(210.px()).Height(38.px());
-        m_cancelRegularButton.Width(139.px()).Height(38.px());
+        m_regularButton.FlexGrow(1f).Height(38.px());
+        m_quickButton.FlexGrow(1.5f).Height(38.px());
+        m_cancelRegularButton.FlexGrow(1f).Height(38.px());
         Row actionsRow = new Row(6.px())
         {
             m_regularButton,
             m_quickButton,
             m_cancelRegularButton,
         };
+        actionsRow.FlexGrow(1f);
 
         AddBodySingle(
             selectAllRow,
@@ -135,7 +136,6 @@ internal sealed class TransportProductRemovalAoEWindow : Window
             new HorizontalDivider().MarginTopBottom(4.pt()),
             m_productsPanel,
             new PanelFooterRow().BodyAdd(
-                new UiComponent().FlexGrow(1f),
                 actionsRow
             )
         );

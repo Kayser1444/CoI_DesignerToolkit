@@ -71,21 +71,12 @@ internal static class BdtLocalization
     public static LocStr HeightRoutingTooltip =
         Loc.Str("dtk.height_routing.tooltip", "Hold or press the shortcut key to toggle lazy height matching. By default belts & pipes match target height as soon as possible. When this is enabled, belts & pipes will stay at their starting height for as long as possible before changing elevation.", "Tooltip for lazy height matching shortcut in transport placement tool.");
 
-    public static LocStr SettingsTransportCleanupHeading =
-        Loc.Str("dtk.settings.transport_cleanup.heading", "TRANSPORT CLEANUP", "Settings section heading for transport cleanup settings.");
-
-    public static LocStr SettingsTransportCleanupHotkey =
-        Loc.Str("dtk.settings.transport_cleanup_hotkey.label", "Transport cleanup hotkey", "Settings row label for the transport cleanup hotkey.");
     public static LocStr SettingsHeightFilterHeading =
         Loc.Str("dtk.settings.height_filter.heading", "HEIGHT FILTER", "Settings section heading for height filter settings.");
     public static LocStr SettingsHeightFilterMaxVisible =
         Loc.Str("dtk.settings.height_filter_max_visible.label", "Visible layers", "Settings row label for visible layers.");
     public static LocStr SettingsHeightFilterMaxVisibleDescription =
         Loc.Str("dtk.settings.height_filter_max_visible.description", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
-    public static LocStr SettingsHeightFilterShowHotkey =
-        Loc.Str("dtk.settings.height_filter_show_hotkey.label", "Show layer hotkey", "Settings row label for height filter show layer hotkey.");
-    public static LocStr SettingsHeightFilterHideHotkey =
-        Loc.Str("dtk.settings.height_filter_hide_hotkey.label", "Hide layer hotkey", "Settings row label for height filter hide layer hotkey.");
     public static LocStr SettingsGlobalHotkeyTooltip =
         Loc.Str("dtk.settings.global_hotkey.description", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
     public static LocStr SettingsRestoreDefaults =
@@ -111,6 +102,10 @@ internal static class BdtLocalization
         Loc.Str("dtk.blueprint.copy_as_markdown.tooltip", "Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub.", "Tooltip for copying one blueprint as Markdown.");
     public static LocStr CopyFolderMarkdownTooltip =
         Loc.Str("dtk.blueprint.copy_folder_as_markdown.tooltip", "Copy folder blueprint list as a Markdown table to the clipboard.", "Tooltip for copying a blueprint folder as Markdown.");
+    public static LocStr BlueprintConstructionCost =
+        Loc.Str("dtk.blueprint.construction_cost", "Construction cost:", "Label for construction cost in the blueprint statistics panel.");
+    public static LocStr BlueprintOperationalCost =
+        Loc.Str("dtk.blueprint.operational_cost", "Operational cost:", "Label for operational cost in the blueprint statistics panel.");
 
     public static LocStr MarkdownComponentsHeading =
         Loc.Str("dtk.markdown.components.heading", "Components", "Markdown section heading for component counts.");
@@ -156,8 +151,6 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.throughput_glow.label", "Enable heatmap glow effect", "Settings row label for heatmap glow toggle.");
     public static LocStr SettingsThroughputGlowDescription =
         Loc.Str("dtk.settings.throughput_glow.description", "Cast a glowing light onto the ground matching the heatmap color. Operates independently of the text overlay. Disable if causing lag.", "Settings row description for heatmap glow.");
-    public static LocStr SettingsThroughputToggleHotkey =
-        Loc.Str("dtk.settings.throughput_toggle_hotkey.label", "Throughput overlay hotkey", "Settings row label for throughput overlay toggle hotkey.");
     public static LocStr SettingsThroughputHeatmap =
         Loc.Str("dtk.settings.throughput_heatmap.label", "Throughput coloring (heat map)", "Settings row label for throughput heat-map.");
     public static LocStr SettingsThroughputColorblind =
@@ -195,9 +188,6 @@ internal static class BdtLocalization
         Loc.Str("dtk.throughput.aoe_tool.global_display", "Display state: ", "Label for global display state setting.");
     public static LocStr ThroughputAoEToolSelectAllLabel =
         Loc.Str("dtk.throughput.aoe_tool.select_all_label", "Select / deselect all", "Label next to the master checkbox to toggle all items.");
-    public static LocStr SettingsThroughputAoEToolHotkey =
-        Loc.Str("dtk.settings.throughput_aoe_tool_hotkey.label", "Throughput tool hotkey", "Settings row label for throughput AoE tool toggle hotkey.");
-
     public static LocStr TransportProductRemovalAoEToolName =
         Loc.Str("dtk.transport_product_removal.aoe_tool.name", "Remove products in area", "Name of the transport product-removal AoE tool.");
     public static LocStr TransportProductRemovalAoEToolWindowTitle =
@@ -237,9 +227,6 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.layout_box.label", "Toggle layout box overlay", "Settings row label for layout box mode.");
     public static LocStr SettingsLayoutBoxModeDescription =
         Loc.Str("dtk.settings.layout_box.description", "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.", "Settings description for layout box mode.");
-    public static LocStr SettingsLayoutBoxModeHotkey =
-        Loc.Str("dtk.settings.layout_box_hotkey.label", "Toggle layout box overlay hotkey", "Settings row label for layout box mode hotkey.");
-
     public static LocStr SettingsRecycleBinHeading =
         Loc.Str("dtk.settings.recycle_bin.heading", "RECYCLE BIN", "Settings section heading for Recycle Bin settings.");
     public static LocStr SettingsUseRecycleBin =
@@ -250,11 +237,9 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.recycle_bin_folder_name.label", "Folder name", "Settings text field label for recycle bin folder name.");
     public static LocStr SettingsRecycleBinFolderNameDescription =
         Loc.Str("dtk.settings.recycle_bin_folder_name.description", "The folder name under the blueprint book root to use as the Recycle Bin.", "Settings text field description for recycle bin folder name.");
+    public static LocStr SettingsRecycleBinFolderNameInvalid =
+        Loc.Str("dtk.settings.recycle_bin_folder_name.invalid", "Invalid folder name. Must not be empty and under 60 characters.", "Validation message for an invalid recycle bin folder name.");
 
-    public static LocStr SettingsUndoHeading =
-        Loc.Str("dtk.settings.undo.heading", "UNDO PLACEMENT", "Settings section heading for Undo settings.");
-    public static LocStr SettingsUndoHotkey =
-        Loc.Str("dtk.settings.undo_hotkey.label", "Undo placement hotkey", "Settings row label for the undo placement hotkey.");
     public static LocStr UndoSuccessMessage =
         Loc.Str("dtk.undo.success", "Undo: Placement reverted successfully.", "Toast or message after undoing a placement.");
     public static LocStr UndoNoActionMessage =
@@ -294,9 +279,6 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.pollution_show_ship.label", "Show ship pollution", "Settings checkbox label for showing ship pollution.");
     public static LocStr SettingsPollutionShowShipDescription =
         Loc.Str("dtk.settings.pollution_show_ship.description", "Enables/disables the in-world pollution rate overlay for ships. Displays the predicted pollution rate based on the current cargo route's round-trip time and fuel consumption. These values include the effects of game difficulty settings and researched pollution-reduction technologies.", "Settings checkbox description for showing ship pollution.");
-    public static LocStr SettingsPollutionToggleHotkey =
-        Loc.Str("dtk.settings.pollution_toggle_hotkey.label", "Pollution overlay hotkey", "Settings row label for pollution overlay toggle hotkey.");
-
     public static LocStr SettingsRadiationHeading =
         Loc.Str("dtk.settings.radiation.heading", "RADIATION OVERLAY", "Settings section heading for radiation overlay settings.");
     public static LocStr SettingsRadiationToggle =
@@ -311,9 +293,6 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.radiation_days.label", "Averaging period", "Settings row label for the days to average radiation.");
     public static LocStr SettingsRadiationDaysToAverageDescription =
         Loc.Str("dtk.settings.radiation_days.description", "Configures the sliding window in game days [0-360] to average sampled unsafe radioactive inventory. Setting this to 0 disables data collection.", "Settings row description for radiation averaging period.");
-    public static LocStr SettingsRadiationToggleHotkey =
-        Loc.Str("dtk.settings.radiation_toggle_hotkey.label", "Radiation overlay hotkey", "Settings row label for radiation overlay toggle hotkey.");
-
     public static LocStr SettingsPlaceFolderHeading =
         Loc.Str("dtk.settings.place_folder.heading", "PLACE FOLDER", "Settings section heading for place folder settings.");
     public static LocStr SettingsBlueprintSpacingLabel =

@@ -751,23 +751,6 @@ internal static class DesignerToolkitSettings
         root.Add(layoutBoxRow);
 
 
-
-
-
-//         BdtKeyBindingField layoutBoxModePrimaryField;
-//         BdtKeyBindingField layoutBoxModeSecondaryField;
-//         root.Add(BuildHotkeyRow(
-//             BdtLocalization.SettingsLayoutBoxModeHotkey.AsFormatted,
-//             BdtLocalization.SettingsGlobalHotkeyTooltip.AsFormatted,
-//             () => LayoutBoxModeToggleHotkey,
-//             hotkey =>
-//             {
-//                 LayoutBoxModeToggleHotkey = hotkey;
-//                 SaveGlobalHotkey(LAYOUT_BOX_MODE_TOGGLE_HOTKEY_PRIMARY_KEY, LAYOUT_BOX_MODE_TOGGLE_HOTKEY_SECONDARY_KEY, hotkey);
-//             },
-//             out layoutBoxModePrimaryField,
-//             out layoutBoxModeSecondaryField));
-
         root.Add(new Title(BdtLocalization.SettingsRecycleBinHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -792,7 +775,7 @@ internal static class DesignerToolkitSettings
                 {
                     SetRecycleBinFolderName(name);
                 }
-                recycleBinFolderNameField!.MarkAsError(!isValid, "Invalid folder name. Must not be empty and under 60 characters.".AsLoc());
+                recycleBinFolderNameField!.MarkAsError(!isValid, BdtLocalization.SettingsRecycleBinFolderNameInvalid.AsFormatted);
             });
         root.Add(recycleBinFolderNameField);
 
@@ -1506,44 +1489,6 @@ internal static class DesignerToolkitSettings
         }
     }
 
-    private static void AppendHotkeyFields(
-        JsonWriter writer,
-        BdtHotkey hotkey,
-        string primaryKey,
-        string secondaryKey)
-    {
-        writer.AppendStringField(primaryKey, hotkey.PrimaryConfigString());
-        writer.AppendStringField(secondaryKey, hotkey.SecondaryConfigString());
-    }
-
-    private static BdtHotkey HotkeyFromState(
-        Dict<string, object> root,
-        string primaryKey,
-        string secondaryKey,
-        string legacyKeyKey,
-        string legacyCtrlKey,
-        string legacyAltKey,
-        string legacyShiftKey,
-        BdtHotkey fallback)
-    {
-        bool hasPrimary = TryGetString(root, primaryKey, out string primary);
-        bool hasSecondary = TryGetString(root, secondaryKey, out string secondary);
-        if (hasPrimary || hasSecondary)
-            return BdtHotkey.FromConfigStrings(
-                hasPrimary ? primary : fallback.PrimaryConfigString(),
-                hasSecondary ? secondary : fallback.SecondaryConfigString(),
-                fallback);
-
-        if (!TryGetInt(root, legacyKeyKey, out int keyValue))
-            return fallback;
-
-        return BdtHotkey.FromLegacy(
-            KeyCodeFromInt(keyValue, KeyCode.None),
-            TryGetBool(root, legacyCtrlKey, out bool ctrl) && ctrl,
-            TryGetBool(root, legacyAltKey, out bool alt) && alt,
-            TryGetBool(root, legacyShiftKey, out bool shift) && shift);
-    }
-
     private static MarkdownNumberFormat NumberFormatFromInt(int value)
     {
         switch (value)
@@ -1645,14 +1590,6 @@ internal static class DesignerToolkitSettings
         }
 
         return false;
-    }
-
-    private static KeyCode KeyCodeFromInt(int value, KeyCode fallback)
-    {
-        if (Enum.IsDefined(typeof(KeyCode), value))
-            return (KeyCode)value;
-
-        return fallback;
     }
 
     private static UiComponent LanguageDropdownOption(

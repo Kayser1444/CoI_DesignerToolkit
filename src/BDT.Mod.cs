@@ -100,7 +100,6 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         ThroughputPatches.Apply(m_harmony);
         ThroughputInspectorPatches.Apply(m_harmony);
         ContentDisplayPatches.Apply(m_harmony);
-        ShortcutsManagerPatches.Apply(m_harmony);
         UndoPatches.Apply(m_harmony);
         PollutionPatches.Apply(m_harmony);
         HeightRoutingPatches.Apply(m_harmony);

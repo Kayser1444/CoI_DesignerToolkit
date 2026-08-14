@@ -108,14 +108,6 @@
     "Håll ned eller tryck på kortkommandot för att växla mellan lat höjdmatchning. Som standard matchar bälten och rör målhöjden så snart som möjligt. När detta är aktiverat kommer bälten och rör att hålla sig på starthöjden så länge som möjligt innan höjden ändras."
   ],
   [
-    "dtk.settings.transport_cleanup.heading",
-    "TRANSPORTSTÄDNING"
-  ],
-  [
-    "dtk.settings.transport_cleanup_hotkey.label",
-    "Snabbknapp för transportrensning"
-  ],
-  [
     "dtk.settings.height_filter.heading",
     "HÖJDFILTER"
   ],
@@ -126,14 +118,6 @@
   [
     "dtk.settings.height_filter_max_visible.description",
     "Begränsar höjdnivån för transporter, strukturer och pelare som ritas i världen."
-  ],
-  [
-    "dtk.settings.height_filter_show_hotkey.label",
-    "Snabbknapp för visa nivå"
-  ],
-  [
-    "dtk.settings.height_filter_hide_hotkey.label",
-    "Snabbknapp för dölj nivå"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -182,6 +166,14 @@
   [
     "dtk.blueprint.copy_folder_as_markdown.tooltip",
     "Kopiera mappens ritningslista som en Markdown-tabell till urklipp."
+  ],
+  [
+    "dtk.blueprint.construction_cost",
+    "Byggkostnad:"
+  ],
+  [
+    "dtk.blueprint.operational_cost",
+    "Driftskostnad:"
   ],
   [
     "dtk.markdown.components.heading",
@@ -268,10 +260,6 @@
     "Kasta ett glödande ljus på marken som matchar värmekartans färg. Fungerar oberoende av textöverlagringen. Inaktivera om det orsakar fördröjning."
   ],
   [
-    "dtk.settings.throughput_toggle_hotkey.label",
-    "Snabbknapp för genomströmningsvy"
-  ],
-  [
     "dtk.settings.throughput_heatmap.label",
     "Genomströmningsfärgläggning (färgkarta)"
   ],
@@ -344,10 +332,6 @@
     "Markera/avmarkera alla"
   ],
   [
-    "dtk.settings.throughput_aoe_tool_hotkey.label",
-    "Genomströmningsverktyg genväg"
-  ],
-  [
     "dtk.transport_product_removal.aoe_tool.name",
     "Ta bort produkter i området"
   ],
@@ -366,6 +350,14 @@
   [
     "dtk.transport_product_removal.aoe_tool.balancer",
     "Balanserare"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "Ta bort ({0})"
+  ],
+  [
+    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "Avbryt ({0})"
   ],
   [
     "dtk.transport_product_removal.aoe_tool.quick_remove",
@@ -400,6 +392,10 @@
     "Inte tillräckligt med Unity för att snabbt ta bort de valda produkterna."
   ],
   [
+    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "Produkter att ta bort ({0} totalt)"
+  ],
+  [
     "dtk.settings.layout_box.heading",
     "LAYOUTRUTOR"
   ],
@@ -410,10 +406,6 @@
   [
     "dtk.settings.layout_box.description",
     "Möjliggör en röntgenöverlagring som återger voxelbegränsningsrutor runt byggnader för att visa deras layout och utrymme."
-  ],
-  [
-    "dtk.settings.layout_box_hotkey.label",
-    "Snabbtangent för att växla layoutbox-överlägg"
   ],
   [
     "dtk.settings.recycle_bin.heading",
@@ -436,12 +428,8 @@
     "Mappnamnet under ritningsbokroten som ska användas som papperskorgen."
   ],
   [
-    "dtk.settings.undo.heading",
-    "ÅNGRA PLACERING"
-  ],
-  [
-    "dtk.settings.undo_hotkey.label",
-    "Snabbknapp för att ångra placering"
+    "dtk.settings.recycle_bin_folder_name.invalid",
+    "Ogiltigt mappnamn. Får inte vara tomt och får inte vara längre än 60 tecken."
   ],
   [
     "dtk.undo.success",
@@ -520,10 +508,6 @@
     "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fartyg. Visar den förväntade föroreningsgraden baserat på den aktuella lastruttens tur och returtid och bränsleförbrukning. Dessa värden inkluderar effekterna av spelsvårighetsinställningar och undersökt teknik för att minska föroreningar."
   ],
   [
-    "dtk.settings.pollution_toggle_hotkey.label",
-    "Snabbknapp för föroreningsöverlägg"
-  ],
-  [
     "dtk.settings.radiation.heading",
     "STRÅLNING OVERLAY"
   ],
@@ -550,10 +534,6 @@
   [
     "dtk.settings.radiation_days.description",
     "Konfigurerar det skjutbara fönstret i speldagar [0-360] till genomsnittligt samplat osäkert radioaktivt inventarium. Om du ställer in detta till 0 inaktiveras datainsamling."
-  ],
-  [
-    "dtk.settings.radiation_toggle_hotkey.label",
-    "Strålningsöverlägg snabbtangent"
   ],
   [
     "dtk.settings.place_folder.heading",

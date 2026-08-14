@@ -2,9 +2,13 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.9.0 [packaged]
+## v0.9.0 [unreleased]
 
 - Updated the maximum verified Captain of Industry version to `0.8.7a`.
+- Fixed: Routed Blueprint Stats and recycle-bin validation text through BDT localization.
+- Removed the obsolete custom hotkey editor and legacy per-setting hotkey labels; hotkeys are managed through the vanilla Controls menu via AutoHelpers.
+- Refined the **Remove products in area** footer so all action buttons expand to fill the available row width.
+- Fixed: Localized the dynamic Remove, Cancel, and product-total labels in the area-removal dialog.
 - Added a shared regular/quick product-removal domain for transports, lifts, connectors, sorters, balancers, and explicitly registered modded entities.
 - Added vanilla-style regular removal to built-in logistics entities that previously supported only quick removal; regular orders block normal input/output until their one-shot product scope is emptied or cancelled.
 - Added combined inspector removal controls with live quick-removal cost and regular-order cancellation.
