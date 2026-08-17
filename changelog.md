@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.9.1 [unreleased]
+## v0.9.1 [packaged]
 
 - Added configurable pollution heatmap glow colors (`white`, `brown`, `purple`, or `#RRGGBB`) through `config.json` and the `bdt_set_pollution_glow_color` console command; the color applies to both entity highlights and screen-space halos.
 - Fixed: Legacy stacker placement now rejects terrain support configurations that would exceed its post-construction collapse threshold (fix for [Discord report](https://discordapp.com/channels/803508556325584926/1403765971327389848/1403765971327389848)).
