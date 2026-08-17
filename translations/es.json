@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "o"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "El terreno no proporciona suficiente apoyo a las patas del apilador."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Alertar cuando la pila esté llena."
   ]
 ]

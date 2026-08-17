@@ -15,6 +15,11 @@ internal static class BdtLocalization
     public static LocStr ModName =
         Loc.Str("dtk.mod.name", "Blueprint Designer's Toolkit", "Blueprint Designer's Toolkit mod name.");
 
+    public static LocStr LegacyStackerUnsupported =
+        Loc.Str("dtk.legacy_stacker.unsupported", "The stacker's legs are not sufficiently supported by terrain.", "Placement error when a legacy stacker's support vertices would make it collapse after construction.");
+    public static LocStr LegacyStackerAlertFullTooltip =
+        Loc.Str("dtk.legacy_stacker.alert_full.tooltip", "Alert when the stack is full.", "Tooltip for the legacy stacker's full-alert toggle.");
+
     public static LocStr SettingsTabMarkdown =
         Loc.Str("dtk.settings.tab.markdown", "Settings", "Settings tab title for BDT settings.");
     public static LocStr SettingsMarkdownCopyHeading =

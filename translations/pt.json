@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "ou"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "As pernas do empilhador não têm apoio suficiente no terreno."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Alertar quando a pilha estiver cheia."
   ]
 ]

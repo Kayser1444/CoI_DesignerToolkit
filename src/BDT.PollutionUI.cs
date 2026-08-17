@@ -16,6 +16,7 @@ using Mafi.Core.Terrain;
 using Mafi.Core.Prototypes;
 using Mafi.Core.Products;
 using Mafi.Localization;
+using Mafi.Unity;
 using Mafi.Unity.Entities;
 using Mafi.Unity.UiToolkit;
 using Mafi.Unity.UiToolkit.Component;
@@ -533,7 +534,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
                 if (t >= 0.1f)
                 {
                     int alpha = (int)(t * 215f);
-                    ColorRgba highlightColor = new ColorRgba(255, 255, 255, alpha);
+                    ColorRgba highlightColor = DesignerToolkitSettings.PollutionGlowColor.SetA((byte)alpha);
                     try { m_highlighter.Highlight(renderedEntity, highlightColor); } catch { }
                     currentHighlights.Add(target.Entity.Id.Value);
                 }
@@ -576,6 +577,7 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
             }
 
             Color oldColor = GUI.color;
+            Color pollutionGlowColor = DesignerToolkitSettings.PollutionGlowColor.ToColor();
             foreach (var dt in drawTargets)
             {
                 if (dt.Avg > 0f)
@@ -591,7 +593,8 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
                                 float gy = Screen.height - tileScreen.y;
                                 float tileRadius = Mathf.Clamp(dt.Radius * 0.7f, 15f, 40f);
                                 Rect glowRect = new Rect(gx - tileRadius, gy - tileRadius, tileRadius * 2f, tileRadius * 2f);
-                                GUI.color = new Color(1f, 1f, 1f, dt.Opacity * 0.7f);
+                                pollutionGlowColor.a = dt.Opacity * 0.7f;
+                                GUI.color = pollutionGlowColor;
                                 GUI.DrawTexture(glowRect, m_glowTexture);
                             }
                         }
@@ -599,7 +602,8 @@ public sealed class PollutionWorldRenderer : MonoBehaviour
                     else
                     {
                         Rect glowRect = new Rect(dt.GuiX - dt.Radius, dt.GuiY - dt.Radius, dt.Radius * 2f, dt.Radius * 2f);
-                        GUI.color = new Color(1f, 1f, 1f, dt.Opacity);
+                        pollutionGlowColor.a = dt.Opacity;
+                        GUI.color = pollutionGlowColor;
                         GUI.DrawTexture(glowRect, m_glowTexture);
                     }
                 }

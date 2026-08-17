@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "eller"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "Stackerns ben har inte tillräckligt stöd av terrängen."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Varna när högen är full."
   ]
 ]

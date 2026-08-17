@@ -1,3 +1,8 @@
+v0.9.1 | 2026-08-17
+* Added configurable pollution heatmap glow colors (`white`, `brown`, `purple`, or `#RRGGBB`) through `config.json` and the `bdt_set_pollution_glow_color` console command, applying to entity highlights and screen-space halos
+* Added an optional orange full-stack alert for legacy Stackers with per-stacker persistence
+* Fixed: Legacy Stacker placement now rejects terrain support configurations that would collapse after construction
+
 v0.9.0 | 2026-08-13
 * Updated compatibility verification for Captain of Industry 0.8.7a
 * Added regular product-removal controls for lifts, connectors, sorters, and balancers alongside their quick-removal actions

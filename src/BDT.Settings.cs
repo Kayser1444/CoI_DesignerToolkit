@@ -75,6 +75,7 @@ internal static class DesignerToolkitSettings
     private const string THROUGHPUT_SHOW_AS_PERCENT_KEY = "throughput_show_as_percent";
     private const string POLLUTION_OVERLAY_ENABLED_KEY = "pollution_overlay_enabled";
     private const string POLLUTION_GLOW_ENABLED_KEY = "pollution_glow_enabled";
+    private const string POLLUTION_GLOW_COLOR_KEY = "pollution_glow_color";
     private const string POLLUTION_DAYS_TO_AVERAGE_KEY = "pollution_days_to_average";
     private const string POLLUTION_SHOW_AIR_KEY = "pollution_show_air";
     private const string POLLUTION_SHOW_GROUND_KEY = "pollution_show_ground";
@@ -117,6 +118,7 @@ internal static class DesignerToolkitSettings
     public static bool ThroughputShowAsPercent { get; private set; } = false;
     public static bool PollutionOverlayEnabled { get; private set; } = false;
     public static bool PollutionGlowEnabled { get; private set; } = false;
+    public static ColorRgba PollutionGlowColor { get; private set; } = ColorRgba.White;
     public static int PollutionDaysToAverage { get; private set; } = 360;
     public static bool PollutionShowAir { get; private set; } = true;
     public static bool PollutionShowGround { get; private set; } = true;
@@ -306,6 +308,54 @@ internal static class DesignerToolkitSettings
         PollutionGlowEnabled = enabled;
     }
 
+    public static bool TrySetPollutionGlowColor(string? value, out string error)
+    {
+        if (!TryParsePollutionGlowColor(value, out ColorRgba parsed))
+        {
+            error = $"Invalid pollution glow color '{value}'. Use white, brown, purple, or #RRGGBB.";
+            return false;
+        }
+
+        PollutionGlowColor = parsed;
+        error = string.Empty;
+        return true;
+    }
+
+    public static string FormatPollutionGlowColor()
+    {
+        return "#" + PollutionGlowColor.ToHexRgb();
+    }
+
+    private static ColorRgba ReadPollutionGlowColor(string value)
+    {
+        if (TryParsePollutionGlowColor(value, out ColorRgba parsed))
+            return parsed;
+
+        s_log.Warning(
+            $"Invalid {POLLUTION_GLOW_COLOR_KEY} value '{value}' in config.json. "
+            + "Use white, brown, purple, or #RRGGBB. Using white.");
+        return ColorRgba.White;
+    }
+
+    private static bool TryParsePollutionGlowColor(string? value, out ColorRgba color)
+    {
+        string normalized = (value ?? string.Empty).Trim();
+        switch (normalized.ToLowerInvariant())
+        {
+            case "white":
+                color = ColorRgba.White;
+                return true;
+            case "brown":
+                color = ColorRgba.Brown;
+                return true;
+            case "purple":
+                color = ColorRgba.Purple;
+                return true;
+            default:
+                return ColorRgba.TryParseHex(normalized, out color);
+        }
+    }
+
     public static void SetPollutionDaysToAverage(int days)
     {
         days = Math.Max(0, Math.Min(360, days));
@@ -382,6 +432,8 @@ internal static class DesignerToolkitSettings
         bool initialThroughputShowAsPercent = s_config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
         bool initialPollutionOverlayEnabled = s_config.GetBool(POLLUTION_OVERLAY_ENABLED_KEY, false);
         bool initialPollutionGlowEnabled = s_config.GetBool(POLLUTION_GLOW_ENABLED_KEY, false);
+        ColorRgba initialPollutionGlowColor = ReadPollutionGlowColor(
+            s_config.GetString(POLLUTION_GLOW_COLOR_KEY, "white"));
         int initialPollutionDaysToAverage = s_config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 360);
         bool initialPollutionShowAir = s_config.GetBool(POLLUTION_SHOW_AIR_KEY, true);
         bool initialPollutionShowGround = s_config.GetBool(POLLUTION_SHOW_GROUND_KEY, true);
@@ -409,6 +461,7 @@ internal static class DesignerToolkitSettings
             initialThroughputShowAsPercent,
             initialPollutionOverlayEnabled,
             initialPollutionGlowEnabled,
+            initialPollutionGlowColor,
             initialPollutionDaysToAverage,
             initialPollutionShowAir,
             initialPollutionShowGround,
@@ -926,6 +979,7 @@ internal static class DesignerToolkitSettings
             SetThroughputShowAsPercent(false);
             SetPollutionOverlayEnabled(false);
             SetPollutionGlowEnabled(false);
+            PollutionGlowColor = ColorRgba.White;
             SetPollutionDaysToAverage(30);
             SetPollutionShowAir(true);
             SetPollutionShowGround(true);
@@ -991,6 +1045,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(POLLUTION_GLOW_ENABLED_KEY, PollutionGlowEnabled, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(POLLUTION_GLOW_COLOR_KEY, FormatPollutionGlowColor(), out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(POLLUTION_DAYS_TO_AVERAGE_KEY, PollutionDaysToAverage, out error))
                 return false;
             if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_AIR_KEY, PollutionShowAir, out error))
@@ -1036,6 +1092,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_OVERLAY_ENABLED_KEY, PollutionOverlayEnabled, out bool pollutionOverlayEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_GLOW_ENABLED_KEY, PollutionGlowEnabled, out bool pollutionGlowEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, POLLUTION_GLOW_COLOR_KEY, FormatPollutionGlowColor(), out bool pollutionGlowColorUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_DAYS_TO_AVERAGE_KEY, PollutionDaysToAverage, out bool pollutionDaysToAverageUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_AIR_KEY, PollutionShowAir, out bool pollutionShowAirUpdated);
             updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_GROUND_KEY, PollutionShowGround, out bool pollutionShowGroundUpdated);
@@ -1103,6 +1160,11 @@ internal static class DesignerToolkitSettings
             if (!pollutionGlowEnabledUpdated)
             {
                 error = "Could not find pollution_glow_enabled default in config.json.";
+                return false;
+            }
+            if (!pollutionGlowColorUpdated)
+            {
+                error = "Could not find pollution_glow_color default in config.json.";
                 return false;
             }
             if (!pollutionDaysToAverageUpdated)
@@ -1308,6 +1370,7 @@ internal static class DesignerToolkitSettings
         bool initialThroughputShowAsPercent,
         bool initialPollutionOverlayEnabled,
         bool initialPollutionGlowEnabled,
+        ColorRgba initialPollutionGlowColor,
         int initialPollutionDaysToAverage,
         bool initialPollutionShowAir,
         bool initialPollutionShowGround,
@@ -1333,6 +1396,7 @@ internal static class DesignerToolkitSettings
         ThroughputShowAsPercent = initialThroughputShowAsPercent;
         PollutionOverlayEnabled = initialPollutionOverlayEnabled;
         PollutionGlowEnabled = initialPollutionGlowEnabled;
+        PollutionGlowColor = initialPollutionGlowColor;
         PollutionDaysToAverage = initialPollutionDaysToAverage;
         PollutionShowAir = initialPollutionShowAir;
         PollutionShowGround = initialPollutionShowGround;
@@ -1385,6 +1449,15 @@ internal static class DesignerToolkitSettings
                 PollutionOverlayEnabled = pollutionOverlayEnabled;
             if (TryGetBool(root, "pollutionGlowEnabled", out bool pollutionGlowEnabled))
                 PollutionGlowEnabled = pollutionGlowEnabled;
+            if (TryGetString(root, "pollutionGlowColor", out string pollutionGlowColor))
+            {
+                if (TryParsePollutionGlowColor(pollutionGlowColor, out ColorRgba parsedPollutionGlowColor))
+                    PollutionGlowColor = parsedPollutionGlowColor;
+                else
+                    s_log.Warning(
+                        $"Invalid pollutionGlowColor '{pollutionGlowColor}' in saved BDT settings. "
+                        + "Using the configured default color.");
+            }
             if (TryGetInt(root, "pollutionDaysToAverage", out int pollutionDaysToAverage))
                 PollutionDaysToAverage = pollutionDaysToAverage;
             if (TryGetBool(root, "pollutionShowAir", out bool pollutionShowAir))
@@ -1437,6 +1510,7 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("throughputShowAsPercent", ThroughputShowAsPercent);
         writer.AppendBoolField("pollutionOverlayEnabled", PollutionOverlayEnabled);
         writer.AppendBoolField("pollutionGlowEnabled", PollutionGlowEnabled);
+        writer.AppendStringField("pollutionGlowColor", FormatPollutionGlowColor());
         writer.AppendNumberField("pollutionDaysToAverage", PollutionDaysToAverage);
         writer.AppendBoolField("pollutionShowAir", PollutionShowAir);
         writer.AppendBoolField("pollutionShowGround", PollutionShowGround);

@@ -79,6 +79,10 @@
     "default": false,
     "description": "Initial pollution glow visibility state."
   },
+  "pollution_glow_color": {
+    "default": "white",
+    "description": "Initial pollution heatmap glow color. Use white, brown, purple, or #RRGGBB."
+  },
   "pollution_days_to_average": {
     "default": 360,
     "is_integer": true,
@@ -128,6 +132,10 @@
   "bdtTransportRemovalOrdersStateJson": {
     "default": "{\"schemaVersion\":1,\"orders\":[]}",
     "description": "Internal per-save Designer Toolkit transport product-removal order state. Editing may reset active removal orders."
+  },
+  "bdtLegacyStackerFullAlertStateJson": {
+    "default": "{\"schemaVersion\":1,\"disabledEntityIds\":[]}",
+    "description": "Internal per-save Designer Toolkit legacy stacker full-alert state. Editing may reset per-stacker alert preferences."
   },
   "last_blueprint_folder": {
     "default": "",

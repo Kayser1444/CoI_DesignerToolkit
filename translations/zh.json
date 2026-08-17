@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "或者"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "堆料机支腿未得到地形的充分支撑。"
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "堆料区已满时发出警报。"
   ]
 ]

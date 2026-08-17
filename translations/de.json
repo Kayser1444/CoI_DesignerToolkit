@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "oder"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "Die Beine des Stackers werden vom Gelände nicht ausreichend gestützt."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Warnen, wenn der Stapel voll ist."
   ]
 ]

@@ -213,7 +213,7 @@ BDT introduces a **Place all** button inside the blueprint folder detail panel. 
 BDT features a real-time **Pollution Overlay** and **Heat Map** system to monitor and visualize island exhaust rates.
 
 - **Pollution Labels**: Displays daily-averaged emission rates (items/min) as floating world-space labels above factories, waste outfalls, vehicles, locomotives, and ships.
-- **Heat Map Glow**: Renders screen-space and 3D white glow outlines indicating relative emission rates. Low emitters receive tiny, whisper-thin backing glows, while major polluters project wide, prominent white halos.
+- **Heat Map Glow**: Renders screen-space and 3D configurable-color glow outlines indicating relative emission rates. Low emitters receive tiny, whisper-thin backing glows, while major polluters project wide, prominent halos.
 - **Common Comparison Pool**: Emissions are scaled linearly against a shared global pool of all currently active layers, allowing players to compare different pollution types (like wastewater outfalls against diesel exhausts). Hiding specific layers in settings dynamically re-calculates the comparison pool.
 - **Dynamic Camera-Zoom Scaling**: Opacity and glow radius scale up dynamically as the camera zooms out, ensuring indicators remain bold and readable from high altitudes.
 - **Filters & Configurable Averaging**: Customize average calculations (default 360 days) and toggle Air, Ground/Water, Vehicle, or Ship overlays independently.

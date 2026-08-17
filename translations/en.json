@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "or"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "The stacker's legs are not sufficiently supported by terrain."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Alert when the stack is full."
   ]
 ]

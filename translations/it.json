@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "O"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "Le gambe dello stacker non sono sufficientemente sostenute dal terreno."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Avvisa quando il cumulo è pieno."
   ]
 ]

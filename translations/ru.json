@@ -582,5 +582,13 @@
   [
     "dtk.settings.hotkey.or",
     "или"
+  ],
+  [
+    "dtk.legacy_stacker.unsupported",
+    "Опоры штабелёра недостаточно поддерживаются рельефом."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Предупреждать, когда штабель заполнен."
   ]
 ]

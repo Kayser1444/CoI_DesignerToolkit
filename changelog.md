@@ -4,6 +4,11 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.9.1 [unreleased]
 
+- Added configurable pollution heatmap glow colors (`white`, `brown`, `purple`, or `#RRGGBB`) through `config.json` and the `bdt_set_pollution_glow_color` console command; the color applies to both entity highlights and screen-space halos.
+- Fixed: Legacy stacker placement now rejects terrain support configurations that would exceed its post-construction collapse threshold (fix for [Discord report](https://discordapp.com/channels/803508556325584926/1403765971327389848/1403765971327389848)).
+- Added a per-stacker **Alert when full** inspector toggle, enabled by default, with an orange vanilla dumping warning and the stacker-tower debounce behavior.
+- Fixed: Legacy stacker full-alert preferences now persist through the declared per-save BDT state slot.
+
 ## v0.9.0 [released]
 
 - Updated the maximum verified Captain of Industry version to `0.8.7a`.

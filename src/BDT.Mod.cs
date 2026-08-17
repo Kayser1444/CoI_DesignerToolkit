@@ -103,6 +103,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         UndoPatches.Apply(m_harmony);
         PollutionPatches.Apply(m_harmony);
         HeightRoutingPatches.Apply(m_harmony);
+        LegacyStackerPatches.Apply(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
 
@@ -110,6 +111,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     {
         depBuilder.RegisterDependency<TransportProductRemovalCommandsProcessor>().AsAllInterfaces();
         depBuilder.RegisterDependency<TransportProductRemovalBatchCommandsProcessor>().AsAllInterfaces();
+        depBuilder.RegisterDependency<LegacyStackerSupportValidator>().AsAllInterfaces();
     }
 
     public void EarlyInit(DependencyResolver resolver)
@@ -181,6 +183,10 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_removalSaveLifecycle.VanillaAttachments,
             ModStateJsonStores.CreateDefault(JsonConfig, TransportProductRemovalManager.CONFIG_KEY));
         entitiesManager.EntityRemoved.AddNonSaveable(this, TransportProductRemovalManager.OnEntityRemoved);
+        LegacyStackerFullAlertManager.Initialize(
+            entitiesManager,
+            ModStateJsonStores.CreateDefault(JsonConfig, LegacyStackerFullAlertManager.CONFIG_KEY));
+        entitiesManager.EntityRemoved.AddNonSaveable(this, LegacyStackerFullAlertManager.OnEntityRemoved);
 
         object? instaBuildManager = resolver.TryResolve(typeof(InstaBuildManager)).ValueOrNull;
         m_instantBuildMode = new InstantBuildMode(
@@ -260,6 +266,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     private void beforeSave()
     {
+        LegacyStackerFullAlertManager.BeforeSave();
         TransportProductRemovalManager.SaveState();
         m_removalSaveLifecycle.BeforeVanillaSave();
 
@@ -290,6 +297,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private void onSaveDone(SaveResult result)
     {
         m_removalSaveLifecycle.AfterVanillaSave();
+        LegacyStackerFullAlertManager.AfterSave();
     }
 
     private void RegisterAutoHelpersLocalizationLateApply(DependencyResolver resolver)
@@ -344,6 +352,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     private void unsubscribeWorldEvents()
     {
+        LegacyStackerFullAlertManager.Clear();
         TransportProductRemovalManager.Clear();
 
         if (m_instantBuildMode != null)
