@@ -2,6 +2,11 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.9.2 [unreleased]
+
+- Fixed the missing `pollution_show_solid_waste` configuration parameter and localized BDT control labels and tooltips across all supported languages.
+- Fixed late localization of vanilla Controls-menu keybindings by refreshing registered BDT keybind attributes after the translation bundle is applied.
+
 ## v0.9.1 [released]
 
 - Added configurable pollution heatmap glow colors (`white`, `brown`, `purple`, or `#RRGGBB`) through `config.json` and the `bdt_set_pollution_glow_color` console command; the color applies to both entity highlights and screen-space halos.

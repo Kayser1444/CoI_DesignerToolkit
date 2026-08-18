@@ -4,6 +4,14 @@
     "Kit de ferramentas para designers de plantas"
   ],
   [
+    "dtk.legacy_stacker.unsupported",
+    "As pernas do empilhador não têm apoio suficiente no terreno."
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "Alertar quando a pilha estiver cheia."
+  ],
+  [
     "dtk.settings.tab.markdown",
     "Configurações"
   ],
@@ -122,6 +130,94 @@
   [
     "dtk.settings.global_hotkey.description",
     "Este atalho de teclado é registrado no sistema de controles do jogo e pode ser configurado em Configurações | Menu de controles."
+  ],
+  [
+    "Kb_Bdt_TransportCleanup__label",
+    "Transport cleanup tool"
+  ],
+  [
+    "Kb_Bdt_TransportCleanup__tooltip",
+    "Activates the transport cleanup selection tool"
+  ],
+  [
+    "Kb_Bdt_HeightFilterShowLayer__label",
+    "Height filter show layer"
+  ],
+  [
+    "Kb_Bdt_HeightFilterShowLayer__tooltip",
+    "Increases the maximum visible height filter layer"
+  ],
+  [
+    "Kb_Bdt_HeightFilterHideLayer__label",
+    "Height filter hide layer"
+  ],
+  [
+    "Kb_Bdt_HeightFilterHideLayer__tooltip",
+    "Decreases the maximum visible height filter layer"
+  ],
+  [
+    "Kb_Bdt_ThroughputOverlayToggle__label",
+    "Toggle throughput overlay"
+  ],
+  [
+    "Kb_Bdt_ThroughputOverlayToggle__tooltip",
+    "Toggles the throughput overlay"
+  ],
+  [
+    "Kb_Bdt_ThroughputAoETool__label",
+    "Throughput tool"
+  ],
+  [
+    "Kb_Bdt_ThroughputAoETool__tooltip",
+    "Activates the throughput area selection tool"
+  ],
+  [
+    "Kb_Bdt_TransportProductRemovalAoETool__label",
+    "Remove products in area"
+  ],
+  [
+    "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
+    "Activates the area product-removal tool"
+  ],
+  [
+    "Kb_Bdt_PollutionOverlayToggle__label",
+    "Toggle pollution overlay"
+  ],
+  [
+    "Kb_Bdt_PollutionOverlayToggle__tooltip",
+    "Toggles the pollution overlay"
+  ],
+  [
+    "Kb_Bdt_RadiationOverlayToggle__label",
+    "Toggle radiation overlay"
+  ],
+  [
+    "Kb_Bdt_RadiationOverlayToggle__tooltip",
+    "Toggles the radiation overlay"
+  ],
+  [
+    "Kb_Bdt_LayoutBoxMode__label",
+    "Toggle layout box overlay"
+  ],
+  [
+    "Kb_Bdt_LayoutBoxMode__tooltip",
+    "Toggles layout box overlay"
+  ],
+  [
+    "Kb_Bdt_UndoPlacement__label",
+    "Undo placement"
+  ],
+  [
+    "Kb_Bdt_UndoPlacement__tooltip",
+    "Undoes the last BDT placement action"
+  ],
+  [
+    "Kb_Bdt_TransportLazyHeight__label",
+    "Transport lazy height routing"
+  ],
+  [
+    "Kb_Bdt_TransportLazyHeight__tooltip",
+    "Holds lazy height matching mode while placing transports (Alt)"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -582,13 +678,5 @@
   [
     "dtk.settings.hotkey.or",
     "ou"
-  ],
-  [
-    "dtk.legacy_stacker.unsupported",
-    "As pernas do empilhador não têm apoio suficiente no terreno."
-  ],
-  [
-    "dtk.legacy_stacker.alert_full.tooltip",
-    "Alertar quando a pilha estiver cheia."
   ]
 ]

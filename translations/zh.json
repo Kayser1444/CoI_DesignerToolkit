@@ -4,6 +4,14 @@
     "蓝图设计师工具包"
   ],
   [
+    "dtk.legacy_stacker.unsupported",
+    "堆料机支腿未得到地形的充分支撑。"
+  ],
+  [
+    "dtk.legacy_stacker.alert_full.tooltip",
+    "堆料区已满时发出警报。"
+  ],
+  [
     "dtk.settings.tab.markdown",
     "设置"
   ],
@@ -122,6 +130,94 @@
   [
     "dtk.settings.global_hotkey.description",
     "此按键绑定已在游戏的控制系统中注册，并且可以在香草设置 | 中进行配置。控制菜单。"
+  ],
+  [
+    "Kb_Bdt_TransportCleanup__label",
+    "Transport cleanup tool"
+  ],
+  [
+    "Kb_Bdt_TransportCleanup__tooltip",
+    "Activates the transport cleanup selection tool"
+  ],
+  [
+    "Kb_Bdt_HeightFilterShowLayer__label",
+    "Height filter show layer"
+  ],
+  [
+    "Kb_Bdt_HeightFilterShowLayer__tooltip",
+    "Increases the maximum visible height filter layer"
+  ],
+  [
+    "Kb_Bdt_HeightFilterHideLayer__label",
+    "Height filter hide layer"
+  ],
+  [
+    "Kb_Bdt_HeightFilterHideLayer__tooltip",
+    "Decreases the maximum visible height filter layer"
+  ],
+  [
+    "Kb_Bdt_ThroughputOverlayToggle__label",
+    "Toggle throughput overlay"
+  ],
+  [
+    "Kb_Bdt_ThroughputOverlayToggle__tooltip",
+    "Toggles the throughput overlay"
+  ],
+  [
+    "Kb_Bdt_ThroughputAoETool__label",
+    "Throughput tool"
+  ],
+  [
+    "Kb_Bdt_ThroughputAoETool__tooltip",
+    "Activates the throughput area selection tool"
+  ],
+  [
+    "Kb_Bdt_TransportProductRemovalAoETool__label",
+    "Remove products in area"
+  ],
+  [
+    "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
+    "Activates the area product-removal tool"
+  ],
+  [
+    "Kb_Bdt_PollutionOverlayToggle__label",
+    "Toggle pollution overlay"
+  ],
+  [
+    "Kb_Bdt_PollutionOverlayToggle__tooltip",
+    "Toggles the pollution overlay"
+  ],
+  [
+    "Kb_Bdt_RadiationOverlayToggle__label",
+    "Toggle radiation overlay"
+  ],
+  [
+    "Kb_Bdt_RadiationOverlayToggle__tooltip",
+    "Toggles the radiation overlay"
+  ],
+  [
+    "Kb_Bdt_LayoutBoxMode__label",
+    "Toggle layout box overlay"
+  ],
+  [
+    "Kb_Bdt_LayoutBoxMode__tooltip",
+    "Toggles layout box overlay"
+  ],
+  [
+    "Kb_Bdt_UndoPlacement__label",
+    "Undo placement"
+  ],
+  [
+    "Kb_Bdt_UndoPlacement__tooltip",
+    "Undoes the last BDT placement action"
+  ],
+  [
+    "Kb_Bdt_TransportLazyHeight__label",
+    "Transport lazy height routing"
+  ],
+  [
+    "Kb_Bdt_TransportLazyHeight__tooltip",
+    "Holds lazy height matching mode while placing transports (Alt)"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -582,13 +678,5 @@
   [
     "dtk.settings.hotkey.or",
     "或者"
-  ],
-  [
-    "dtk.legacy_stacker.unsupported",
-    "堆料机支腿未得到地形的充分支撑。"
-  ],
-  [
-    "dtk.legacy_stacker.alert_full.tooltip",
-    "堆料区已满时发出警报。"
   ]
 ]

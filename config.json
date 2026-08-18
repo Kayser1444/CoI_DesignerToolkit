@@ -96,6 +96,10 @@
     "default": true,
     "description": "Initial state for showing ground and water pollution."
   },
+  "pollution_show_solid_waste": {
+    "default": true,
+    "description": "Initial state for showing ground pollution from landfill."
+  },
   "pollution_show_vehicle": {
     "default": true,
     "description": "Initial state for showing vehicle and train pollution."

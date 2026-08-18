@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 146,
+  "total_keys": 170,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -9,6 +9,249 @@
     "dtk.settings.language.local",
     "dtk.settings.number_format.auto"
   ],
-  "keys": {},
-  "keys_needing_translation": 0
+  "keys": {
+    "Kb_Bdt_TransportCleanup__label": {
+      "en": "Transport cleanup tool",
+      "context": "Label for the BDT transport cleanup control.",
+      "de": "Transport cleanup tool",
+      "es": "Transport cleanup tool",
+      "it": "Transport cleanup tool",
+      "pt": "Transport cleanup tool",
+      "ru": "Transport cleanup tool",
+      "sv": "Transport cleanup tool",
+      "zh": "Transport cleanup tool"
+    },
+    "Kb_Bdt_TransportCleanup__tooltip": {
+      "en": "Activates the transport cleanup selection tool",
+      "context": "Tooltip for the BDT transport cleanup control.",
+      "de": "Activates the transport cleanup selection tool",
+      "es": "Activates the transport cleanup selection tool",
+      "it": "Activates the transport cleanup selection tool",
+      "pt": "Activates the transport cleanup selection tool",
+      "ru": "Activates the transport cleanup selection tool",
+      "sv": "Activates the transport cleanup selection tool",
+      "zh": "Activates the transport cleanup selection tool"
+    },
+    "Kb_Bdt_HeightFilterShowLayer__label": {
+      "en": "Height filter show layer",
+      "context": "Label for the BDT height filter show-layer control.",
+      "de": "Height filter show layer",
+      "es": "Height filter show layer",
+      "it": "Height filter show layer",
+      "pt": "Height filter show layer",
+      "ru": "Height filter show layer",
+      "sv": "Height filter show layer",
+      "zh": "Height filter show layer"
+    },
+    "Kb_Bdt_HeightFilterShowLayer__tooltip": {
+      "en": "Increases the maximum visible height filter layer",
+      "context": "Tooltip for the BDT height filter show-layer control.",
+      "de": "Increases the maximum visible height filter layer",
+      "es": "Increases the maximum visible height filter layer",
+      "it": "Increases the maximum visible height filter layer",
+      "pt": "Increases the maximum visible height filter layer",
+      "ru": "Increases the maximum visible height filter layer",
+      "sv": "Increases the maximum visible height filter layer",
+      "zh": "Increases the maximum visible height filter layer"
+    },
+    "Kb_Bdt_HeightFilterHideLayer__label": {
+      "en": "Height filter hide layer",
+      "context": "Label for the BDT height filter hide-layer control.",
+      "de": "Height filter hide layer",
+      "es": "Height filter hide layer",
+      "it": "Height filter hide layer",
+      "pt": "Height filter hide layer",
+      "ru": "Height filter hide layer",
+      "sv": "Height filter hide layer",
+      "zh": "Height filter hide layer"
+    },
+    "Kb_Bdt_HeightFilterHideLayer__tooltip": {
+      "en": "Decreases the maximum visible height filter layer",
+      "context": "Tooltip for the BDT height filter hide-layer control.",
+      "de": "Decreases the maximum visible height filter layer",
+      "es": "Decreases the maximum visible height filter layer",
+      "it": "Decreases the maximum visible height filter layer",
+      "pt": "Decreases the maximum visible height filter layer",
+      "ru": "Decreases the maximum visible height filter layer",
+      "sv": "Decreases the maximum visible height filter layer",
+      "zh": "Decreases the maximum visible height filter layer"
+    },
+    "Kb_Bdt_ThroughputOverlayToggle__label": {
+      "en": "Toggle throughput overlay",
+      "context": "Label for the BDT throughput-overlay control.",
+      "de": "Toggle throughput overlay",
+      "es": "Toggle throughput overlay",
+      "it": "Toggle throughput overlay",
+      "pt": "Toggle throughput overlay",
+      "ru": "Toggle throughput overlay",
+      "sv": "Toggle throughput overlay",
+      "zh": "Toggle throughput overlay"
+    },
+    "Kb_Bdt_ThroughputOverlayToggle__tooltip": {
+      "en": "Toggles the throughput overlay",
+      "context": "Tooltip for the BDT throughput-overlay control.",
+      "de": "Toggles the throughput overlay",
+      "es": "Toggles the throughput overlay",
+      "it": "Toggles the throughput overlay",
+      "pt": "Toggles the throughput overlay",
+      "ru": "Toggles the throughput overlay",
+      "sv": "Toggles the throughput overlay",
+      "zh": "Toggles the throughput overlay"
+    },
+    "Kb_Bdt_ThroughputAoETool__label": {
+      "en": "Throughput tool",
+      "context": "Label for the BDT throughput area tool control.",
+      "de": "Throughput tool",
+      "es": "Throughput tool",
+      "it": "Throughput tool",
+      "pt": "Throughput tool",
+      "ru": "Throughput tool",
+      "sv": "Throughput tool",
+      "zh": "Throughput tool"
+    },
+    "Kb_Bdt_ThroughputAoETool__tooltip": {
+      "en": "Activates the throughput area selection tool",
+      "context": "Tooltip for the BDT throughput area tool control.",
+      "de": "Activates the throughput area selection tool",
+      "es": "Activates the throughput area selection tool",
+      "it": "Activates the throughput area selection tool",
+      "pt": "Activates the throughput area selection tool",
+      "ru": "Activates the throughput area selection tool",
+      "sv": "Activates the throughput area selection tool",
+      "zh": "Activates the throughput area selection tool"
+    },
+    "Kb_Bdt_TransportProductRemovalAoETool__label": {
+      "en": "Remove products in area",
+      "context": "Label for the BDT area product-removal control.",
+      "de": "Remove products in area",
+      "es": "Remove products in area",
+      "it": "Remove products in area",
+      "pt": "Remove products in area",
+      "ru": "Remove products in area",
+      "sv": "Remove products in area",
+      "zh": "Remove products in area"
+    },
+    "Kb_Bdt_TransportProductRemovalAoETool__tooltip": {
+      "en": "Activates the area product-removal tool",
+      "context": "Tooltip for the BDT area product-removal control.",
+      "de": "Activates the area product-removal tool",
+      "es": "Activates the area product-removal tool",
+      "it": "Activates the area product-removal tool",
+      "pt": "Activates the area product-removal tool",
+      "ru": "Activates the area product-removal tool",
+      "sv": "Activates the area product-removal tool",
+      "zh": "Activates the area product-removal tool"
+    },
+    "Kb_Bdt_PollutionOverlayToggle__label": {
+      "en": "Toggle pollution overlay",
+      "context": "Label for the BDT pollution-overlay control.",
+      "de": "Toggle pollution overlay",
+      "es": "Toggle pollution overlay",
+      "it": "Toggle pollution overlay",
+      "pt": "Toggle pollution overlay",
+      "ru": "Toggle pollution overlay",
+      "sv": "Toggle pollution overlay",
+      "zh": "Toggle pollution overlay"
+    },
+    "Kb_Bdt_PollutionOverlayToggle__tooltip": {
+      "en": "Toggles the pollution overlay",
+      "context": "Tooltip for the BDT pollution-overlay control.",
+      "de": "Toggles the pollution overlay",
+      "es": "Toggles the pollution overlay",
+      "it": "Toggles the pollution overlay",
+      "pt": "Toggles the pollution overlay",
+      "ru": "Toggles the pollution overlay",
+      "sv": "Toggles the pollution overlay",
+      "zh": "Toggles the pollution overlay"
+    },
+    "Kb_Bdt_RadiationOverlayToggle__label": {
+      "en": "Toggle radiation overlay",
+      "context": "Label for the BDT radiation-overlay control.",
+      "de": "Toggle radiation overlay",
+      "es": "Toggle radiation overlay",
+      "it": "Toggle radiation overlay",
+      "pt": "Toggle radiation overlay",
+      "ru": "Toggle radiation overlay",
+      "sv": "Toggle radiation overlay",
+      "zh": "Toggle radiation overlay"
+    },
+    "Kb_Bdt_RadiationOverlayToggle__tooltip": {
+      "en": "Toggles the radiation overlay",
+      "context": "Tooltip for the BDT radiation-overlay control.",
+      "de": "Toggles the radiation overlay",
+      "es": "Toggles the radiation overlay",
+      "it": "Toggles the radiation overlay",
+      "pt": "Toggles the radiation overlay",
+      "ru": "Toggles the radiation overlay",
+      "sv": "Toggles the radiation overlay",
+      "zh": "Toggles the radiation overlay"
+    },
+    "Kb_Bdt_LayoutBoxMode__label": {
+      "en": "Toggle layout box overlay",
+      "context": "Label for the BDT layout-box overlay control.",
+      "de": "Toggle layout box overlay",
+      "es": "Toggle layout box overlay",
+      "it": "Toggle layout box overlay",
+      "pt": "Toggle layout box overlay",
+      "ru": "Toggle layout box overlay",
+      "sv": "Toggle layout box overlay",
+      "zh": "Toggle layout box overlay"
+    },
+    "Kb_Bdt_LayoutBoxMode__tooltip": {
+      "en": "Toggles layout box overlay",
+      "context": "Tooltip for the BDT layout-box overlay control.",
+      "de": "Toggles layout box overlay",
+      "es": "Toggles layout box overlay",
+      "it": "Toggles layout box overlay",
+      "pt": "Toggles layout box overlay",
+      "ru": "Toggles layout box overlay",
+      "sv": "Toggles layout box overlay",
+      "zh": "Toggles layout box overlay"
+    },
+    "Kb_Bdt_UndoPlacement__label": {
+      "en": "Undo placement",
+      "context": "Label for the BDT undo-placement control.",
+      "de": "Undo placement",
+      "es": "Undo placement",
+      "it": "Undo placement",
+      "pt": "Undo placement",
+      "ru": "Undo placement",
+      "sv": "Undo placement",
+      "zh": "Undo placement"
+    },
+    "Kb_Bdt_UndoPlacement__tooltip": {
+      "en": "Undoes the last BDT placement action",
+      "context": "Tooltip for the BDT undo-placement control.",
+      "de": "Undoes the last BDT placement action",
+      "es": "Undoes the last BDT placement action",
+      "it": "Undoes the last BDT placement action",
+      "pt": "Undoes the last BDT placement action",
+      "ru": "Undoes the last BDT placement action",
+      "sv": "Undoes the last BDT placement action",
+      "zh": "Undoes the last BDT placement action"
+    },
+    "Kb_Bdt_TransportLazyHeight__label": {
+      "en": "Transport lazy height routing",
+      "context": "Label for the BDT transport lazy-height control.",
+      "de": "Transport lazy height routing",
+      "es": "Transport lazy height routing",
+      "it": "Transport lazy height routing",
+      "pt": "Transport lazy height routing",
+      "ru": "Transport lazy height routing",
+      "sv": "Transport lazy height routing",
+      "zh": "Transport lazy height routing"
+    },
+    "Kb_Bdt_TransportLazyHeight__tooltip": {
+      "en": "Holds lazy height matching mode while placing transports (Alt)",
+      "context": "Tooltip for the BDT transport lazy-height control.",
+      "de": "Holds lazy height matching mode while placing transports (Alt)",
+      "es": "Holds lazy height matching mode while placing transports (Alt)",
+      "it": "Holds lazy height matching mode while placing transports (Alt)",
+      "pt": "Holds lazy height matching mode while placing transports (Alt)",
+      "ru": "Holds lazy height matching mode while placing transports (Alt)",
+      "sv": "Holds lazy height matching mode while placing transports (Alt)",
+      "zh": "Holds lazy height matching mode while placing transports (Alt)"
+    }
+  },
+  "keys_needing_translation": 22
 }

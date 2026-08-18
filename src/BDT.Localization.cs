@@ -84,6 +84,55 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.height_filter_max_visible.description", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
     public static LocStr SettingsGlobalHotkeyTooltip =
         Loc.Str("dtk.settings.global_hotkey.description", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
+
+    // KbAttribute creates these IDs from the control ID. Keep them as static
+    // LocStr fields so the translation exporter and late rebind pass discover
+    // the same keys that the vanilla controls screen uses.
+    public static LocStr HotkeyTransportCleanupLabel =
+        Loc.Str("Kb_Bdt_TransportCleanup__label", "Transport cleanup tool", "Label for the BDT transport cleanup control.");
+    public static LocStr HotkeyTransportCleanupTooltip =
+        Loc.Str("Kb_Bdt_TransportCleanup__tooltip", "Activates the transport cleanup selection tool", "Tooltip for the BDT transport cleanup control.");
+    public static LocStr HotkeyHeightFilterShowLayerLabel =
+        Loc.Str("Kb_Bdt_HeightFilterShowLayer__label", "Height filter show layer", "Label for the BDT height filter show-layer control.");
+    public static LocStr HotkeyHeightFilterShowLayerTooltip =
+        Loc.Str("Kb_Bdt_HeightFilterShowLayer__tooltip", "Increases the maximum visible height filter layer", "Tooltip for the BDT height filter show-layer control.");
+    public static LocStr HotkeyHeightFilterHideLayerLabel =
+        Loc.Str("Kb_Bdt_HeightFilterHideLayer__label", "Height filter hide layer", "Label for the BDT height filter hide-layer control.");
+    public static LocStr HotkeyHeightFilterHideLayerTooltip =
+        Loc.Str("Kb_Bdt_HeightFilterHideLayer__tooltip", "Decreases the maximum visible height filter layer", "Tooltip for the BDT height filter hide-layer control.");
+    public static LocStr HotkeyThroughputOverlayToggleLabel =
+        Loc.Str("Kb_Bdt_ThroughputOverlayToggle__label", "Toggle throughput overlay", "Label for the BDT throughput-overlay control.");
+    public static LocStr HotkeyThroughputOverlayToggleTooltip =
+        Loc.Str("Kb_Bdt_ThroughputOverlayToggle__tooltip", "Toggles the throughput overlay", "Tooltip for the BDT throughput-overlay control.");
+    public static LocStr HotkeyThroughputAoEToolLabel =
+        Loc.Str("Kb_Bdt_ThroughputAoETool__label", "Throughput tool", "Label for the BDT throughput area tool control.");
+    public static LocStr HotkeyThroughputAoEToolTooltip =
+        Loc.Str("Kb_Bdt_ThroughputAoETool__tooltip", "Activates the throughput area selection tool", "Tooltip for the BDT throughput area tool control.");
+    public static LocStr HotkeyTransportProductRemovalAoEToolLabel =
+        Loc.Str("Kb_Bdt_TransportProductRemovalAoETool__label", "Remove products in area", "Label for the BDT area product-removal control.");
+    public static LocStr HotkeyTransportProductRemovalAoEToolTooltip =
+        Loc.Str("Kb_Bdt_TransportProductRemovalAoETool__tooltip", "Activates the area product-removal tool", "Tooltip for the BDT area product-removal control.");
+    public static LocStr HotkeyPollutionOverlayToggleLabel =
+        Loc.Str("Kb_Bdt_PollutionOverlayToggle__label", "Toggle pollution overlay", "Label for the BDT pollution-overlay control.");
+    public static LocStr HotkeyPollutionOverlayToggleTooltip =
+        Loc.Str("Kb_Bdt_PollutionOverlayToggle__tooltip", "Toggles the pollution overlay", "Tooltip for the BDT pollution-overlay control.");
+    public static LocStr HotkeyRadiationOverlayToggleLabel =
+        Loc.Str("Kb_Bdt_RadiationOverlayToggle__label", "Toggle radiation overlay", "Label for the BDT radiation-overlay control.");
+    public static LocStr HotkeyRadiationOverlayToggleTooltip =
+        Loc.Str("Kb_Bdt_RadiationOverlayToggle__tooltip", "Toggles the radiation overlay", "Tooltip for the BDT radiation-overlay control.");
+    public static LocStr HotkeyLayoutBoxModeLabel =
+        Loc.Str("Kb_Bdt_LayoutBoxMode__label", "Toggle layout box overlay", "Label for the BDT layout-box overlay control.");
+    public static LocStr HotkeyLayoutBoxModeTooltip =
+        Loc.Str("Kb_Bdt_LayoutBoxMode__tooltip", "Toggles layout box overlay", "Tooltip for the BDT layout-box overlay control.");
+    public static LocStr HotkeyUndoPlacementLabel =
+        Loc.Str("Kb_Bdt_UndoPlacement__label", "Undo placement", "Label for the BDT undo-placement control.");
+    public static LocStr HotkeyUndoPlacementTooltip =
+        Loc.Str("Kb_Bdt_UndoPlacement__tooltip", "Undoes the last BDT placement action", "Tooltip for the BDT undo-placement control.");
+    public static LocStr HotkeyTransportLazyHeightLabel =
+        Loc.Str("Kb_Bdt_TransportLazyHeight__label", "Transport lazy height routing", "Label for the BDT transport lazy-height control.");
+    public static LocStr HotkeyTransportLazyHeightTooltip =
+        Loc.Str("Kb_Bdt_TransportLazyHeight__tooltip", "Holds lazy height matching mode while placing transports (Alt)", "Tooltip for the BDT transport lazy-height control.");
+
     public static LocStr SettingsRestoreDefaults =
         Loc.Str("dtk.settings.action.restore_defaults", "Restore defaults", "Button label for restoring default settings.");
     public static LocStr SettingsRestoreDefaultsTooltip =

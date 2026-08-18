@@ -335,9 +335,10 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             translationsDirectory,
             typeof(DesignerToolkitMod).Assembly,
             Array.Empty<string>()));
+        int refreshedKeybindCount = CoI.AutoHelpers.InputControl.CustomKeybindsInjector.RefreshRegisteredLocalizations();
 
         s_log.Info(
-            $"Localization: applied locale='{result.AppliedLocaleCode}', upserted={result.UpsertedEntryCount}, scannedFields={result.ScannedFieldCount}, reboundFields={result.ReboundFieldCount}, readonlySkipped={result.SkippedReadonlyFieldCount}, missingTranslationSkipped={result.SkippedMissingTranslationFieldCount}, failedWrites={result.FailedFieldCount}, diagnostics={result.Diagnostics.Count}.");
+            $"Localization: applied locale='{result.AppliedLocaleCode}', upserted={result.UpsertedEntryCount}, scannedFields={result.ScannedFieldCount}, reboundFields={result.ReboundFieldCount}, refreshedKeybinds={refreshedKeybindCount}, readonlySkipped={result.SkippedReadonlyFieldCount}, missingTranslationSkipped={result.SkippedMissingTranslationFieldCount}, failedWrites={result.FailedFieldCount}, diagnostics={result.Diagnostics.Count}.");
 
         foreach (TranslationDiagnostic diagnostic in result.Diagnostics)
         {
