@@ -16,6 +16,7 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 - [Copy as Markdown](#copy-as-markdown)
 - [Symmetric entity normalization](#symmetric-entity-normalization)
 - [Instant build mode](#instant-build-mode)
+- [Pre-color pipes](#pre-color-pipes)
 - [Transport cleanup tool](#transport-cleanup-tool)
 - [Transport product removal](#transport-product-removal)
 - [Height filter](#height-filter)
@@ -142,6 +143,12 @@ BDT includes an Instant Build mode that automatically completes construction, de
 When enabled, BDT turns off the game's built-in insta-build toggle and uses its own completion pass after player commands are processed.
 
 See [Instant Build Mode](docs/player/instant-build-mode.md) for player-facing details.
+
+### Pre-color pipes
+
+BDT can give empty fluid and molten pipes an initial color based on connected upstream sources. Multiple source fluids are blended equally, while vanilla flow coloring remains authoritative once products enter the pipe.
+
+Enable **Pre-color pipes** under **BUILD BEHAVIORS** in Mod Settings. See [Pre-color pipes](docs/player/pipe-pre-coloring.md) for details.
 
 ### Transport cleanup tool
 

@@ -48,8 +48,8 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.number_format.english", "English separators", "Dropdown option for en-US Markdown number formatting.");
     public static LocStr SettingsNumberFormatLocal =
         Loc.Str("dtk.settings.number_format.local", "Local separators", "Dropdown option for local Markdown number formatting.");
-    public static LocStr SettingsInstantBuildHeading =
-        Loc.Str("dtk.settings.instant_build.heading", "INSTANT BUILD", "Settings section heading for automatic construction tools.");
+    public static LocStr SettingsBuildBehaviorsHeading =
+        Loc.Str("dtk.settings.build_behaviors.heading", "BUILD BEHAVIORS", "Settings section heading for build behavior settings.");
     public static LocStr SettingsInstantBuildMode =
         Loc.Str("dtk.settings.instant_build_mode.label", "Instant build mode", "Settings row label for instant build mode.");
     public static LocStr SettingsInstantBuildModeDescription =
@@ -60,6 +60,10 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.legacy_belt_configurations.label", "Allow curvy incline belts", "Settings row label for allowing legacy belt configurations (curvy incline belts).");
     public static LocStr SettingsLegacyBeltConfigurationsDescription =
         Loc.Str("dtk.settings.legacy_belt_configurations.description", "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly).", "Settings row description for allowing legacy belt configurations (curvy incline belts).");
+    public static LocStr SettingsPreColorPipes =
+        Loc.Str("dtk.settings.pre_color_pipes.label", "Pre-color pipes", "Settings row label for pre-coloring empty pipes.");
+    public static LocStr SettingsPreColorPipesDescription =
+        Loc.Str("dtk.settings.pre_color_pipes.description", "Colors empty pipes from their connected upstream sources. Multiple fluids are blended equally. Actual transport flow takes over the color while they contain products.", "Settings row description for pre-coloring empty pipes.");
 
     public static LocStr RateLimitTitle =
         Loc.Str("dtk.rate_limit.title", "Throughput Limiter", "Panel title for the throughput limiter inspector.");
@@ -70,8 +74,6 @@ internal static class BdtLocalization
     public static LocStr RateLimitItemsPerMin =
         Loc.Str("dtk.rate_limit.items_per_min", "items/min", "Unit label for items per minute in the throughput limiter.");
 
-    public static LocStr SettingsTransportConstructionHeading =
-        Loc.Str("dtk.settings.transport_construction.heading", "TRANSPORT CONSTRUCTION", "Settings section heading for transport construction settings.");
 
     public static LocStr HeightRoutingTooltip =
         Loc.Str("dtk.height_routing.tooltip", "Hold or press the shortcut key to toggle lazy height matching. By default belts & pipes match target height as soon as possible. When this is enabled, belts & pipes will stay at their starting height for as long as possible before changing elevation.", "Tooltip for lazy height matching shortcut in transport placement tool.");

@@ -68,8 +68,8 @@
     "Lokale Trennzeichen"
   ],
   [
-    "dtk.settings.instant_build.heading",
-    "SOFORTBAU"
+    "dtk.settings.build_behaviors.heading",
+    "BAUVERHALTEN"
   ],
   [
     "dtk.settings.instant_build_mode.label",
@@ -92,6 +92,14 @@
     "Ermöglicht den Transportbau im Stil von Update 1, sodass Transporte auf derselben Kachel gleichzeitig abbiegen und ansteigen/abfallen können (kurvenförmige Schrägbänder direkt baubar)."
   ],
   [
+    "dtk.settings.pre_color_pipes.label",
+    "Rohre vorab einfärben"
+  ],
+  [
+    "dtk.settings.pre_color_pipes.description",
+    "Färbt leere Rohre anhand ihrer angeschlossenen Quellen stromaufwärts. Mehrere Flüssigkeiten werden gleichmäßig gemischt. Sobald sich Produkte im Rohr befinden, übernimmt der tatsächliche Transport die Farbe."
+  ],
+  [
     "dtk.rate_limit.title",
     "Durchsatz-Begrenzer"
   ],
@@ -106,10 +114,6 @@
   [
     "dtk.rate_limit.items_per_min",
     "items/min"
-  ],
-  [
-    "dtk.settings.transport_construction.heading",
-    "TRANSPORTBAU"
   ],
   [
     "dtk.height_routing.tooltip",

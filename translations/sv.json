@@ -68,8 +68,8 @@
     "Lokala avgränsare"
   ],
   [
-    "dtk.settings.instant_build.heading",
-    "OMEDELBART BYGGE"
+    "dtk.settings.build_behaviors.heading",
+    "BYGGBETEENDEN"
   ],
   [
     "dtk.settings.instant_build_mode.label",
@@ -92,6 +92,14 @@
     "Aktiverar transportkonstruktion i stil med Uppdatering 1, vilket gör att transporter kan svänga och stiga/sjunka på samma ruta (möjliggör direkt konstruktion av kurviga lutningsband)."
   ],
   [
+    "dtk.settings.pre_color_pipes.label",
+    "Förfärga rör"
+  ],
+  [
+    "dtk.settings.pre_color_pipes.description",
+    "Färgar tomma rör efter deras anslutna källor uppströms. Flera vätskor blandas i lika delar. Det faktiska transportflödet tar över färgen när rören innehåller produkter."
+  ],
+  [
     "dtk.rate_limit.title",
     "Genomströmningsbegränsare"
   ],
@@ -106,10 +114,6 @@
   [
     "dtk.rate_limit.items_per_min",
     "st/min"
-  ],
-  [
-    "dtk.settings.transport_construction.heading",
-    "TRANSPORTKONSTRUKTION"
   ],
   [
     "dtk.height_routing.tooltip",

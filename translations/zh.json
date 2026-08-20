@@ -68,8 +68,8 @@
     "本地分隔符"
   ],
   [
-    "dtk.settings.instant_build.heading",
-    "即时建造"
+    "dtk.settings.build_behaviors.heading",
+    "建造行为"
   ],
   [
     "dtk.settings.instant_build_mode.label",
@@ -92,6 +92,14 @@
     "启用更新1风格的传输建造，允许传输在同一格同时转弯和上升/下降（使弯曲坡度传送带可以直接建造）。"
   ],
   [
+    "dtk.settings.pre_color_pipes.label",
+    "预先为管道着色"
+  ],
+  [
+    "dtk.settings.pre_color_pipes.description",
+    "根据空管道所连接的上游源为其着色。多种流体会按相同比例混合颜色。管道中有产品后，实际运输流动会接管颜色。"
+  ],
+  [
     "dtk.rate_limit.title",
     "吞吐量限制器"
   ],
@@ -106,10 +114,6 @@
   [
     "dtk.rate_limit.items_per_min",
     "items/min"
-  ],
-  [
-    "dtk.settings.transport_construction.heading",
-    "传输建造"
   ],
   [
     "dtk.height_routing.tooltip",

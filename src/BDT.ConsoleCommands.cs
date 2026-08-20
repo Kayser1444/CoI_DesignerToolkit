@@ -15,6 +15,18 @@ namespace CoIDesignerToolkit;
 [GlobalDependency(RegistrationMode.AsSelf, false, false)]
 public sealed class BdtConsoleCommands
 {
+    [ConsoleCommand(false, false, "Gets or sets the session-only BDT diagnostic level. Allowed: warning, info, debug, trace.", "bdt_diagnostic_level")]
+    private string bdtDiagnosticLevel(string value = "")
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return $"[BDT] Diagnostic level: {BdtDiagnostics.Describe()}.";
+
+        if (!BdtDiagnostics.TrySetSessionLevel(value, out string error))
+            return $"[BDT] Invalid diagnostic level '{value}'. {error}";
+
+        return $"[BDT] Diagnostic level set for this session: {BdtDiagnostics.Describe()}.";
+    }
+
     [ConsoleCommand(false, false, "Sets the BDT pollution heatmap glow color (white, brown, purple, or #RRGGBB).", null)]
     private string bdtSetPollutionGlowColor(string? value = null)
     {

@@ -16,6 +16,7 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - [📝 Copy as Markdown](#copy-as-markdown)
 - [🧩 Symmetric entity normalization](#symmetric-entity-normalization)
 - [⚡ Instant build mode](#instant-build-mode)
+- [🎨 Pre-color pipes](#pre-color-pipes)
 - [🧹 Transport cleanup tool](#transport-cleanup-tool)
 - [🗑️ Transport product removal](#transport-product-removal)
 - [👁️ Height filter](#height-filter)
@@ -154,6 +155,12 @@ Enabling this feature turns off the game's built-in insta-build toggle.
 
 Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
 
+### 🎨 Pre-color pipes
+
+BDT can give empty fluid and molten pipes an initial color based on their connected upstream sources. Multiple source fluids are blended equally. Once a pipe contains products, vanilla transport coloring takes over and fades toward the color determined by its current contents and flow.
+
+Enable **Pre-color pipes** under **BUILD BEHAVIORS** in Mod Settings. The affected connected cluster refreshes when topology, recipes, source products, or construction changes, including while the game is paused.
+
 ### 🧹 Transport cleanup tool
 
 BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to detect and demolish useless belts and pipes via an area selection drag, before capturing your blueprint. To avoid capturing input and output transports, terminate them properly with a source or sink.
@@ -163,6 +170,8 @@ The hotkey can be changed in BDT's mod settings under **TRANSPORT CLEANUP**.
 Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
 
 ### 🗑️ Transport product removal
+
+![image.png](/content-images/073be4c4448bd9218f4b6b8db57eee0f9e034331fca2fad25578a5a5c7d79a54/image.png)
 
 BDT adds regular product removal to lifts, connectors, sorters, and balancers, placing it beside the familiar quick-removal action in their inspectors. Regular removal mirrors vanilla transports: eligible products are discarded immediately and truck-loadable products wait for normal vehicle collection. The entity does not accept or output products until that one-shot removal order is empty or cancelled.
 
@@ -220,7 +229,7 @@ BDT features a real-time **Pollution Overlay** and **Heat Map** system to monito
 
 ### ☢ Radiation overlay
 
-![radiation-overlay.png]()
+![image.png](/content-images/4f7c5b659abe247a470559f041c0f3bbe2a10b25a7ecef119d948d1454e590a8/image.png)
 
 BDT also includes a **Radiation Overlay** for locating unsafe radioactive inventory during design testing. It samples at the same daily boundary as vanilla radiation accounting and displays local amounts using translationless `#N.D#` labels.
 
@@ -262,6 +271,8 @@ Throughput limiting remains available in sandbox mode. Limits are saved per enti
 This allows you to test your designs thoroughly before capturing the blueprint.
 
 ### 🚧 Legacy Belt Configurations
+
+![image.png](/content-images/a0db078ba7b3b8e3eb9344de8f0b42b07db4e840078c19c9af54decd9c2ec688/image.png)
 
 The Mod Settings menu now features an option to enable Update 1 style transport construction. Turning on "Allow curvy incline belts" permits transports to turn and incline/decline on the exact same tile, restoring the ability to build tight, curvy vertical belts.
 

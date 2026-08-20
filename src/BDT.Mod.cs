@@ -104,6 +104,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         PollutionPatches.Apply(m_harmony);
         HeightRoutingPatches.Apply(m_harmony);
         LegacyStackerPatches.Apply(m_harmony);
+        PipeColoring.ApplyPatches(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
 
@@ -136,6 +137,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath, gameWasLoaded);
         DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
         DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
+        PipeColoring.Initialize(resolver);
         HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.Audio.AudioDb>());
 
         m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
@@ -154,6 +156,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         var gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
         gameLoopEvents.RegisterRendererInitState(this, () =>
         {
+            BdtDiagnostics.Debug(s_log, $"Diagnostics: {BdtDiagnostics.Describe()}.");
             m_throughputWorldRendererGo = new UnityEngine.GameObject("BDT.ThroughputWorldRenderer");
             m_throughputWorldRenderer = m_throughputWorldRendererGo.AddComponent<ThroughputWorldRenderer>();
             m_throughputWorldRenderer.Setup(resolver.Resolve<EntitiesManager>(), resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance, gameLoopEvents);
@@ -353,6 +356,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     private void unsubscribeWorldEvents()
     {
+        PipeColoring.Dispose();
         LegacyStackerFullAlertManager.Clear();
         TransportProductRemovalManager.Clear();
 

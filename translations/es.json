@@ -68,8 +68,8 @@
     "Separadores locales"
   ],
   [
-    "dtk.settings.instant_build.heading",
-    "CONSTRUCCIÓN INSTANTÁNEA"
+    "dtk.settings.build_behaviors.heading",
+    "COMPORTAMIENTOS DE CONSTRUCCIÓN"
   ],
   [
     "dtk.settings.instant_build_mode.label",
@@ -92,6 +92,14 @@
     "Activa la construcción de transportes al estilo de la Actualización 1, permitiendo que los transportes giren y suban/bajen en la misma casilla (posibilitando construir cintas inclinadas curvas directamente)."
   ],
   [
+    "dtk.settings.pre_color_pipes.label",
+    "Precolorear tuberías"
+  ],
+  [
+    "dtk.settings.pre_color_pipes.description",
+    "Colorea las tuberías vacías según sus fuentes conectadas aguas arriba. Los fluidos se mezclan a partes iguales. El flujo real del transporte toma el control del color mientras haya productos en las tuberías."
+  ],
+  [
     "dtk.rate_limit.title",
     "Limitador de rendimiento"
   ],
@@ -106,10 +114,6 @@
   [
     "dtk.rate_limit.items_per_min",
     "items/min"
-  ],
-  [
-    "dtk.settings.transport_construction.heading",
-    "CONSTRUCCIÓN DE TRANSPORTE"
   ],
   [
     "dtk.height_routing.tooltip",

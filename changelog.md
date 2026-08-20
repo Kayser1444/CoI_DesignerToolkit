@@ -2,10 +2,15 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.9.2 [unreleased]
+## v0.10.0 [unreleased]
 
 - Fixed the missing `pollution_show_solid_waste` configuration parameter and localized BDT control labels and tooltips across all supported languages.
 - Fixed late localization of vanilla Controls-menu keybindings by refreshing registered BDT keybind attributes after the translation bundle is applied.
+- Added optional **Pre-color pipes** behavior for empty fluid and molten pipes, using connected upstream sources and equally blending multiple resolved fluids.
+- Kept vanilla transport coloring authoritative after a pipe contains products, including the normal fade from the seeded color toward the active flow state.
+- Refreshed affected pipe clusters after topology, recipe, source-product, and construction changes, including while the game is paused, without changing simulation state.
+- Added session-only `bdt_diagnostic_level` control with tiered debug and trace diagnostics for BDT runtime troubleshooting.
+- Reorganized the settings panel under **BUILD BEHAVIORS**, grouping instant build, curvy incline belts, and pipe pre-coloring together.
 
 ## v0.9.1 [released]
 

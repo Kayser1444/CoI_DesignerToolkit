@@ -1,3 +1,10 @@
+v0.10.0 | 2026-08-20
+* Added optional **Pre-color pipes** behavior for empty fluid and molten pipes, using connected upstream sources and equally blending multiple resolved fluids
+* Kept vanilla transport coloring authoritative after a pipe contains products, including its normal fade toward the active flow state
+* Grouped instant build, curvy incline belts, and pipe pre-coloring under the **Build Behaviors** settings heading
+* Fixed: Pollution overlay settings now retain the solid-waste visibility option across saves
+* Fixed: Vanilla Controls-menu keybindings now receive their localized labels after BDT translations load
+
 v0.9.1 | 2026-08-17
 * Added configurable pollution heatmap glow colors (`white`, `brown`, `purple`, or `#RRGGBB`) through `config.json` and the `bdt_set_pollution_glow_color` console command, applying to entity highlights and screen-space halos
 * Added an optional orange full-stack alert for legacy Stackers with per-stacker persistence

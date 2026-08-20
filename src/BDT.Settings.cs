@@ -89,6 +89,7 @@ internal static class DesignerToolkitSettings
     private const string USE_RECYCLE_BIN_KEY = "use_recycle_bin";
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
     private const string BLUEPRINT_SPACING_KEY = "blueprint_spacing";
+    private const string PRE_COLOR_PIPES_KEY = "pre_color_pipes";
 
     private const int SETTINGS_SCHEMA_VERSION = 1;
     private const string SETTINGS_TAB_ICON_ASSET =
@@ -132,6 +133,7 @@ internal static class DesignerToolkitSettings
     public static bool UseRecycleBin { get; private set; } = true;
     public static string RecycleBinFolderName { get; private set; } = "Recycle Bin";
     public static int BlueprintSpacing { get; private set; } = 6;
+    public static bool PreColorPipesEnabled { get; private set; } = true;
     public static bool IsFirstUnpausePending { get; set; } = true;
 
     private static Func<BlueprintsLibrary>? s_blueprintsLibraryProvider;
@@ -278,6 +280,7 @@ internal static class DesignerToolkitSettings
     public static event Action<bool>? ThroughputOverlayEnabledChanged;
     public static event Action<bool>? PollutionOverlayEnabledChanged;
     public static event Action<int>? PollutionDaysToAverageChanged;
+    public static event Action<bool>? PreColorPipesEnabledChanged;
 
     private static void SetThroughputHeatmapMode(ThroughputHeatmapMode mode)
     {
@@ -447,6 +450,7 @@ internal static class DesignerToolkitSettings
         bool initialUseRecycleBin = s_config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = s_config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
         int initialBlueprintSpacing = s_config.GetInt(BLUEPRINT_SPACING_KEY, 6);
+        bool initialPreColorPipesEnabled = s_config.GetBool(PRE_COLOR_PIPES_KEY, true);
 
         LoadFromJsonStore(
             s_store,
@@ -474,7 +478,8 @@ internal static class DesignerToolkitSettings
             initialLayoutBoxModeEnabled,
             initialUseRecycleBin,
             initialRecycleBinFolderName,
-            initialBlueprintSpacing);
+            initialBlueprintSpacing,
+            initialPreColorPipesEnabled);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -536,7 +541,7 @@ internal static class DesignerToolkitSettings
                 .OnValueChanged((numberFormat, _) => SetMarkdownNumberFormat(numberFormat));
 
         root.Add(numberFormatDropdown);
-        root.Add(new Title(BdtLocalization.SettingsInstantBuildHeading.AsFormatted)
+        root.Add(new Title(BdtLocalization.SettingsBuildBehaviorsHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
@@ -559,6 +564,20 @@ internal static class DesignerToolkitSettings
         }
 
         root.Add(instantBuildToggle);
+
+        Toggle preColorPipesToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsPreColorPipes.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsPreColorPipesDescription.AsFormatted)
+            .Value(PreColorPipesEnabled)
+            .OnValueChanged(SetPreColorPipesEnabled);
+        root.Add(preColorPipesToggle);
+
+        Toggle legacyBeltConfigurationsToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsLegacyBeltConfigurations.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsLegacyBeltConfigurationsDescription.AsFormatted)
+            .Value(LegacyBeltConfigurationsEnabled)
+            .OnValueChanged(SetLegacyBeltConfigurations);
+        root.Add(legacyBeltConfigurationsToggle);
 
         root.Add(new Title(BdtLocalization.SettingsHeightFilterHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -892,23 +911,13 @@ internal static class DesignerToolkitSettings
         spacingMinusBtn.OnClick(() => adjustSpacing(-1), allowKeyPresses: true);
         spacingPlusBtn.OnClick(() => adjustSpacing(1), allowKeyPresses: true);
 
-        root.Add(new Title(BdtLocalization.SettingsTransportConstructionHeading.AsFormatted)
-            .MarginTop(4.pt())
-            .MarginLeft(-SETTINGS_SECTION_INDENT));
-
-        Toggle legacyBeltConfigurationsToggle = new Toggle(standalone: true)
-            .Label(BdtLocalization.SettingsLegacyBeltConfigurations.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsLegacyBeltConfigurationsDescription.AsFormatted)
-            .Value(LegacyBeltConfigurationsEnabled)
-            .OnValueChanged(SetLegacyBeltConfigurations);
-        root.Add(legacyBeltConfigurationsToggle);
-
         root.Add(BuildFooter(() =>
         {
             languageDropdown.SetValue(MarkdownTableLanguage);
             numberFormatDropdown.SetValue(MarkdownNumberFormat);
             instantBuildToggle.Value(InstantBuildModeEnabled);
             legacyBeltConfigurationsToggle.Value(LegacyBeltConfigurationsEnabled);
+            preColorPipesToggle.Value(PreColorPipesEnabled);
             throughputOverlayToggle.Value(ThroughputOverlayEnabled);
             throughputGlowToggle.Value(ThroughputGlowEnabled);
             heatmapDropdown.SetValue(ThroughputHeatmapMode);
@@ -971,6 +980,7 @@ internal static class DesignerToolkitSettings
             MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             SetInstantBuildMode(false);
             SetLegacyBeltConfigurations(true);
+            SetPreColorPipesEnabled(true);
             SetHeightFilterMaxVisibleLevel(6);
             SetThroughputOverlayEnabled(true);
             SetThroughputGlowEnabled(true);
@@ -1031,6 +1041,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(PRE_COLOR_PIPES_KEY, PreColorPipesEnabled, out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out error))
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out error))
@@ -1085,6 +1097,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out bool numberFormatUpdated);
             updated = TryReplaceConfigDefault(updated, INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out bool instantBuildUpdated);
             updated = TryReplaceConfigDefault(updated, LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out bool legacyBeltConfigurationsUpdated);
+            updated = TryReplaceConfigDefault(updated, PRE_COLOR_PIPES_KEY, PreColorPipesEnabled, out bool preColorPipesUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out bool throughputOverlayEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out bool throughputGlowEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out bool throughputHeatmapModeUpdated);
@@ -1125,6 +1138,11 @@ internal static class DesignerToolkitSettings
             if (!legacyBeltConfigurationsUpdated)
             {
                 error = "Could not find legacy_belt_configurations default in config.json.";
+                return false;
+            }
+            if (!preColorPipesUpdated)
+            {
+                error = "Could not find pre_color_pipes default in config.json.";
                 return false;
             }
             if (!throughputOverlayEnabledUpdated)
@@ -1263,6 +1281,16 @@ internal static class DesignerToolkitSettings
         LegacyBeltConfigurationsEnabled = enabled;
     }
 
+    private static void SetPreColorPipesEnabled(bool enabled)
+    {
+        if (PreColorPipesEnabled == enabled)
+            return;
+
+        PreColorPipesEnabled = enabled;
+        try { PreColorPipesEnabledChanged?.Invoke(enabled); }
+        catch (Exception ex) { s_log.Warning($"Pre-color pipes change handler failed: {ex.Message}"); }
+    }
+
     public static void SetThroughputOverlayEnabled(bool enabled)
     {
         if (ThroughputOverlayEnabled == enabled)
@@ -1383,7 +1411,8 @@ internal static class DesignerToolkitSettings
         bool initialLayoutBoxModeEnabled,
         bool initialUseRecycleBin,
         string initialRecycleBinFolderName,
-        int initialBlueprintSpacing)
+        int initialBlueprintSpacing,
+        bool initialPreColorPipesEnabled)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
@@ -1410,6 +1439,7 @@ internal static class DesignerToolkitSettings
         UseRecycleBin = initialUseRecycleBin;
         RecycleBinFolderName = initialRecycleBinFolderName;
         BlueprintSpacing = initialBlueprintSpacing;
+        PreColorPipesEnabled = initialPreColorPipesEnabled;
 
         string json = store.LoadJson();
         if (string.IsNullOrWhiteSpace(json))
@@ -1484,6 +1514,8 @@ internal static class DesignerToolkitSettings
                 RecycleBinFolderName = recycleBinFolderName;
             if (TryGetInt(root, "blueprintSpacing", out int blueprintSpacing))
                 BlueprintSpacing = blueprintSpacing;
+            if (TryGetBool(root, "preColorPipesEnabled", out bool preColorPipesEnabled))
+                PreColorPipesEnabled = preColorPipesEnabled;
             if (TryGetBool(root, "isFirstUnpausePending", out bool firstUnpausePending))
                 IsFirstUnpausePending = firstUnpausePending;
         }
@@ -1524,6 +1556,7 @@ internal static class DesignerToolkitSettings
         writer.AppendBoolField("useRecycleBin", UseRecycleBin);
         writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);
         writer.AppendNumberField("blueprintSpacing", BlueprintSpacing);
+        writer.AppendBoolField("preColorPipesEnabled", PreColorPipesEnabled);
         writer.AppendBoolField("isFirstUnpausePending", IsFirstUnpausePending);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();

@@ -68,8 +68,8 @@
     "Local separators"
   ],
   [
-    "dtk.settings.instant_build.heading",
-    "INSTANT BUILD"
+    "dtk.settings.build_behaviors.heading",
+    "BUILD BEHAVIORS"
   ],
   [
     "dtk.settings.instant_build_mode.label",
@@ -92,6 +92,14 @@
     "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly)."
   ],
   [
+    "dtk.settings.pre_color_pipes.label",
+    "Pre-color pipes"
+  ],
+  [
+    "dtk.settings.pre_color_pipes.description",
+    "Colors empty pipes from their connected upstream sources. Multiple fluids are blended equally. Actual transport flow takes over the color while they contain products."
+  ],
+  [
     "dtk.rate_limit.title",
     "Throughput Limiter"
   ],
@@ -106,10 +114,6 @@
   [
     "dtk.rate_limit.items_per_min",
     "items/min"
-  ],
-  [
-    "dtk.settings.transport_construction.heading",
-    "TRANSPORT CONSTRUCTION"
   ],
   [
     "dtk.height_routing.tooltip",

@@ -36,6 +36,10 @@
     "default": true,
     "description": "Initial state for legacy belt configurations (Update 1 style transport construction that allows turning and inclining/declining on the same tile)."
   },
+  "pre_color_pipes": {
+    "default": true,
+    "description": "Initial state for coloring empty pipes from their connected upstream sources."
+  },
   "throughput_overlay_enabled": {
     "default": false,
     "description": "Initial throughput overlay visibility state for saves without BDT settings state. When enabled, configured throughput overlays will render in-world."
