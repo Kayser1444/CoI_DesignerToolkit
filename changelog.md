@@ -12,7 +12,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Added session-only `bdt_diagnostic_level` control with tiered debug and trace diagnostics for BDT runtime troubleshooting.
 - Reorganized the settings panel under **BUILD BEHAVIORS**, grouping instant build, curvy incline belts, and pipe pre-coloring together.
 
-## v0.10.1 [packaged]
+## v0.10.1 [released]
 
 - Fixed: Instant build mode now preserves construction pauses for buildings placed while Planning Mode is enabled; unpausing them allows instant completion.
 
