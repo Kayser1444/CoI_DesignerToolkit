@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.10.0 [packaged]
+## v0.10.0 [released]
 
 - Fixed the missing `pollution_show_solid_waste` configuration parameter and localized BDT control labels and tooltips across all supported languages.
 - Fixed late localization of vanilla Controls-menu keybindings by refreshing registered BDT keybind attributes after the translation bundle is applied.
