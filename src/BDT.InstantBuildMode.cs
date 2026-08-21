@@ -124,6 +124,14 @@ internal sealed class InstantBuildMode : IDisposable
                     state == ConstructionState.PreparingUpgrade ||
                     state == ConstructionState.BeingUpgraded)
                 {
+                    // Planning Mode starts construction paused. Preserve that vanilla pause so
+                    // instant build does not turn a planned building into an active one.
+                    if (state == ConstructionState.InConstruction
+                        && entity.ConstructionProgress.ValueOrNull?.IsPaused == true)
+                    {
+                        continue;
+                    }
+
                     m_snapshot.Add(entity);
                 }
             }

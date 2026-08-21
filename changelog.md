@@ -14,6 +14,8 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.10.1 [unreleased]
 
+- Fixed: Instant build mode now preserves construction pauses for buildings placed while Planning Mode is enabled; unpausing them allows instant completion.
+
 ## v0.9.1 [released]
 
 - Added configurable pollution heatmap glow colors (`white`, `brown`, `purple`, or `#RRGGBB`) through `config.json` and the `bdt_set_pollution_glow_color` console command; the color applies to both entity highlights and screen-space halos.

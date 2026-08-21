@@ -153,9 +153,13 @@ BDT includes an Instant Build mode (configurable in Mod Settings) that automatic
 
 Enabling this feature turns off the game's built-in insta-build toggle.
 
+Buildings placed while Planning Mode is enabled remain paused until you unpause their construction.
+
 Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
 
 ### 🎨 Pre-color pipes
+
+![image.png](/content-images/50b311d8b332645fc508490dfa4dc0e9c12ab18822a7cb04e79d79635a7d9904/image.png)*Screenshot of pre-colored pipes.*
 
 BDT can give empty fluid and molten pipes an initial color based on their connected upstream sources. Multiple source fluids are blended equally. Once a pipe contains products, vanilla transport coloring takes over and fades toward the color determined by its current contents and flow.
 

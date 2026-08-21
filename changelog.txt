@@ -1,3 +1,6 @@
+v0.10.1 | 2026-08-21
+* Fixed: Instant build mode now preserves construction pauses for buildings placed while Planning Mode is enabled
+
 v0.10.0 | 2026-08-20
 * Added optional **Pre-color pipes** behavior for empty fluid and molten pipes, using connected upstream sources and equally blending multiple resolved fluids
 * Kept vanilla transport coloring authoritative after a pipe contains products, including its normal fade toward the active flow state

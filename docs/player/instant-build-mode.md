@@ -12,6 +12,10 @@ When enabled, BDT checks the world after player commands are processed and immed
 
 When instant build mode is enabled, BDT turns off the game's insta-build toggle. BDT uses its own construction/deconstruction completion pass instead of leaving the broader game cheat mode active.
 
+## Interaction With Planning Mode
+
+Buildings placed while Planning Mode is enabled remain paused and are not completed by BDT. They are completed as soon as you unpause their construction, matching the game's normal Planning Mode behavior.
+
 ## Save Safety
 
 The setting is stored as BDT config-backed state. BDT does not add custom game entities, prototypes, notifications, or save payloads for this feature, so the mod remains safe to remove from existing saves.
