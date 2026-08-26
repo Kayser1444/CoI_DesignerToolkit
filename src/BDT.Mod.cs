@@ -50,6 +50,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private HeightFilter? m_heightFilter;
     private IModStateJsonStore? m_rateLimitsStateStore;
     private IModStateJsonStore? m_throughputStateStore;
+    private IModStateJsonStore? m_groundwaterStateStore;
     private ThroughputManager? m_throughputManager;
     private ThroughputWorldRenderer? m_throughputWorldRenderer;
     private UnityEngine.GameObject? m_throughputWorldRendererGo;
@@ -105,6 +106,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         HeightRoutingPatches.Apply(m_harmony);
         LegacyStackerPatches.Apply(m_harmony);
         PipeColoring.ApplyPatches(m_harmony);
+        GroundwaterStatsManager.ApplyPatches(m_harmony);
+        GroundwaterInspectorPatches.Apply(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
     }
 
@@ -152,6 +155,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_radiationManager = new RadiationManager();
         m_radiationManager.Initialize(resolver);
+
+        m_groundwaterStateStore = ModStateJsonStores.CreateDefault(JsonConfig, GroundwaterStatsManager.CONFIG_KEY);
+        GroundwaterStatsManager.Initialize(resolver, m_groundwaterStateStore);
 
         var gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
         gameLoopEvents.RegisterRendererInitState(this, () =>
@@ -295,6 +301,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             m_throughputManager.SaveConfigState();
         }
 
+        GroundwaterStatsManager.Instance?.SaveToStore();
     }
 
     private void onSaveDone(SaveResult result)

@@ -379,4 +379,40 @@ internal static class BdtLocalization
 
     public static LocStr SettingsHotkeyOr =
         Loc.Str("dtk.settings.hotkey.or", "or", "Word 'or' separating hotkeys.");
+
+    public static LocStr GroundwaterInsightsTitle =
+        Loc.Str("dtk.groundwater.insights_title", "Groundwater Reservoir Insights", "Title for groundwater reservoir rich tooltip floater.");
+    public static LocStr GroundwaterLastYearAvgDrawLabel =
+        Loc.Str("dtk.groundwater.last_year_avg_draw", "Last year's avg monthly draw", "Label for average monthly groundwater drawn over the past 12 months.");
+    public static LocStr GroundwaterSustainableDrawLabel =
+        Loc.Str("dtk.groundwater.sustainable_draw", "Max sustainable draw", "Label for maximum sustainable monthly groundwater draw.");
+    public static LocStr GroundwaterSustainableTooltip =
+        Loc.Str("dtk.groundwater.sustainable_tooltip", "Calculated steady-state monthly replenishment rate post year 10 based on the Weather difficulty setting (Rainwater yield setting affects only Rainwater Harvesters, not groundwater).", "Tooltip explaining sustainable monthly groundwater draw calculation.");
+    public static LocStr GroundwaterExpectedYearlyChangeLabel =
+        Loc.Str("dtk.groundwater.expected_yearly_change", "Expected yearly change", "Label for expected net reservoir level change over the next year.");
+    public static LocStr GroundwaterExpectedYearsRemainingLabel =
+        Loc.Str("dtk.groundwater.expected_years_remaining", "Expected years remaining", "Label for expected years until groundwater depletion.");
+    public static LocStr GroundwaterYearsRemainingStable =
+        Loc.Str("dtk.groundwater.years_remaining_stable", "Stable", "Indicator that water level is stable or increasing.");
+    public static LocStr GroundwaterYearsRemainingOver1000 =
+        Loc.Str("dtk.groundwater.years_remaining_over1000", ">1000 years", "Indicator that depletion is more than 1000 years away.");
+    public static LocStr GroundwaterMonthlyChartTitle =
+        Loc.Str("dtk.groundwater.monthly_chart_title", "Monthly Reserve Level (1st of Month)", "Title for 12-month groundwater historical bar chart.");
+    public static LocStr GroundwaterYearlyChartTitle =
+        Loc.Str("dtk.groundwater.yearly_chart_title", "10-Year Reserve Level (1st of Jan)", "Title for 10-year groundwater historical bar chart.");
+    public static LocStr GroundwaterSafeLevelLabel =
+        Loc.Str("dtk.groundwater.safe_level", "Safe reserve", "Legend label for safe groundwater reserve level.");
+    public static LocStr GroundwaterLowLevelLabel =
+        Loc.Str("dtk.groundwater.low_level", "Low reserve", "Legend label for low groundwater reserve warning level.");
+    public static LocStr GroundwaterTrendFilling =
+        Loc.Str("dtk.groundwater.trend_filling", "Filling", "Indicator that reservoir is filling.");
+    public static LocStr GroundwaterTrendEmptying =
+        Loc.Str("dtk.groundwater.trend_emptying", "Depleting", "Indicator that reservoir is depleting.");
+    public static LocStr GroundwaterTrendBalanced =
+        Loc.Str("dtk.groundwater.trend_balanced", "Balanced", "Indicator that reservoir draw matches replenish.");
+    public static LocStr GroundwaterTrendIdle =
+        Loc.Str("dtk.groundwater.trend_idle", "Idle / No draw recorded", "Indicator when no pump draw was recorded in last full month.");
+    public static LocStr2 GroundwaterTrackingNotice =
+        Loc.Str2("dtk.groundwater.tracking_notice", "Tracking in progress ({0}/{1} months recorded)", "Notice when less than 12 months of data have been tracked since mod start.");
 }
+
