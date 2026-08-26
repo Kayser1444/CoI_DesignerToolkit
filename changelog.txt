@@ -1,4 +1,4 @@
-v0.10.2 | 2026-08-26
+v0.11.0 | 2026-08-26
 * Added Groundwater Reservoir Insights rich tooltip to Groundwater pump inspectors, displaying historical trends and replenishment projections
 * Added 12-month rolling monthly reserve level and 10-year annual reserve level bar charts to the groundwater inspector tooltip
 * Added calculated steady-state max sustainable monthly draw and expected yearly change indicators based on game difficulty settings

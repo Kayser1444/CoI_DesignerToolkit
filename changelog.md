@@ -12,7 +12,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Added session-only `bdt_diagnostic_level` control with tiered debug and trace diagnostics for BDT runtime troubleshooting.
 - Reorganized the settings panel under **BUILD BEHAVIORS**, grouping instant build, curvy incline belts, and pipe pre-coloring together.
 
-## v0.10.2 [packaged]
+## v0.11.0 [unreleased]
 
 - Added rich **Groundwater Reservoir Insights** tooltip to Groundwater pump inspectors with a stats icon in the Reserve status header.
 - Added a 12-month rolling bar chart tracking water levels on the 1st of each month.
