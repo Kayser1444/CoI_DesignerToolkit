@@ -2,6 +2,9 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.11.1 [unreleased]
+
+
 ## v0.10.0 [released]
 
 - Fixed the missing `pollution_show_solid_waste` configuration parameter and localized BDT control labels and tooltips across all supported languages.
