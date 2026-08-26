@@ -14,6 +14,14 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.10.2 [unreleased]
 
+- Added rich **Groundwater Reservoir Insights** tooltip to Groundwater pump inspectors with a stats icon in the Reserve status header.
+- Added a 12-month rolling bar chart tracking water levels on the 1st of each month.
+- Added a 10-year rolling bar chart tracking water levels on the 1st of January.
+- Calculated post-year-10 steady-state max sustainable monthly draw based on the Weather difficulty setting.
+- Added predictive KPIs for last year's average monthly draw, expected yearly change, and expected years remaining (with red highlight when < 10 years).
+- Implemented persistent mod cache storage (`bdtGroundwaterStateJson` via `IModStateJsonStore`) for reservoir monthly/yearly ring buffers and monthly draws, preserving zero save footprint.
+- Updated translations and formatting to prevent label overlap and ensure right-aligned values across localized languages.
+
 ## v0.10.1 [released]
 
 - Fixed: Instant build mode now preserves construction pauses for buildings placed while Planning Mode is enabled; unpausing them allows instant completion.
