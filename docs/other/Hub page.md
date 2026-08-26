@@ -24,7 +24,7 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - [📤 Batch placing](#batch-placing)
 - [🏭 Pollution overlay](#pollution-overlay)
 - [💧 Groundwater reservoir insights](#groundwater-reservoir-insights)
-- [☢ Radiation overlay](#radiation-overlay)
+- [☢️ Radiation overlay](#radiation-overlay)
 - [🚦 Throughput tools](#throughput-tools)
 - [🚧 Legacy Belt Configurations](#legacy-belt-configurations)
 - [⚙️ Mod settings](#mod-settings)
@@ -243,7 +243,7 @@ BDT adds a stats icon to Groundwater pump inspectors that opens a rich **Groundw
 
 The history is retained across save and load sessions while BDT is installed. It is stored as mod cache data and does not add custom entities or save payloads.
 
-### ☢ Radiation overlay
+### ☢️ Radiation overlay
 
 ![image.png](/content-images/4f7c5b659abe247a470559f041c0f3bbe2a10b25a7ecef119d948d1454e590a8/image.png)
 
