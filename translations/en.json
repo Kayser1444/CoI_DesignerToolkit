@@ -4,6 +4,74 @@
     "Blueprint Designer's Toolkit"
   ],
   [
+    "dtk.groundwater.insights_title",
+    "Groundwater Reservoir Insights"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Last year's avg monthly draw"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Max sustainable draw"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Calculated steady-state monthly replenishment rate post year 10 based on the Weather difficulty setting (Rainwater yield setting affects only Rainwater Harvesters, not groundwater)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Expected yearly change"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Expected years remaining"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Stable"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 years"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Monthly Reserve Level (1st of Month)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10-Year Reserve Level (1st of Jan)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Safe reserve"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Low reserve"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Filling"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Depleting"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Balanced"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Idle / No draw recorded"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Tracking in progress ({0}/{1} months recorded)"
+  ],
+  [
     "dtk.legacy_stacker.unsupported",
     "The stacker's legs are not sufficiently supported by terrain."
   ],

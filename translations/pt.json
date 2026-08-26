@@ -4,6 +4,74 @@
     "Kit de ferramentas para designers de plantas"
   ],
   [
+    "dtk.groundwater.insights_title",
+    "Informações sobre o reservatório de água subterrânea"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Extração média mensal do último ano"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Extração máxima sustentável"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Taxa mensal de recarga em estado estacionário calculada após o ano 10 com base na dificuldade climática (a configuração do rendimento da água da chuva afeta apenas os coletores de água da chuva, não a água subterrânea)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Variação anual esperada"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Anos restantes esperados"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Estável"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 anos"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Nível da reserva mensal (1º dia do mês)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "Nível da reserva de 10 anos (1º de janeiro)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Reserva segura"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Reserva baixa"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Enchendo"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Esgotando"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Equilibrado"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Inativo / Nenhuma extração registrada"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Rastreamento em andamento ({0}/{1} meses registrados)"
+  ],
+  [
     "dtk.legacy_stacker.unsupported",
     "As pernas do empilhador não têm apoio suficiente no terreno."
   ],

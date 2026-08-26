@@ -4,6 +4,74 @@
     "Инструментарий дизайнера чертежей"
   ],
   [
+    "dtk.groundwater.insights_title",
+    "Сведения о запасах грунтовых вод"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Средний месячный расход за последний год"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Максимальный устойчивый расход"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Расчётная месячная скорость восполнения в установившемся режиме после 10-го года с учётом сложности погоды (настройка выхода дождевой воды влияет только на сборщики дождевой воды, но не на грунтовые воды)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Ожидаемое годовое изменение"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Ожидаемый срок до истощения"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Стабильно"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 лет"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Месячный уровень запасов (1-е число месяца)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10-летний уровень запасов (1 января)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Безопасный запас"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Низкий запас"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Восполняется"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Истощается"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Сбалансировано"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Простой / Расход не зарегистрирован"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Идёт сбор данных ({0}/{1} месяцев записано)"
+  ],
+  [
     "dtk.legacy_stacker.unsupported",
     "Опоры штабелёра недостаточно поддерживаются рельефом."
   ],

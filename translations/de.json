@@ -4,6 +4,74 @@
     "Werkzeugkasten für Blueprint-Designer"
   ],
   [
+    "dtk.groundwater.insights_title",
+    "Grundwasser-Reservoirübersicht"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Durchschn. monatliche Entnahme im letzten Jahr"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Max. nachhaltige Entnahme"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Berechnete monatliche Gleichgewichts-Neubildungsrate nach Jahr 10 basierend auf der Wetterschwierigkeit (die Regenwasser-Ertragsrate betrifft nur Regenwassersammler, nicht Grundwasser)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Erwartete jährliche Änderung"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Erwartete verbleibende Jahre"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Stabil"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 Jahre"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Monatlicher Reservestand (1. des Monats)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10-jähriger Reservestand (1. Jan.)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Sicherer Vorrat"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Niedriger Vorrat"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Füllend"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Sinkend"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Ausgeglichen"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Inaktiv / Keine Entnahme aufgezeichnet"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Verfolgung läuft ({0}/{1} Monate aufgezeichnet)"
+  ],
+  [
     "dtk.legacy_stacker.unsupported",
     "Die Beine des Stackers werden vom Gelände nicht ausreichend gestützt."
   ],

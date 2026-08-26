@@ -17,6 +17,7 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 - [Symmetric entity normalization](#symmetric-entity-normalization)
 - [Instant build mode](#instant-build-mode)
 - [Pre-color pipes](#pre-color-pipes)
+- [Groundwater reservoir insights](#groundwater-reservoir-insights)
 - [Transport cleanup tool](#transport-cleanup-tool)
 - [Transport product removal](#transport-product-removal)
 - [Height filter](#height-filter)
@@ -150,6 +151,19 @@ BDT can give empty fluid and molten pipes an initial color based on connected up
 
 Enable **Pre-color pipes** under **BUILD BEHAVIORS** in Mod Settings. See [Pre-color pipes](docs/player/pipe-pre-coloring.md) for details.
 
+### Groundwater reservoir insights
+
+BDT adds a stats icon to Groundwater pump inspectors. Open it to see a **Groundwater Reservoir Insights** tooltip with:
+
+- a rolling monthly reserve-level chart
+- a 10-year annual reserve-level chart
+- last year's average monthly draw and the maximum sustainable monthly draw
+- the expected yearly reserve change and estimated years remaining
+
+The sustainable draw estimate uses the Weather difficulty setting. Historical levels and monthly draws are retained across save and load sessions while BDT is installed.
+
+See [Groundwater Reservoir Insights](docs/player/groundwater-reservoir-insights.md) for details.
+
 ### Transport cleanup tool
 
 BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. After arming the tool, drag a rectangle over belts or pipes; disconnected transport segments highlight red and are removed when the mouse is released.
@@ -216,6 +230,7 @@ Additional player-facing notes live in [`docs/player`](docs/player):
 - [Area Upgrade Tool](docs/player/area-upgrade-tool.md)
 - [Height Filter](docs/player/height-filter.md)
 - [Instant Build Mode](docs/player/instant-build-mode.md)
+- [Groundwater Reservoir Insights](docs/player/groundwater-reservoir-insights.md)
 - [Layout Box Mode](docs/player/layout-box-mode.md)
 - [Transport Cleanup Tool](docs/player/transport-cleanup-tool.md)
 - [Throughput Tools](docs/player/throughput-tools.md)
@@ -234,7 +249,7 @@ Radiation is sampled at the same daily boundary used by vanilla radiation accoun
 - Compatible with vanilla saves.
 - Can be added to or removed from existing saves.
 - Requires Captain of Industry `0.8.5` or newer; older versions may work but are not supported or tested.
-- Verified with Captain of Industry through `0.8.5`.
+- Verified with Captain of Industry through `0.8.7b`.
 - Blueprint consumers do not need this mod installed.
 - UI translations are included for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
 

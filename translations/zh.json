@@ -4,6 +4,74 @@
     "蓝图设计师工具包"
   ],
   [
+    "dtk.groundwater.insights_title",
+    "地下水储量信息"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "过去一年的月平均抽取量"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "最大可持续抽取量"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "根据天气难度设置计算的第 10 年后的稳态月补给率（雨水产量设置只影响雨水收集器，不影响地下水）。"
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "预计年度变化"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "预计剩余年数"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "稳定"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 年"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "月度储量水平（每月 1 日）"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10 年储量水平（1 月 1 日）"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "安全储量"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "低储量"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "补充中"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "消耗中"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "平衡"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "闲置 / 未记录抽取量"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "正在记录（已记录 {0}/{1} 个月）"
+  ],
+  [
     "dtk.legacy_stacker.unsupported",
     "堆料机支腿未得到地形的充分支撑。"
   ],

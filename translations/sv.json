@@ -4,6 +4,74 @@
     "Verktygslåda för ritningsdesigners"
   ],
   [
+    "dtk.groundwater.insights_title",
+    "Grundvattenmagasinets insikter"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Genomsnittligt månadsuttag senaste året"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Maximalt hållbart uttag"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Beräknad månatlig påfyllnad i jämvikt efter år 10, baserat på vädersvårighetsgraden (inställningen för regnvattenutbyte påverkar bara regnvattensamlare, inte grundvatten)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Förväntad årlig förändring"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Förväntat antal år kvar"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Stabil"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 år"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Månadsreservnivå (månadens 1:a)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10-årig reservnivå (1 januari)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Säker reserv"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Låg reserv"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Fylls på"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Töms"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Balanserad"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Inaktiv / Inget uttag registrerat"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Spårning pågår ({0}/{1} månader registrerade)"
+  ],
+  [
     "dtk.legacy_stacker.unsupported",
     "Stackerns ben har inte tillräckligt stöd av terrängen."
   ],

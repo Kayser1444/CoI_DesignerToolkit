@@ -4,6 +4,74 @@
     "Kit strumenti per designer di progetti"
   ],
   [
+    "dtk.groundwater.insights_title",
+    "Informazioni sulla riserva di acque sotterranee"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Prelievo mensile medio dell'ultimo anno"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Prelievo massimo sostenibile"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Tasso mensile di ricarica in regime stazionario calcolato dopo il decimo anno in base alla difficoltà meteorologica (l'impostazione della resa dell'acqua piovana influisce solo sui raccoglitori di acqua piovana, non sulle acque sotterranee)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Variazione annuale prevista"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Anni rimanenti previsti"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Stabile"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 anni"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Livello della riserva mensile (1° del mese)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "Livello della riserva su 10 anni (1° gennaio)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Riserva sicura"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Riserva bassa"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "In aumento"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "In esaurimento"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "In equilibrio"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Inattivo / Nessun prelievo registrato"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Monitoraggio in corso ({0}/{1} mesi registrati)"
+  ],
+  [
     "dtk.legacy_stacker.unsupported",
     "Le gambe dello stacker non sono sufficientemente sostenute dal terreno."
   ],
