@@ -197,7 +197,7 @@ Adjusting the visible height levels makes it significantly easier to inspect and
 - `PageUp`: increases the maximum visible level (up to level 6, which shows all heights).
 - `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
 
-These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
+These hotkeys and the pillar visibility mode (`Detached` height-based vs. `Attached` to visible transports or elevated structures) can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 

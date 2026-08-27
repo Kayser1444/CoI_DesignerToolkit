@@ -15,6 +15,13 @@ These hotkeys can be customized in BDT's mod settings (under **HEIGHT FILTER**) 
 - **Levels 1-5**: Shows entities up to that relative height level above terrain.
 - **Level 6**: Shows all heights (default).
 
+## Pillar Visibility
+
+The **Pillar visibility** setting under **HEIGHT FILTER** controls how support pillars respond to height filtering:
+
+- **Detached** (default): Each pillar independently evaluates its own vertical segments against the active layer threshold (a pillar is hidden if 50% or more of its segments exceed the visible level).
+- **Attached**: A pillar remains visible whenever at least one visible transport or elevated structure is attached to it.
+
 ## Selection Behavior
 
 Entities hidden by the height filter are protected from selection, preventing accidental interactions or demolition.

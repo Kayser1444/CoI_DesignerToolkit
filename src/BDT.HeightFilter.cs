@@ -48,6 +48,8 @@ namespace CoIDesignerToolkit
         private readonly HashSet<int> m_hiddenTransportIds = new HashSet<int>();
         private readonly HashSet<int> m_hiddenPillarIds = new HashSet<int>();
         private readonly HashSet<int> m_hiddenLayoutEntityIds = new HashSet<int>();
+        private readonly HashSet<int> m_visiblePillarIds = new HashSet<int>();
+        private readonly Lyst<TransportPillar> m_attachedPillarsTmp = new Lyst<TransportPillar>();
 
         private TransportsManager? m_transportsManager;
         private EntitiesManager? m_entitiesManager;
@@ -98,6 +100,7 @@ namespace CoIDesignerToolkit
                 m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, OnSyncUpdate);
                 m_gameLoopEvents.RenderUpdateEnd.AddNonSaveable(this, OnRenderUpdateEnd);
                 DesignerToolkitSettings.HeightFilterMaxVisibleLevelChanged += OnMaxVisibleLevelChanged;
+                DesignerToolkitSettings.HeightFilterPillarVisibilityChanged += OnPillarVisibilityChanged;
                 m_isSubscribed = true;
                 m_isInitialized = true;
 
@@ -117,6 +120,7 @@ namespace CoIDesignerToolkit
                 try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
                 try { m_gameLoopEvents.RenderUpdateEnd.RemoveNonSaveable(this, OnRenderUpdateEnd); } catch { }
                 DesignerToolkitSettings.HeightFilterMaxVisibleLevelChanged -= OnMaxVisibleLevelChanged;
+                DesignerToolkitSettings.HeightFilterPillarVisibilityChanged -= OnPillarVisibilityChanged;
                 m_isSubscribed = false;
             }
 
@@ -261,6 +265,11 @@ namespace CoIDesignerToolkit
             m_filterDirty = true;
         }
 
+        private void OnPillarVisibilityChanged(HeightFilterPillarVisibility _)
+        {
+            m_filterDirty = true;
+        }
+
         private int GetTerrainHeight(Tile2i pos)
         {
             if (m_terrainManager == null) return 0;
@@ -336,6 +345,10 @@ namespace CoIDesignerToolkit
 
             try
             {
+                m_visiblePillarIds.Clear();
+                bool isAttachedMode = DesignerToolkitSettings.HeightFilterPillarVisibility == HeightFilterPillarVisibility.Attached;
+                int maxVisibleLevel = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
+
                 // Process Transports
                 foreach (Transport transport in m_transportsManager.Transports)
                 {
@@ -355,6 +368,24 @@ namespace CoIDesignerToolkit
                         m_hiddenTransportIds.Remove(id);
                         ShowTransport(transport);
                     }
+
+                    if (isAttachedMode && !shouldHide)
+                    {
+                        m_attachedPillarsTmp.Clear();
+                        m_transportsManager.FindAttachedPillars(transport, m_attachedPillarsTmp);
+                        for (int i = 0; i < m_attachedPillarsTmp.Count; i++)
+                        {
+                            m_visiblePillarIds.Add(m_attachedPillarsTmp[i].Id.Value);
+                        }
+                    }
+                }
+
+                if (isAttachedMode && m_entitiesManager != null)
+                {
+                    CollectAttachedPillarsForVisibleLayoutEntities(m_entitiesManager.GetAllEntitiesOfType<Zipper>());
+                    CollectAttachedPillarsForVisibleLayoutEntities(m_entitiesManager.GetAllEntitiesOfType<MiniZipper>());
+                    CollectAttachedPillarsForVisibleLayoutEntities(m_entitiesManager.GetAllEntitiesOfType<Sorter>());
+                    CollectAttachedPillarsForVisibleLayoutEntities(m_entitiesManager.GetAllEntitiesOfType<Lift>());
                 }
 
                 // Process Pillars
@@ -364,7 +395,10 @@ namespace CoIDesignerToolkit
                     if (pillar.IsDestroyed) continue;
 
                     int pillarId = pillar.Id.Value;
-                    bool shouldHide = ShouldPillarBeHidden(pillar);
+                    bool shouldHide = isAttachedMode
+                        ? (maxVisibleLevel < 6 && !m_visiblePillarIds.Contains(pillarId))
+                        : ShouldPillarBeHidden(pillar);
+
                     bool isHidden = m_hiddenPillarIds.Contains(pillarId);
 
                     if (shouldHide)
@@ -397,6 +431,24 @@ namespace CoIDesignerToolkit
             catch (Exception ex)
             {
                 s_log.Warning($"Error while applying height filter: {ex.Message}");
+            }
+        }
+
+        private void CollectAttachedPillarsForVisibleLayoutEntities<T>(IEnumerable<T> entities) where T : LayoutEntityBase
+        {
+            if (m_transportsManager == null) return;
+            foreach (T entity in entities)
+            {
+                if (entity.IsDestroyed || ShouldLayoutEntityBeHidden(entity)) continue;
+                if (entity is LayoutEntity layoutEntity)
+                {
+                    m_attachedPillarsTmp.Clear();
+                    m_transportsManager.FindAttachedPillars(layoutEntity, m_attachedPillarsTmp);
+                    for (int i = 0; i < m_attachedPillarsTmp.Count; i++)
+                    {
+                        m_visiblePillarIds.Add(m_attachedPillarsTmp[i].Id.Value);
+                    }
+                }
             }
         }
 

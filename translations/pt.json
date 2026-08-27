@@ -4,74 +4,6 @@
     "Kit de ferramentas para designers de plantas"
   ],
   [
-    "dtk.groundwater.insights_title",
-    "Informações sobre o reservatório de água subterrânea"
-  ],
-  [
-    "dtk.groundwater.last_year_avg_draw",
-    "Extração média mensal do último ano"
-  ],
-  [
-    "dtk.groundwater.sustainable_draw",
-    "Extração máxima sustentável"
-  ],
-  [
-    "dtk.groundwater.sustainable_tooltip",
-    "Taxa mensal de recarga em estado estacionário calculada após o ano 10 com base na dificuldade climática (a configuração do rendimento da água da chuva afeta apenas os coletores de água da chuva, não a água subterrânea)."
-  ],
-  [
-    "dtk.groundwater.expected_yearly_change",
-    "Variação anual esperada"
-  ],
-  [
-    "dtk.groundwater.expected_years_remaining",
-    "Anos restantes esperados"
-  ],
-  [
-    "dtk.groundwater.years_remaining_stable",
-    "Estável"
-  ],
-  [
-    "dtk.groundwater.years_remaining_over1000",
-    ">1000 anos"
-  ],
-  [
-    "dtk.groundwater.monthly_chart_title",
-    "Nível da reserva mensal (1º dia do mês)"
-  ],
-  [
-    "dtk.groundwater.yearly_chart_title",
-    "Nível da reserva de 10 anos (1º de janeiro)"
-  ],
-  [
-    "dtk.groundwater.safe_level",
-    "Reserva segura"
-  ],
-  [
-    "dtk.groundwater.low_level",
-    "Reserva baixa"
-  ],
-  [
-    "dtk.groundwater.trend_filling",
-    "Enchendo"
-  ],
-  [
-    "dtk.groundwater.trend_emptying",
-    "Esgotando"
-  ],
-  [
-    "dtk.groundwater.trend_balanced",
-    "Equilibrado"
-  ],
-  [
-    "dtk.groundwater.trend_idle",
-    "Inativo / Nenhuma extração registrada"
-  ],
-  [
-    "dtk.groundwater.tracking_notice",
-    "Rastreamento em andamento ({0}/{1} meses registrados)"
-  ],
-  [
     "dtk.legacy_stacker.unsupported",
     "As pernas do empilhador não têm apoio suficiente no terreno."
   ],
@@ -200,96 +132,116 @@
     "Limita o nível de altura de transportes, estruturas e pilares renderizados no mundo."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.label",
+    "Visibilidade do pilar"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.description",
+    "Controla como a visibilidade do pilar é avaliada ao filtrar camadas de altura."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.tooltip",
+    "Detached avalia a altura de cada pilar independentemente em relação à camada ativa. Anexado mostra pilares sempre que pelo menos um transporte visível ou estrutura elevada estiver anexado."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.detached",
+    "Desanexado"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached",
+    "Apegado"
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Este atalho de teclado é registrado no sistema de controles do jogo e pode ser configurado em Configurações | Menu de controles."
   ],
   [
     "Kb_Bdt_TransportCleanup__label",
-    "Transport cleanup tool"
+    "Ferramenta de limpeza de transporte"
   ],
   [
     "Kb_Bdt_TransportCleanup__tooltip",
-    "Activates the transport cleanup selection tool"
+    "Ativa a ferramenta de seleção de limpeza de transporte"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__label",
-    "Height filter show layer"
+    "Camada de exibição de filtro de altura"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__tooltip",
-    "Increases the maximum visible height filter layer"
+    "Aumenta a camada de filtro de altura visível máxima"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__label",
-    "Height filter hide layer"
+    "Filtro de altura ocultar camada"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
-    "Decreases the maximum visible height filter layer"
+    "Diminui a camada de filtro de altura visível máxima"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",
-    "Toggle throughput overlay"
+    "Alternar sobreposição de taxa de transferência"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__tooltip",
-    "Toggles the throughput overlay"
+    "Alterna a sobreposição de taxa de transferência"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__label",
-    "Throughput tool"
+    "Ferramenta de rendimento"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__tooltip",
-    "Activates the throughput area selection tool"
+    "Ativa a ferramenta de seleção de área de rendimento"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__label",
-    "Remove products in area"
+    "Remover produtos da área"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
-    "Activates the area product-removal tool"
+    "Ativa a ferramenta de remoção de produtos da área"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__label",
-    "Toggle pollution overlay"
+    "Alternar sobreposição de poluição"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__tooltip",
-    "Toggles the pollution overlay"
+    "Alterna a sobreposição de poluição"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__label",
-    "Toggle radiation overlay"
+    "Alternar sobreposição de radiação"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__tooltip",
-    "Toggles the radiation overlay"
+    "Alterna a sobreposição de radiação"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__label",
-    "Toggle layout box overlay"
+    "Alternar sobreposição da caixa de layout"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__tooltip",
-    "Toggles layout box overlay"
+    "Alterna a sobreposição da caixa de layout"
   ],
   [
     "Kb_Bdt_UndoPlacement__label",
-    "Undo placement"
+    "Desfazer posicionamento"
   ],
   [
     "Kb_Bdt_UndoPlacement__tooltip",
-    "Undoes the last BDT placement action"
+    "Desfaz a última ação de posicionamento do BDT"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__label",
-    "Transport lazy height routing"
+    "Roteamento de altura preguiçosa de transporte"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__tooltip",
-    "Holds lazy height matching mode while placing transports (Alt)"
+    "Mantém o modo de correspondência de altura lenta ao colocar transportes (Alt)"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -750,5 +702,69 @@
   [
     "dtk.settings.hotkey.or",
     "ou"
+  ],
+  [
+    "dtk.groundwater.insights_title",
+    "Informações sobre o reservatório de água subterrânea"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Extração média mensal do último ano"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Extração máxima sustentável"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Taxa mensal de recarga em estado estacionário calculada após o ano 10 com base na dificuldade climática (a configuração do rendimento da água da chuva afeta apenas os coletores de água da chuva, não a água subterrânea)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Variação anual esperada"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Anos restantes esperados"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Estável"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 anos"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Nível da reserva mensal (1º dia do mês)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "Nível da reserva de 10 anos (1º de janeiro)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Reserva segura"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Reserva baixa"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Enchendo"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Esgotando"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Equilibrado"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Inativo / Nenhuma extração registrada"
   ]
 ]

@@ -4,74 +4,6 @@
     "Verktygslåda för ritningsdesigners"
   ],
   [
-    "dtk.groundwater.insights_title",
-    "Grundvattenmagasinets insikter"
-  ],
-  [
-    "dtk.groundwater.last_year_avg_draw",
-    "Genomsnittligt månadsuttag senaste året"
-  ],
-  [
-    "dtk.groundwater.sustainable_draw",
-    "Maximalt hållbart uttag"
-  ],
-  [
-    "dtk.groundwater.sustainable_tooltip",
-    "Beräknad månatlig påfyllnad i jämvikt efter år 10, baserat på vädersvårighetsgraden (inställningen för regnvattenutbyte påverkar bara regnvattensamlare, inte grundvatten)."
-  ],
-  [
-    "dtk.groundwater.expected_yearly_change",
-    "Förväntad årlig förändring"
-  ],
-  [
-    "dtk.groundwater.expected_years_remaining",
-    "Förväntat antal år kvar"
-  ],
-  [
-    "dtk.groundwater.years_remaining_stable",
-    "Stabil"
-  ],
-  [
-    "dtk.groundwater.years_remaining_over1000",
-    ">1000 år"
-  ],
-  [
-    "dtk.groundwater.monthly_chart_title",
-    "Månadsreservnivå (månadens 1:a)"
-  ],
-  [
-    "dtk.groundwater.yearly_chart_title",
-    "10-årig reservnivå (1 januari)"
-  ],
-  [
-    "dtk.groundwater.safe_level",
-    "Säker reserv"
-  ],
-  [
-    "dtk.groundwater.low_level",
-    "Låg reserv"
-  ],
-  [
-    "dtk.groundwater.trend_filling",
-    "Fylls på"
-  ],
-  [
-    "dtk.groundwater.trend_emptying",
-    "Töms"
-  ],
-  [
-    "dtk.groundwater.trend_balanced",
-    "Balanserad"
-  ],
-  [
-    "dtk.groundwater.trend_idle",
-    "Inaktiv / Inget uttag registrerat"
-  ],
-  [
-    "dtk.groundwater.tracking_notice",
-    "Spårning pågår ({0}/{1} månader registrerade)"
-  ],
-  [
     "dtk.legacy_stacker.unsupported",
     "Stackerns ben har inte tillräckligt stöd av terrängen."
   ],
@@ -200,96 +132,116 @@
     "Begränsar höjdnivån för transporter, strukturer och pelare som ritas i världen."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.label",
+    "Pelare synlighet"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.description",
+    "Styr hur pelarens synlighet utvärderas vid filtrering av höjdlager."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.tooltip",
+    "Fristående utvärderar varje pelares höjd oberoende av det aktiva lagret. Bifogad visar pelare när minst en synlig transport eller upphöjd struktur är fäst."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.detached",
+    "Fristående"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached",
+    "Bunden"
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Denna nyckelbindning är registrerad med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn."
   ],
   [
     "Kb_Bdt_TransportCleanup__label",
-    "Transport cleanup tool"
+    "Transportrengöringsverktyg"
   ],
   [
     "Kb_Bdt_TransportCleanup__tooltip",
-    "Activates the transport cleanup selection tool"
+    "Aktiverar verktyget för val av transportrensning"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__label",
-    "Height filter show layer"
+    "Höjd filter visa lager"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__tooltip",
-    "Increases the maximum visible height filter layer"
+    "Ökar filterskiktet för maximal synlig höjd"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__label",
-    "Height filter hide layer"
+    "Höjd filter gömma lager"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
-    "Decreases the maximum visible height filter layer"
+    "Minskar filterskiktet för den maximala synliga höjden"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",
-    "Toggle throughput overlay"
+    "Växla genomströmningsöverlagring"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__tooltip",
-    "Toggles the throughput overlay"
+    "Växlar genomströmningsöverlagringen"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__label",
-    "Throughput tool"
+    "Genomströmningsverktyg"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__tooltip",
-    "Activates the throughput area selection tool"
+    "Aktiverar verktyget för val av genomströmningsområde"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__label",
-    "Remove products in area"
+    "Ta bort produkter i området"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
-    "Activates the area product-removal tool"
+    "Aktiverar verktyget för borttagning av områdesprodukter"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__label",
-    "Toggle pollution overlay"
+    "Växla föroreningsöverlagring"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__tooltip",
-    "Toggles the pollution overlay"
+    "Växlar föroreningsöverlagringen"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__label",
-    "Toggle radiation overlay"
+    "Växla strålningsöverlagring"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__tooltip",
-    "Toggles the radiation overlay"
+    "Växlar strålningsöverlagringen"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__label",
-    "Toggle layout box overlay"
+    "Växla layoutruta överlagring"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__tooltip",
-    "Toggles layout box overlay"
+    "Växlar layoutboxöverlagring"
   ],
   [
     "Kb_Bdt_UndoPlacement__label",
-    "Undo placement"
+    "Ångra placering"
   ],
   [
     "Kb_Bdt_UndoPlacement__tooltip",
-    "Undoes the last BDT placement action"
+    "Ångrar den senaste BDT-placeringsåtgärden"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__label",
-    "Transport lazy height routing"
+    "Transport lata höjd routing"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__tooltip",
-    "Holds lazy height matching mode while placing transports (Alt)"
+    "Håller läget för lat höjdmatchning när du placerar transporter (Alt)"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -750,5 +702,69 @@
   [
     "dtk.settings.hotkey.or",
     "eller"
+  ],
+  [
+    "dtk.groundwater.insights_title",
+    "Grundvattenmagasinets insikter"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Genomsnittligt månadsuttag senaste året"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Maximalt hållbart uttag"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Beräknad månatlig påfyllnad i jämvikt efter år 10, baserat på vädersvårighetsgraden (inställningen för regnvattenutbyte påverkar bara regnvattensamlare, inte grundvatten)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Förväntad årlig förändring"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Förväntat antal år kvar"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Stabil"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 år"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Månadsreservnivå (månadens 1:a)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10-årig reservnivå (1 januari)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Säker reserv"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Låg reserv"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Fylls på"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Töms"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Balanserad"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Inaktiv / Inget uttag registrerat"
   ]
 ]

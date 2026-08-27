@@ -84,6 +84,16 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.height_filter_max_visible.label", "Visible layers", "Settings row label for visible layers.");
     public static LocStr SettingsHeightFilterMaxVisibleDescription =
         Loc.Str("dtk.settings.height_filter_max_visible.description", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
+    public static LocStr SettingsHeightFilterPillarVisibility =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.label", "Pillar visibility", "Settings row label for height filter pillar visibility mode.");
+    public static LocStr SettingsHeightFilterPillarVisibilityDescription =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.description", "Controls how pillar visibility is evaluated when filtering height layers.", "Settings row description for height filter pillar visibility mode.");
+    public static LocStr SettingsHeightFilterPillarVisibilityTooltip =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.tooltip", "Detached evaluates each pillar's height independently against the active layer. Attached shows pillars whenever at least one visible transport or elevated structure is attached.", "Settings tooltip for height filter pillar visibility options.");
+    public static LocStr SettingsHeightFilterPillarVisibilityDetached =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.detached", "Detached", "Dropdown option for detached height filter pillar visibility.");
+    public static LocStr SettingsHeightFilterPillarVisibilityAttached =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.attached", "Attached", "Dropdown option for attached height filter pillar visibility.");
     public static LocStr SettingsGlobalHotkeyTooltip =
         Loc.Str("dtk.settings.global_hotkey.description", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
 

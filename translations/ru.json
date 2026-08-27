@@ -4,74 +4,6 @@
     "Инструментарий дизайнера чертежей"
   ],
   [
-    "dtk.groundwater.insights_title",
-    "Сведения о запасах грунтовых вод"
-  ],
-  [
-    "dtk.groundwater.last_year_avg_draw",
-    "Средний месячный расход за последний год"
-  ],
-  [
-    "dtk.groundwater.sustainable_draw",
-    "Максимальный устойчивый расход"
-  ],
-  [
-    "dtk.groundwater.sustainable_tooltip",
-    "Расчётная месячная скорость восполнения в установившемся режиме после 10-го года с учётом сложности погоды (настройка выхода дождевой воды влияет только на сборщики дождевой воды, но не на грунтовые воды)."
-  ],
-  [
-    "dtk.groundwater.expected_yearly_change",
-    "Ожидаемое годовое изменение"
-  ],
-  [
-    "dtk.groundwater.expected_years_remaining",
-    "Ожидаемый срок до истощения"
-  ],
-  [
-    "dtk.groundwater.years_remaining_stable",
-    "Стабильно"
-  ],
-  [
-    "dtk.groundwater.years_remaining_over1000",
-    ">1000 лет"
-  ],
-  [
-    "dtk.groundwater.monthly_chart_title",
-    "Месячный уровень запасов (1-е число месяца)"
-  ],
-  [
-    "dtk.groundwater.yearly_chart_title",
-    "10-летний уровень запасов (1 января)"
-  ],
-  [
-    "dtk.groundwater.safe_level",
-    "Безопасный запас"
-  ],
-  [
-    "dtk.groundwater.low_level",
-    "Низкий запас"
-  ],
-  [
-    "dtk.groundwater.trend_filling",
-    "Восполняется"
-  ],
-  [
-    "dtk.groundwater.trend_emptying",
-    "Истощается"
-  ],
-  [
-    "dtk.groundwater.trend_balanced",
-    "Сбалансировано"
-  ],
-  [
-    "dtk.groundwater.trend_idle",
-    "Простой / Расход не зарегистрирован"
-  ],
-  [
-    "dtk.groundwater.tracking_notice",
-    "Идёт сбор данных ({0}/{1} месяцев записано)"
-  ],
-  [
     "dtk.legacy_stacker.unsupported",
     "Опоры штабелёра недостаточно поддерживаются рельефом."
   ],
@@ -200,96 +132,116 @@
     "Ограничивает уровень высоты транспортёров, строений и опор, отображаемых в мире."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.label",
+    "Видимость столба"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.description",
+    "Управляет тем, как оценивается видимость столбов при фильтрации слоев высот."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.tooltip",
+    "Отдельный оценивает высоту каждой колонны независимо от активного слоя. Прикрепленные столбы отображаются всякий раз, когда прикреплен хотя бы один видимый транспорт или надземная конструкция."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.detached",
+    "Отдельностоящий"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached",
+    "Прикрепил"
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Эта комбинация клавиш зарегистрирована в системе управления игрой и может быть настроена в стандартных настройках | Меню управления."
   ],
   [
     "Kb_Bdt_TransportCleanup__label",
-    "Transport cleanup tool"
+    "Инструмент для очистки транспорта"
   ],
   [
     "Kb_Bdt_TransportCleanup__tooltip",
-    "Activates the transport cleanup selection tool"
+    "Активирует инструмент выбора очистки транспорта."
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__label",
-    "Height filter show layer"
+    "Фильтр высоты показать слой"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__tooltip",
-    "Increases the maximum visible height filter layer"
+    "Увеличивает максимальную видимую высоту слоя фильтра."
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__label",
-    "Height filter hide layer"
+    "Фильтр высоты скрыть слой"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
-    "Decreases the maximum visible height filter layer"
+    "Уменьшает максимальную видимую высоту слоя фильтра."
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",
-    "Toggle throughput overlay"
+    "Переключить наложение пропускной способности"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__tooltip",
-    "Toggles the throughput overlay"
+    "Переключает наложение пропускной способности"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__label",
-    "Throughput tool"
+    "Инструмент пропускной способности"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__tooltip",
-    "Activates the throughput area selection tool"
+    "Активирует инструмент выбора области пропускной способности."
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__label",
-    "Remove products in area"
+    "Удалить продукты в зоне"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
-    "Activates the area product-removal tool"
+    "Активирует инструмент удаления продуктов из области."
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__label",
-    "Toggle pollution overlay"
+    "Переключить наложение загрязнения"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__tooltip",
-    "Toggles the pollution overlay"
+    "Переключает наложение загрязнения"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__label",
-    "Toggle radiation overlay"
+    "Переключить наложение радиации"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__tooltip",
-    "Toggles the radiation overlay"
+    "Переключает наложение радиации"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__label",
-    "Toggle layout box overlay"
+    "Переключить наложение рамки макета"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__tooltip",
-    "Toggles layout box overlay"
+    "Переключает наложение рамки макета"
   ],
   [
     "Kb_Bdt_UndoPlacement__label",
-    "Undo placement"
+    "Отменить размещение"
   ],
   [
     "Kb_Bdt_UndoPlacement__tooltip",
-    "Undoes the last BDT placement action"
+    "Отменяет последнее действие по размещению BDT."
   ],
   [
     "Kb_Bdt_TransportLazyHeight__label",
-    "Transport lazy height routing"
+    "Транспортная ленивая маршрутизация по высоте"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__tooltip",
-    "Holds lazy height matching mode while placing transports (Alt)"
+    "Удерживает режим ленивого сопоставления высоты при размещении транспорта (Alt)"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -750,5 +702,69 @@
   [
     "dtk.settings.hotkey.or",
     "или"
+  ],
+  [
+    "dtk.groundwater.insights_title",
+    "Сведения о запасах грунтовых вод"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Средний месячный расход за последний год"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Максимальный устойчивый расход"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Расчётная месячная скорость восполнения в установившемся режиме после 10-го года с учётом сложности погоды (настройка выхода дождевой воды влияет только на сборщики дождевой воды, но не на грунтовые воды)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Ожидаемое годовое изменение"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Ожидаемый срок до истощения"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Стабильно"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 лет"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Месячный уровень запасов (1-е число месяца)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10-летний уровень запасов (1 января)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Безопасный запас"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Низкий запас"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "Восполняется"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "Истощается"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "Сбалансировано"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Простой / Расход не зарегистрирован"
   ]
 ]

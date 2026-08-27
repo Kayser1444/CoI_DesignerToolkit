@@ -4,74 +4,6 @@
     "蓝图设计师工具包"
   ],
   [
-    "dtk.groundwater.insights_title",
-    "地下水储量信息"
-  ],
-  [
-    "dtk.groundwater.last_year_avg_draw",
-    "过去一年的月平均抽取量"
-  ],
-  [
-    "dtk.groundwater.sustainable_draw",
-    "最大可持续抽取量"
-  ],
-  [
-    "dtk.groundwater.sustainable_tooltip",
-    "根据天气难度设置计算的第 10 年后的稳态月补给率（雨水产量设置只影响雨水收集器，不影响地下水）。"
-  ],
-  [
-    "dtk.groundwater.expected_yearly_change",
-    "预计年度变化"
-  ],
-  [
-    "dtk.groundwater.expected_years_remaining",
-    "预计剩余年数"
-  ],
-  [
-    "dtk.groundwater.years_remaining_stable",
-    "稳定"
-  ],
-  [
-    "dtk.groundwater.years_remaining_over1000",
-    ">1000 年"
-  ],
-  [
-    "dtk.groundwater.monthly_chart_title",
-    "月度储量水平（每月 1 日）"
-  ],
-  [
-    "dtk.groundwater.yearly_chart_title",
-    "10 年储量水平（1 月 1 日）"
-  ],
-  [
-    "dtk.groundwater.safe_level",
-    "安全储量"
-  ],
-  [
-    "dtk.groundwater.low_level",
-    "低储量"
-  ],
-  [
-    "dtk.groundwater.trend_filling",
-    "补充中"
-  ],
-  [
-    "dtk.groundwater.trend_emptying",
-    "消耗中"
-  ],
-  [
-    "dtk.groundwater.trend_balanced",
-    "平衡"
-  ],
-  [
-    "dtk.groundwater.trend_idle",
-    "闲置 / 未记录抽取量"
-  ],
-  [
-    "dtk.groundwater.tracking_notice",
-    "正在记录（已记录 {0}/{1} 个月）"
-  ],
-  [
     "dtk.legacy_stacker.unsupported",
     "堆料机支腿未得到地形的充分支撑。"
   ],
@@ -200,96 +132,116 @@
     "限制世界中渲染的传输、结构和支柱的高度层级。"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.label",
+    "支柱可见度"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.description",
+    "控制过滤高度图层时如何评估支柱可见性。"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.tooltip",
+    "分离根据有源层独立评估每个柱的高度。只要至少连接了一个可见的运输或高架结构，就会显示柱子。"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.detached",
+    "独立的"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached",
+    "随附的"
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "此按键绑定已在游戏的控制系统中注册，并且可以在香草设置 | 中进行配置。控制菜单。"
   ],
   [
     "Kb_Bdt_TransportCleanup__label",
-    "Transport cleanup tool"
+    "运输清理工具"
   ],
   [
     "Kb_Bdt_TransportCleanup__tooltip",
-    "Activates the transport cleanup selection tool"
+    "激活传输清理选择工具"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__label",
-    "Height filter show layer"
+    "高度过滤显示层"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__tooltip",
-    "Increases the maximum visible height filter layer"
+    "增加过滤层的最大可见高度"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__label",
-    "Height filter hide layer"
+    "高度过滤隐藏层"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
-    "Decreases the maximum visible height filter layer"
+    "降低滤镜层的最大可见高度"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",
-    "Toggle throughput overlay"
+    "切换吞吐量叠加"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__tooltip",
-    "Toggles the throughput overlay"
+    "切换吞吐量覆盖"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__label",
-    "Throughput tool"
+    "吞吐量工具"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__tooltip",
-    "Activates the throughput area selection tool"
+    "激活吞吐量区域选择工具"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__label",
-    "Remove products in area"
+    "删除该区域的产品"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
-    "Activates the area product-removal tool"
+    "激活区域产品移除工具"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__label",
-    "Toggle pollution overlay"
+    "切换污染叠加"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__tooltip",
-    "Toggles the pollution overlay"
+    "切换污染叠加"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__label",
-    "Toggle radiation overlay"
+    "切换辐射叠加"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__tooltip",
-    "Toggles the radiation overlay"
+    "切换辐射覆盖"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__label",
-    "Toggle layout box overlay"
+    "切换布局框覆盖"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__tooltip",
-    "Toggles layout box overlay"
+    "切换布局框覆盖"
   ],
   [
     "Kb_Bdt_UndoPlacement__label",
-    "Undo placement"
+    "撤消放置"
   ],
   [
     "Kb_Bdt_UndoPlacement__tooltip",
-    "Undoes the last BDT placement action"
+    "撤消上次 BDT 放置操作"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__label",
-    "Transport lazy height routing"
+    "传输惰性高度路由"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__tooltip",
-    "Holds lazy height matching mode while placing transports (Alt)"
+    "放置传输时保持惰性高度匹配模式（Alt）"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -750,5 +702,69 @@
   [
     "dtk.settings.hotkey.or",
     "或者"
+  ],
+  [
+    "dtk.groundwater.insights_title",
+    "地下水储量信息"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "过去一年的月平均抽取量"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "最大可持续抽取量"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "根据天气难度设置计算的第 10 年后的稳态月补给率（雨水产量设置只影响雨水收集器，不影响地下水）。"
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "预计年度变化"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "预计剩余年数"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "稳定"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 年"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "月度储量水平（每月 1 日）"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "10 年储量水平（1 月 1 日）"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "安全储量"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "低储量"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "补充中"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "消耗中"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "平衡"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "闲置 / 未记录抽取量"
   ]
 ]

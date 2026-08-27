@@ -4,74 +4,6 @@
     "Kit strumenti per designer di progetti"
   ],
   [
-    "dtk.groundwater.insights_title",
-    "Informazioni sulla riserva di acque sotterranee"
-  ],
-  [
-    "dtk.groundwater.last_year_avg_draw",
-    "Prelievo mensile medio dell'ultimo anno"
-  ],
-  [
-    "dtk.groundwater.sustainable_draw",
-    "Prelievo massimo sostenibile"
-  ],
-  [
-    "dtk.groundwater.sustainable_tooltip",
-    "Tasso mensile di ricarica in regime stazionario calcolato dopo il decimo anno in base alla difficoltà meteorologica (l'impostazione della resa dell'acqua piovana influisce solo sui raccoglitori di acqua piovana, non sulle acque sotterranee)."
-  ],
-  [
-    "dtk.groundwater.expected_yearly_change",
-    "Variazione annuale prevista"
-  ],
-  [
-    "dtk.groundwater.expected_years_remaining",
-    "Anni rimanenti previsti"
-  ],
-  [
-    "dtk.groundwater.years_remaining_stable",
-    "Stabile"
-  ],
-  [
-    "dtk.groundwater.years_remaining_over1000",
-    ">1000 anni"
-  ],
-  [
-    "dtk.groundwater.monthly_chart_title",
-    "Livello della riserva mensile (1° del mese)"
-  ],
-  [
-    "dtk.groundwater.yearly_chart_title",
-    "Livello della riserva su 10 anni (1° gennaio)"
-  ],
-  [
-    "dtk.groundwater.safe_level",
-    "Riserva sicura"
-  ],
-  [
-    "dtk.groundwater.low_level",
-    "Riserva bassa"
-  ],
-  [
-    "dtk.groundwater.trend_filling",
-    "In aumento"
-  ],
-  [
-    "dtk.groundwater.trend_emptying",
-    "In esaurimento"
-  ],
-  [
-    "dtk.groundwater.trend_balanced",
-    "In equilibrio"
-  ],
-  [
-    "dtk.groundwater.trend_idle",
-    "Inattivo / Nessun prelievo registrato"
-  ],
-  [
-    "dtk.groundwater.tracking_notice",
-    "Monitoraggio in corso ({0}/{1} mesi registrati)"
-  ],
-  [
     "dtk.legacy_stacker.unsupported",
     "Le gambe dello stacker non sono sufficientemente sostenute dal terreno."
   ],
@@ -200,96 +132,116 @@
     "Limita il livello di altezza di trasporti, strutture e pilastri visualizzati nel mondo."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.label",
+    "Visibilità del pilastro"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.description",
+    "Controlla il modo in cui viene valutata la visibilità dei pilastri durante il filtraggio dei layer di altezza."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.tooltip",
+    "Staccato valuta l'altezza di ciascun pilastro in modo indipendente rispetto al livello attivo. In allegato vengono mostrati i pilastri ogni volta che è collegato almeno un trasporto visibile o una struttura elevata."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.detached",
+    "Distaccato"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached",
+    "Allegato"
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Questa combinazione di tasti è registrata con il sistema di controllo del gioco e può essere configurata nelle Impostazioni Vanilla | Menù controlli."
   ],
   [
     "Kb_Bdt_TransportCleanup__label",
-    "Transport cleanup tool"
+    "Strumento di pulizia dei trasporti"
   ],
   [
     "Kb_Bdt_TransportCleanup__tooltip",
-    "Activates the transport cleanup selection tool"
+    "Attiva lo strumento di selezione della pulizia del trasporto"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__label",
-    "Height filter show layer"
+    "Livello di visualizzazione del filtro altezza"
   ],
   [
     "Kb_Bdt_HeightFilterShowLayer__tooltip",
-    "Increases the maximum visible height filter layer"
+    "Aumenta lo strato di filtro dell'altezza massima visibile"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__label",
-    "Height filter hide layer"
+    "Strato di nascondere il filtro in altezza"
   ],
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
-    "Decreases the maximum visible height filter layer"
+    "Diminuisce il livello di filtro dell'altezza massima visibile"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",
-    "Toggle throughput overlay"
+    "Attiva/disattiva la sovrapposizione del throughput"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__tooltip",
-    "Toggles the throughput overlay"
+    "Attiva/disattiva la sovrapposizione del throughput"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__label",
-    "Throughput tool"
+    "Strumento di produttività"
   ],
   [
     "Kb_Bdt_ThroughputAoETool__tooltip",
-    "Activates the throughput area selection tool"
+    "Attiva lo strumento di selezione dell'area di throughput"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__label",
-    "Remove products in area"
+    "Rimuovere i prodotti nell'area"
   ],
   [
     "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
-    "Activates the area product-removal tool"
+    "Attiva lo strumento di rimozione del prodotto dell'area"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__label",
-    "Toggle pollution overlay"
+    "Attiva/disattiva la sovrapposizione dell'inquinamento"
   ],
   [
     "Kb_Bdt_PollutionOverlayToggle__tooltip",
-    "Toggles the pollution overlay"
+    "Attiva/disattiva la sovrapposizione dell'inquinamento"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__label",
-    "Toggle radiation overlay"
+    "Attiva/disattiva la sovrapposizione delle radiazioni"
   ],
   [
     "Kb_Bdt_RadiationOverlayToggle__tooltip",
-    "Toggles the radiation overlay"
+    "Attiva/disattiva la sovrapposizione delle radiazioni"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__label",
-    "Toggle layout box overlay"
+    "Attiva/disattiva la sovrapposizione della casella di layout"
   ],
   [
     "Kb_Bdt_LayoutBoxMode__tooltip",
-    "Toggles layout box overlay"
+    "Attiva/disattiva la sovrapposizione della casella di layout"
   ],
   [
     "Kb_Bdt_UndoPlacement__label",
-    "Undo placement"
+    "Annulla posizionamento"
   ],
   [
     "Kb_Bdt_UndoPlacement__tooltip",
-    "Undoes the last BDT placement action"
+    "Annulla l'ultima azione di posizionamento BDT"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__label",
-    "Transport lazy height routing"
+    "Trasporto con percorsi ad altezza pigra"
   ],
   [
     "Kb_Bdt_TransportLazyHeight__tooltip",
-    "Holds lazy height matching mode while placing transports (Alt)"
+    "Mantiene la modalità di corrispondenza dell'altezza pigra durante il posizionamento dei trasporti (Alt)"
   ],
   [
     "dtk.settings.action.restore_defaults",
@@ -750,5 +702,69 @@
   [
     "dtk.settings.hotkey.or",
     "O"
+  ],
+  [
+    "dtk.groundwater.insights_title",
+    "Informazioni sulla riserva di acque sotterranee"
+  ],
+  [
+    "dtk.groundwater.last_year_avg_draw",
+    "Prelievo mensile medio dell'ultimo anno"
+  ],
+  [
+    "dtk.groundwater.sustainable_draw",
+    "Prelievo massimo sostenibile"
+  ],
+  [
+    "dtk.groundwater.sustainable_tooltip",
+    "Tasso mensile di ricarica in regime stazionario calcolato dopo il decimo anno in base alla difficoltà meteorologica (l'impostazione della resa dell'acqua piovana influisce solo sui raccoglitori di acqua piovana, non sulle acque sotterranee)."
+  ],
+  [
+    "dtk.groundwater.expected_yearly_change",
+    "Variazione annuale prevista"
+  ],
+  [
+    "dtk.groundwater.expected_years_remaining",
+    "Anni rimanenti previsti"
+  ],
+  [
+    "dtk.groundwater.years_remaining_stable",
+    "Stabile"
+  ],
+  [
+    "dtk.groundwater.years_remaining_over1000",
+    ">1000 anni"
+  ],
+  [
+    "dtk.groundwater.monthly_chart_title",
+    "Livello della riserva mensile (1° del mese)"
+  ],
+  [
+    "dtk.groundwater.yearly_chart_title",
+    "Livello della riserva su 10 anni (1° gennaio)"
+  ],
+  [
+    "dtk.groundwater.safe_level",
+    "Riserva sicura"
+  ],
+  [
+    "dtk.groundwater.low_level",
+    "Riserva bassa"
+  ],
+  [
+    "dtk.groundwater.trend_filling",
+    "In aumento"
+  ],
+  [
+    "dtk.groundwater.trend_emptying",
+    "In esaurimento"
+  ],
+  [
+    "dtk.groundwater.trend_balanced",
+    "In equilibrio"
+  ],
+  [
+    "dtk.groundwater.trend_idle",
+    "Inattivo / Nessun prelievo registrato"
   ]
 ]

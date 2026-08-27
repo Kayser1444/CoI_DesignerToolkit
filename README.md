@@ -187,9 +187,9 @@ Filter the visibility of transports, transport pillars, and layout entities (suc
 - `PageUp`: increases the maximum visible level (up to level 6, which shows all heights).
 - `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
 
-These hotkeys can be customized in BDT's mod settings (under **HEIGHT FILTER**). Hidden entities are protected from selection to prevent accidental demolition or interaction.
+These hotkeys and the pillar visibility mode (`Detached` vs. `Attached`) can be customized in BDT's mod settings (under **HEIGHT FILTER**). Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
-See [Height Filter](docs/player/height-filter.md) for level behavior.
+See [Height Filter](docs/player/height-filter.md) for level behavior and pillar visibility details.
 
 ### Layout box mode
 

@@ -50,6 +50,12 @@ internal enum ThroughputHeatmapMode
     Capacity = 2,
 }
 
+internal enum HeightFilterPillarVisibility
+{
+    Detached = 0,
+    Attached = 1,
+}
+
 internal static class DesignerToolkitSettings
 {
     internal const string SettingsStateConfigKey = "dtkSettingsStateJson";
@@ -90,6 +96,7 @@ internal static class DesignerToolkitSettings
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
     private const string BLUEPRINT_SPACING_KEY = "blueprint_spacing";
     private const string PRE_COLOR_PIPES_KEY = "pre_color_pipes";
+    private const string HEIGHT_FILTER_PILLAR_VISIBILITY_KEY = "height_filter_pillar_visibility";
 
     private const int SETTINGS_SCHEMA_VERSION = 1;
     private const string SETTINGS_TAB_ICON_ASSET =
@@ -98,6 +105,7 @@ internal static class DesignerToolkitSettings
     private static readonly Percent SETTINGS_COLUMN_WIDTH = 96.Percent();
     private static readonly Px SETTINGS_SECTION_INDENT = 4.pt();
     private static readonly Px SETTINGS_OPTIONS_GAP = 2.pt();
+    private static readonly Px SETTINGS_CONTROL_WIDTH = 140.px();
 
     private static readonly ModLogger s_log = new ModLogger("BDT.Settings");
 
@@ -112,6 +120,7 @@ internal static class DesignerToolkitSettings
     public static bool InstantBuildModeEnabled { get; private set; }
     public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
     public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
+    public static HeightFilterPillarVisibility HeightFilterPillarVisibility { get; private set; } = HeightFilterPillarVisibility.Detached;
     public static bool ThroughputOverlayEnabled { get; private set; } = true;
     public static bool ThroughputGlowEnabled { get; private set; } = true;
     public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.Capacity;
@@ -277,6 +286,7 @@ internal static class DesignerToolkitSettings
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
+    public static event Action<HeightFilterPillarVisibility>? HeightFilterPillarVisibilityChanged;
     public static event Action<bool>? ThroughputOverlayEnabledChanged;
     public static event Action<bool>? PollutionOverlayEnabledChanged;
     public static event Action<int>? PollutionDaysToAverageChanged;
@@ -415,6 +425,7 @@ internal static class DesignerToolkitSettings
         bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
         int initialBlueprintSpacing = config.GetInt(BLUEPRINT_SPACING_KEY, 6);
+        HeightFilterPillarVisibility initialPillarVisibility = PillarVisibilityFromInt(config.GetInt(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility.Detached));
 
         LoadFromStore();
     }
@@ -451,6 +462,7 @@ internal static class DesignerToolkitSettings
         string initialRecycleBinFolderName = s_config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
         int initialBlueprintSpacing = s_config.GetInt(BLUEPRINT_SPACING_KEY, 6);
         bool initialPreColorPipesEnabled = s_config.GetBool(PRE_COLOR_PIPES_KEY, true);
+        HeightFilterPillarVisibility initialPillarVisibility = PillarVisibilityFromInt(s_config.GetInt(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility.Detached));
 
         LoadFromJsonStore(
             s_store,
@@ -479,7 +491,8 @@ internal static class DesignerToolkitSettings
             initialUseRecycleBin,
             initialRecycleBinFolderName,
             initialBlueprintSpacing,
-            initialPreColorPipesEnabled);
+            initialPreColorPipesEnabled,
+            initialPillarVisibility);
     }
 
     public static void SaveToJsonStore(IModStateJsonStore store)
@@ -512,12 +525,6 @@ internal static class DesignerToolkitSettings
 
         Dropdown<MarkdownTableLanguage> languageDropdown =
             new Dropdown<MarkdownTableLanguage>(LanguageDropdownOption)
-                .Label(BdtLocalization.SettingsMarkdownTableLanguage.AsFormatted)
-                .Tooltip(new LocStrFormatted(
-                    BdtLocalization.SettingsMarkdownTableLanguageDescription.TranslatedString
-                    + "\n\n"
-                    + BdtLocalization.SettingsMarkdownTableLanguagePending.TranslatedString))
-                .LabelWidth(SETTINGS_LABEL_WIDTH)
                 .SetOptions(
                     MarkdownTableLanguage.English,
                     MarkdownTableLanguage.Local,
@@ -525,22 +532,30 @@ internal static class DesignerToolkitSettings
                     MarkdownTableLanguage.Hybrid)
                 .SetValue(MarkdownTableLanguage)
                 .OnValueChanged((language, _) => SetMarkdownTableLanguage(language));
+        languageDropdown.Width(SETTINGS_CONTROL_WIDTH);
 
-        root.Add(languageDropdown);
+        root.Add(BuildControlRow(
+            BdtLocalization.SettingsMarkdownTableLanguage.AsFormatted,
+            new LocStrFormatted(
+                BdtLocalization.SettingsMarkdownTableLanguageDescription.TranslatedString
+                + "\n\n"
+                + BdtLocalization.SettingsMarkdownTableLanguagePending.TranslatedString),
+            languageDropdown));
 
         Dropdown<MarkdownNumberFormat> numberFormatDropdown =
             new Dropdown<MarkdownNumberFormat>(NumberFormatDropdownOption)
-                .Label(BdtLocalization.SettingsMarkdownNumberFormat.AsFormatted)
-                .Tooltip(BdtLocalization.SettingsMarkdownNumberFormatDescription.AsFormatted)
-                .LabelWidth(SETTINGS_LABEL_WIDTH)
                 .SetOptions(
                     MarkdownNumberFormat.Auto,
                     MarkdownNumberFormat.English,
                     MarkdownNumberFormat.Local)
                 .SetValue(MarkdownNumberFormat)
                 .OnValueChanged((numberFormat, _) => SetMarkdownNumberFormat(numberFormat));
+        numberFormatDropdown.Width(SETTINGS_CONTROL_WIDTH);
 
-        root.Add(numberFormatDropdown);
+        root.Add(BuildControlRow(
+            BdtLocalization.SettingsMarkdownNumberFormat.AsFormatted,
+            BdtLocalization.SettingsMarkdownNumberFormatDescription.AsFormatted,
+            numberFormatDropdown));
         root.Add(new Title(BdtLocalization.SettingsBuildBehaviorsHeading.AsFormatted)
             .MarginTop(4.pt())
             .MarginLeft(-SETTINGS_SECTION_INDENT));
@@ -584,13 +599,33 @@ internal static class DesignerToolkitSettings
             .MarginLeft(-SETTINGS_SECTION_INDENT));
 
         Dropdown<int> heightFilterDropdown = new Dropdown<int>(HeightFilterDropdownOption)
-            .Label(BdtLocalization.SettingsHeightFilterMaxVisible.AsFormatted)
-            .Tooltip(new LocStrFormatted(BdtLocalization.SettingsHeightFilterMaxVisibleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsHeightFilterControlsTooltip.TranslatedString))
-            .LabelWidth(SETTINGS_LABEL_WIDTH)
             .SetOptions(0, 1, 2, 3, 4, 5, 6)
             .SetValue(HeightFilterMaxVisibleLevel)
             .OnValueChanged((level, _) => SetHeightFilterMaxVisibleLevel(level));
-        root.Add(heightFilterDropdown);
+        heightFilterDropdown.Width(SETTINGS_CONTROL_WIDTH);
+
+        root.Add(BuildControlRow(
+            BdtLocalization.SettingsHeightFilterMaxVisible.AsFormatted,
+            new LocStrFormatted(
+                BdtLocalization.SettingsHeightFilterMaxVisibleDescription.TranslatedString
+                + "\n\n"
+                + BdtLocalization.SettingsHeightFilterControlsTooltip.TranslatedString),
+            heightFilterDropdown));
+
+        Dropdown<HeightFilterPillarVisibility> pillarVisibilityDropdown =
+            new Dropdown<HeightFilterPillarVisibility>(PillarVisibilityDropdownOption)
+                .SetOptions(HeightFilterPillarVisibility.Detached, HeightFilterPillarVisibility.Attached)
+                .SetValue(HeightFilterPillarVisibility)
+                .OnValueChanged((mode, _) => SetHeightFilterPillarVisibility(mode));
+        pillarVisibilityDropdown.Width(SETTINGS_CONTROL_WIDTH);
+
+        root.Add(BuildControlRow(
+            BdtLocalization.SettingsHeightFilterPillarVisibility.AsFormatted,
+            new LocStrFormatted(
+                BdtLocalization.SettingsHeightFilterPillarVisibilityDescription.TranslatedString
+                + "\n\n"
+                + BdtLocalization.SettingsHeightFilterPillarVisibilityTooltip.TranslatedString),
+            pillarVisibilityDropdown));
 
         root.Add(new Title(BdtLocalization.SettingsThroughputHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -623,8 +658,6 @@ internal static class DesignerToolkitSettings
 
         Dropdown<ThroughputHeatmapMode> heatmapDropdown =
             new Dropdown<ThroughputHeatmapMode>(HeatmapDropdownOption)
-                .Label(BdtLocalization.SettingsThroughputHeatmap.AsFormatted)
-                .LabelWidth(SETTINGS_LABEL_WIDTH)
                 .SetOptions(
                     ThroughputHeatmapMode.None,
                     ThroughputHeatmapMode.Relative,
@@ -634,7 +667,12 @@ internal static class DesignerToolkitSettings
                     SetThroughputHeatmapMode(mode);
                     colorblindToggle.Enabled(mode != ThroughputHeatmapMode.None);
                 });
-        root.Add(heatmapDropdown);
+        heatmapDropdown.Width(SETTINGS_CONTROL_WIDTH);
+
+        root.Add(BuildControlRow(
+            BdtLocalization.SettingsThroughputHeatmap.AsFormatted,
+            null,
+            heatmapDropdown));
         root.Add(colorblindToggle);
 
         Toggle showAsPercentToggle = new Toggle(standalone: true)
@@ -783,28 +821,64 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetRadiationGlowEnabled);
         root.Add(radiationGlowToggle);
 
+        // --- RADIATION DAYS TO AVERAGE ---
         var radiationDaysRow = new Row(2.pt()).AlignItemsCenter();
         var radiationDaysLabel = new Label(BdtLocalization.SettingsRadiationDaysToAverage.AsFormatted)
             .Tooltip(BdtLocalization.SettingsRadiationDaysToAverageDescription.AsFormatted)
             .Width(SETTINGS_LABEL_WIDTH);
         radiationDaysRow.Add(radiationDaysLabel);
-        radiationDaysRow.Add(new UiComponent().FlexGrow(1f));
+
+        var radiationDaysSpacer = new UiComponent().FlexGrow(1f);
+        radiationDaysRow.Add(radiationDaysSpacer);
+
+        var radiationDaysControlRow = new Row(2.pt()).AlignItemsCenter();
+
+        var radiationDaysMinusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
+            .Compact().IconSize(14.px());
+        var radiationDaysPlusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Plus128.png")
+            .Compact().IconSize(14.px());
 
         TextField radiationDaysInput = new TextField()
             .Class(Cls.displayFont, Cls.displayBg)
             .Width(45.px());
         UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(radiationDaysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
         radiationDaysInput.Text(RadiationDaysToAverage.ToString());
-        radiationDaysInput.OnValueChanged(text =>
+
+        radiationDaysControlRow.Add(radiationDaysMinusBtn);
+        radiationDaysControlRow.Add(radiationDaysInput);
+        radiationDaysControlRow.Add(radiationDaysPlusBtn);
+        radiationDaysRow.Add(radiationDaysControlRow);
+        root.Add(radiationDaysRow);
+
+        Action<int> updateRadiationDays = (val) =>
         {
-            if (int.TryParse(text, out int value))
+            SetRadiationDaysToAverage(val);
+            radiationDaysInput.Text(RadiationDaysToAverage.ToString());
+        };
+
+        radiationDaysInput.OnValueChanged((text) =>
+        {
+            if (int.TryParse(text, out int val))
             {
-                SetRadiationDaysToAverage(value);
-                radiationDaysInput.Text(RadiationDaysToAverage.ToString());
+                updateRadiationDays(val);
             }
         });
-        radiationDaysRow.Add(radiationDaysInput);
-        root.Add(radiationDaysRow);
+
+        Action<int> adjustRadiationDays = (sign) =>
+        {
+            if (int.TryParse(radiationDaysInput.GetText(), out int current))
+            {
+                int step = 1;
+                if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) step = 10;
+                else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) step = 5;
+
+                int next = Math.Max(0, Math.Min(360, current + sign * step));
+                updateRadiationDays(next);
+            }
+        };
+
+        radiationDaysMinusBtn.OnClick(() => adjustRadiationDays(-1), allowKeyPresses: true);
+        radiationDaysPlusBtn.OnClick(() => adjustRadiationDays(1), allowKeyPresses: true);
 
         root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -836,11 +910,9 @@ internal static class DesignerToolkitSettings
 
         TextField? recycleBinFolderNameField = null;
         recycleBinFolderNameField = new TextField()
-            .Label(BdtLocalization.SettingsRecycleBinFolderName.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsRecycleBinFolderNameDescription.AsFormatted)
-            .LabelWidth(SETTINGS_LABEL_WIDTH)
             .CharLimit(60)
             .Text(RecycleBinFolderName)
+            .Width(SETTINGS_CONTROL_WIDTH)
             .OnEditEnd(name => {
                 bool isValid = !string.IsNullOrWhiteSpace(name) && name.Length <= 60;
                 if (isValid)
@@ -849,7 +921,11 @@ internal static class DesignerToolkitSettings
                 }
                 recycleBinFolderNameField!.MarkAsError(!isValid, BdtLocalization.SettingsRecycleBinFolderNameInvalid.AsFormatted);
             });
-        root.Add(recycleBinFolderNameField);
+
+        root.Add(BuildControlRow(
+            BdtLocalization.SettingsRecycleBinFolderName.AsFormatted,
+            BdtLocalization.SettingsRecycleBinFolderNameDescription.AsFormatted,
+            recycleBinFolderNameField));
 
         root.Add(new Title(BdtLocalization.SettingsPlaceFolderHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -937,6 +1013,7 @@ internal static class DesignerToolkitSettings
             radiationDaysInput.Text(RadiationDaysToAverage.ToString());
             layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
+            pillarVisibilityDropdown.SetValue(HeightFilterPillarVisibility);
             recycleBinToggle.Value(UseRecycleBin);
             recycleBinFolderNameField.Text(RecycleBinFolderName);
             recycleBinFolderNameField.MarkAsError(false);
@@ -946,6 +1023,20 @@ internal static class DesignerToolkitSettings
         }));
 
         return root;
+    }
+
+    private static Row BuildControlRow(LocStrFormatted label, LocStrFormatted? tooltip, UiComponent control)
+    {
+        var row = new Row().AlignItemsCenter();
+        var labelComp = new Label(label);
+        if (tooltip.HasValue)
+        {
+            labelComp.Tooltip(tooltip.Value);
+        }
+        row.Add(labelComp);
+        row.Add(new UiComponent().FlexGrow(1f));
+        row.Add(control);
+        return row;
     }
 
 
@@ -982,6 +1073,7 @@ internal static class DesignerToolkitSettings
             SetLegacyBeltConfigurations(true);
             SetPreColorPipesEnabled(true);
             SetHeightFilterMaxVisibleLevel(6);
+            SetHeightFilterPillarVisibility(HeightFilterPillarVisibility.Detached);
             SetThroughputOverlayEnabled(true);
             SetThroughputGlowEnabled(true);
             SetThroughputHeatmapMode(ThroughputHeatmapMode.Capacity);
@@ -1083,6 +1175,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(BLUEPRINT_SPACING_KEY, BlueprintSpacing, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility, out error))
+                return false;
 
 
             if (string.IsNullOrWhiteSpace(s_modDirectory))
@@ -1119,6 +1213,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
             updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
             updated = TryReplaceConfigDefault(updated, BLUEPRINT_SPACING_KEY, BlueprintSpacing, out bool blueprintSpacingUpdated);
+            updated = TryReplaceConfigDefault(updated, HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility, out bool pillarVisibilityUpdated);
 
             if (!languageUpdated)
             {
@@ -1245,6 +1340,11 @@ internal static class DesignerToolkitSettings
                 error = "Could not find blueprint_spacing default in config.json.";
                 return false;
             }
+            if (!pillarVisibilityUpdated)
+            {
+                error = "Could not find height_filter_pillar_visibility default in config.json.";
+                return false;
+            }
 
             File.WriteAllText(path, updated, new System.Text.UTF8Encoding(false));
             return true;
@@ -1314,6 +1414,16 @@ internal static class DesignerToolkitSettings
         HeightFilterMaxVisibleLevel = level;
         try { HeightFilterMaxVisibleLevelChanged?.Invoke(level); }
         catch (Exception ex) { s_log.Warning($"Height filter max visible level change handler failed: {ex.Message}"); }
+    }
+
+    public static void SetHeightFilterPillarVisibility(HeightFilterPillarVisibility mode)
+    {
+        if (HeightFilterPillarVisibility == mode)
+            return;
+
+        HeightFilterPillarVisibility = mode;
+        try { HeightFilterPillarVisibilityChanged?.Invoke(mode); }
+        catch (Exception ex) { s_log.Warning($"Height filter pillar visibility change handler failed: {ex.Message}"); }
     }
 
     private static UiComponent HeightFilterDropdownOption(int level, int index, bool isInDropdown)
@@ -1412,12 +1522,14 @@ internal static class DesignerToolkitSettings
         bool initialUseRecycleBin,
         string initialRecycleBinFolderName,
         int initialBlueprintSpacing,
-        bool initialPreColorPipesEnabled)
+        bool initialPreColorPipesEnabled,
+        HeightFilterPillarVisibility initialPillarVisibility)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
         InstantBuildModeEnabled = initialInstantBuildMode;
         LegacyBeltConfigurationsEnabled = initialLegacyBeltConfigurations;
+        HeightFilterPillarVisibility = initialPillarVisibility;
         ThroughputOverlayEnabled = initialThroughputOverlayEnabled;
         ThroughputGlowEnabled = initialThroughputGlowEnabled;
         ThroughputHeatmapMode = initialThroughputHeatmapMode;
@@ -1516,6 +1628,8 @@ internal static class DesignerToolkitSettings
                 BlueprintSpacing = blueprintSpacing;
             if (TryGetBool(root, "preColorPipesEnabled", out bool preColorPipesEnabled))
                 PreColorPipesEnabled = preColorPipesEnabled;
+            if (TryGetInt(root, "heightFilterPillarVisibility", out int pillarVisibility))
+                HeightFilterPillarVisibility = PillarVisibilityFromInt(pillarVisibility);
             if (TryGetBool(root, "isFirstUnpausePending", out bool firstUnpausePending))
                 IsFirstUnpausePending = firstUnpausePending;
         }
@@ -1557,6 +1671,7 @@ internal static class DesignerToolkitSettings
         writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);
         writer.AppendNumberField("blueprintSpacing", BlueprintSpacing);
         writer.AppendBoolField("preColorPipesEnabled", PreColorPipesEnabled);
+        writer.AppendNumberField("heightFilterPillarVisibility", (int)HeightFilterPillarVisibility);
         writer.AppendBoolField("isFirstUnpausePending", IsFirstUnpausePending);
         writer.AppendEndObject();
         return writer.GetJsonAndClear();
@@ -1740,6 +1855,36 @@ internal static class DesignerToolkitSettings
                 return BdtLocalization.SettingsNumberFormatLocal.AsFormatted;
             default:
                 return BdtLocalization.SettingsNumberFormatAuto.AsFormatted;
+        }
+    }
+
+    private static HeightFilterPillarVisibility PillarVisibilityFromInt(int value)
+    {
+        switch (value)
+        {
+            case (int)HeightFilterPillarVisibility.Attached:
+                return HeightFilterPillarVisibility.Attached;
+            default:
+                return HeightFilterPillarVisibility.Detached;
+        }
+    }
+
+    private static UiComponent PillarVisibilityDropdownOption(
+        HeightFilterPillarVisibility mode,
+        int index,
+        bool isInDropdown)
+    {
+        return new Label(PillarVisibilityLabel(mode));
+    }
+
+    private static LocStrFormatted PillarVisibilityLabel(HeightFilterPillarVisibility mode)
+    {
+        switch (mode)
+        {
+            case HeightFilterPillarVisibility.Attached:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityAttached.AsFormatted;
+            default:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityDetached.AsFormatted;
         }
     }
 }

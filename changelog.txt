@@ -1,3 +1,6 @@
+v0.11.1 | 2026-08-27
+* Added a **Pillar visibility** mode to the **Height filter**, allowing support pillars to be evaluated by their own height or remain visible while attached to visible transports or elevated structures
+
 v0.11.0 | 2026-08-26
 * Added Groundwater Reservoir Insights rich tooltip to Groundwater pump inspectors, displaying historical trends and replenishment projections
 * Added 12-month rolling monthly reserve level and 10-year annual reserve level bar charts to the groundwater inspector tooltip
