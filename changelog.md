@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.11.1 [unreleased]
+## v0.11.1 [packaged]
 
 - Added **Pillar visibility** setting under **HEIGHT FILTER** (`Detached` vs `Attached`), allowing support pillars to either evaluate height independently or remain visible whenever they support at least one visible transport or elevated structure.
 - Persisted pillar visibility mode per world via `dtkSettingsStateJson` mod cache storage and added global default in `config.json`.
