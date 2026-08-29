@@ -23,7 +23,7 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - [📦 Layout box mode](#layout-box-mode)
 - [📤 Batch placing](#batch-placing)
 - [🏭 Pollution overlay](#pollution-overlay)
-- [💧 Groundwater reservoir insights](#groundwater-reservoir-insights)
+- [💧 Reservoir insights](#reservoir-insights)
 - [☢️ Radiation overlay](#radiation-overlay)
 - [🚦 Throughput tools](#throughput-tools)
 - [🚧 Legacy Belt Configurations](#legacy-belt-configurations)
@@ -240,13 +240,13 @@ BDT features a real-time **Pollution Overlay** and **Heat Map** system to monito
 - **Dynamic Camera-Zoom Scaling**: Opacity and glow radius scale up dynamically as the camera zooms out, ensuring indicators remain bold and readable from high altitudes.
 - **Filters & Configurable Averaging**: Customize average calculations (default 360 days) and toggle Air, Ground/Water, Vehicle, or Ship overlays independently.
 
-### 💧 Groundwater reservoir insights
+### 💧 Reservoir insights
 
-BDT adds a stats icon to Groundwater pump inspectors that opens a rich **Groundwater Reservoir Insights** tooltip.
+BDT adds a stats icon to Groundwater pump and other virtual resource well inspectors (such as oil wells and modded reservoirs) that opens a rich **Reservoir Insights** tooltip.
 
-- **Monthly history**: A rolling bar chart shows the current level and the latest 12 monthly reserve snapshots, with low-reserve values highlighted.
+- **Monthly history**: A rolling bar chart shows the current level and the latest 12 monthly reserve snapshots, styled with the mined product's characteristic color (with low-reserve values highlighted).
 - **Yearly history**: A second bar chart shows the current level and up to 10 annual snapshots taken on January 1.
-- **Sustainability indicators**: See the last year's average monthly draw, the maximum sustainable monthly draw after year 10, and the expected yearly reserve change. Sustainable replenishment is calculated from the Weather difficulty setting; the Rainwater yield setting does not affect groundwater.
+- **Sustainability indicators**: For groundwater, see the last year's average monthly draw, the maximum sustainable monthly draw after year 10, and the expected yearly reserve change. Sustainable replenishment is calculated from the Weather difficulty setting; the Rainwater yield setting does not affect groundwater. Non-replenishing reservoirs omit the sustainable draw row and compute depletion directly from draw.
 - **Depletion estimate**: When the reservoir is shrinking, BDT estimates the years remaining and highlights reservoirs with fewer than 10 years expected remaining.
 
 The history is retained across save and load sessions while BDT is installed. It is stored as mod cache data and does not add custom entities or save payloads.

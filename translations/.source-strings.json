@@ -35,7 +35,7 @@
   "dtk.blueprint.update.tooltip": "Update the selected blueprint from a new area selection.",
   "dtk.groundwater.expected_yearly_change": "Expected yearly change",
   "dtk.groundwater.expected_years_remaining": "Expected years remaining",
-  "dtk.groundwater.insights_title": "Groundwater Reservoir Insights",
+  "dtk.groundwater.insights_title": "Reservoir insights: {0}",
   "dtk.groundwater.last_year_avg_draw": "Last year's avg monthly draw",
   "dtk.groundwater.low_level": "Low reserve",
   "dtk.groundwater.monthly_chart_title": "Monthly Reserve Level (1st of Month)",

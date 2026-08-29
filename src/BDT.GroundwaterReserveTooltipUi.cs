@@ -2,6 +2,7 @@
 // Copyright (c) 2026 Kayser1444
 // Licensed under the MIT License.
 using System;
+using System.Reflection;
 using Mafi;
 using Mafi.Collections;
 using Mafi.Collections.ReadonlyCollections;
@@ -20,24 +21,35 @@ using Mafi.Unity.UiToolkit;
 using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
 using Mafi.Unity.UiToolkit.Library.FloatingPanel;
+using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
 
 public sealed class GroundwaterReserveTooltipUi : Column
 {
+    private static readonly ModLogger s_log = new ModLogger("BDT.GroundwaterReserveTooltipUi");
+    private static readonly FieldInfo? s_barChartGraphField = typeof(BarChart).GetField("m_graph", BindingFlags.Instance | BindingFlags.NonPublic);
+
     private static readonly ColorRgba COLOR_WATER_SAFE = new ColorRgba(56, 189, 248);     // Sky/Cyan Blue
     private static readonly ColorRgba COLOR_WATER_WARNING = new ColorRgba(245, 158, 11);  // Amber
     private static readonly ColorRgba COLOR_WATER_CRITICAL = new ColorRgba(239, 68, 68); // Red
+    private static readonly ColorRgba COLOR_CONTRAST_BG = new ColorRgba(75, 85, 99);      // Slate grey for dark bar contrast
 
+    private readonly Title m_title;
     private readonly BarChart m_monthlyChart;
+    private readonly DataSeries m_monthlySafeSeries;
+    private readonly DataSeries m_monthlyWarningSeries;
     private readonly Lyst<long> m_monthlySafeData;
     private readonly Lyst<long> m_monthlyWarningData;
 
     private readonly BarChart m_yearlyChart;
+    private readonly DataSeries m_yearlySafeSeries;
+    private readonly DataSeries m_yearlyWarningSeries;
     private readonly Lyst<long> m_yearlySafeData;
     private readonly Lyst<long> m_yearlyWarningData;
 
     private readonly Label m_lastYearAvgDrawValue;
+    private readonly Row m_sustainableDrawRow;
     private readonly Label m_sustainableDrawValue;
     private readonly Label m_expectedYearlyChangeValue;
     private readonly Label m_expectedYearsRemainingValue;
@@ -49,10 +61,11 @@ public sealed class GroundwaterReserveTooltipUi : Column
         this.Padding(4.pt()).MinWidth(420.px()).AlignItemsStretch();
 
         // Header Title
+        m_title = new Title().NoBorder().FlexGrow(1f);
         Add(new Row(2.pt())
         {
             (Action<Row>)(r => r.JustifyItemsSpaceBetween().AlignItemsCenter().MarginBottom(2.pt())),
-            new Title(BdtLocalization.GroundwaterInsightsTitle).NoBorder().FlexGrow(1f)
+            m_title
         });
 
         // KPI Summary Box
@@ -60,13 +73,14 @@ public sealed class GroundwaterReserveTooltipUi : Column
 
         m_lastYearAvgDrawValue = new Label().FontBold();
         m_sustainableDrawValue = new Label().FontBold();
+        m_sustainableDrawRow = CreateKpiRow(BdtLocalization.GroundwaterSustainableDrawLabel, m_sustainableDrawValue);
         m_expectedYearlyChangeValue = new Label().FontBold();
         m_expectedYearsRemainingValue = new Label().FontBold();
         m_trackingNoticeLabel = new Label().FontSize(12).Color(Theme.InactiveColor).Hide();
 
         kpiColumn.Add(
             CreateKpiRow(BdtLocalization.GroundwaterLastYearAvgDrawLabel, m_lastYearAvgDrawValue),
-            CreateKpiRow(BdtLocalization.GroundwaterSustainableDrawLabel, m_sustainableDrawValue),
+            m_sustainableDrawRow,
             CreateKpiRow(BdtLocalization.GroundwaterExpectedYearlyChangeLabel, m_expectedYearlyChangeValue),
             CreateKpiRow(BdtLocalization.GroundwaterExpectedYearsRemainingLabel, m_expectedYearsRemainingValue),
             m_trackingNoticeLabel
@@ -86,8 +100,10 @@ public sealed class GroundwaterReserveTooltipUi : Column
         m_monthlySafeData.Count = GroundwaterStatsManager.MONTHLY_HISTORY_COUNT;
         m_monthlyWarningData.Count = GroundwaterStatsManager.MONTHLY_HISTORY_COUNT;
 
-        m_monthlyChart.AddSeries(new DataSeries(BdtLocalization.GroundwaterSafeLevelLabel, Option<string>.None, COLOR_WATER_SAFE, m_monthlySafeData));
-        m_monthlyChart.AddSeries(new DataSeries(BdtLocalization.GroundwaterLowLevelLabel, Option<string>.None, COLOR_WATER_WARNING, m_monthlyWarningData));
+        m_monthlySafeSeries = new DataSeries(BdtLocalization.GroundwaterSafeLevelLabel, Option<string>.None, COLOR_WATER_SAFE, m_monthlySafeData);
+        m_monthlyWarningSeries = new DataSeries(BdtLocalization.GroundwaterLowLevelLabel, Option<string>.None, COLOR_WATER_WARNING, m_monthlyWarningData);
+        m_monthlyChart.AddSeries(m_monthlySafeSeries);
+        m_monthlyChart.AddSeries(m_monthlyWarningSeries);
 
         m_monthlyChart.ConfigureXAxis(
             GroundwaterStatsManager.MONTHLY_HISTORY_COUNT,
@@ -115,8 +131,10 @@ public sealed class GroundwaterReserveTooltipUi : Column
         m_yearlySafeData.Count = GroundwaterStatsManager.YEARLY_HISTORY_COUNT;
         m_yearlyWarningData.Count = GroundwaterStatsManager.YEARLY_HISTORY_COUNT;
 
-        m_yearlyChart.AddSeries(new DataSeries(BdtLocalization.GroundwaterSafeLevelLabel, Option<string>.None, COLOR_WATER_SAFE, m_yearlySafeData));
-        m_yearlyChart.AddSeries(new DataSeries(BdtLocalization.GroundwaterLowLevelLabel, Option<string>.None, COLOR_WATER_WARNING, m_yearlyWarningData));
+        m_yearlySafeSeries = new DataSeries(BdtLocalization.GroundwaterSafeLevelLabel, Option<string>.None, COLOR_WATER_SAFE, m_yearlySafeData);
+        m_yearlyWarningSeries = new DataSeries(BdtLocalization.GroundwaterLowLevelLabel, Option<string>.None, COLOR_WATER_WARNING, m_yearlyWarningData);
+        m_yearlyChart.AddSeries(m_yearlySafeSeries);
+        m_yearlyChart.AddSeries(m_yearlyWarningSeries);
 
         m_yearlyChart.ConfigureXAxis(
             GroundwaterStatsManager.YEARLY_HISTORY_COUNT,
@@ -153,6 +171,38 @@ public sealed class GroundwaterReserveTooltipUi : Column
 
         var manager = GroundwaterStatsManager.Instance;
         var record = manager.GetOrCreateRecord(resource);
+        if (record == null)
+        {
+            return;
+        }
+
+        bool isGroundwater = resource.Product != null && resource.Product.Id == IdsCore.Products.Groundwater;
+        ProductProto? minedProduct = miningEntity.ProductToMine ?? resource.Product?.Product;
+
+        // Title
+        LocStr productName = (resource.Product != null && isGroundwater)
+            ? resource.Product.Strings.Name
+            : (minedProduct != null ? minedProduct.Strings.Name : (resource.Product != null ? resource.Product.Strings.Name : LocStr.Empty));
+        m_title.Value(BdtLocalization.GroundwaterInsightsTitle.Format(productName));
+
+        // Bar Chart Colors matching product characteristic color (groundwater hardcoded to vibrant water blue)
+        ColorRgba safeColor = COLOR_WATER_SAFE;
+        if (isGroundwater)
+        {
+            safeColor = COLOR_WATER_SAFE;
+        }
+        else if (minedProduct != null && !minedProduct.Graphics.Color.IsEmpty)
+        {
+            safeColor = minedProduct.Graphics.Color;
+        }
+        else if (resource.Product?.Graphics != null && !resource.Product.Graphics.ResourcesVizColor.IsEmpty)
+        {
+            safeColor = resource.Product.Graphics.ResourcesVizColor;
+        }
+        m_monthlySafeSeries.Color = safeColor;
+        m_yearlySafeSeries.Color = safeColor;
+        SetChartBackground(m_monthlyChart, safeColor);
+        SetChartBackground(m_yearlyChart, safeColor);
 
         long current = resource.Quantity.Value;
         long capacity = resource.Capacity.Value;
@@ -161,10 +211,19 @@ public sealed class GroundwaterReserveTooltipUi : Column
         Quantity avgMonthlyDraw = record.CalculateAverageMonthlyDraw();
         m_lastYearAvgDrawValue.Value($"{avgMonthlyDraw.Value:N0} / month".AsLoc());
 
-        // 2. Max Sustainable Monthly Draw
-        var sustainable = manager.CalculateMaxSustainableMonthlyDraw(resource);
-        m_sustainableDrawValue.Value($"{sustainable.Value:N0} / month".AsLoc());
-        m_sustainableDrawValue.Tooltip(BdtLocalization.GroundwaterSustainableTooltip);
+        // 2. Max Sustainable Monthly Draw (shown only for groundwater)
+        Quantity sustainable = Quantity.Zero;
+        if (isGroundwater)
+        {
+            m_sustainableDrawRow.Show();
+            sustainable = manager.CalculateMaxSustainableMonthlyDraw(resource);
+            m_sustainableDrawValue.Value($"{sustainable.Value:N0} / month".AsLoc());
+            m_sustainableDrawValue.Tooltip(BdtLocalization.GroundwaterSustainableTooltip);
+        }
+        else
+        {
+            m_sustainableDrawRow.Hide();
+        }
 
         // 3. Expected Yearly Change
         long expectedAnnualReplenish = (long)sustainable.Value * 12L;
@@ -305,5 +364,35 @@ public sealed class GroundwaterReserveTooltipUi : Column
         m_monthlyChart.RenderUpdate(null);
         m_yearlyChart.MarkDirtyRepaint();
         m_yearlyChart.RenderUpdate(null);
+    }
+
+    private static void SetChartBackground(BarChart chart, ColorRgba barColor)
+    {
+        try
+        {
+            if (s_barChartGraphField?.GetValue(chart) is OrthogonalChart graph)
+            {
+                ColorRgba defaultBg = ChartConstants.CHART_BACKGROUND_COLOR;
+                float dr = barColor.R - defaultBg.R;
+                float dg = barColor.G - defaultBg.G;
+                float db = barColor.B - defaultBg.B;
+                float distance = (float)Math.Sqrt(dr * dr + dg * dg + db * db);
+
+                // If bar color is very dark (like crude oil) or too close to the chart background,
+                // adjust background to a lighter slate grey for high contrast.
+                if ((barColor.R < 45 && barColor.G < 45 && barColor.B < 45) || distance < 45f)
+                {
+                    graph.GraphArea.Background(COLOR_CONTRAST_BG);
+                }
+                else
+                {
+                    graph.GraphArea.Background(defaultBg);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            s_log.Warning($"Failed to set chart background: {ex.Message}");
+        }
     }
 }

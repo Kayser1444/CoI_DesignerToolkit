@@ -6,6 +6,7 @@ using System.Reflection;
 using HarmonyLib;
 using Mafi;
 using Mafi.Collections;
+using Mafi.Core;
 using Mafi.Core.Entities;
 using Mafi.Core.Factory.Machines;
 using Mafi.Core.Factory.WellPumps;
@@ -100,17 +101,6 @@ public static class GroundwaterInspectorPatches
                 return;
             }
 
-            // Find the title label in TitleRow
-            Label? titleLabel = null;
-            foreach (var titleChild in reservePanel.TitleRow)
-            {
-                if (titleChild is Label l)
-                {
-                    titleLabel = l;
-                    break;
-                }
-            }
-
             // Create our rich tooltip component
             var tooltipUi = new GroundwaterReserveTooltipUi();
 
@@ -123,55 +113,35 @@ public static class GroundwaterInspectorPatches
             statsIcon.FloaterInteractive(() => tooltipUi);
             reservePanel.TitleRow.Add(statsIcon);
 
-            if (titleLabel != null)
-            {
-                titleLabel.FloaterInteractive(() => tooltipUi);
-            }
-
             // Observe entity changes to update tooltip visibility and data
             uiComponent.Observe(() => entityProp.GetValue(__instance) as Machine)
                 .Do(machine =>
                 {
-                    if (machine is WellPump wellPump)
+                    if (machine is IVirtualResourceMiningEntity miningEntity)
                     {
-                        if (titleLabel != null)
+                        var resource = GetResourceForPump(machine);
+                        if (resource != null)
                         {
-                            titleLabel.InfoIconPosition(Label.InfoIconPos.None);
-                            titleLabel.Tooltip(LocStrFormatted.Empty);
+                            statsIcon.Show();
+                            tooltipUi.UpdateData(miningEntity, resource);
+                            return;
                         }
-                        statsIcon.Show();
-                        var resource = GetResourceForPump(wellPump);
-                        tooltipUi.UpdateData(wellPump, resource);
                     }
-                    else if (machine is IVirtualResourceMiningEntity miningEntity)
-                    {
-                        if (titleLabel != null)
-                        {
-                            titleLabel.InfoIconPosition(Label.InfoIconPos.None);
-                            titleLabel.Tooltip(LocStrFormatted.Empty);
-                        }
-                        statsIcon.Show();
-                        tooltipUi.UpdateData(miningEntity, null);
-                    }
-                    else
-                    {
-                        statsIcon.Hide();
-                    }
+                    statsIcon.Hide();
                 });
 
             // Observe buffer changes for ongoing live updates
             uiComponent.Observe(() => (entityProp.GetValue(__instance) as IVirtualResourceMiningEntity)?.QuantityLeftToMine)
                 .Do(_ =>
                 {
-                    if (entityProp.GetValue(__instance) is WellPump pump)
+                    if (entityProp.GetValue(__instance) is Machine machine &&
+                        machine is IVirtualResourceMiningEntity miningEntity)
                     {
-                        if (titleLabel != null)
+                        var resource = GetResourceForPump(machine);
+                        if (resource != null)
                         {
-                            titleLabel.InfoIconPosition(Label.InfoIconPos.None);
-                            titleLabel.Tooltip(LocStrFormatted.Empty);
+                            tooltipUi.UpdateData(miningEntity, resource);
                         }
-                        var resource = GetResourceForPump(pump);
-                        tooltipUi.UpdateData(pump, resource);
                     }
                 });
         }
@@ -181,30 +151,42 @@ public static class GroundwaterInspectorPatches
         }
     }
 
-    private static IVirtualTerrainResource? GetResourceForPump(WellPump pump)
+    private static IVirtualTerrainResource? GetResourceForPump(Machine machine)
     {
-        try
+        if (machine is WellPump pump)
         {
-            var resField = typeof(WellPump).GetField("m_resource", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (resField != null)
+            try
             {
-                var option = (Option<IVirtualTerrainResource>)resField.GetValue(pump);
-                if (option.HasValue) return option.Value;
+                var resField = typeof(WellPump).GetField("m_resource", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (resField != null)
+                {
+                    var option = (Option<IVirtualTerrainResource>)resField.GetValue(pump);
+                    if (option.HasValue && option.Value != null)
+                    {
+                        return option.Value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                s_log.Warning($"Failed to get resource from pump field: {ex.Message}");
             }
         }
-        catch (Exception ex)
-        {
-            s_log.Warning($"Failed to get resource from pump field: {ex.Message}");
-        }
 
-        try
+        if (machine is IVirtualResourceMiningEntity miningEntity && miningEntity.ProductToMine != null)
         {
-            var resource = GroundwaterStatsManager.Instance?.GetResourceAt(pump.ProductToMine, pump.Transform.Position.Tile2i);
-            if (resource != null) return resource;
-        }
-        catch (Exception ex)
-        {
-            s_log.Warning($"Failed to get resource from GroundwaterStatsManager: {ex.Message}");
+            try
+            {
+                var resource = GroundwaterStatsManager.Instance?.GetResourceAt(miningEntity.ProductToMine, machine.Transform.Position.Tile2i);
+                if (resource != null)
+                {
+                    return resource;
+                }
+            }
+            catch (Exception ex)
+            {
+                s_log.Warning($"Failed to get resource from GroundwaterStatsManager: {ex.Message}");
+            }
         }
 
         return null;

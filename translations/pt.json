@@ -777,7 +777,7 @@
   ],
   [
     "dtk.groundwater.insights_title",
-    "Informações sobre o reservatório de água subterrânea"
+    "Informações do reservatório: {0}"
   ],
   [
     "dtk.groundwater.last_year_avg_draw",

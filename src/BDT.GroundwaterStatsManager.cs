@@ -172,20 +172,22 @@ public sealed class GroundwaterStatsManager
         m_calendar.NewMonthStart.AddNonSaveable(this, onNewMonthStart);
         m_calendar.NewDay.AddNonSaveable(this, onNewDay);
 
-        // Pre-discover existing groundwater resources
+        // Pre-discover existing virtual resources
         try
         {
             var protosDb = resolver.Resolve<Mafi.Core.Prototypes.ProtosDb>();
-            var groundwaterProto = protosDb.GetOrThrow<VirtualResourceProductProto>(IdsCore.Products.Groundwater);
-            var allResources = m_virtualResourceManager.GetAllResourcesFor(groundwaterProto);
-            foreach (var res in allResources)
+            foreach (var proto in protosDb.All<VirtualResourceProductProto>())
             {
-                GetOrCreateRecord(res);
+                var allResources = m_virtualResourceManager.GetAllResourcesFor(proto);
+                foreach (var res in allResources)
+                {
+                    GetOrCreateRecord(res);
+                }
             }
         }
         catch (Exception ex)
         {
-            s_log.Warning($"Error discovering initial groundwater resources: {ex.Message}");
+            s_log.Warning($"Error discovering initial virtual resources: {ex.Message}");
         }
 
         LoadFromStore();
@@ -200,8 +202,13 @@ public sealed class GroundwaterStatsManager
         return $"res_{resource.Product.Id.Value}_{resource.GetHashCode()}";
     }
 
-    public ResourceRecord GetOrCreateRecord(IVirtualTerrainResource resource)
+    public ResourceRecord? GetOrCreateRecord(IVirtualTerrainResource resource)
     {
+        if (resource == null)
+        {
+            return null;
+        }
+
         if (!m_records.TryGetValue(resource, out var record))
         {
             string key = GetResourceKey(resource);
@@ -217,19 +224,22 @@ public sealed class GroundwaterStatsManager
 
     public IVirtualTerrainResource? GetResourceAt(ProductProto product, Tile2i position)
     {
-        if (m_virtualResourceManager == null) return null;
+        if (m_virtualResourceManager == null || product == null) return null;
         var resources = m_virtualResourceManager.RetrieveResourcesAt(product, position);
         return resources.Length > 0 ? resources[0] : null;
     }
 
     public static void MineResourceAtPostfix(SimpleVirtualResource __instance, ProductQuantity __result)
     {
-        if (s_instance == null || __result.Quantity.IsZero) return;
+        if (s_instance == null || __result.Quantity.IsZero || __instance == null) return;
 
         try
         {
             var record = s_instance.GetOrCreateRecord(__instance);
-            record.CurrentMonthDraw += __result.Quantity;
+            if (record != null)
+            {
+                record.CurrentMonthDraw += __result.Quantity;
+            }
         }
         catch (Exception ex)
         {
@@ -263,7 +273,7 @@ public sealed class GroundwaterStatsManager
     /// </summary>
     public Quantity CalculateMaxSustainableMonthlyDraw(IVirtualTerrainResource resource)
     {
-        if (resource == null) return Quantity.Zero;
+        if (resource == null || resource.Product == null || resource.Product.Id != IdsCore.Products.Groundwater) return Quantity.Zero;
 
         float annualRainFactor = 3.5f; // default Standard post-year 10
         if (m_difficultyConfig != null)

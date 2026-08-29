@@ -10,50 +10,17 @@
     "dtk.settings.number_format.auto"
   ],
   "keys": {
-    "dtk.settings.height_filter_pillar_visibility.top": {
-      "en": "Top",
-      "context": "Dropdown option for top layer height filter pillar visibility.",
-      "de": "Spitze",
-      "es": "Arriba",
-      "it": "Superiore",
-      "pt": "Principal",
-      "ru": "Вершина",
-      "sv": "Bästa",
-      "zh": "顶部"
-    },
-    "dtk.settings.height_filter_pillar_visibility.top.tooltip": {
-      "en": "Controls pillar visibility based on whether its top layer is at or below the visible height limit.",
-      "context": "Tooltip for Top pillar visibility option.",
-      "de": "Steuert die Sichtbarkeit der Säule basierend darauf, ob sich ihre oberste Ebene auf oder unter der sichtbaren Höhengrenze befindet.",
-      "es": "Controla la visibilidad del pilar en función de si su capa superior está en el límite de altura visible o por debajo de él.",
-      "it": "Controlla la visibilità del pilastro in base al fatto che il suo strato superiore sia pari o inferiore al limite di altezza visibile.",
-      "pt": "Controla a visibilidade do pilar com base no fato de sua camada superior estar no limite de altura visível ou abaixo dele.",
-      "ru": "Управляет видимостью столба в зависимости от того, находится ли его верхний слой на видимом пределе высоты или ниже него.",
-      "sv": "Styr pelarens synlighet baserat på om dess översta skikt är vid eller under den synliga höjdgränsen.",
-      "zh": "根据其顶层是否处于或低于可见高度限制来控制支柱可见性。"
-    },
-    "dtk.settings.height_filter_pillar_visibility.off": {
-      "en": "Off",
-      "context": "Dropdown option for off height filter pillar visibility.",
-      "de": "Aus",
-      "es": "Apagado",
-      "it": "Spento",
-      "pt": "Desligado",
-      "ru": "Выключенный",
-      "sv": "Av",
-      "zh": "离开"
-    },
-    "dtk.settings.height_filter_pillar_visibility.off.tooltip": {
-      "en": "Hides all pillars whenever any height layer is filtered out.",
-      "context": "Tooltip for Off pillar visibility option.",
-      "de": "Blendet alle Säulen aus, wenn eine Höhenebene herausgefiltert wird.",
-      "es": "Oculta todos los pilares cada vez que se filtra cualquier capa de altura.",
-      "it": "Nasconde tutti i pilastri ogni volta che viene filtrato un livello di altezza.",
-      "pt": "Oculta todos os pilares sempre que qualquer camada de altura é filtrada.",
-      "ru": "Скрывает все столбы всякий раз, когда отфильтровывается какой-либо слой высоты.",
-      "sv": "Döljer alla pelare när något höjdlager filtreras bort.",
-      "zh": "每当过滤掉任何高度层时，都会隐藏所有柱子。"
+    "dtk.groundwater.insights_title": {
+      "en": "Reservoir insights: {0}",
+      "context": "Title for reservoir rich tooltip floater where {0} is the localized product name.",
+      "de": "Reservoir insights: {0}",
+      "es": "Reservoir insights: {0}",
+      "it": "Reservoir insights: {0}",
+      "pt": "Reservoir insights: {0}",
+      "ru": "Reservoir insights: {0}",
+      "sv": "Reservoir insights: {0}",
+      "zh": "Reservoir insights: {0}"
     }
   },
-  "keys_needing_translation": 4
+  "keys_needing_translation": 1
 }

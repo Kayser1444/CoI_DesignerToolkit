@@ -777,7 +777,7 @@
   ],
   [
     "dtk.groundwater.insights_title",
-    "Groundwater Reservoir Insights"
+    "Reservoir insights: {0}"
   ],
   [
     "dtk.groundwater.last_year_avg_draw",

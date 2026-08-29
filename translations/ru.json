@@ -777,7 +777,7 @@
   ],
   [
     "dtk.groundwater.insights_title",
-    "Сведения о запасах грунтовых вод"
+    "Сведения о месторождении: {0}"
   ],
   [
     "dtk.groundwater.last_year_avg_draw",

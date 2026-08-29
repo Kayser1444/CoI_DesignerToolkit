@@ -426,8 +426,8 @@ internal static class BdtLocalization
     public static LocStr SettingsHotkeyOr =
         Loc.Str("dtk.settings.hotkey.or", "or", "Word 'or' separating hotkeys.");
 
-    public static LocStr GroundwaterInsightsTitle =
-        Loc.Str("dtk.groundwater.insights_title", "Groundwater Reservoir Insights", "Title for groundwater reservoir rich tooltip floater.");
+    public static LocStr1 GroundwaterInsightsTitle =
+        Loc.Str1("dtk.groundwater.insights_title", "Reservoir insights: {0}", "Title for reservoir rich tooltip floater where {0} is the localized product name.");
     public static LocStr GroundwaterLastYearAvgDrawLabel =
         Loc.Str("dtk.groundwater.last_year_avg_draw", "Last year's avg monthly draw", "Label for average monthly groundwater drawn over the past 12 months.");
     public static LocStr GroundwaterSustainableDrawLabel =
