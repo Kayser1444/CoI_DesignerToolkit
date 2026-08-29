@@ -132,6 +132,42 @@
     "Limita o nível de altura de transportes, estruturas e pilares renderizados no mundo."
   ],
   [
+    "dtk.settings.height_filter_transport_visibility.label",
+    "Visibilidade dos transportes"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.description",
+    "Controla como a visibilidade dos transportes é avaliada ao filtrar camadas de altura."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "Controla o requisito de altura dos pontos de inflexão do transporte em relação ao nível visível."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low",
+    "Baixa"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "Todos os pontos de inflexão do transporte devem estar no nível de referência ou abaixo dele."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium",
+    "Média"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "A maioria dos pontos de inflexão do transporte deve estar no nível de referência ou abaixo dele."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high",
+    "Alta"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "Pelo menos um ponto de inflexão do transporte deve estar no nível de referência ou abaixo dele."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.label",
     "Visibilidade do pilar"
   ],
@@ -140,16 +176,20 @@
     "Controla como a visibilidade do pilar é avaliada ao filtrar camadas de altura."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.tooltip",
-    "Detached avalia a altura de cada pilar independentemente em relação à camada ativa. Anexado mostra pilares sempre que pelo menos um transporte visível ou estrutura elevada estiver anexado."
-  ],
-  [
     "dtk.settings.height_filter_pillar_visibility.detached",
     "Desanexado"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "Avalia a altura de cada pilar independentemente do nível ativo."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.attached",
     "Apegado"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "Mostra os pilares sempre que pelo menos um transporte visível ou uma estrutura elevada estiver conectado a eles."
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -178,6 +218,22 @@
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Diminui a camada de filtro de altura visível máxima"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "Visibilidade dos transportes do filtro de altura (alta)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "Aumenta a visibilidade dos transportes em direção a Alta"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "Visibilidade dos transportes do filtro de altura (baixa)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "Reduz a visibilidade dos transportes em direção a Baixa"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",

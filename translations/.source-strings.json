@@ -82,6 +82,7 @@
   "dtk.settings.height_filter_pillar_visibility.detached": "Detached",
   "dtk.settings.height_filter_pillar_visibility.label": "Pillar visibility",
   "dtk.settings.height_filter_pillar_visibility.tooltip": "Detached evaluates each pillar's height independently against the active layer. Attached shows pillars whenever at least one visible transport or elevated structure is attached.",
+  "dtk.settings.height_filter_transport_visibility.tooltip": "Controls the threshold requirement for transport inflection points against the visible layer.",
   "dtk.settings.hotkey.or": "or",
   "dtk.settings.instant_build_mode.description": "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle.",
   "dtk.settings.instant_build_mode.label": "Instant build mode",

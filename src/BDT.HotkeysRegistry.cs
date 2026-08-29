@@ -20,6 +20,12 @@ public static class HotkeysRegistry
     [Kb(BDT_CATEGORY, "Bdt_HeightFilterHideLayer", "Height filter hide layer", "Decreases the maximum visible height filter layer", false, false, null)]
     public static KeyBindings HeightFilterHideLayer { get; set; } = FromPrimaryKeys(KeyCode.PageDown);
 
+    [Kb(BDT_CATEGORY, "Bdt_HeightFilterTransportVisibilityHigh", "Height filter transport visibility (high)", "Steps transport visibility towards High", false, false, null)]
+    public static KeyBindings HeightFilterTransportVisibilityHigh { get; set; } = FromPrimaryKeys(KeyCode.LeftShift, KeyCode.PageUp);
+
+    [Kb(BDT_CATEGORY, "Bdt_HeightFilterTransportVisibilityLow", "Height filter transport visibility (low)", "Steps transport visibility towards Low", false, false, null)]
+    public static KeyBindings HeightFilterTransportVisibilityLow { get; set; } = FromPrimaryKeys(KeyCode.LeftShift, KeyCode.PageDown);
+
     [Kb(BDT_CATEGORY, "Bdt_ThroughputOverlayToggle", "Toggle throughput overlay", "Toggles the throughput overlay", false, false, null)]
     public static KeyBindings ThroughputOverlayToggle { get; set; } = FromPrimaryKeys(KeyCode.LeftAlt, KeyCode.T);
 

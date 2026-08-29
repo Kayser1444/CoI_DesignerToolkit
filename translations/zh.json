@@ -132,6 +132,42 @@
     "限制世界中渲染的传输、结构和支柱的高度层级。"
   ],
   [
+    "dtk.settings.height_filter_transport_visibility.label",
+    "运输可见性"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.description",
+    "控制按高度筛选时如何判断运输的可见性。"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "控制运输转折点相对于可见层的高度要求。"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low",
+    "低"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "运输的所有转折点都必须位于阈值层或更低。"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium",
+    "中"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "运输的大多数转折点必须位于阈值层或更低。"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high",
+    "高"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "运输至少有一个转折点位于阈值层或更低。"
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.label",
     "支柱可见度"
   ],
@@ -140,16 +176,20 @@
     "控制过滤高度图层时如何评估支柱可见性。"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.tooltip",
-    "分离根据有源层独立评估每个柱的高度。只要至少连接了一个可见的运输或高架结构，就会显示柱子。"
-  ],
-  [
     "dtk.settings.height_filter_pillar_visibility.detached",
     "独立的"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "根据当前图层独立评估每根支柱的高度。"
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.attached",
     "随附的"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "只要连接了至少一个可见运输或高架结构，就显示支柱。"
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -178,6 +218,22 @@
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
     "降低滤镜层的最大可见高度"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "高度筛选运输可见性（高）"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "将运输可见性向高调整"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "高度筛选运输可见性（低）"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "将运输可见性向低调整"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",

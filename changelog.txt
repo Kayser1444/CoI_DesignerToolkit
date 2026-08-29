@@ -1,3 +1,7 @@
+v0.11.2 | 2026-08-29
+* Added a **Transport visibility** policy selector to the **Height filter**: `Low` hides transports unless all inflection points are at or below the visible layer, `Medium` requires a majority, and `High` requires at least one
+* Added default `Shift+PageUp` and `Shift+PageDown` hotkeys to step the transport visibility policy towards `High` or `Low`
+
 v0.11.1 | 2026-08-27
 * Added a **Pillar visibility** mode to the **Height filter**, allowing support pillars to be evaluated by their own height or remain visible while attached to visible transports or elevated structures
 

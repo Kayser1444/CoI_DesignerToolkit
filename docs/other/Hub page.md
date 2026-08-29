@@ -192,12 +192,20 @@ Regular removal orders persist through saving and reloading while BDT remains in
 
 BDT features a Height Filter rendering system that allows players to filter the visibility of transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) in the world.
 
-Adjusting the visible height levels makes it significantly easier to inspect and manage multi-tier pipe stacks, layered belt paths, or dense underground logistics without visual clutter. Transports that span multiple levels are hidden/shown based on the majority of their nodes.
+Adjusting the visible height levels makes it significantly easier to inspect and manage multi-tier pipe stacks, layered belt paths, or dense underground logistics without visual clutter. The **Transport visibility** policy controls how transports that span multiple levels are hidden or shown.
 
 - `PageUp`: increases the maximum visible level (up to level 6, which shows all heights).
 - `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
+- `Shift+PageUp`: steps the transport visibility policy towards **High**.
+- `Shift+PageDown`: steps the transport visibility policy towards **Low**.
 
-These hotkeys and the pillar visibility mode (`Detached` height-based vs. `Attached` to visible transports or elevated structures) can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
+The **Transport visibility** policy has three modes:
+
+- **Low**: all inflection points of the transport must be at or below the threshold layer.
+- **Medium** (default): a majority of the inflection points must be at or below the threshold layer.
+- **High**: at least one inflection point must be at or below the threshold layer.
+
+These hotkeys and the pillar visibility mode (`Detached` height-based vs. `Attached` to visible transports or elevated structures) can be customized in BDT's mod settings under **HEIGHT FILTER** or in the vanilla **Settings | Controls** menu. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 

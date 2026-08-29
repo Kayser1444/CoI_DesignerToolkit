@@ -132,6 +132,42 @@
     "Limits the height level of transports, structures, and pillars rendered in the world."
   ],
   [
+    "dtk.settings.height_filter_transport_visibility.label",
+    "Transport visibility"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.description",
+    "Controls how transport visibility is evaluated when filtering height layers."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "Controls the threshold requirement for transport inflection points against the visible layer."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low",
+    "Low"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "All inflection points of the transport must be at or below the threshold layer."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium",
+    "Medium"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "A majority of the inflection points of the transport must be at or below the threshold layer."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high",
+    "High"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "At least one inflection point of the transport must be at or below the threshold layer."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.label",
     "Pillar visibility"
   ],
@@ -140,16 +176,20 @@
     "Controls how pillar visibility is evaluated when filtering height layers."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.tooltip",
-    "Detached evaluates each pillar's height independently against the active layer. Attached shows pillars whenever at least one visible transport or elevated structure is attached."
-  ],
-  [
     "dtk.settings.height_filter_pillar_visibility.detached",
     "Detached"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "Evaluates each pillar's height independently against the active layer."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.attached",
     "Attached"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "Shows pillars whenever at least one visible transport or elevated structure is attached."
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -178,6 +218,22 @@
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Decreases the maximum visible height filter layer"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "Height filter transport visibility (high)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "Steps transport visibility towards High"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "Height filter transport visibility (low)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "Steps transport visibility towards Low"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",

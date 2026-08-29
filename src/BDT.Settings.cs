@@ -50,6 +50,13 @@ internal enum ThroughputHeatmapMode
     Capacity = 2,
 }
 
+internal enum HeightFilterTransportVisibility
+{
+    Low = 0,
+    Medium = 1,
+    High = 2,
+}
+
 internal enum HeightFilterPillarVisibility
 {
     Detached = 0,
@@ -96,6 +103,7 @@ internal static class DesignerToolkitSettings
     private const string RECYCLE_BIN_FOLDER_NAME_KEY = "recycle_bin_folder_name";
     private const string BLUEPRINT_SPACING_KEY = "blueprint_spacing";
     private const string PRE_COLOR_PIPES_KEY = "pre_color_pipes";
+    private const string HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY = "height_filter_transport_visibility";
     private const string HEIGHT_FILTER_PILLAR_VISIBILITY_KEY = "height_filter_pillar_visibility";
 
     private const int SETTINGS_SCHEMA_VERSION = 1;
@@ -120,6 +128,7 @@ internal static class DesignerToolkitSettings
     public static bool InstantBuildModeEnabled { get; private set; }
     public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
     public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
+    public static HeightFilterTransportVisibility HeightFilterTransportVisibility { get; private set; } = HeightFilterTransportVisibility.Medium;
     public static HeightFilterPillarVisibility HeightFilterPillarVisibility { get; private set; } = HeightFilterPillarVisibility.Detached;
     public static bool ThroughputOverlayEnabled { get; private set; } = true;
     public static bool ThroughputGlowEnabled { get; private set; } = true;
@@ -286,6 +295,7 @@ internal static class DesignerToolkitSettings
 
     public static event Action<bool>? InstantBuildModeChanged;
     public static event Action<int>? HeightFilterMaxVisibleLevelChanged;
+    public static event Action<HeightFilterTransportVisibility>? HeightFilterTransportVisibilityChanged;
     public static event Action<HeightFilterPillarVisibility>? HeightFilterPillarVisibilityChanged;
     public static event Action<bool>? ThroughputOverlayEnabledChanged;
     public static event Action<bool>? PollutionOverlayEnabledChanged;
@@ -425,6 +435,7 @@ internal static class DesignerToolkitSettings
         bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
         string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
         int initialBlueprintSpacing = config.GetInt(BLUEPRINT_SPACING_KEY, 6);
+        HeightFilterTransportVisibility initialTransportVisibility = TransportVisibilityFromInt(config.GetInt(HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY, (int)HeightFilterTransportVisibility.Medium));
         HeightFilterPillarVisibility initialPillarVisibility = PillarVisibilityFromInt(config.GetInt(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility.Detached));
 
         LoadFromStore();
@@ -462,6 +473,7 @@ internal static class DesignerToolkitSettings
         string initialRecycleBinFolderName = s_config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
         int initialBlueprintSpacing = s_config.GetInt(BLUEPRINT_SPACING_KEY, 6);
         bool initialPreColorPipesEnabled = s_config.GetBool(PRE_COLOR_PIPES_KEY, true);
+        HeightFilterTransportVisibility initialTransportVisibility = TransportVisibilityFromInt(s_config.GetInt(HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY, (int)HeightFilterTransportVisibility.Medium));
         HeightFilterPillarVisibility initialPillarVisibility = PillarVisibilityFromInt(s_config.GetInt(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility.Detached));
 
         LoadFromJsonStore(
@@ -492,6 +504,7 @@ internal static class DesignerToolkitSettings
             initialRecycleBinFolderName,
             initialBlueprintSpacing,
             initialPreColorPipesEnabled,
+            initialTransportVisibility,
             initialPillarVisibility);
     }
 
@@ -610,7 +623,27 @@ internal static class DesignerToolkitSettings
                 BdtLocalization.SettingsHeightFilterMaxVisibleDescription.TranslatedString
                 + "\n\n"
                 + BdtLocalization.SettingsHeightFilterControlsTooltip.TranslatedString),
-            heightFilterDropdown));
+            heightFilterDropdown,
+            row => AddDualHotkeyBadges(row, HotkeysRegistry.HeightFilterHideLayer, HotkeysRegistry.HeightFilterShowLayer)));
+
+        Dropdown<HeightFilterTransportVisibility> transportVisibilityDropdown =
+            new Dropdown<HeightFilterTransportVisibility>(TransportVisibilityDropdownOption)
+                .SetOptions(
+                    HeightFilterTransportVisibility.Low,
+                    HeightFilterTransportVisibility.Medium,
+                    HeightFilterTransportVisibility.High)
+                .SetValue(HeightFilterTransportVisibility)
+                .OnValueChanged((mode, _) => SetHeightFilterTransportVisibility(mode));
+        transportVisibilityDropdown.Width(SETTINGS_CONTROL_WIDTH);
+
+        root.Add(BuildControlRow(
+            BdtLocalization.SettingsHeightFilterTransportVisibility.AsFormatted,
+            new LocStrFormatted(
+                BdtLocalization.SettingsHeightFilterTransportVisibilityDescription.TranslatedString
+                + "\n\n"
+                + BdtLocalization.SettingsHeightFilterControlsTooltip.TranslatedString),
+            transportVisibilityDropdown,
+            row => AddDualHotkeyBadges(row, HotkeysRegistry.HeightFilterTransportVisibilityLow, HotkeysRegistry.HeightFilterTransportVisibilityHigh)));
 
         Dropdown<HeightFilterPillarVisibility> pillarVisibilityDropdown =
             new Dropdown<HeightFilterPillarVisibility>(PillarVisibilityDropdownOption)
@@ -621,10 +654,7 @@ internal static class DesignerToolkitSettings
 
         root.Add(BuildControlRow(
             BdtLocalization.SettingsHeightFilterPillarVisibility.AsFormatted,
-            new LocStrFormatted(
-                BdtLocalization.SettingsHeightFilterPillarVisibilityDescription.TranslatedString
-                + "\n\n"
-                + BdtLocalization.SettingsHeightFilterPillarVisibilityTooltip.TranslatedString),
+            BdtLocalization.SettingsHeightFilterPillarVisibilityDescription.AsFormatted,
             pillarVisibilityDropdown));
 
         root.Add(new Title(BdtLocalization.SettingsThroughputHeading.AsFormatted)
@@ -1013,6 +1043,7 @@ internal static class DesignerToolkitSettings
             radiationDaysInput.Text(RadiationDaysToAverage.ToString());
             layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
+            transportVisibilityDropdown.SetValue(HeightFilterTransportVisibility);
             pillarVisibilityDropdown.SetValue(HeightFilterPillarVisibility);
             recycleBinToggle.Value(UseRecycleBin);
             recycleBinFolderNameField.Text(RecycleBinFolderName);
@@ -1025,7 +1056,7 @@ internal static class DesignerToolkitSettings
         return root;
     }
 
-    private static Row BuildControlRow(LocStrFormatted label, LocStrFormatted? tooltip, UiComponent control)
+    private static Row BuildControlRow(LocStrFormatted label, LocStrFormatted? tooltip, UiComponent control, Action<Row>? addBadges = null)
     {
         var row = new Row().AlignItemsCenter();
         var labelComp = new Label(label);
@@ -1034,18 +1065,29 @@ internal static class DesignerToolkitSettings
             labelComp.Tooltip(tooltip.Value);
         }
         row.Add(labelComp);
+        addBadges?.Invoke(row);
         row.Add(new UiComponent().FlexGrow(1f));
         row.Add(control);
         return row;
     }
 
-
-
-    private static void AddHotkeyBadges(Row row, KeyBindings bindings)
+    private static void AddDualHotkeyBadges(Row row, KeyBindings first, KeyBindings second)
     {
+        AddHotkeyBadges(row, first);
+        row.Add(new Label("/".AsLoc())
+            .Color(Mafi.Unity.UiToolkit.Theme.InactiveColor)
+            .MarginLeft(3.pt()));
+        AddHotkeyBadges(row, second, marginLeft: 3.pt());
+    }
+
+
+
+    private static void AddHotkeyBadges(Row row, KeyBindings bindings, Px? marginLeft = null)
+    {
+        Px primaryMargin = marginLeft ?? 6.pt();
         if (!bindings.Primary.IsEmpty)
         {
-            row.Add(new KeyBindUi().SetKeys(bindings.Primary.Keys.ToArray()).MarginLeft(6.pt()));
+            row.Add(new KeyBindUi().SetKeys(bindings.Primary.Keys.ToArray()).MarginLeft(primaryMargin));
         }
         if (!bindings.Primary.IsEmpty && !bindings.Secondary.IsEmpty)
         {
@@ -1073,6 +1115,7 @@ internal static class DesignerToolkitSettings
             SetLegacyBeltConfigurations(true);
             SetPreColorPipesEnabled(true);
             SetHeightFilterMaxVisibleLevel(6);
+            SetHeightFilterTransportVisibility(HeightFilterTransportVisibility.Medium);
             SetHeightFilterPillarVisibility(HeightFilterPillarVisibility.Detached);
             SetThroughputOverlayEnabled(true);
             SetThroughputGlowEnabled(true);
@@ -1175,6 +1218,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(BLUEPRINT_SPACING_KEY, BlueprintSpacing, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY, (int)HeightFilterTransportVisibility, out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility, out error))
                 return false;
 
@@ -1213,6 +1258,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
             updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
             updated = TryReplaceConfigDefault(updated, BLUEPRINT_SPACING_KEY, BlueprintSpacing, out bool blueprintSpacingUpdated);
+            updated = TryReplaceConfigDefault(updated, HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY, (int)HeightFilterTransportVisibility, out bool transportVisibilityUpdated);
             updated = TryReplaceConfigDefault(updated, HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility, out bool pillarVisibilityUpdated);
 
             if (!languageUpdated)
@@ -1340,6 +1386,11 @@ internal static class DesignerToolkitSettings
                 error = "Could not find blueprint_spacing default in config.json.";
                 return false;
             }
+            if (!transportVisibilityUpdated)
+            {
+                error = "Could not find height_filter_transport_visibility default in config.json.";
+                return false;
+            }
             if (!pillarVisibilityUpdated)
             {
                 error = "Could not find height_filter_pillar_visibility default in config.json.";
@@ -1414,6 +1465,16 @@ internal static class DesignerToolkitSettings
         HeightFilterMaxVisibleLevel = level;
         try { HeightFilterMaxVisibleLevelChanged?.Invoke(level); }
         catch (Exception ex) { s_log.Warning($"Height filter max visible level change handler failed: {ex.Message}"); }
+    }
+
+    public static void SetHeightFilterTransportVisibility(HeightFilterTransportVisibility mode)
+    {
+        if (HeightFilterTransportVisibility == mode)
+            return;
+
+        HeightFilterTransportVisibility = mode;
+        try { HeightFilterTransportVisibilityChanged?.Invoke(mode); }
+        catch (Exception ex) { s_log.Warning($"Height filter transport visibility change handler failed: {ex.Message}"); }
     }
 
     public static void SetHeightFilterPillarVisibility(HeightFilterPillarVisibility mode)
@@ -1523,12 +1584,14 @@ internal static class DesignerToolkitSettings
         string initialRecycleBinFolderName,
         int initialBlueprintSpacing,
         bool initialPreColorPipesEnabled,
+        HeightFilterTransportVisibility initialTransportVisibility,
         HeightFilterPillarVisibility initialPillarVisibility)
     {
         MarkdownTableLanguage = initialLanguage;
         MarkdownNumberFormat = initialNumberFormat;
         InstantBuildModeEnabled = initialInstantBuildMode;
         LegacyBeltConfigurationsEnabled = initialLegacyBeltConfigurations;
+        HeightFilterTransportVisibility = initialTransportVisibility;
         HeightFilterPillarVisibility = initialPillarVisibility;
         ThroughputOverlayEnabled = initialThroughputOverlayEnabled;
         ThroughputGlowEnabled = initialThroughputGlowEnabled;
@@ -1628,6 +1691,8 @@ internal static class DesignerToolkitSettings
                 BlueprintSpacing = blueprintSpacing;
             if (TryGetBool(root, "preColorPipesEnabled", out bool preColorPipesEnabled))
                 PreColorPipesEnabled = preColorPipesEnabled;
+            if (TryGetInt(root, "heightFilterTransportVisibility", out int transportVisibility))
+                HeightFilterTransportVisibility = TransportVisibilityFromInt(transportVisibility);
             if (TryGetInt(root, "heightFilterPillarVisibility", out int pillarVisibility))
                 HeightFilterPillarVisibility = PillarVisibilityFromInt(pillarVisibility);
             if (TryGetBool(root, "isFirstUnpausePending", out bool firstUnpausePending))
@@ -1671,6 +1736,7 @@ internal static class DesignerToolkitSettings
         writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);
         writer.AppendNumberField("blueprintSpacing", BlueprintSpacing);
         writer.AppendBoolField("preColorPipesEnabled", PreColorPipesEnabled);
+        writer.AppendNumberField("heightFilterTransportVisibility", (int)HeightFilterTransportVisibility);
         writer.AppendNumberField("heightFilterPillarVisibility", (int)HeightFilterPillarVisibility);
         writer.AppendBoolField("isFirstUnpausePending", IsFirstUnpausePending);
         writer.AppendEndObject();
@@ -1858,6 +1924,55 @@ internal static class DesignerToolkitSettings
         }
     }
 
+    private static HeightFilterTransportVisibility TransportVisibilityFromInt(int value)
+    {
+        switch (value)
+        {
+            case (int)HeightFilterTransportVisibility.Low:
+                return HeightFilterTransportVisibility.Low;
+            case (int)HeightFilterTransportVisibility.High:
+                return HeightFilterTransportVisibility.High;
+            default:
+                return HeightFilterTransportVisibility.Medium;
+        }
+    }
+
+    private static UiComponent TransportVisibilityDropdownOption(
+        HeightFilterTransportVisibility mode,
+        int index,
+        bool isInDropdown)
+    {
+        var label = new Label(TransportVisibilityLabel(mode));
+        label.Tooltip(TransportVisibilityTooltip(mode));
+        return label;
+    }
+
+    private static LocStrFormatted TransportVisibilityLabel(HeightFilterTransportVisibility mode)
+    {
+        switch (mode)
+        {
+            case HeightFilterTransportVisibility.Low:
+                return BdtLocalization.SettingsHeightFilterTransportVisibilityLow.AsFormatted;
+            case HeightFilterTransportVisibility.High:
+                return BdtLocalization.SettingsHeightFilterTransportVisibilityHigh.AsFormatted;
+            default:
+                return BdtLocalization.SettingsHeightFilterTransportVisibilityMedium.AsFormatted;
+        }
+    }
+
+    private static LocStrFormatted TransportVisibilityTooltip(HeightFilterTransportVisibility mode)
+    {
+        switch (mode)
+        {
+            case HeightFilterTransportVisibility.Low:
+                return BdtLocalization.SettingsHeightFilterTransportVisibilityLowTooltip.AsFormatted;
+            case HeightFilterTransportVisibility.High:
+                return BdtLocalization.SettingsHeightFilterTransportVisibilityHighTooltip.AsFormatted;
+            default:
+                return BdtLocalization.SettingsHeightFilterTransportVisibilityMediumTooltip.AsFormatted;
+        }
+    }
+
     private static HeightFilterPillarVisibility PillarVisibilityFromInt(int value)
     {
         switch (value)
@@ -1874,7 +1989,9 @@ internal static class DesignerToolkitSettings
         int index,
         bool isInDropdown)
     {
-        return new Label(PillarVisibilityLabel(mode));
+        var label = new Label(PillarVisibilityLabel(mode));
+        label.Tooltip(PillarVisibilityTooltip(mode));
+        return label;
     }
 
     private static LocStrFormatted PillarVisibilityLabel(HeightFilterPillarVisibility mode)
@@ -1885,6 +2002,17 @@ internal static class DesignerToolkitSettings
                 return BdtLocalization.SettingsHeightFilterPillarVisibilityAttached.AsFormatted;
             default:
                 return BdtLocalization.SettingsHeightFilterPillarVisibilityDetached.AsFormatted;
+        }
+    }
+
+    private static LocStrFormatted PillarVisibilityTooltip(HeightFilterPillarVisibility mode)
+    {
+        switch (mode)
+        {
+            case HeightFilterPillarVisibility.Attached:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityAttachedTooltip.AsFormatted;
+            default:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityDetachedTooltip.AsFormatted;
         }
     }
 }

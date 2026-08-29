@@ -40,6 +40,13 @@
     "default": true,
     "description": "Initial state for coloring empty pipes from their connected upstream sources."
   },
+  "height_filter_transport_visibility": {
+    "default": 1,
+    "is_integer": true,
+    "description": "Initial transport visibility mode for height filtering for saves without BDT settings state (0=Low, 1=Medium, 2=High).",
+    "min": 0,
+    "max": 2
+  },
   "height_filter_pillar_visibility": {
     "default": 0,
     "is_integer": true,

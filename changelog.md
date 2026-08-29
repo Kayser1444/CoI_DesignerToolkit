@@ -4,6 +4,12 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.11.2 [unreleased]
 
+- Added **Transport visibility** policy selector (`Low`, `Medium`, `High`) under **HEIGHT FILTER**, controlling whether transports require all inflection points (`Low`), a majority of inflection points (`Medium`, default), or at least one inflection point (`High`) to be at or below the threshold layer to remain visible.
+- Added keybindings for stepping transport visibility: `Shift+PageUp` (towards High) and `Shift+PageDown` (towards Low).
+- Added hotkey badges and tooltip clues for **Visible layers** (`[PgDn] / [PgUp]`) and **Transport visibility** (`[Shift+PgDn] / [Shift+PgUp]`).
+- Added per-value tooltips to each option in the Transport visibility and Pillar visibility dropdowns.
+- Persisted transport visibility mode per world via `dtkSettingsStateJson` mod cache storage and added global default in `config.json`.
+
 
 ## v0.11.1 [released]
 

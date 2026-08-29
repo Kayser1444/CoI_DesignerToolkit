@@ -132,6 +132,42 @@
     "Ограничивает уровень высоты транспортёров, строений и опор, отображаемых в мире."
   ],
   [
+    "dtk.settings.height_filter_transport_visibility.label",
+    "Видимость транспортов"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.description",
+    "Управляет оценкой видимости транспортов при фильтрации слоёв высоты."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "Определяет требования к точкам перегиба транспорта относительно видимого слоя."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low",
+    "Низкая"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "Все точки перегиба транспорта должны находиться на пороговом слое или ниже него."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium",
+    "Средняя"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "Большинство точек перегиба транспорта должны находиться на пороговом слое или ниже него."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high",
+    "Высокая"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "Хотя бы одна точка перегиба транспорта должна находиться на пороговом слое или ниже него."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.label",
     "Видимость столба"
   ],
@@ -140,16 +176,20 @@
     "Управляет тем, как оценивается видимость столбов при фильтрации слоев высот."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.tooltip",
-    "Отдельный оценивает высоту каждой колонны независимо от активного слоя. Прикрепленные столбы отображаются всякий раз, когда прикреплен хотя бы один видимый транспорт или надземная конструкция."
-  ],
-  [
     "dtk.settings.height_filter_pillar_visibility.detached",
     "Отдельностоящий"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "Оценивает высоту каждого столба независимо от активного слоя."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.attached",
     "Прикрепил"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "Показывает столбы, если к ним подключён хотя бы один видимый транспорт или надземная конструкция."
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -178,6 +218,22 @@
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Уменьшает максимальную видимую высоту слоя фильтра."
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "Видимость транспортов фильтра высоты (высокая)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "Переключает видимость транспортов в сторону «Высокая»"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "Видимость транспортов фильтра высоты (низкая)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "Переключает видимость транспортов в сторону «Низкая»"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",

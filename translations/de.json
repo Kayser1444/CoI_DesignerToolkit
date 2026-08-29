@@ -132,6 +132,42 @@
     "Begrenzt die Höhenebene von Transporten, Bauwerken und Pfeilern, die in der Welt gerendert werden."
   ],
   [
+    "dtk.settings.height_filter_transport_visibility.label",
+    "Transportsichtbarkeit"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.description",
+    "Legt fest, wie die Sichtbarkeit von Transporten bei der Höhenfilterung bewertet wird."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "Legt fest, welche Anforderung die Wendepunkte eines Transports im Verhältnis zur sichtbaren Ebene erfüllen müssen."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low",
+    "Niedrig"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "Alle Wendepunkte des Transports müssen auf oder unter der Schwellenebene liegen."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium",
+    "Mittel"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "Die Mehrheit der Wendepunkte des Transports muss auf oder unter der Schwellenebene liegen."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high",
+    "Hoch"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "Mindestens ein Wendepunkt des Transports muss auf oder unter der Schwellenebene liegen."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.label",
     "Sichtbarkeit der Säule"
   ],
@@ -140,16 +176,20 @@
     "Steuert, wie die Säulensichtbarkeit beim Filtern von Höhenebenen bewertet wird."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.tooltip",
-    "Bei „Detached“ wird die Höhe jeder Säule unabhängig von der aktiven Ebene bewertet. „Angehängt“ zeigt Säulen, wenn mindestens eine sichtbare Transport- oder Hochstruktur angebracht ist."
-  ],
-  [
     "dtk.settings.height_filter_pillar_visibility.detached",
     "Losgelöst"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "Bewertet die Höhe jedes Pfeilers unabhängig von der aktiven Ebene."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.attached",
     "Beigefügt"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "Zeigt Pfeiler an, sobald mindestens ein sichtbarer Transport oder eine erhöhte Struktur daran befestigt ist."
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -178,6 +218,22 @@
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Verringert die maximal sichtbare Filterebene"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "Höhenfilter: Transportsichtbarkeit (hoch)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "Schaltet die Transportsichtbarkeit in Richtung Hoch"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "Höhenfilter: Transportsichtbarkeit (niedrig)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "Schaltet die Transportsichtbarkeit in Richtung Niedrig"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",

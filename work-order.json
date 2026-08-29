@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 192,
+  "total_keys": 206,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -10,303 +10,160 @@
     "dtk.settings.number_format.auto"
   ],
   "keys": {
-    "dtk.settings.height_filter_pillar_visibility.label": {
-      "en": "Pillar visibility",
-      "context": "Settings row label for height filter pillar visibility mode.",
-      "de": "Sichtbarkeit der Säule",
-      "es": "Visibilidad del pilar",
-      "it": "Visibilità del pilastro",
-      "pt": "Visibilidade do pilar",
-      "ru": "Видимость столба",
-      "sv": "Pelare synlighet",
-      "zh": "支柱可见度"
+    "dtk.settings.height_filter_transport_visibility.label": {
+      "en": "Transport visibility",
+      "context": "Settings row label for height filter transport visibility mode.",
+      "de": "Transportsichtbarkeit",
+      "es": "Visibilidad de transportes",
+      "it": "Visibilità dei trasporti",
+      "pt": "Visibilidade dos transportes",
+      "ru": "Видимость транспортов",
+      "zh": "运输可见性",
+      "sv": "Transportsynlighet"
     },
-    "dtk.settings.height_filter_pillar_visibility.description": {
-      "en": "Controls how pillar visibility is evaluated when filtering height layers.",
-      "context": "Settings row description for height filter pillar visibility mode.",
-      "de": "Steuert, wie die Säulensichtbarkeit beim Filtern von Höhenebenen bewertet wird.",
-      "es": "Controla cómo se evalúa la visibilidad de los pilares al filtrar capas de altura.",
-      "it": "Controlla il modo in cui viene valutata la visibilità dei pilastri durante il filtraggio dei layer di altezza.",
-      "pt": "Controla como a visibilidade do pilar é avaliada ao filtrar camadas de altura.",
-      "ru": "Управляет тем, как оценивается видимость столбов при фильтрации слоев высот.",
-      "sv": "Styr hur pelarens synlighet utvärderas vid filtrering av höjdlager.",
-      "zh": "控制过滤高度图层时如何评估支柱可见性。"
+    "dtk.settings.height_filter_transport_visibility.description": {
+      "en": "Controls how transport visibility is evaluated when filtering height layers.",
+      "context": "Settings row description for height filter transport visibility mode.",
+      "de": "Legt fest, wie die Sichtbarkeit von Transporten bei der Höhenfilterung bewertet wird.",
+      "es": "Controla cómo se evalúa la visibilidad de los transportes al filtrar las capas de altura.",
+      "it": "Controlla come viene valutata la visibilità dei trasporti durante il filtraggio dei livelli di altezza.",
+      "pt": "Controla como a visibilidade dos transportes é avaliada ao filtrar camadas de altura.",
+      "ru": "Управляет оценкой видимости транспортов при фильтрации слоёв высоты.",
+      "zh": "控制按高度筛选时如何判断运输的可见性。",
+      "sv": "Styr hur transportsynlighet utvärderas vid filtrering av höjdlager."
     },
-    "dtk.settings.height_filter_pillar_visibility.tooltip": {
-      "en": "Detached evaluates each pillar's height independently against the active layer. Attached shows pillars whenever at least one visible transport or elevated structure is attached.",
-      "context": "Settings tooltip for height filter pillar visibility options.",
-      "de": "Bei „Detached“ wird die Höhe jeder Säule unabhängig von der aktiven Ebene bewertet. „Angehängt“ zeigt Säulen, wenn mindestens eine sichtbare Transport- oder Hochstruktur angebracht ist.",
-      "es": "Separado evalúa la altura de cada pilar de forma independiente frente a la capa activa. Adjunto muestra pilares cada vez que se adjunta al menos un transporte visible o una estructura elevada.",
-      "it": "Staccato valuta l'altezza di ciascun pilastro in modo indipendente rispetto al livello attivo. In allegato vengono mostrati i pilastri ogni volta che è collegato almeno un trasporto visibile o una struttura elevata.",
-      "pt": "Detached avalia a altura de cada pilar independentemente em relação à camada ativa. Anexado mostra pilares sempre que pelo menos um transporte visível ou estrutura elevada estiver anexado.",
-      "ru": "Отдельный оценивает высоту каждой колонны независимо от активного слоя. Прикрепленные столбы отображаются всякий раз, когда прикреплен хотя бы один видимый транспорт или надземная конструкция.",
-      "sv": "Fristående utvärderar varje pelares höjd oberoende av det aktiva lagret. Bifogad visar pelare när minst en synlig transport eller upphöjd struktur är fäst.",
-      "zh": "分离根据有源层独立评估每个柱的高度。只要至少连接了一个可见的运输或高架结构，就会显示柱子。"
+    "dtk.settings.height_filter_transport_visibility.low": {
+      "en": "Low",
+      "context": "Dropdown option for low height filter transport visibility.",
+      "de": "Niedrig",
+      "es": "Baja",
+      "it": "Bassa",
+      "pt": "Baixa",
+      "ru": "Низкая",
+      "zh": "低",
+      "sv": "Låg"
     },
-    "dtk.settings.height_filter_pillar_visibility.detached": {
-      "en": "Detached",
-      "context": "Dropdown option for detached height filter pillar visibility.",
-      "de": "Losgelöst",
-      "es": "Separado",
-      "it": "Distaccato",
-      "pt": "Desanexado",
-      "ru": "Отдельностоящий",
-      "sv": "Fristående",
-      "zh": "独立的"
+    "dtk.settings.height_filter_transport_visibility.low.tooltip": {
+      "en": "All inflection points of the transport must be at or below the threshold layer.",
+      "context": "Tooltip for Low transport visibility option.",
+      "de": "Alle Wendepunkte des Transports müssen auf oder unter der Schwellenebene liegen.",
+      "es": "Todos los puntos de inflexión del transporte deben estar en la capa umbral o por debajo.",
+      "it": "Tutti i punti di inflessione del trasporto devono trovarsi al livello soglia o al di sotto.",
+      "pt": "Todos os pontos de inflexão do transporte devem estar no nível de referência ou abaixo dele.",
+      "ru": "Все точки перегиба транспорта должны находиться на пороговом слое или ниже него.",
+      "zh": "运输的所有转折点都必须位于阈值层或更低。",
+      "sv": "Alla brytpunkter för transporten måste vara vid eller under tröskellagret."
     },
-    "dtk.settings.height_filter_pillar_visibility.attached": {
-      "en": "Attached",
-      "context": "Dropdown option for attached height filter pillar visibility.",
-      "de": "Beigefügt",
-      "es": "Adjunto",
-      "it": "Allegato",
-      "pt": "Apegado",
-      "ru": "Прикрепил",
-      "sv": "Bunden",
-      "zh": "随附的"
+    "dtk.settings.height_filter_transport_visibility.medium": {
+      "en": "Medium",
+      "context": "Dropdown option for medium height filter transport visibility.",
+      "de": "Mittel",
+      "es": "Media",
+      "it": "Media",
+      "pt": "Média",
+      "ru": "Средняя",
+      "sv": "Medel",
+      "zh": "中"
     },
-    "Kb_Bdt_TransportCleanup__label": {
-      "en": "Transport cleanup tool",
-      "context": "Label for the BDT transport cleanup control.",
-      "de": "Transportbereinigungstool",
-      "es": "Herramienta de limpieza de transporte",
-      "it": "Strumento di pulizia dei trasporti",
-      "pt": "Ferramenta de limpeza de transporte",
-      "ru": "Инструмент для очистки транспорта",
-      "sv": "Transportrengöringsverktyg",
-      "zh": "运输清理工具"
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip": {
+      "en": "A majority of the inflection points of the transport must be at or below the threshold layer.",
+      "context": "Tooltip for Medium transport visibility option.",
+      "de": "Die Mehrheit der Wendepunkte des Transports muss auf oder unter der Schwellenebene liegen.",
+      "es": "La mayoría de los puntos de inflexión del transporte deben estar en la capa umbral o por debajo.",
+      "it": "La maggior parte dei punti di inflessione del trasporto deve trovarsi al livello soglia o al di sotto.",
+      "pt": "A maioria dos pontos de inflexão do transporte deve estar no nível de referência ou abaixo dele.",
+      "ru": "Большинство точек перегиба транспорта должны находиться на пороговом слое или ниже него.",
+      "zh": "运输的大多数转折点必须位于阈值层或更低。",
+      "sv": "En majoritet av transportens brytpunkter måste vara vid eller under tröskellagret."
     },
-    "Kb_Bdt_TransportCleanup__tooltip": {
-      "en": "Activates the transport cleanup selection tool",
-      "context": "Tooltip for the BDT transport cleanup control.",
-      "de": "Aktiviert das Auswahltool für die Transportbereinigung",
-      "es": "Activa la herramienta de selección de limpieza de transporte.",
-      "it": "Attiva lo strumento di selezione della pulizia del trasporto",
-      "pt": "Ativa a ferramenta de seleção de limpeza de transporte",
-      "ru": "Активирует инструмент выбора очистки транспорта.",
-      "sv": "Aktiverar verktyget för val av transportrensning",
-      "zh": "激活传输清理选择工具"
+    "dtk.settings.height_filter_transport_visibility.high": {
+      "en": "High",
+      "context": "Dropdown option for high height filter transport visibility.",
+      "de": "Hoch",
+      "es": "Alta",
+      "it": "Alta",
+      "pt": "Alta",
+      "ru": "Высокая",
+      "zh": "高",
+      "sv": "Hög"
     },
-    "Kb_Bdt_HeightFilterShowLayer__label": {
-      "en": "Height filter show layer",
-      "context": "Label for the BDT height filter show-layer control.",
-      "de": "Höhenfilter-Anzeigeebene",
-      "es": "Filtro de altura mostrar capa",
-      "it": "Livello di visualizzazione del filtro altezza",
-      "pt": "Camada de exibição de filtro de altura",
-      "ru": "Фильтр высоты показать слой",
-      "sv": "Höjd filter visa lager",
-      "zh": "高度过滤显示层"
+    "dtk.settings.height_filter_transport_visibility.high.tooltip": {
+      "en": "At least one inflection point of the transport must be at or below the threshold layer.",
+      "context": "Tooltip for High transport visibility option.",
+      "de": "Mindestens ein Wendepunkt des Transports muss auf oder unter der Schwellenebene liegen.",
+      "es": "Al menos un punto de inflexión del transporte debe estar en la capa umbral o por debajo.",
+      "it": "Almeno un punto di inflessione del trasporto deve trovarsi al livello soglia o al di sotto.",
+      "pt": "Pelo menos um ponto de inflexão do transporte deve estar no nível de referência ou abaixo dele.",
+      "ru": "Хотя бы одна точка перегиба транспорта должна находиться на пороговом слое или ниже него.",
+      "zh": "运输至少有一个转折点位于阈值层或更低。",
+      "sv": "Minst en brytpunkt för transporten måste vara vid eller under tröskellagret."
     },
-    "Kb_Bdt_HeightFilterShowLayer__tooltip": {
-      "en": "Increases the maximum visible height filter layer",
-      "context": "Tooltip for the BDT height filter show-layer control.",
-      "de": "Erhöht die maximal sichtbare Filterebene",
-      "es": "Aumenta la altura máxima visible de la capa de filtro.",
-      "it": "Aumenta lo strato di filtro dell'altezza massima visibile",
-      "pt": "Aumenta a camada de filtro de altura visível máxima",
-      "ru": "Увеличивает максимальную видимую высоту слоя фильтра.",
-      "sv": "Ökar filterskiktet för maximal synlig höjd",
-      "zh": "增加过滤层的最大可见高度"
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip": {
+      "en": "Evaluates each pillar's height independently against the active layer.",
+      "context": "Tooltip for Detached pillar visibility option.",
+      "de": "Bewertet die Höhe jedes Pfeilers unabhängig von der aktiven Ebene.",
+      "es": "Evalúa la altura de cada pilar de forma independiente respecto a la capa activa.",
+      "it": "Valuta l'altezza di ogni pilastro indipendentemente dal livello attivo.",
+      "pt": "Avalia a altura de cada pilar independentemente do nível ativo.",
+      "ru": "Оценивает высоту каждого столба независимо от активного слоя.",
+      "sv": "Utvärderar varje pelares höjd självständigt mot det aktiva lagret.",
+      "zh": "根据当前图层独立评估每根支柱的高度。"
     },
-    "Kb_Bdt_HeightFilterHideLayer__label": {
-      "en": "Height filter hide layer",
-      "context": "Label for the BDT height filter hide-layer control.",
-      "de": "Ebene des Höhenfilters ausblenden",
-      "es": "Filtro de altura ocultar capa",
-      "it": "Strato di nascondere il filtro in altezza",
-      "pt": "Filtro de altura ocultar camada",
-      "ru": "Фильтр высоты скрыть слой",
-      "sv": "Höjd filter gömma lager",
-      "zh": "高度过滤隐藏层"
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip": {
+      "en": "Shows pillars whenever at least one visible transport or elevated structure is attached.",
+      "context": "Tooltip for Attached pillar visibility option.",
+      "de": "Zeigt Pfeiler an, sobald mindestens ein sichtbarer Transport oder eine erhöhte Struktur daran befestigt ist.",
+      "es": "Muestra los pilares cuando hay al menos un transporte visible o una estructura elevada conectados a ellos.",
+      "it": "Mostra i pilastri quando almeno un trasporto visibile o una struttura sopraelevata è collegato a essi.",
+      "pt": "Mostra os pilares sempre que pelo menos um transporte visível ou uma estrutura elevada estiver conectado a eles.",
+      "ru": "Показывает столбы, если к ним подключён хотя бы один видимый транспорт или надземная конструкция.",
+      "sv": "Visar pelare så länge minst en synlig transport eller upphöjd struktur är ansluten.",
+      "zh": "只要连接了至少一个可见运输或高架结构，就显示支柱。"
     },
-    "Kb_Bdt_HeightFilterHideLayer__tooltip": {
-      "en": "Decreases the maximum visible height filter layer",
-      "context": "Tooltip for the BDT height filter hide-layer control.",
-      "de": "Verringert die maximal sichtbare Filterebene",
-      "es": "Disminuye la capa de filtro de altura máxima visible.",
-      "it": "Diminuisce il livello di filtro dell'altezza massima visibile",
-      "pt": "Diminui a camada de filtro de altura visível máxima",
-      "ru": "Уменьшает максимальную видимую высоту слоя фильтра.",
-      "sv": "Minskar filterskiktet för den maximala synliga höjden",
-      "zh": "降低滤镜层的最大可见高度"
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label": {
+      "en": "Height filter transport visibility (high)",
+      "context": "Label for the BDT height filter transport-visibility step towards High control.",
+      "de": "Höhenfilter: Transportsichtbarkeit (hoch)",
+      "es": "Visibilidad de transportes del filtro de altura (alta)",
+      "it": "Visibilità dei trasporti del filtro altezza (alta)",
+      "pt": "Visibilidade dos transportes do filtro de altura (alta)",
+      "ru": "Видимость транспортов фильтра высоты (высокая)",
+      "zh": "高度筛选运输可见性（高）",
+      "sv": "Höjdfilter transportsynlighet (hög)"
     },
-    "Kb_Bdt_ThroughputOverlayToggle__label": {
-      "en": "Toggle throughput overlay",
-      "context": "Label for the BDT throughput-overlay control.",
-      "de": "Durchsatz-Overlay umschalten",
-      "es": "Alternar superposición de rendimiento",
-      "it": "Attiva/disattiva la sovrapposizione del throughput",
-      "pt": "Alternar sobreposição de taxa de transferência",
-      "ru": "Переключить наложение пропускной способности",
-      "sv": "Växla genomströmningsöverlagring",
-      "zh": "切换吞吐量叠加"
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip": {
+      "en": "Steps transport visibility towards High",
+      "context": "Tooltip for the BDT height filter transport-visibility step towards High control.",
+      "de": "Schaltet die Transportsichtbarkeit in Richtung Hoch",
+      "es": "Avanza la visibilidad de transportes hacia Alta",
+      "it": "Aumenta la visibilità dei trasporti verso Alta",
+      "pt": "Aumenta a visibilidade dos transportes em direção a Alta",
+      "ru": "Переключает видимость транспортов в сторону «Высокая»",
+      "zh": "将运输可见性向高调整",
+      "sv": "Stegar transportsynlighet mot Hög"
     },
-    "Kb_Bdt_ThroughputOverlayToggle__tooltip": {
-      "en": "Toggles the throughput overlay",
-      "context": "Tooltip for the BDT throughput-overlay control.",
-      "de": "Schaltet die Durchsatzüberlagerung um",
-      "es": "Alterna la superposición de rendimiento",
-      "it": "Attiva/disattiva la sovrapposizione del throughput",
-      "pt": "Alterna a sobreposição de taxa de transferência",
-      "ru": "Переключает наложение пропускной способности",
-      "sv": "Växlar genomströmningsöverlagringen",
-      "zh": "切换吞吐量覆盖"
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label": {
+      "en": "Height filter transport visibility (low)",
+      "context": "Label for the BDT height filter transport-visibility step towards Low control.",
+      "de": "Höhenfilter: Transportsichtbarkeit (niedrig)",
+      "es": "Visibilidad de transportes del filtro de altura (baja)",
+      "it": "Visibilità dei trasporti del filtro altezza (bassa)",
+      "pt": "Visibilidade dos transportes do filtro de altura (baixa)",
+      "ru": "Видимость транспортов фильтра высоты (низкая)",
+      "zh": "高度筛选运输可见性（低）",
+      "sv": "Höjdfilter transportsynlighet (låg)"
     },
-    "Kb_Bdt_ThroughputAoETool__label": {
-      "en": "Throughput tool",
-      "context": "Label for the BDT throughput area tool control.",
-      "de": "Durchsatzwerkzeug",
-      "es": "herramienta de rendimiento",
-      "it": "Strumento di produttività",
-      "pt": "Ferramenta de rendimento",
-      "ru": "Инструмент пропускной способности",
-      "sv": "Genomströmningsverktyg",
-      "zh": "吞吐量工具"
-    },
-    "Kb_Bdt_ThroughputAoETool__tooltip": {
-      "en": "Activates the throughput area selection tool",
-      "context": "Tooltip for the BDT throughput area tool control.",
-      "de": "Aktiviert das Werkzeug zur Auswahl des Durchsatzbereichs",
-      "es": "Activa la herramienta de selección del área de rendimiento.",
-      "it": "Attiva lo strumento di selezione dell'area di throughput",
-      "pt": "Ativa a ferramenta de seleção de área de rendimento",
-      "ru": "Активирует инструмент выбора области пропускной способности.",
-      "sv": "Aktiverar verktyget för val av genomströmningsområde",
-      "zh": "激活吞吐量区域选择工具"
-    },
-    "Kb_Bdt_TransportProductRemovalAoETool__label": {
-      "en": "Remove products in area",
-      "context": "Label for the BDT area product-removal control.",
-      "de": "Entfernen Sie Produkte aus dem Bereich",
-      "es": "Eliminar productos en el área",
-      "it": "Rimuovere i prodotti nell'area",
-      "pt": "Remover produtos da área",
-      "ru": "Удалить продукты в зоне",
-      "sv": "Ta bort produkter i området",
-      "zh": "删除该区域的产品"
-    },
-    "Kb_Bdt_TransportProductRemovalAoETool__tooltip": {
-      "en": "Activates the area product-removal tool",
-      "context": "Tooltip for the BDT area product-removal control.",
-      "de": "Aktiviert das Bereichsprodukt-Entfernungstool",
-      "es": "Activa la herramienta de eliminación de productos del área.",
-      "it": "Attiva lo strumento di rimozione del prodotto dell'area",
-      "pt": "Ativa a ferramenta de remoção de produtos da área",
-      "ru": "Активирует инструмент удаления продуктов из области.",
-      "sv": "Aktiverar verktyget för borttagning av områdesprodukter",
-      "zh": "激活区域产品移除工具"
-    },
-    "Kb_Bdt_PollutionOverlayToggle__label": {
-      "en": "Toggle pollution overlay",
-      "context": "Label for the BDT pollution-overlay control.",
-      "de": "Verschmutzungsüberlagerung ein-/ausschalten",
-      "es": "Alternar superposición de contaminación",
-      "it": "Attiva/disattiva la sovrapposizione dell'inquinamento",
-      "pt": "Alternar sobreposição de poluição",
-      "ru": "Переключить наложение загрязнения",
-      "sv": "Växla föroreningsöverlagring",
-      "zh": "切换污染叠加"
-    },
-    "Kb_Bdt_PollutionOverlayToggle__tooltip": {
-      "en": "Toggles the pollution overlay",
-      "context": "Tooltip for the BDT pollution-overlay control.",
-      "de": "Schaltet die Verschmutzungsüberlagerung um",
-      "es": "Alterna la superposición de contaminación.",
-      "it": "Attiva/disattiva la sovrapposizione dell'inquinamento",
-      "pt": "Alterna a sobreposição de poluição",
-      "ru": "Переключает наложение загрязнения",
-      "sv": "Växlar föroreningsöverlagringen",
-      "zh": "切换污染叠加"
-    },
-    "Kb_Bdt_RadiationOverlayToggle__label": {
-      "en": "Toggle radiation overlay",
-      "context": "Label for the BDT radiation-overlay control.",
-      "de": "Strahlungsüberlagerung ein-/ausschalten",
-      "es": "Alternar superposición de radiación",
-      "it": "Attiva/disattiva la sovrapposizione delle radiazioni",
-      "pt": "Alternar sobreposição de radiação",
-      "ru": "Переключить наложение радиации",
-      "sv": "Växla strålningsöverlagring",
-      "zh": "切换辐射叠加"
-    },
-    "Kb_Bdt_RadiationOverlayToggle__tooltip": {
-      "en": "Toggles the radiation overlay",
-      "context": "Tooltip for the BDT radiation-overlay control.",
-      "de": "Schaltet die Strahlungsüberlagerung um",
-      "es": "Alterna la superposición de radiación.",
-      "it": "Attiva/disattiva la sovrapposizione delle radiazioni",
-      "pt": "Alterna a sobreposição de radiação",
-      "ru": "Переключает наложение радиации",
-      "sv": "Växlar strålningsöverlagringen",
-      "zh": "切换辐射覆盖"
-    },
-    "Kb_Bdt_LayoutBoxMode__label": {
-      "en": "Toggle layout box overlay",
-      "context": "Label for the BDT layout-box overlay control.",
-      "de": "Schalten Sie die Überlagerung des Layout-Felds um",
-      "es": "Alternar superposición de cuadro de diseño",
-      "it": "Attiva/disattiva la sovrapposizione della casella di layout",
-      "pt": "Alternar sobreposição da caixa de layout",
-      "ru": "Переключить наложение рамки макета",
-      "sv": "Växla layoutruta överlagring",
-      "zh": "切换布局框覆盖"
-    },
-    "Kb_Bdt_LayoutBoxMode__tooltip": {
-      "en": "Toggles layout box overlay",
-      "context": "Tooltip for the BDT layout-box overlay control.",
-      "de": "Schaltet die Überlagerung des Layoutfelds um",
-      "es": "Alterna la superposición del cuadro de diseño",
-      "it": "Attiva/disattiva la sovrapposizione della casella di layout",
-      "pt": "Alterna a sobreposição da caixa de layout",
-      "ru": "Переключает наложение рамки макета",
-      "sv": "Växlar layoutboxöverlagring",
-      "zh": "切换布局框覆盖"
-    },
-    "Kb_Bdt_UndoPlacement__label": {
-      "en": "Undo placement",
-      "context": "Label for the BDT undo-placement control.",
-      "de": "Platzierung rückgängig machen",
-      "es": "Deshacer colocación",
-      "it": "Annulla posizionamento",
-      "pt": "Desfazer posicionamento",
-      "ru": "Отменить размещение",
-      "sv": "Ångra placering",
-      "zh": "撤消放置"
-    },
-    "Kb_Bdt_UndoPlacement__tooltip": {
-      "en": "Undoes the last BDT placement action",
-      "context": "Tooltip for the BDT undo-placement control.",
-      "de": "Macht die letzte BDT-Platzierungsaktion rückgängig",
-      "es": "Deshace la última acción de colocación de BDT",
-      "it": "Annulla l'ultima azione di posizionamento BDT",
-      "pt": "Desfaz a última ação de posicionamento do BDT",
-      "ru": "Отменяет последнее действие по размещению BDT.",
-      "sv": "Ångrar den senaste BDT-placeringsåtgärden",
-      "zh": "撤消上次 BDT 放置操作"
-    },
-    "Kb_Bdt_TransportLazyHeight__label": {
-      "en": "Transport lazy height routing",
-      "context": "Label for the BDT transport lazy-height control.",
-      "de": "Transport-Lay-Height-Routing",
-      "es": "Transporte enrutamiento de altura diferida",
-      "it": "Trasporto con percorsi ad altezza pigra",
-      "pt": "Roteamento de altura preguiçosa de transporte",
-      "ru": "Транспортная ленивая маршрутизация по высоте",
-      "sv": "Transport lata höjd routing",
-      "zh": "传输惰性高度路由"
-    },
-    "Kb_Bdt_TransportLazyHeight__tooltip": {
-      "en": "Holds lazy height matching mode while placing transports (Alt)",
-      "context": "Tooltip for the BDT transport lazy-height control.",
-      "de": "Behält den Lazy-Höhenanpassungsmodus beim Platzieren von Transportmitteln bei (Alt)",
-      "es": "Mantiene el modo de coincidencia de altura diferida mientras se realizan transportes (Alt)",
-      "it": "Mantiene la modalità di corrispondenza dell'altezza pigra durante il posizionamento dei trasporti (Alt)",
-      "pt": "Mantém o modo de correspondência de altura lenta ao colocar transportes (Alt)",
-      "ru": "Удерживает режим ленивого сопоставления высоты при размещении транспорта (Alt)",
-      "sv": "Håller läget för lat höjdmatchning när du placerar transporter (Alt)",
-      "zh": "放置传输时保持惰性高度匹配模式（Alt）"
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip": {
+      "en": "Steps transport visibility towards Low",
+      "context": "Tooltip for the BDT height filter transport-visibility step towards Low control.",
+      "de": "Schaltet die Transportsichtbarkeit in Richtung Niedrig",
+      "es": "Avanza la visibilidad de transportes hacia Baja",
+      "it": "Riduce la visibilità dei trasporti verso Bassa",
+      "pt": "Reduz a visibilidade dos transportes em direção a Baixa",
+      "ru": "Переключает видимость транспортов в сторону «Низкая»",
+      "zh": "将运输可见性向低调整",
+      "sv": "Stegar transportsynlighet mot Låg"
     }
   },
-  "keys_needing_translation": 27
+  "keys_needing_translation": 0
 }

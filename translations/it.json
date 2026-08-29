@@ -132,6 +132,42 @@
     "Limita il livello di altezza di trasporti, strutture e pilastri visualizzati nel mondo."
   ],
   [
+    "dtk.settings.height_filter_transport_visibility.label",
+    "Visibilità dei trasporti"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.description",
+    "Controlla come viene valutata la visibilità dei trasporti durante il filtraggio dei livelli di altezza."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "Controlla il requisito dei punti di inflessione del trasporto rispetto al livello visibile."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low",
+    "Bassa"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "Tutti i punti di inflessione del trasporto devono trovarsi al livello soglia o al di sotto."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium",
+    "Media"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "La maggior parte dei punti di inflessione del trasporto deve trovarsi al livello soglia o al di sotto."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high",
+    "Alta"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "Almeno un punto di inflessione del trasporto deve trovarsi al livello soglia o al di sotto."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.label",
     "Visibilità del pilastro"
   ],
@@ -140,16 +176,20 @@
     "Controlla il modo in cui viene valutata la visibilità dei pilastri durante il filtraggio dei layer di altezza."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.tooltip",
-    "Staccato valuta l'altezza di ciascun pilastro in modo indipendente rispetto al livello attivo. In allegato vengono mostrati i pilastri ogni volta che è collegato almeno un trasporto visibile o una struttura elevata."
-  ],
-  [
     "dtk.settings.height_filter_pillar_visibility.detached",
     "Distaccato"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "Valuta l'altezza di ogni pilastro indipendentemente dal livello attivo."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.attached",
     "Allegato"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "Mostra i pilastri quando almeno un trasporto visibile o una struttura sopraelevata è collegato a essi."
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -178,6 +218,22 @@
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Diminuisce il livello di filtro dell'altezza massima visibile"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "Visibilità dei trasporti del filtro altezza (alta)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "Aumenta la visibilità dei trasporti verso Alta"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "Visibilità dei trasporti del filtro altezza (bassa)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "Riduce la visibilità dei trasporti verso Bassa"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",

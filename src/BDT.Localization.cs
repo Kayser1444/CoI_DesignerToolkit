@@ -84,16 +84,36 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.height_filter_max_visible.label", "Visible layers", "Settings row label for visible layers.");
     public static LocStr SettingsHeightFilterMaxVisibleDescription =
         Loc.Str("dtk.settings.height_filter_max_visible.description", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
+    public static LocStr SettingsHeightFilterTransportVisibility =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.label", "Transport visibility", "Settings row label for height filter transport visibility mode.");
+    public static LocStr SettingsHeightFilterTransportVisibilityDescription =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.description", "Controls how transport visibility is evaluated when filtering height layers.", "Settings row description for height filter transport visibility mode.");
+    public static LocStr SettingsHeightFilterTransportVisibilityTooltip =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.tooltip", "Controls the threshold requirement for transport inflection points against the visible layer.", "Settings tooltip for height filter transport visibility options.");
+    public static LocStr SettingsHeightFilterTransportVisibilityLow =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.low", "Low", "Dropdown option for low height filter transport visibility.");
+    public static LocStr SettingsHeightFilterTransportVisibilityLowTooltip =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.low.tooltip", "All inflection points of the transport must be at or below the threshold layer.", "Tooltip for Low transport visibility option.");
+    public static LocStr SettingsHeightFilterTransportVisibilityMedium =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.medium", "Medium", "Dropdown option for medium height filter transport visibility.");
+    public static LocStr SettingsHeightFilterTransportVisibilityMediumTooltip =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.medium.tooltip", "A majority of the inflection points of the transport must be at or below the threshold layer.", "Tooltip for Medium transport visibility option.");
+    public static LocStr SettingsHeightFilterTransportVisibilityHigh =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.high", "High", "Dropdown option for high height filter transport visibility.");
+    public static LocStr SettingsHeightFilterTransportVisibilityHighTooltip =
+        Loc.Str("dtk.settings.height_filter_transport_visibility.high.tooltip", "At least one inflection point of the transport must be at or below the threshold layer.", "Tooltip for High transport visibility option.");
     public static LocStr SettingsHeightFilterPillarVisibility =
         Loc.Str("dtk.settings.height_filter_pillar_visibility.label", "Pillar visibility", "Settings row label for height filter pillar visibility mode.");
     public static LocStr SettingsHeightFilterPillarVisibilityDescription =
         Loc.Str("dtk.settings.height_filter_pillar_visibility.description", "Controls how pillar visibility is evaluated when filtering height layers.", "Settings row description for height filter pillar visibility mode.");
-    public static LocStr SettingsHeightFilterPillarVisibilityTooltip =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.tooltip", "Detached evaluates each pillar's height independently against the active layer. Attached shows pillars whenever at least one visible transport or elevated structure is attached.", "Settings tooltip for height filter pillar visibility options.");
     public static LocStr SettingsHeightFilterPillarVisibilityDetached =
         Loc.Str("dtk.settings.height_filter_pillar_visibility.detached", "Detached", "Dropdown option for detached height filter pillar visibility.");
+    public static LocStr SettingsHeightFilterPillarVisibilityDetachedTooltip =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.detached.tooltip", "Evaluates each pillar's height independently against the active layer.", "Tooltip for Detached pillar visibility option.");
     public static LocStr SettingsHeightFilterPillarVisibilityAttached =
         Loc.Str("dtk.settings.height_filter_pillar_visibility.attached", "Attached", "Dropdown option for attached height filter pillar visibility.");
+    public static LocStr SettingsHeightFilterPillarVisibilityAttachedTooltip =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.attached.tooltip", "Shows pillars whenever at least one visible transport or elevated structure is attached.", "Tooltip for Attached pillar visibility option.");
     public static LocStr SettingsGlobalHotkeyTooltip =
         Loc.Str("dtk.settings.global_hotkey.description", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
 
@@ -112,6 +132,14 @@ internal static class BdtLocalization
         Loc.Str("Kb_Bdt_HeightFilterHideLayer__label", "Height filter hide layer", "Label for the BDT height filter hide-layer control.");
     public static LocStr HotkeyHeightFilterHideLayerTooltip =
         Loc.Str("Kb_Bdt_HeightFilterHideLayer__tooltip", "Decreases the maximum visible height filter layer", "Tooltip for the BDT height filter hide-layer control.");
+    public static LocStr HotkeyHeightFilterTransportVisibilityHighLabel =
+        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityHigh__label", "Height filter transport visibility (high)", "Label for the BDT height filter transport-visibility step towards High control.");
+    public static LocStr HotkeyHeightFilterTransportVisibilityHighTooltip =
+        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip", "Steps transport visibility towards High", "Tooltip for the BDT height filter transport-visibility step towards High control.");
+    public static LocStr HotkeyHeightFilterTransportVisibilityLowLabel =
+        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityLow__label", "Height filter transport visibility (low)", "Label for the BDT height filter transport-visibility step towards Low control.");
+    public static LocStr HotkeyHeightFilterTransportVisibilityLowTooltip =
+        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip", "Steps transport visibility towards Low", "Tooltip for the BDT height filter transport-visibility step towards Low control.");
     public static LocStr HotkeyThroughputOverlayToggleLabel =
         Loc.Str("Kb_Bdt_ThroughputOverlayToggle__label", "Toggle throughput overlay", "Label for the BDT throughput-overlay control.");
     public static LocStr HotkeyThroughputOverlayToggleTooltip =

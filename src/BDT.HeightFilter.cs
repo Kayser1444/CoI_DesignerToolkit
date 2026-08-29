@@ -100,6 +100,7 @@ namespace CoIDesignerToolkit
                 m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, OnSyncUpdate);
                 m_gameLoopEvents.RenderUpdateEnd.AddNonSaveable(this, OnRenderUpdateEnd);
                 DesignerToolkitSettings.HeightFilterMaxVisibleLevelChanged += OnMaxVisibleLevelChanged;
+                DesignerToolkitSettings.HeightFilterTransportVisibilityChanged += OnTransportVisibilityChanged;
                 DesignerToolkitSettings.HeightFilterPillarVisibilityChanged += OnPillarVisibilityChanged;
                 m_isSubscribed = true;
                 m_isInitialized = true;
@@ -120,6 +121,7 @@ namespace CoIDesignerToolkit
                 try { m_gameLoopEvents.SyncUpdate.RemoveNonSaveable(this, OnSyncUpdate); } catch { }
                 try { m_gameLoopEvents.RenderUpdateEnd.RemoveNonSaveable(this, OnRenderUpdateEnd); } catch { }
                 DesignerToolkitSettings.HeightFilterMaxVisibleLevelChanged -= OnMaxVisibleLevelChanged;
+                DesignerToolkitSettings.HeightFilterTransportVisibilityChanged -= OnTransportVisibilityChanged;
                 DesignerToolkitSettings.HeightFilterPillarVisibilityChanged -= OnPillarVisibilityChanged;
                 m_isSubscribed = false;
             }
@@ -222,6 +224,26 @@ namespace CoIDesignerToolkit
                     s_log.Info($"Hide layer shortcut pressed. Max visible level set to: {DesignerToolkitSettings.HeightFilterMaxVisibleLevel}");
                 }
             }
+            else if (HotkeysRegistry.IsPressed(HotkeysRegistry.HeightFilterTransportVisibilityHigh))
+            {
+                HotkeysRegistry.PlayClickSound();
+                HeightFilterTransportVisibility current = DesignerToolkitSettings.HeightFilterTransportVisibility;
+                if (current < HeightFilterTransportVisibility.High)
+                {
+                    DesignerToolkitSettings.SetHeightFilterTransportVisibility(current + 1);
+                    s_log.Info($"Transport visibility shortcut pressed. Policy set to: {DesignerToolkitSettings.HeightFilterTransportVisibility}");
+                }
+            }
+            else if (HotkeysRegistry.IsPressed(HotkeysRegistry.HeightFilterTransportVisibilityLow))
+            {
+                HotkeysRegistry.PlayClickSound();
+                HeightFilterTransportVisibility current = DesignerToolkitSettings.HeightFilterTransportVisibility;
+                if (current > HeightFilterTransportVisibility.Low)
+                {
+                    DesignerToolkitSettings.SetHeightFilterTransportVisibility(current - 1);
+                    s_log.Info($"Transport visibility shortcut pressed. Policy set to: {DesignerToolkitSettings.HeightFilterTransportVisibility}");
+                }
+            }
         }
 
         /// <summary>
@@ -265,6 +287,11 @@ namespace CoIDesignerToolkit
             m_filterDirty = true;
         }
 
+        private void OnTransportVisibilityChanged(HeightFilterTransportVisibility _)
+        {
+            m_filterDirty = true;
+        }
+
         private void OnPillarVisibilityChanged(HeightFilterPillarVisibility _)
         {
             m_filterDirty = true;
@@ -297,7 +324,17 @@ namespace CoIDesignerToolkit
                 }
             }
 
-            return (double)hiddenCount / pivots.Length > 0.5;
+            HeightFilterTransportVisibility policy = DesignerToolkitSettings.HeightFilterTransportVisibility;
+            switch (policy)
+            {
+                case HeightFilterTransportVisibility.Low:
+                    return hiddenCount > 0;
+                case HeightFilterTransportVisibility.High:
+                    return hiddenCount == pivots.Length;
+                case HeightFilterTransportVisibility.Medium:
+                default:
+                    return (double)hiddenCount / pivots.Length > 0.5;
+            }
         }
 
         /// <summary>

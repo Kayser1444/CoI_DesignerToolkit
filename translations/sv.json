@@ -132,6 +132,42 @@
     "Begränsar höjdnivån för transporter, strukturer och pelare som ritas i världen."
   ],
   [
+    "dtk.settings.height_filter_transport_visibility.label",
+    "Transportsynlighet"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.description",
+    "Styr hur transportsynlighet utvärderas vid filtrering av höjdlager."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "Styr tröskelkravet för transportens brytpunkter mot det synliga lagret."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low",
+    "Låg"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "Alla brytpunkter för transporten måste vara vid eller under tröskellagret."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium",
+    "Medel"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "En majoritet av transportens brytpunkter måste vara vid eller under tröskellagret."
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high",
+    "Hög"
+  ],
+  [
+    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "Minst en brytpunkt för transporten måste vara vid eller under tröskellagret."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.label",
     "Pelare synlighet"
   ],
@@ -140,16 +176,20 @@
     "Styr hur pelarens synlighet utvärderas vid filtrering av höjdlager."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.tooltip",
-    "Fristående utvärderar varje pelares höjd oberoende av det aktiva lagret. Bifogad visar pelare när minst en synlig transport eller upphöjd struktur är fäst."
-  ],
-  [
     "dtk.settings.height_filter_pillar_visibility.detached",
     "Fristående"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "Utvärderar varje pelares höjd självständigt mot det aktiva lagret."
+  ],
+  [
     "dtk.settings.height_filter_pillar_visibility.attached",
     "Bunden"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "Visar pelare så länge minst en synlig transport eller upphöjd struktur är ansluten."
   ],
   [
     "dtk.settings.global_hotkey.description",
@@ -178,6 +218,22 @@
   [
     "Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Minskar filterskiktet för den maximala synliga höjden"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "Höjdfilter transportsynlighet (hög)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "Stegar transportsynlighet mot Hög"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "Höjdfilter transportsynlighet (låg)"
+  ],
+  [
+    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "Stegar transportsynlighet mot Låg"
   ],
   [
     "Kb_Bdt_ThroughputOverlayToggle__label",
