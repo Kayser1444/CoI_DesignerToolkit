@@ -16,13 +16,15 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - [📝 Copy as Markdown](#copy-as-markdown)
 - [🧩 Symmetric entity normalization](#symmetric-entity-normalization)
 - [⚡ Instant build mode](#instant-build-mode)
+- [🎨 Pre-color pipes](#pre-color-pipes)
 - [🧹 Transport cleanup tool](#transport-cleanup-tool)
 - [🗑️ Transport product removal](#transport-product-removal)
 - [👁️ Height filter](#height-filter)
 - [📦 Layout box mode](#layout-box-mode)
 - [📤 Batch placing](#batch-placing)
 - [🏭 Pollution overlay](#pollution-overlay)
-- [☢ Radiation overlay](#radiation-overlay)
+- [💧 Groundwater reservoir insights](#groundwater-reservoir-insights)
+- [☢️ Radiation overlay](#radiation-overlay)
 - [🚦 Throughput tools](#throughput-tools)
 - [🚧 Legacy Belt Configurations](#legacy-belt-configurations)
 - [⚙️ Mod settings](#mod-settings)
@@ -152,13 +154,21 @@ BDT includes an Instant Build mode (configurable in Mod Settings) that automatic
 
 Enabling this feature turns off the game's built-in insta-build toggle.
 
+Buildings placed while Planning Mode is enabled remain paused until you unpause their construction.
+
 Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
+
+### 🎨 Pre-color pipes
+
+![image.png](/content-images/50b311d8b332645fc508490dfa4dc0e9c12ab18822a7cb04e79d79635a7d9904/image.png)*Screenshot of pre-colored pipes.*
+
+BDT can give empty fluid and molten pipes an initial color based on their connected upstream sources. Multiple source fluids are blended equally. Once a pipe contains products, vanilla transport coloring takes over and fades toward the color determined by its current contents and flow.
+
+Enable **Pre-color pipes** under **BUILD BEHAVIORS** in Mod Settings. The affected connected cluster refreshes when topology, recipes, source products, or construction changes, including while the game is paused.
 
 ### 🧹 Transport cleanup tool
 
 BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to detect and demolish useless belts and pipes via an area selection drag, before capturing your blueprint. To avoid capturing input and output transports, terminate them properly with a source or sink.
-
-This is useful if you're building blueprints with multiple layers and want to check that there are no unconnected transports hiding under the transports.
 
 The hotkey can be changed in BDT's mod settings under **TRANSPORT CLEANUP**.
 
@@ -182,12 +192,20 @@ Regular removal orders persist through saving and reloading while BDT remains in
 
 BDT features a Height Filter rendering system that allows players to filter the visibility of transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) in the world.
 
-Adjusting the visible height levels makes it significantly easier to inspect and manage multi-tier pipe stacks, layered belt paths, or dense underground logistics without visual clutter. Transports that span multiple levels are hidden/shown based on the majority of their nodes.
+Adjusting the visible height levels makes it significantly easier to inspect and manage multi-tier pipe stacks, layered belt paths, or dense underground logistics without visual clutter. The **Transport visibility** policy controls how transports that span multiple levels are hidden or shown.
 
 - `PageUp`: increases the maximum visible level (up to level 6, which shows all heights).
 - `PageDown`: decreases the maximum visible level (down to level 0, which shows underground entities only).
+- `Shift+PageUp`: steps the transport visibility policy towards **High**.
+- `Shift+PageDown`: steps the transport visibility policy towards **Low**.
 
-These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER**. Hidden entities are protected from selection to prevent accidental demolition or interaction.
+The **Transport visibility** policy has three modes:
+
+- **Low**: all inflection points of the transport must be at or below the threshold layer.
+- **Medium** (default): a majority of the inflection points must be at or below the threshold layer.
+- **High**: at least one inflection point must be at or below the threshold layer.
+
+These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER** or in the vanilla **Settings | Controls** menu. The transport and pillar visibility modes are configured in BDT's mod settings. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
@@ -217,12 +235,23 @@ BDT introduces a **Place all** button inside the blueprint folder detail panel. 
 BDT features a real-time **Pollution Overlay** and **Heat Map** system to monitor and visualize island exhaust rates.
 
 - **Pollution Labels**: Displays daily-averaged emission rates (items/min) as floating world-space labels above factories, waste outfalls, vehicles, locomotives, and ships.
-- **Heat Map Glow**: Renders screen-space and 3D white glow outlines indicating relative emission rates. Low emitters receive tiny, whisper-thin backing glows, while major polluters project wide, prominent white halos.
+- **Heat Map Glow**: Renders screen-space and 3D configurable-color glow outlines indicating relative emission rates. Low emitters receive tiny, whisper-thin backing glows, while major polluters project wide, prominent halos.
 - **Common Comparison Pool**: Emissions are scaled linearly against a shared global pool of all currently active layers, allowing players to compare different pollution types (like wastewater outfalls against diesel exhausts). Hiding specific layers in settings dynamically re-calculates the comparison pool.
 - **Dynamic Camera-Zoom Scaling**: Opacity and glow radius scale up dynamically as the camera zooms out, ensuring indicators remain bold and readable from high altitudes.
 - **Filters & Configurable Averaging**: Customize average calculations (default 360 days) and toggle Air, Ground/Water, Vehicle, or Ship overlays independently.
 
-### ☢ Radiation overlay
+### 💧 Groundwater reservoir insights
+
+BDT adds a stats icon to Groundwater pump inspectors that opens a rich **Groundwater Reservoir Insights** tooltip.
+
+- **Monthly history**: A rolling bar chart shows the current level and the latest 12 monthly reserve snapshots, with low-reserve values highlighted.
+- **Yearly history**: A second bar chart shows the current level and up to 10 annual snapshots taken on January 1.
+- **Sustainability indicators**: See the last year's average monthly draw, the maximum sustainable monthly draw after year 10, and the expected yearly reserve change. Sustainable replenishment is calculated from the Weather difficulty setting; the Rainwater yield setting does not affect groundwater.
+- **Depletion estimate**: When the reservoir is shrinking, BDT estimates the years remaining and highlights reservoirs with fewer than 10 years expected remaining.
+
+The history is retained across save and load sessions while BDT is installed. It is stored as mod cache data and does not add custom entities or save payloads.
+
+### ☢️ Radiation overlay
 
 ![image.png](/content-images/4f7c5b659abe247a470559f041c0f3bbe2a10b25a7ecef119d948d1454e590a8/image.png)
 
@@ -325,5 +354,3 @@ Designer Toolkit is an unofficial, community-made mod for Captain of Industry.
 Captain of Industry, MaFi Games, and related names, trademarks, game code, and assets are the property of MaFi Games. This mod is not affiliated with, endorsed by, or sponsored by MaFi Games.
 
 This repository is intended to contain only original mod code and configuration, licensed under the MIT License. It does not intentionally include Captain of Industry game code, game assets, or other MaFi Games intellectual property.
-
-Codex PoC: browser edit test
