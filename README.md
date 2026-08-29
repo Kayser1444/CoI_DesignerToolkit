@@ -17,7 +17,7 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 - [Symmetric entity normalization](#symmetric-entity-normalization)
 - [Instant build mode](#instant-build-mode)
 - [Pre-color pipes](#pre-color-pipes)
-- [Groundwater reservoir insights](#groundwater-reservoir-insights)
+- [Reservoir insights](#reservoir-insights)
 - [Transport cleanup tool](#transport-cleanup-tool)
 - [Transport product removal](#transport-product-removal)
 - [Height filter](#height-filter)
@@ -151,16 +151,16 @@ BDT can give empty fluid and molten pipes an initial color based on connected up
 
 Enable **Pre-color pipes** under **BUILD BEHAVIORS** in Mod Settings. See [Pre-color pipes](docs/player/pipe-pre-coloring.md) for details.
 
-### Groundwater reservoir insights
+### Reservoir insights
 
-BDT adds a stats icon to Groundwater pump inspectors. Open it to see a **Groundwater Reservoir Insights** tooltip with:
+BDT adds a stats icon to Groundwater pump and other virtual resource well inspectors, such as oil wells and modded reservoirs. Open it to see a **Reservoir Insights** tooltip with:
 
-- a rolling monthly reserve-level chart
+- a rolling monthly reserve-level chart styled with the mined product's characteristic color
 - a 10-year annual reserve-level chart
-- last year's average monthly draw and the maximum sustainable monthly draw
+- last year's average monthly draw and, for groundwater, the maximum sustainable monthly draw
 - the expected yearly reserve change and estimated years remaining
 
-The sustainable draw estimate uses the Weather difficulty setting. Historical levels and monthly draws are retained across save and load sessions while BDT is installed.
+The sustainable draw estimate uses the Weather difficulty setting. Non-replenishing reservoirs omit that KPI row and calculate depletion directly from actual draw. Historical levels and monthly draws are retained across save and load sessions while BDT is installed.
 
 See [Groundwater Reservoir Insights](docs/player/groundwater-reservoir-insights.md) for details.
 
@@ -196,6 +196,13 @@ The **Transport visibility** policy controls how transports spanning multiple le
 - **High**: at least one inflection point must be at or below the threshold.
 
 These hotkeys can be customized in BDT's mod settings (under **HEIGHT FILTER**) or in the vanilla **Settings | Controls** menu. The transport and pillar visibility modes are configured in BDT's mod settings. Hidden entities are protected from selection to prevent accidental demolition or interaction.
+
+The **Pillar visibility** mode controls how support pillars respond to height filtering:
+
+- **Detached** (default): each pillar evaluates its own vertical segments independently.
+- **Attached**: a pillar remains visible whenever a visible transport or elevated structure is attached to it.
+- **Top**: a pillar follows the visibility of its top segment.
+- **Off**: pillars are hidden whenever any height layer is filtered out.
 
 See [Height Filter](docs/player/height-filter.md) for level behavior and pillar visibility details.
 

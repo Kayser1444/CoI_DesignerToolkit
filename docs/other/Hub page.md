@@ -207,6 +207,13 @@ The **Transport visibility** policy has three modes:
 
 These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER** or in the vanilla **Settings | Controls** menu. The transport and pillar visibility modes are configured in BDT's mod settings. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
+The **Pillar visibility** mode controls how support pillars respond to height filtering:
+
+- **Detached** (default): each pillar evaluates its own vertical segments independently.
+- **Attached**: a pillar remains visible whenever a visible transport or elevated structure is attached to it.
+- **Top**: a pillar follows the visibility of its top segment.
+- **Off**: pillars are hidden whenever any height layer is filtered out.
+
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
 ### 📦 Layout box mode
