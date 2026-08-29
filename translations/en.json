@@ -192,6 +192,22 @@
     "Shows pillars whenever at least one visible transport or elevated structure is attached."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.top",
+    "Top"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "Controls pillar visibility based on whether its top layer is at or below the visible height limit."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off",
+    "Off"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "Hides all pillars whenever any height layer is filtered out."
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu."
   ],

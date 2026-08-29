@@ -192,6 +192,22 @@
     "Muestra los pilares cuando hay al menos un transporte visible o una estructura elevada conectados a ellos."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.top",
+    "Arriba"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "Controla la visibilidad del pilar en función de si su capa superior está en el límite de altura visible o por debajo de él."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off",
+    "Apagado"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "Oculta todos los pilares cada vez que se filtra cualquier capa de altura."
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Esta combinación de teclas está registrada en el sistema de controles del juego y se puede configurar en Configuración básica | Menú de controles."
   ],

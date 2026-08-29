@@ -192,6 +192,22 @@
     "只要连接了至少一个可见运输或高架结构，就显示支柱。"
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.top",
+    "顶部"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "根据其顶层是否处于或低于可见高度限制来控制支柱可见性。"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off",
+    "离开"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "每当过滤掉任何高度层时，都会隐藏所有柱子。"
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "此按键绑定已在游戏的控制系统中注册，并且可以在香草设置 | 中进行配置。控制菜单。"
   ],

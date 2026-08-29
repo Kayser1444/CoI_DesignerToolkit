@@ -192,6 +192,22 @@
     "Показывает столбы, если к ним подключён хотя бы один видимый транспорт или надземная конструкция."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.top",
+    "Вершина"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "Управляет видимостью столба в зависимости от того, находится ли его верхний слой на видимом пределе высоты или ниже него."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off",
+    "Выключенный"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "Скрывает все столбы всякий раз, когда отфильтровывается какой-либо слой высоты."
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Эта комбинация клавиш зарегистрирована в системе управления игрой и может быть настроена в стандартных настройках | Меню управления."
   ],

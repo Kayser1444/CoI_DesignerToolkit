@@ -192,6 +192,22 @@
     "Mostra i pilastri quando almeno un trasporto visibile o una struttura sopraelevata è collegato a essi."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.top",
+    "Superiore"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "Controlla la visibilità del pilastro in base al fatto che il suo strato superiore sia pari o inferiore al limite di altezza visibile."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off",
+    "Spento"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "Nasconde tutti i pilastri ogni volta che viene filtrato un livello di altezza."
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Questa combinazione di tasti è registrata con il sistema di controllo del gioco e può essere configurata nelle Impostazioni Vanilla | Menù controlli."
   ],

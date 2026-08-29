@@ -50,9 +50,9 @@
   "height_filter_pillar_visibility": {
     "default": 0,
     "is_integer": true,
-    "description": "Initial pillar visibility mode for height filtering for saves without BDT settings state (0=Detached, 1=Attached).",
+    "description": "Initial pillar visibility mode for height filtering for saves without BDT settings state (0=Detached, 1=Attached, 2=Top, 3=Off).",
     "min": 0,
-    "max": 1
+    "max": 3
   },
   "throughput_overlay_enabled": {
     "default": false,

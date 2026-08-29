@@ -4,6 +4,8 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.11.3 [unreleased]
 
+- Added **Top** and **Off** pillar visibility options under **HEIGHT FILTER**, allowing pillar visibility to either follow its top segment (`Top`) or hide all pillars whenever any height layer is filtered out (`Off`).
+
 
 ## v0.11.2 [released]
 

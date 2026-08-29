@@ -192,6 +192,22 @@
     "Zeigt Pfeiler an, sobald mindestens ein sichtbarer Transport oder eine erhöhte Struktur daran befestigt ist."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.top",
+    "Spitze"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "Steuert die Sichtbarkeit der Säule basierend darauf, ob sich ihre oberste Ebene auf oder unter der sichtbaren Höhengrenze befindet."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off",
+    "Aus"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "Blendet alle Säulen aus, wenn eine Höhenebene herausgefiltert wird."
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Diese Tastenkombination ist im Steuersystem des Spiels registriert und kann in den Vanilla-Einstellungen | konfiguriert werden Menü „Steuerung“."
   ],

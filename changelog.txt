@@ -1,3 +1,6 @@
+v0.11.3 | 2026-08-29
+* Added **Top** and **Off** pillar visibility options to the **Height filter**, allowing support pillars to follow their top segment or be hidden whenever any height layer is filtered out
+
 v0.11.2 | 2026-08-29
 * Added a **Transport visibility** policy selector to the **Height filter**: `Low` hides transports unless all inflection points are at or below the visible layer, `Medium` requires a majority, and `High` requires at least one
 * Added default `Shift+PageUp` and `Shift+PageDown` hotkeys to step the transport visibility policy towards `High` or `Low`

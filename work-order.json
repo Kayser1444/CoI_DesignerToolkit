@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 206,
+  "total_keys": 210,
   "skip_keys": [
     "dtk.mod.name",
     "dtk.rate_limit.items_per_min",
@@ -10,160 +10,50 @@
     "dtk.settings.number_format.auto"
   ],
   "keys": {
-    "dtk.settings.height_filter_transport_visibility.label": {
-      "en": "Transport visibility",
-      "context": "Settings row label for height filter transport visibility mode.",
-      "de": "Transportsichtbarkeit",
-      "es": "Visibilidad de transportes",
-      "it": "Visibilità dei trasporti",
-      "pt": "Visibilidade dos transportes",
-      "ru": "Видимость транспортов",
-      "zh": "运输可见性",
-      "sv": "Transportsynlighet"
+    "dtk.settings.height_filter_pillar_visibility.top": {
+      "en": "Top",
+      "context": "Dropdown option for top layer height filter pillar visibility.",
+      "de": "Spitze",
+      "es": "Arriba",
+      "it": "Superiore",
+      "pt": "Principal",
+      "ru": "Вершина",
+      "sv": "Bästa",
+      "zh": "顶部"
     },
-    "dtk.settings.height_filter_transport_visibility.description": {
-      "en": "Controls how transport visibility is evaluated when filtering height layers.",
-      "context": "Settings row description for height filter transport visibility mode.",
-      "de": "Legt fest, wie die Sichtbarkeit von Transporten bei der Höhenfilterung bewertet wird.",
-      "es": "Controla cómo se evalúa la visibilidad de los transportes al filtrar las capas de altura.",
-      "it": "Controlla come viene valutata la visibilità dei trasporti durante il filtraggio dei livelli di altezza.",
-      "pt": "Controla como a visibilidade dos transportes é avaliada ao filtrar camadas de altura.",
-      "ru": "Управляет оценкой видимости транспортов при фильтрации слоёв высоты.",
-      "zh": "控制按高度筛选时如何判断运输的可见性。",
-      "sv": "Styr hur transportsynlighet utvärderas vid filtrering av höjdlager."
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip": {
+      "en": "Controls pillar visibility based on whether its top layer is at or below the visible height limit.",
+      "context": "Tooltip for Top pillar visibility option.",
+      "de": "Steuert die Sichtbarkeit der Säule basierend darauf, ob sich ihre oberste Ebene auf oder unter der sichtbaren Höhengrenze befindet.",
+      "es": "Controla la visibilidad del pilar en función de si su capa superior está en el límite de altura visible o por debajo de él.",
+      "it": "Controlla la visibilità del pilastro in base al fatto che il suo strato superiore sia pari o inferiore al limite di altezza visibile.",
+      "pt": "Controla a visibilidade do pilar com base no fato de sua camada superior estar no limite de altura visível ou abaixo dele.",
+      "ru": "Управляет видимостью столба в зависимости от того, находится ли его верхний слой на видимом пределе высоты или ниже него.",
+      "sv": "Styr pelarens synlighet baserat på om dess översta skikt är vid eller under den synliga höjdgränsen.",
+      "zh": "根据其顶层是否处于或低于可见高度限制来控制支柱可见性。"
     },
-    "dtk.settings.height_filter_transport_visibility.low": {
-      "en": "Low",
-      "context": "Dropdown option for low height filter transport visibility.",
-      "de": "Niedrig",
-      "es": "Baja",
-      "it": "Bassa",
-      "pt": "Baixa",
-      "ru": "Низкая",
-      "zh": "低",
-      "sv": "Låg"
+    "dtk.settings.height_filter_pillar_visibility.off": {
+      "en": "Off",
+      "context": "Dropdown option for off height filter pillar visibility.",
+      "de": "Aus",
+      "es": "Apagado",
+      "it": "Spento",
+      "pt": "Desligado",
+      "ru": "Выключенный",
+      "sv": "Av",
+      "zh": "离开"
     },
-    "dtk.settings.height_filter_transport_visibility.low.tooltip": {
-      "en": "All inflection points of the transport must be at or below the threshold layer.",
-      "context": "Tooltip for Low transport visibility option.",
-      "de": "Alle Wendepunkte des Transports müssen auf oder unter der Schwellenebene liegen.",
-      "es": "Todos los puntos de inflexión del transporte deben estar en la capa umbral o por debajo.",
-      "it": "Tutti i punti di inflessione del trasporto devono trovarsi al livello soglia o al di sotto.",
-      "pt": "Todos os pontos de inflexão do transporte devem estar no nível de referência ou abaixo dele.",
-      "ru": "Все точки перегиба транспорта должны находиться на пороговом слое или ниже него.",
-      "zh": "运输的所有转折点都必须位于阈值层或更低。",
-      "sv": "Alla brytpunkter för transporten måste vara vid eller under tröskellagret."
-    },
-    "dtk.settings.height_filter_transport_visibility.medium": {
-      "en": "Medium",
-      "context": "Dropdown option for medium height filter transport visibility.",
-      "de": "Mittel",
-      "es": "Media",
-      "it": "Media",
-      "pt": "Média",
-      "ru": "Средняя",
-      "sv": "Medel",
-      "zh": "中"
-    },
-    "dtk.settings.height_filter_transport_visibility.medium.tooltip": {
-      "en": "A majority of the inflection points of the transport must be at or below the threshold layer.",
-      "context": "Tooltip for Medium transport visibility option.",
-      "de": "Die Mehrheit der Wendepunkte des Transports muss auf oder unter der Schwellenebene liegen.",
-      "es": "La mayoría de los puntos de inflexión del transporte deben estar en la capa umbral o por debajo.",
-      "it": "La maggior parte dei punti di inflessione del trasporto deve trovarsi al livello soglia o al di sotto.",
-      "pt": "A maioria dos pontos de inflexão do transporte deve estar no nível de referência ou abaixo dele.",
-      "ru": "Большинство точек перегиба транспорта должны находиться на пороговом слое или ниже него.",
-      "zh": "运输的大多数转折点必须位于阈值层或更低。",
-      "sv": "En majoritet av transportens brytpunkter måste vara vid eller under tröskellagret."
-    },
-    "dtk.settings.height_filter_transport_visibility.high": {
-      "en": "High",
-      "context": "Dropdown option for high height filter transport visibility.",
-      "de": "Hoch",
-      "es": "Alta",
-      "it": "Alta",
-      "pt": "Alta",
-      "ru": "Высокая",
-      "zh": "高",
-      "sv": "Hög"
-    },
-    "dtk.settings.height_filter_transport_visibility.high.tooltip": {
-      "en": "At least one inflection point of the transport must be at or below the threshold layer.",
-      "context": "Tooltip for High transport visibility option.",
-      "de": "Mindestens ein Wendepunkt des Transports muss auf oder unter der Schwellenebene liegen.",
-      "es": "Al menos un punto de inflexión del transporte debe estar en la capa umbral o por debajo.",
-      "it": "Almeno un punto di inflessione del trasporto deve trovarsi al livello soglia o al di sotto.",
-      "pt": "Pelo menos um ponto de inflexão do transporte deve estar no nível de referência ou abaixo dele.",
-      "ru": "Хотя бы одна точка перегиба транспорта должна находиться на пороговом слое или ниже него.",
-      "zh": "运输至少有一个转折点位于阈值层或更低。",
-      "sv": "Minst en brytpunkt för transporten måste vara vid eller under tröskellagret."
-    },
-    "dtk.settings.height_filter_pillar_visibility.detached.tooltip": {
-      "en": "Evaluates each pillar's height independently against the active layer.",
-      "context": "Tooltip for Detached pillar visibility option.",
-      "de": "Bewertet die Höhe jedes Pfeilers unabhängig von der aktiven Ebene.",
-      "es": "Evalúa la altura de cada pilar de forma independiente respecto a la capa activa.",
-      "it": "Valuta l'altezza di ogni pilastro indipendentemente dal livello attivo.",
-      "pt": "Avalia a altura de cada pilar independentemente do nível ativo.",
-      "ru": "Оценивает высоту каждого столба независимо от активного слоя.",
-      "sv": "Utvärderar varje pelares höjd självständigt mot det aktiva lagret.",
-      "zh": "根据当前图层独立评估每根支柱的高度。"
-    },
-    "dtk.settings.height_filter_pillar_visibility.attached.tooltip": {
-      "en": "Shows pillars whenever at least one visible transport or elevated structure is attached.",
-      "context": "Tooltip for Attached pillar visibility option.",
-      "de": "Zeigt Pfeiler an, sobald mindestens ein sichtbarer Transport oder eine erhöhte Struktur daran befestigt ist.",
-      "es": "Muestra los pilares cuando hay al menos un transporte visible o una estructura elevada conectados a ellos.",
-      "it": "Mostra i pilastri quando almeno un trasporto visibile o una struttura sopraelevata è collegato a essi.",
-      "pt": "Mostra os pilares sempre que pelo menos um transporte visível ou uma estrutura elevada estiver conectado a eles.",
-      "ru": "Показывает столбы, если к ним подключён хотя бы один видимый транспорт или надземная конструкция.",
-      "sv": "Visar pelare så länge minst en synlig transport eller upphöjd struktur är ansluten.",
-      "zh": "只要连接了至少一个可见运输或高架结构，就显示支柱。"
-    },
-    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label": {
-      "en": "Height filter transport visibility (high)",
-      "context": "Label for the BDT height filter transport-visibility step towards High control.",
-      "de": "Höhenfilter: Transportsichtbarkeit (hoch)",
-      "es": "Visibilidad de transportes del filtro de altura (alta)",
-      "it": "Visibilità dei trasporti del filtro altezza (alta)",
-      "pt": "Visibilidade dos transportes do filtro de altura (alta)",
-      "ru": "Видимость транспортов фильтра высоты (высокая)",
-      "zh": "高度筛选运输可见性（高）",
-      "sv": "Höjdfilter transportsynlighet (hög)"
-    },
-    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip": {
-      "en": "Steps transport visibility towards High",
-      "context": "Tooltip for the BDT height filter transport-visibility step towards High control.",
-      "de": "Schaltet die Transportsichtbarkeit in Richtung Hoch",
-      "es": "Avanza la visibilidad de transportes hacia Alta",
-      "it": "Aumenta la visibilità dei trasporti verso Alta",
-      "pt": "Aumenta a visibilidade dos transportes em direção a Alta",
-      "ru": "Переключает видимость транспортов в сторону «Высокая»",
-      "zh": "将运输可见性向高调整",
-      "sv": "Stegar transportsynlighet mot Hög"
-    },
-    "Kb_Bdt_HeightFilterTransportVisibilityLow__label": {
-      "en": "Height filter transport visibility (low)",
-      "context": "Label for the BDT height filter transport-visibility step towards Low control.",
-      "de": "Höhenfilter: Transportsichtbarkeit (niedrig)",
-      "es": "Visibilidad de transportes del filtro de altura (baja)",
-      "it": "Visibilità dei trasporti del filtro altezza (bassa)",
-      "pt": "Visibilidade dos transportes do filtro de altura (baixa)",
-      "ru": "Видимость транспортов фильтра высоты (низкая)",
-      "zh": "高度筛选运输可见性（低）",
-      "sv": "Höjdfilter transportsynlighet (låg)"
-    },
-    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip": {
-      "en": "Steps transport visibility towards Low",
-      "context": "Tooltip for the BDT height filter transport-visibility step towards Low control.",
-      "de": "Schaltet die Transportsichtbarkeit in Richtung Niedrig",
-      "es": "Avanza la visibilidad de transportes hacia Baja",
-      "it": "Riduce la visibilità dei trasporti verso Bassa",
-      "pt": "Reduz a visibilidade dos transportes em direção a Baixa",
-      "ru": "Переключает видимость транспортов в сторону «Низкая»",
-      "zh": "将运输可见性向低调整",
-      "sv": "Stegar transportsynlighet mot Låg"
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip": {
+      "en": "Hides all pillars whenever any height layer is filtered out.",
+      "context": "Tooltip for Off pillar visibility option.",
+      "de": "Blendet alle Säulen aus, wenn eine Höhenebene herausgefiltert wird.",
+      "es": "Oculta todos los pilares cada vez que se filtra cualquier capa de altura.",
+      "it": "Nasconde tutti i pilastri ogni volta che viene filtrato un livello di altezza.",
+      "pt": "Oculta todos os pilares sempre que qualquer camada de altura é filtrada.",
+      "ru": "Скрывает все столбы всякий раз, когда отфильтровывается какой-либо слой высоты.",
+      "sv": "Döljer alla pelare när något höjdlager filtreras bort.",
+      "zh": "每当过滤掉任何高度层时，都会隐藏所有柱子。"
     }
   },
-  "keys_needing_translation": 0
+  "keys_needing_translation": 4
 }

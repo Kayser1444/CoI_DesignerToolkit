@@ -61,6 +61,8 @@ internal enum HeightFilterPillarVisibility
 {
     Detached = 0,
     Attached = 1,
+    Top = 2,
+    Off = 3,
 }
 
 internal static class DesignerToolkitSettings
@@ -649,7 +651,11 @@ internal static class DesignerToolkitSettings
 
         Dropdown<HeightFilterPillarVisibility> pillarVisibilityDropdown =
             new Dropdown<HeightFilterPillarVisibility>(PillarVisibilityDropdownOption)
-                .SetOptions(HeightFilterPillarVisibility.Detached, HeightFilterPillarVisibility.Attached)
+                .SetOptions(
+                    HeightFilterPillarVisibility.Detached,
+                    HeightFilterPillarVisibility.Attached,
+                    HeightFilterPillarVisibility.Top,
+                    HeightFilterPillarVisibility.Off)
                 .SetValue(HeightFilterPillarVisibility)
                 .OnValueChanged((mode, _) => SetHeightFilterPillarVisibility(mode));
         pillarVisibilityDropdown.Width(SETTINGS_CONTROL_WIDTH);
@@ -1991,6 +1997,10 @@ internal static class DesignerToolkitSettings
         {
             case (int)HeightFilterPillarVisibility.Attached:
                 return HeightFilterPillarVisibility.Attached;
+            case (int)HeightFilterPillarVisibility.Top:
+                return HeightFilterPillarVisibility.Top;
+            case (int)HeightFilterPillarVisibility.Off:
+                return HeightFilterPillarVisibility.Off;
             default:
                 return HeightFilterPillarVisibility.Detached;
         }
@@ -2012,6 +2022,10 @@ internal static class DesignerToolkitSettings
         {
             case HeightFilterPillarVisibility.Attached:
                 return BdtLocalization.SettingsHeightFilterPillarVisibilityAttached.AsFormatted;
+            case HeightFilterPillarVisibility.Top:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityTop.AsFormatted;
+            case HeightFilterPillarVisibility.Off:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityOff.AsFormatted;
             default:
                 return BdtLocalization.SettingsHeightFilterPillarVisibilityDetached.AsFormatted;
         }
@@ -2023,6 +2037,10 @@ internal static class DesignerToolkitSettings
         {
             case HeightFilterPillarVisibility.Attached:
                 return BdtLocalization.SettingsHeightFilterPillarVisibilityAttachedTooltip.AsFormatted;
+            case HeightFilterPillarVisibility.Top:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityTopTooltip.AsFormatted;
+            case HeightFilterPillarVisibility.Off:
+                return BdtLocalization.SettingsHeightFilterPillarVisibilityOffTooltip.AsFormatted;
             default:
                 return BdtLocalization.SettingsHeightFilterPillarVisibilityDetachedTooltip.AsFormatted;
         }

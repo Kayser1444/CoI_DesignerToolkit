@@ -114,6 +114,14 @@ internal static class BdtLocalization
         Loc.Str("dtk.settings.height_filter_pillar_visibility.attached", "Attached", "Dropdown option for attached height filter pillar visibility.");
     public static LocStr SettingsHeightFilterPillarVisibilityAttachedTooltip =
         Loc.Str("dtk.settings.height_filter_pillar_visibility.attached.tooltip", "Shows pillars whenever at least one visible transport or elevated structure is attached.", "Tooltip for Attached pillar visibility option.");
+    public static LocStr SettingsHeightFilterPillarVisibilityTop =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.top", "Top", "Dropdown option for top layer height filter pillar visibility.");
+    public static LocStr SettingsHeightFilterPillarVisibilityTopTooltip =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.top.tooltip", "Controls pillar visibility based on whether its top layer is at or below the visible height limit.", "Tooltip for Top pillar visibility option.");
+    public static LocStr SettingsHeightFilterPillarVisibilityOff =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.off", "Off", "Dropdown option for off height filter pillar visibility.");
+    public static LocStr SettingsHeightFilterPillarVisibilityOffTooltip =
+        Loc.Str("dtk.settings.height_filter_pillar_visibility.off.tooltip", "Hides all pillars whenever any height layer is filtered out.", "Tooltip for Off pillar visibility option.");
     public static LocStr SettingsGlobalHotkeyTooltip =
         Loc.Str("dtk.settings.global_hotkey.description", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
 

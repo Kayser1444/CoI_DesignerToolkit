@@ -192,6 +192,22 @@
     "Visar pelare så länge minst en synlig transport eller upphöjd struktur är ansluten."
   ],
   [
+    "dtk.settings.height_filter_pillar_visibility.top",
+    "Bästa"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "Styr pelarens synlighet baserat på om dess översta skikt är vid eller under den synliga höjdgränsen."
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off",
+    "Av"
+  ],
+  [
+    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "Döljer alla pelare när något höjdlager filtreras bort."
+  ],
+  [
     "dtk.settings.global_hotkey.description",
     "Denna nyckelbindning är registrerad med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn."
   ],

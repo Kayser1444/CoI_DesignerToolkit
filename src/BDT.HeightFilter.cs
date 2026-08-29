@@ -367,6 +367,24 @@ namespace CoIDesignerToolkit
             return (double)hiddenCount / height >= 0.5;
         }
 
+        /// <summary>
+        /// Implements the top-layer pillar visibility filter logic. Checks the top segment of a transport pillar
+        /// against the terrain height, returning true if the top segment is above the filter threshold.
+        /// </summary>
+        private bool ShouldPillarTopBeHidden(TransportPillar pillar)
+        {
+            int maxVisibleLevel = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
+            if (maxVisibleLevel >= 6) return false;
+
+            int baseZ = pillar.CenterTile.Z;
+            int height = pillar.Height.Value;
+            int topZ = baseZ + height - 1;
+            int terrainZ = GetTerrainHeight(pillar.CenterTile.Xy);
+            int topLevel = topZ - terrainZ + 1; // 1-based level
+
+            return topLevel > maxVisibleLevel;
+        }
+
         private bool ShouldLayoutEntityBeHidden(LayoutEntityBase entity)
         {
             int maxVisibleLevel = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
@@ -385,7 +403,8 @@ namespace CoIDesignerToolkit
             try
             {
                 m_visiblePillarIds.Clear();
-                bool isAttachedMode = DesignerToolkitSettings.HeightFilterPillarVisibility == HeightFilterPillarVisibility.Attached;
+                HeightFilterPillarVisibility pillarMode = DesignerToolkitSettings.HeightFilterPillarVisibility;
+                bool isAttachedMode = pillarMode == HeightFilterPillarVisibility.Attached;
                 int maxVisibleLevel = DesignerToolkitSettings.HeightFilterMaxVisibleLevel;
 
                 // Process Transports
@@ -434,9 +453,30 @@ namespace CoIDesignerToolkit
                     if (pillar.IsDestroyed) continue;
 
                     int pillarId = pillar.Id.Value;
-                    bool shouldHide = isAttachedMode
-                        ? (maxVisibleLevel < 6 && !m_visiblePillarIds.Contains(pillarId))
-                        : ShouldPillarBeHidden(pillar);
+                    bool shouldHide;
+                    if (maxVisibleLevel >= 6)
+                    {
+                        shouldHide = false;
+                    }
+                    else
+                    {
+                        switch (pillarMode)
+                        {
+                            case HeightFilterPillarVisibility.Attached:
+                                shouldHide = !m_visiblePillarIds.Contains(pillarId);
+                                break;
+                            case HeightFilterPillarVisibility.Top:
+                                shouldHide = ShouldPillarTopBeHidden(pillar);
+                                break;
+                            case HeightFilterPillarVisibility.Off:
+                                shouldHide = true;
+                                break;
+                            case HeightFilterPillarVisibility.Detached:
+                            default:
+                                shouldHide = ShouldPillarBeHidden(pillar);
+                                break;
+                        }
+                    }
 
                     bool isHidden = m_hiddenPillarIds.Contains(pillarId);
 

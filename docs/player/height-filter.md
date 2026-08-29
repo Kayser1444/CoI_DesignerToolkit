@@ -31,6 +31,8 @@ The **Pillar visibility** setting under **HEIGHT FILTER** controls how support p
 
 - **Detached** (default): Each pillar independently evaluates its own vertical segments against the active layer threshold (a pillar is hidden if 50% or more of its segments exceed the visible level).
 - **Attached**: A pillar remains visible whenever at least one visible transport or elevated structure is attached to it.
+- **Top**: A pillar's visibility is controlled by its top layer (it remains visible if and only if its top segment is at or below the active visible layer).
+- **Off**: All pillars are hidden as soon as any height layer is filtered out (when all layers are visible at level 6, pillars remain visible).
 
 ## Selection Behavior
 
