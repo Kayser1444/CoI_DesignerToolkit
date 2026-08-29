@@ -641,6 +641,8 @@ internal static class DesignerToolkitSettings
             new LocStrFormatted(
                 BdtLocalization.SettingsHeightFilterTransportVisibilityDescription.TranslatedString
                 + "\n\n"
+                + BdtLocalization.SettingsHeightFilterTransportVisibilityTooltip.TranslatedString
+                + "\n\n"
                 + BdtLocalization.SettingsHeightFilterControlsTooltip.TranslatedString),
             transportVisibilityDropdown,
             row => AddDualHotkeyBadges(row, HotkeysRegistry.HeightFilterTransportVisibilityLow, HotkeysRegistry.HeightFilterTransportVisibilityHigh)));
@@ -1924,17 +1926,52 @@ internal static class DesignerToolkitSettings
         }
     }
 
+    private sealed class TransportVisibilityOption
+    {
+        public readonly HeightFilterTransportVisibility Mode;
+        public readonly LocStrFormatted Label;
+        public readonly LocStrFormatted Tooltip;
+
+        public TransportVisibilityOption(
+            HeightFilterTransportVisibility mode,
+            LocStrFormatted label,
+            LocStrFormatted tooltip)
+        {
+            Mode = mode;
+            Label = label;
+            Tooltip = tooltip;
+        }
+    }
+
+    private static readonly TransportVisibilityOption[] s_transportVisibilityOptions =
+    {
+        new TransportVisibilityOption(
+            HeightFilterTransportVisibility.Low,
+            BdtLocalization.SettingsHeightFilterTransportVisibilityLow.AsFormatted,
+            BdtLocalization.SettingsHeightFilterTransportVisibilityLowTooltip.AsFormatted),
+        new TransportVisibilityOption(
+            HeightFilterTransportVisibility.Medium,
+            BdtLocalization.SettingsHeightFilterTransportVisibilityMedium.AsFormatted,
+            BdtLocalization.SettingsHeightFilterTransportVisibilityMediumTooltip.AsFormatted),
+        new TransportVisibilityOption(
+            HeightFilterTransportVisibility.High,
+            BdtLocalization.SettingsHeightFilterTransportVisibilityHigh.AsFormatted,
+            BdtLocalization.SettingsHeightFilterTransportVisibilityHighTooltip.AsFormatted),
+    };
+
+    private static TransportVisibilityOption GetTransportVisibilityOption(
+        HeightFilterTransportVisibility mode)
+    {
+        int index = (int)mode;
+        if (index < 0 || index >= s_transportVisibilityOptions.Length)
+            index = (int)HeightFilterTransportVisibility.Medium;
+
+        return s_transportVisibilityOptions[index];
+    }
+
     private static HeightFilterTransportVisibility TransportVisibilityFromInt(int value)
     {
-        switch (value)
-        {
-            case (int)HeightFilterTransportVisibility.Low:
-                return HeightFilterTransportVisibility.Low;
-            case (int)HeightFilterTransportVisibility.High:
-                return HeightFilterTransportVisibility.High;
-            default:
-                return HeightFilterTransportVisibility.Medium;
-        }
+        return GetTransportVisibilityOption((HeightFilterTransportVisibility)value).Mode;
     }
 
     private static UiComponent TransportVisibilityDropdownOption(
@@ -1942,35 +1979,10 @@ internal static class DesignerToolkitSettings
         int index,
         bool isInDropdown)
     {
-        var label = new Label(TransportVisibilityLabel(mode));
-        label.Tooltip(TransportVisibilityTooltip(mode));
+        TransportVisibilityOption option = GetTransportVisibilityOption(mode);
+        var label = new Label(option.Label);
+        label.Tooltip(option.Tooltip);
         return label;
-    }
-
-    private static LocStrFormatted TransportVisibilityLabel(HeightFilterTransportVisibility mode)
-    {
-        switch (mode)
-        {
-            case HeightFilterTransportVisibility.Low:
-                return BdtLocalization.SettingsHeightFilterTransportVisibilityLow.AsFormatted;
-            case HeightFilterTransportVisibility.High:
-                return BdtLocalization.SettingsHeightFilterTransportVisibilityHigh.AsFormatted;
-            default:
-                return BdtLocalization.SettingsHeightFilterTransportVisibilityMedium.AsFormatted;
-        }
-    }
-
-    private static LocStrFormatted TransportVisibilityTooltip(HeightFilterTransportVisibility mode)
-    {
-        switch (mode)
-        {
-            case HeightFilterTransportVisibility.Low:
-                return BdtLocalization.SettingsHeightFilterTransportVisibilityLowTooltip.AsFormatted;
-            case HeightFilterTransportVisibility.High:
-                return BdtLocalization.SettingsHeightFilterTransportVisibilityHighTooltip.AsFormatted;
-            default:
-                return BdtLocalization.SettingsHeightFilterTransportVisibilityMediumTooltip.AsFormatted;
-        }
     }
 
     private static HeightFilterPillarVisibility PillarVisibilityFromInt(int value)

@@ -195,7 +195,7 @@ The **Transport visibility** policy controls how transports spanning multiple le
 - **Medium** (default): a majority of inflection points must be at or below the threshold.
 - **High**: at least one inflection point must be at or below the threshold.
 
-These hotkeys and the transport and pillar visibility modes can be customized in BDT's mod settings (under **HEIGHT FILTER**) or in the vanilla **Settings | Controls** menu. Hidden entities are protected from selection to prevent accidental demolition or interaction.
+These hotkeys can be customized in BDT's mod settings (under **HEIGHT FILTER**) or in the vanilla **Settings | Controls** menu. The transport and pillar visibility modes are configured in BDT's mod settings. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
 See [Height Filter](docs/player/height-filter.md) for level behavior and pillar visibility details.
 

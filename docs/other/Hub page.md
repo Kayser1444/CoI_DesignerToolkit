@@ -205,7 +205,7 @@ The **Transport visibility** policy has three modes:
 - **Medium** (default): a majority of the inflection points must be at or below the threshold layer.
 - **High**: at least one inflection point must be at or below the threshold layer.
 
-These hotkeys and the pillar visibility mode (`Detached` height-based vs. `Attached` to visible transports or elevated structures) can be customized in BDT's mod settings under **HEIGHT FILTER** or in the vanilla **Settings | Controls** menu. Hidden entities are protected from selection to prevent accidental demolition or interaction.
+These hotkeys can be customized in BDT's mod settings under **HEIGHT FILTER** or in the vanilla **Settings | Controls** menu. The transport and pillar visibility modes are configured in BDT's mod settings. Hidden entities are protected from selection to prevent accidental demolition or interaction.
 
 Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 

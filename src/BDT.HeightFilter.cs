@@ -333,7 +333,9 @@ namespace CoIDesignerToolkit
                     return hiddenCount == pivots.Length;
                 case HeightFilterTransportVisibility.Medium:
                 default:
-                    return (double)hiddenCount / pivots.Length > 0.5;
+                    // Medium keeps a transport visible only when more than half of its
+                    // inflection points are at or below the visible layer.
+                    return hiddenCount * 2 >= pivots.Length;
             }
         }
 
