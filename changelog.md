@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.11.2 [unreleased]
+## v0.11.2 [packaged]
 
 - Added **Transport visibility** policy selector (`Low`, `Medium`, `High`) under **HEIGHT FILTER**, controlling whether transports require all inflection points (`Low`), a majority of inflection points (`Medium`, default), or at least one inflection point (`High`) to be at or below the threshold layer to remain visible.
 - Added keybindings for stepping transport visibility: `Shift+PageUp` (towards High) and `Shift+PageDown` (towards Low).
