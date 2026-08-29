@@ -67,7 +67,6 @@ $filesToInclude = @(
     'DesignerToolkit.dll',
     '0Harmony.dll',
     'changelog.txt',
-    'readme.md',
     'thumbnail.png',
     'LICENSE'
 )
@@ -86,25 +85,6 @@ if (Test-Path $translationsDir) {
     Get-ChildItem -Path $translationsDir -Filter '*.json' -File |
         Where-Object { -not $_.Name.StartsWith('.') } |
         Copy-Item -Destination $packageTranslationsDir -Force
-}
-
-$docsAssetsDir = Join-Path $PSScriptRoot 'docs\assets'
-if (Test-Path $docsAssetsDir) {
-    New-Item -ItemType Directory -Path (Join-Path $packageRootDir 'docs') -Force | Out-Null
-    New-Item -ItemType Directory -Path (Join-Path $packageRootDir 'docs\assets') -Force | Out-Null
-    $docsAssetsToInclude = @(
-        'update-blueprint.png',
-        'remembered-blueprint-folder.png',
-        'blueprint-operational-stats.png',
-        'copy-as-markdown.png',
-        'symmetric-normalization-result.png'
-    )
-    foreach ($asset in $docsAssetsToInclude) {
-        $sourcePath = Join-Path $docsAssetsDir $asset
-        if (Test-Path $sourcePath) {
-            Copy-Item $sourcePath -Destination (Join-Path $packageRootDir "docs\assets\$asset") -Force
-        }
-    }
 }
 
 if (Test-Path $zipPath) {
