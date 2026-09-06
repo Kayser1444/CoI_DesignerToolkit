@@ -91,6 +91,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     {
         m_harmony = new Harmony("DesignerToolkit");
         BlueprintUpdater.ApplyPatches(m_harmony);
+        // TEMPORARY INVESTIGATION PATCH intentionally disabled.
+        // Enabling it can hide a vanilla blueprint portability issue from authors.
+        // BlueprintTransportExactPasteFix.ApplyPatches(m_harmony);
         BlueprintRecycleBin.ApplyPatches(m_harmony);
         FolderPersistence.ApplyPatches(m_harmony, JsonConfig);
         BlueprintStats.ApplyPatches(m_harmony);
