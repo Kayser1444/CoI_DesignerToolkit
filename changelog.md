@@ -4,6 +4,10 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.11.4 [unreleased]
 
+- Improved Layout Box Mode visibility for vehicle surfaces and overlappable cells, with clearer translucent colors.
+- Verified compatibility with Captain of Industry 0.8.7d (build 619).
+- Replaced repeated entity collection scans in fuel pollution hooks with vehicle, locomotive, and battleship caches maintained from entity lifecycle events.
+
 
 ## v0.11.3 [released]
 

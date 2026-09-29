@@ -32,6 +32,8 @@ public static class PollutionPatches
     private static bool s_isRecordingFuelConsumption;
 
     private static readonly Dictionary<FuelTank, IEntity> s_fuelTankToEntity = new Dictionary<FuelTank, IEntity>();
+    private static readonly List<BattleShip> s_battleShips = new List<BattleShip>();
+    private static readonly object s_entityCacheLock = new object();
 
     public static void Apply(Harmony harmony)
     {
@@ -130,37 +132,93 @@ public static class PollutionPatches
         }
     }
 
-    public static IEntity? GetEntityForFuelTank(FuelTank tank, IEntitiesManager em)
+    public static void RegisterFuelTankEntity(IEntity entity)
     {
-        if (s_fuelTankToEntity.TryGetValue(tank, out var entity) && !entity.IsDestroyed)
+        lock (s_entityCacheLock)
         {
-            return entity;
-        }
+            if (entity is BattleShip battleShip && !s_battleShips.Contains(battleShip))
+                s_battleShips.Add(battleShip);
 
-        // Refresh mapping
-        s_fuelTankToEntity.Clear();
-        foreach (var v in em.GetAllEntitiesOfType<Vehicle>())
-        {
-            var t = v.m_fuelTank.ValueOrNull;
-            if (t != null)
+            if (entity is Vehicle vehicle)
             {
-                s_fuelTankToEntity[t] = v;
+                var tank = vehicle.m_fuelTank.ValueOrNull;
+                if (tank != null)
+                    s_fuelTankToEntity[tank] = vehicle;
+            }
+            else if (entity is Locomotive locomotive)
+            {
+                var tank = locomotive.m_fuelTank.ValueOrNull;
+                if (tank != null)
+                    s_fuelTankToEntity[tank] = locomotive;
             }
         }
-        foreach (var l in em.GetAllEntitiesOfType<Locomotive>())
+    }
+
+    public static void UnregisterFuelTankEntity(IEntity entity)
+    {
+        lock (s_entityCacheLock)
         {
-            var t = l.m_fuelTank.ValueOrNull;
-            if (t != null)
+            if (entity is BattleShip battleShip)
+                s_battleShips.Remove(battleShip);
+
+            if (entity is Vehicle vehicle)
             {
-                s_fuelTankToEntity[t] = l;
+                var tank = vehicle.m_fuelTank.ValueOrNull;
+                if (tank != null)
+                    s_fuelTankToEntity.Remove(tank);
+            }
+            else if (entity is Locomotive locomotive)
+            {
+                var tank = locomotive.m_fuelTank.ValueOrNull;
+                if (tank != null)
+                    s_fuelTankToEntity.Remove(tank);
             }
         }
+    }
 
-        if (s_fuelTankToEntity.TryGetValue(tank, out entity) && !entity.IsDestroyed)
+    public static void InitializeFuelTankCache(IEntitiesManager entitiesManager)
+    {
+        lock (s_entityCacheLock)
         {
-            return entity;
+            s_fuelTankToEntity.Clear();
+            s_battleShips.Clear();
+            foreach (var vehicle in entitiesManager.GetAllEntitiesOfType<Vehicle>())
+                RegisterFuelTankEntity(vehicle);
+            foreach (var locomotive in entitiesManager.GetAllEntitiesOfType<Locomotive>())
+                RegisterFuelTankEntity(locomotive);
+            foreach (var battleShip in entitiesManager.GetAllEntitiesOfType<BattleShip>())
+                RegisterFuelTankEntity(battleShip);
         }
-        return null;
+    }
+
+    public static void ClearFuelTankCache()
+    {
+        lock (s_entityCacheLock)
+        {
+            s_fuelTankToEntity.Clear();
+            s_battleShips.Clear();
+        }
+    }
+
+    public static IEntity? GetEntityForFuelTank(FuelTank tank)
+    {
+        lock (s_entityCacheLock)
+            return s_fuelTankToEntity.TryGetValue(tank, out var entity) && !entity.IsDestroyed
+                ? entity
+                : null;
+    }
+
+    private static BattleShip? GetFirstEnabledBattleShip()
+    {
+        lock (s_entityCacheLock)
+        {
+            foreach (var ship in s_battleShips)
+            {
+                if (!ship.IsDestroyed && ship.IsEnabled)
+                    return ship;
+            }
+            return null;
+        }
     }
 
     public static class Machine_tryPushFinishedRecipeToBuffers_Patch
@@ -229,7 +287,7 @@ public static class PollutionPatches
                 var em = PollutionManager.Instance.EntitiesManager;
                 if (em == null) return;
 
-                var entity = GetEntityForFuelTank(tank, em);
+                var entity = GetEntityForFuelTank(tank);
                 if (entity != null)
                 {
                     var proto = tank.Proto;
@@ -316,22 +374,18 @@ public static class PollutionPatches
             {
                 if (DesignerToolkitSettings.PollutionDaysToAverage > 0 && PollutionManager.Instance != null && reason == FuelUsedBy.BattleShip)
                 {
-                    var em = PollutionManager.Instance.EntitiesManager;
-                    if (em != null)
+                    if (PollutionManager.Instance.EntitiesManager != null)
                     {
-                        foreach (var ship in em.GetAllEntitiesOfType<BattleShip>())
+                        var ship = GetFirstEnabledBattleShip();
+                        if (ship != null)
                         {
-                            if (!ship.IsDestroyed && ship.IsEnabled)
-                            {
-                                float dieselPollutionPercent = PollutionManager.Instance.DieselPollutionPercent;
-                                float mult = PollutionManager.Instance.ShipsPollutionMultiplier * PollutionManager.Instance.AirPollutionMultiplier;
-                                
-                                // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
-                                float pollution = quantity.Value * dieselPollutionPercent * 0.6f * mult;
-                                
-                                PollutionManager.Instance.RecordPollution(ship.Id.Value, pollution, PollutionManager.PollutionType.Ship);
-                                break;
-                            }
+                            float dieselPollutionPercent = PollutionManager.Instance.DieselPollutionPercent;
+                            float mult = PollutionManager.Instance.ShipsPollutionMultiplier * PollutionManager.Instance.AirPollutionMultiplier;
+
+                            // Emit rate factor is POLLUTION_MULT = 60.Percent() = 0.6f
+                            float pollution = quantity.Value * dieselPollutionPercent * 0.6f * mult;
+
+                            PollutionManager.Instance.RecordPollution(ship.Id.Value, pollution, PollutionManager.PollutionType.Ship);
                         }
                     }
                 }

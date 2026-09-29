@@ -220,7 +220,7 @@ Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
 ![image.png](/content-images/c132fa98f4cf9395821cd90133eabea05bd866ec9957af03839b48b0ba35abfe/image.png)
 
-Layout Box Mode renders 3D building footprint and clearance boxes so designers can see where elevated pipes, belts, and other transports can pass over existing structures. The default toggle hotkey is `Alt+B`.
+Layout Box Mode renders 3D building footprint and clearance boxes so designers can see where elevated pipes, belts, and other transports can pass over existing structures. Vehicle-surface cells appear as terrain-height surfaces, and cells that allow vehicle overlap are distinguished by color. The default toggle hotkey is `Alt+B`.
 
 ### 📤 Batch placing
 
@@ -249,7 +249,7 @@ BDT features a real-time **Pollution Overlay** and **Heat Map** system to monito
 
 ### 💧 Reservoir insights
 
-BDT adds a stats icon to Groundwater pump and other virtual resource well inspectors (such as oil wells and modded reservoirs) that opens a rich **Reservoir Insights** tooltip.
+![image.png](/content-images/1a254b680cfb88da1e054e4053f9e7188762edef9f8dff7d21b79384044ccde9/image.png)BDT adds a stats icon to Groundwater pump and other virtual resource well inspectors (such as oil wells and modded reservoirs) that opens a rich **Reservoir Insights** tooltip.
 
 - **Monthly history**: A rolling bar chart shows the current level and the latest 12 monthly reserve snapshots, styled with the mined product's characteristic color (with low-reserve values highlighted).
 - **Yearly history**: A second bar chart shows the current level and up to 10 annual snapshots taken on January 1.

@@ -98,6 +98,10 @@ internal sealed class PollutionManager : IDisposable
     {
         m_entitiesManager = resolver.Resolve<IEntitiesManager>();
 
+        m_entitiesManager.EntityAdded.AddNonSaveable(this, OnEntityAdded);
+        m_entitiesManager.EntityRemoved.AddNonSaveable(this, OnEntityRemoved);
+        PollutionPatches.InitializeFuelTankCache(m_entitiesManager);
+
         try
         {
             var calendar = resolver.Resolve<Calendar>();
@@ -110,8 +114,6 @@ internal sealed class PollutionManager : IDisposable
             m_airPollutionMultiplier = propsDb.GetProperty(IdsCore.PropertyIds.AirPollutionMultiplier);
             m_waterPollutionMultiplier = propsDb.GetProperty(IdsCore.PropertyIds.WaterPollutionMultiplier);
             m_simLoopEvents = resolver.Resolve<ISimLoopEvents>();
-
-            m_entitiesManager.EntityRemoved.AddNonSaveable(this, OnEntityRemoved);
 
             var protosDb = resolver.Resolve<ProtosDb>();
             foreach (var proto in protosDb.All<FuelTankProto>())
@@ -139,10 +141,12 @@ internal sealed class PollutionManager : IDisposable
         {
             try
             {
+                m_entitiesManager.EntityAdded.RemoveNonSaveable(this, OnEntityAdded);
                 m_entitiesManager.EntityRemoved.RemoveNonSaveable(this, OnEntityRemoved);
             }
             catch {}
         }
+        PollutionPatches.ClearFuelTankCache();
         m_states.Clear();
         m_entitiesManager = null;
     }
@@ -196,10 +200,12 @@ internal sealed class PollutionManager : IDisposable
 
     private void OnEntityAdded(IEntity entity)
     {
+        PollutionPatches.RegisterFuelTankEntity(entity);
     }
 
     public void OnEntityRemoved(IEntity entity)
     {
+        PollutionPatches.UnregisterFuelTankEntity(entity);
         int id = entity.Id.Value;
         m_states.Remove(id);
     }

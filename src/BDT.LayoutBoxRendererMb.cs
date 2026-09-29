@@ -33,11 +33,18 @@ public class LayoutBoxRendererMb : MonoBehaviour
         public Vector3 Position;
         public Matrix4x4[] BodyMatrices;
         public Matrix4x4[] TopMatrices;
+        public Matrix4x4[] OverlappableTopMatrices;
+        public Matrix4x4[] VehicleSurfaceBodyMatrices;
+        public Matrix4x4[] VehicleSurfaceTopMatrices;
+        public Mesh? VehicleSurfaceMesh;
     }
 
     private Mesh m_cubeMesh = null!;
     private Material m_boxMaterial = null!;
     private Material m_topMaterial = null!;
+    private Material m_overlappableTopMaterial = null!;
+    private Material m_vehicleSurfaceBodyMaterial = null!;
+    private Material m_vehicleSurfaceMaterial = null!;
     private readonly List<EntityCacheEntry> m_cache = new List<EntityCacheEntry>();
     private IEntitiesManager m_entitiesManager = null!;
     private ShortcutsManager m_shortcutsManager = null!;
@@ -85,15 +92,40 @@ public class LayoutBoxRendererMb : MonoBehaviour
         }
         Log.Info($"[LayoutBoxMode] Using shader: {shader.name}");
 
-        m_boxMaterial = new Material(shader);
+        // Use a shader with explicit alpha blending for all overlay geometry.
+        // Standard's material mode changes have appeared opaque in game even
+        // with low color alpha, so prefer Unity's built-in transparent shader.
+        Shader overlayShader = Shader.Find("Hidden/Internal-Colored");
+        if (overlayShader == null)
+        {
+            overlayShader = Shader.Find("Sprites/Default") ?? shader;
+        }
+        Log.Info($"[LayoutBoxMode] Using overlay shader: {overlayShader.name}");
+
+        m_boxMaterial = new Material(overlayShader);
         // Semi-transparent light blue side walls.
-        m_boxMaterial.color = new Color(0.2f, 0.8f, 1f, 0.25f);
+        m_boxMaterial.color = new Color(0.2f, 0.8f, 1f, 0.1f);
         SetupTransparentMaterial(m_boxMaterial);
 
-        m_topMaterial = new Material(shader);
-        // More opaque vibrant amber/yellow roof caps.
-        m_topMaterial.color = new Color(1f, 0.75f, 0.1f, 0.85f);
+        m_topMaterial = new Material(overlayShader);
+        // Amber caps stay translucent so the building remains visible below them.
+        m_topMaterial.color = new Color(1f, 0.62f, 0.08f, 0.25f);
         SetupTransparentMaterial(m_topMaterial);
+
+        m_overlappableTopMaterial = new Material(overlayShader);
+        // Blue caps distinguish cells that allow overlap with another vehicle surface.
+        m_overlappableTopMaterial.color = new Color(0.2f, 0.8f, 1f, 0.05f);
+        SetupTransparentMaterial(m_overlappableTopMaterial);
+
+        m_vehicleSurfaceBodyMaterial = new Material(overlayShader);
+        // Keep green side walls as transparent as the blue box walls.
+        m_vehicleSurfaceBodyMaterial.color = new Color(0.15f, 1f, 0.2f, 0.05f);
+        SetupTransparentMaterial(m_vehicleSurfaceBodyMaterial);
+
+        m_vehicleSurfaceMaterial = new Material(overlayShader);
+        // Green caps and planes match the transparency of the amber caps.
+        m_vehicleSurfaceMaterial.color = new Color(0.15f, 1f, 0.2f, 0.05f);
+        SetupTransparentMaterial(m_vehicleSurfaceMaterial);
 
         Log.Info($"[LayoutBoxMode] Init complete. Mesh={m_cubeMesh.name}, " +
                  $"BodyMaterial={m_boxMaterial.name}, TopMaterial={m_topMaterial.name}, " +
@@ -107,6 +139,7 @@ public class LayoutBoxRendererMb : MonoBehaviour
 
     private void RebuildCache()
     {
+        ReleaseVehicleSurfaceMeshes();
         m_cache.Clear();
 
         int totalBoxes = 0;
@@ -128,6 +161,17 @@ public class LayoutBoxRendererMb : MonoBehaviour
 
             List<Matrix4x4> bodyMatrices = new List<Matrix4x4>();
             List<Matrix4x4> topMatrices = new List<Matrix4x4>();
+            List<Matrix4x4> overlappableTopMatrices = new List<Matrix4x4>();
+            List<Matrix4x4> vehicleSurfaceBodyMatrices = new List<Matrix4x4>();
+            List<Matrix4x4> vehicleSurfaceTopMatrices = new List<Matrix4x4>();
+            List<Vector3> vehicleSurfaceVertices = new List<Vector3>();
+            List<int> vehicleSurfaceTriangles = new List<int>();
+
+            Dictionary<Tile2i, float> vehicleSurfaceHeights = new Dictionary<Tile2i, float>();
+            foreach (KeyValuePair<Tile2i, HeightTilesF> surfaceHeight in entity.VehicleSurfaceHeights)
+            {
+                vehicleSurfaceHeights[surfaceHeight.Key] = surfaceHeight.Value.Value.ToFloat() * 2f;
+            }
 
             foreach (LayoutTile tile in layout.LayoutTiles)
             {
@@ -161,12 +205,52 @@ public class LayoutBoxRendererMb : MonoBehaviour
                     (absoluteTile.Y + 0.5f) * 2f);
                 Vector3 bodyScale = new Vector3(2f, bodyHeight, 2f);
 
-                bodyMatrices.Add(Matrix4x4.TRS(bodyPos, Quaternion.identity, bodyScale));
-                topMatrices.Add(Matrix4x4.TRS(capPos, Quaternion.identity, capScale));
+                Matrix4x4 bodyMatrix = Matrix4x4.TRS(bodyPos, Quaternion.identity, bodyScale);
+                if (tile.HasVehicleSurface)
+                {
+                    vehicleSurfaceBodyMatrices.Add(bodyMatrix);
+                }
+                else
+                {
+                    bodyMatrices.Add(bodyMatrix);
+                }
+
+                bool isOverlappableVehicleSurface =
+                    (tile.Constraint & LayoutTileConstraint.OverlappableVehicleSurface) != LayoutTileConstraint.None;
+                Matrix4x4 capMatrix = Matrix4x4.TRS(capPos, Quaternion.identity, capScale);
+                if (tile.HasVehicleSurface)
+                {
+                    vehicleSurfaceTopMatrices.Add(capMatrix);
+                }
+                else if (isOverlappableVehicleSurface)
+                {
+                    overlappableTopMatrices.Add(capMatrix);
+                }
+                else
+                {
+                    topMatrices.Add(capMatrix);
+                }
                 totalBoxes++;
+
+                if (tile.HasVehicleSurface &&
+                    TryGetVehicleSurfaceHeight(vehicleSurfaceHeights, absoluteTile.X, absoluteTile.Y, out float h00) &&
+                    TryGetVehicleSurfaceHeight(vehicleSurfaceHeights, absoluteTile.X + 1, absoluteTile.Y, out float h10) &&
+                    TryGetVehicleSurfaceHeight(vehicleSurfaceHeights, absoluteTile.X + 1, absoluteTile.Y + 1, out float h11) &&
+                    TryGetVehicleSurfaceHeight(vehicleSurfaceHeights, absoluteTile.X, absoluteTile.Y + 1, out float h01))
+                {
+                    AddVehicleSurfaceQuad(
+                        vehicleSurfaceVertices,
+                        vehicleSurfaceTriangles,
+                        absoluteTile.X * 2f,
+                        absoluteTile.Y * 2f,
+                        h00,
+                        h10,
+                        h11,
+                        h01);
+                }
             }
 
-            if (bodyMatrices.Count > 0)
+            if (bodyMatrices.Count > 0 || vehicleSurfaceBodyMatrices.Count > 0)
             {
                 Vector3 entityPos = new Vector3(
                     (transform.Position.X + 0.5f) * 2f,
@@ -177,7 +261,11 @@ public class LayoutBoxRendererMb : MonoBehaviour
                 {
                     Position = entityPos,
                     BodyMatrices = bodyMatrices.ToArray(),
-                    TopMatrices = topMatrices.ToArray()
+                    TopMatrices = topMatrices.ToArray(),
+                    OverlappableTopMatrices = overlappableTopMatrices.ToArray(),
+                    VehicleSurfaceBodyMatrices = vehicleSurfaceBodyMatrices.ToArray(),
+                    VehicleSurfaceTopMatrices = vehicleSurfaceTopMatrices.ToArray(),
+                    VehicleSurfaceMesh = BuildVehicleSurfaceMesh(vehicleSurfaceVertices, vehicleSurfaceTriangles)
                 });
             }
         }
@@ -185,6 +273,26 @@ public class LayoutBoxRendererMb : MonoBehaviour
         Log.Info($"[LayoutBoxMode] Rebuilt cache: {totalBoxes} boxes from {m_cache.Count} " +
                  $"entities (total checked static entities: {entityCount}).");
         m_isCacheDirty = false;
+    }
+
+    private void OnDestroy()
+    {
+        ReleaseVehicleSurfaceMeshes();
+        if (m_cubeMesh != null) Destroy(m_cubeMesh);
+        if (m_boxMaterial != null) Destroy(m_boxMaterial);
+        if (m_topMaterial != null) Destroy(m_topMaterial);
+        if (m_overlappableTopMaterial != null) Destroy(m_overlappableTopMaterial);
+        if (m_vehicleSurfaceBodyMaterial != null) Destroy(m_vehicleSurfaceBodyMaterial);
+        if (m_vehicleSurfaceMaterial != null) Destroy(m_vehicleSurfaceMaterial);
+    }
+
+    private void ReleaseVehicleSurfaceMeshes()
+    {
+        for (int i = 0; i < m_cache.Count; i++)
+        {
+            Mesh? mesh = m_cache[i].VehicleSurfaceMesh;
+            if (mesh != null) Destroy(mesh);
+        }
     }
 
     private void Update()
@@ -226,20 +334,86 @@ public class LayoutBoxRendererMb : MonoBehaviour
                 {
                     Graphics.DrawMesh(m_cubeMesh, entry.TopMatrices[j], m_topMaterial, 0);
                 }
+                for (int j = 0; j < entry.OverlappableTopMatrices.Length; j++)
+                {
+                    Graphics.DrawMesh(m_cubeMesh, entry.OverlappableTopMatrices[j], m_overlappableTopMaterial, 0);
+                }
+                for (int j = 0; j < entry.VehicleSurfaceBodyMatrices.Length; j++)
+                {
+                    Graphics.DrawMesh(m_cubeMesh, entry.VehicleSurfaceBodyMatrices[j], m_vehicleSurfaceBodyMaterial, 0);
+                }
+                for (int j = 0; j < entry.VehicleSurfaceTopMatrices.Length; j++)
+                {
+                    Graphics.DrawMesh(m_cubeMesh, entry.VehicleSurfaceTopMatrices[j], m_vehicleSurfaceMaterial, 0);
+                }
+                if (entry.VehicleSurfaceMesh != null)
+                {
+                    Graphics.DrawMesh(entry.VehicleSurfaceMesh, Matrix4x4.identity, m_vehicleSurfaceMaterial, 0);
+                }
             }
         }
     }
 
+    private static bool TryGetVehicleSurfaceHeight(
+        Dictionary<Tile2i, float> heights,
+        int x,
+        int y,
+        out float height)
+    {
+        return heights.TryGetValue(new Tile2i(x, y), out height);
+    }
+
+    private static void AddVehicleSurfaceQuad(
+        List<Vector3> vertices,
+        List<int> triangles,
+        float x,
+        float z,
+        float h00,
+        float h10,
+        float h11,
+        float h01)
+    {
+        int firstVertex = vertices.Count;
+        // Use the final per-corner heights from the layout. Open box bottoms
+        // leave no coplanar face to obscure the vehicle-surface plane.
+        vertices.Add(new Vector3(x, h00, z));
+        vertices.Add(new Vector3(x + 2f, h10, z));
+        vertices.Add(new Vector3(x + 2f, h11, z + 2f));
+        vertices.Add(new Vector3(x, h01, z + 2f));
+
+        // The game grid's Y axis maps to Unity's Z axis. This winding faces up.
+        triangles.Add(firstVertex);
+        triangles.Add(firstVertex + 2);
+        triangles.Add(firstVertex + 1);
+        triangles.Add(firstVertex);
+        triangles.Add(firstVertex + 3);
+        triangles.Add(firstVertex + 2);
+    }
+
+    private static Mesh? BuildVehicleSurfaceMesh(List<Vector3> vertices, List<int> triangles)
+    {
+        if (vertices.Count == 0) return null;
+
+        Mesh mesh = new Mesh { name = "BDT_LayoutBoxVehicleSurface" };
+        mesh.indexFormat = IndexFormat.UInt32;
+        mesh.SetVertices(vertices);
+        mesh.SetTriangles(triangles, 0);
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+        return mesh;
+    }
+
     /// <summary>
-    /// Creates a unit cube mesh (vertices from -0.5 to +0.5) with proper
-    /// normals. This avoids relying on CreatePrimitive whose shared mesh
+    /// Creates an open-bottom unit box mesh (vertices from -0.5 to +0.5) with
+    /// proper normals. This avoids relying on CreatePrimitive whose shared mesh
     /// may become invalid after the temp GameObject is destroyed.
     /// </summary>
     private static Mesh BuildUnitCubeMesh()
     {
-        Mesh mesh = new Mesh { name = "BDT_LayoutBoxCube" };
+        Mesh mesh = new Mesh { name = "BDT_LayoutBoxOpenBottomBox" };
 
-        // 24 vertices (4 per face, unique normals).
+        // 20 vertices (4 per rendered face, unique normals). The bottom face is
+        // omitted so layout volumes remain visible without hiding surfaces below them.
         Vector3[] vertices =
         {
             // Front (Z+)
@@ -251,9 +425,6 @@ public class LayoutBoxRendererMb : MonoBehaviour
             // Top (Y+)
             new(-0.5f, 0.5f, 0.5f), new( 0.5f, 0.5f, 0.5f),
             new( 0.5f, 0.5f, -0.5f), new(-0.5f, 0.5f, -0.5f),
-            // Bottom (Y-)
-            new(-0.5f, -0.5f, -0.5f), new( 0.5f, -0.5f, -0.5f),
-            new( 0.5f, -0.5f, 0.5f), new(-0.5f, -0.5f, 0.5f),
             // Right (X+)
             new( 0.5f, -0.5f, 0.5f), new( 0.5f, -0.5f, -0.5f),
             new( 0.5f, 0.5f, -0.5f), new( 0.5f, 0.5f, 0.5f),
@@ -267,19 +438,17 @@ public class LayoutBoxRendererMb : MonoBehaviour
             Vector3.forward, Vector3.forward, Vector3.forward, Vector3.forward,
             Vector3.back,    Vector3.back,    Vector3.back,    Vector3.back,
             Vector3.up,      Vector3.up,      Vector3.up,      Vector3.up,
-            Vector3.down,    Vector3.down,    Vector3.down,    Vector3.down,
             Vector3.right,   Vector3.right,   Vector3.right,   Vector3.right,
             Vector3.left,    Vector3.left,    Vector3.left,    Vector3.left,
         };
 
         int[] triangles =
         {
-             0, 2, 1, 0, 3, 2, // Front
-             4, 6, 5, 4, 7, 6, // Back
-             8,10, 9, 8,11,10, // Top
-            12,14,13, 12,15,14, // Bottom
-            16,18,17, 16,19,18, // Right
-            20,22,21, 20,23,22, // Left
+             0, 1, 2, 0, 2, 3, // Front
+             4, 5, 6, 4, 6, 7, // Back
+             8, 9,10, 8,10,11, // Top
+            12,13,14, 12,14,15, // Right
+            16,17,18, 16,18,19, // Left
         };
 
         mesh.vertices = vertices;
@@ -292,6 +461,7 @@ public class LayoutBoxRendererMb : MonoBehaviour
     private static void SetupTransparentMaterial(Material mat)
     {
         // Standard shader transparency setup.
+        mat.SetOverrideTag("RenderType", "Transparent");
         mat.SetFloat("_Mode", 3f); // Transparent
         mat.SetInt("_SrcBlend", (int)BlendMode.SrcAlpha);
         mat.SetInt("_DstBlend", (int)BlendMode.OneMinusSrcAlpha);

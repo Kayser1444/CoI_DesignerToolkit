@@ -1,3 +1,8 @@
+v0.11.4 | 2026-09-29
+* Improved Layout Box Mode visibility for vehicle surfaces and overlappable cells
+* Fixed: Pollution tracking no longer polls entity collections from fuel-consumption callbacks, preventing thread-safety errors in the game log
+* Verified compatibility with Captain of Industry 0.8.7d
+
 v0.11.3 | 2026-08-29
 * Added **Top** and **Off** pillar visibility options to the **Height filter**, allowing support pillars to follow their top segment or be hidden whenever any height layer is filtered out
 * Extended **Reservoir Insights** to support all virtual resources (including vanilla oil wells and modded reservoirs such as natural gas), dynamically styling bar charts with the product's characteristic color, adjusting chart background contrast for dark products (like crude oil), and hiding the sustainable-draw row when replenishment is not active
