@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.11.4 [unreleased]
+## v0.11.4 [packaged]
 
 - Improved Layout Box Mode visibility for vehicle surfaces and overlappable cells, with clearer translucent colors.
 - Verified compatibility with Captain of Industry 0.8.7d (build 619).
