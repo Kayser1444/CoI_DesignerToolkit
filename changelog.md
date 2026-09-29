@@ -2,6 +2,9 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.11.5 [unreleased]
+
+
 ## v0.11.4 [released]
 
 - Improved Layout Box Mode visibility for vehicle surfaces and overlappable cells, with clearer translucent colors.
