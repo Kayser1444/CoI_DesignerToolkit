@@ -1,0 +1,116 @@
+{
+  "version": "0.11.5",
+  "preparationCommit": "68ff9a8dce996e5d049d1b82c152954de97c4eec",
+  "helpersCommit": "f216feac5684447bac8adff43f98f0a6ccafe6e5",
+  "branch": "main",
+  "package": "DesignerToolkit-0.11.5.zip",
+  "bytes": 1306074,
+  "sha256": "4AC6E5E6519A41A5A02D5571CFF191B71551DC7FEB98F8AB11F75DD6FB3AB606",
+  "gameVersions": [
+    "0.8.7d",
+    "0.8.8"
+  ],
+  "compatibilityScope": "Technical/experimental Update 4.3 compatibility; extensive playtesting remains",
+  "publication": "Not published",
+  "verifiedInputs": [
+    {
+      "path": "0Harmony.dll",
+      "bytes": 2195456,
+      "sha256": "498EDE1D20A87AFAA6C7B1ED5B3BEB505B01DC418B952C1BE5C322204404B033"
+    },
+    {
+      "path": "DesignerToolkit.Loader.dll",
+      "bytes": 10240,
+      "sha256": "5796C773AD9FA4C72426A64E24362DA242429921F0B3822F5CEFD6567573EEE8"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1067,
+      "sha256": "4129F53F2BA0A5530C4B55B506E67625066198F1D3688196F4C2F96D8F27C8B6"
+    },
+    {
+      "path": "changelog.txt",
+      "bytes": 15711,
+      "sha256": "91EF8B150F6E8F6C38434179B15BB09A114357E795E2DECBA8D9D0C8E70A9D5F"
+    },
+    {
+      "path": "config.json",
+      "bytes": 6675,
+      "sha256": "DFD47490E23FCF975765CE18ABA82F9C4EDA155831643FB9EA0906112880A9E7"
+    },
+    {
+      "path": "implementations/pre-update-4.3/DesignerToolkit.dll",
+      "bytes": 490496,
+      "sha256": "D86D1439BC7C451C1FAEA4265E4F43D523C57C1A4AB51FADB5A6BA57FD4AA663"
+    },
+    {
+      "path": "implementations/update-4.3/DesignerToolkit.dll",
+      "bytes": 491008,
+      "sha256": "A9F655633ECCC421D1BA72A1E482F0539235925FBD74DB8E442B3AB3B5D5C5E3"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 2706,
+      "sha256": "FE58FF7681D562B3B2D031D552C3767B766E8BD7169D10F5DD5E5AAFDEF01BDD"
+    },
+    {
+      "path": "thumbnail.png",
+      "bytes": 131424,
+      "sha256": "88C5415FB38EF3A85D7DABFE4508BF85C4D65CDC8D4AB7DD660B47946F5BB37C"
+    },
+    {
+      "path": "translations/de.json",
+      "bytes": 24957,
+      "sha256": "8246DA750C31488FB209453A0BA6EA691AFFBC9F1051AFD70E87A225FCB76ADB"
+    },
+    {
+      "path": "translations/en.json",
+      "bytes": 22756,
+      "sha256": "1398DE9EF41DD3FBFFDDB176F6F49FBDF39CBBB724B8DE18B5429D893A5E5739"
+    },
+    {
+      "path": "translations/es.json",
+      "bytes": 25351,
+      "sha256": "326551797918250FF85AE4669B3AECAF65179595C44C37D20BFC98CE41482083"
+    },
+    {
+      "path": "translations/it.json",
+      "bytes": 25326,
+      "sha256": "84D930BF5CFD009E74915AA2355348092E2C512E8C2E37830DE712B26DDC6856"
+    },
+    {
+      "path": "translations/pt.json",
+      "bytes": 24716,
+      "sha256": "0CD835BF0C5C89596A121AEC9E7A2EC25AF1832F0512F4238ED5606B50FA4300"
+    },
+    {
+      "path": "translations/ru.json",
+      "bytes": 33569,
+      "sha256": "9AF8D76EB925CC8B19F920CC7CB66B050C9B765CD88AB9A60B58DE635FABA162"
+    },
+    {
+      "path": "translations/sv.json",
+      "bytes": 23824,
+      "sha256": "5606C6B0C174261C09CFF4CB02CBE648AFBAD8E38694C51007D27ED9B3F58D54"
+    },
+    {
+      "path": "translations/zh.json",
+      "bytes": 21695,
+      "sha256": "DCEE0A7B886AC5040CE68EC978FDD61FBD582F9674AF6EC863000389C24BCAA1"
+    }
+  ],
+  "entries": 17,
+  "runtimeLocales": 8,
+  "verification": {
+    "zipCrc": "pass",
+    "portableUniquePaths": "pass",
+    "reviewedManifest": "pass",
+    "selectorAndBothImplementations": "pass",
+    "byteEqualityWithInstalledAndReleaseStaging": "pass",
+    "localeKeysAndPlaceholders": "pass",
+    "gameReferencesAndReleaseGating": "pass",
+    "nativeReleaseSelectorFixtureBothVersions": "pass",
+    "fullGameSaveLoadingBothVersions": "owner-confirmed",
+    "extensivePlaytesting": "remaining"
+  }
+}
