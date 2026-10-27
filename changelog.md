@@ -2,6 +2,8 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.11.6 [unreleased]
+
 ## v0.11.5 [released]
 
 - Release scope: technical/experimental compatibility with Captain of Industry Update 4.3 (0.8.8), retaining support for 0.8.7d. Extensive playtesting remains; successful startup and focused checks do not certify extended gameplay.
