@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
 using Mafi.Core.Entities.Static.Layout;
+using Mafi.Core.GameLoop;
 using Mafi.Unity;
 using Mafi.Unity.Entities;
 using Mafi.Unity.InputControl;
@@ -48,13 +49,16 @@ public class LayoutBoxRendererMb : MonoBehaviour
     private readonly List<EntityCacheEntry> m_cache = new List<EntityCacheEntry>();
     private IEntitiesManager m_entitiesManager = null!;
     private ShortcutsManager m_shortcutsManager = null!;
+    private IGameLoopEvents m_gameLoopEvents = null!;
     private bool m_isCacheDirty = true;
     private bool m_initFailed;
 
-    public void Init(IEntitiesManager entitiesManager, ShortcutsManager shortcutsManager)
+    public void Init(IEntitiesManager entitiesManager, ShortcutsManager shortcutsManager, IGameLoopEvents gameLoopEvents)
     {
         m_entitiesManager = entitiesManager;
         m_shortcutsManager = shortcutsManager;
+        m_gameLoopEvents = gameLoopEvents;
+        m_gameLoopEvents.Terminate.AddNonSaveable(this, OnGameTerminating);
 
         m_entitiesManager.StaticEntityAdded.AddNonSaveable(this, OnEntityChanged);
         m_entitiesManager.StaticEntityRemoved.AddNonSaveable(this, OnEntityChanged);
@@ -104,12 +108,12 @@ public class LayoutBoxRendererMb : MonoBehaviour
 
         m_boxMaterial = new Material(overlayShader);
         // Semi-transparent light blue side walls.
-        m_boxMaterial.color = new Color(0.2f, 0.8f, 1f, 0.1f);
+        m_boxMaterial.color = new Color(0.2f, 0.8f, 1f, 0.05f);
         SetupTransparentMaterial(m_boxMaterial);
 
         m_topMaterial = new Material(overlayShader);
         // Amber caps stay translucent so the building remains visible below them.
-        m_topMaterial.color = new Color(1f, 0.62f, 0.08f, 0.25f);
+        m_topMaterial.color = new Color(1f, 0.62f, 0.08f, 0.15f);
         SetupTransparentMaterial(m_topMaterial);
 
         m_overlappableTopMaterial = new Material(overlayShader);
@@ -123,7 +127,7 @@ public class LayoutBoxRendererMb : MonoBehaviour
         SetupTransparentMaterial(m_vehicleSurfaceBodyMaterial);
 
         m_vehicleSurfaceMaterial = new Material(overlayShader);
-        // Green caps and planes match the transparency of the amber caps.
+        // Keep the terrain and model visible through traversable surfaces.
         m_vehicleSurfaceMaterial.color = new Color(0.15f, 1f, 0.2f, 0.05f);
         SetupTransparentMaterial(m_vehicleSurfaceMaterial);
 
@@ -277,6 +281,10 @@ public class LayoutBoxRendererMb : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (m_gameLoopEvents != null)
+        {
+            m_gameLoopEvents.Terminate.RemoveNonSaveable(this, OnGameTerminating);
+        }
         ReleaseVehicleSurfaceMeshes();
         if (m_cubeMesh != null) Destroy(m_cubeMesh);
         if (m_boxMaterial != null) Destroy(m_boxMaterial);
@@ -284,6 +292,13 @@ public class LayoutBoxRendererMb : MonoBehaviour
         if (m_overlappableTopMaterial != null) Destroy(m_overlappableTopMaterial);
         if (m_vehicleSurfaceBodyMaterial != null) Destroy(m_vehicleSurfaceBodyMaterial);
         if (m_vehicleSurfaceMaterial != null) Destroy(m_vehicleSurfaceMaterial);
+    }
+
+    private void OnGameTerminating()
+    {
+        // This renderer survives Unity scene changes, so explicitly end its lifetime
+        // with the game whose entity manager it captured during initialization.
+        Destroy(gameObject);
     }
 
     private void ReleaseVehicleSurfaceMeshes()
@@ -299,7 +314,12 @@ public class LayoutBoxRendererMb : MonoBehaviour
     {
         if (m_initFailed) return;
 
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if COI_UPDATE_4_3
+        if (HotkeysRegistry.IsPressed(HotkeysRegistry.LayoutBoxModeToggle))
+#else
         if (m_shortcutsManager.IsDown(HotkeysRegistry.LayoutBoxModeToggle))
+#endif
         {
             HotkeysRegistry.PlayClickSound();
             DesignerToolkitSettings.SetLayoutBoxModeEnabled(!DesignerToolkitSettings.LayoutBoxModeEnabled);

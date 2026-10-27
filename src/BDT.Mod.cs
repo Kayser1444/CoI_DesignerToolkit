@@ -111,7 +111,14 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         PipeColoring.ApplyPatches(m_harmony);
         GroundwaterStatsManager.ApplyPatches(m_harmony);
         GroundwaterInspectorPatches.Apply(m_harmony);
-        CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony, Manifest.DisplayName, typeof(HotkeysRegistry));
+        CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony,
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if COI_UPDATE_4_3
+            Manifest.Id,
+#else
+            Manifest.DisplayName,
+#endif
+            typeof(HotkeysRegistry));
     }
 
     public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
@@ -127,8 +134,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
     {
+#if COI_UPDATE_4_3
+        CoI.AutoHelpers.InputControl.CustomKeybindsInjector.Register(resolver, this);
+#endif
         s_log.EnableConsoleLogging();
         s_log.RegisterAutoConsoleMirroring(this, resolver.Resolve<IGameLoopEvents>(), resolver.Resolve<GameConsoleCommandsExecutor>());
+        ModDebugWebApi.Register(this, resolver, "[BDT]");
 
         ApplyAutoHelpersLocalization();
         RegisterAutoHelpersLocalizationLateApply(resolver);
@@ -144,7 +155,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
         DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
         PipeColoring.Initialize(resolver);
-        HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.Audio.AudioDb>());
+        HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.UiToolkit.UiRoot>());
 
         m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
         RateLimitManager.Initialize(m_rateLimitsStateStore);
@@ -173,7 +184,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
             var layoutBoxRendererGo = new UnityEngine.GameObject("BDT.LayoutBoxRenderer");
             var layoutBoxRenderer = layoutBoxRendererGo.AddComponent<LayoutBoxRendererMb>();
-            layoutBoxRenderer.Init(resolver.Resolve<IEntitiesManager>(), resolver.Resolve<ShortcutsManager>());
+            layoutBoxRenderer.Init(resolver.Resolve<IEntitiesManager>(), resolver.Resolve<ShortcutsManager>(), gameLoopEvents);
             UnityEngine.Object.DontDestroyOnLoad(layoutBoxRendererGo);
 
             m_pollutionWorldRendererGo = new UnityEngine.GameObject("BDT.PollutionWorldRenderer");

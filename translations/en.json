@@ -838,5 +838,9 @@
   [
     "dtk.groundwater.trend_idle",
     "Idle / No draw recorded"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Tracking in progress ({0}/{1} months recorded)"
   ]
 ]

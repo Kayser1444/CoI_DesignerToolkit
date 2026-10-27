@@ -1184,7 +1184,7 @@ public static class TransportProductRemovalManager
         return hash;
     }
 
-    private sealed class EntityClearingBuffer : IProductBuffer, ISaveDetachedVanillaAttachment
+    private sealed class EntityClearingBuffer : CoI.AutoHelpers.Compatibility.PlainProductBufferAdapter, ISaveDetachedVanillaAttachment
     {
         private readonly IVehicleBuffersRegistry m_vehicleBuffersRegistry;
         private readonly Action<EntityClearingBuffer> m_onExhausted;
@@ -1196,11 +1196,11 @@ public static class TransportProductRemovalManager
         private bool m_isDisposed;
 
         public ITransportProductRemovalAdapter Adapter { get; }
-        public ProductProto Product { get; }
+        public override ProductProto Product { get; }
         public Quantity RemainingQuantity => m_remainingQuantity;
-        public Quantity UsableCapacity => Quantity.Zero;
-        public Quantity Capacity => Quantity;
-        public Quantity Quantity =>
+        public override Quantity UsableCapacity => Quantity.Zero;
+        public override Quantity Capacity => Quantity;
+        public override Quantity Quantity =>
             Adapter.GetProductQuantity(Product).Min(m_remainingQuantity);
         public bool IsAttachedToVanilla => m_isAttached;
         public string SaveDetachmentReason => "BDT regular product-removal clearing buffer is runtime-only.";
@@ -1219,12 +1219,12 @@ public static class TransportProductRemovalManager
             m_onExhausted = onExhausted;
         }
 
-        public Quantity StoreAsMuchAs(Quantity quantity)
+        public override Quantity StoreAsMuchAs(Quantity quantity)
         {
             return quantity;
         }
 
-        public Quantity RemoveAsMuchAs(Quantity maxQuantity)
+        public override Quantity RemoveAsMuchAs(Quantity maxQuantity)
         {
             if (m_isDisposed)
                 return Quantity.Zero;

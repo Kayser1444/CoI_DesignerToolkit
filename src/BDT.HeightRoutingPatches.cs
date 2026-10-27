@@ -43,8 +43,10 @@ internal static class HeightRoutingPatches
     private static readonly FieldInfo? s_toolboxField =
         AccessTools.Field(typeof(TransportBuildController), "m_toolbox");
 
+    // PRE_4_3_COMPAT: retire the m_noTurnBtn fallback after Update 5 or when pre-4.3 support ends.
     private static readonly FieldInfo? s_noTurnBtnField =
-        AccessTools.Field(typeof(TransportBuildController), "m_noTurnBtn");
+        AccessTools.Field(typeof(TransportBuildController), "m_noTurnBtn")
+        ?? AccessTools.Field(typeof(TransportBuildController), "m_onlyStraight");
 
     private static readonly FieldInfo? s_shortcutsManagerField =
         AccessTools.Field(typeof(TransportBuildController), "m_shortcutsManager");
@@ -124,12 +126,19 @@ internal static class HeightRoutingPatches
             {
                 s_lazyHeightBtn = toolbox.AddEntry(
                     RampIconPath,
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if COI_UPDATE_4_3
+                    CoI.AutoHelpers.InputControl.CustomKeybindsInjector.GetHandle(nameof(HotkeysRegistry.TransportLazyHeight)),
+#else
                     GetDisplayKeyBindings,
+#endif
                     OnToolboxBtnClick,
                     BdtLocalization.HeightRoutingTooltip
                 );
 
-                ToolboxItem? noTurnBtn = s_noTurnBtnField?.GetValue(__instance) as ToolboxItem;
+                object? noTurn = s_noTurnBtnField?.GetValue(__instance);
+                ToolboxItem? noTurnBtn = noTurn as ToolboxItem
+                    ?? noTurn?.GetType().GetProperty("Button")?.GetValue(noTurn) as ToolboxItem;
                 ReorderToolboxItemAfter(toolbox, s_lazyHeightBtn, noTurnBtn);
 
                 s_log.Info("Successfully added Height Routing button to TransportBuildController toolbox.");
@@ -198,7 +207,11 @@ internal static class HeightRoutingPatches
         KeyBindings kb = HotkeysRegistry.TransportLazyHeight;
         if (kb.Primary.IsEmpty && !kb.Secondary.IsEmpty)
         {
+#if COI_UPDATE_4_3
+            return new KeyBindings(kb.Secondary, KbChord.Empty);
+#else
             return new KeyBindings(kb.Mode, kb.Secondary, KeyBinding.Empty(kb.Secondary.Category));
+#endif
         }
         return kb;
     }
@@ -243,10 +256,18 @@ internal static class HeightRoutingPatches
             {
                 toolbox.SetEntryVisible(s_lazyHeightBtn, true);
             }
+#if COI_UPDATE_4_3
+            s_lazyHeightBtn.Update();
+#else
             s_lazyHeightBtn.Update(manager);
+#endif
         }
 
+#if COI_UPDATE_4_3
+        bool isHotKeyHeld = manager != null && HotkeysRegistry.IsHeld(HotkeysRegistry.TransportLazyHeight);
+#else
         bool isHotKeyHeld = manager != null && manager.IsOn(HotkeysRegistry.TransportLazyHeight);
+#endif
 
         bool newState = isHotKeyHeld || s_manualToggleState;
 

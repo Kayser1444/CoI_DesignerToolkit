@@ -1095,7 +1095,14 @@ internal static class DesignerToolkitSettings
         Px primaryMargin = marginLeft ?? 6.pt();
         if (!bindings.Primary.IsEmpty)
         {
-            row.Add(new KeyBindUi().SetKeys(bindings.Primary.Keys.ToArray()).MarginLeft(primaryMargin));
+            row.Add(new KeyBindUi().SetKeys(
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if COI_UPDATE_4_3
+                bindings.Primary.GetDisplayKeys()
+#else
+                bindings.Primary.Keys.ToArray()
+#endif
+).MarginLeft(primaryMargin));
         }
         if (!bindings.Primary.IsEmpty && !bindings.Secondary.IsEmpty)
         {
@@ -1105,7 +1112,13 @@ internal static class DesignerToolkitSettings
         }
         if (!bindings.Secondary.IsEmpty)
         {
-            row.Add(new KeyBindUi().SetKeys(bindings.Secondary.Keys.ToArray()).MarginLeft(4.pt()));
+            row.Add(new KeyBindUi().SetKeys(
+#if COI_UPDATE_4_3
+                bindings.Secondary.GetDisplayKeys()
+#else
+                bindings.Secondary.Keys.ToArray()
+#endif
+).MarginLeft(4.pt()));
         }
     }
 
@@ -1715,6 +1728,41 @@ internal static class DesignerToolkitSettings
     private static string BuildStateJson()
     {
         var writer = new JsonWriter(128);
+#if COI_UPDATE_4_3
+        writer.BeginObject();
+        writer.Field("schemaVersion", SETTINGS_SCHEMA_VERSION);
+        writer.Field("markdownTableLanguage", (int)MarkdownTableLanguage);
+        writer.Field("markdownNumberFormat", (int)MarkdownNumberFormat);
+        writer.Field("instantBuildMode", InstantBuildModeEnabled);
+        writer.Field("legacyBeltConfigurations", LegacyBeltConfigurationsEnabled);
+        writer.Field("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
+        writer.Field("throughputOverlayEnabled", ThroughputOverlayEnabled);
+        writer.Field("throughputGlowEnabled", ThroughputGlowEnabled);
+        writer.Field("throughputHeatmapMode", (int)ThroughputHeatmapMode);
+        writer.Field("throughputColorblindMode", ThroughputColorblindMode);
+        writer.Field("throughputShowAsPercent", ThroughputShowAsPercent);
+        writer.Field("pollutionOverlayEnabled", PollutionOverlayEnabled);
+        writer.Field("pollutionGlowEnabled", PollutionGlowEnabled);
+        writer.Field("pollutionGlowColor", FormatPollutionGlowColor());
+        writer.Field("pollutionDaysToAverage", PollutionDaysToAverage);
+        writer.Field("pollutionShowAir", PollutionShowAir);
+        writer.Field("pollutionShowGround", PollutionShowGround);
+        writer.Field("pollutionShowSolidWaste", PollutionShowSolidWaste);
+        writer.Field("pollutionShowVehicle", PollutionShowVehicle);
+        writer.Field("pollutionShowShip", PollutionShowShip);
+        writer.Field("radiationOverlayEnabled", RadiationOverlayEnabled);
+        writer.Field("radiationGlowEnabled", RadiationGlowEnabled);
+        writer.Field("radiationDaysToAverage", RadiationDaysToAverage);
+        writer.Field("layoutBoxModeEnabled", LayoutBoxModeEnabled);
+        writer.Field("useRecycleBin", UseRecycleBin);
+        writer.Field("recycleBinFolderName", RecycleBinFolderName);
+        writer.Field("blueprintSpacing", BlueprintSpacing);
+        writer.Field("preColorPipesEnabled", PreColorPipesEnabled);
+        writer.Field("heightFilterTransportVisibility", (int)HeightFilterTransportVisibility);
+        writer.Field("heightFilterPillarVisibility", (int)HeightFilterPillarVisibility);
+        writer.Field("isFirstUnpausePending", IsFirstUnpausePending);
+        writer.EndObject();
+#else
         writer.AppendStartObject();
         writer.AppendNumberField("schemaVersion", SETTINGS_SCHEMA_VERSION);
         writer.AppendNumberField("markdownTableLanguage", (int)MarkdownTableLanguage);
@@ -1748,6 +1796,7 @@ internal static class DesignerToolkitSettings
         writer.AppendNumberField("heightFilterPillarVisibility", (int)HeightFilterPillarVisibility);
         writer.AppendBoolField("isFirstUnpausePending", IsFirstUnpausePending);
         writer.AppendEndObject();
+#endif
         return writer.GetJsonAndClear();
     }
 

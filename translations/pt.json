@@ -838,5 +838,9 @@
   [
     "dtk.groundwater.trend_idle",
     "Inativo / Nenhuma extração registrada"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Monitoramento em andamento ({0}/{1} meses registrados)"
   ]
 ]

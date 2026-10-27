@@ -4,6 +4,16 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.11.5 [unreleased]
 
+- Release scope: technical/experimental compatibility with Captain of Industry Update 4.3 (0.8.8), retaining support for 0.8.7d. Extensive playtesting remains; successful startup and focused checks do not certify extended gameplay.
+
+- Release preparation: owner confirms the current features and successful game/save loading on both 0.8.7d and 0.8.8. Ship one version-switching Release package with both implementations. Retain current version until public distribution is confirmed.
+
+- Added an experimental automatic game-version selector with both 0.8.7d and 0.8.8 implementations in one installed mod. Native loader and binary-reference checks pass on both APIs; the owner subsequently confirmed game/save loading on both supported versions.
+
+- Prepared Captain of Industry 0.8.8 (Update 4.3, build 622) API compatibility: native shortcuts, toolbar/sound controls, JSON writer and plain logistics buffers. Preserve mixed-pile members during regular/quick removal and support the new input-only mini-zipper. Debug build and all four native transport-removal fixtures pass; in-game verification remains pending. Retained older source paths for separate builds.
+
+- Tuned Layout Box Mode for clearer model inspection: restored green vehicle-surface opacity to 5%, softened blue side walls to 5%, and reduced orange occupancy caps to 15%.
+- Layout Box Mode now releases its game-specific renderer when a game ends, preventing boxes from a previous game from appearing in the next one.
 
 ## v0.11.4 [released]
 

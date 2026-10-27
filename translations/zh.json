@@ -838,5 +838,9 @@
   [
     "dtk.groundwater.trend_idle",
     "闲置 / 未记录抽取量"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "正在记录（已记录 {0}/{1} 个月）"
   ]
 ]

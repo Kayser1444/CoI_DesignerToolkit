@@ -69,7 +69,12 @@ internal sealed class TransportProductRemovalAoETool : BaseEntityCursorInputCont
             (Option<NewInstanceOf<TransportTrajectoryHighlighter>>)Option.None,
             (Proto.ID?)null,
             (CursorStyle?)CursorsStyles.SelectArea,
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if COI_UPDATE_4_3
+            Mafi.Unity.Audio.UiSound.ButtonClick,
+#else
             "Assets/Unity/UserInterface/Audio/ButtonClick.prefab",
+#endif
             Option<Mafi.Unity.Ui.Controllers.Tools.FilterToolbox>.None)
     {
         m_gameLoopEvents = gameLoopEvents;
@@ -83,7 +88,11 @@ internal sealed class TransportProductRemovalAoETool : BaseEntityCursorInputCont
             this,
             "Assets/Unity/UserInterface/General/Trash128.png",
             1080f,
+#if COI_UPDATE_4_3
+            CoI.AutoHelpers.InputControl.CustomKeybindsInjector.GetHandle(nameof(HotkeysRegistry.TransportProductRemovalAoETool)));
+#else
             (ShortcutsManager _) => HotkeysRegistry.TransportProductRemovalAoETool);
+#endif
     }
 
     public void Initialize()

@@ -838,5 +838,9 @@
   [
     "dtk.groundwater.trend_idle",
     "Inaktiv / Keine Entnahme aufgezeichnet"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Aufzeichnung läuft ({0}/{1} Monate erfasst)"
   ]
 ]

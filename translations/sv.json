@@ -838,5 +838,9 @@
   [
     "dtk.groundwater.trend_idle",
     "Inaktiv / Inget uttag registrerat"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Mätning pågår ({0}/{1} månader registrerade)"
   ]
 ]

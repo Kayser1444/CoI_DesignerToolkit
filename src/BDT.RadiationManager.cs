@@ -161,11 +161,20 @@ internal sealed class RadiationManager : IDisposable
         if (entity is Zipper zipper)
         {
             for (int i = 0; i < zipper.m_inputBuffer.Length; i++)
-                AddProduct(zipper.m_inputBuffer[i], ref total);
+                // PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+                #if COI_UPDATE_4_3
+AddPile(zipper.m_inputBuffer[i], ref total);
+#else
+AddProduct(zipper.m_inputBuffer[i], ref total);
+#endif
 
             var outputEnumerator = zipper.m_outputBuffer.GetEnumerator();
             while (outputEnumerator.MoveNext())
-                AddProduct(outputEnumerator.Current.ProductQuantity, ref total);
+                #if COI_UPDATE_4_3
+AddPile(outputEnumerator.Current.Pile, ref total);
+#else
+AddProduct(outputEnumerator.Current.ProductQuantity, ref total);
+#endif
         }
 
         if (entity is Transport transport)
@@ -231,10 +240,23 @@ internal sealed class RadiationManager : IDisposable
         }
     }
 
+#if COI_UPDATE_4_3
+    private static void AddPile(Mafi.Core.Factory.Transports.MixedPile pile, ref float total)
+    {
+        var products = new Lyst<ProductQuantity>(3);
+        pile.AggregateInto(products);
+        AddProducts(products, ref total);
+    }
+#endif
+
     private static void AddTruckCargo(Truck truck, ref float total)
     {
         var products = new Lyst<ProductQuantity>(8);
-        truck.Cargo.GetCargoProducts(products);
+        #if COI_UPDATE_4_3
+truck.GetCargoProducts(products);
+#else
+truck.Cargo.GetCargoProducts(products);
+#endif
         AddProducts(products, ref total);
     }
 

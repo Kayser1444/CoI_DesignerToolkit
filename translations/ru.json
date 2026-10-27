@@ -838,5 +838,9 @@
   [
     "dtk.groundwater.trend_idle",
     "Простой / Расход не зарегистрирован"
+  ],
+  [
+    "dtk.groundwater.tracking_notice",
+    "Идёт наблюдение (записано месяцев: {0}/{1})"
   ]
 ]

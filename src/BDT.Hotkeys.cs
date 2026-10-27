@@ -1,3 +1,5 @@
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if !COI_UPDATE_4_3
 // CoI Designer Toolkit
 // Copyright (c) 2026 Kayser1444
 // Licensed under the MIT License.
@@ -122,3 +124,5 @@ internal readonly struct BdtHotkey
         return true;
     }
 }
+
+#endif

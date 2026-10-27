@@ -326,7 +326,10 @@ internal sealed class UndoManager : IDisposable
                 var cmd = new BatchCreateStaticEntitiesCmd(
                     configsToRestore.ToImmutableArray(),
                     BuildMiniZippersMode.DeferToProto,
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if !COI_UPDATE_4_3
                     isFree: m_constructionManager.IsInstaBuildEnabled,
+#endif
                     allowValidationSuppression: true,
                     applyConfiguration: true
                 );

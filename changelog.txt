@@ -1,3 +1,9 @@
+v0.11.5 | 2026-10-27
+
+* This release provides technical/experimental compatibility with Captain of Industry Update 4.3 (0.8.8), while retaining support for 0.8.7d; extensive playtesting remains
+* Refined Layout Box Mode colors and transparency for clearer model inspection
+* Fixed: Layout boxes from a previous game no longer remain after loading another world
+
 v0.11.4 | 2026-09-29
 * Improved Layout Box Mode visibility for vehicle surfaces and overlappable cells
 * Fixed: Pollution tracking no longer polls entity collections from fuel-consumption callbacks, preventing thread-safety errors in the game log

@@ -93,7 +93,12 @@ internal static class UndoPatches
         }
     }
 
+// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
+#if COI_UPDATE_4_3
+    [HarmonyPatch(typeof(ConstructionManager), nameof(ConstructionManager.StartDeconstruction), new Type[] { typeof(IStaticEntity), typeof(bool), typeof(EntityRemoveReason), typeof(bool), typeof(bool) })]
+#else
     [HarmonyPatch(typeof(ConstructionManager), nameof(ConstructionManager.StartDeconstruction), new Type[] { typeof(IStaticEntity), typeof(bool), typeof(EntityRemoveReason), typeof(bool) })]
+#endif
     private static class StartDeconstructionPatch
     {
         [HarmonyPrefix]
