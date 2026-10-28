@@ -2,6 +2,10 @@
 
 # 🧰 Kayser's Blueprint Designer's Toolkit
 
+> **Why is the code analysis red?**
+>
+> To handle the transition to Update 4.3 gracefully, the mod temporarily ships with a loader DLL that selects the compatible mod DLL based on the installed version of the base game.
+
 Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, documenting, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
