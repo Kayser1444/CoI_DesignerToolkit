@@ -218,9 +218,7 @@ Freely adopted from Moriarty's Utilities++ mod, with permission. (Thanks @Mori!)
 
 ### 📦 Layout box mode
 
-![image.png](/content-images/c132fa98f4cf9395821cd90133eabea05bd866ec9957af03839b48b0ba35abfe/image.png)
-
-Layout Box Mode renders 3D building footprint and clearance boxes so designers can see where elevated pipes, belts, and other transports can pass over existing structures. Vehicle-surface cells appear as terrain-height surfaces, and cells that allow vehicle overlap are distinguished by color. The default toggle hotkey is `Alt+B`.
+![image.png](/content-images/bbeb6ccd80846d7905432af3b3001f07f75c5fcab5e4804bb542032f9488aaad/image.png)Layout Box Mode renders 3D building footprint and clearance boxes so designers can see where elevated pipes, belts, and other transports can pass over existing structures. Aprons--tiles reserved for vehicle traversal--are displayed in an alternate color (green). The default toggle hotkey is `Alt+B`.
 
 ### 📤 Batch placing
 
