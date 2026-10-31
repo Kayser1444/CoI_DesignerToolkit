@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.11.6 [packaged]
+## v0.11.6 [released]
 
 - Fix b624 mini-zipper reserve inventory in content displays, removal snapshots, selective removal and quick-return accounting; promote retained reserves when an input is emptied and retain the optional-field fallback for b622. Include plain piles explicitly alongside mixed members. Add permanent reserve lifecycle and conservation contracts.
 - Move test web API startup to the game launch command; retain early AutoHelpers console mirroring for version and DLL timestamp rows.
