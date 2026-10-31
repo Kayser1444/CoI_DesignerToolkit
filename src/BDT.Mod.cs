@@ -139,7 +139,6 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 #endif
         s_log.EnableConsoleLogging();
         s_log.RegisterAutoConsoleMirroring(this, resolver.Resolve<IGameLoopEvents>(), resolver.Resolve<GameConsoleCommandsExecutor>());
-        ModDebugWebApi.Register(this, resolver, "[BDT]");
 
         ApplyAutoHelpersLocalization();
         RegisterAutoHelpersLocalizationLateApply(resolver);

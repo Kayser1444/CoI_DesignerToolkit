@@ -192,6 +192,8 @@ The **Remove products in area** tool (default hotkey `Alt+Backspace`) lets you d
 
 Regular removal orders persist through saving and reloading while BDT remains installed. Product sources and sinks are intentionally excluded.
 
+On Update 4.3, removal previews and actions also include the mini-zipper reserve introduced in game build 624. Selective removal keeps retained products available for normal transport after the order finishes.
+
 ### 👁️ Height filter
 
 BDT features a Height Filter rendering system that allows players to filter the visibility of transports, transport pillars, and layout entities (such as sorters, zippers, mini-zippers, and lifts) in the world.
@@ -342,7 +344,7 @@ The **Throughput** settings control the global overlay, overlay hotkey, heat-map
 
 - Compatible with vanilla saves.
 - Can be added to or removed from existing saves.
-- Requires Captain of Industry `0.8.2` or newer.
+- Requires Captain of Industry `0.8.5` or newer; the download selects the appropriate implementation for 0.8.7d or Update 4.3 (0.8.8).
 - Blueprint consumers do not need this mod installed.
 - UI translations included for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
 

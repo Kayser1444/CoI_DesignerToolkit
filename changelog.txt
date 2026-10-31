@@ -1,3 +1,8 @@
+v0.11.6 | 2026-10-31
+
+* Fixed: Transport product removal includes the mini-zipper's reserve inventory introduced in game build 624, keeping product previews, selective removal and quick removal accurate
+* Fixed: Removing selected products from a mini-zipper no longer leaves retained reserve products stranded when its input becomes empty
+
 v0.11.5 | 2026-10-27
 
 * This release provides technical/experimental compatibility with Captain of Industry Update 4.3 (0.8.8), while retaining support for 0.8.7d; extensive playtesting remains

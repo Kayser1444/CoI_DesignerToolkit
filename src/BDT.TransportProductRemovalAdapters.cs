@@ -40,6 +40,13 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
     private static readonly FieldInfo? s_miniZipperOutput = GetField<MiniZipper>("m_outputBuffer");
     private static readonly FieldInfo? s_miniZipperInputQuantity = GetField<MiniZipper>("m_quantityInInputBuffer");
     private static readonly FieldInfo? s_miniZipperOutputQuantity = GetField<MiniZipper>("m_quantityInOutputBuffer");
+#if COI_UPDATE_4_3
+    // Optional: b622 has only the input slots; b624 adds a shared reserve.
+    private static readonly FieldInfo? s_miniZipperReserve = GetField<MiniZipper>("m_reservePile");
+    private static readonly FieldInfo? s_miniZipperReservePort = GetField<MiniZipper>("m_reservePortIndex");
+    private static readonly FieldInfo? s_miniZipperReserveStep = GetField<MiniZipper>("m_reserveStep");
+    private static readonly FieldInfo? s_miniZipperInputSteps = GetField<MiniZipper>("m_inputBufferSteps");
+#endif
     private static readonly FieldInfo? s_sorterOutput = GetField<Sorter>("m_outputBuffer");
     private static readonly FieldInfo? s_sorterOutputQuantity = GetField<Sorter>("<QuantityInOutputBuffer>k__BackingField");
 
@@ -132,6 +139,9 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
 #if COI_UPDATE_4_3
         // Mini-zippers now stage input piles and forward directly to ports.
         requiresOutputBuffer = entity is not MiniZipper;
+        if (entity is MiniZipper && s_miniZipperReserve != null &&
+            (s_miniZipperReservePort == null || s_miniZipperReserveStep == null || s_miniZipperInputSteps == null))
+            return false;
 #endif
         if ((requiresOutputBuffer && (outputQueue == null || outputQuantity == null)) ||
             (entity is Zipper && (inputArray == null || inputQuantity == null)) ||
@@ -258,6 +268,12 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
                 removedInput += removed;
             }
         }
+        if (Entity is MiniZipper && s_miniZipperReserve?.GetValue(Entity) is MixedPile reserve)
+        {
+            SetMiniZipperReserve(RemoveFromPile(reserve, product, ref remaining, out Quantity removed));
+            removedInput += removed;
+            PromoteMiniZipperReserveIfInputEmpty();
+        }
         Queueue<ZipBuffProduct> outputs = GetOutputBuffer();
         for (int i = 0; i < outputs.Count && remaining.IsPositive; i++)
         {
@@ -274,6 +290,30 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
         if (reportAsCleared && total.IsPositive)
             GetContext().ProductsManager.ProductClearedNoChecks(product, total);
         return total;
+    }
+
+    private void SetMiniZipperReserve(MixedPile pile)
+    {
+        if (Entity is not MiniZipper || s_miniZipperReserve == null) return;
+        s_miniZipperReserve.SetValue(Entity, pile);
+        if (pile.IsEmpty)
+        {
+            s_miniZipperReservePort!.SetValue(Entity, -1);
+            s_miniZipperReserveStep!.SetValue(Entity, default(SimStep));
+        }
+    }
+
+    private void PromoteMiniZipperReserveIfInputEmpty()
+    {
+        if (s_miniZipperReserve!.GetValue(Entity) is not MixedPile reserve || reserve.IsEmpty) return;
+        int port = (int)s_miniZipperReservePort!.GetValue(Entity);
+        var inputs = (MixedPile[])m_inputArrayField!.GetValue(Entity);
+        if (port < 0 || port >= inputs.Length || inputs[port].IsNotEmpty) return;
+        // Native SimUpdate promotes the reserve only after sending a nonempty
+        // input slot. Removal can empty it first, leaving the reserve stranded.
+        inputs[port] = reserve;
+        ((SimStep[])s_miniZipperInputSteps!.GetValue(Entity))[port] = (SimStep)s_miniZipperReserveStep!.GetValue(Entity);
+        SetMiniZipperReserve(MixedPile.None);
     }
 
     private static MixedPile RemoveFromPile(MixedPile pile, ProductProto product,
@@ -386,11 +426,20 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
     private void ForEachBufferedProduct(Action<ProductQuantity> action)
     {
         var products = new Lyst<ProductQuantity>(8);
-        if (m_pendingInputField?.GetValue(Entity) is MixedPile pending) pending.AggregateInto(products);
+        if (m_pendingInputField?.GetValue(Entity) is MixedPile pending) AddPileProducts(pending, products);
         if (m_inputArrayField?.GetValue(Entity) is MixedPile[] inputs)
-            foreach (MixedPile pile in inputs) pile.AggregateInto(products);
-        foreach (ZipBuffProduct output in GetOutputBuffer()) output.Pile.AggregateInto(products);
+            foreach (MixedPile pile in inputs) AddPileProducts(pile, products);
+        if (Entity is MiniZipper && s_miniZipperReserve?.GetValue(Entity) is MixedPile reserve)
+            AddPileProducts(reserve, products);
+        foreach (ZipBuffProduct output in GetOutputBuffer()) AddPileProducts(output.Pile, products);
         foreach (ProductQuantity product in products) action(product);
+    }
+
+    private static void AddPileProducts(MixedPile pile, Lyst<ProductQuantity> products)
+    {
+        // AggregateInto expands mixed members only; plain piles need their own row.
+        if (pile.HasMembers) pile.AggregateInto(products);
+        else if (pile.IsNotEmpty) products.AddQuantity(pile.Product, pile.Quantity);
     }
 
 
@@ -454,6 +503,7 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
         if (m_pendingInputField != null) m_pendingInputField.SetValue(Entity, MixedPile.None);
         if (m_inputArrayField?.GetValue(Entity) is MixedPile[] mixedInput)
             for (int i = 0; i < mixedInput.Length; i++) mixedInput[i] = MixedPile.None;
+        SetMiniZipperReserve(MixedPile.None);
 #endif
         GetOutputBuffer().Clear();
         m_inputQuantityField?.SetValue(Entity, Quantity.Zero);

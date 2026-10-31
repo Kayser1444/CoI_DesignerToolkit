@@ -14,7 +14,7 @@ using Mafi.Core.Factory.Zippers;
 using Mafi.Core.Products;
 using Mafi.Core.Prototypes;
 
-public static class Program
+public static partial class Program
 {
     private static int Main(string[] args)
     {
@@ -80,10 +80,12 @@ public static class Program
         Check(source.TransferTo(new Buffer(b, 0, 10), Quantity.One, false) == Quantity.Zero,
             "cross-product transfer is refused");
         AdapterContracts(mod, pile, a);
+        AdapterContracts(mod, MixedPile.FromPlain(a, 3.Quantity()), a, matchingUnitsPerPile: 3);
+        MiniZipperReserveContracts(mod, pile, a, b);
         Console.WriteLine("PASS: mixed-pile selective removal, scope limits, unit order, native zipper/lift/mini-zipper/sorter quick removal, and transient-buffer quantity conservation.");
     }
 
-    private static void AdapterContracts(string mod, MixedPile pile, ProductProto product)
+    private static void AdapterContracts(string mod, MixedPile pile, ProductProto product, int matchingUnitsPerPile = 2)
     {
         Type adapterType = Assembly.LoadFrom(mod).GetType("CoIDesignerToolkit.TransportProductRemovalAdapter", true)!;
         foreach (Type entityType in new[] { typeof(Zipper), typeof(Lift), typeof(MiniZipper), typeof(Sorter) })
@@ -113,18 +115,22 @@ public static class Program
             object?[] args = { entity, null };
             Check((bool)adapterType.GetMethod("TryCreateBuiltIn")!.Invoke(null, args)!, "native adapter fields resolve");
             object adapter = args[1]!;
+            int pileCount = sorter || mini ? 1 : 2;
+            int expectedTotal = pile.Quantity.Value * pileCount;
+            int expectedRemoved = Math.Min(3, matchingUnitsPerPile * pileCount);
+            int expectedRemaining = expectedTotal - expectedRemoved;
             Quantity total = (Quantity)adapterType.GetMethod("GetTotalQuantity")!.Invoke(adapter, null)!;
-            Check(total == (sorter || mini ? 3 : 6).Quantity(), "native input and output piles are counted");
+            Check(total == expectedTotal.Quantity(), "native input and output piles are counted");
             Quantity removed = (Quantity)adapterType.GetMethod("RemoveProduct")!
                 .Invoke(adapter, new object[] { product, 3.Quantity(), false })!;
-            Check(removed == (sorter || mini ? 2 : 3).Quantity(), "scope removes matching members across input and output");
+            Check(removed == expectedRemoved.Quantity(), "scope removes matching members across input and output");
             total = (Quantity)adapterType.GetMethod("GetTotalQuantity")!.Invoke(adapter, null)!;
-            Check(total == (sorter || mini ? 1 : 3).Quantity(), "unrequested members remain after regular removal");
+            Check(total == expectedRemaining.Quantity(), "unrequested members remain after regular removal");
             adapterType.GetMethod("ClearAllProductsForQuickRemove")!.Invoke(adapter, null);
             Check(output.Count == 0 && (input == null || input.All(p => p.IsEmpty)), "quick removal empties native buffers");
             total = (Quantity)adapterType.GetMethod("GetTotalQuantity")!.Invoke(adapter, null)!;
             Check(total == Quantity.Zero, "quick removal leaves no pending input to duplicate");
-            Check(((StoreProxy)(object)store).Stored == (sorter || mini ? 1 : 3).Quantity(), "quick removal returns exactly the remaining products");
+            Check(((StoreProxy)(object)store).Stored == expectedRemaining.Quantity(), "quick removal returns exactly the remaining products");
         }
     }
 

@@ -4,6 +4,9 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.11.6 [unreleased]
 
+- Fix b624 mini-zipper reserve inventory in content displays, removal snapshots, selective removal and quick-return accounting; promote retained reserves when an input is emptied and retain the optional-field fallback for b622. Include plain piles explicitly alongside mixed members. Add permanent reserve lifecycle and conservation contracts.
+- Move test web API startup to the game launch command; retain early AutoHelpers console mirroring for version and DLL timestamp rows.
+
 ## v0.11.5 [released]
 
 - Release scope: technical/experimental compatibility with Captain of Industry Update 4.3 (0.8.8), retaining support for 0.8.7d. Extensive playtesting remains; successful startup and focused checks do not certify extended gameplay.

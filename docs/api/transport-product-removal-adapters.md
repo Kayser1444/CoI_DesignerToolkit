@@ -14,4 +14,12 @@ Important contract requirements:
 - Construction validity and destroyed state are reported accurately.
 - Registration metadata and adapter instances are runtime-only and are not serialized.
 
+The built-in mini-zipper adapter includes the optional b624 reserve pile in
+content snapshots, removal limits and returned products. If selective removal
+empties the reserve's input slot, it promotes the retained reserve into that
+slot with its original arrival step so native sending can continue. It resets
+reserve ownership when empty and preserves the input-only path on older builds.
+Native `MixedPile.AggregateInto` expands mixed members only; plain piles must
+also be included explicitly when enumerating inventory.
+
 The integration seam is public, but v0.9.0 has not been validated against a third-party adapter implementation. Integrators should test entity-level regular and quick removal, area selection, save/reload restoration, cancellation, destruction, and mod removal before shipping support.
