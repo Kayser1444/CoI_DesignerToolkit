@@ -1,0 +1,46 @@
+{
+  "version": "0.11.6",
+  "prepared_on": "2026-10-31",
+  "preparation_commit": "9f3374abca93cdec52d121ece444ff71a259a7b9",
+  "zip": "DesignerToolkit-0.11.6.zip",
+  "size_bytes": 1332203,
+  "sha256": "CD59AF52AAD51FA8108588B6F7854B4C397A4DF2058B543997608BA3C9B76E38",
+  "entry_count": 17,
+  "locales": [
+    "de.json",
+    "en.json",
+    "es.json",
+    "it.json",
+    "pt.json",
+    "ru.json",
+    "sv.json",
+    "zh.json"
+  ],
+  "verified": [
+    "ZIP CRC and portable paths",
+    "Exact package allowlist",
+    "Every entry matches local source or verified build output",
+    "Release manifest, changelog and save compatibility flags",
+    "No development sources, symbols, probes or caches",
+    "Packaged Update 4.3 Release implementation passes native reserve-removal contracts"
+  ],
+  "entry_sha256": {
+    "0Harmony.dll": "498EDE1D20A87AFAA6C7B1ED5B3BEB505B01DC418B952C1BE5C322204404B033",
+    "DesignerToolkit.Loader.dll": "A422998FCEA22A428EF5D82FD9E2507A24181FC2D901E3DC65B053B06BBFF1C5",
+    "LICENSE": "4129F53F2BA0A5530C4B55B506E67625066198F1D3688196F4C2F96D8F27C8B6",
+    "changelog.txt": "0F79D4B988EDC18AB163815CB679890D5958D01A7CC2004CC4CCE4B9FEE07970",
+    "config.json": "DFD47490E23FCF975765CE18ABA82F9C4EDA155831643FB9EA0906112880A9E7",
+    "implementations/pre-update-4.3/DesignerToolkit.dll": "3444802892FD1CA346E992553F5DEFDF866456A04B3443E5DBDD8607BA5D77DD",
+    "implementations/update-4.3/DesignerToolkit.dll": "AF140E668EB8C2338469A8F91412E63A033C6B3CC347919B449AC33B26D6C2B3",
+    "manifest.json": "AF20CF963719778722F62884018541CF87D45D28F1B97BB543782C8CA4DAD032",
+    "thumbnail.png": "88C5415FB38EF3A85D7DABFE4508BF85C4D65CDC8D4AB7DD660B47946F5BB37C",
+    "translations/de.json": "8246DA750C31488FB209453A0BA6EA691AFFBC9F1051AFD70E87A225FCB76ADB",
+    "translations/en.json": "1398DE9EF41DD3FBFFDDB176F6F49FBDF39CBBB724B8DE18B5429D893A5E5739",
+    "translations/es.json": "326551797918250FF85AE4669B3AECAF65179595C44C37D20BFC98CE41482083",
+    "translations/it.json": "84D930BF5CFD009E74915AA2355348092E2C512E8C2E37830DE712B26DDC6856",
+    "translations/pt.json": "0CD835BF0C5C89596A121AEC9E7A2EC25AF1832F0512F4238ED5606B50FA4300",
+    "translations/ru.json": "9AF8D76EB925CC8B19F920CC7CB66B050C9B765CD88AB9A60B58DE635FABA162",
+    "translations/sv.json": "5606C6B0C174261C09CFF4CB02CBE648AFBAD8E38694C51007D27ED9B3F58D54",
+    "translations/zh.json": "DCEE0A7B886AC5040CE68EC978FDD61FBD582F9674AF6EC863000389C24BCAA1"
+  }
+}
