@@ -10,6 +10,7 @@ using Mafi.Core;
 using Mafi.Core.Environment;
 using Mafi.Core.Factory.WellPumps;
 using Mafi.Core.Game;
+using Mafi.Core.GameLoop;
 using Mafi.Core.Map;
 using Mafi.Core.Products;
 using Mafi.Core.PropertiesDb;
@@ -168,6 +169,15 @@ public sealed class GroundwaterStatsManager
         m_difficultyConfig = resolver.Resolve<GameDifficultyConfig>();
         m_propertiesDb = resolver.Resolve<IPropertiesDb>();
         m_virtualResourceManager = resolver.Resolve<VirtualResourceManager>();
+
+        // On new games the resource index is populated during NewGameCreated,
+        // after mod Initialize. InitState runs after that on both new and loaded worlds.
+        resolver.Resolve<IGameLoopEvents>().RegisterInitState(this, () => initializeWorldState(resolver));
+    }
+
+    private void initializeWorldState(DependencyResolver resolver)
+    {
+        if (m_calendar == null || m_virtualResourceManager == null) return;
 
         m_calendar.NewMonthStart.AddNonSaveable(this, onNewMonthStart);
         m_calendar.NewDay.AddNonSaveable(this, onNewDay);
@@ -348,22 +358,27 @@ public sealed class GroundwaterStatsManager
         if (resData.TryGetValue("recordedYears", out object? rawYears))
             record.RecordedYearsCount = ToInt(rawYears);
 
-        if (resData.TryGetValue("monthlyHistory", out object? rawMonthly) && rawMonthly is Lyst<object> monthlyList)
-        {
-            for (int i = 0; i < Math.Min(MONTHLY_HISTORY_COUNT, monthlyList.Count); i++)
-                record.MonthlyHistory[i] = ToLong(monthlyList[i]);
-        }
+        if (resData.TryGetValue("monthlyHistory", out object? rawMonthly))
+            LoadHistoryArray(record.MonthlyHistory, rawMonthly);
 
-        if (resData.TryGetValue("yearlyHistory", out object? rawYearly) && rawYearly is Lyst<object> yearlyList)
-        {
-            for (int i = 0; i < Math.Min(YEARLY_HISTORY_COUNT, yearlyList.Count); i++)
-                record.YearlyHistory[i] = ToLong(yearlyList[i]);
-        }
+        if (resData.TryGetValue("yearlyHistory", out object? rawYearly))
+            LoadHistoryArray(record.YearlyHistory, rawYearly);
 
-        if (resData.TryGetValue("monthlyDraws", out object? rawDraws) && rawDraws is Lyst<object> drawsList)
+        if (resData.TryGetValue("monthlyDraws", out object? rawDraws))
+            LoadHistoryArray(record.MonthlyDraws, rawDraws);
+    }
+
+    private static void LoadHistoryArray(long[] target, object? rawValues)
+    {
+        // Accept the parser's object[] as well as older list-shaped results.
+        if (rawValues is System.Collections.Generic.IEnumerable<object> values)
         {
-            for (int i = 0; i < Math.Min(MONTHLY_DRAWS_COUNT, drawsList.Count); i++)
-                record.MonthlyDraws[i] = ToLong(drawsList[i]);
+            int index = 0;
+            foreach (object value in values)
+            {
+                if (index >= target.Length) break;
+                target[index++] = ToLong(value);
+            }
         }
     }
 

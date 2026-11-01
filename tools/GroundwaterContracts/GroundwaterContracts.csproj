@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <NuGetAudit>false</NuGetAudit>
+    <ManagedPath Condition="'$(ManagedPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed</ManagedPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mafi"><HintPath>$(ManagedPath)/Mafi.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Mafi.Core"><HintPath>$(ManagedPath)/Mafi.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>../../0Harmony.dll</HintPath></Reference>
+    <Compile Include="../../src/BDT.GroundwaterStatsManager.cs" Link="GroundwaterStatsManager.cs" />
+    <Compile Include="../../external/CoI_AutoHelpers/src/CoI.AutoHelpers/Persistence/IModStateJsonStore.cs" Link="IModStateJsonStore.cs" />
+    <Compile Include="../../external/CoI_AutoHelpers/src/CoI.AutoHelpers/Persistence/ModStateJsonSaveResult.cs" Link="ModStateJsonSaveResult.cs" />
+  </ItemGroup>
+</Project>

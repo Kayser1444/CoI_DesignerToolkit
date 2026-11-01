@@ -4,6 +4,9 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.11.7 [unreleased]
 
+- Defer reservoir discovery and cached-history restoration to the world InitState event, after the game's virtual resource index exists. Fix the initial-discovery null-reference warning on new games; add new-world, loaded-world and empty-map initialization contracts.
+- Restore reservoir history arrays from the current game JSON parser's array results, while retaining support for list results; previously history values were silently skipped.
+
 ## v0.11.6 [released]
 
 - Fix b624 mini-zipper reserve inventory in content displays, removal snapshots, selective removal and quick-return accounting; promote retained reserves when an input is emptied and retain the optional-field fallback for b622. Include plain piles explicitly alongside mixed members. Add permanent reserve lifecycle and conservation contracts.
