@@ -26,3 +26,12 @@
   directory and the planned live-language-switching document outside this release.
 - The public changelog contains only the two player-facing fixes. Package
   publication and release tagging/version advancement await portal confirmation.
+- Preparation commit 064be88 was pushed before packaging. Release implementations
+  for 0.8.7d and 0.8.8, plus the selector, build with zero warnings/errors. A
+  BDT-only copy of the shared CompatibilityContracts runner verifies both payloads'
+  game assembly versions, type/member resolution and Release optimization.
+- DesignerToolkit-0.11.7.zip passes CRC, exact file-list and duplicate-entry checks,
+  byte equality with every package input, UTF-8 JSON parsing, manifest loader and
+  save-removability fields, and public changelog version/date checks. Exact hashes
+  are in release-0.11.7-package.json. Current-game groundwater contracts pass again;
+  transport/mini-zipper contracts also pass against the packaged Release payload.

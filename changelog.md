@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.11.7 [unreleased]
+## v0.11.7 [packaged]
 
 - Defer reservoir discovery and cached-history restoration to the world InitState event, after the game's virtual resource index exists. Fix the initial-discovery null-reference warning on new games; add new-world, loaded-world and empty-map initialization contracts.
 - Restore reservoir history arrays from the current game JSON parser's array results, while retaining support for list results; previously history values were silently skipped.

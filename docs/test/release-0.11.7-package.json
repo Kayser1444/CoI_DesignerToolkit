@@ -1,0 +1,108 @@
+{
+  "version": "0.11.7",
+  "preparationCommit": "064be88cd05c98ce2d3bd8752696565267f7ee04",
+  "helpersCommit": "e5afbdd7ceccbc9a0e052405aec829c1646d6cd5",
+  "branch": "main",
+  "package": "DesignerToolkit-0.11.7.zip",
+  "bytes": 1333586,
+  "sha256": "335F39D4C7D15C4DDE291EC2B3E3386F1E67B0F647581505F56375A6838CCE7E",
+  "gameVersions": [
+    "0.8.7d",
+    "0.8.8"
+  ],
+  "publication": "Packaged; portal upload not confirmed",
+  "verification": [
+    "ZIP CRC, exact file list, no duplicate entries, byte equality to all inputs, UTF-8 JSON, manifest version/loader/save-removability fields, public changelog version/date",
+    "Both Release implementations and selector pass release optimization and matching game API reference contracts",
+    "Current native groundwater and transport contracts pass; live gameplay not tested",
+    "Legacy groundwater runtime fixture blocked by native integrity check #7",
+    "Live Hub comparison blocked by disabled browser access; local page unchanged"
+  ],
+  "verifiedInputs": [
+    {
+      "path": "manifest.json",
+      "bytes": 2706,
+      "sha256": "9E037B5956193E1A95AC7D564A080E7C6F83007044EC17771C3444F26513FB49"
+    },
+    {
+      "path": "config.json",
+      "bytes": 6675,
+      "sha256": "DFD47490E23FCF975765CE18ABA82F9C4EDA155831643FB9EA0906112880A9E7"
+    },
+    {
+      "path": "DesignerToolkit.Loader.dll",
+      "bytes": 10240,
+      "sha256": "A422998FCEA22A428EF5D82FD9E2507A24181FC2D901E3DC65B053B06BBFF1C5"
+    },
+    {
+      "path": "implementations/pre-update-4.3/DesignerToolkit.dll",
+      "bytes": 492544,
+      "sha256": "56705326506B3B7BD0C17C054768177B5C117AC1DA50D63F9BB7D9C48A7DD7F2"
+    },
+    {
+      "path": "implementations/update-4.3/DesignerToolkit.dll",
+      "bytes": 493568,
+      "sha256": "33826AABF73C96A9B64A7B6F0CBD034A59963B7F9E498A3791F4AE5A7C9498B3"
+    },
+    {
+      "path": "0Harmony.dll",
+      "bytes": 2195456,
+      "sha256": "498EDE1D20A87AFAA6C7B1ED5B3BEB505B01DC418B952C1BE5C322204404B033"
+    },
+    {
+      "path": "changelog.txt",
+      "bytes": 16248,
+      "sha256": "D621B73248EB6D667FF59C869EB8EA55714DF9C6D229DF35162D6D132E4D7748"
+    },
+    {
+      "path": "thumbnail.png",
+      "bytes": 131424,
+      "sha256": "88C5415FB38EF3A85D7DABFE4508BF85C4D65CDC8D4AB7DD660B47946F5BB37C"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1067,
+      "sha256": "4129F53F2BA0A5530C4B55B506E67625066198F1D3688196F4C2F96D8F27C8B6"
+    },
+    {
+      "path": "translations/de.json",
+      "bytes": 24957,
+      "sha256": "8246DA750C31488FB209453A0BA6EA691AFFBC9F1051AFD70E87A225FCB76ADB"
+    },
+    {
+      "path": "translations/en.json",
+      "bytes": 22756,
+      "sha256": "1398DE9EF41DD3FBFFDDB176F6F49FBDF39CBBB724B8DE18B5429D893A5E5739"
+    },
+    {
+      "path": "translations/es.json",
+      "bytes": 25351,
+      "sha256": "326551797918250FF85AE4669B3AECAF65179595C44C37D20BFC98CE41482083"
+    },
+    {
+      "path": "translations/it.json",
+      "bytes": 25326,
+      "sha256": "84D930BF5CFD009E74915AA2355348092E2C512E8C2E37830DE712B26DDC6856"
+    },
+    {
+      "path": "translations/pt.json",
+      "bytes": 24716,
+      "sha256": "0CD835BF0C5C89596A121AEC9E7A2EC25AF1832F0512F4238ED5606B50FA4300"
+    },
+    {
+      "path": "translations/ru.json",
+      "bytes": 33569,
+      "sha256": "9AF8D76EB925CC8B19F920CC7CB66B050C9B765CD88AB9A60B58DE635FABA162"
+    },
+    {
+      "path": "translations/sv.json",
+      "bytes": 23824,
+      "sha256": "5606C6B0C174261C09CFF4CB02CBE648AFBAD8E38694C51007D27ED9B3F58D54"
+    },
+    {
+      "path": "translations/zh.json",
+      "bytes": 21695,
+      "sha256": "DCEE0A7B886AC5040CE68EC978FDD61FBD582F9674AF6EC863000389C24BCAA1"
+    }
+  ]
+}
