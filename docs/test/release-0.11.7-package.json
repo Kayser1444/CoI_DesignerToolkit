@@ -10,7 +10,7 @@
     "0.8.7d",
     "0.8.8"
   ],
-  "publication": "Packaged; portal upload not confirmed",
+  "publication": "Released; confirmed by owner on 2026-11-02",
   "verification": [
     "ZIP CRC, exact file list, no duplicate entries, byte equality to all inputs, UTF-8 JSON, manifest version/loader/save-removability fields, public changelog version/date",
     "Both Release implementations and selector pass release optimization and matching game API reference contracts",
