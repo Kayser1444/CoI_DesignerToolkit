@@ -2,6 +2,11 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.11.8 [unreleased]
+
+- Honor the optional b626 RadiationShielded prototype tag in new radiation-overlay samples, retaining earlier-build fallback and dynamic shielding contracts. Add native-protection and unprotected-inventory regressions.
+- Migrate all 211 localization IDs and shortcut text to the native DesignerToolkit namespace and Portuguese/Chinese filenames, preserving translated text and shortcut preference identities. Use native loading on 0.8.8 and preserve older-game rebind/shortcut aliases. Migrate pending work-order identities without replacing its values.
+
 ## v0.11.7 [released]
 
 - Defer reservoir discovery and cached-history restoration to the world InitState event, after the game's virtual resource index exists. Fix the initial-discovery null-reference warning on new games; add new-world, loaded-world and empty-map initialization contracts.
