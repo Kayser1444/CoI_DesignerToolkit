@@ -210,7 +210,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Fixed: Applied `AutoHelpers` localization before registering the Mod Settings tab, preventing duplicate English/localized settings tabs in localized languages.
 - Translated the mod name across all supported non-English locales (German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese) and polished translation consistency.
 
-## v0.8.1 [released]
+## v0.8.1 [packaged]
 
 - Changed default pollution settings so that both the pollution overlay and the heat map (glow) are off by default.
 - Added **Throughput AoE select/deselect all** checkbox to the Throughput Area Tool window:
@@ -309,7 +309,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Fixed Throughput Limiter/Monitor inspector panel disappearing when changing maps/saves without restarting the game
 - Fixed negative/zero throughput display values due to incorrect patch execution order
 
-## v0.6.0 [released]
+## v0.6.0 [packaged]
 
 - Left-aligned "Set averaging period" and right-aligned "days" unit label and numeric input controls in the Throughput AoE tool window
 - Styled the averaging days input textfield in the Throughput AoE tool window to use the segmented LCD number style (display font and background)
@@ -373,7 +373,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Fixed settings save default validation logic (Regex.IsMatch) to successfully write configuration file even if values match currently stored defaults
 - Updated and translated the "Restore defaults" tooltip note across all 8 language files to refer to the "Save as config" button and config.json
 
-## v0.3.0 [released]
+## v0.3.0 [packaged]
 
 - Renamed the mod identity around Blueprint Designer's Toolkit (BDT)
 - Added a BDT-native instant build mode based on Mori's Utilities++ source
@@ -396,7 +396,7 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 - Verified `dotnet build DesignerToolkit.sln -c Debug --no-restore` succeeds; normal restore remains blocked locally by a NuGet temp lock
 - Rephrased the sandbox warning for Instant Build Mode to a British derogatory expression
 
-## v0.2.0a [released]
+## v0.2.0a [packaged]
 
 - Added **Restore defaults** and **Save as global** buttons to Designer Toolkit's Mod Settings tab
 - Added **Markdown number format** setting with Auto, English separators, and Local separators modes
