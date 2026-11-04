@@ -18,3 +18,12 @@ Release evidence is retained locally in the workspace .scratch/shipping-20261104
 
 No public upload or Hub page publication is part of preparation. Historical Hub checkpoints remain preserved. No extended simulation, complete visual review, or new older-game runtime session was performed. Existing earlier owner confirmation of legacy game/save loading is separate from these build checks.
 Radiation shielding, reserve/buffer and groundwater lifecycle/history contracts passed. The live translation-preview proposal is excluded.
+
+## Verified shipping package
+
+- ZIP: DesignerToolkit-0.11.8.zip
+- Entries: 17; bytes: 1322301
+- SHA-256: 9B021465A23053908DC624EB40640B38CA2706053271717D0993473A3A572AB8
+- Exact runtime whitelist and every entry's source bytes verified; both implementation DLLs match the Release build overlays
+- No debug symbols, authoring tools, laboratory proposals or translation metadata in the ZIP
+- Preparation commit: 4651561; shared AutoHelpers commit: 765d2c1

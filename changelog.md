@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.11.8 [unreleased]
+## v0.11.8 [packaged]
 
 - Release verification on 0.8.8a b628: dual Debug/Release builds and current/legacy compiled references pass; same-process English/Swedish/English settings reload preserves unique tabs and leaves the save unchanged. See docs/test/release-preparation-0.11.8.md for checks and limits.
 
