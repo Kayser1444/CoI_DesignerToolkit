@@ -3,23 +3,23 @@
   "source_file": "src\\BDT.Localization.cs",
   "total_keys": 210,
   "skip_keys": [
-    "dtk.mod.name",
-    "dtk.rate_limit.items_per_min",
-    "dtk.settings.language.hybrid",
-    "dtk.settings.language.local",
-    "dtk.settings.number_format.auto"
+    "DesignerToolkit.ModName",
+    "DesignerToolkit.RateLimitItemsPerMin",
+    "DesignerToolkit.SettingsLanguageHybrid",
+    "DesignerToolkit.SettingsLanguageLocal",
+    "DesignerToolkit.SettingsNumberFormatAuto"
   ],
   "keys": {
-    "dtk.groundwater.insights_title": {
+    "DesignerToolkit.GroundwaterInsightsTitle": {
       "en": "Reservoir insights: {0}",
       "context": "Title for reservoir rich tooltip floater where {0} is the localized product name.",
-      "de": "Reservoir insights: {0}",
-      "es": "Reservoir insights: {0}",
-      "it": "Reservoir insights: {0}",
-      "pt": "Reservoir insights: {0}",
-      "ru": "Reservoir insights: {0}",
-      "sv": "Reservoir insights: {0}",
-      "zh": "Reservoir insights: {0}"
+      "de": "Reservoir-Einblicke: {0}",
+      "es": "Información del yacimiento: {0}",
+      "it": "Analisi del giacimento: {0}",
+      "pt": "Informações da reserva: {0}",
+      "ru": "Обзор месторождения: {0}",
+      "sv": "Reservoarinsikter: {0}",
+      "zh": "储层信息：{0}"
     }
   },
   "keys_needing_translation": 1

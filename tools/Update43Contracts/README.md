@@ -1,5 +1,10 @@
 # Update 4.3 buffer contracts
 
+Also checks the production radiation sampler against native build 626 tag
+protection. Tagged ordinary holders sample zero; untagged radioactive inventory
+still counts, and tags do not override an active IShieldedEntity contract. On
+earlier 4.3 references, the same fixture verifies the missing-tag fallback.
+
 Build DesignerToolkit in Debug first. This runner uses the actual game mixed
 pile implementation and the private removal adapter from the compiled mod. It
 creates isolated, unspawned entity fixtures; no game or save is opened.

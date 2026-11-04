@@ -1,846 +1,846 @@
 [
   [
-    "dtk.mod.name",
+    "DesignerToolkit.ModName",
     "Verktygslåda för ritningsdesigners"
   ],
   [
-    "dtk.legacy_stacker.unsupported",
+    "DesignerToolkit.LegacyStackerUnsupported",
     "Stackerns ben har inte tillräckligt stöd av terrängen."
   ],
   [
-    "dtk.legacy_stacker.alert_full.tooltip",
+    "DesignerToolkit.LegacyStackerAlertFullTooltip",
     "Varna när högen är full."
   ],
   [
-    "dtk.settings.tab.markdown",
+    "DesignerToolkit.SettingsTabMarkdown",
     "Inställningar"
   ],
   [
-    "dtk.settings.markdown_copy.heading",
+    "DesignerToolkit.SettingsMarkdownCopyHeading",
     "Markdownkopiering"
   ],
   [
-    "dtk.settings.markdown_table_language.label",
+    "DesignerToolkit.SettingsMarkdownTableLanguage",
     "Språk för Markdown-tabeller"
   ],
   [
-    "dtk.settings.markdown_table_language.description",
+    "DesignerToolkit.SettingsMarkdownTableLanguageDescription",
     "Styr vilket språk rubriker i Markdown-tabeller och produkt-/entitetsnamn ska använda."
   ],
   [
-    "dtk.settings.markdown_table_language.pending",
+    "DesignerToolkit.SettingsMarkdownTableLanguagePending",
     "Engelska, Lokalt, Båda och Hybrid används nu av Markdown-exporten."
   ],
   [
-    "dtk.settings.markdown_number_format.label",
+    "DesignerToolkit.SettingsMarkdownNumberFormat",
     "Talformat för Markdown"
   ],
   [
-    "dtk.settings.markdown_number_format.description",
+    "DesignerToolkit.SettingsMarkdownNumberFormatDescription",
     "Styr decimal- och tusentalsavgränsare i Markdown-exporter. Auto följer den renderade tabellens språk: engelska tabeller använder en-US-avgränsare och lokala tabeller använder spelets aktuella språk."
   ],
   [
-    "dtk.settings.language.english",
+    "DesignerToolkit.SettingsLanguageEnglish",
     "Engelska"
   ],
   [
-    "dtk.settings.language.local",
+    "DesignerToolkit.SettingsLanguageLocal",
     "Lokalt"
   ],
   [
-    "dtk.settings.language.both",
+    "DesignerToolkit.SettingsLanguageBoth",
     "Båda"
   ],
   [
-    "dtk.settings.language.hybrid",
+    "DesignerToolkit.SettingsLanguageHybrid",
     "Hybrid"
   ],
   [
-    "dtk.settings.number_format.auto",
+    "DesignerToolkit.SettingsNumberFormatAuto",
     "Auto"
   ],
   [
-    "dtk.settings.number_format.english",
+    "DesignerToolkit.SettingsNumberFormatEnglish",
     "Engelska avgränsare"
   ],
   [
-    "dtk.settings.number_format.local",
+    "DesignerToolkit.SettingsNumberFormatLocal",
     "Lokala avgränsare"
   ],
   [
-    "dtk.settings.build_behaviors.heading",
+    "DesignerToolkit.SettingsBuildBehaviorsHeading",
     "BYGGBETEENDEN"
   ],
   [
-    "dtk.settings.instant_build_mode.label",
+    "DesignerToolkit.SettingsInstantBuildMode",
     "Omedelbart bygge-läge"
   ],
   [
-    "dtk.settings.instant_build_mode.description",
+    "DesignerToolkit.SettingsInstantBuildModeDescription",
     "Slutför automatiskt och omedelbart konstruktion, rivning, uppgraderingar och nedgraderingar utan material, arbetare eller enhet (även vid paus). Aktivering stänger även av spelets eget omedelbart-bygge-alternativ."
   ],
   [
-    "dtk.settings.instant_build_mode.sandbox_only",
+    "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
     "Stick till sandlådan, du late drummel!"
   ],
   [
-    "dtk.settings.legacy_belt_configurations.label",
+    "DesignerToolkit.SettingsLegacyBeltConfigurations",
     "Tillåt kurviga lutningsband"
   ],
   [
-    "dtk.settings.legacy_belt_configurations.description",
+    "DesignerToolkit.SettingsLegacyBeltConfigurationsDescription",
     "Aktiverar transportkonstruktion i stil med Uppdatering 1, vilket gör att transporter kan svänga och stiga/sjunka på samma ruta (möjliggör direkt konstruktion av kurviga lutningsband)."
   ],
   [
-    "dtk.settings.pre_color_pipes.label",
+    "DesignerToolkit.SettingsPreColorPipes",
     "Förfärga rör"
   ],
   [
-    "dtk.settings.pre_color_pipes.description",
+    "DesignerToolkit.SettingsPreColorPipesDescription",
     "Färgar tomma rör efter deras anslutna källor uppströms. Flera vätskor blandas i lika delar. Det faktiska transportflödet tar över färgen när rören innehåller produkter."
   ],
   [
-    "dtk.rate_limit.title",
+    "DesignerToolkit.RateLimitTitle",
     "Genomströmningsbegränsare"
   ],
   [
-    "dtk.rate_limit.enable",
+    "DesignerToolkit.RateLimitEnable",
     "Begränsa genomströmning"
   ],
   [
-    "dtk.rate_limit.sandbox_only",
+    "DesignerToolkit.RateLimitSandboxOnly",
     "Genomströmningsbegränsning är endast tillgänglig i sandlådeläge."
   ],
   [
-    "dtk.rate_limit.items_per_min",
+    "DesignerToolkit.RateLimitItemsPerMin",
     "st/min"
   ],
   [
-    "dtk.height_routing.tooltip",
+    "DesignerToolkit.HeightRoutingTooltip",
     "Håll ned eller tryck på kortkommandot för att växla mellan lat höjdmatchning. Som standard matchar bälten och rör målhöjden så snart som möjligt. När detta är aktiverat kommer bälten och rör att hålla sig på starthöjden så länge som möjligt innan höjden ändras."
   ],
   [
-    "dtk.settings.height_filter.heading",
+    "DesignerToolkit.SettingsHeightFilterHeading",
     "HÖJDFILTER"
   ],
   [
-    "dtk.settings.height_filter_max_visible.label",
+    "DesignerToolkit.SettingsHeightFilterMaxVisible",
     "Synliga nivåer"
   ],
   [
-    "dtk.settings.height_filter_max_visible.description",
+    "DesignerToolkit.SettingsHeightFilterMaxVisibleDescription",
     "Begränsar höjdnivån för transporter, strukturer och pelare som ritas i världen."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.label",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibility",
     "Transportsynlighet"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.description",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityDescription",
     "Styr hur transportsynlighet utvärderas vid filtrering av höjdlager."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityTooltip",
     "Styr tröskelkravet för transportens brytpunkter mot det synliga lagret."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.low",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityLow",
     "Låg"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityLowTooltip",
     "Alla brytpunkter för transporten måste vara vid eller under tröskellagret."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.medium",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityMedium",
     "Medel"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityMediumTooltip",
     "En majoritet av transportens brytpunkter måste vara vid eller under tröskellagret."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.high",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityHigh",
     "Hög"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityHighTooltip",
     "Minst en brytpunkt för transporten måste vara vid eller under tröskellagret."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.label",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibility",
     "Pelare synlighet"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.description",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityDescription",
     "Styr hur pelarens synlighet utvärderas vid filtrering av höjdlager."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.detached",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityDetached",
     "Fristående"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityDetachedTooltip",
     "Utvärderar varje pelares höjd självständigt mot det aktiva lagret."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.attached",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityAttached",
     "Bunden"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityAttachedTooltip",
     "Visar pelare så länge minst en synlig transport eller upphöjd struktur är ansluten."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.top",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityTop",
     "Bästa"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityTopTooltip",
     "Styr pelarens synlighet baserat på om dess översta skikt är vid eller under den synliga höjdgränsen."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.off",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityOff",
     "Av"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityOffTooltip",
     "Döljer alla pelare när något höjdlager filtreras bort."
   ],
   [
-    "dtk.settings.global_hotkey.description",
+    "DesignerToolkit.SettingsGlobalHotkeyTooltip",
     "Denna nyckelbindning är registrerad med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn."
   ],
   [
-    "Kb_Bdt_TransportCleanup__label",
+    "DesignerToolkit.Kb_Bdt_TransportCleanup__label",
     "Transportrengöringsverktyg"
   ],
   [
-    "Kb_Bdt_TransportCleanup__tooltip",
+    "DesignerToolkit.Kb_Bdt_TransportCleanup__tooltip",
     "Aktiverar verktyget för val av transportrensning"
   ],
   [
-    "Kb_Bdt_HeightFilterShowLayer__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterShowLayer__label",
     "Höjd filter visa lager"
   ],
   [
-    "Kb_Bdt_HeightFilterShowLayer__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterShowLayer__tooltip",
     "Ökar filterskiktet för maximal synlig höjd"
   ],
   [
-    "Kb_Bdt_HeightFilterHideLayer__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterHideLayer__label",
     "Höjd filter gömma lager"
   ],
   [
-    "Kb_Bdt_HeightFilterHideLayer__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Minskar filterskiktet för den maximala synliga höjden"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
     "Höjdfilter transportsynlighet (hög)"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
     "Stegar transportsynlighet mot Hög"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityLow__label",
     "Höjdfilter transportsynlighet (låg)"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
     "Stegar transportsynlighet mot Låg"
   ],
   [
-    "Kb_Bdt_ThroughputOverlayToggle__label",
+    "DesignerToolkit.Kb_Bdt_ThroughputOverlayToggle__label",
     "Växla genomströmningsöverlagring"
   ],
   [
-    "Kb_Bdt_ThroughputOverlayToggle__tooltip",
+    "DesignerToolkit.Kb_Bdt_ThroughputOverlayToggle__tooltip",
     "Växlar genomströmningsöverlagringen"
   ],
   [
-    "Kb_Bdt_ThroughputAoETool__label",
+    "DesignerToolkit.Kb_Bdt_ThroughputAoETool__label",
     "Genomströmningsverktyg"
   ],
   [
-    "Kb_Bdt_ThroughputAoETool__tooltip",
+    "DesignerToolkit.Kb_Bdt_ThroughputAoETool__tooltip",
     "Aktiverar verktyget för val av genomströmningsområde"
   ],
   [
-    "Kb_Bdt_TransportProductRemovalAoETool__label",
+    "DesignerToolkit.Kb_Bdt_TransportProductRemovalAoETool__label",
     "Ta bort produkter i området"
   ],
   [
-    "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
+    "DesignerToolkit.Kb_Bdt_TransportProductRemovalAoETool__tooltip",
     "Aktiverar verktyget för borttagning av områdesprodukter"
   ],
   [
-    "Kb_Bdt_PollutionOverlayToggle__label",
+    "DesignerToolkit.Kb_Bdt_PollutionOverlayToggle__label",
     "Växla föroreningsöverlagring"
   ],
   [
-    "Kb_Bdt_PollutionOverlayToggle__tooltip",
+    "DesignerToolkit.Kb_Bdt_PollutionOverlayToggle__tooltip",
     "Växlar föroreningsöverlagringen"
   ],
   [
-    "Kb_Bdt_RadiationOverlayToggle__label",
+    "DesignerToolkit.Kb_Bdt_RadiationOverlayToggle__label",
     "Växla strålningsöverlagring"
   ],
   [
-    "Kb_Bdt_RadiationOverlayToggle__tooltip",
+    "DesignerToolkit.Kb_Bdt_RadiationOverlayToggle__tooltip",
     "Växlar strålningsöverlagringen"
   ],
   [
-    "Kb_Bdt_LayoutBoxMode__label",
+    "DesignerToolkit.Kb_Bdt_LayoutBoxMode__label",
     "Växla layoutruta överlagring"
   ],
   [
-    "Kb_Bdt_LayoutBoxMode__tooltip",
+    "DesignerToolkit.Kb_Bdt_LayoutBoxMode__tooltip",
     "Växlar layoutboxöverlagring"
   ],
   [
-    "Kb_Bdt_UndoPlacement__label",
+    "DesignerToolkit.Kb_Bdt_UndoPlacement__label",
     "Ångra placering"
   ],
   [
-    "Kb_Bdt_UndoPlacement__tooltip",
+    "DesignerToolkit.Kb_Bdt_UndoPlacement__tooltip",
     "Ångrar den senaste BDT-placeringsåtgärden"
   ],
   [
-    "Kb_Bdt_TransportLazyHeight__label",
+    "DesignerToolkit.Kb_Bdt_TransportLazyHeight__label",
     "Transport lata höjd routing"
   ],
   [
-    "Kb_Bdt_TransportLazyHeight__tooltip",
+    "DesignerToolkit.Kb_Bdt_TransportLazyHeight__tooltip",
     "Håller läget för lat höjdmatchning när du placerar transporter (Alt)"
   ],
   [
-    "dtk.settings.action.restore_defaults",
+    "DesignerToolkit.SettingsRestoreDefaults",
     "Återställ standard"
   ],
   [
-    "dtk.settings.action.restore_defaults.tooltip",
+    "DesignerToolkit.SettingsRestoreDefaultsTooltip",
     "Återställer moddens globala standardvärden för alla inställningar."
   ],
   [
-    "dtk.settings.action.save_as_global",
+    "DesignerToolkit.SettingsSaveAsGlobal",
     "Spara till config.json"
   ],
   [
-    "dtk.settings.action.save_as_global.tooltip",
+    "DesignerToolkit.SettingsSaveAsGlobalTooltip",
     "Sparar dessa inställningar till config.json. De kommer att användas som standard för alla nya spel."
   ],
   [
-    "dtk.settings.status.restored_defaults",
+    "DesignerToolkit.SettingsRestoredDefaults",
     "Inbyggda standardvärden återställda i minnet."
   ],
   [
-    "dtk.settings.status.saved_to_config",
+    "DesignerToolkit.SettingsSavedToConfig",
     "Sparat i config.json."
   ],
   [
-    "dtk.settings.status.save_failed",
+    "DesignerToolkit.SettingsSaveFailed",
     "Det gick inte att spara: {0}"
   ],
   [
-    "dtk.settings.status.store_not_initialized",
+    "DesignerToolkit.SettingsStoreNotInitialized",
     "Det gick inte att spara: inställningslagret är inte initierat."
   ],
   [
-    "dtk.blueprint.copy_as_markdown.button",
+    "DesignerToolkit.CopyAsMarkdownButton",
     "Kopiera som Markdown"
   ],
   [
-    "dtk.blueprint.copy_as_markdown.tooltip",
+    "DesignerToolkit.CopyBlueprintMarkdownTooltip",
     "Kopiera ritningsstatistik som en Markdown-tabell till urklipp, redo att klistras in i hubben."
   ],
   [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "DesignerToolkit.CopyFolderMarkdownTooltip",
     "Kopiera mappens ritningslista som en Markdown-tabell till urklipp."
   ],
   [
-    "dtk.blueprint.construction_cost",
+    "DesignerToolkit.BlueprintConstructionCost",
     "Byggkostnad:"
   ],
   [
-    "dtk.blueprint.operational_cost",
+    "DesignerToolkit.BlueprintOperationalCost",
     "Driftskostnad:"
   ],
   [
-    "dtk.markdown.components.heading",
+    "DesignerToolkit.MarkdownComponentsHeading",
     "Komponenter"
   ],
   [
-    "dtk.markdown.construction.heading",
+    "DesignerToolkit.MarkdownConstructionHeading",
     "Konstruktion"
   ],
   [
-    "dtk.markdown.operational.heading",
+    "DesignerToolkit.MarkdownOperationalHeading",
     "Drift"
   ],
   [
-    "dtk.markdown.entity.header",
+    "DesignerToolkit.MarkdownEntityHeader",
     "Entitet"
   ],
   [
-    "dtk.markdown.count.header",
+    "DesignerToolkit.MarkdownCountHeader",
     "Antal"
   ],
   [
-    "dtk.markdown.product.header",
+    "DesignerToolkit.MarkdownProductHeader",
     "Produkt"
   ],
   [
-    "dtk.markdown.quantity.header",
+    "DesignerToolkit.MarkdownQuantityHeader",
     "Antal"
   ],
   [
-    "dtk.markdown.property.header",
+    "DesignerToolkit.MarkdownPropertyHeader",
     "Egenskap"
   ],
   [
-    "dtk.markdown.value.header",
+    "DesignerToolkit.MarkdownValueHeader",
     "Värde"
   ],
   [
-    "dtk.markdown.blueprint.header",
+    "DesignerToolkit.MarkdownBlueprintHeader",
     "Ritning"
   ],
   [
-    "dtk.markdown.folder.header",
+    "DesignerToolkit.MarkdownFolderHeader",
     "Mapp"
   ],
   [
-    "dtk.markdown.entities.stat",
+    "DesignerToolkit.MarkdownEntitiesStat",
     "Entiteter"
   ],
   [
-    "dtk.markdown.per_month.suffix",
+    "DesignerToolkit.MarkdownPerMonthSuffix",
     "/ mån"
   ],
   [
-    "dtk.throughput.title",
+    "DesignerToolkit.ThroughputTitle",
     "Genomströmning"
   ],
   [
-    "dtk.throughput.display",
+    "DesignerToolkit.ThroughputDisplay",
     "Visa genomströmning"
   ],
   [
-    "dtk.throughput.days_to_average",
+    "DesignerToolkit.ThroughputDaysToAverage",
     "dagar att snitta"
   ],
   [
-    "dtk.settings.throughput.heading",
+    "DesignerToolkit.SettingsThroughputHeading",
     "GENOMSTRÖMNING"
   ],
   [
-    "dtk.settings.throughput_toggle.label",
+    "DesignerToolkit.SettingsThroughputToggle",
     "Genomströmningsvy"
   ],
   [
-    "dtk.settings.throughput_toggle.description",
+    "DesignerToolkit.SettingsThroughputToggleDescription",
     "Aktiverar/inaktiverar genomströmningsvyer i världen. Enskilda entiteters visning måste fortfarande slås på i inspektören eller med genomströmningsverktyget."
   ],
   [
-    "dtk.settings.throughput_glow.label",
+    "DesignerToolkit.SettingsThroughputGlow",
     "Aktivera värmekartans glödeffekt"
   ],
   [
-    "dtk.settings.throughput_glow.description",
+    "DesignerToolkit.SettingsThroughputGlowDescription",
     "Kasta ett glödande ljus på marken som matchar värmekartans färg. Fungerar oberoende av textöverlagringen. Inaktivera om det orsakar fördröjning."
   ],
   [
-    "dtk.settings.throughput_heatmap.label",
+    "DesignerToolkit.SettingsThroughputHeatmap",
     "Genomströmningsfärgläggning (färgkarta)"
   ],
   [
-    "dtk.settings.throughput_colorblind.label",
+    "DesignerToolkit.SettingsThroughputColorblind",
     "Färgblindsvänliga färger"
   ],
   [
-    "dtk.settings.throughput_colorblind.description",
+    "DesignerToolkit.SettingsThroughputColorblindDescription",
     "Ändrar värmekartans gradienter från Grön-Orange-Röd till Blå-Gul-Röd för bättre synlighet."
   ],
   [
-    "dtk.settings.throughput_show_as_percent.label",
+    "DesignerToolkit.SettingsThroughputShowAsPercent",
     "Visa genomströmning i procent"
   ],
   [
-    "dtk.settings.throughput_show_as_percent.description",
+    "DesignerToolkit.SettingsThroughputShowAsPercentDescription",
     "Ändrar visningsformatet för genomströmning i världen från absoluta tal (enheter/min) till en procentandel av enhetens maximala kapacitet."
   ],
   [
-    "dtk.throughput.aoe_tool.name",
+    "DesignerToolkit.ThroughputAoEToolName",
     "Genomströmningsområdesverktyg"
   ],
   [
-    "dtk.throughput.aoe_tool.tooltip",
+    "DesignerToolkit.ThroughputAoEToolTooltip",
     "Klicka och dra för att markera ett område, konfigurera sedan visningsinställningar för genomströmning för alla markerade enheter per typ."
   ],
   [
-    "dtk.throughput.aoe_tool.window_title",
+    "DesignerToolkit.ThroughputAoEToolWindowTitle",
     "Konfigurera genomströmning i område"
   ],
   [
-    "dtk.throughput.aoe_tool.apply",
+    "DesignerToolkit.ThroughputAoEToolApply",
     "Verkställ"
   ],
   [
-    "dtk.throughput.aoe_tool.close",
+    "DesignerToolkit.ThroughputAoEToolClose",
     "Stäng"
   ],
   [
-    "dtk.throughput.aoe_tool.no_change",
+    "DesignerToolkit.ThroughputAoEToolNoChange",
     "Ingen ändring"
   ],
   [
-    "dtk.throughput.aoe_tool.enable",
+    "DesignerToolkit.ThroughputAoEToolEnable",
     "Aktivera"
   ],
   [
-    "dtk.throughput.aoe_tool.disable",
+    "DesignerToolkit.ThroughputAoEToolDisable",
     "Inaktivera"
   ],
   [
-    "dtk.throughput.aoe_tool.override_days_label",
+    "DesignerToolkit.ThroughputAoEToolOverrideDaysLabel",
     "Ange medelvärdesperiod"
   ],
   [
-    "dtk.throughput.days",
+    "DesignerToolkit.ThroughputDays",
     "dagar"
   ],
   [
-    "dtk.throughput.aoe_tool.global_header",
+    "DesignerToolkit.ThroughputAoEToolGlobalActionHeader",
     "Batchinställningar"
   ],
   [
-    "dtk.throughput.aoe_tool.global_display",
+    "DesignerToolkit.ThroughputAoEToolGlobalDisplay",
     "Visningsstatus: "
   ],
   [
-    "dtk.throughput.aoe_tool.select_all_label",
+    "DesignerToolkit.ThroughputAoEToolSelectAllLabel",
     "Markera/avmarkera alla"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.name",
+    "DesignerToolkit.TransportProductRemovalAoEToolName",
     "Ta bort produkter i området"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.window_title",
+    "DesignerToolkit.TransportProductRemovalAoEToolWindowTitle",
     "Ta bort produkter i området"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.select_all",
+    "DesignerToolkit.TransportProductRemovalAoESelectAll",
     "Välj/avmarkera alla entitetstyper"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.connector",
+    "DesignerToolkit.TransportProductRemovalAoEConnector",
     "Koppling"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.balancer",
+    "DesignerToolkit.TransportProductRemovalAoEBalancer",
     "Balanserare"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "DesignerToolkit.TransportProductRemovalAoERemoveCount",
     "Ta bort ({0})"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "DesignerToolkit.TransportProductRemovalAoECancelCount",
     "Avbryt ({0})"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "DesignerToolkit.TransportProductRemovalAoEQuickRemove",
     "Snabb bortforsling"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoERemoveTooltip",
     "Skickar borttagningsbeställningar för alla produkter i de valda enheterna."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoEQuickRemoveTooltip",
     "Tar omedelbart bort alla produkter från de valda enheterna för den visade Unity-kostnaden."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoECancelTooltip",
     "Avbryter nuvarande borttagningsbeställningar."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENothingToCancelTooltip",
     "Inga aktuella borttagningsbeställningar att avbryta."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENoEntitiesTooltip",
     "Inga enheter är inriktade på."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENoProductsTooltip",
     "Inga produkter att ta bort."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENotEnoughUnityTooltip",
     "Inte tillräckligt med Unity för att snabbt ta bort de valda produkterna."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "DesignerToolkit.TransportProductRemovalAoEProductsToRemove",
     "Produkter att ta bort ({0} totalt)"
   ],
   [
-    "dtk.settings.layout_box.heading",
+    "DesignerToolkit.SettingsLayoutBoxModeHeading",
     "LAYOUTRUTOR"
   ],
   [
-    "dtk.settings.layout_box.label",
+    "DesignerToolkit.SettingsLayoutBoxModeToggle",
     "Växla layoutbox-överlägg"
   ],
   [
-    "dtk.settings.layout_box.description",
+    "DesignerToolkit.SettingsLayoutBoxModeDescription",
     "Möjliggör en röntgenöverlagring som återger voxelbegränsningsrutor runt byggnader för att visa deras layout och utrymme."
   ],
   [
-    "dtk.settings.recycle_bin.heading",
+    "DesignerToolkit.SettingsRecycleBinHeading",
     "PAPPERSKORG"
   ],
   [
-    "dtk.settings.use_recycle_bin.label",
+    "DesignerToolkit.SettingsUseRecycleBin",
     "Använd papperskorgen"
   ],
   [
-    "dtk.settings.use_recycle_bin.description",
+    "DesignerToolkit.SettingsUseRecycleBinDescription",
     "När det är aktiverat kopieras ritningar och mappar till papperskorgen före radering eller uppdateringar, och popup-fönstret för borttagningsbekräftelse döljs."
   ],
   [
-    "dtk.settings.recycle_bin_folder_name.label",
+    "DesignerToolkit.SettingsRecycleBinFolderName",
     "Mappnamn"
   ],
   [
-    "dtk.settings.recycle_bin_folder_name.description",
+    "DesignerToolkit.SettingsRecycleBinFolderNameDescription",
     "Mappnamnet under ritningsbokroten som ska användas som papperskorgen."
   ],
   [
-    "dtk.settings.recycle_bin_folder_name.invalid",
+    "DesignerToolkit.SettingsRecycleBinFolderNameInvalid",
     "Ogiltigt mappnamn. Får inte vara tomt och får inte vara längre än 60 tecken."
   ],
   [
-    "dtk.undo.success",
+    "DesignerToolkit.UndoSuccessMessage",
     "Ångra: Placeringen har återställts."
   ],
   [
-    "dtk.undo.no_action",
+    "DesignerToolkit.UndoNoActionMessage",
     "Ångra: Inga placeringsåtgärder att återställa."
   ],
   [
-    "dtk.settings.pollution.heading",
+    "DesignerToolkit.SettingsPollutionHeading",
     "FÖRORENINGSÖVERLÄGG"
   ],
   [
-    "dtk.settings.pollution_toggle.label",
+    "DesignerToolkit.SettingsPollutionToggle",
     "Föroreningsöverlägg"
   ],
   [
-    "dtk.settings.pollution_toggle.description",
+    "DesignerToolkit.SettingsPollutionToggleDescription",
     "Aktiverar/inaktiverar överlägget för föroreningshastighet i världen. Visar medelvärden över de konfigurerade dagarna. Dessa värden inkluderar effekterna av spelets svårighetsinställningar och undersökta tekniker för att minska föroreningar."
   ],
   [
-    "dtk.settings.pollution_glow.label",
+    "DesignerToolkit.SettingsPollutionGlow",
     "Aktivera värmekartans glödeffekt"
   ],
   [
-    "dtk.settings.pollution_glow.description",
+    "DesignerToolkit.SettingsPollutionGlowDescription",
     "Kastar ett glödande ljus på förorenande enheter som matchar deras utsläppsintensitet. Inaktivera om det orsakar fördröjning."
   ],
   [
-    "dtk.settings.pollution_days.label",
+    "DesignerToolkit.SettingsPollutionDaysToAverage",
     "Genomsnittsperiod"
   ],
   [
-    "dtk.settings.pollution_days.description",
+    "DesignerToolkit.SettingsPollutionDaysToAverageDescription",
     "Konfigurerar det glidande fönstret i speldagar [0-360] för att beräkna genomsnittliga utsläpp. Om detta ställs in på 0 inaktiveras datainsamling och patchar helt."
   ],
   [
-    "dtk.settings.pollution_show_air.label",
+    "DesignerToolkit.SettingsPollutionShowAir",
     "Visa luftföroreningar"
   ],
   [
-    "dtk.settings.pollution_show_air.description",
+    "DesignerToolkit.SettingsPollutionShowAirDescription",
     "Aktiverar/inaktiverar överlägget för föroreningshastighet i världen för gasformiga luftutsläpp (skorstenar/facklor)."
   ],
   [
-    "dtk.settings.pollution_show_ground.label",
+    "DesignerToolkit.SettingsPollutionShowGround",
     "Visa vattenföroreningar"
   ],
   [
-    "dtk.settings.pollution_show_ground.description",
+    "DesignerToolkit.SettingsPollutionShowGroundDescription",
     "Aktiverar/inaktiverar överlägget för föroreningshastighet i världen för utsläpp av flytande vatten (avloppsutlopp)."
   ],
   [
-    "dtk.settings.pollution_show_solid_waste.label",
+    "DesignerToolkit.SettingsPollutionShowSolidWaste",
     "Visa markföroreningar (deponi)"
   ],
   [
-    "dtk.settings.pollution_show_solid_waste.description",
+    "DesignerToolkit.SettingsPollutionShowSolidWasteDescription",
     "Aktiverar/inaktiverar föroreningsöverlagringen i världen för dumpning av fast avfall i terräng (aktiv deponi). Överlagringsetiketter är formaterade som [Förorening(plattor)]."
   ],
   [
-    "dtk.settings.pollution_show_vehicle.label",
+    "DesignerToolkit.SettingsPollutionShowVehicle",
     "Visa fordons- och tågföroreningar"
   ],
   [
-    "dtk.settings.pollution_show_vehicle.description",
+    "DesignerToolkit.SettingsPollutionShowVehicleDescription",
     "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fordon och lok."
   ],
   [
-    "dtk.settings.pollution_show_ship.label",
+    "DesignerToolkit.SettingsPollutionShowShip",
     "Visa fartygsföroreningar"
   ],
   [
-    "dtk.settings.pollution_show_ship.description",
+    "DesignerToolkit.SettingsPollutionShowShipDescription",
     "Aktiverar/inaktiverar överlagringen av föroreningshastigheten i världen för fartyg. Visar den förväntade föroreningsgraden baserat på den aktuella lastruttens tur och returtid och bränsleförbrukning. Dessa värden inkluderar effekterna av spelsvårighetsinställningar och undersökt teknik för att minska föroreningar."
   ],
   [
-    "dtk.settings.radiation.heading",
+    "DesignerToolkit.SettingsRadiationHeading",
     "STRÅLNING OVERLAY"
   ],
   [
-    "dtk.settings.radiation_toggle.label",
+    "DesignerToolkit.SettingsRadiationToggle",
     "Strålningsöverlägg"
   ],
   [
-    "dtk.settings.radiation_toggle.description",
+    "DesignerToolkit.SettingsRadiationToggleDescription",
     "Visar den genomsnittliga mängden osäkra radioaktiva produkter som innehas av varje enhet vid de dagliga provpunkterna som används av överlägget."
   ],
   [
-    "dtk.settings.radiation_glow.label",
+    "DesignerToolkit.SettingsRadiationGlow",
     "Aktivera värmekartans glödeffekt"
   ],
   [
-    "dtk.settings.radiation_glow.description",
+    "DesignerToolkit.SettingsRadiationGlowDescription",
     "Framhäver och ger en glöd till enheter enligt deras provtagna osäkra radioaktiva inventarier. Inaktivera om det orsakar fördröjning."
   ],
   [
-    "dtk.settings.radiation_days.label",
+    "DesignerToolkit.SettingsRadiationDaysToAverage",
     "Genomsnittlig period"
   ],
   [
-    "dtk.settings.radiation_days.description",
+    "DesignerToolkit.SettingsRadiationDaysToAverageDescription",
     "Konfigurerar det skjutbara fönstret i speldagar [0-360] till genomsnittligt samplat osäkert radioaktivt inventarium. Om du ställer in detta till 0 inaktiveras datainsamling."
   ],
   [
-    "dtk.settings.place_folder.heading",
+    "DesignerToolkit.SettingsPlaceFolderHeading",
     "PLACERA MAPP"
   ],
   [
-    "dtk.settings.blueprint_spacing.label",
+    "DesignerToolkit.SettingsBlueprintSpacingLabel",
     "Ritningsavstånd"
   ],
   [
-    "dtk.settings.blueprint_spacing.description",
+    "DesignerToolkit.SettingsBlueprintSpacingDescription",
     "Avstånd (i rutor) mellan ritningar placerade sida vid sida vid batchplacering [0-12]."
   ],
   [
-    "dtk.blueprint.place_all.button",
+    "DesignerToolkit.PlaceAllButton",
     "Placera alla"
   ],
   [
-    "dtk.blueprint.place_all.tooltip",
+    "DesignerToolkit.PlaceAllTooltip",
     "Placera alla ritningar i den här mappen."
   ],
   [
-    "dtk.blueprint.update.tooltip",
+    "DesignerToolkit.UpdateBlueprintTooltip",
     "Uppdatera den valda ritningen från ett nytt områdesval."
   ],
   [
-    "dtk.settings.height_filter.all",
+    "DesignerToolkit.SettingsHeightFilterAll",
     "Alla"
   ],
   [
-    "dtk.settings.height_filter.controls_tooltip",
+    "DesignerToolkit.SettingsHeightFilterControlsTooltip",
     "Dessa nyckelbindningar är registrerade med spelets kontrollsystem och kan konfigureras i Vanilla Settings | Kontrollmenyn."
   ],
   [
-    "dtk.settings.throughput_heatmap.none",
+    "DesignerToolkit.SettingsThroughputHeatmapNone",
     "Ingen"
   ],
   [
-    "dtk.settings.throughput_heatmap.relative",
+    "DesignerToolkit.SettingsThroughputHeatmapRelative",
     "Relativ"
   ],
   [
-    "dtk.settings.throughput_heatmap.capacity",
+    "DesignerToolkit.SettingsThroughputHeatmapCapacity",
     "Kapacitet"
   ],
   [
-    "dtk.settings.hotkey.or",
+    "DesignerToolkit.SettingsHotkeyOr",
     "eller"
   ],
   [
-    "dtk.groundwater.insights_title",
+    "DesignerToolkit.GroundwaterInsightsTitle",
     "Reservoarinsikter: {0}"
   ],
   [
-    "dtk.groundwater.last_year_avg_draw",
+    "DesignerToolkit.GroundwaterLastYearAvgDrawLabel",
     "Genomsnittligt månadsuttag senaste året"
   ],
   [
-    "dtk.groundwater.sustainable_draw",
+    "DesignerToolkit.GroundwaterSustainableDrawLabel",
     "Maximalt hållbart uttag"
   ],
   [
-    "dtk.groundwater.sustainable_tooltip",
+    "DesignerToolkit.GroundwaterSustainableTooltip",
     "Beräknad månatlig påfyllnad i jämvikt efter år 10, baserat på vädersvårighetsgraden (inställningen för regnvattenutbyte påverkar bara regnvattensamlare, inte grundvatten)."
   ],
   [
-    "dtk.groundwater.expected_yearly_change",
+    "DesignerToolkit.GroundwaterExpectedYearlyChangeLabel",
     "Förväntad årlig förändring"
   ],
   [
-    "dtk.groundwater.expected_years_remaining",
+    "DesignerToolkit.GroundwaterExpectedYearsRemainingLabel",
     "Förväntat antal år kvar"
   ],
   [
-    "dtk.groundwater.years_remaining_stable",
+    "DesignerToolkit.GroundwaterYearsRemainingStable",
     "Stabil"
   ],
   [
-    "dtk.groundwater.years_remaining_over1000",
+    "DesignerToolkit.GroundwaterYearsRemainingOver1000",
     ">1000 år"
   ],
   [
-    "dtk.groundwater.monthly_chart_title",
+    "DesignerToolkit.GroundwaterMonthlyChartTitle",
     "Månadsreservnivå (månadens 1:a)"
   ],
   [
-    "dtk.groundwater.yearly_chart_title",
+    "DesignerToolkit.GroundwaterYearlyChartTitle",
     "10-årig reservnivå (1 januari)"
   ],
   [
-    "dtk.groundwater.safe_level",
+    "DesignerToolkit.GroundwaterSafeLevelLabel",
     "Säker reserv"
   ],
   [
-    "dtk.groundwater.low_level",
+    "DesignerToolkit.GroundwaterLowLevelLabel",
     "Låg reserv"
   ],
   [
-    "dtk.groundwater.trend_filling",
+    "DesignerToolkit.GroundwaterTrendFilling",
     "Fylls på"
   ],
   [
-    "dtk.groundwater.trend_emptying",
+    "DesignerToolkit.GroundwaterTrendEmptying",
     "Töms"
   ],
   [
-    "dtk.groundwater.trend_balanced",
+    "DesignerToolkit.GroundwaterTrendBalanced",
     "Balanserad"
   ],
   [
-    "dtk.groundwater.trend_idle",
+    "DesignerToolkit.GroundwaterTrendIdle",
     "Inaktiv / Inget uttag registrerat"
   ],
   [
-    "dtk.groundwater.tracking_notice",
+    "DesignerToolkit.GroundwaterTrackingNotice",
     "Mätning pågår ({0}/{1} månader registrerade)"
   ]
 ]

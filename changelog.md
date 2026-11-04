@@ -4,6 +4,10 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.11.8 [unreleased]
 
+- Release verification on 0.8.8a b628: dual Debug/Release builds and current/legacy compiled references pass; same-process English/Swedish/English settings reload preserves unique tabs and leaves the save unchanged. See docs/test/release-preparation-0.11.8.md for checks and limits.
+
+- Release preparation includes the shared stable-tab/world-reset fix and completion of the pending Reservoir insights title in seven non-English locales. Live translation-preview proposals are excluded.
+
 - Honor the optional b626 RadiationShielded prototype tag in new radiation-overlay samples, retaining earlier-build fallback and dynamic shielding contracts. Add native-protection and unprotected-inventory regressions.
 - Migrate all 211 localization IDs and shortcut text to the native DesignerToolkit namespace and Portuguese/Chinese filenames, preserving translated text and shortcut preference identities. Use native loading on 0.8.8 and preserve older-game rebind/shortcut aliases. Migrate pending work-order identities without replacing its values.
 

@@ -1,846 +1,846 @@
 [
   [
-    "dtk.mod.name",
+    "DesignerToolkit.ModName",
     "Kit de ferramentas para designers de plantas"
   ],
   [
-    "dtk.legacy_stacker.unsupported",
+    "DesignerToolkit.LegacyStackerUnsupported",
     "As pernas do empilhador não têm apoio suficiente no terreno."
   ],
   [
-    "dtk.legacy_stacker.alert_full.tooltip",
+    "DesignerToolkit.LegacyStackerAlertFullTooltip",
     "Alertar quando a pilha estiver cheia."
   ],
   [
-    "dtk.settings.tab.markdown",
+    "DesignerToolkit.SettingsTabMarkdown",
     "Configurações"
   ],
   [
-    "dtk.settings.markdown_copy.heading",
+    "DesignerToolkit.SettingsMarkdownCopyHeading",
     "Cópia Markdown"
   ],
   [
-    "dtk.settings.markdown_table_language.label",
+    "DesignerToolkit.SettingsMarkdownTableLanguage",
     "Idioma das tabelas Markdown"
   ],
   [
-    "dtk.settings.markdown_table_language.description",
+    "DesignerToolkit.SettingsMarkdownTableLanguageDescription",
     "Controla qual idioma os cabeçalhos das tabelas Markdown e os nomes de produtos/entidades devem usar."
   ],
   [
-    "dtk.settings.markdown_table_language.pending",
+    "DesignerToolkit.SettingsMarkdownTableLanguagePending",
     "Inglês, Local, Ambos e Híbrido já estão conectados à exportação Markdown."
   ],
   [
-    "dtk.settings.markdown_number_format.label",
+    "DesignerToolkit.SettingsMarkdownNumberFormat",
     "Formato de números Markdown"
   ],
   [
-    "dtk.settings.markdown_number_format.description",
+    "DesignerToolkit.SettingsMarkdownNumberFormatDescription",
     "Controla os separadores decimais e de milhares nas exportações Markdown. Auto segue o idioma da tabela renderizada: tabelas em inglês usam separadores en-US e tabelas locais usam o idioma atual do jogo."
   ],
   [
-    "dtk.settings.language.english",
+    "DesignerToolkit.SettingsLanguageEnglish",
     "Inglês"
   ],
   [
-    "dtk.settings.language.local",
+    "DesignerToolkit.SettingsLanguageLocal",
     "Local"
   ],
   [
-    "dtk.settings.language.both",
+    "DesignerToolkit.SettingsLanguageBoth",
     "Ambos"
   ],
   [
-    "dtk.settings.language.hybrid",
+    "DesignerToolkit.SettingsLanguageHybrid",
     "Híbrido"
   ],
   [
-    "dtk.settings.number_format.auto",
+    "DesignerToolkit.SettingsNumberFormatAuto",
     "Auto"
   ],
   [
-    "dtk.settings.number_format.english",
+    "DesignerToolkit.SettingsNumberFormatEnglish",
     "Separadores em inglês"
   ],
   [
-    "dtk.settings.number_format.local",
+    "DesignerToolkit.SettingsNumberFormatLocal",
     "Separadores locais"
   ],
   [
-    "dtk.settings.build_behaviors.heading",
+    "DesignerToolkit.SettingsBuildBehaviorsHeading",
     "COMPORTAMENTOS DE CONSTRUÇÃO"
   ],
   [
-    "dtk.settings.instant_build_mode.label",
+    "DesignerToolkit.SettingsInstantBuildMode",
     "Modo de construção instantânea"
   ],
   [
-    "dtk.settings.instant_build_mode.description",
+    "DesignerToolkit.SettingsInstantBuildModeDescription",
     "Completa automaticamente e instantaneamente construção, demolição, upgrades e downgrades sem materiais, trabalhadores ou unidade (mesmo em pausa). Ativar isso também desativa o interruptor de construção instantânea do jogo."
   ],
   [
-    "dtk.settings.instant_build_mode.sandbox_only",
+    "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
     "Vai jogar na sandbox, seu preguiçoso!"
   ],
   [
-    "dtk.settings.legacy_belt_configurations.label",
+    "DesignerToolkit.SettingsLegacyBeltConfigurations",
     "Permitir esteiras inclinadas curvas"
   ],
   [
-    "dtk.settings.legacy_belt_configurations.description",
+    "DesignerToolkit.SettingsLegacyBeltConfigurationsDescription",
     "Ativa a construção de transportes no estilo da Atualização 1, permitindo que os transportes virem e subam/desçam no mesmo tile (tornando possível construir esteiras inclinadas curvas diretamente)."
   ],
   [
-    "dtk.settings.pre_color_pipes.label",
+    "DesignerToolkit.SettingsPreColorPipes",
     "Pré-colorir tubulações"
   ],
   [
-    "dtk.settings.pre_color_pipes.description",
+    "DesignerToolkit.SettingsPreColorPipesDescription",
     "Colore as tubulações vazias de acordo com as fontes conectadas a montante. Vários fluidos são misturados em partes iguais. O fluxo real do transporte assume o controle da cor enquanto houver produtos nas tubulações."
   ],
   [
-    "dtk.rate_limit.title",
+    "DesignerToolkit.RateLimitTitle",
     "Limitador de throughput"
   ],
   [
-    "dtk.rate_limit.enable",
+    "DesignerToolkit.RateLimitEnable",
     "Limitar throughput"
   ],
   [
-    "dtk.rate_limit.sandbox_only",
+    "DesignerToolkit.RateLimitSandboxOnly",
     "A limitação de throughput só está disponível no modo sandbox."
   ],
   [
-    "dtk.rate_limit.items_per_min",
+    "DesignerToolkit.RateLimitItemsPerMin",
     "items/min"
   ],
   [
-    "dtk.height_routing.tooltip",
+    "DesignerToolkit.HeightRoutingTooltip",
     "Segure ou pressione a tecla de atalho para alternar a correspondência de altura lenta. Por padrão, as correias e os tubos correspondem à altura alvo o mais rápido possível. Quando ativado, as correias e os tubos permanecerão na altura inicial pelo maior tempo possível antes de alterar a elevação."
   ],
   [
-    "dtk.settings.height_filter.heading",
+    "DesignerToolkit.SettingsHeightFilterHeading",
     "FILTRO DE ALTURA"
   ],
   [
-    "dtk.settings.height_filter_max_visible.label",
+    "DesignerToolkit.SettingsHeightFilterMaxVisible",
     "Camadas visíveis"
   ],
   [
-    "dtk.settings.height_filter_max_visible.description",
+    "DesignerToolkit.SettingsHeightFilterMaxVisibleDescription",
     "Limita o nível de altura de transportes, estruturas e pilares renderizados no mundo."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.label",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibility",
     "Visibilidade dos transportes"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.description",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityDescription",
     "Controla como a visibilidade dos transportes é avaliada ao filtrar camadas de altura."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityTooltip",
     "Controla o requisito de altura dos pontos de inflexão do transporte em relação ao nível visível."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.low",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityLow",
     "Baixa"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.low.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityLowTooltip",
     "Todos os pontos de inflexão do transporte devem estar no nível de referência ou abaixo dele."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.medium",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityMedium",
     "Média"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.medium.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityMediumTooltip",
     "A maioria dos pontos de inflexão do transporte deve estar no nível de referência ou abaixo dele."
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.high",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityHigh",
     "Alta"
   ],
   [
-    "dtk.settings.height_filter_transport_visibility.high.tooltip",
+    "DesignerToolkit.SettingsHeightFilterTransportVisibilityHighTooltip",
     "Pelo menos um ponto de inflexão do transporte deve estar no nível de referência ou abaixo dele."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.label",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibility",
     "Visibilidade do pilar"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.description",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityDescription",
     "Controla como a visibilidade do pilar é avaliada ao filtrar camadas de altura."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.detached",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityDetached",
     "Desanexado"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.detached.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityDetachedTooltip",
     "Avalia a altura de cada pilar independentemente do nível ativo."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.attached",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityAttached",
     "Apegado"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.attached.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityAttachedTooltip",
     "Mostra os pilares sempre que pelo menos um transporte visível ou uma estrutura elevada estiver conectado a eles."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.top",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityTop",
     "Principal"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.top.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityTopTooltip",
     "Controla a visibilidade do pilar com base no fato de sua camada superior estar no limite de altura visível ou abaixo dele."
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.off",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityOff",
     "Desligado"
   ],
   [
-    "dtk.settings.height_filter_pillar_visibility.off.tooltip",
+    "DesignerToolkit.SettingsHeightFilterPillarVisibilityOffTooltip",
     "Oculta todos os pilares sempre que qualquer camada de altura é filtrada."
   ],
   [
-    "dtk.settings.global_hotkey.description",
+    "DesignerToolkit.SettingsGlobalHotkeyTooltip",
     "Este atalho de teclado é registrado no sistema de controles do jogo e pode ser configurado em Configurações | Menu de controles."
   ],
   [
-    "Kb_Bdt_TransportCleanup__label",
+    "DesignerToolkit.Kb_Bdt_TransportCleanup__label",
     "Ferramenta de limpeza de transporte"
   ],
   [
-    "Kb_Bdt_TransportCleanup__tooltip",
+    "DesignerToolkit.Kb_Bdt_TransportCleanup__tooltip",
     "Ativa a ferramenta de seleção de limpeza de transporte"
   ],
   [
-    "Kb_Bdt_HeightFilterShowLayer__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterShowLayer__label",
     "Camada de exibição de filtro de altura"
   ],
   [
-    "Kb_Bdt_HeightFilterShowLayer__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterShowLayer__tooltip",
     "Aumenta a camada de filtro de altura visível máxima"
   ],
   [
-    "Kb_Bdt_HeightFilterHideLayer__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterHideLayer__label",
     "Filtro de altura ocultar camada"
   ],
   [
-    "Kb_Bdt_HeightFilterHideLayer__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterHideLayer__tooltip",
     "Diminui a camada de filtro de altura visível máxima"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityHigh__label",
     "Visibilidade dos transportes do filtro de altura (alta)"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip",
     "Aumenta a visibilidade dos transportes em direção a Alta"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityLow__label",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityLow__label",
     "Visibilidade dos transportes do filtro de altura (baixa)"
   ],
   [
-    "Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
+    "DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip",
     "Reduz a visibilidade dos transportes em direção a Baixa"
   ],
   [
-    "Kb_Bdt_ThroughputOverlayToggle__label",
+    "DesignerToolkit.Kb_Bdt_ThroughputOverlayToggle__label",
     "Alternar sobreposição de taxa de transferência"
   ],
   [
-    "Kb_Bdt_ThroughputOverlayToggle__tooltip",
+    "DesignerToolkit.Kb_Bdt_ThroughputOverlayToggle__tooltip",
     "Alterna a sobreposição de taxa de transferência"
   ],
   [
-    "Kb_Bdt_ThroughputAoETool__label",
+    "DesignerToolkit.Kb_Bdt_ThroughputAoETool__label",
     "Ferramenta de rendimento"
   ],
   [
-    "Kb_Bdt_ThroughputAoETool__tooltip",
+    "DesignerToolkit.Kb_Bdt_ThroughputAoETool__tooltip",
     "Ativa a ferramenta de seleção de área de rendimento"
   ],
   [
-    "Kb_Bdt_TransportProductRemovalAoETool__label",
+    "DesignerToolkit.Kb_Bdt_TransportProductRemovalAoETool__label",
     "Remover produtos da área"
   ],
   [
-    "Kb_Bdt_TransportProductRemovalAoETool__tooltip",
+    "DesignerToolkit.Kb_Bdt_TransportProductRemovalAoETool__tooltip",
     "Ativa a ferramenta de remoção de produtos da área"
   ],
   [
-    "Kb_Bdt_PollutionOverlayToggle__label",
+    "DesignerToolkit.Kb_Bdt_PollutionOverlayToggle__label",
     "Alternar sobreposição de poluição"
   ],
   [
-    "Kb_Bdt_PollutionOverlayToggle__tooltip",
+    "DesignerToolkit.Kb_Bdt_PollutionOverlayToggle__tooltip",
     "Alterna a sobreposição de poluição"
   ],
   [
-    "Kb_Bdt_RadiationOverlayToggle__label",
+    "DesignerToolkit.Kb_Bdt_RadiationOverlayToggle__label",
     "Alternar sobreposição de radiação"
   ],
   [
-    "Kb_Bdt_RadiationOverlayToggle__tooltip",
+    "DesignerToolkit.Kb_Bdt_RadiationOverlayToggle__tooltip",
     "Alterna a sobreposição de radiação"
   ],
   [
-    "Kb_Bdt_LayoutBoxMode__label",
+    "DesignerToolkit.Kb_Bdt_LayoutBoxMode__label",
     "Alternar sobreposição da caixa de layout"
   ],
   [
-    "Kb_Bdt_LayoutBoxMode__tooltip",
+    "DesignerToolkit.Kb_Bdt_LayoutBoxMode__tooltip",
     "Alterna a sobreposição da caixa de layout"
   ],
   [
-    "Kb_Bdt_UndoPlacement__label",
+    "DesignerToolkit.Kb_Bdt_UndoPlacement__label",
     "Desfazer posicionamento"
   ],
   [
-    "Kb_Bdt_UndoPlacement__tooltip",
+    "DesignerToolkit.Kb_Bdt_UndoPlacement__tooltip",
     "Desfaz a última ação de posicionamento do BDT"
   ],
   [
-    "Kb_Bdt_TransportLazyHeight__label",
+    "DesignerToolkit.Kb_Bdt_TransportLazyHeight__label",
     "Roteamento de altura preguiçosa de transporte"
   ],
   [
-    "Kb_Bdt_TransportLazyHeight__tooltip",
+    "DesignerToolkit.Kb_Bdt_TransportLazyHeight__tooltip",
     "Mantém o modo de correspondência de altura lenta ao colocar transportes (Alt)"
   ],
   [
-    "dtk.settings.action.restore_defaults",
+    "DesignerToolkit.SettingsRestoreDefaults",
     "Restaurar padrões"
   ],
   [
-    "dtk.settings.action.restore_defaults.tooltip",
+    "DesignerToolkit.SettingsRestoreDefaultsTooltip",
     "Restaurar os padrões globais do mod para todas as configurações."
   ],
   [
-    "dtk.settings.action.save_as_global",
+    "DesignerToolkit.SettingsSaveAsGlobal",
     "Salvar como config.json"
   ],
   [
-    "dtk.settings.action.save_as_global.tooltip",
+    "DesignerToolkit.SettingsSaveAsGlobalTooltip",
     "Salvar estas configurações em config.json. Elas serão usadas como padrão para todos os novos jogos."
   ],
   [
-    "dtk.settings.status.restored_defaults",
+    "DesignerToolkit.SettingsRestoredDefaults",
     "Padrões internos restaurados na memória."
   ],
   [
-    "dtk.settings.status.saved_to_config",
+    "DesignerToolkit.SettingsSavedToConfig",
     "Salvo em config.json."
   ],
   [
-    "dtk.settings.status.save_failed",
+    "DesignerToolkit.SettingsSaveFailed",
     "Falha ao salvar: {0}"
   ],
   [
-    "dtk.settings.status.store_not_initialized",
+    "DesignerToolkit.SettingsStoreNotInitialized",
     "Falha ao salvar: armazenamento de configurações não inicializado."
   ],
   [
-    "dtk.blueprint.copy_as_markdown.button",
+    "DesignerToolkit.CopyAsMarkdownButton",
     "Copiar como Markdown"
   ],
   [
-    "dtk.blueprint.copy_as_markdown.tooltip",
+    "DesignerToolkit.CopyBlueprintMarkdownTooltip",
     "Copia as estatísticas do plano como uma tabela Markdown para a área de transferência, pronta para colar no Hub."
   ],
   [
-    "dtk.blueprint.copy_folder_as_markdown.tooltip",
+    "DesignerToolkit.CopyFolderMarkdownTooltip",
     "Copia a lista de planos da pasta como uma tabela Markdown para a área de transferência."
   ],
   [
-    "dtk.blueprint.construction_cost",
+    "DesignerToolkit.BlueprintConstructionCost",
     "Custo de construção:"
   ],
   [
-    "dtk.blueprint.operational_cost",
+    "DesignerToolkit.BlueprintOperationalCost",
     "Custo operacional:"
   ],
   [
-    "dtk.markdown.components.heading",
+    "DesignerToolkit.MarkdownComponentsHeading",
     "Componentes"
   ],
   [
-    "dtk.markdown.construction.heading",
+    "DesignerToolkit.MarkdownConstructionHeading",
     "Construção"
   ],
   [
-    "dtk.markdown.operational.heading",
+    "DesignerToolkit.MarkdownOperationalHeading",
     "Operacional"
   ],
   [
-    "dtk.markdown.entity.header",
+    "DesignerToolkit.MarkdownEntityHeader",
     "Entidade"
   ],
   [
-    "dtk.markdown.count.header",
+    "DesignerToolkit.MarkdownCountHeader",
     "Contagem"
   ],
   [
-    "dtk.markdown.product.header",
+    "DesignerToolkit.MarkdownProductHeader",
     "Produto"
   ],
   [
-    "dtk.markdown.quantity.header",
+    "DesignerToolkit.MarkdownQuantityHeader",
     "Quantidade"
   ],
   [
-    "dtk.markdown.property.header",
+    "DesignerToolkit.MarkdownPropertyHeader",
     "Propriedade"
   ],
   [
-    "dtk.markdown.value.header",
+    "DesignerToolkit.MarkdownValueHeader",
     "Valor"
   ],
   [
-    "dtk.markdown.blueprint.header",
+    "DesignerToolkit.MarkdownBlueprintHeader",
     "Plano"
   ],
   [
-    "dtk.markdown.folder.header",
+    "DesignerToolkit.MarkdownFolderHeader",
     "Pasta"
   ],
   [
-    "dtk.markdown.entities.stat",
+    "DesignerToolkit.MarkdownEntitiesStat",
     "Entidades"
   ],
   [
-    "dtk.markdown.per_month.suffix",
+    "DesignerToolkit.MarkdownPerMonthSuffix",
     "/ mês"
   ],
   [
-    "dtk.throughput.title",
+    "DesignerToolkit.ThroughputTitle",
     "Produtividade"
   ],
   [
-    "dtk.throughput.display",
+    "DesignerToolkit.ThroughputDisplay",
     "Exibir throughput"
   ],
   [
-    "dtk.throughput.days_to_average",
+    "DesignerToolkit.ThroughputDaysToAverage",
     "dias para média"
   ],
   [
-    "dtk.settings.throughput.heading",
+    "DesignerToolkit.SettingsThroughputHeading",
     "PRODUTIVIDADE"
   ],
   [
-    "dtk.settings.throughput_toggle.label",
+    "DesignerToolkit.SettingsThroughputToggle",
     "Sobreposição de fluxo"
   ],
   [
-    "dtk.settings.throughput_toggle.description",
+    "DesignerToolkit.SettingsThroughputToggleDescription",
     "Ativa/desativa as sobreposições de fluxo no mundo. A exibição de entidades individuais ainda deve ser ativada no inspetor ou pela ferramenta de fluxo."
   ],
   [
-    "dtk.settings.throughput_glow.label",
+    "DesignerToolkit.SettingsThroughputGlow",
     "Ativar efeito de brilho do mapa de calor"
   ],
   [
-    "dtk.settings.throughput_glow.description",
+    "DesignerToolkit.SettingsThroughputGlowDescription",
     "Lance uma luz brilhante no chão combinando com a cor do mapa de calor. Opera independentemente da sobreposição de texto. Desative se estiver causando atraso."
   ],
   [
-    "dtk.settings.throughput_heatmap.label",
+    "DesignerToolkit.SettingsThroughputHeatmap",
     "Colorização de fluxo (mapa de calor)"
   ],
   [
-    "dtk.settings.throughput_colorblind.label",
+    "DesignerToolkit.SettingsThroughputColorblind",
     "Cores para daltônicos"
   ],
   [
-    "dtk.settings.throughput_colorblind.description",
+    "DesignerToolkit.SettingsThroughputColorblindDescription",
     "Muda os gradientes do mapa de calor de Verde-Laranja-Vermelho para Azul-Amarelo-Vermelho para melhor visibilidade."
   ],
   [
-    "dtk.settings.throughput_show_as_percent.label",
+    "DesignerToolkit.SettingsThroughputShowAsPercent",
     "Mostrar throughput como porcentagem"
   ],
   [
-    "dtk.settings.throughput_show_as_percent.description",
+    "DesignerToolkit.SettingsThroughputShowAsPercentDescription",
     "Muda o formato de exibição de throughput no mundo de números absolutos (itens/min) para uma porcentagem da capacidade máxima."
   ],
   [
-    "dtk.throughput.aoe_tool.name",
+    "DesignerToolkit.ThroughputAoEToolName",
     "Ferramenta de área de throughput"
   ],
   [
-    "dtk.throughput.aoe_tool.tooltip",
+    "DesignerToolkit.ThroughputAoEToolTooltip",
     "Clique e arraste para selecionar uma área, depois configure as exibições de throughput para todas as entidades selecionadas por tipo."
   ],
   [
-    "dtk.throughput.aoe_tool.window_title",
+    "DesignerToolkit.ThroughputAoEToolWindowTitle",
     "Configurar throughput na área"
   ],
   [
-    "dtk.throughput.aoe_tool.apply",
+    "DesignerToolkit.ThroughputAoEToolApply",
     "Aplicar"
   ],
   [
-    "dtk.throughput.aoe_tool.close",
+    "DesignerToolkit.ThroughputAoEToolClose",
     "Fechar"
   ],
   [
-    "dtk.throughput.aoe_tool.no_change",
+    "DesignerToolkit.ThroughputAoEToolNoChange",
     "Sem alteração"
   ],
   [
-    "dtk.throughput.aoe_tool.enable",
+    "DesignerToolkit.ThroughputAoEToolEnable",
     "Ativar"
   ],
   [
-    "dtk.throughput.aoe_tool.disable",
+    "DesignerToolkit.ThroughputAoEToolDisable",
     "Desativar"
   ],
   [
-    "dtk.throughput.aoe_tool.override_days_label",
+    "DesignerToolkit.ThroughputAoEToolOverrideDaysLabel",
     "Definir período de média"
   ],
   [
-    "dtk.throughput.days",
+    "DesignerToolkit.ThroughputDays",
     "dias"
   ],
   [
-    "dtk.throughput.aoe_tool.global_header",
+    "DesignerToolkit.ThroughputAoEToolGlobalActionHeader",
     "Configurações em lote"
   ],
   [
-    "dtk.throughput.aoe_tool.global_display",
+    "DesignerToolkit.ThroughputAoEToolGlobalDisplay",
     "Estado de exibição: "
   ],
   [
-    "dtk.throughput.aoe_tool.select_all_label",
+    "DesignerToolkit.ThroughputAoEToolSelectAllLabel",
     "Selecionar/desmarcar tudo"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.name",
+    "DesignerToolkit.TransportProductRemovalAoEToolName",
     "Remover produtos da área"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.window_title",
+    "DesignerToolkit.TransportProductRemovalAoEToolWindowTitle",
     "Remover produtos da área"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.select_all",
+    "DesignerToolkit.TransportProductRemovalAoESelectAll",
     "Marcar/desmarcar todos os tipos de entidade"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.connector",
+    "DesignerToolkit.TransportProductRemovalAoEConnector",
     "Conector"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.balancer",
+    "DesignerToolkit.TransportProductRemovalAoEBalancer",
     "Distribuidor"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.remove_count",
+    "DesignerToolkit.TransportProductRemovalAoERemoveCount",
     "Remover ({0})"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.cancel_count",
+    "DesignerToolkit.TransportProductRemovalAoECancelCount",
     "Cancelar ({0})"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.quick_remove",
+    "DesignerToolkit.TransportProductRemovalAoEQuickRemove",
     "Remoção rápida"
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.remove_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoERemoveTooltip",
     "Envia pedidos de retirada para todos os produtos nas entidades selecionadas."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.quick_remove_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoEQuickRemoveTooltip",
     "Remove imediatamente todos os produtos das entidades selecionadas pelo custo de Unity mostrado."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.cancel_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoECancelTooltip",
     "Cancela os pedidos de remoção atuais."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENothingToCancelTooltip",
     "Nenhum pedido de remoção atual para cancelar."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.no_entities_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENoEntitiesTooltip",
     "Nenhuma entidade é alvo."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.no_products_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENoProductsTooltip",
     "Não há produtos para remover."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip",
+    "DesignerToolkit.TransportProductRemovalAoENotEnoughUnityTooltip",
     "Unity insuficiente para remover rapidamente os produtos selecionados."
   ],
   [
-    "dtk.transport_product_removal.aoe_tool.products_to_remove",
+    "DesignerToolkit.TransportProductRemovalAoEProductsToRemove",
     "Produtos a serem removidos ({0} total)"
   ],
   [
-    "dtk.settings.layout_box.heading",
+    "DesignerToolkit.SettingsLayoutBoxModeHeading",
     "CAIXAS DE LAYOUT"
   ],
   [
-    "dtk.settings.layout_box.label",
+    "DesignerToolkit.SettingsLayoutBoxModeToggle",
     "Alternar sobreposição da caixa de layout"
   ],
   [
-    "dtk.settings.layout_box.description",
+    "DesignerToolkit.SettingsLayoutBoxModeDescription",
     "Permite que uma sobreposição de raio-X renderize caixas delimitadoras de voxel ao redor de edifícios para mostrar seu layout e espaço livre."
   ],
   [
-    "dtk.settings.recycle_bin.heading",
+    "DesignerToolkit.SettingsRecycleBinHeading",
     "LIXEIRA"
   ],
   [
-    "dtk.settings.use_recycle_bin.label",
+    "DesignerToolkit.SettingsUseRecycleBin",
     "Usar lixeira"
   ],
   [
-    "dtk.settings.use_recycle_bin.description",
+    "DesignerToolkit.SettingsUseRecycleBinDescription",
     "Quando ativado, os blueprints e as pastas são copiados para a lixeira antes da exclusão ou atualização, e o pop-up de confirmação de exclusão é suprimido."
   ],
   [
-    "dtk.settings.recycle_bin_folder_name.label",
+    "DesignerToolkit.SettingsRecycleBinFolderName",
     "Nome da pasta"
   ],
   [
-    "dtk.settings.recycle_bin_folder_name.description",
+    "DesignerToolkit.SettingsRecycleBinFolderNameDescription",
     "O nome da pasta na raiz do livro do blueprint a ser usada como Lixeira."
   ],
   [
-    "dtk.settings.recycle_bin_folder_name.invalid",
+    "DesignerToolkit.SettingsRecycleBinFolderNameInvalid",
     "Nome de pasta inválido. Não deve estar vazio nem ter mais de 60 caracteres."
   ],
   [
-    "dtk.undo.success",
+    "DesignerToolkit.UndoSuccessMessage",
     "Desfazer: colocação revertida com sucesso."
   ],
   [
-    "dtk.undo.no_action",
+    "DesignerToolkit.UndoNoActionMessage",
     "Desfazer: nenhuma ação de posicionamento para reverter."
   ],
   [
-    "dtk.settings.pollution.heading",
+    "DesignerToolkit.SettingsPollutionHeading",
     "SOBREPOSIÇÃO DE POLUIÇÃO"
   ],
   [
-    "dtk.settings.pollution_toggle.label",
+    "DesignerToolkit.SettingsPollutionToggle",
     "Sobreposição de poluição"
   ],
   [
-    "dtk.settings.pollution_toggle.description",
+    "DesignerToolkit.SettingsPollutionToggleDescription",
     "Ativa/desativa a sobreposição da taxa de poluição no mundo. Exibe médias ao longo dos dias configurados. Esses valores incluem os efeitos das configurações de dificuldade do jogo e das tecnologias pesquisadas de redução da poluição."
   ],
   [
-    "dtk.settings.pollution_glow.label",
+    "DesignerToolkit.SettingsPollutionGlow",
     "Ativar efeito de brilho do mapa de calor"
   ],
   [
-    "dtk.settings.pollution_glow.description",
+    "DesignerToolkit.SettingsPollutionGlowDescription",
     "Projeta uma luz brilhante sobre entidades poluentes, correspondente à intensidade de emissão delas. Desative se estiver causando lentidão."
   ],
   [
-    "dtk.settings.pollution_days.label",
+    "DesignerToolkit.SettingsPollutionDaysToAverage",
     "Período de média"
   ],
   [
-    "dtk.settings.pollution_days.description",
+    "DesignerToolkit.SettingsPollutionDaysToAverageDescription",
     "Configura a janela deslizante em dias de jogo [0-360] para calcular a média das emissões. Definir como 0 desativa completamente a coleta de dados e os patches."
   ],
   [
-    "dtk.settings.pollution_show_air.label",
+    "DesignerToolkit.SettingsPollutionShowAir",
     "Mostrar poluição do ar"
   ],
   [
-    "dtk.settings.pollution_show_air.description",
+    "DesignerToolkit.SettingsPollutionShowAirDescription",
     "Ativa/desativa a sobreposição da taxa de poluição mundial para emissões atmosféricas gasosas (chaminés/chamas)."
   ],
   [
-    "dtk.settings.pollution_show_ground.label",
+    "DesignerToolkit.SettingsPollutionShowGround",
     "Mostrar poluição da água"
   ],
   [
-    "dtk.settings.pollution_show_ground.description",
+    "DesignerToolkit.SettingsPollutionShowGroundDescription",
     "Ativa/desativa a sobreposição da taxa de poluição mundial para descargas de água líquida (emissários de águas residuais)."
   ],
   [
-    "dtk.settings.pollution_show_solid_waste.label",
+    "DesignerToolkit.SettingsPollutionShowSolidWaste",
     "Mostrar poluição do solo (aterro sanitário)"
   ],
   [
-    "dtk.settings.pollution_show_solid_waste.description",
+    "DesignerToolkit.SettingsPollutionShowSolidWasteDescription",
     "Ativa/desativa a sobreposição de poluição mundial para despejo de resíduos sólidos no terreno (aterro ativo). Os rótulos de sobreposição são formatados como [Pollution(Tiles)]."
   ],
   [
-    "dtk.settings.pollution_show_vehicle.label",
+    "DesignerToolkit.SettingsPollutionShowVehicle",
     "Mostrar poluição de veículos e trens"
   ],
   [
-    "dtk.settings.pollution_show_vehicle.description",
+    "DesignerToolkit.SettingsPollutionShowVehicleDescription",
     "Ativa/desativa a sobreposição da taxa de poluição mundial para veículos e locomotivas."
   ],
   [
-    "dtk.settings.pollution_show_ship.label",
+    "DesignerToolkit.SettingsPollutionShowShip",
     "Mostrar poluição de navios"
   ],
   [
-    "dtk.settings.pollution_show_ship.description",
+    "DesignerToolkit.SettingsPollutionShowShipDescription",
     "Ativa/desativa a sobreposição da taxa de poluição mundial para navios. Exibe a taxa de poluição prevista com base no tempo de ida e volta da rota de carga atual e no consumo de combustível. Esses valores incluem os efeitos das configurações de dificuldade do jogo e das tecnologias pesquisadas de redução da poluição."
   ],
   [
-    "dtk.settings.radiation.heading",
+    "DesignerToolkit.SettingsRadiationHeading",
     "SOBREPOSIÇÃO DE RADIAÇÃO"
   ],
   [
-    "dtk.settings.radiation_toggle.label",
+    "DesignerToolkit.SettingsRadiationToggle",
     "Sobreposição de radiação"
   ],
   [
-    "dtk.settings.radiation_toggle.description",
+    "DesignerToolkit.SettingsRadiationToggleDescription",
     "Mostra a quantidade média de produto radioativo inseguro mantido por cada entidade nos pontos de amostragem diários usados ​​pela sobreposição."
   ],
   [
-    "dtk.settings.radiation_glow.label",
+    "DesignerToolkit.SettingsRadiationGlow",
     "Ativar efeito de brilho do mapa de calor"
   ],
   [
-    "dtk.settings.radiation_glow.description",
+    "DesignerToolkit.SettingsRadiationGlowDescription",
     "Destaca e adiciona brilho às entidades de acordo com seu inventário radioativo inseguro amostrado. Desative se estiver causando atraso."
   ],
   [
-    "dtk.settings.radiation_days.label",
+    "DesignerToolkit.SettingsRadiationDaysToAverage",
     "Período médio"
   ],
   [
-    "dtk.settings.radiation_days.description",
+    "DesignerToolkit.SettingsRadiationDaysToAverageDescription",
     "Configura a janela deslizante em dias de jogo [0-360] para calcular a média do inventário radioativo inseguro amostrado. Definir como 0 desativa a coleta de dados."
   ],
   [
-    "dtk.settings.place_folder.heading",
+    "DesignerToolkit.SettingsPlaceFolderHeading",
     "COLOCAR PASTA"
   ],
   [
-    "dtk.settings.blueprint_spacing.label",
+    "DesignerToolkit.SettingsBlueprintSpacingLabel",
     "Espaçamento da planta"
   ],
   [
-    "dtk.settings.blueprint_spacing.description",
+    "DesignerToolkit.SettingsBlueprintSpacingDescription",
     "Espaçamento (em blocos) entre plantas colocadas lado a lado durante a colocação em lote [0-12]."
   ],
   [
-    "dtk.blueprint.place_all.button",
+    "DesignerToolkit.PlaceAllButton",
     "Colocar tudo"
   ],
   [
-    "dtk.blueprint.place_all.tooltip",
+    "DesignerToolkit.PlaceAllTooltip",
     "Colocar todas as plantas nesta pasta."
   ],
   [
-    "dtk.blueprint.update.tooltip",
+    "DesignerToolkit.UpdateBlueprintTooltip",
     "Atualiza o plano selecionado a partir de uma nova seleção de área."
   ],
   [
-    "dtk.settings.height_filter.all",
+    "DesignerToolkit.SettingsHeightFilterAll",
     "Todos"
   ],
   [
-    "dtk.settings.height_filter.controls_tooltip",
+    "DesignerToolkit.SettingsHeightFilterControlsTooltip",
     "Esses atalhos de teclado são registrados no sistema de controles do jogo e podem ser configurados em Configurações | Menu de controles."
   ],
   [
-    "dtk.settings.throughput_heatmap.none",
+    "DesignerToolkit.SettingsThroughputHeatmapNone",
     "Nenhum"
   ],
   [
-    "dtk.settings.throughput_heatmap.relative",
+    "DesignerToolkit.SettingsThroughputHeatmapRelative",
     "Relativo"
   ],
   [
-    "dtk.settings.throughput_heatmap.capacity",
+    "DesignerToolkit.SettingsThroughputHeatmapCapacity",
     "Capacidade"
   ],
   [
-    "dtk.settings.hotkey.or",
+    "DesignerToolkit.SettingsHotkeyOr",
     "ou"
   ],
   [
-    "dtk.groundwater.insights_title",
-    "Informações do reservatório: {0}"
+    "DesignerToolkit.GroundwaterInsightsTitle",
+    "Informações da reserva: {0}"
   ],
   [
-    "dtk.groundwater.last_year_avg_draw",
+    "DesignerToolkit.GroundwaterLastYearAvgDrawLabel",
     "Extração média mensal do último ano"
   ],
   [
-    "dtk.groundwater.sustainable_draw",
+    "DesignerToolkit.GroundwaterSustainableDrawLabel",
     "Extração máxima sustentável"
   ],
   [
-    "dtk.groundwater.sustainable_tooltip",
+    "DesignerToolkit.GroundwaterSustainableTooltip",
     "Taxa mensal de recarga em estado estacionário calculada após o ano 10 com base na dificuldade climática (a configuração do rendimento da água da chuva afeta apenas os coletores de água da chuva, não a água subterrânea)."
   ],
   [
-    "dtk.groundwater.expected_yearly_change",
+    "DesignerToolkit.GroundwaterExpectedYearlyChangeLabel",
     "Variação anual esperada"
   ],
   [
-    "dtk.groundwater.expected_years_remaining",
+    "DesignerToolkit.GroundwaterExpectedYearsRemainingLabel",
     "Anos restantes esperados"
   ],
   [
-    "dtk.groundwater.years_remaining_stable",
+    "DesignerToolkit.GroundwaterYearsRemainingStable",
     "Estável"
   ],
   [
-    "dtk.groundwater.years_remaining_over1000",
+    "DesignerToolkit.GroundwaterYearsRemainingOver1000",
     ">1000 anos"
   ],
   [
-    "dtk.groundwater.monthly_chart_title",
+    "DesignerToolkit.GroundwaterMonthlyChartTitle",
     "Nível da reserva mensal (1º dia do mês)"
   ],
   [
-    "dtk.groundwater.yearly_chart_title",
+    "DesignerToolkit.GroundwaterYearlyChartTitle",
     "Nível da reserva de 10 anos (1º de janeiro)"
   ],
   [
-    "dtk.groundwater.safe_level",
+    "DesignerToolkit.GroundwaterSafeLevelLabel",
     "Reserva segura"
   ],
   [
-    "dtk.groundwater.low_level",
+    "DesignerToolkit.GroundwaterLowLevelLabel",
     "Reserva baixa"
   ],
   [
-    "dtk.groundwater.trend_filling",
+    "DesignerToolkit.GroundwaterTrendFilling",
     "Enchendo"
   ],
   [
-    "dtk.groundwater.trend_emptying",
+    "DesignerToolkit.GroundwaterTrendEmptying",
     "Esgotando"
   ],
   [
-    "dtk.groundwater.trend_balanced",
+    "DesignerToolkit.GroundwaterTrendBalanced",
     "Equilibrado"
   ],
   [
-    "dtk.groundwater.trend_idle",
+    "DesignerToolkit.GroundwaterTrendIdle",
     "Inativo / Nenhuma extração registrada"
   ],
   [
-    "dtk.groundwater.tracking_notice",
+    "DesignerToolkit.GroundwaterTrackingNotice",
     "Monitoramento em andamento ({0}/{1} meses registrados)"
   ]
 ]

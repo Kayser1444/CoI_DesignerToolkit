@@ -13,452 +13,452 @@ namespace CoIDesignerToolkit;
 internal static class BdtLocalization
 {
     public static LocStr ModName =
-        Loc.Str("dtk.mod.name", "Blueprint Designer's Toolkit", "Blueprint Designer's Toolkit mod name.");
+        Loc.Str("DesignerToolkit.ModName", "Blueprint Designer's Toolkit", "Blueprint Designer's Toolkit mod name.");
 
     public static LocStr LegacyStackerUnsupported =
-        Loc.Str("dtk.legacy_stacker.unsupported", "The stacker's legs are not sufficiently supported by terrain.", "Placement error when a legacy stacker's support vertices would make it collapse after construction.");
+        Loc.Str("DesignerToolkit.LegacyStackerUnsupported", "The stacker's legs are not sufficiently supported by terrain.", "Placement error when a legacy stacker's support vertices would make it collapse after construction.");
     public static LocStr LegacyStackerAlertFullTooltip =
-        Loc.Str("dtk.legacy_stacker.alert_full.tooltip", "Alert when the stack is full.", "Tooltip for the legacy stacker's full-alert toggle.");
+        Loc.Str("DesignerToolkit.LegacyStackerAlertFullTooltip", "Alert when the stack is full.", "Tooltip for the legacy stacker's full-alert toggle.");
 
     public static LocStr SettingsTabMarkdown =
-        Loc.Str("dtk.settings.tab.markdown", "Settings", "Settings tab title for BDT settings.");
+        Loc.Str("DesignerToolkit.SettingsTabMarkdown", "Settings", "Settings tab title for BDT settings.");
     public static LocStr SettingsMarkdownCopyHeading =
-        Loc.Str("dtk.settings.markdown_copy.heading", "Markdown Copy", "Settings section heading for Markdown copy/export settings.");
+        Loc.Str("DesignerToolkit.SettingsMarkdownCopyHeading", "Markdown Copy", "Settings section heading for Markdown copy/export settings.");
     public static LocStr SettingsMarkdownTableLanguage =
-        Loc.Str("dtk.settings.markdown_table_language.label", "Markdown table language", "Settings row label for Markdown table language.");
+        Loc.Str("DesignerToolkit.SettingsMarkdownTableLanguage", "Markdown table language", "Settings row label for Markdown table language.");
     public static LocStr SettingsMarkdownTableLanguageDescription =
-        Loc.Str("dtk.settings.markdown_table_language.description", "Controls which language Markdown table headers and product/entity names should use.", "Settings row description for Markdown table language.");
+        Loc.Str("DesignerToolkit.SettingsMarkdownTableLanguageDescription", "Controls which language Markdown table headers and product/entity names should use.", "Settings row description for Markdown table language.");
     public static LocStr SettingsMarkdownTableLanguagePending =
-        Loc.Str("dtk.settings.markdown_table_language.pending", "English, Local, Both, and Hybrid are wired into Markdown export.", "Settings note for Markdown table language implementation status.");
+        Loc.Str("DesignerToolkit.SettingsMarkdownTableLanguagePending", "English, Local, Both, and Hybrid are wired into Markdown export.", "Settings note for Markdown table language implementation status.");
     public static LocStr SettingsMarkdownNumberFormat =
-        Loc.Str("dtk.settings.markdown_number_format.label", "Markdown number format", "Settings row label for Markdown number formatting.");
+        Loc.Str("DesignerToolkit.SettingsMarkdownNumberFormat", "Markdown number format", "Settings row label for Markdown number formatting.");
     public static LocStr SettingsMarkdownNumberFormatDescription =
-        Loc.Str("dtk.settings.markdown_number_format.description", "Controls decimal and thousands separators in Markdown exports. Auto follows the rendered table language: English tables use en-US separators and local tables use the current game locale.", "Settings row description for Markdown number formatting.");
+        Loc.Str("DesignerToolkit.SettingsMarkdownNumberFormatDescription", "Controls decimal and thousands separators in Markdown exports. Auto follows the rendered table language: English tables use en-US separators and local tables use the current game locale.", "Settings row description for Markdown number formatting.");
     public static LocStr SettingsLanguageEnglish =
-        Loc.Str("dtk.settings.language.english", "English", "Dropdown option for English Markdown table language.");
+        Loc.Str("DesignerToolkit.SettingsLanguageEnglish", "English", "Dropdown option for English Markdown table language.");
     public static LocStr SettingsLanguageLocal =
-        Loc.Str("dtk.settings.language.local", "Local", "Dropdown option for local Markdown table language.");
+        Loc.Str("DesignerToolkit.SettingsLanguageLocal", "Local", "Dropdown option for local Markdown table language.");
     public static LocStr SettingsLanguageBoth =
-        Loc.Str("dtk.settings.language.both", "Both", "Dropdown option for bilingual Markdown table language.");
+        Loc.Str("DesignerToolkit.SettingsLanguageBoth", "Both", "Dropdown option for bilingual Markdown table language.");
     public static LocStr SettingsLanguageHybrid =
-        Loc.Str("dtk.settings.language.hybrid", "Hybrid", "Dropdown option for hybrid Markdown table language.");
+        Loc.Str("DesignerToolkit.SettingsLanguageHybrid", "Hybrid", "Dropdown option for hybrid Markdown table language.");
     public static LocStr SettingsNumberFormatAuto =
-        Loc.Str("dtk.settings.number_format.auto", "Auto", "Dropdown option for automatic Markdown number formatting.");
+        Loc.Str("DesignerToolkit.SettingsNumberFormatAuto", "Auto", "Dropdown option for automatic Markdown number formatting.");
     public static LocStr SettingsNumberFormatEnglish =
-        Loc.Str("dtk.settings.number_format.english", "English separators", "Dropdown option for en-US Markdown number formatting.");
+        Loc.Str("DesignerToolkit.SettingsNumberFormatEnglish", "English separators", "Dropdown option for en-US Markdown number formatting.");
     public static LocStr SettingsNumberFormatLocal =
-        Loc.Str("dtk.settings.number_format.local", "Local separators", "Dropdown option for local Markdown number formatting.");
+        Loc.Str("DesignerToolkit.SettingsNumberFormatLocal", "Local separators", "Dropdown option for local Markdown number formatting.");
     public static LocStr SettingsBuildBehaviorsHeading =
-        Loc.Str("dtk.settings.build_behaviors.heading", "BUILD BEHAVIORS", "Settings section heading for build behavior settings.");
+        Loc.Str("DesignerToolkit.SettingsBuildBehaviorsHeading", "BUILD BEHAVIORS", "Settings section heading for build behavior settings.");
     public static LocStr SettingsInstantBuildMode =
-        Loc.Str("dtk.settings.instant_build_mode.label", "Instant build mode", "Settings row label for instant build mode.");
+        Loc.Str("DesignerToolkit.SettingsInstantBuildMode", "Instant build mode", "Settings row label for instant build mode.");
     public static LocStr SettingsInstantBuildModeDescription =
-        Loc.Str("dtk.settings.instant_build_mode.description", "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
+        Loc.Str("DesignerToolkit.SettingsInstantBuildModeDescription", "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
     public static LocStr SettingsInstantBuildModeSandboxOnly =
-        Loc.Str("dtk.settings.instant_build_mode.sandbox_only", "Sod off to the sandbox, you lazy git!", "Tooltip for instant build mode when the game is not in sandbox mode.");
+        Loc.Str("DesignerToolkit.SettingsInstantBuildModeSandboxOnly", "Sod off to the sandbox, you lazy git!", "Tooltip for instant build mode when the game is not in sandbox mode.");
     public static LocStr SettingsLegacyBeltConfigurations =
-        Loc.Str("dtk.settings.legacy_belt_configurations.label", "Allow curvy incline belts", "Settings row label for allowing legacy belt configurations (curvy incline belts).");
+        Loc.Str("DesignerToolkit.SettingsLegacyBeltConfigurations", "Allow curvy incline belts", "Settings row label for allowing legacy belt configurations (curvy incline belts).");
     public static LocStr SettingsLegacyBeltConfigurationsDescription =
-        Loc.Str("dtk.settings.legacy_belt_configurations.description", "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly).", "Settings row description for allowing legacy belt configurations (curvy incline belts).");
+        Loc.Str("DesignerToolkit.SettingsLegacyBeltConfigurationsDescription", "Enables Update 1 style transport construction, allowing transports to turn and incline/decline on the same tile (making curvy incline belts possible to construct directly).", "Settings row description for allowing legacy belt configurations (curvy incline belts).");
     public static LocStr SettingsPreColorPipes =
-        Loc.Str("dtk.settings.pre_color_pipes.label", "Pre-color pipes", "Settings row label for pre-coloring empty pipes.");
+        Loc.Str("DesignerToolkit.SettingsPreColorPipes", "Pre-color pipes", "Settings row label for pre-coloring empty pipes.");
     public static LocStr SettingsPreColorPipesDescription =
-        Loc.Str("dtk.settings.pre_color_pipes.description", "Colors empty pipes from their connected upstream sources. Multiple fluids are blended equally. Actual transport flow takes over the color while they contain products.", "Settings row description for pre-coloring empty pipes.");
+        Loc.Str("DesignerToolkit.SettingsPreColorPipesDescription", "Colors empty pipes from their connected upstream sources. Multiple fluids are blended equally. Actual transport flow takes over the color while they contain products.", "Settings row description for pre-coloring empty pipes.");
 
     public static LocStr RateLimitTitle =
-        Loc.Str("dtk.rate_limit.title", "Throughput Limiter", "Panel title for the throughput limiter inspector.");
+        Loc.Str("DesignerToolkit.RateLimitTitle", "Throughput Limiter", "Panel title for the throughput limiter inspector.");
     public static LocStr RateLimitEnable =
-        Loc.Str("dtk.rate_limit.enable", "Limit throughput", "Checkbox label to enable the throughput limiter.");
+        Loc.Str("DesignerToolkit.RateLimitEnable", "Limit throughput", "Checkbox label to enable the throughput limiter.");
     public static LocStr RateLimitSandboxOnly =
-        Loc.Str("dtk.rate_limit.sandbox_only", "Throughput limiting is only available in sandbox mode.", "Tooltip explaining that the throughput limiter requires sandbox mode.");
+        Loc.Str("DesignerToolkit.RateLimitSandboxOnly", "Throughput limiting is only available in sandbox mode.", "Tooltip explaining that the throughput limiter requires sandbox mode.");
     public static LocStr RateLimitItemsPerMin =
-        Loc.Str("dtk.rate_limit.items_per_min", "items/min", "Unit label for items per minute in the throughput limiter.");
+        Loc.Str("DesignerToolkit.RateLimitItemsPerMin", "items/min", "Unit label for items per minute in the throughput limiter.");
 
 
     public static LocStr HeightRoutingTooltip =
-        Loc.Str("dtk.height_routing.tooltip", "Hold or press the shortcut key to toggle lazy height matching. By default belts & pipes match target height as soon as possible. When this is enabled, belts & pipes will stay at their starting height for as long as possible before changing elevation.", "Tooltip for lazy height matching shortcut in transport placement tool.");
+        Loc.Str("DesignerToolkit.HeightRoutingTooltip", "Hold or press the shortcut key to toggle lazy height matching. By default belts & pipes match target height as soon as possible. When this is enabled, belts & pipes will stay at their starting height for as long as possible before changing elevation.", "Tooltip for lazy height matching shortcut in transport placement tool.");
 
     public static LocStr SettingsHeightFilterHeading =
-        Loc.Str("dtk.settings.height_filter.heading", "HEIGHT FILTER", "Settings section heading for height filter settings.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterHeading", "HEIGHT FILTER", "Settings section heading for height filter settings.");
     public static LocStr SettingsHeightFilterMaxVisible =
-        Loc.Str("dtk.settings.height_filter_max_visible.label", "Visible layers", "Settings row label for visible layers.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterMaxVisible", "Visible layers", "Settings row label for visible layers.");
     public static LocStr SettingsHeightFilterMaxVisibleDescription =
-        Loc.Str("dtk.settings.height_filter_max_visible.description", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterMaxVisibleDescription", "Limits the height level of transports, structures, and pillars rendered in the world.", "Settings row description for max visible layer.");
     public static LocStr SettingsHeightFilterTransportVisibility =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.label", "Transport visibility", "Settings row label for height filter transport visibility mode.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibility", "Transport visibility", "Settings row label for height filter transport visibility mode.");
     public static LocStr SettingsHeightFilterTransportVisibilityDescription =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.description", "Controls how transport visibility is evaluated when filtering height layers.", "Settings row description for height filter transport visibility mode.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityDescription", "Controls how transport visibility is evaluated when filtering height layers.", "Settings row description for height filter transport visibility mode.");
     public static LocStr SettingsHeightFilterTransportVisibilityTooltip =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.tooltip", "Controls the threshold requirement for transport inflection points against the visible layer.", "Settings tooltip for height filter transport visibility options.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityTooltip", "Controls the threshold requirement for transport inflection points against the visible layer.", "Settings tooltip for height filter transport visibility options.");
     public static LocStr SettingsHeightFilterTransportVisibilityLow =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.low", "Low", "Dropdown option for low height filter transport visibility.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityLow", "Low", "Dropdown option for low height filter transport visibility.");
     public static LocStr SettingsHeightFilterTransportVisibilityLowTooltip =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.low.tooltip", "All inflection points of the transport must be at or below the threshold layer.", "Tooltip for Low transport visibility option.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityLowTooltip", "All inflection points of the transport must be at or below the threshold layer.", "Tooltip for Low transport visibility option.");
     public static LocStr SettingsHeightFilterTransportVisibilityMedium =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.medium", "Medium", "Dropdown option for medium height filter transport visibility.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityMedium", "Medium", "Dropdown option for medium height filter transport visibility.");
     public static LocStr SettingsHeightFilterTransportVisibilityMediumTooltip =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.medium.tooltip", "A majority of the inflection points of the transport must be at or below the threshold layer.", "Tooltip for Medium transport visibility option.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityMediumTooltip", "A majority of the inflection points of the transport must be at or below the threshold layer.", "Tooltip for Medium transport visibility option.");
     public static LocStr SettingsHeightFilterTransportVisibilityHigh =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.high", "High", "Dropdown option for high height filter transport visibility.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityHigh", "High", "Dropdown option for high height filter transport visibility.");
     public static LocStr SettingsHeightFilterTransportVisibilityHighTooltip =
-        Loc.Str("dtk.settings.height_filter_transport_visibility.high.tooltip", "At least one inflection point of the transport must be at or below the threshold layer.", "Tooltip for High transport visibility option.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterTransportVisibilityHighTooltip", "At least one inflection point of the transport must be at or below the threshold layer.", "Tooltip for High transport visibility option.");
     public static LocStr SettingsHeightFilterPillarVisibility =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.label", "Pillar visibility", "Settings row label for height filter pillar visibility mode.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibility", "Pillar visibility", "Settings row label for height filter pillar visibility mode.");
     public static LocStr SettingsHeightFilterPillarVisibilityDescription =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.description", "Controls how pillar visibility is evaluated when filtering height layers.", "Settings row description for height filter pillar visibility mode.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityDescription", "Controls how pillar visibility is evaluated when filtering height layers.", "Settings row description for height filter pillar visibility mode.");
     public static LocStr SettingsHeightFilterPillarVisibilityDetached =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.detached", "Detached", "Dropdown option for detached height filter pillar visibility.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityDetached", "Detached", "Dropdown option for detached height filter pillar visibility.");
     public static LocStr SettingsHeightFilterPillarVisibilityDetachedTooltip =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.detached.tooltip", "Evaluates each pillar's height independently against the active layer.", "Tooltip for Detached pillar visibility option.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityDetachedTooltip", "Evaluates each pillar's height independently against the active layer.", "Tooltip for Detached pillar visibility option.");
     public static LocStr SettingsHeightFilterPillarVisibilityAttached =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.attached", "Attached", "Dropdown option for attached height filter pillar visibility.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityAttached", "Attached", "Dropdown option for attached height filter pillar visibility.");
     public static LocStr SettingsHeightFilterPillarVisibilityAttachedTooltip =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.attached.tooltip", "Shows pillars whenever at least one visible transport or elevated structure is attached.", "Tooltip for Attached pillar visibility option.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityAttachedTooltip", "Shows pillars whenever at least one visible transport or elevated structure is attached.", "Tooltip for Attached pillar visibility option.");
     public static LocStr SettingsHeightFilterPillarVisibilityTop =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.top", "Top", "Dropdown option for top layer height filter pillar visibility.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityTop", "Top", "Dropdown option for top layer height filter pillar visibility.");
     public static LocStr SettingsHeightFilterPillarVisibilityTopTooltip =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.top.tooltip", "Controls pillar visibility based on whether its top layer is at or below the visible height limit.", "Tooltip for Top pillar visibility option.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityTopTooltip", "Controls pillar visibility based on whether its top layer is at or below the visible height limit.", "Tooltip for Top pillar visibility option.");
     public static LocStr SettingsHeightFilterPillarVisibilityOff =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.off", "Off", "Dropdown option for off height filter pillar visibility.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityOff", "Off", "Dropdown option for off height filter pillar visibility.");
     public static LocStr SettingsHeightFilterPillarVisibilityOffTooltip =
-        Loc.Str("dtk.settings.height_filter_pillar_visibility.off.tooltip", "Hides all pillars whenever any height layer is filtered out.", "Tooltip for Off pillar visibility option.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterPillarVisibilityOffTooltip", "Hides all pillars whenever any height layer is filtered out.", "Tooltip for Off pillar visibility option.");
     public static LocStr SettingsGlobalHotkeyTooltip =
-        Loc.Str("dtk.settings.global_hotkey.description", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
+        Loc.Str("DesignerToolkit.SettingsGlobalHotkeyTooltip", "This keybind is registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Settings row description for global hotkeys.");
 
     // KbAttribute creates these IDs from the control ID. Keep them as static
     // LocStr fields so the translation exporter and late rebind pass discover
     // the same keys that the vanilla controls screen uses.
     public static LocStr HotkeyTransportCleanupLabel =
-        Loc.Str("Kb_Bdt_TransportCleanup__label", "Transport cleanup tool", "Label for the BDT transport cleanup control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_TransportCleanup__label", "Transport cleanup tool", "Label for the BDT transport cleanup control.");
     public static LocStr HotkeyTransportCleanupTooltip =
-        Loc.Str("Kb_Bdt_TransportCleanup__tooltip", "Activates the transport cleanup selection tool", "Tooltip for the BDT transport cleanup control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_TransportCleanup__tooltip", "Activates the transport cleanup selection tool", "Tooltip for the BDT transport cleanup control.");
     public static LocStr HotkeyHeightFilterShowLayerLabel =
-        Loc.Str("Kb_Bdt_HeightFilterShowLayer__label", "Height filter show layer", "Label for the BDT height filter show-layer control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterShowLayer__label", "Height filter show layer", "Label for the BDT height filter show-layer control.");
     public static LocStr HotkeyHeightFilterShowLayerTooltip =
-        Loc.Str("Kb_Bdt_HeightFilterShowLayer__tooltip", "Increases the maximum visible height filter layer", "Tooltip for the BDT height filter show-layer control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterShowLayer__tooltip", "Increases the maximum visible height filter layer", "Tooltip for the BDT height filter show-layer control.");
     public static LocStr HotkeyHeightFilterHideLayerLabel =
-        Loc.Str("Kb_Bdt_HeightFilterHideLayer__label", "Height filter hide layer", "Label for the BDT height filter hide-layer control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterHideLayer__label", "Height filter hide layer", "Label for the BDT height filter hide-layer control.");
     public static LocStr HotkeyHeightFilterHideLayerTooltip =
-        Loc.Str("Kb_Bdt_HeightFilterHideLayer__tooltip", "Decreases the maximum visible height filter layer", "Tooltip for the BDT height filter hide-layer control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterHideLayer__tooltip", "Decreases the maximum visible height filter layer", "Tooltip for the BDT height filter hide-layer control.");
     public static LocStr HotkeyHeightFilterTransportVisibilityHighLabel =
-        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityHigh__label", "Height filter transport visibility (high)", "Label for the BDT height filter transport-visibility step towards High control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityHigh__label", "Height filter transport visibility (high)", "Label for the BDT height filter transport-visibility step towards High control.");
     public static LocStr HotkeyHeightFilterTransportVisibilityHighTooltip =
-        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip", "Steps transport visibility towards High", "Tooltip for the BDT height filter transport-visibility step towards High control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityHigh__tooltip", "Steps transport visibility towards High", "Tooltip for the BDT height filter transport-visibility step towards High control.");
     public static LocStr HotkeyHeightFilterTransportVisibilityLowLabel =
-        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityLow__label", "Height filter transport visibility (low)", "Label for the BDT height filter transport-visibility step towards Low control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityLow__label", "Height filter transport visibility (low)", "Label for the BDT height filter transport-visibility step towards Low control.");
     public static LocStr HotkeyHeightFilterTransportVisibilityLowTooltip =
-        Loc.Str("Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip", "Steps transport visibility towards Low", "Tooltip for the BDT height filter transport-visibility step towards Low control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_HeightFilterTransportVisibilityLow__tooltip", "Steps transport visibility towards Low", "Tooltip for the BDT height filter transport-visibility step towards Low control.");
     public static LocStr HotkeyThroughputOverlayToggleLabel =
-        Loc.Str("Kb_Bdt_ThroughputOverlayToggle__label", "Toggle throughput overlay", "Label for the BDT throughput-overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_ThroughputOverlayToggle__label", "Toggle throughput overlay", "Label for the BDT throughput-overlay control.");
     public static LocStr HotkeyThroughputOverlayToggleTooltip =
-        Loc.Str("Kb_Bdt_ThroughputOverlayToggle__tooltip", "Toggles the throughput overlay", "Tooltip for the BDT throughput-overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_ThroughputOverlayToggle__tooltip", "Toggles the throughput overlay", "Tooltip for the BDT throughput-overlay control.");
     public static LocStr HotkeyThroughputAoEToolLabel =
-        Loc.Str("Kb_Bdt_ThroughputAoETool__label", "Throughput tool", "Label for the BDT throughput area tool control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_ThroughputAoETool__label", "Throughput tool", "Label for the BDT throughput area tool control.");
     public static LocStr HotkeyThroughputAoEToolTooltip =
-        Loc.Str("Kb_Bdt_ThroughputAoETool__tooltip", "Activates the throughput area selection tool", "Tooltip for the BDT throughput area tool control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_ThroughputAoETool__tooltip", "Activates the throughput area selection tool", "Tooltip for the BDT throughput area tool control.");
     public static LocStr HotkeyTransportProductRemovalAoEToolLabel =
-        Loc.Str("Kb_Bdt_TransportProductRemovalAoETool__label", "Remove products in area", "Label for the BDT area product-removal control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_TransportProductRemovalAoETool__label", "Remove products in area", "Label for the BDT area product-removal control.");
     public static LocStr HotkeyTransportProductRemovalAoEToolTooltip =
-        Loc.Str("Kb_Bdt_TransportProductRemovalAoETool__tooltip", "Activates the area product-removal tool", "Tooltip for the BDT area product-removal control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_TransportProductRemovalAoETool__tooltip", "Activates the area product-removal tool", "Tooltip for the BDT area product-removal control.");
     public static LocStr HotkeyPollutionOverlayToggleLabel =
-        Loc.Str("Kb_Bdt_PollutionOverlayToggle__label", "Toggle pollution overlay", "Label for the BDT pollution-overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_PollutionOverlayToggle__label", "Toggle pollution overlay", "Label for the BDT pollution-overlay control.");
     public static LocStr HotkeyPollutionOverlayToggleTooltip =
-        Loc.Str("Kb_Bdt_PollutionOverlayToggle__tooltip", "Toggles the pollution overlay", "Tooltip for the BDT pollution-overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_PollutionOverlayToggle__tooltip", "Toggles the pollution overlay", "Tooltip for the BDT pollution-overlay control.");
     public static LocStr HotkeyRadiationOverlayToggleLabel =
-        Loc.Str("Kb_Bdt_RadiationOverlayToggle__label", "Toggle radiation overlay", "Label for the BDT radiation-overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_RadiationOverlayToggle__label", "Toggle radiation overlay", "Label for the BDT radiation-overlay control.");
     public static LocStr HotkeyRadiationOverlayToggleTooltip =
-        Loc.Str("Kb_Bdt_RadiationOverlayToggle__tooltip", "Toggles the radiation overlay", "Tooltip for the BDT radiation-overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_RadiationOverlayToggle__tooltip", "Toggles the radiation overlay", "Tooltip for the BDT radiation-overlay control.");
     public static LocStr HotkeyLayoutBoxModeLabel =
-        Loc.Str("Kb_Bdt_LayoutBoxMode__label", "Toggle layout box overlay", "Label for the BDT layout-box overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_LayoutBoxMode__label", "Toggle layout box overlay", "Label for the BDT layout-box overlay control.");
     public static LocStr HotkeyLayoutBoxModeTooltip =
-        Loc.Str("Kb_Bdt_LayoutBoxMode__tooltip", "Toggles layout box overlay", "Tooltip for the BDT layout-box overlay control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_LayoutBoxMode__tooltip", "Toggles layout box overlay", "Tooltip for the BDT layout-box overlay control.");
     public static LocStr HotkeyUndoPlacementLabel =
-        Loc.Str("Kb_Bdt_UndoPlacement__label", "Undo placement", "Label for the BDT undo-placement control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_UndoPlacement__label", "Undo placement", "Label for the BDT undo-placement control.");
     public static LocStr HotkeyUndoPlacementTooltip =
-        Loc.Str("Kb_Bdt_UndoPlacement__tooltip", "Undoes the last BDT placement action", "Tooltip for the BDT undo-placement control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_UndoPlacement__tooltip", "Undoes the last BDT placement action", "Tooltip for the BDT undo-placement control.");
     public static LocStr HotkeyTransportLazyHeightLabel =
-        Loc.Str("Kb_Bdt_TransportLazyHeight__label", "Transport lazy height routing", "Label for the BDT transport lazy-height control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_TransportLazyHeight__label", "Transport lazy height routing", "Label for the BDT transport lazy-height control.");
     public static LocStr HotkeyTransportLazyHeightTooltip =
-        Loc.Str("Kb_Bdt_TransportLazyHeight__tooltip", "Holds lazy height matching mode while placing transports (Alt)", "Tooltip for the BDT transport lazy-height control.");
+        Loc.Str("DesignerToolkit.Kb_Bdt_TransportLazyHeight__tooltip", "Holds lazy height matching mode while placing transports (Alt)", "Tooltip for the BDT transport lazy-height control.");
 
     public static LocStr SettingsRestoreDefaults =
-        Loc.Str("dtk.settings.action.restore_defaults", "Restore defaults", "Button label for restoring default settings.");
+        Loc.Str("DesignerToolkit.SettingsRestoreDefaults", "Restore defaults", "Button label for restoring default settings.");
     public static LocStr SettingsRestoreDefaultsTooltip =
-        Loc.Str("dtk.settings.action.restore_defaults.tooltip", "Restore the global mod defaults for all settings.", "Tooltip for restoring default settings.");
+        Loc.Str("DesignerToolkit.SettingsRestoreDefaultsTooltip", "Restore the global mod defaults for all settings.", "Tooltip for restoring default settings.");
     public static LocStr SettingsSaveAsGlobal =
-        Loc.Str("dtk.settings.action.save_as_global", "Save as config", "Button label for saving settings as config default.");
+        Loc.Str("DesignerToolkit.SettingsSaveAsGlobal", "Save as config", "Button label for saving settings as config default.");
     public static LocStr SettingsSaveAsGlobalTooltip =
-        Loc.Str("dtk.settings.action.save_as_global.tooltip", "Save these settings to config.json. They will be used as the defaults for all new games.", "Tooltip for saving settings as config default.");
+        Loc.Str("DesignerToolkit.SettingsSaveAsGlobalTooltip", "Save these settings to config.json. They will be used as the defaults for all new games.", "Tooltip for saving settings as config default.");
     public static LocStr SettingsRestoredDefaults =
-        Loc.Str("dtk.settings.status.restored_defaults", "Restored built-in defaults in memory.", "Status message after settings are restored to defaults.");
+        Loc.Str("DesignerToolkit.SettingsRestoredDefaults", "Restored built-in defaults in memory.", "Status message after settings are restored to defaults.");
     public static LocStr SettingsSavedToConfig =
-        Loc.Str("dtk.settings.status.saved_to_config", "Saved to config.json.", "Status message after settings are saved.");
+        Loc.Str("DesignerToolkit.SettingsSavedToConfig", "Saved to config.json.", "Status message after settings are saved.");
     public static LocStr SettingsSaveFailed =
-        Loc.Str("dtk.settings.status.save_failed", "Save failed: {0}", "Status message after settings save fails. {0} = error message.");
+        Loc.Str("DesignerToolkit.SettingsSaveFailed", "Save failed: {0}", "Status message after settings save fails. {0} = error message.");
     public static LocStr SettingsStoreNotInitialized =
-        Loc.Str("dtk.settings.status.store_not_initialized", "Save failed: settings store is not initialized.", "Status message when settings store is not initialized.");
+        Loc.Str("DesignerToolkit.SettingsStoreNotInitialized", "Save failed: settings store is not initialized.", "Status message when settings store is not initialized.");
 
     public static LocStr CopyAsMarkdownButton =
-        Loc.Str("dtk.blueprint.copy_as_markdown.button", "Copy as Markdown", "Button label for copying blueprint information as Markdown.");
+        Loc.Str("DesignerToolkit.CopyAsMarkdownButton", "Copy as Markdown", "Button label for copying blueprint information as Markdown.");
     public static LocStr CopyBlueprintMarkdownTooltip =
-        Loc.Str("dtk.blueprint.copy_as_markdown.tooltip", "Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub.", "Tooltip for copying one blueprint as Markdown.");
+        Loc.Str("DesignerToolkit.CopyBlueprintMarkdownTooltip", "Copy blueprint stats as a Markdown table to the clipboard, ready to paste into the Hub.", "Tooltip for copying one blueprint as Markdown.");
     public static LocStr CopyFolderMarkdownTooltip =
-        Loc.Str("dtk.blueprint.copy_folder_as_markdown.tooltip", "Copy folder blueprint list as a Markdown table to the clipboard.", "Tooltip for copying a blueprint folder as Markdown.");
+        Loc.Str("DesignerToolkit.CopyFolderMarkdownTooltip", "Copy folder blueprint list as a Markdown table to the clipboard.", "Tooltip for copying a blueprint folder as Markdown.");
     public static LocStr BlueprintConstructionCost =
-        Loc.Str("dtk.blueprint.construction_cost", "Construction cost:", "Label for construction cost in the blueprint statistics panel.");
+        Loc.Str("DesignerToolkit.BlueprintConstructionCost", "Construction cost:", "Label for construction cost in the blueprint statistics panel.");
     public static LocStr BlueprintOperationalCost =
-        Loc.Str("dtk.blueprint.operational_cost", "Operational cost:", "Label for operational cost in the blueprint statistics panel.");
+        Loc.Str("DesignerToolkit.BlueprintOperationalCost", "Operational cost:", "Label for operational cost in the blueprint statistics panel.");
 
     public static LocStr MarkdownComponentsHeading =
-        Loc.Str("dtk.markdown.components.heading", "Components", "Markdown section heading for component counts.");
+        Loc.Str("DesignerToolkit.MarkdownComponentsHeading", "Components", "Markdown section heading for component counts.");
     public static LocStr MarkdownConstructionHeading =
-        Loc.Str("dtk.markdown.construction.heading", "Construction", "Markdown section heading for construction costs.");
+        Loc.Str("DesignerToolkit.MarkdownConstructionHeading", "Construction", "Markdown section heading for construction costs.");
     public static LocStr MarkdownOperationalHeading =
-        Loc.Str("dtk.markdown.operational.heading", "Operational", "Markdown section heading for operational stats.");
+        Loc.Str("DesignerToolkit.MarkdownOperationalHeading", "Operational", "Markdown section heading for operational stats.");
     public static LocStr MarkdownEntityHeader =
-        Loc.Str("dtk.markdown.entity.header", "Entity", "Markdown table header for entity names.");
+        Loc.Str("DesignerToolkit.MarkdownEntityHeader", "Entity", "Markdown table header for entity names.");
     public static LocStr MarkdownCountHeader =
-        Loc.Str("dtk.markdown.count.header", "Count", "Markdown table header for counts.");
+        Loc.Str("DesignerToolkit.MarkdownCountHeader", "Count", "Markdown table header for counts.");
     public static LocStr MarkdownProductHeader =
-        Loc.Str("dtk.markdown.product.header", "Product", "Markdown table header for product names.");
+        Loc.Str("DesignerToolkit.MarkdownProductHeader", "Product", "Markdown table header for product names.");
     public static LocStr MarkdownQuantityHeader =
-        Loc.Str("dtk.markdown.quantity.header", "Quantity", "Markdown table header for quantities.");
+        Loc.Str("DesignerToolkit.MarkdownQuantityHeader", "Quantity", "Markdown table header for quantities.");
     public static LocStr MarkdownPropertyHeader =
-        Loc.Str("dtk.markdown.property.header", "Property", "Markdown table header for property names.");
+        Loc.Str("DesignerToolkit.MarkdownPropertyHeader", "Property", "Markdown table header for property names.");
     public static LocStr MarkdownValueHeader =
-        Loc.Str("dtk.markdown.value.header", "Value", "Markdown table header for values.");
+        Loc.Str("DesignerToolkit.MarkdownValueHeader", "Value", "Markdown table header for values.");
     public static LocStr MarkdownBlueprintHeader =
-        Loc.Str("dtk.markdown.blueprint.header", "Blueprint", "Markdown table header for blueprint names.");
+        Loc.Str("DesignerToolkit.MarkdownBlueprintHeader", "Blueprint", "Markdown table header for blueprint names.");
     public static LocStr MarkdownFolderHeader =
-        Loc.Str("dtk.markdown.folder.header", "Folder", "Markdown table header for folder names.");
+        Loc.Str("DesignerToolkit.MarkdownFolderHeader", "Folder", "Markdown table header for folder names.");
     public static LocStr MarkdownEntitiesStat =
-        Loc.Str("dtk.markdown.entities.stat", "Entities", "Markdown operational stat label for entity count.");
+        Loc.Str("DesignerToolkit.MarkdownEntitiesStat", "Entities", "Markdown operational stat label for entity count.");
     public static LocStr MarkdownPerMonthSuffix =
-        Loc.Str("dtk.markdown.per_month.suffix", "/ mo", "Markdown suffix for monthly maintenance columns.");
+        Loc.Str("DesignerToolkit.MarkdownPerMonthSuffix", "/ mo", "Markdown suffix for monthly maintenance columns.");
 
     public static LocStr ThroughputTitle =
-        Loc.Str("dtk.throughput.title", "Throughput", "Panel title for the throughput inspector.");
+        Loc.Str("DesignerToolkit.ThroughputTitle", "Throughput", "Panel title for the throughput inspector.");
     public static LocStr ThroughputDisplay =
-        Loc.Str("dtk.throughput.display", "Display throughput", "Checkbox label to enable display of throughput in the world.");
+        Loc.Str("DesignerToolkit.ThroughputDisplay", "Display throughput", "Checkbox label to enable display of throughput in the world.");
     public static LocStr ThroughputDaysToAverage =
-        Loc.Str("dtk.throughput.days_to_average", "days to average", "Label for the days to average setting.");
+        Loc.Str("DesignerToolkit.ThroughputDaysToAverage", "days to average", "Label for the days to average setting.");
 
     public static LocStr SettingsThroughputHeading =
-        Loc.Str("dtk.settings.throughput.heading", "THROUGHPUT", "Settings section heading for throughput settings.");
+        Loc.Str("DesignerToolkit.SettingsThroughputHeading", "THROUGHPUT", "Settings section heading for throughput settings.");
     public static LocStr SettingsThroughputToggle =
-        Loc.Str("dtk.settings.throughput_toggle.label", "Throughput overlay", "Settings row label for throughput overlay toggle.");
+        Loc.Str("DesignerToolkit.SettingsThroughputToggle", "Throughput overlay", "Settings row label for throughput overlay toggle.");
     public static LocStr SettingsThroughputToggleDescription =
-        Loc.Str("dtk.settings.throughput_toggle.description", "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool.", "Settings row description for throughput overlay visibility.");
+        Loc.Str("DesignerToolkit.SettingsThroughputToggleDescription", "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool.", "Settings row description for throughput overlay visibility.");
     public static LocStr SettingsThroughputGlow =
-        Loc.Str("dtk.settings.throughput_glow.label", "Enable heatmap glow effect", "Settings row label for heatmap glow toggle.");
+        Loc.Str("DesignerToolkit.SettingsThroughputGlow", "Enable heatmap glow effect", "Settings row label for heatmap glow toggle.");
     public static LocStr SettingsThroughputGlowDescription =
-        Loc.Str("dtk.settings.throughput_glow.description", "Cast a glowing light onto the ground matching the heatmap color. Operates independently of the text overlay. Disable if causing lag.", "Settings row description for heatmap glow.");
+        Loc.Str("DesignerToolkit.SettingsThroughputGlowDescription", "Cast a glowing light onto the ground matching the heatmap color. Operates independently of the text overlay. Disable if causing lag.", "Settings row description for heatmap glow.");
     public static LocStr SettingsThroughputHeatmap =
-        Loc.Str("dtk.settings.throughput_heatmap.label", "Throughput coloring (heat map)", "Settings row label for throughput heat-map.");
+        Loc.Str("DesignerToolkit.SettingsThroughputHeatmap", "Throughput coloring (heat map)", "Settings row label for throughput heat-map.");
     public static LocStr SettingsThroughputColorblind =
-        Loc.Str("dtk.settings.throughput_colorblind.label", "Colorblind-friendly colors", "Settings row label for colorblind-friendly heatmap colors.");
+        Loc.Str("DesignerToolkit.SettingsThroughputColorblind", "Colorblind-friendly colors", "Settings row label for colorblind-friendly heatmap colors.");
     public static LocStr SettingsThroughputColorblindDescription =
-        Loc.Str("dtk.settings.throughput_colorblind.description", "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility.", "Settings row description / tooltip for colorblind heatmap colors.");
+        Loc.Str("DesignerToolkit.SettingsThroughputColorblindDescription", "Changes the heat-map gradients from Green-Orange-Red to Blue-Yellow-Red for better visibility.", "Settings row description / tooltip for colorblind heatmap colors.");
     public static LocStr SettingsThroughputShowAsPercent =
-        Loc.Str("dtk.settings.throughput_show_as_percent.label", "Show throughput as percent", "Settings row label for showing throughput as percentage of capacity.");
+        Loc.Str("DesignerToolkit.SettingsThroughputShowAsPercent", "Show throughput as percent", "Settings row label for showing throughput as percentage of capacity.");
     public static LocStr SettingsThroughputShowAsPercentDescription =
-        Loc.Str("dtk.settings.throughput_show_as_percent.description", "Switches the in-world throughput display format from absolute numbers (items/min) to a percentage of the entity's maximum capacity.", "Settings row description for showing throughput as percent.");
+        Loc.Str("DesignerToolkit.SettingsThroughputShowAsPercentDescription", "Switches the in-world throughput display format from absolute numbers (items/min) to a percentage of the entity's maximum capacity.", "Settings row description for showing throughput as percent.");
     
     public static LocStr ThroughputAoEToolName =
-        Loc.Str("dtk.throughput.aoe_tool.name", "Throughput Area Tool", "Name of the throughput AoE tool.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolName", "Throughput Area Tool", "Name of the throughput AoE tool.");
     public static LocStr ThroughputAoEToolTooltip =
-        Loc.Str("dtk.throughput.aoe_tool.tooltip", "Click and drag to select an area, then configure throughput display settings for all selected entities by type.", "Tooltip for the throughput AoE tool button.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolTooltip", "Click and drag to select an area, then configure throughput display settings for all selected entities by type.", "Tooltip for the throughput AoE tool button.");
     public static LocStr ThroughputAoEToolWindowTitle =
-        Loc.Str("dtk.throughput.aoe_tool.window_title", "Configure Throughput in Area", "Title of the throughput configuration tool window.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolWindowTitle", "Configure Throughput in Area", "Title of the throughput configuration tool window.");
     public static LocStr ThroughputAoEToolApply =
-        Loc.Str("dtk.throughput.aoe_tool.apply", "Apply", "Button label to apply changes.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolApply", "Apply", "Button label to apply changes.");
     public static LocStr ThroughputAoEToolClose =
-        Loc.Str("dtk.throughput.aoe_tool.close", "Close", "Button label to close window.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolClose", "Close", "Button label to close window.");
     public static LocStr ThroughputAoEToolNoChange =
-        Loc.Str("dtk.throughput.aoe_tool.no_change", "No change", "Dropdown option to keep existing throughput display settings.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolNoChange", "No change", "Dropdown option to keep existing throughput display settings.");
     public static LocStr ThroughputAoEToolEnable =
-        Loc.Str("dtk.throughput.aoe_tool.enable", "Enable", "Dropdown option to force enable throughput display.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolEnable", "Enable", "Dropdown option to force enable throughput display.");
     public static LocStr ThroughputAoEToolDisable =
-        Loc.Str("dtk.throughput.aoe_tool.disable", "Disable", "Dropdown option to force disable throughput display.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolDisable", "Disable", "Dropdown option to force disable throughput display.");
     public static LocStr ThroughputAoEToolOverrideDaysLabel =
-        Loc.Str("dtk.throughput.aoe_tool.override_days_label", "Set averaging period", "Label for setting the throughput averaging period in the AoE tool bulk panel.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolOverrideDaysLabel", "Set averaging period", "Label for setting the throughput averaging period in the AoE tool bulk panel.");
     public static LocStr ThroughputDays =
-        Loc.Str("dtk.throughput.days", "days", "Label for days unit.");
+        Loc.Str("DesignerToolkit.ThroughputDays", "days", "Label for days unit.");
     public static LocStr ThroughputAoEToolGlobalActionHeader =
-        Loc.Str("dtk.throughput.aoe_tool.global_header", "Batch settings", "Header for the bulk action settings section.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolGlobalActionHeader", "Batch settings", "Header for the bulk action settings section.");
     public static LocStr ThroughputAoEToolGlobalDisplay =
-        Loc.Str("dtk.throughput.aoe_tool.global_display", "Display state: ", "Label for global display state setting.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolGlobalDisplay", "Display state: ", "Label for global display state setting.");
     public static LocStr ThroughputAoEToolSelectAllLabel =
-        Loc.Str("dtk.throughput.aoe_tool.select_all_label", "Select / deselect all", "Label next to the master checkbox to toggle all items.");
+        Loc.Str("DesignerToolkit.ThroughputAoEToolSelectAllLabel", "Select / deselect all", "Label next to the master checkbox to toggle all items.");
     public static LocStr TransportProductRemovalAoEToolName =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.name", "Remove products in area", "Name of the transport product-removal AoE tool.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoEToolName", "Remove products in area", "Name of the transport product-removal AoE tool.");
     public static LocStr TransportProductRemovalAoEToolWindowTitle =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.window_title", "Remove products in area", "Title of the transport product-removal AoE window.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoEToolWindowTitle", "Remove products in area", "Title of the transport product-removal AoE window.");
     public static LocStr TransportProductRemovalAoESelectAll =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.select_all", "Select / deselect all entity types", "Label for the AoE product-removal entity-type master toggle.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoESelectAll", "Select / deselect all entity types", "Label for the AoE product-removal entity-type master toggle.");
     public static LocStr TransportProductRemovalAoEConnector =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.connector", "Connector", "Player-facing name for mini-zippers in the AoE product-removal entity-type list.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoEConnector", "Connector", "Player-facing name for mini-zippers in the AoE product-removal entity-type list.");
     public static LocStr TransportProductRemovalAoEBalancer =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.balancer", "Balancer", "Player-facing name for zippers in the AoE product-removal entity-type list.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoEBalancer", "Balancer", "Player-facing name for zippers in the AoE product-removal entity-type list.");
     public static LocStr1 TransportProductRemovalAoERemoveCount =
-        Loc.Str1("dtk.transport_product_removal.aoe_tool.remove_count", "Remove ({0})", "Regular AoE product-removal button. {0} = entity count eligible for a regular removal request.");
+        Loc.Str1("DesignerToolkit.TransportProductRemovalAoERemoveCount", "Remove ({0})", "Regular AoE product-removal button. {0} = entity count eligible for a regular removal request.");
     public static LocStr1 TransportProductRemovalAoECancelCount =
-        Loc.Str1("dtk.transport_product_removal.aoe_tool.cancel_count", "Cancel ({0})", "Cancel regular AoE product-removal button. {0} = active order count.");
+        Loc.Str1("DesignerToolkit.TransportProductRemovalAoECancelCount", "Cancel ({0})", "Cancel regular AoE product-removal button. {0} = active order count.");
     public static LocStr TransportProductRemovalAoEQuickRemove =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.quick_remove", "Quick remove", "Quick AoE product-removal button label.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoEQuickRemove", "Quick remove", "Quick AoE product-removal button label.");
     public static LocStr TransportProductRemovalAoERemoveTooltip =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.remove_tooltip", "Sends remove orders for all products in the selected entities.", "Tooltip for the regular AoE product-removal button.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoERemoveTooltip", "Sends remove orders for all products in the selected entities.", "Tooltip for the regular AoE product-removal button.");
     public static LocStr TransportProductRemovalAoEQuickRemoveTooltip =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.quick_remove_tooltip", "Immediately removes all products from the selected entities for the shown Unity cost.", "Tooltip for the quick AoE product-removal button.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoEQuickRemoveTooltip", "Immediately removes all products from the selected entities for the shown Unity cost.", "Tooltip for the quick AoE product-removal button.");
     public static LocStr TransportProductRemovalAoECancelTooltip =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.cancel_tooltip", "Cancels the current remove orders.", "Tooltip for the enabled cancel AoE product-removal button.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoECancelTooltip", "Cancels the current remove orders.", "Tooltip for the enabled cancel AoE product-removal button.");
     public static LocStr TransportProductRemovalAoENothingToCancelTooltip =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.nothing_to_cancel_tooltip", "No current remove orders to cancel.", "Tooltip for the disabled cancel AoE product-removal button.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoENothingToCancelTooltip", "No current remove orders to cancel.", "Tooltip for the disabled cancel AoE product-removal button.");
     public static LocStr TransportProductRemovalAoENoEntitiesTooltip =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.no_entities_tooltip", "No entities are targeted.", "Tooltip when an AoE product-removal action has no targeted entities.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoENoEntitiesTooltip", "No entities are targeted.", "Tooltip when an AoE product-removal action has no targeted entities.");
     public static LocStr TransportProductRemovalAoENoProductsTooltip =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.no_products_tooltip", "No products to remove.", "Tooltip when an AoE product-removal action has no products to remove.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoENoProductsTooltip", "No products to remove.", "Tooltip when an AoE product-removal action has no products to remove.");
     public static LocStr TransportProductRemovalAoENotEnoughUnityTooltip =
-        Loc.Str("dtk.transport_product_removal.aoe_tool.not_enough_unity_tooltip", "Not enough Unity to quick remove the selected products.", "Tooltip when the quick AoE product-removal action is unaffordable.");
+        Loc.Str("DesignerToolkit.TransportProductRemovalAoENotEnoughUnityTooltip", "Not enough Unity to quick remove the selected products.", "Tooltip when the quick AoE product-removal action is unaffordable.");
     public static LocStr1 TransportProductRemovalAoEProductsToRemove =
-        Loc.Str1("dtk.transport_product_removal.aoe_tool.products_to_remove", "Products to remove ({0} total)", "AoE product preview title. {0} = total buffered product quantity.");
+        Loc.Str1("DesignerToolkit.TransportProductRemovalAoEProductsToRemove", "Products to remove ({0} total)", "AoE product preview title. {0} = total buffered product quantity.");
 
     public static LocStr SettingsLayoutBoxModeHeading =
-        Loc.Str("dtk.settings.layout_box.heading", "LAYOUT", "Settings section heading for layout box mode.");
+        Loc.Str("DesignerToolkit.SettingsLayoutBoxModeHeading", "LAYOUT", "Settings section heading for layout box mode.");
     public static LocStr SettingsLayoutBoxModeToggle =
-        Loc.Str("dtk.settings.layout_box.label", "Toggle layout box overlay", "Settings row label for layout box mode.");
+        Loc.Str("DesignerToolkit.SettingsLayoutBoxModeToggle", "Toggle layout box overlay", "Settings row label for layout box mode.");
     public static LocStr SettingsLayoutBoxModeDescription =
-        Loc.Str("dtk.settings.layout_box.description", "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.", "Settings description for layout box mode.");
+        Loc.Str("DesignerToolkit.SettingsLayoutBoxModeDescription", "Enables an X-Ray overlay rendering voxel bounding boxes around buildings to show their layout and clearance.", "Settings description for layout box mode.");
     public static LocStr SettingsRecycleBinHeading =
-        Loc.Str("dtk.settings.recycle_bin.heading", "RECYCLE BIN", "Settings section heading for Recycle Bin settings.");
+        Loc.Str("DesignerToolkit.SettingsRecycleBinHeading", "RECYCLE BIN", "Settings section heading for Recycle Bin settings.");
     public static LocStr SettingsUseRecycleBin =
-        Loc.Str("dtk.settings.use_recycle_bin.label", "Use recycle bin", "Settings checkbox label for enabling recycle bin.");
+        Loc.Str("DesignerToolkit.SettingsUseRecycleBin", "Use recycle bin", "Settings checkbox label for enabling recycle bin.");
     public static LocStr SettingsUseRecycleBinDescription =
-        Loc.Str("dtk.settings.use_recycle_bin.description", "When enabled, blueprints and folders are copied to the recycle bin before deletion or updates, and the delete confirmation popup is suppressed.", "Settings checkbox description for enabling recycle bin.");
+        Loc.Str("DesignerToolkit.SettingsUseRecycleBinDescription", "When enabled, blueprints and folders are copied to the recycle bin before deletion or updates, and the delete confirmation popup is suppressed.", "Settings checkbox description for enabling recycle bin.");
     public static LocStr SettingsRecycleBinFolderName =
-        Loc.Str("dtk.settings.recycle_bin_folder_name.label", "Folder name", "Settings text field label for recycle bin folder name.");
+        Loc.Str("DesignerToolkit.SettingsRecycleBinFolderName", "Folder name", "Settings text field label for recycle bin folder name.");
     public static LocStr SettingsRecycleBinFolderNameDescription =
-        Loc.Str("dtk.settings.recycle_bin_folder_name.description", "The folder name under the blueprint book root to use as the Recycle Bin.", "Settings text field description for recycle bin folder name.");
+        Loc.Str("DesignerToolkit.SettingsRecycleBinFolderNameDescription", "The folder name under the blueprint book root to use as the Recycle Bin.", "Settings text field description for recycle bin folder name.");
     public static LocStr SettingsRecycleBinFolderNameInvalid =
-        Loc.Str("dtk.settings.recycle_bin_folder_name.invalid", "Invalid folder name. Must not be empty and under 60 characters.", "Validation message for an invalid recycle bin folder name.");
+        Loc.Str("DesignerToolkit.SettingsRecycleBinFolderNameInvalid", "Invalid folder name. Must not be empty and under 60 characters.", "Validation message for an invalid recycle bin folder name.");
 
     public static LocStr UndoSuccessMessage =
-        Loc.Str("dtk.undo.success", "Undo: Placement reverted successfully.", "Toast or message after undoing a placement.");
+        Loc.Str("DesignerToolkit.UndoSuccessMessage", "Undo: Placement reverted successfully.", "Toast or message after undoing a placement.");
     public static LocStr UndoNoActionMessage =
-        Loc.Str("dtk.undo.no_action", "Undo: No placement actions to revert.", "Toast or message when undo queue is empty.");
+        Loc.Str("DesignerToolkit.UndoNoActionMessage", "Undo: No placement actions to revert.", "Toast or message when undo queue is empty.");
 
     public static LocStr SettingsPollutionHeading =
-        Loc.Str("dtk.settings.pollution.heading", "POLLUTION OVERLAY", "Settings section heading for pollution overlay settings.");
+        Loc.Str("DesignerToolkit.SettingsPollutionHeading", "POLLUTION OVERLAY", "Settings section heading for pollution overlay settings.");
     public static LocStr SettingsPollutionToggle =
-        Loc.Str("dtk.settings.pollution_toggle.label", "Pollution overlay", "Settings row label for pollution overlay toggle.");
+        Loc.Str("DesignerToolkit.SettingsPollutionToggle", "Pollution overlay", "Settings row label for pollution overlay toggle.");
     public static LocStr SettingsPollutionToggleDescription =
-        Loc.Str("dtk.settings.pollution_toggle.description", "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days. These values include the effects of game difficulty settings and researched pollution-reduction technologies.", "Settings row description for pollution overlay visibility.");
+        Loc.Str("DesignerToolkit.SettingsPollutionToggleDescription", "Enables/disables the in-world pollution rate overlay. Displays averages over the configured days. These values include the effects of game difficulty settings and researched pollution-reduction technologies.", "Settings row description for pollution overlay visibility.");
     public static LocStr SettingsPollutionGlow =
-        Loc.Str("dtk.settings.pollution_glow.label", "Enable heatmap glow effect", "Settings row label for pollution heatmap glow toggle.");
+        Loc.Str("DesignerToolkit.SettingsPollutionGlow", "Enable heatmap glow effect", "Settings row label for pollution heatmap glow toggle.");
     public static LocStr SettingsPollutionGlowDescription =
-        Loc.Str("dtk.settings.pollution_glow.description", "Cast a glowing light onto polluting entities matching their emission intensity. Disable if causing lag.", "Settings row description for pollution heatmap glow.");
+        Loc.Str("DesignerToolkit.SettingsPollutionGlowDescription", "Cast a glowing light onto polluting entities matching their emission intensity. Disable if causing lag.", "Settings row description for pollution heatmap glow.");
     public static LocStr SettingsPollutionDaysToAverage =
-        Loc.Str("dtk.settings.pollution_days.label", "Averaging period", "Settings row label for the days to average pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionDaysToAverage", "Averaging period", "Settings row label for the days to average pollution.");
     public static LocStr SettingsPollutionDaysToAverageDescription =
-        Loc.Str("dtk.settings.pollution_days.description", "Configures the sliding window in game days [0-360] to average emissions. Setting this to 0 completely disables data collection and patches.", "Settings row description for pollution averaging period.");
+        Loc.Str("DesignerToolkit.SettingsPollutionDaysToAverageDescription", "Configures the sliding window in game days [0-360] to average emissions. Setting this to 0 completely disables data collection and patches.", "Settings row description for pollution averaging period.");
     public static LocStr SettingsPollutionShowAir =
-        Loc.Str("dtk.settings.pollution_show_air.label", "Show air pollution", "Settings checkbox label for showing air pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowAir", "Show air pollution", "Settings checkbox label for showing air pollution.");
     public static LocStr SettingsPollutionShowAirDescription =
-        Loc.Str("dtk.settings.pollution_show_air.description", "Enables/disables the in-world pollution rate overlay for gaseous air emissions (smokestacks/flares).", "Settings checkbox description for showing air pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowAirDescription", "Enables/disables the in-world pollution rate overlay for gaseous air emissions (smokestacks/flares).", "Settings checkbox description for showing air pollution.");
     public static LocStr SettingsPollutionShowGround =
-        Loc.Str("dtk.settings.pollution_show_ground.label", "Show water pollution", "Settings checkbox label for showing water pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowGround", "Show water pollution", "Settings checkbox label for showing water pollution.");
     public static LocStr SettingsPollutionShowGroundDescription =
-        Loc.Str("dtk.settings.pollution_show_ground.description", "Enables/disables the in-world pollution rate overlay for liquid water discharges (wastewater outfalls).", "Settings checkbox description for showing water pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowGroundDescription", "Enables/disables the in-world pollution rate overlay for liquid water discharges (wastewater outfalls).", "Settings checkbox description for showing water pollution.");
     public static LocStr SettingsPollutionShowSolidWaste =
-        Loc.Str("dtk.settings.pollution_show_solid_waste.label", "Show ground pollution (landfill)", "Settings checkbox label for showing ground pollution from landfill.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowSolidWaste", "Show ground pollution (landfill)", "Settings checkbox label for showing ground pollution from landfill.");
     public static LocStr SettingsPollutionShowSolidWasteDescription =
-        Loc.Str("dtk.settings.pollution_show_solid_waste.description", "Enables/disables the in-world pollution overlay for solid waste dumping on terrain (active landfill). Overlay labels are formatted as [Pollution(Tiles)].", "Settings checkbox description for showing ground landfill pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowSolidWasteDescription", "Enables/disables the in-world pollution overlay for solid waste dumping on terrain (active landfill). Overlay labels are formatted as [Pollution(Tiles)].", "Settings checkbox description for showing ground landfill pollution.");
     public static LocStr SettingsPollutionShowVehicle =
-        Loc.Str("dtk.settings.pollution_show_vehicle.label", "Show vehicle & train pollution", "Settings checkbox label for showing vehicle & train pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowVehicle", "Show vehicle & train pollution", "Settings checkbox label for showing vehicle & train pollution.");
     public static LocStr SettingsPollutionShowVehicleDescription =
-        Loc.Str("dtk.settings.pollution_show_vehicle.description", "Enables/disables the in-world pollution rate overlay for vehicles and locomotives.", "Settings checkbox description for showing vehicle pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowVehicleDescription", "Enables/disables the in-world pollution rate overlay for vehicles and locomotives.", "Settings checkbox description for showing vehicle pollution.");
     public static LocStr SettingsPollutionShowShip =
-        Loc.Str("dtk.settings.pollution_show_ship.label", "Show ship pollution", "Settings checkbox label for showing ship pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowShip", "Show ship pollution", "Settings checkbox label for showing ship pollution.");
     public static LocStr SettingsPollutionShowShipDescription =
-        Loc.Str("dtk.settings.pollution_show_ship.description", "Enables/disables the in-world pollution rate overlay for ships. Displays the predicted pollution rate based on the current cargo route's round-trip time and fuel consumption. These values include the effects of game difficulty settings and researched pollution-reduction technologies.", "Settings checkbox description for showing ship pollution.");
+        Loc.Str("DesignerToolkit.SettingsPollutionShowShipDescription", "Enables/disables the in-world pollution rate overlay for ships. Displays the predicted pollution rate based on the current cargo route's round-trip time and fuel consumption. These values include the effects of game difficulty settings and researched pollution-reduction technologies.", "Settings checkbox description for showing ship pollution.");
     public static LocStr SettingsRadiationHeading =
-        Loc.Str("dtk.settings.radiation.heading", "RADIATION OVERLAY", "Settings section heading for radiation overlay settings.");
+        Loc.Str("DesignerToolkit.SettingsRadiationHeading", "RADIATION OVERLAY", "Settings section heading for radiation overlay settings.");
     public static LocStr SettingsRadiationToggle =
-        Loc.Str("dtk.settings.radiation_toggle.label", "Radiation overlay", "Settings row label for radiation overlay toggle.");
+        Loc.Str("DesignerToolkit.SettingsRadiationToggle", "Radiation overlay", "Settings row label for radiation overlay toggle.");
     public static LocStr SettingsRadiationToggleDescription =
-        Loc.Str("dtk.settings.radiation_toggle.description", "Shows the average amount of unsafe radioactive product held by each entity at the daily sample points used by the overlay.", "Settings row description for radiation overlay visibility.");
+        Loc.Str("DesignerToolkit.SettingsRadiationToggleDescription", "Shows the average amount of unsafe radioactive product held by each entity at the daily sample points used by the overlay.", "Settings row description for radiation overlay visibility.");
     public static LocStr SettingsRadiationGlow =
-        Loc.Str("dtk.settings.radiation_glow.label", "Enable heatmap glow effect", "Settings row label for radiation heatmap glow toggle.");
+        Loc.Str("DesignerToolkit.SettingsRadiationGlow", "Enable heatmap glow effect", "Settings row label for radiation heatmap glow toggle.");
     public static LocStr SettingsRadiationGlowDescription =
-        Loc.Str("dtk.settings.radiation_glow.description", "Highlights and adds a glow to entities according to their sampled unsafe radioactive inventory. Disable if causing lag.", "Settings row description for radiation heatmap glow.");
+        Loc.Str("DesignerToolkit.SettingsRadiationGlowDescription", "Highlights and adds a glow to entities according to their sampled unsafe radioactive inventory. Disable if causing lag.", "Settings row description for radiation heatmap glow.");
     public static LocStr SettingsRadiationDaysToAverage =
-        Loc.Str("dtk.settings.radiation_days.label", "Averaging period", "Settings row label for the days to average radiation.");
+        Loc.Str("DesignerToolkit.SettingsRadiationDaysToAverage", "Averaging period", "Settings row label for the days to average radiation.");
     public static LocStr SettingsRadiationDaysToAverageDescription =
-        Loc.Str("dtk.settings.radiation_days.description", "Configures the sliding window in game days [0-360] to average sampled unsafe radioactive inventory. Setting this to 0 disables data collection.", "Settings row description for radiation averaging period.");
+        Loc.Str("DesignerToolkit.SettingsRadiationDaysToAverageDescription", "Configures the sliding window in game days [0-360] to average sampled unsafe radioactive inventory. Setting this to 0 disables data collection.", "Settings row description for radiation averaging period.");
     public static LocStr SettingsPlaceFolderHeading =
-        Loc.Str("dtk.settings.place_folder.heading", "PLACE FOLDER", "Settings section heading for place folder settings.");
+        Loc.Str("DesignerToolkit.SettingsPlaceFolderHeading", "PLACE FOLDER", "Settings section heading for place folder settings.");
     public static LocStr SettingsBlueprintSpacingLabel =
-        Loc.Str("dtk.settings.blueprint_spacing.label", "Blueprint spacing", "Settings row label for blueprint spacing.");
+        Loc.Str("DesignerToolkit.SettingsBlueprintSpacingLabel", "Blueprint spacing", "Settings row label for blueprint spacing.");
     public static LocStr SettingsBlueprintSpacingDescription =
-        Loc.Str("dtk.settings.blueprint_spacing.description", "Spacing (in tiles) between blueprints placed side-by-side during batch placing [0-12].", "Settings row description for blueprint spacing.");
+        Loc.Str("DesignerToolkit.SettingsBlueprintSpacingDescription", "Spacing (in tiles) between blueprints placed side-by-side during batch placing [0-12].", "Settings row description for blueprint spacing.");
     public static LocStr PlaceAllButton =
-        Loc.Str("dtk.blueprint.place_all.button", "Place all", "Button label for placing ghosts of all designs in the folder.");
+        Loc.Str("DesignerToolkit.PlaceAllButton", "Place all", "Button label for placing ghosts of all designs in the folder.");
     public static LocStr PlaceAllTooltip =
-        Loc.Str("dtk.blueprint.place_all.tooltip", "Place all blueprints in this folder.", "Tooltip for placing all blueprints in a folder.");
+        Loc.Str("DesignerToolkit.PlaceAllTooltip", "Place all blueprints in this folder.", "Tooltip for placing all blueprints in a folder.");
     public static LocStr UpdateBlueprintTooltip =
-        Loc.Str("dtk.blueprint.update.tooltip", "Update the selected blueprint from a new area selection.", "Tooltip for updating the selected blueprint from a new area selection.");
+        Loc.Str("DesignerToolkit.UpdateBlueprintTooltip", "Update the selected blueprint from a new area selection.", "Tooltip for updating the selected blueprint from a new area selection.");
 
     public static LocStr SettingsHeightFilterAll =
-        Loc.Str("dtk.settings.height_filter.all", "All", "Dropdown option for all height filter layers.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterAll", "All", "Dropdown option for all height filter layers.");
     
     public static LocStr SettingsHeightFilterControlsTooltip =
-        Loc.Str("dtk.settings.height_filter.controls_tooltip", "These keybinds are registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Tooltip noting that height filter keybinds are configured in vanilla Settings | Controls.");
+        Loc.Str("DesignerToolkit.SettingsHeightFilterControlsTooltip", "These keybinds are registered with the game's controls system and can be configured in the vanilla Settings | Controls menu.", "Tooltip noting that height filter keybinds are configured in vanilla Settings | Controls.");
 
     public static LocStr SettingsThroughputHeatmapNone =
-        Loc.Str("dtk.settings.throughput_heatmap.none", "None", "Dropdown option for no heatmap.");
+        Loc.Str("DesignerToolkit.SettingsThroughputHeatmapNone", "None", "Dropdown option for no heatmap.");
 
     public static LocStr SettingsThroughputHeatmapRelative =
-        Loc.Str("dtk.settings.throughput_heatmap.relative", "Relative", "Dropdown option for relative heatmap.");
+        Loc.Str("DesignerToolkit.SettingsThroughputHeatmapRelative", "Relative", "Dropdown option for relative heatmap.");
 
     public static LocStr SettingsThroughputHeatmapCapacity =
-        Loc.Str("dtk.settings.throughput_heatmap.capacity", "Capacity", "Dropdown option for capacity heatmap.");
+        Loc.Str("DesignerToolkit.SettingsThroughputHeatmapCapacity", "Capacity", "Dropdown option for capacity heatmap.");
 
     public static LocStr SettingsHotkeyOr =
-        Loc.Str("dtk.settings.hotkey.or", "or", "Word 'or' separating hotkeys.");
+        Loc.Str("DesignerToolkit.SettingsHotkeyOr", "or", "Word 'or' separating hotkeys.");
 
     public static LocStr1 GroundwaterInsightsTitle =
-        Loc.Str1("dtk.groundwater.insights_title", "Reservoir insights: {0}", "Title for reservoir rich tooltip floater where {0} is the localized product name.");
+        Loc.Str1("DesignerToolkit.GroundwaterInsightsTitle", "Reservoir insights: {0}", "Title for reservoir rich tooltip floater where {0} is the localized product name.");
     public static LocStr GroundwaterLastYearAvgDrawLabel =
-        Loc.Str("dtk.groundwater.last_year_avg_draw", "Last year's avg monthly draw", "Label for average monthly groundwater drawn over the past 12 months.");
+        Loc.Str("DesignerToolkit.GroundwaterLastYearAvgDrawLabel", "Last year's avg monthly draw", "Label for average monthly groundwater drawn over the past 12 months.");
     public static LocStr GroundwaterSustainableDrawLabel =
-        Loc.Str("dtk.groundwater.sustainable_draw", "Max sustainable draw", "Label for maximum sustainable monthly groundwater draw.");
+        Loc.Str("DesignerToolkit.GroundwaterSustainableDrawLabel", "Max sustainable draw", "Label for maximum sustainable monthly groundwater draw.");
     public static LocStr GroundwaterSustainableTooltip =
-        Loc.Str("dtk.groundwater.sustainable_tooltip", "Calculated steady-state monthly replenishment rate post year 10 based on the Weather difficulty setting (Rainwater yield setting affects only Rainwater Harvesters, not groundwater).", "Tooltip explaining sustainable monthly groundwater draw calculation.");
+        Loc.Str("DesignerToolkit.GroundwaterSustainableTooltip", "Calculated steady-state monthly replenishment rate post year 10 based on the Weather difficulty setting (Rainwater yield setting affects only Rainwater Harvesters, not groundwater).", "Tooltip explaining sustainable monthly groundwater draw calculation.");
     public static LocStr GroundwaterExpectedYearlyChangeLabel =
-        Loc.Str("dtk.groundwater.expected_yearly_change", "Expected yearly change", "Label for expected net reservoir level change over the next year.");
+        Loc.Str("DesignerToolkit.GroundwaterExpectedYearlyChangeLabel", "Expected yearly change", "Label for expected net reservoir level change over the next year.");
     public static LocStr GroundwaterExpectedYearsRemainingLabel =
-        Loc.Str("dtk.groundwater.expected_years_remaining", "Expected years remaining", "Label for expected years until groundwater depletion.");
+        Loc.Str("DesignerToolkit.GroundwaterExpectedYearsRemainingLabel", "Expected years remaining", "Label for expected years until groundwater depletion.");
     public static LocStr GroundwaterYearsRemainingStable =
-        Loc.Str("dtk.groundwater.years_remaining_stable", "Stable", "Indicator that water level is stable or increasing.");
+        Loc.Str("DesignerToolkit.GroundwaterYearsRemainingStable", "Stable", "Indicator that water level is stable or increasing.");
     public static LocStr GroundwaterYearsRemainingOver1000 =
-        Loc.Str("dtk.groundwater.years_remaining_over1000", ">1000 years", "Indicator that depletion is more than 1000 years away.");
+        Loc.Str("DesignerToolkit.GroundwaterYearsRemainingOver1000", ">1000 years", "Indicator that depletion is more than 1000 years away.");
     public static LocStr GroundwaterMonthlyChartTitle =
-        Loc.Str("dtk.groundwater.monthly_chart_title", "Monthly Reserve Level (1st of Month)", "Title for 12-month groundwater historical bar chart.");
+        Loc.Str("DesignerToolkit.GroundwaterMonthlyChartTitle", "Monthly Reserve Level (1st of Month)", "Title for 12-month groundwater historical bar chart.");
     public static LocStr GroundwaterYearlyChartTitle =
-        Loc.Str("dtk.groundwater.yearly_chart_title", "10-Year Reserve Level (1st of Jan)", "Title for 10-year groundwater historical bar chart.");
+        Loc.Str("DesignerToolkit.GroundwaterYearlyChartTitle", "10-Year Reserve Level (1st of Jan)", "Title for 10-year groundwater historical bar chart.");
     public static LocStr GroundwaterSafeLevelLabel =
-        Loc.Str("dtk.groundwater.safe_level", "Safe reserve", "Legend label for safe groundwater reserve level.");
+        Loc.Str("DesignerToolkit.GroundwaterSafeLevelLabel", "Safe reserve", "Legend label for safe groundwater reserve level.");
     public static LocStr GroundwaterLowLevelLabel =
-        Loc.Str("dtk.groundwater.low_level", "Low reserve", "Legend label for low groundwater reserve warning level.");
+        Loc.Str("DesignerToolkit.GroundwaterLowLevelLabel", "Low reserve", "Legend label for low groundwater reserve warning level.");
     public static LocStr GroundwaterTrendFilling =
-        Loc.Str("dtk.groundwater.trend_filling", "Filling", "Indicator that reservoir is filling.");
+        Loc.Str("DesignerToolkit.GroundwaterTrendFilling", "Filling", "Indicator that reservoir is filling.");
     public static LocStr GroundwaterTrendEmptying =
-        Loc.Str("dtk.groundwater.trend_emptying", "Depleting", "Indicator that reservoir is depleting.");
+        Loc.Str("DesignerToolkit.GroundwaterTrendEmptying", "Depleting", "Indicator that reservoir is depleting.");
     public static LocStr GroundwaterTrendBalanced =
-        Loc.Str("dtk.groundwater.trend_balanced", "Balanced", "Indicator that reservoir draw matches replenish.");
+        Loc.Str("DesignerToolkit.GroundwaterTrendBalanced", "Balanced", "Indicator that reservoir draw matches replenish.");
     public static LocStr GroundwaterTrendIdle =
-        Loc.Str("dtk.groundwater.trend_idle", "Idle / No draw recorded", "Indicator when no pump draw was recorded in last full month.");
+        Loc.Str("DesignerToolkit.GroundwaterTrendIdle", "Idle / No draw recorded", "Indicator when no pump draw was recorded in last full month.");
     public static LocStr2 GroundwaterTrackingNotice =
-        Loc.Str2("dtk.groundwater.tracking_notice", "Tracking in progress ({0}/{1} months recorded)", "Notice when less than 12 months of data have been tracked since mod start.");
+        Loc.Str2("DesignerToolkit.GroundwaterTrackingNotice", "Tracking in progress ({0}/{1} months recorded)", "Notice when less than 12 months of data have been tracked since mod start.");
 }
 

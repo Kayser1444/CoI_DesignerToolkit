@@ -38,9 +38,9 @@ if ($missingConfigKeys.Count -gt 0) {
 $hotkeyLines = Get-Content $hotkeysPath
 $hotkeyKeys = foreach ($line in $hotkeyLines) {
     if ($line -match '^\s*\[Kb\([^,]+,\s*"(?<id>[^"]+)",\s*"(?<label>[^"]+)",\s*"(?<tooltip>[^"]*)"') {
-        "Kb_$($Matches.id)__label"
+        "DesignerToolkit.Kb_$($Matches.id)__label"
         if (-not [string]::IsNullOrEmpty($Matches.tooltip)) {
-            "Kb_$($Matches.id)__tooltip"
+            "DesignerToolkit.Kb_$($Matches.id)__tooltip"
         }
     }
 }

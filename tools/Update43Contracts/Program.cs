@@ -35,6 +35,7 @@ public static partial class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Run(string mod)
     {
+        RadiationContracts(mod);
         ProductProto a = Product("A"), b = Product("B"), placeholder = Product("Mixed");
         var category = (MixedMaterialCategory)RuntimeHelpers.GetUninitializedObject(typeof(MixedMaterialCategory));
         var members = new[] { Member(category, a), Member(category, b) };

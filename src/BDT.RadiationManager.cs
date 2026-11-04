@@ -11,6 +11,7 @@ using Mafi.Core.Factory.Machines;
 using Mafi.Core.Factory.NuclearReactors;
 using Mafi.Core.Factory.Transports;
 using Mafi.Core.Factory.Zippers;
+using Mafi.Core.Prototypes;
 using Mafi.Core.Products;
 using Mafi.Core.Simulation;
 using Mafi.Core.Vehicles.Trucks;
@@ -21,12 +22,17 @@ namespace CoIDesignerToolkit;
 /// <summary>
 /// Samples the unsafe radioactive product inventory at the same daily cadence used by vanilla's
 /// radiation manager. The value is deliberately inventory-based: transport events do not create
-/// additional radiation in vanilla, while product held outside the two safe-storage implementations does.
+/// additional radiation in vanilla. Reactor/waste storage and native tag-protected holders are excluded.
 /// </summary>
 internal sealed class RadiationManager : IDisposable
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.RadiationManager");
     private static RadiationManager? s_instance;
+#if COI_UPDATE_4_3
+    // Added in b626 without an assembly-version change; older 4.3 builds lack the field.
+    private static readonly Tag? s_radiationShieldedTag =
+        typeof(CoreProtoTags).GetField("RadiationShielded")?.GetValue(null) as Tag;
+#endif
 
     private readonly Dict<int, EntityRadiationState> m_states = new Dict<int, EntityRadiationState>();
     private IEntitiesManager? m_entitiesManager;
@@ -129,6 +135,15 @@ internal sealed class RadiationManager : IDisposable
         // show them in the overlay, or the overlay would disagree with the game's penalty source.
         if (entity is NuclearReactor || entity is NuclearWasteStorage)
             return 0f;
+
+#if COI_UPDATE_4_3
+        // Native IShieldedEntity implementations own their per-product shielding;
+        // the prototype tag applies to ordinary product holders only.
+        if (s_radiationShieldedTag != null && entity is IEntityWithProducts
+            && !(entity is Mafi.Core.Environment.IShieldedEntity shielded && shielded.HasShielding)
+            && entity.Prototype.HasTag(s_radiationShieldedTag))
+            return 0f;
+#endif
 
         float total = 0f;
         var seenBuffers = new HashSet<IProductBufferReadOnly>();

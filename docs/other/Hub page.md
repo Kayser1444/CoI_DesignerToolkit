@@ -268,7 +268,7 @@ The history is retained across save and load sessions while BDT is installed. It
 
 BDT also includes a **Radiation Overlay** for locating unsafe radioactive inventory during design testing. It samples at the same daily boundary as vanilla radiation accounting and displays local amounts using translationless `#N.D#` labels.
 
-- **Local source coverage**: Inspects supported machines, storage buffers, connectors, lifts, flat conveyors, and trucks. Reactor and radioactive-waste-storage buffers are excluded as vanilla-safe storage.
+- **Local source coverage**: Inspects supported machines, storage buffers, connectors, lifts, flat conveyors, and trucks. Reactor and radioactive-waste-storage buffers are excluded as vanilla-safe storage. On game builds that support native prototype shielding, protected production buildings are also excluded from new samples; existing averages decay over the configured history window.
 - **Green entity glow**: Optionally highlights the source entity or vehicle itself, with intensity scaled against the strongest currently visible source and a fixed zero baseline.
 - **Configurable averaging**: Uses a sliding window of `0` to `360` game days, defaulting to 30 days. Setting it to `0` disables data collection.
 - **Hotkey**: Toggle the overlay with `Alt+R`.
