@@ -444,6 +444,14 @@
     "Ativa/desativa as sobreposições de fluxo no mundo. A exibição de entidades individuais ainda deve ser ativada no inspetor ou pela ferramenta de fluxo."
   ],
   [
+    "DesignerToolkit.SettingsThroughputDaysToAverage",
+    "Período padrão da média de vazão (dias)"
+  ],
+  [
+    "DesignerToolkit.SettingsThroughputDaysToAverageDescription",
+    "Insira de 1 a 360 dias de jogo para entidades sem um período de média próprio."
+  ],
+  [
     "DesignerToolkit.SettingsThroughputGlow",
     "Ativar efeito de brilho do mapa de calor"
   ],

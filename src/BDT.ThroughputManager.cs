@@ -30,7 +30,13 @@ internal sealed class ThroughputManager : IDisposable
     public sealed class EntityState
     {
         public bool DisplayThroughput;
-        public int DaysToAverage = 30;
+        public int? DaysToAverageOverride { get; private set; }
+
+        public int DaysToAverage
+        {
+            get => DaysToAverageOverride ?? DesignerToolkitSettings.ThroughputDaysToAverage;
+            set => DaysToAverageOverride = Math.Max(1, Math.Min(360, value));
+        }
 
         // Circular buffer storing daily sums. Size is 360 (1 game year)
         public readonly float[] DailyHistory = new float[360];
@@ -120,6 +126,15 @@ internal sealed class ThroughputManager : IDisposable
         return m_states;
     }
 
+    public void RecalculateDefaultAverages()
+    {
+        foreach (var state in m_states.Values)
+        {
+            if (!state.DaysToAverageOverride.HasValue)
+                state.RecalculateAverage();
+        }
+    }
+
     public void OnNewDay()
     {
         foreach (var state in m_states.Values)
@@ -186,16 +201,12 @@ internal sealed class ThroughputManager : IDisposable
                         }
                         if (configData.TryGetValue("days", out object? rawDays))
                         {
-                            int daysVal = 30;
-                            if (rawDays is int dInt) daysVal = dInt;
-                            else if (rawDays is double dDouble) daysVal = (int)dDouble;
-                            else if (rawDays is long dLong) daysVal = (int)dLong;
-                            
-                            state.DaysToAverage = Math.Max(1, Math.Min(360, daysVal));
+                            if (rawDays is int days) state.DaysToAverage = days;
+                            else if (rawDays is double doubleDays) state.DaysToAverage = (int)doubleDays;
+                            else if (rawDays is long longDays) state.DaysToAverage = (int)longDays;
                         }
 
-                        // We only load it if display is active or days are non-default
-                        if (state.DisplayThroughput || state.DaysToAverage != 30)
+                        if (state.DisplayThroughput || state.DaysToAverageOverride.HasValue)
                         {
                             m_states[entityIdValue] = state;
                         }
@@ -224,11 +235,14 @@ internal sealed class ThroughputManager : IDisposable
             {
                 var state = kvp.Value;
                 // Only save if it has a reason to be saved
-                if (!state.DisplayThroughput && state.DaysToAverage == 30)
+                if (!state.DisplayThroughput && !state.DaysToAverageOverride.HasValue)
                     continue;
 
                 if (!first) sb.AppendLine(",");
-                sb.Append($"    \"{kvp.Key}\": {{ \"display\": {(state.DisplayThroughput ? "true" : "false")}, \"days\": {state.DaysToAverage} }}");
+                sb.Append($"    \"{kvp.Key}\": {{ \"display\": {(state.DisplayThroughput ? "true" : "false")}");
+                if (state.DaysToAverageOverride is int days)
+                    sb.Append($", \"days\": {days}");
+                sb.Append(" }");
                 first = false;
             }
             sb.AppendLine();

@@ -62,6 +62,13 @@
     "default": false,
     "description": "Initial throughput glow visibility state for saves without BDT settings state."
   },
+  "throughput_days_to_average": {
+    "default": 30,
+    "is_integer": true,
+    "description": "Default number of in-game days to average for throughput monitoring on entities without an individual averaging period.",
+    "min": 1,
+    "max": 360
+  },
   "throughput_heatmap_mode": {
     "default": 2,
     "is_integer": true,

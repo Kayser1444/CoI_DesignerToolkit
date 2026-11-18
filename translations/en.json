@@ -444,6 +444,14 @@
     "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool."
   ],
   [
+    "DesignerToolkit.SettingsThroughputDaysToAverage",
+    "Default throughput averaging period (days)"
+  ],
+  [
+    "DesignerToolkit.SettingsThroughputDaysToAverageDescription",
+    "Enter 1 to 360 in-game days for entities without their own averaging period."
+  ],
+  [
     "DesignerToolkit.SettingsThroughputGlow",
     "Enable heatmap glow effect"
   ],

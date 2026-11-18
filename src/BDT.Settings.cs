@@ -84,6 +84,8 @@ internal static class DesignerToolkitSettings
     public static bool IsSandbox => s_difficultyConfig != null && s_difficultyConfig.IsSandbox;
     
     private const string THROUGHPUT_OVERLAY_ENABLED_KEY = "throughput_overlay_enabled";
+    private const string THROUGHPUT_DAYS_TO_AVERAGE_KEY = "throughput_days_to_average";
+    private const int DEFAULT_THROUGHPUT_DAYS_TO_AVERAGE = 30;
     private const string THROUGHPUT_GLOW_ENABLED_KEY = "throughput_glow_enabled";
     private const string THROUGHPUT_HEATMAP_MODE_KEY = "throughput_heatmap_mode";
     private const string THROUGHPUT_COLORBLIND_MODE_KEY = "throughput_colorblind_mode";
@@ -133,6 +135,7 @@ internal static class DesignerToolkitSettings
     public static HeightFilterTransportVisibility HeightFilterTransportVisibility { get; private set; } = HeightFilterTransportVisibility.Medium;
     public static HeightFilterPillarVisibility HeightFilterPillarVisibility { get; private set; } = HeightFilterPillarVisibility.Detached;
     public static bool ThroughputOverlayEnabled { get; private set; } = true;
+    public static int ThroughputDaysToAverage { get; private set; } = DEFAULT_THROUGHPUT_DAYS_TO_AVERAGE;
     public static bool ThroughputGlowEnabled { get; private set; } = true;
     public static ThroughputHeatmapMode ThroughputHeatmapMode { get; private set; } = ThroughputHeatmapMode.Capacity;
     public static bool ThroughputColorblindMode { get; private set; } = false;
@@ -454,6 +457,7 @@ internal static class DesignerToolkitSettings
         bool initialLegacyBeltConfigurations = s_config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
         bool initialThroughputOverlayEnabled = s_config.GetBool(THROUGHPUT_OVERLAY_ENABLED_KEY, true);
         bool initialThroughputGlowEnabled = s_config.GetBool(THROUGHPUT_GLOW_ENABLED_KEY, true);
+        int initialThroughputDaysToAverage = s_config.GetInt(THROUGHPUT_DAYS_TO_AVERAGE_KEY, DEFAULT_THROUGHPUT_DAYS_TO_AVERAGE);
         ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(s_config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode.Capacity));
         bool initialThroughputColorblindMode = s_config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
         bool initialThroughputShowAsPercent = s_config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
@@ -486,6 +490,7 @@ internal static class DesignerToolkitSettings
             initialLegacyBeltConfigurations,
             initialThroughputOverlayEnabled,
             initialThroughputGlowEnabled,
+            initialThroughputDaysToAverage,
             initialThroughputHeatmapMode,
             initialThroughputColorblindMode,
             initialThroughputShowAsPercent,
@@ -687,6 +692,14 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetThroughputGlowEnabled);
         root.Add(throughputGlowToggle);
 
+        root.Add(BuildAveragingPeriodRow(
+            BdtLocalization.SettingsThroughputDaysToAverage.AsFormatted,
+            BdtLocalization.SettingsThroughputDaysToAverageDescription.AsFormatted,
+            () => ThroughputDaysToAverage,
+            SetThroughputDaysToAverage,
+            out TextField throughputDaysInput,
+            isDelayed: true));
+
         Toggle colorblindToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsThroughputColorblind.AsFormatted)
             .Tooltip(BdtLocalization.SettingsThroughputColorblindDescription.AsFormatted)
@@ -742,64 +755,12 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetPollutionGlowEnabled);
         root.Add(pollutionGlowToggle);
 
-        // --- DAYS TO AVERAGE ---
-        var daysRow = new Row(2.pt()).AlignItemsCenter();
-        var daysLabel = new Label(BdtLocalization.SettingsPollutionDaysToAverage.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsPollutionDaysToAverageDescription.AsFormatted)
-            .Width(SETTINGS_LABEL_WIDTH);
-        daysRow.Add(daysLabel);
-
-        var daysSpacer = new UiComponent().FlexGrow(1f);
-        daysRow.Add(daysSpacer);
-
-        var daysControlRow = new Row(2.pt()).AlignItemsCenter();
-
-        var daysMinusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
-            .Compact().IconSize(14.px());
-        var daysPlusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Plus128.png")
-            .Compact().IconSize(14.px());
-
-        TextField daysInput = new TextField()
-            .Class(Cls.displayFont, Cls.displayBg)
-            .Width(45.px());
-        UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(daysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
-        daysInput.Text(PollutionDaysToAverage.ToString());
-
-        daysControlRow.Add(daysMinusBtn);
-        daysControlRow.Add(daysInput);
-        daysControlRow.Add(daysPlusBtn);
-        daysRow.Add(daysControlRow);
-        root.Add(daysRow);
-
-        Action<int> updateDays = (val) =>
-        {
-            SetPollutionDaysToAverage(val);
-            daysInput.Text(PollutionDaysToAverage.ToString());
-        };
-
-        daysInput.OnValueChanged((text) =>
-        {
-            if (int.TryParse(text, out int val))
-            {
-                updateDays(val);
-            }
-        });
-
-        Action<int> adjustDays = (sign) =>
-        {
-            if (int.TryParse(daysInput.GetText(), out int current))
-            {
-                int step = 1;
-                if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) step = 10;
-                else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) step = 5;
-
-                int next = Math.Max(0, Math.Min(360, current + sign * step));
-                updateDays(next);
-            }
-        };
-
-        daysMinusBtn.OnClick(() => adjustDays(-1), allowKeyPresses: true);
-        daysPlusBtn.OnClick(() => adjustDays(1), allowKeyPresses: true);
+        root.Add(BuildAveragingPeriodRow(
+            BdtLocalization.SettingsPollutionDaysToAverage.AsFormatted,
+            BdtLocalization.SettingsPollutionDaysToAverageDescription.AsFormatted,
+            () => PollutionDaysToAverage,
+            SetPollutionDaysToAverage,
+            out TextField daysInput));
 
         // --- SUB-TOGGLES ---
         Toggle showAirToggle = new Toggle(standalone: true)
@@ -859,64 +820,12 @@ internal static class DesignerToolkitSettings
             .OnValueChanged(SetRadiationGlowEnabled);
         root.Add(radiationGlowToggle);
 
-        // --- RADIATION DAYS TO AVERAGE ---
-        var radiationDaysRow = new Row(2.pt()).AlignItemsCenter();
-        var radiationDaysLabel = new Label(BdtLocalization.SettingsRadiationDaysToAverage.AsFormatted)
-            .Tooltip(BdtLocalization.SettingsRadiationDaysToAverageDescription.AsFormatted)
-            .Width(SETTINGS_LABEL_WIDTH);
-        radiationDaysRow.Add(radiationDaysLabel);
-
-        var radiationDaysSpacer = new UiComponent().FlexGrow(1f);
-        radiationDaysRow.Add(radiationDaysSpacer);
-
-        var radiationDaysControlRow = new Row(2.pt()).AlignItemsCenter();
-
-        var radiationDaysMinusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
-            .Compact().IconSize(14.px());
-        var radiationDaysPlusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Plus128.png")
-            .Compact().IconSize(14.px());
-
-        TextField radiationDaysInput = new TextField()
-            .Class(Cls.displayFont, Cls.displayBg)
-            .Width(45.px());
-        UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(radiationDaysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
-        radiationDaysInput.Text(RadiationDaysToAverage.ToString());
-
-        radiationDaysControlRow.Add(radiationDaysMinusBtn);
-        radiationDaysControlRow.Add(radiationDaysInput);
-        radiationDaysControlRow.Add(radiationDaysPlusBtn);
-        radiationDaysRow.Add(radiationDaysControlRow);
-        root.Add(radiationDaysRow);
-
-        Action<int> updateRadiationDays = (val) =>
-        {
-            SetRadiationDaysToAverage(val);
-            radiationDaysInput.Text(RadiationDaysToAverage.ToString());
-        };
-
-        radiationDaysInput.OnValueChanged((text) =>
-        {
-            if (int.TryParse(text, out int val))
-            {
-                updateRadiationDays(val);
-            }
-        });
-
-        Action<int> adjustRadiationDays = (sign) =>
-        {
-            if (int.TryParse(radiationDaysInput.GetText(), out int current))
-            {
-                int step = 1;
-                if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) step = 10;
-                else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) step = 5;
-
-                int next = Math.Max(0, Math.Min(360, current + sign * step));
-                updateRadiationDays(next);
-            }
-        };
-
-        radiationDaysMinusBtn.OnClick(() => adjustRadiationDays(-1), allowKeyPresses: true);
-        radiationDaysPlusBtn.OnClick(() => adjustRadiationDays(1), allowKeyPresses: true);
+        root.Add(BuildAveragingPeriodRow(
+            BdtLocalization.SettingsRadiationDaysToAverage.AsFormatted,
+            BdtLocalization.SettingsRadiationDaysToAverageDescription.AsFormatted,
+            () => RadiationDaysToAverage,
+            SetRadiationDaysToAverage,
+            out TextField radiationDaysInput));
 
         root.Add(new Title(BdtLocalization.SettingsLayoutBoxModeHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -1034,6 +943,7 @@ internal static class DesignerToolkitSettings
             preColorPipesToggle.Value(PreColorPipesEnabled);
             throughputOverlayToggle.Value(ThroughputOverlayEnabled);
             throughputGlowToggle.Value(ThroughputGlowEnabled);
+            throughputDaysInput.Text(ThroughputDaysToAverage.ToString());
             heatmapDropdown.SetValue(ThroughputHeatmapMode);
             colorblindToggle.Value(ThroughputColorblindMode);
             colorblindToggle.Enabled(ThroughputHeatmapMode != ThroughputHeatmapMode.None);
@@ -1062,6 +972,60 @@ internal static class DesignerToolkitSettings
         }));
 
         return root;
+    }
+
+    private static Row BuildAveragingPeriodRow(
+        LocStrFormatted label,
+        LocStrFormatted tooltip,
+        Func<int> getDays,
+        Action<int> setDays,
+        out TextField daysInput,
+        bool isDelayed = false)
+    {
+        var minusButton = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
+            .Compact().IconSize(14.px());
+        var plusButton = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Plus128.png")
+            .Compact().IconSize(14.px());
+        var input = new TextField()
+            .Class(Cls.displayFont, Cls.displayBg)
+            .Width(45.px())
+            .Text(getDays().ToString());
+        UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(input.Element).style.unityTextAlign = TextAnchor.MiddleRight;
+
+        void UpdateDays(int days)
+        {
+            setDays(days);
+            input.Text(getDays().ToString());
+        }
+
+        void AdjustDays(int direction)
+        {
+            if (!int.TryParse(input.GetText(), out int current))
+                return;
+
+            int step = 1;
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) step = 10;
+            else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) step = 5;
+
+            UpdateDays((int)Math.Max(0, Math.Min(360, (long)current + direction * step)));
+        }
+
+        input.OnValueChanged(text =>
+        {
+            if (int.TryParse(text, out int days))
+                UpdateDays(days);
+            else if (isDelayed)
+                input.Text(getDays().ToString());
+        }, isDelayed);
+        minusButton.OnClick(() => AdjustDays(-1), allowKeyPresses: true);
+        plusButton.OnClick(() => AdjustDays(1), allowKeyPresses: true);
+
+        var controls = new Row(2.pt()).AlignItemsCenter();
+        controls.Add(minusButton);
+        controls.Add(input);
+        controls.Add(plusButton);
+        daysInput = input;
+        return BuildControlRow(label, tooltip, controls);
     }
 
     private static Row BuildControlRow(LocStrFormatted label, LocStrFormatted? tooltip, UiComponent control, Action<Row>? addBadges = null)
@@ -1096,12 +1060,7 @@ internal static class DesignerToolkitSettings
         if (!bindings.Primary.IsEmpty)
         {
             row.Add(new KeyBindUi().SetKeys(
-// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
-#if COI_UPDATE_4_3
                 bindings.Primary.GetDisplayKeys()
-#else
-                bindings.Primary.Keys.ToArray()
-#endif
 ).MarginLeft(primaryMargin));
         }
         if (!bindings.Primary.IsEmpty && !bindings.Secondary.IsEmpty)
@@ -1113,11 +1072,7 @@ internal static class DesignerToolkitSettings
         if (!bindings.Secondary.IsEmpty)
         {
             row.Add(new KeyBindUi().SetKeys(
-#if COI_UPDATE_4_3
                 bindings.Secondary.GetDisplayKeys()
-#else
-                bindings.Secondary.Keys.ToArray()
-#endif
 ).MarginLeft(4.pt()));
         }
     }
@@ -1140,6 +1095,7 @@ internal static class DesignerToolkitSettings
             SetHeightFilterPillarVisibility(HeightFilterPillarVisibility.Detached);
             SetThroughputOverlayEnabled(true);
             SetThroughputGlowEnabled(true);
+            SetThroughputDaysToAverage(DEFAULT_THROUGHPUT_DAYS_TO_AVERAGE);
             SetThroughputHeatmapMode(ThroughputHeatmapMode.Capacity);
             SetThroughputColorblindMode(false);
             SetThroughputShowAsPercent(false);
@@ -1203,6 +1159,8 @@ internal static class DesignerToolkitSettings
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out error))
                 return false;
+            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_DAYS_TO_AVERAGE_KEY, ThroughputDaysToAverage, out error))
+                return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out error))
                 return false;
             if (s_config != null && !s_config.TrySetValue(THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out error))
@@ -1260,6 +1218,7 @@ internal static class DesignerToolkitSettings
             updated = TryReplaceConfigDefault(updated, PRE_COLOR_PIPES_KEY, PreColorPipesEnabled, out bool preColorPipesUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out bool throughputOverlayEnabledUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out bool throughputGlowEnabledUpdated);
+            updated = TryReplaceConfigDefault(updated, THROUGHPUT_DAYS_TO_AVERAGE_KEY, ThroughputDaysToAverage, out bool throughputDaysToAverageUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out bool throughputHeatmapModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out bool throughputColorblindModeUpdated);
             updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
@@ -1315,6 +1274,11 @@ internal static class DesignerToolkitSettings
             if (!throughputGlowEnabledUpdated)
             {
                 error = "Could not find throughput_glow_enabled default in config.json.";
+                return false;
+            }
+            if (!throughputDaysToAverageUpdated)
+            {
+                error = "Could not find throughput_days_to_average default in config.json.";
                 return false;
             }
             if (!throughputHeatmapModeUpdated)
@@ -1473,6 +1437,12 @@ internal static class DesignerToolkitSettings
         catch (Exception ex) { s_log.Warning($"Throughput overlay visibility change handler failed: {ex.Message}"); }
     }
 
+    private static void SetThroughputDaysToAverage(int days)
+    {
+        ThroughputDaysToAverage = Math.Max(1, Math.Min(360, days));
+        ThroughputManager.Instance?.RecalculateDefaultAverages();
+    }
+
     public static void SetThroughputGlowEnabled(bool enabled)
     {
         ThroughputGlowEnabled = enabled;
@@ -1585,6 +1555,7 @@ internal static class DesignerToolkitSettings
         bool initialLegacyBeltConfigurations,
         bool initialThroughputOverlayEnabled,
         bool initialThroughputGlowEnabled,
+        int initialThroughputDaysToAverage,
         ThroughputHeatmapMode initialThroughputHeatmapMode,
         bool initialThroughputColorblindMode,
         bool initialThroughputShowAsPercent,
@@ -1616,6 +1587,7 @@ internal static class DesignerToolkitSettings
         HeightFilterPillarVisibility = initialPillarVisibility;
         ThroughputOverlayEnabled = initialThroughputOverlayEnabled;
         ThroughputGlowEnabled = initialThroughputGlowEnabled;
+        ThroughputDaysToAverage = Math.Max(1, Math.Min(360, initialThroughputDaysToAverage));
         ThroughputHeatmapMode = initialThroughputHeatmapMode;
         ThroughputColorblindMode = initialThroughputColorblindMode;
         ThroughputShowAsPercent = initialThroughputShowAsPercent;
@@ -1665,6 +1637,8 @@ internal static class DesignerToolkitSettings
                 ThroughputOverlayEnabled = throughputOverlayEnabled;
             if (TryGetBool(root, "throughputGlowEnabled", out bool throughputGlowEnabled))
                 ThroughputGlowEnabled = throughputGlowEnabled;
+            if (TryGetInt(root, "throughputDaysToAverage", out int throughputDaysToAverage))
+                ThroughputDaysToAverage = Math.Max(1, Math.Min(360, throughputDaysToAverage));
             if (TryGetInt(root, "throughputHeatmapMode", out int heatmapMode))
                 ThroughputHeatmapMode = HeatmapModeFromInt(heatmapMode);
             if (TryGetBool(root, "throughputColorblindMode", out bool colorblindMode))
@@ -1728,7 +1702,6 @@ internal static class DesignerToolkitSettings
     private static string BuildStateJson()
     {
         var writer = new JsonWriter(128);
-#if COI_UPDATE_4_3
         writer.BeginObject();
         writer.Field("schemaVersion", SETTINGS_SCHEMA_VERSION);
         writer.Field("markdownTableLanguage", (int)MarkdownTableLanguage);
@@ -1738,6 +1711,7 @@ internal static class DesignerToolkitSettings
         writer.Field("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
         writer.Field("throughputOverlayEnabled", ThroughputOverlayEnabled);
         writer.Field("throughputGlowEnabled", ThroughputGlowEnabled);
+        writer.Field("throughputDaysToAverage", ThroughputDaysToAverage);
         writer.Field("throughputHeatmapMode", (int)ThroughputHeatmapMode);
         writer.Field("throughputColorblindMode", ThroughputColorblindMode);
         writer.Field("throughputShowAsPercent", ThroughputShowAsPercent);
@@ -1762,41 +1736,6 @@ internal static class DesignerToolkitSettings
         writer.Field("heightFilterPillarVisibility", (int)HeightFilterPillarVisibility);
         writer.Field("isFirstUnpausePending", IsFirstUnpausePending);
         writer.EndObject();
-#else
-        writer.AppendStartObject();
-        writer.AppendNumberField("schemaVersion", SETTINGS_SCHEMA_VERSION);
-        writer.AppendNumberField("markdownTableLanguage", (int)MarkdownTableLanguage);
-        writer.AppendNumberField("markdownNumberFormat", (int)MarkdownNumberFormat);
-        writer.AppendBoolField("instantBuildMode", InstantBuildModeEnabled);
-        writer.AppendBoolField("legacyBeltConfigurations", LegacyBeltConfigurationsEnabled);
-        writer.AppendNumberField("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
-        writer.AppendBoolField("throughputOverlayEnabled", ThroughputOverlayEnabled);
-        writer.AppendBoolField("throughputGlowEnabled", ThroughputGlowEnabled);
-        writer.AppendNumberField("throughputHeatmapMode", (int)ThroughputHeatmapMode);
-        writer.AppendBoolField("throughputColorblindMode", ThroughputColorblindMode);
-        writer.AppendBoolField("throughputShowAsPercent", ThroughputShowAsPercent);
-        writer.AppendBoolField("pollutionOverlayEnabled", PollutionOverlayEnabled);
-        writer.AppendBoolField("pollutionGlowEnabled", PollutionGlowEnabled);
-        writer.AppendStringField("pollutionGlowColor", FormatPollutionGlowColor());
-        writer.AppendNumberField("pollutionDaysToAverage", PollutionDaysToAverage);
-        writer.AppendBoolField("pollutionShowAir", PollutionShowAir);
-        writer.AppendBoolField("pollutionShowGround", PollutionShowGround);
-        writer.AppendBoolField("pollutionShowSolidWaste", PollutionShowSolidWaste);
-        writer.AppendBoolField("pollutionShowVehicle", PollutionShowVehicle);
-        writer.AppendBoolField("pollutionShowShip", PollutionShowShip);
-        writer.AppendBoolField("radiationOverlayEnabled", RadiationOverlayEnabled);
-        writer.AppendBoolField("radiationGlowEnabled", RadiationGlowEnabled);
-        writer.AppendNumberField("radiationDaysToAverage", RadiationDaysToAverage);
-        writer.AppendBoolField("layoutBoxModeEnabled", LayoutBoxModeEnabled);
-        writer.AppendBoolField("useRecycleBin", UseRecycleBin);
-        writer.AppendStringField("recycleBinFolderName", RecycleBinFolderName);
-        writer.AppendNumberField("blueprintSpacing", BlueprintSpacing);
-        writer.AppendBoolField("preColorPipesEnabled", PreColorPipesEnabled);
-        writer.AppendNumberField("heightFilterTransportVisibility", (int)HeightFilterTransportVisibility);
-        writer.AppendNumberField("heightFilterPillarVisibility", (int)HeightFilterPillarVisibility);
-        writer.AppendBoolField("isFirstUnpausePending", IsFirstUnpausePending);
-        writer.AppendEndObject();
-#endif
         return writer.GetJsonAndClear();
     }
 

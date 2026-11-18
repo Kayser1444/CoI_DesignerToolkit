@@ -214,7 +214,6 @@ public class ThroughputAoEToolWindow : Window
             .Width(35.px())
             .PositiveIntegersOnly()
             .OnEditEnd(_ => ClampGlobalDaysInput());
-        m_globalDaysInput.Text("30");
         UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.TextElement>(m_globalDaysInput.Element).style.unityTextAlign = TextAnchor.MiddleRight;
 
         m_globalDaysMinusBtn = new ButtonIcon(Button.General, "Assets/Unity/UserInterface/General/Minus128.png")
@@ -259,6 +258,9 @@ public class ThroughputAoEToolWindow : Window
 
     public void SetEntities(IEnumerable<IEntity> entities)
     {
+        if (!IsOpen)
+            m_globalDaysInput?.Text(DesignerToolkitSettings.ThroughputDaysToAverage.ToString());
+
         m_itemsColumn.Clear();
         var grouped = entities.GroupBy(e => m_context.ProtosDb.GetOrThrow<EntityProto>(e.Prototype.Id).Strings.Name.TranslatedString);
         foreach (var group in grouped)
@@ -273,7 +275,7 @@ public class ThroughputAoEToolWindow : Window
     private void ClampGlobalDaysInput()
     {
         if (m_globalDaysInput == null) return;
-        int days = 30;
+        int days = DesignerToolkitSettings.ThroughputDaysToAverage;
         if (int.TryParse(m_globalDaysInput.GetText(), out int daysVal))
         {
             days = Math.Max(1, Math.Min(360, daysVal));

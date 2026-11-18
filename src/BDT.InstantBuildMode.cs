@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using HarmonyLib;
 using Mafi;
 using Mafi.Core.Buildings.Storages;
 using Mafi.Core.Entities;
@@ -16,6 +17,8 @@ using Mafi.Core.Entities.Static;
 using Mafi.Core.Game;
 using Mafi.Core.Products;
 using Mafi.Core.Simulation;
+using Mafi.Core.Terrain.Designation;
+using Mafi.Core.Utils;
 using CoI.AutoHelpers.Logging;
 
 namespace CoIDesignerToolkit;
@@ -57,6 +60,51 @@ internal sealed class InstantBuildMode : IDisposable
         m_setInstaBuildMethod = instaBuildManager?.GetType().GetMethod(
             "SetInstaBuild",
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+    }
+
+    internal static void ApplyPatches(Harmony harmony)
+    {
+        MethodInfo? target = AccessTools.Method(typeof(SurfaceDesignationsManager), "simUpdate");
+        if (target == null)
+        {
+            s_log.Warning("Surface instant build is unavailable: the surface update method was not found.");
+            return;
+        }
+
+        try
+        {
+            harmony.Patch(target, transpiler: new HarmonyMethod(
+                typeof(InstantBuildMode), nameof(AllowInstantSurfaceWork)));
+        }
+        catch (Exception ex)
+        {
+            s_log.Exception(ex, "Failed to patch instant build for surface designations.");
+        }
+    }
+
+    private static IEnumerable<CodeInstruction> AllowInstantSurfaceWork(IEnumerable<CodeInstruction> instructions)
+    {
+        var body = new List<CodeInstruction>(instructions);
+        MethodInfo getter = AccessTools.PropertyGetter(
+            typeof(IInstaBuildManager), nameof(IInstaBuildManager.IsInstaBuildEnabled));
+        CodeInstruction? check = body.Find(instruction => instruction.Calls(getter));
+        if (check == null)
+        {
+            s_log.Warning("Surface instant build is unavailable: the vanilla insta-build check was not found.");
+            return body;
+        }
+
+        // Reuse vanilla surface placement and clearing without enabling insta-build for other systems.
+        CodeInstruction replacement = CodeInstruction.Call(typeof(InstantBuildMode), nameof(ShouldBuildSurfaces));
+        check.opcode = replacement.opcode;
+        check.operand = replacement.operand;
+        return body;
+    }
+
+    private static bool ShouldBuildSurfaces(IInstaBuildManager instaBuildManager)
+    {
+        return (DesignerToolkitSettings.IsSandbox && DesignerToolkitSettings.InstantBuildModeEnabled)
+            || instaBuildManager.IsInstaBuildEnabled;
     }
 
     public void Initialize()
@@ -211,9 +259,8 @@ internal sealed class InstantBuildMode : IDisposable
     }
 
     /// <summary>
-    /// Disables the game's built-in sandbox insta-build mode via reflection. Since BDT's instant build handles
-    /// all designer placement actions customly, disabling vanilla insta-build prevents duplicate event handlers
-    /// and conflicts.
+    /// Disables the game's built-in sandbox insta-build mode via reflection so vanilla and BDT do
+    /// not both handle entity construction.
     /// </summary>
     private void DisableInstaBuildIfNeeded()
     {

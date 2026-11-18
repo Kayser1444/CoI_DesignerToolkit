@@ -15,7 +15,7 @@ Throughput monitoring can display averaged flow rates in the world as either:
 - absolute throughput in items/min
 - percent of the entity's maximum capacity
 
-Each monitored entity can use a configurable averaging period. Longer periods smooth out short bursts; shorter periods react faster to current behavior.
+Set **Default throughput averaging period (days)** in BDT settings under **Throughput**. It starts at 30 in-game days and applies to entities without an individual averaging period. The inspector and area tool can set individual averaging periods. Longer periods smooth out short bursts; shorter periods react faster to current behavior.
 
 ## Heat Map and Glow
 

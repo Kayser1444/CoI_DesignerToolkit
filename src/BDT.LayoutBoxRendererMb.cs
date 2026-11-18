@@ -314,12 +314,7 @@ public class LayoutBoxRendererMb : MonoBehaviour
     {
         if (m_initFailed) return;
 
-// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
-#if COI_UPDATE_4_3
         if (HotkeysRegistry.IsPressed(HotkeysRegistry.LayoutBoxModeToggle))
-#else
-        if (m_shortcutsManager.IsDown(HotkeysRegistry.LayoutBoxModeToggle))
-#endif
         {
             HotkeysRegistry.PlayClickSound();
             DesignerToolkitSettings.SetLayoutBoxModeEnabled(!DesignerToolkitSettings.LayoutBoxModeEnabled);

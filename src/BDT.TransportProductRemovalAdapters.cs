@@ -10,10 +10,7 @@ using Mafi.Core;
 using Mafi.Core.Entities;
 using Mafi.Core.Entities.Static;
 using Mafi.Core.Factory.Lifts;
-// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
-#if COI_UPDATE_4_3
 using Mafi.Core.Factory.Transports;
-#endif
 using Mafi.Core.Factory.Sorters;
 using Mafi.Core.Factory.Zippers;
 using Mafi.Core.Products;
@@ -40,13 +37,11 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
     private static readonly FieldInfo? s_miniZipperOutput = GetField<MiniZipper>("m_outputBuffer");
     private static readonly FieldInfo? s_miniZipperInputQuantity = GetField<MiniZipper>("m_quantityInInputBuffer");
     private static readonly FieldInfo? s_miniZipperOutputQuantity = GetField<MiniZipper>("m_quantityInOutputBuffer");
-#if COI_UPDATE_4_3
     // Optional: b622 has only the input slots; b624 adds a shared reserve.
     private static readonly FieldInfo? s_miniZipperReserve = GetField<MiniZipper>("m_reservePile");
     private static readonly FieldInfo? s_miniZipperReservePort = GetField<MiniZipper>("m_reservePortIndex");
     private static readonly FieldInfo? s_miniZipperReserveStep = GetField<MiniZipper>("m_reserveStep");
     private static readonly FieldInfo? s_miniZipperInputSteps = GetField<MiniZipper>("m_inputBufferSteps");
-#endif
     private static readonly FieldInfo? s_sorterOutput = GetField<Sorter>("m_outputBuffer");
     private static readonly FieldInfo? s_sorterOutputQuantity = GetField<Sorter>("<QuantityInOutputBuffer>k__BackingField");
 
@@ -136,13 +131,11 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
         }
 
         bool requiresOutputBuffer = true;
-#if COI_UPDATE_4_3
         // Mini-zippers now stage input piles and forward directly to ports.
         requiresOutputBuffer = entity is not MiniZipper;
         if (entity is MiniZipper && s_miniZipperReserve != null &&
             (s_miniZipperReservePort == null || s_miniZipperReserveStep == null || s_miniZipperInputSteps == null))
             return false;
-#endif
         if ((requiresOutputBuffer && (outputQueue == null || outputQuantity == null)) ||
             (entity is Zipper && (inputArray == null || inputQuantity == null)) ||
             (entity is Lift && pendingInput == null) ||
@@ -249,7 +242,6 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
         // their equivalent idempotent gate.
     }
 
-#if COI_UPDATE_4_3
     public Quantity RemoveProduct(ProductProto product, Quantity maxQuantity, bool reportAsCleared)
     {
         Quantity remaining = maxQuantity;
@@ -349,72 +341,6 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
     }
 
 
-#else
-    public Quantity RemoveProduct(ProductProto product, Quantity maxQuantity, bool reportAsCleared)
-    {
-        Quantity remaining = maxQuantity;
-        Quantity removed = Quantity.Zero;
-        Quantity removedFromInput = Quantity.Zero;
-        Quantity removedFromOutput = Quantity.Zero;
-
-        if (m_pendingInputField?.GetValue(Entity) is ProductQuantity pending &&
-            pending.IsNotEmpty && pending.Product == product && remaining.IsPositive)
-        {
-            Quantity amount = pending.Quantity.Min(remaining);
-            Quantity left = pending.Quantity - amount;
-            m_pendingInputField.SetValue(Entity, left.IsPositive ? pending.WithNewQuantity(left) : ProductQuantity.None);
-            removed += amount;
-            remaining -= amount;
-        }
-
-        if (m_inputArrayField?.GetValue(Entity) is ProductQuantity[] inputBuffer)
-        {
-            for (int i = 0; i < inputBuffer.Length && remaining.IsPositive; i++)
-            {
-                ProductQuantity current = inputBuffer[i];
-                if (current.IsEmpty || current.Product != product)
-                    continue;
-
-                Quantity amount = current.Quantity.Min(remaining);
-                Quantity left = current.Quantity - amount;
-                inputBuffer[i] = left.IsPositive ? current.WithNewQuantity(left) : ProductQuantity.None;
-                removed += amount;
-                removedFromInput += amount;
-                remaining -= amount;
-            }
-        }
-
-        Queueue<ZipBuffProduct> outputBuffer = GetOutputBuffer();
-        for (int i = 0; i < outputBuffer.Count && remaining.IsPositive; i++)
-        {
-            ZipBuffProduct current = outputBuffer[i];
-            ProductQuantity currentProduct = current.ProductQuantity;
-            if (currentProduct.IsEmpty || currentProduct.Product != product)
-                continue;
-
-            Quantity amount = currentProduct.Quantity.Min(remaining);
-            Quantity left = currentProduct.Quantity - amount;
-            if (left.IsPositive)
-                outputBuffer[i] = new ZipBuffProduct(currentProduct.WithNewQuantity(left), current.EnqueuedAtStep);
-            else
-            {
-                outputBuffer.RemoveAt(i);
-                i--;
-            }
-            removed += amount;
-            removedFromOutput += amount;
-            remaining -= amount;
-        }
-
-        DecreaseCachedQuantity(m_inputQuantityField, removedFromInput);
-        DecreaseCachedQuantity(m_outputQuantityField, removedFromOutput);
-        if (reportAsCleared && removed.IsPositive)
-            GetContext().ProductsManager.ProductClearedNoChecks(product, removed);
-        return removed;
-    }
-
-
-#endif
     public Quantity GetTotalQuantity()
     {
         Quantity total = Quantity.Zero;
@@ -422,7 +348,6 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
         return total;
     }
 
-#if COI_UPDATE_4_3
     private void ForEachBufferedProduct(Action<ProductQuantity> action)
     {
         var products = new Lyst<ProductQuantity>(8);
@@ -443,29 +368,6 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
     }
 
 
-#else
-    private void ForEachBufferedProduct(Action<ProductQuantity> action)
-    {
-        if (m_pendingInputField?.GetValue(Entity) is ProductQuantity pending && pending.IsNotEmpty)
-            action(pending);
-        if (m_inputArrayField?.GetValue(Entity) is ProductQuantity[] inputBuffer)
-        {
-            for (int i = 0; i < inputBuffer.Length; i++)
-            {
-                if (inputBuffer[i].IsNotEmpty)
-                    action(inputBuffer[i]);
-            }
-        }
-        Queueue<ZipBuffProduct>.Enumerator enumerator = GetOutputBuffer().GetEnumerator();
-        while (enumerator.MoveNext())
-        {
-            if (enumerator.Current.ProductQuantity.IsNotEmpty)
-                action(enumerator.Current.ProductQuantity);
-        }
-    }
-
-
-#endif
     private Queueue<ZipBuffProduct> GetOutputBuffer()
     {
         return m_outputQueueField?.GetValue(Entity) as Queueue<ZipBuffProduct> ?? m_emptyOutput;
@@ -499,12 +401,10 @@ internal sealed class TransportProductRemovalAdapter : ITransportProductRemovalA
             for (int i = 0; i < inputBuffer.Length; i++)
                 inputBuffer[i] = ProductQuantity.None;
         }
-#if COI_UPDATE_4_3
         if (m_pendingInputField != null) m_pendingInputField.SetValue(Entity, MixedPile.None);
         if (m_inputArrayField?.GetValue(Entity) is MixedPile[] mixedInput)
             for (int i = 0; i < mixedInput.Length; i++) mixedInput[i] = MixedPile.None;
         SetMiniZipperReserve(MixedPile.None);
-#endif
         GetOutputBuffer().Clear();
         m_inputQuantityField?.SetValue(Entity, Quantity.Zero);
         m_outputQuantityField?.SetValue(Entity, Quantity.Zero);

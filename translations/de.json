@@ -444,6 +444,14 @@
     "Aktiviert/deaktiviert die Durchsatz-Overlays in der Spielwelt. Die Anzeige für einzelne Entitäten muss weiterhin im Inspektor oder über das Durchsatz-Werkzeug aktiviert werden."
   ],
   [
+    "DesignerToolkit.SettingsThroughputDaysToAverage",
+    "Standard-Mittelungszeitraum für den Durchsatz (Tage)"
+  ],
+  [
+    "DesignerToolkit.SettingsThroughputDaysToAverageDescription",
+    "Gib für Objekte ohne eigenen Mittelungszeitraum 1 bis 360 Spieltage ein."
+  ],
+  [
     "DesignerToolkit.SettingsThroughputGlow",
     "Aktivieren Sie den Heatmap-Glüheffekt"
   ],

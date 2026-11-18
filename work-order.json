@@ -1,7 +1,7 @@
 {
   "mod": "DesignerToolkit",
   "source_file": "src\\BDT.Localization.cs",
-  "total_keys": 210,
+  "total_keys": 213,
   "skip_keys": [
     "DesignerToolkit.ModName",
     "DesignerToolkit.RateLimitItemsPerMin",
@@ -20,7 +20,65 @@
       "ru": "Обзор месторождения: {0}",
       "sv": "Reservoarinsikter: {0}",
       "zh": "储层信息：{0}"
+    },
+    "DesignerToolkit.SettingsThroughputDaysToAverage": {
+      "en": "Default throughput averaging period (days)",
+      "context": "Settings row label for the default throughput averaging period.",
+      "de": "Standard-Mittelungszeitraum für den Durchsatz (Tage)",
+      "es": "Período predeterminado para promediar el rendimiento (días)",
+      "fr": null,
+      "it": "Periodo predefinito per la media della portata (giorni)",
+      "pt": "Período padrão da média de vazão (dias)",
+      "ru": "Период усреднения пропускной способности по умолчанию (дни)",
+      "sv": "Standardperiod för medelvärde av genomströmning (dagar)",
+      "zh": "默认吞吐量平均周期（天）",
+      "references": {
+        "de": {
+          "Default": "Standard",
+          "Throughput": "Durchsatz"
+        },
+        "es": {
+          "Default": "Predeterminado",
+          "Throughput": "Rendimiento"
+        },
+        "fr": {
+          "Default": "Par défaut",
+          "Throughput": "Débit"
+        },
+        "it": {
+          "Default": "Predefinita",
+          "Throughput": "Portata"
+        },
+        "pt": {
+          "Default": "Padrão",
+          "Throughput": "Rendimento"
+        },
+        "ru": {
+          "Default": "Общая",
+          "Throughput": "Производительность"
+        },
+        "sv": {
+          "Default": "Standardzonen",
+          "Throughput": "Genomströmning"
+        },
+        "zh": {
+          "Default": "默认区域",
+          "Throughput": "吞吐量"
+        }
+      }
+    },
+    "DesignerToolkit.SettingsThroughputDaysToAverageDescription": {
+      "en": "Enter 1 to 360 in-game days for entities without their own averaging period.",
+      "context": "Settings tooltip for the default throughput averaging period.",
+      "de": "Gib für Objekte ohne eigenen Mittelungszeitraum 1 bis 360 Spieltage ein.",
+      "es": "Introduce entre 1 y 360 días de juego para las entidades sin un período de promedio propio.",
+      "fr": null,
+      "it": "Inserisci da 1 a 360 giorni di gioco per le entità senza un proprio periodo di calcolo della media.",
+      "pt": "Insira de 1 a 360 dias de jogo para entidades sem um período de média próprio.",
+      "ru": "Укажите от 1 до 360 игровых дней для объектов без собственного периода усреднения.",
+      "sv": "Ange 1 till 360 speldagar för objekt utan egen medelvärdesperiod.",
+      "zh": "为未单独设置平均周期的实体输入 1 至 360 个游戏日。"
     }
   },
-  "keys_needing_translation": 1
+  "keys_needing_translation": 3
 }

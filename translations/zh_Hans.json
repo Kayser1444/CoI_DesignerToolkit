@@ -444,6 +444,14 @@
     "启用/禁用世界中的吞吐量覆盖层。单个实体的显示仍须在检查器中或通过吞吐量工具开启。"
   ],
   [
+    "DesignerToolkit.SettingsThroughputDaysToAverage",
+    "默认吞吐量平均周期（天）"
+  ],
+  [
+    "DesignerToolkit.SettingsThroughputDaysToAverageDescription",
+    "为未单独设置平均周期的实体输入 1 至 360 个游戏日。"
+  ],
+  [
     "DesignerToolkit.SettingsThroughputGlow",
     "启用热图发光效果"
   ],

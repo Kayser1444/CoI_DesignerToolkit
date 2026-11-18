@@ -28,11 +28,9 @@ internal sealed class RadiationManager : IDisposable
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.RadiationManager");
     private static RadiationManager? s_instance;
-#if COI_UPDATE_4_3
     // Added in b626 without an assembly-version change; older 4.3 builds lack the field.
     private static readonly Tag? s_radiationShieldedTag =
         typeof(CoreProtoTags).GetField("RadiationShielded")?.GetValue(null) as Tag;
-#endif
 
     private readonly Dict<int, EntityRadiationState> m_states = new Dict<int, EntityRadiationState>();
     private IEntitiesManager? m_entitiesManager;
@@ -136,14 +134,12 @@ internal sealed class RadiationManager : IDisposable
         if (entity is NuclearReactor || entity is NuclearWasteStorage)
             return 0f;
 
-#if COI_UPDATE_4_3
         // Native IShieldedEntity implementations own their per-product shielding;
         // the prototype tag applies to ordinary product holders only.
         if (s_radiationShieldedTag != null && entity is IEntityWithProducts
             && !(entity is Mafi.Core.Environment.IShieldedEntity shielded && shielded.HasShielding)
             && entity.Prototype.HasTag(s_radiationShieldedTag))
             return 0f;
-#endif
 
         float total = 0f;
         var seenBuffers = new HashSet<IProductBufferReadOnly>();
@@ -176,20 +172,11 @@ internal sealed class RadiationManager : IDisposable
         if (entity is Zipper zipper)
         {
             for (int i = 0; i < zipper.m_inputBuffer.Length; i++)
-                // PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
-                #if COI_UPDATE_4_3
 AddPile(zipper.m_inputBuffer[i], ref total);
-#else
-AddProduct(zipper.m_inputBuffer[i], ref total);
-#endif
 
             var outputEnumerator = zipper.m_outputBuffer.GetEnumerator();
             while (outputEnumerator.MoveNext())
-                #if COI_UPDATE_4_3
 AddPile(outputEnumerator.Current.Pile, ref total);
-#else
-AddProduct(outputEnumerator.Current.ProductQuantity, ref total);
-#endif
         }
 
         if (entity is Transport transport)
@@ -255,23 +242,17 @@ AddProduct(outputEnumerator.Current.ProductQuantity, ref total);
         }
     }
 
-#if COI_UPDATE_4_3
     private static void AddPile(Mafi.Core.Factory.Transports.MixedPile pile, ref float total)
     {
         var products = new Lyst<ProductQuantity>(3);
         pile.AggregateInto(products);
         AddProducts(products, ref total);
     }
-#endif
 
     private static void AddTruckCargo(Truck truck, ref float total)
     {
         var products = new Lyst<ProductQuantity>(8);
-        #if COI_UPDATE_4_3
 truck.GetCargoProducts(products);
-#else
-truck.Cargo.GetCargoProducts(products);
-#endif
         AddProducts(products, ref total);
     }
 

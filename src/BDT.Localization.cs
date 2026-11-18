@@ -249,6 +249,10 @@ internal static class BdtLocalization
         Loc.Str("DesignerToolkit.SettingsThroughputToggle", "Throughput overlay", "Settings row label for throughput overlay toggle.");
     public static LocStr SettingsThroughputToggleDescription =
         Loc.Str("DesignerToolkit.SettingsThroughputToggleDescription", "Enables/disables the in-world throughput overlays. Individual entities' toggle must still be switched on in inspector or by the throughput tool.", "Settings row description for throughput overlay visibility.");
+    public static readonly LocStr SettingsThroughputDaysToAverage =
+        Loc.Str("DesignerToolkit.SettingsThroughputDaysToAverage", "Default throughput averaging period (days)", "Settings row label for the default throughput averaging period.");
+    public static readonly LocStr SettingsThroughputDaysToAverageDescription =
+        Loc.Str("DesignerToolkit.SettingsThroughputDaysToAverageDescription", "Enter 1 to 360 in-game days for entities without their own averaging period.", "Settings tooltip for the default throughput averaging period.");
     public static LocStr SettingsThroughputGlow =
         Loc.Str("DesignerToolkit.SettingsThroughputGlow", "Enable heatmap glow effect", "Settings row label for heatmap glow toggle.");
     public static LocStr SettingsThroughputGlowDescription =

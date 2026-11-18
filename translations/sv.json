@@ -444,6 +444,14 @@
     "Aktiverar/inaktiverar genomströmningsvyer i världen. Enskilda entiteters visning måste fortfarande slås på i inspektören eller med genomströmningsverktyget."
   ],
   [
+    "DesignerToolkit.SettingsThroughputDaysToAverage",
+    "Standardperiod för medelvärde av genomströmning (dagar)"
+  ],
+  [
+    "DesignerToolkit.SettingsThroughputDaysToAverageDescription",
+    "Ange 1 till 360 speldagar för objekt utan egen medelvärdesperiod."
+  ],
+  [
     "DesignerToolkit.SettingsThroughputGlow",
     "Aktivera värmekartans glödeffekt"
   ],

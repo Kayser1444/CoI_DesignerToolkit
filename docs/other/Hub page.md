@@ -2,10 +2,6 @@
 
 # 🧰 Kayser's Blueprint Designer's Toolkit
 
-> **Why is the code analysis red?**
->
-> To handle the transition to Update 4.3 gracefully, the mod temporarily ships with a loader DLL that selects the compatible mod DLL based on the installed version of the base game.
-
 Kayser's Blueprint Designer's Toolkit (BDT) is a quality-of-life mod for Captain of Industry blueprint creators.
 
 It is built around one rule: **designer-only, consumer-free**. Players who download and use your blueprints do **not** need this mod installed. BDT helps with creating, documenting, updating, inspecting, and cleaning up blueprints, but the output remains normal vanilla-compatible blueprint data.
@@ -156,7 +152,7 @@ This is a passive feature that allows you to freely place connectors, balancers,
 
 BDT includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. The benefit over the vanilla insta-build toggle is that you don't need to unpause the game and risk having products end up in the wrong places when your build is being modified.
 
-Enabling this feature turns off the game's built-in insta-build toggle.
+Enabling this feature turns off the game's built-in insta-build toggle. Surface placement and clearing also complete automatically in sandbox mode.
 
 Buildings placed while Planning Mode is enabled remain paused until you unpause their construction.
 
@@ -282,7 +278,7 @@ The throughput monitor can display averaged flow rates in the world as either:
 - absolute throughput in items/min
 - percent of the entity's maximum capacity
 
-You can choose how many days each entity should average over, making it easier to smooth out short production bursts or inspect a design's recent behavior.
+Set the **Default throughput averaging period (days)** in BDT's **Throughput** settings. It starts at 30 game days and applies to entities without an individual averaging period. Adjust periods for individual entities in the inspector or in bulk with the Throughput Area Tool.
 
 ![image.png](/content-images/85bf7e25f9d01b7ef2b8abec9e767fad4bd4478202e2b1910d8ab08aa609fb6e/image.png)
 
@@ -338,13 +334,13 @@ BDT adds a **Mod Settings** panel, accessible from the top-right **M** button in
 
 Settings are stored per save file. The `markdown_table_language` and `markdown_number_format` keys in `config.json` set the initial values for saves that have no stored settings yet.
 
-The **Throughput** settings control the global overlay, overlay hotkey, heat-map mode, colorblind-friendly colors, percent display, and the Throughput Area Tool hotkey.
+The **Throughput** settings control the global overlay, overlay hotkey, default averaging period, heat-map mode, colorblind-friendly colors, percent display, and the Throughput Area Tool hotkey.
 
 ## 📌 Notes
 
 - Compatible with vanilla saves.
 - Can be added to or removed from existing saves.
-- Requires Captain of Industry `0.8.5` or newer; the download selects the appropriate implementation for 0.8.7d or Update 4.3 (0.8.8).
+- Requires Captain of Industry Update 4.3 (`0.8.8`) or newer.
 - Blueprint consumers do not need this mod installed.
 - UI translations included for English, German, Spanish, Italian, Portuguese, Russian, Swedish, and Chinese.
 

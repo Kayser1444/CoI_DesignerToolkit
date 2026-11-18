@@ -29,9 +29,6 @@ using Mafi.Unity.Entities;
 using Mafi.Unity.InputControl;
 using Mafi.Unity.Ui.Hud;
 using Mafi.Unity.UiToolkit;
-#if !COI_UPDATE_4_3
-using CoI.AutoHelpers.Localization;
-#endif
 using CoI.AutoHelpers.Logging;
 using CoI.AutoHelpers.Persistence;
 using CoI.AutoHelpers.Settings;
@@ -104,6 +101,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         LegacyBeltConfigurations.ApplyPatches(m_harmony);
         RateLimitPatches.Apply(m_harmony);
         ThroughputPatches.Apply(m_harmony);
+        InstantBuildMode.ApplyPatches(m_harmony);
         ThroughputInspectorPatches.Apply(m_harmony);
         ContentDisplayPatches.Apply(m_harmony);
         UndoPatches.Apply(m_harmony);
@@ -114,12 +112,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         GroundwaterStatsManager.ApplyPatches(m_harmony);
         GroundwaterInspectorPatches.Apply(m_harmony);
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.ApplyPatches(m_harmony,
-// PRE_4_3_COMPAT: legacy branches/API guards only; remove after Update 5 or when pre-4.3 support ends.
-#if COI_UPDATE_4_3
             Manifest.Id,
-#else
-            Manifest.DisplayName,
-#endif
             typeof(HotkeysRegistry));
     }
 
@@ -136,15 +129,10 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
     {
-#if COI_UPDATE_4_3
         CoI.AutoHelpers.InputControl.CustomKeybindsInjector.Register(resolver, this);
-#endif
         s_log.EnableConsoleLogging();
         s_log.RegisterAutoConsoleMirroring(this, resolver.Resolve<IGameLoopEvents>(), resolver.Resolve<GameConsoleCommandsExecutor>());
 
-#if !COI_UPDATE_4_3
-        ApplyAutoHelpersLocalization();
-#endif
         RegisterAutoHelpersLocalizationLateApply(resolver);
 
         m_gameLoopEvents = resolver.Resolve<IGameLoopEvents>();
@@ -333,58 +321,10 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         gameLoopEvents.RegisterRendererInitState(this, () =>
         {
             s_log.Info($"Blueprint Designer's Toolkit v{ModVersion} | dll: {ModLogger.GetDllBuildTimestamp(typeof(DesignerToolkitMod).Assembly)}");
-#if COI_UPDATE_4_3
             s_log.Info($"Localization: native mod translations, culture='{Mafi.Localization.LocalizationManager.CurrentLangInfo.CultureInfoId}'.");
-#else
-            s_log.Info("Localization: late apply at renderer init state.");
-            ApplyAutoHelpersLocalization();
-#endif
         });
     }
 
-#if !COI_UPDATE_4_3
-    // PRE_4_3_COMPAT: keep the late splice/rebind and shortcut-label refresh on older games.
-    private void ApplyAutoHelpersLocalization()
-    {
-        string translationsDirectory = Path.Combine(Manifest.RootDirectoryPath, "translations");
-        s_log.Info($"Localization: probing directory '{translationsDirectory}'.");
-
-        if (!Directory.Exists(translationsDirectory))
-        {
-            s_log.Warning("Localization: translations directory does not exist; skipping.");
-            return;
-        }
-
-        string[] jsonFiles = Array.FindAll(
-            Directory.GetFiles(translationsDirectory, "*.json", SearchOption.TopDirectoryOnly),
-            filePath => !Path.GetFileName(filePath).StartsWith(".", StringComparison.Ordinal));
-        Array.Sort(jsonFiles, StringComparer.OrdinalIgnoreCase);
-        if (jsonFiles.Length == 0)
-            s_log.Warning("Localization: no translation JSON files found.");
-        else
-            s_log.Info($"Localization: discovered {jsonFiles.Length} file(s): {string.Join(", ", jsonFiles)}");
-
-        ModTranslationsApplyResult result = new ModTranslations().Apply(new ModTranslationsApplyOptions(
-            translationsDirectory,
-            typeof(DesignerToolkitMod).Assembly,
-            Array.Empty<string>()));
-        int refreshedKeybindCount = CoI.AutoHelpers.InputControl.CustomKeybindsInjector.RefreshRegisteredLocalizations();
-
-        s_log.Info(
-            $"Localization: applied locale='{result.AppliedLocaleCode}', upserted={result.UpsertedEntryCount}, scannedFields={result.ScannedFieldCount}, reboundFields={result.ReboundFieldCount}, refreshedKeybinds={refreshedKeybindCount}, readonlySkipped={result.SkippedReadonlyFieldCount}, missingTranslationSkipped={result.SkippedMissingTranslationFieldCount}, failedWrites={result.FailedFieldCount}, diagnostics={result.Diagnostics.Count}.");
-
-        foreach (TranslationDiagnostic diagnostic in result.Diagnostics)
-        {
-            string itemInfo = diagnostic.ItemIndex.HasValue ? $", itemIndex={diagnostic.ItemIndex.Value}" : string.Empty;
-            string message = $"Localization diagnostic [{diagnostic.Severity}] source='{diagnostic.SourcePath}'{itemInfo}: {diagnostic.Message}";
-            if (diagnostic.Severity == TranslationDiagnosticSeverity.Info)
-                s_log.Info(message);
-            else
-                s_log.Warning(message);
-        }
-    }
-
-#endif
 
     private void unsubscribeWorldEvents()
     {

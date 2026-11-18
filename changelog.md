@@ -2,7 +2,13 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.11.9 [unreleased]
+## v0.12.0 [unreleased]
+
+- Require Captain of Industry Update 4.3 and load the mod DLL directly. Remove the pre-4.3 implementation and dual-version loader.
+- Remove throughput highlights when their transport entities are demolished, including when they have already left the entity registry.
+- Complete sandbox surface placement and clearing through the vanilla surface-designation loop while BDT instant build is active.
+- Add a configurable default throughput averaging period and preserve existing per-entity values. Share the averaging controls across throughput, pollution, and radiation settings.
+- In-game verification on 0.8.8d build 633 confirmed instant surface placement and clearing, throughput highlight cleanup on deletion, and visibility of the new averaging setting. The compact selector revision was build-verified.
 
 ## v0.11.8 [released]
 

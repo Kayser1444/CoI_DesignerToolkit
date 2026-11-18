@@ -6,7 +6,7 @@ Instant build mode is a BDT setting that automatically completes construction an
 
 Open the BDT settings panel and turn on **Instant build mode** under **BUILD BEHAVIORS**.
 
-When enabled, BDT checks the world after player commands are processed and immediately finishes static entities that are in construction or deconstruction.
+When enabled, BDT checks the world after player commands are processed and immediately finishes static entities that are in construction or deconstruction. Surface placement and clearing designations also complete automatically in sandbox mode.
 
 ## Interaction With Insta-Build
 

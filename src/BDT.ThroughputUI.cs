@@ -2,6 +2,7 @@
 // Copyright (c) 2026 Kayser1444
 // Licensed under the MIT License.
 using System;
+using System.Collections.Generic;
 using Mafi;
 using Mafi.Core;
 using Mafi.Core.Entities;
@@ -401,7 +402,8 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
     private Mafi.Core.GameLoop.IGameLoopEvents? m_gameLoopEvents;
     private bool m_isGameLoaded = false;
     private bool m_isSyncUpdateRegistered = false;
-    private System.Collections.Generic.HashSet<int> m_highlightedEntities = new System.Collections.Generic.HashSet<int>();
+    private HashSet<IRenderedEntity> m_highlightedEntities = new();
+    private HashSet<IRenderedEntity> m_currentHighlights = new();
     private Texture2D? m_bgTexture;
     private Texture2D? m_whiteTexture;
     private readonly System.Collections.Generic.List<UnityEngine.UIElements.IPanel> m_cachedPanels = new System.Collections.Generic.List<UnityEngine.UIElements.IPanel>();
@@ -433,18 +435,9 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
 
     private void ClearHighlights()
     {
-        if (m_highlighter == null) return;
-        foreach (int id in m_highlightedEntities)
-        {
-            if (m_entitiesManager != null && m_entitiesManager.TryGetEntity(new EntityId(id), out IEntity e) && !e.IsDestroyed)
-            {
-                if (e is IRenderedEntity re)
-                {
-                    try { m_highlighter.RemoveHighlight(re); } catch { }
-                }
-            }
-        }
+        m_highlighter?.ClearAllHighlights();
         m_highlightedEntities.Clear();
+        m_currentHighlights.Clear();
     }
 
     private void UpdateCachedPanels()
@@ -588,6 +581,9 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
             return;
         }
 
+        if (!DesignerToolkitSettings.ThroughputGlowEnabled)
+            ClearHighlights();
+
         var states = ThroughputManager.Instance.GetAllStates();
         if (states.Count == 0) 
         {
@@ -645,7 +641,7 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
             }
         }
 
-        var currentHighlights = new System.Collections.Generic.HashSet<int>();
+        m_currentHighlights.Clear();
 
         foreach (var kvp in states)
         {
@@ -735,8 +731,12 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
                 // Maximum glow opacity for 98%+ to make them stand out, softer glow for normal entities
                 int alpha = isOver98 ? 255 : 150;
                 ColorRgba highlightColor = new ColorRgba(r, g, b, alpha);
-                try { m_highlighter.Highlight(renderedEntity, highlightColor); } catch { }
-                currentHighlights.Add(entity.Id.Value);
+                try
+                {
+                    m_highlighter.Highlight(renderedEntity, highlightColor);
+                    m_currentHighlights.Add(renderedEntity);
+                }
+                catch { }
             }
 
             if (DesignerToolkitSettings.ThroughputOverlayEnabled)
@@ -769,20 +769,14 @@ public sealed class ThroughputWorldRenderer : MonoBehaviour
 
         if (m_highlighter != null)
         {
-            foreach (int id in m_highlightedEntities)
+            // The entity may already be absent from EntitiesManager after demolition.
+            foreach (IRenderedEntity entity in m_highlightedEntities)
             {
-                if (!currentHighlights.Contains(id))
-                {
-                    if (m_entitiesManager != null && m_entitiesManager.TryGetEntity(new EntityId(id), out IEntity e) && !e.IsDestroyed)
-                    {
-                        if (e is IRenderedEntity re)
-                        {
-                            try { m_highlighter.RemoveHighlight(re); } catch { }
-                        }
-                    }
-                }
+                if (!m_currentHighlights.Contains(entity))
+                    m_highlighter.RemoveHighlight(entity);
             }
-            m_highlightedEntities = currentHighlights;
+            (m_highlightedEntities, m_currentHighlights) = (m_currentHighlights, m_highlightedEntities);
+            m_currentHighlights.Clear();
         }
     }
 

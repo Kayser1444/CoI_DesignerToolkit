@@ -444,6 +444,14 @@
     "Attiva/disattiva gli overlay di produttività nel mondo. L'attivazione delle singole entità deve comunque essere effettuata nell'ispettore o tramite lo strumento di produttività."
   ],
   [
+    "DesignerToolkit.SettingsThroughputDaysToAverage",
+    "Periodo predefinito per la media della portata (giorni)"
+  ],
+  [
+    "DesignerToolkit.SettingsThroughputDaysToAverageDescription",
+    "Inserisci da 1 a 360 giorni di gioco per le entità senza un proprio periodo di calcolo della media."
+  ],
+  [
     "DesignerToolkit.SettingsThroughputGlow",
     "Abilita l'effetto bagliore della mappa termica"
   ],
