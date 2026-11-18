@@ -2,6 +2,8 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.12.1 [unreleased]
+
 ## v0.12.0 [released]
 
 - Require Captain of Industry Update 4.3 and load the mod DLL directly. Remove the pre-4.3 implementation and dual-version loader.
