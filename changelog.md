@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.12.1 [unreleased]
+## v0.12.1 [packaged]
 
 - Use a single native shortcut handler for Remove products in area and route the throughput area tool through the game input controller.
 - Arm transport cleanup with the native selection cursor and select disconnected belts or pipes by their overlap with the terrain selection.
