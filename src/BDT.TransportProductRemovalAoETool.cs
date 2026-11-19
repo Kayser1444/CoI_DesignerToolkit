@@ -11,7 +11,6 @@ using Mafi.Collections.ReadonlyCollections;
 using Mafi.Core;
 using Mafi.Core.Entities;
 using Mafi.Core.Factory.Transports;
-using Mafi.Core.GameLoop;
 using Mafi.Core.Prototypes;
 using Mafi.Core.Terrain;
 using Mafi.Unity;
@@ -39,10 +38,8 @@ internal sealed class TransportProductRemovalAoETool : BaseEntityCursorInputCont
     private static readonly ColorRgba COLOR_HIGHLIGHT = new ColorRgba(255, 180, 40, 160);
     private static readonly ColorRgba COLOR_HIGHLIGHT_CONFIRM = new ColorRgba(255, 180, 40, 220);
 
-    private readonly IGameLoopEvents m_gameLoopEvents;
     private readonly EntityHighlighter m_dialogHighlighter;
     private TransportProductRemovalAoEWindow? m_window;
-    private bool m_isSubscribed;
 
     public override ControllerConfig Config =>
         m_window != null && m_window.IsOpen ? ControllerConfig.Window : ControllerConfig.Tool;
@@ -55,8 +52,7 @@ internal sealed class TransportProductRemovalAoETool : BaseEntityCursorInputCont
         AreaSelectionToolFactory areaSelectionToolFactory,
         IEntitiesManager entitiesManager,
         NewInstanceOf<EntityHighlighter> highlighter,
-        NewInstanceOf<TerrainAreaOutlineRenderer> terrainOutlineRenderer,
-        IGameLoopEvents gameLoopEvents)
+        NewInstanceOf<TerrainAreaOutlineRenderer> terrainOutlineRenderer)
         : base(
             toolbar,
             context,
@@ -72,7 +68,6 @@ internal sealed class TransportProductRemovalAoETool : BaseEntityCursorInputCont
             Mafi.Unity.Audio.UiSound.ButtonClick,
             Option<Mafi.Unity.Ui.Controllers.Tools.FilterToolbox>.None)
     {
-        m_gameLoopEvents = gameLoopEvents;
         m_dialogHighlighter = highlighter.Instance;
         InitHighlightColors(COLOR_HIGHLIGHT, COLOR_HIGHLIGHT_CONFIRM);
         SetEdgeSizeLimit(new RelTile1i(512));
@@ -86,23 +81,9 @@ internal sealed class TransportProductRemovalAoETool : BaseEntityCursorInputCont
             CoI.AutoHelpers.InputControl.CustomKeybindsInjector.GetHandle(nameof(HotkeysRegistry.TransportProductRemovalAoETool)));
     }
 
-    public void Initialize()
-    {
-        if (m_isSubscribed)
-            return;
-
-        m_gameLoopEvents.InputUpdate.AddNonSaveable(this, OnGlobalInputUpdate);
-        m_isSubscribed = true;
-    }
-
     public void Dispose()
     {
-        if (m_isSubscribed)
-        {
-            try { m_gameLoopEvents.InputUpdate.RemoveNonSaveable(this, OnGlobalInputUpdate); }
-            catch { }
-            m_isSubscribed = false;
-        }
+        Context.InputMgr.DeactivateController(this);
 
         if (m_window != null)
         {
@@ -200,15 +181,6 @@ internal sealed class TransportProductRemovalAoETool : BaseEntityCursorInputCont
         if (m_window != null && m_window.IsOpen)
             return false;
         return base.InputUpdate();
-    }
-
-    private void OnGlobalInputUpdate(GameTime gameTime)
-    {
-        if (HotkeysRegistry.IsPressed(HotkeysRegistry.TransportProductRemovalAoETool))
-        {
-            HotkeysRegistry.PlayClickSound();
-            Context.InputMgr.ToggleController(this);
-        }
     }
 
     private void UpdateDialogHighlights(IEnumerable<IEntity> entities)

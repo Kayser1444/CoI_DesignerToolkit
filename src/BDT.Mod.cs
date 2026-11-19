@@ -146,7 +146,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
         DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
         PipeColoring.Initialize(resolver);
-        HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.UiToolkit.UiRoot>());
+        HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.Ui.UiContext>());
 
         m_rateLimitsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, RateLimitManager.CONFIG_KEY);
         RateLimitManager.Initialize(m_rateLimitsStateStore);
@@ -216,10 +216,12 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
         m_transportCleanupTool = new TransportCleanupTool(
             resolver.Resolve<EntitiesManager>(),
-            resolver.Resolve<IGameLoopEvents>(),
             m_simLoopEvents,
-            resolver.Resolve<NewInstanceOf<EntityHighlighter>>().Instance);
-        m_transportCleanupTool.Initialize();
+            resolver.Resolve<Mafi.Unity.Ui.UiContext>(),
+            resolver.Resolve<Mafi.Unity.InputControl.AreaTool.AreaSelectionToolFactory>(),
+            resolver.Resolve<Mafi.Unity.UiStatic.Cursors.CursorManager>(),
+            resolver.Resolve<NewInstanceOf<EntityHighlighter>>(),
+            resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>());
 
         m_throughputAoETool = new ThroughputAoETool(
             resolver.Resolve<Mafi.Unity.Ui.Hud.ToolbarHud>(),
@@ -229,9 +231,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<Mafi.Unity.InputControl.AreaTool.AreaSelectionToolFactory>(),
             resolver.Resolve<IEntitiesManager>(),
             resolver.Resolve<NewInstanceOf<EntityHighlighter>>(),
-            resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>(),
-            resolver.Resolve<IGameLoopEvents>());
-        m_throughputAoETool.Initialize();
+            resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>());
 
         m_transportProductRemovalAoETool = new TransportProductRemovalAoETool(
             resolver.Resolve<Mafi.Unity.Ui.Hud.ToolbarHud>(),
@@ -241,9 +241,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<Mafi.Unity.InputControl.AreaTool.AreaSelectionToolFactory>(),
             resolver.Resolve<IEntitiesManager>(),
             resolver.Resolve<NewInstanceOf<EntityHighlighter>>(),
-            resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>(),
-            resolver.Resolve<IGameLoopEvents>());
-        m_transportProductRemovalAoETool.Initialize();
+            resolver.Resolve<NewInstanceOf<Mafi.Unity.Terrain.TerrainAreaOutlineRenderer>>());
 
         m_heightFilter = new HeightFilter(m_harmony!, resolver.Resolve<IGameLoopEvents>());
         m_heightFilter.Initialize(resolver);
@@ -328,6 +326,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
 
     private void unsubscribeWorldEvents()
     {
+        HotkeysRegistry.Shutdown();
         PipeColoring.Dispose();
         LegacyStackerFullAlertManager.Clear();
         TransportProductRemovalManager.Clear();

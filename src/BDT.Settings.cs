@@ -14,6 +14,7 @@ using Mafi.Collections;
 using Mafi.Core.Entities.Blueprints;
 using Mafi.Core.Game;
 using Mafi.Core.Mods;
+using Mafi.Core.Syncers;
 using Mafi.Localization;
 using Mafi.Serialization;
 using Mafi.Unity.UiToolkit.Component;
@@ -679,6 +680,7 @@ internal static class DesignerToolkitSettings
             .Tooltip(new LocStrFormatted(BdtLocalization.SettingsThroughputToggleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
             .Value(ThroughputOverlayEnabled)
             .OnValueChanged(SetThroughputOverlayEnabled);
+        throughputOverlayToggle.Observe(() => ThroughputOverlayEnabled).Do(enabled => throughputOverlayToggle.Value(enabled));
 
         var throughputOverlayRow = new Row().AlignItemsCenter();
         throughputOverlayRow.Add(throughputOverlayToggle);
@@ -742,6 +744,7 @@ internal static class DesignerToolkitSettings
             .Tooltip(new LocStrFormatted(BdtLocalization.SettingsPollutionToggleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
             .Value(PollutionOverlayEnabled)
             .OnValueChanged(SetPollutionOverlayEnabled);
+        pollutionOverlayToggle.Observe(() => PollutionOverlayEnabled).Do(enabled => pollutionOverlayToggle.Value(enabled));
 
         var pollutionOverlayRow = new Row().AlignItemsCenter();
         pollutionOverlayRow.Add(pollutionOverlayToggle);
@@ -807,6 +810,7 @@ internal static class DesignerToolkitSettings
             .Tooltip(new LocStrFormatted(BdtLocalization.SettingsRadiationToggleDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
             .Value(RadiationOverlayEnabled)
             .OnValueChanged(SetRadiationOverlayEnabled);
+        radiationOverlayToggle.Observe(() => RadiationOverlayEnabled).Do(enabled => radiationOverlayToggle.Value(enabled));
 
         var radiationOverlayRow = new Row().AlignItemsCenter();
         radiationOverlayRow.Add(radiationOverlayToggle);
@@ -836,6 +840,7 @@ internal static class DesignerToolkitSettings
             .Tooltip(new LocStrFormatted(BdtLocalization.SettingsLayoutBoxModeDescription.TranslatedString + "\n\n" + BdtLocalization.SettingsGlobalHotkeyTooltip.TranslatedString))
             .Value(LayoutBoxModeEnabled)
             .OnValueChanged(SetLayoutBoxModeEnabled);
+        layoutBoxModeToggle.Observe(() => LayoutBoxModeEnabled).Do(enabled => layoutBoxModeToggle.Value(enabled));
 
         var layoutBoxRow = new Row().AlignItemsCenter();
         layoutBoxRow.Add(layoutBoxModeToggle);
@@ -941,14 +946,12 @@ internal static class DesignerToolkitSettings
             instantBuildToggle.Value(InstantBuildModeEnabled);
             legacyBeltConfigurationsToggle.Value(LegacyBeltConfigurationsEnabled);
             preColorPipesToggle.Value(PreColorPipesEnabled);
-            throughputOverlayToggle.Value(ThroughputOverlayEnabled);
             throughputGlowToggle.Value(ThroughputGlowEnabled);
             throughputDaysInput.Text(ThroughputDaysToAverage.ToString());
             heatmapDropdown.SetValue(ThroughputHeatmapMode);
             colorblindToggle.Value(ThroughputColorblindMode);
             colorblindToggle.Enabled(ThroughputHeatmapMode != ThroughputHeatmapMode.None);
             showAsPercentToggle.Value(ThroughputShowAsPercent);
-            pollutionOverlayToggle.Value(PollutionOverlayEnabled);
             pollutionGlowToggle.Value(PollutionGlowEnabled);
             daysInput.Text(PollutionDaysToAverage.ToString());
             showAirToggle.Value(PollutionShowAir);
@@ -956,10 +959,8 @@ internal static class DesignerToolkitSettings
             showSolidWasteToggle.Value(PollutionShowSolidWaste);
             showVehicleToggle.Value(PollutionShowVehicle);
             showShipToggle.Value(PollutionShowShip);
-            radiationOverlayToggle.Value(RadiationOverlayEnabled);
             radiationGlowToggle.Value(RadiationGlowEnabled);
             radiationDaysInput.Text(RadiationDaysToAverage.ToString());
-            layoutBoxModeToggle.Value(LayoutBoxModeEnabled);
             heightFilterDropdown.SetValue(HeightFilterMaxVisibleLevel);
             transportVisibilityDropdown.SetValue(HeightFilterTransportVisibility);
             pillarVisibilityDropdown.SetValue(HeightFilterPillarVisibility);

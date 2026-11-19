@@ -1,3 +1,11 @@
+v0.12.1 | 2026-11-19
+
+* Fixed: Remove products in area now activates once per keypress
+* Transport cleanup shows a selection cursor and can select disconnected segments by dragging across any part of them
+* Fixed: Overlay checkboxes in BDT settings now update when an overlay is toggled by hotkey
+* BDT shortcuts now respect the pause menu and focused text fields, and default shortcuts support either side of the keyboard for Alt, Shift, and Ctrl
+* A game action can take priority over a BDT shortcut that shares its modifier, such as Free look mode bound to Left Alt. Remap either shortcut to avoid the overlap
+
 v0.12.0 | 2026-11-19
 
 * Requires Captain of Industry Update 4.3 (0.8.8) or newer

@@ -4,6 +4,13 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.12.1 [unreleased]
 
+- Use a single native shortcut handler for Remove products in area and route the throughput area tool through the game input controller.
+- Arm transport cleanup with the native selection cursor and select disconnected belts or pipes by their overlap with the terrain selection.
+- Use generic Alt, Shift, and Ctrl for default bindings while preserving saved custom bindings.
+- Keep the throughput, pollution, radiation, and layout-box settings checkboxes synchronized with overlay changes.
+
+- BDT shortcuts now respect game input handling. If a game action such as Free look mode consumes a shared modifier, BDT shortcuts using that modifier may be blocked. For example, holding Left Alt to activate Free look mode can prevent Alt-based BDT shortcuts from firing. Remap either shortcut to avoid the overlap.
+
 ## v0.12.0 [released]
 
 - Require Captain of Industry Update 4.3 and load the mod DLL directly. Remove the pre-4.3 implementation and dual-version loader.
