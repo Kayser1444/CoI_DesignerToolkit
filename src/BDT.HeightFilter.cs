@@ -660,6 +660,9 @@ namespace CoIDesignerToolkit
 
         private void ShowOnePort(IoPort port)
         {
+            // ShowPort assumes the caller has already checked which side owns the visible mesh.
+            if (!IoPortsRenderer.hasOwnModel(port)) return;
+
             var chunk = GetPortChunk(port);
             if (chunk == null) return;
             try
