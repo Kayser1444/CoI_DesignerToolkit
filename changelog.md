@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.12.2 [packaged]
+## v0.12.2 [released]
 
 - Bundle Harmony 2.4.3 with MonoMod.Core 1.3.6, which includes the Unity Mono detour fix for affected Proton configurations. Keep the version aligned across ATD, AFD, BDT, and KPIE because the game can reuse the first loaded copy.
 - Restore port meshes using vanilla's visibility rule so connected belts do not show extra end caps after using the height filter.
