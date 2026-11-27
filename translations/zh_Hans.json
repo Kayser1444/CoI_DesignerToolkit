@@ -77,11 +77,27 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "自动即时完成建造、拆除、升级和降级，无需材料、工人或统一度（即使在暂停状态下也有效）。启用此功能还会关闭游戏自身的即时建造开关。"
+    "即使游戏暂停，也能立即完成建造、拆除、升级和降级，无需材料、工人或统一度。支持剪切和粘贴已完工的建筑。剪切会移除原建筑，并将蓝图交给你，以便在其他位置放置。按 Ctrl+Z 可恢复原建筑。启用后会关闭游戏自带的即时建造功能。"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoom",
+    "无限缩放"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoomDescription",
+    "滚动鼠标滚轮，即可突破常规镜头限制，进一步拉近或拉远。"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTier",
+    "匹配运输设施等级"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTierDescription",
+    "临时匹配所连接的传送带或管道的等级。关闭此选项即可选择其他等级。"
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "滚去沙盒模式玩吧，懒鬼！"
+    "仅在沙盒模式可用，支持剪切和粘贴已完工的建筑。"
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -329,7 +345,7 @@
   ],
   [
     "DesignerToolkit.SettingsSaveAsGlobalTooltip",
-    "将这些设置保存到 config.json。它们将用作所有新游戏的默认设置。"
+    "将这些设置保存到 BDTsettings.json。它们将用作所有新游戏的默认设置。"
   ],
   [
     "DesignerToolkit.SettingsRestoredDefaults",
@@ -337,7 +353,7 @@
   ],
   [
     "DesignerToolkit.SettingsSavedToConfig",
-    "已保存到 config.json。"
+    "已保存到 BDTsettings.json。"
   ],
   [
     "DesignerToolkit.SettingsSaveFailed",
@@ -634,6 +650,14 @@
   [
     "DesignerToolkit.UndoSuccessMessage",
     "撤消：放置已成功恢复。"
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "已恢复剪切的对象。"
+  ],
+  [
+    "DesignerToolkit.UndoCutFailedMessage",
+    "部分剪切的对象无法恢复。"
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

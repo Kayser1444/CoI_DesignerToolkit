@@ -12,6 +12,12 @@ When enabled, BDT checks the world after player commands are processed and immed
 
 When instant build mode is enabled, BDT turns off the game's insta-build toggle. BDT uses its own construction/deconstruction completion pass instead of leaving the broader game cheat mode active.
 
+## Cut Completed Buildings
+
+With BDT Instant build mode active in Sandbox, press `X` over a completed building or press `Ctrl+X` to start an area cut. Cut is available before researching the vanilla tool. The held preview carries the usual blueprint configuration.
+
+Press `Esc` to drop the preview. Press `Ctrl+Z` to restore the cut at its original location. If you already pasted it elsewhere, undo the paste first, then undo the cut. The undo history lasts for the current game session.
+
 ## Interaction With Planning Mode
 
 Buildings placed while Planning Mode is enabled remain paused and are not completed by BDT. They are completed as soon as you unpause their construction, matching the game's normal Planning Mode behavior.

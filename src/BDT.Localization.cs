@@ -52,10 +52,18 @@ internal static class BdtLocalization
         Loc.Str("DesignerToolkit.SettingsBuildBehaviorsHeading", "BUILD BEHAVIORS", "Settings section heading for build behavior settings.");
     public static LocStr SettingsInstantBuildMode =
         Loc.Str("DesignerToolkit.SettingsInstantBuildMode", "Instant build mode", "Settings row label for instant build mode.");
-    public static LocStr SettingsInstantBuildModeDescription =
-        Loc.Str("DesignerToolkit.SettingsInstantBuildModeDescription", "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle.", "Settings row description for instant build mode.");
-    public static LocStr SettingsInstantBuildModeSandboxOnly =
-        Loc.Str("DesignerToolkit.SettingsInstantBuildModeSandboxOnly", "Sod off to the sandbox, you lazy git!", "Tooltip for instant build mode when the game is not in sandbox mode.");
+    public static readonly LocStr SettingsInstantBuildModeDescription =
+        Loc.Str("DesignerToolkit.SettingsInstantBuildModeDescription", "Instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or Unity, even while paused. Includes true cut and paste. Cut removes completed buildings and gives you a blueprint to place elsewhere. Ctrl+Z restores the cut. Turns off the game's Insta-build toggle.", "Settings row description for instant build mode.");
+    public static readonly LocStr SettingsInfiniteZoom =
+        Loc.Str("DesignerToolkit.SettingsInfiniteZoom", "Infinite zoom", "Settings row label for removing scroll-wheel camera zoom limits.");
+    public static readonly LocStr SettingsInfiniteZoomDescription =
+        Loc.Str("DesignerToolkit.SettingsInfiniteZoomDescription", "Scroll past the normal camera zoom limits in either direction.", "Settings row description for infinite zoom.");
+    public static readonly LocStr SettingsMatchTransportTier =
+        Loc.Str("DesignerToolkit.SettingsMatchTransportTier", "Match transport tier", "Settings row label for matching belt and pipe tiers while drawing a route.");
+    public static readonly LocStr SettingsMatchTransportTierDescription =
+        Loc.Str("DesignerToolkit.SettingsMatchTransportTierDescription", "Temporarily matches the tier of belts and pipes you connect to. Turn this off to place a different tier on purpose.", "Settings row description for transport tier matching.");
+    public static readonly LocStr SettingsInstantBuildModeSandboxOnly =
+        Loc.Str("DesignerToolkit.SettingsInstantBuildModeSandboxOnly", "Available in Sandbox. Includes true cut and paste for completed buildings.", "Tooltip for instant build mode when the game is not in sandbox mode.");
     public static LocStr SettingsLegacyBeltConfigurations =
         Loc.Str("DesignerToolkit.SettingsLegacyBeltConfigurations", "Allow curvy incline belts", "Settings row label for allowing legacy belt configurations (curvy incline belts).");
     public static LocStr SettingsLegacyBeltConfigurationsDescription =
@@ -188,11 +196,11 @@ internal static class BdtLocalization
     public static LocStr SettingsSaveAsGlobal =
         Loc.Str("DesignerToolkit.SettingsSaveAsGlobal", "Save as config", "Button label for saving settings as config default.");
     public static LocStr SettingsSaveAsGlobalTooltip =
-        Loc.Str("DesignerToolkit.SettingsSaveAsGlobalTooltip", "Save these settings to config.json. They will be used as the defaults for all new games.", "Tooltip for saving settings as config default.");
+        Loc.Str("DesignerToolkit.SettingsSaveAsGlobalTooltip", "Save these settings to BDTsettings.json. They will be used as the defaults for all new games.", "Tooltip for saving settings as config default.");
     public static LocStr SettingsRestoredDefaults =
         Loc.Str("DesignerToolkit.SettingsRestoredDefaults", "Restored built-in defaults in memory.", "Status message after settings are restored to defaults.");
     public static LocStr SettingsSavedToConfig =
-        Loc.Str("DesignerToolkit.SettingsSavedToConfig", "Saved to config.json.", "Status message after settings are saved.");
+        Loc.Str("DesignerToolkit.SettingsSavedToConfig", "Saved to BDTsettings.json.", "Status message after settings are saved.");
     public static LocStr SettingsSaveFailed =
         Loc.Str("DesignerToolkit.SettingsSaveFailed", "Save failed: {0}", "Status message after settings save fails. {0} = error message.");
     public static LocStr SettingsStoreNotInitialized =
@@ -348,6 +356,10 @@ internal static class BdtLocalization
 
     public static LocStr UndoSuccessMessage =
         Loc.Str("DesignerToolkit.UndoSuccessMessage", "Undo: Placement reverted successfully.", "Toast or message after undoing a placement.");
+    public static readonly LocStr UndoCutSuccessMessage =
+        Loc.Str("DesignerToolkit.UndoCutSuccessMessage", "Undo: Cut restored.", "Toast after restoring a cut selection to its original position.");
+    public static readonly LocStr UndoCutFailedMessage =
+        Loc.Str("DesignerToolkit.UndoCutFailedMessage", "Undo: Some cut items could not be restored.", "Toast when the game rejects some or all of a cut restoration.");
     public static LocStr UndoNoActionMessage =
         Loc.Str("DesignerToolkit.UndoNoActionMessage", "Undo: No placement actions to revert.", "Toast or message when undo queue is empty.");
 

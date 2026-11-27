@@ -77,11 +77,27 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Slutför automatiskt och omedelbart konstruktion, rivning, uppgraderingar och nedgraderingar utan material, arbetare eller enhet (även vid paus). Aktivering stänger även av spelets eget omedelbart-bygge-alternativ."
+    "Slutför byggnation, rivning, uppgraderingar och nedgraderingar direkt utan material, arbetare eller Unity, även när spelet är pausat. Du kan klippa ut och klistra in färdigbyggda byggnader. När du klipper ut tas byggnaderna bort och du får en ritning att placera någon annanstans. Ctrl+Z återställer byggnaderna. Inaktiverar spelets eget snabbygge."
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoom",
+    "Obegränsad zoom"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoomDescription",
+    "Använd mushjulet för att zooma in och ut förbi kamerans vanliga gränser."
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTier",
+    "Matcha transportnivå"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTierDescription",
+    "Anpassar tillfälligt nivån till de transportband och rör du ansluter till. Stäng av för att kunna välja en annan nivå."
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Stick till sandlådan, du late drummel!"
+    "Tillgängligt i Sandbox. Där kan du klippa ut och klistra in färdigbyggda byggnader."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -329,7 +345,7 @@
   ],
   [
     "DesignerToolkit.SettingsSaveAsGlobalTooltip",
-    "Sparar dessa inställningar till config.json. De kommer att användas som standard för alla nya spel."
+    "Sparar dessa inställningar till BDTsettings.json. De kommer att användas som standard för alla nya spel."
   ],
   [
     "DesignerToolkit.SettingsRestoredDefaults",
@@ -337,7 +353,7 @@
   ],
   [
     "DesignerToolkit.SettingsSavedToConfig",
-    "Sparat i config.json."
+    "Sparat i BDTsettings.json."
   ],
   [
     "DesignerToolkit.SettingsSaveFailed",
@@ -634,6 +650,14 @@
   [
     "DesignerToolkit.UndoSuccessMessage",
     "Ångra: Placeringen har återställts."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Urklippta byggnader har återställts."
+  ],
+  [
+    "DesignerToolkit.UndoCutFailedMessage",
+    "Vissa urklippta objekt kunde inte återställas."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

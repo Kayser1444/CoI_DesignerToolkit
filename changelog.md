@@ -2,7 +2,12 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.12.3 [unreleased]
+## v0.13.0 [unreleased]
+
+- Store **Save as config** defaults in `ModConfigs/DesignerToolkit/BDTsettings.json`. Import customized defaults from an older installed `config.json` when available.
+- Add default-on **Infinite zoom** for the scroll wheel.
+- Add true cut and paste for completed buildings to **Instant build mode** in Sandbox. Cut removes the originals and records an undo entry independently of the paste. Update the tooltip and localized strings.
+- Add default-on **Match transport tier** for belt and pipe routing. Use the higher tier when both ends have the same construction status, and the completed end's tier when joining it to a ghost.
 
 ## v0.12.2 [released]
 

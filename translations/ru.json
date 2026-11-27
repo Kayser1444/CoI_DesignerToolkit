@@ -77,11 +77,27 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Автоматически и мгновенно завершает строительство, демонтаж, улучшения и понижения без материалов, рабочих и «Единства» (даже на паузе). Включение этой функции также отключает функцию мгновенного строительства в игре."
+    "Мгновенно завершает строительство, демонтаж, повышение и понижение уровня без материалов, рабочих и «Единства», даже на паузе. Готовые здания можно вырезать и вставлять. При вырезании исходные здания удаляются, а вы получаете чертёж для размещения в другом месте. Ctrl+Z восстанавливает исходные здания. Отключает встроенное мгновенное строительство."
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoom",
+    "Масштабирование без ограничений"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoomDescription",
+    "Прокручивайте колёсико мыши, чтобы приблизить или отдалить камеру за пределы обычных ограничений."
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTier",
+    "Подбирать уровень транспорта"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTierDescription",
+    "Временно подбирает уровень по конвейерам и трубам, к которым вы подключаетесь. Отключите эту настройку, чтобы выбрать другой уровень."
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Проваливай в песочницу, лентяй!"
+    "Доступно в песочнице. Позволяет вырезать и вставлять готовые здания."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -329,7 +345,7 @@
   ],
   [
     "DesignerToolkit.SettingsSaveAsGlobalTooltip",
-    "Сохраняет эти настройки в «config.json». Они будут использоваться как значения по умолчанию для всех новых игр."
+    "Сохраняет эти настройки в «BDTsettings.json». Они будут использоваться как значения по умолчанию для всех новых игр."
   ],
   [
     "DesignerToolkit.SettingsRestoredDefaults",
@@ -337,7 +353,7 @@
   ],
   [
     "DesignerToolkit.SettingsSavedToConfig",
-    "Сохранено в «config.json»."
+    "Сохранено в «BDTsettings.json»."
   ],
   [
     "DesignerToolkit.SettingsSaveFailed",
@@ -634,6 +650,14 @@
   [
     "DesignerToolkit.UndoSuccessMessage",
     "Отмена: размещение успешно отменено."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Вырезанные объекты восстановлены."
+  ],
+  [
+    "DesignerToolkit.UndoCutFailedMessage",
+    "Не удалось восстановить часть вырезанных объектов."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

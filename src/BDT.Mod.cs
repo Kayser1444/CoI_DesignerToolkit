@@ -102,6 +102,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         RateLimitPatches.Apply(m_harmony);
         ThroughputPatches.Apply(m_harmony);
         InstantBuildMode.ApplyPatches(m_harmony);
+        InfiniteZoom.ApplyPatches(m_harmony);
+        CompletedBuildingCut.ApplyPatches(m_harmony);
+        TransportTierMatching.ApplyPatches(m_harmony);
         ThroughputInspectorPatches.Apply(m_harmony);
         ContentDisplayPatches.Apply(m_harmony);
         UndoPatches.Apply(m_harmony);
@@ -142,9 +145,13 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         m_saveManager.OnSaveDone += onSaveDone;
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
-        DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore, Manifest.RootDirectoryPath, gameWasLoaded);
+        DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore,
+            resolver.Resolve<IFileSystemHelper>().GameDataRootDirPath, gameWasLoaded);
         DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
         DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
+        CompletedBuildingCut.Initialize(resolver.Resolve<Mafi.Unity.Ui.UiContext>().InputMgr);
+        m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, CompletedBuildingCut.RefreshAvailabilityIfChanged);
+        TransportTierMatching.Initialize(resolver);
         PipeColoring.Initialize(resolver);
         HotkeysRegistry.Initialize(resolver.Resolve<Mafi.Unity.Ui.UiContext>());
 
@@ -327,6 +334,9 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     private void unsubscribeWorldEvents()
     {
         HotkeysRegistry.Shutdown();
+        m_gameLoopEvents?.SyncUpdate.RemoveNonSaveable(this, CompletedBuildingCut.RefreshAvailabilityIfChanged);
+        CompletedBuildingCut.Dispose();
+        TransportTierMatching.Dispose();
         PipeColoring.Dispose();
         LegacyStackerFullAlertManager.Clear();
         TransportProductRemovalManager.Clear();

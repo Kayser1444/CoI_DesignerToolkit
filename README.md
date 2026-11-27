@@ -16,6 +16,8 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 - [Copy as Markdown](#copy-as-markdown)
 - [Symmetric entity normalization](#symmetric-entity-normalization)
 - [Instant build mode](#instant-build-mode)
+- [Infinite zoom](#infinite-zoom)
+- [Match transport tier](#match-transport-tier)
 - [Pre-color pipes](#pre-color-pipes)
 - [Reservoir insights](#reservoir-insights)
 - [Transport cleanup tool](#transport-cleanup-tool)
@@ -143,7 +145,19 @@ BDT includes an Instant Build mode that automatically completes construction, de
 
 When enabled, BDT turns off the game's built-in insta-build toggle and uses its own completion pass after player commands are processed.
 
+With BDT Instant build mode active, use `X` over a completed building or `Ctrl+X` to select an area. Cut puts a placement preview in hand. `Esc` drops it, and `Ctrl+Z` restores the cut at its original location. Cutting and pasting create separate undo entries.
+
 See [Instant Build Mode](docs/player/instant-build-mode.md) for player-facing details.
+
+### Infinite zoom
+
+Use the scroll wheel to zoom past the normal camera limits in either direction. **Infinite zoom** is on by default and can be turned off in BDT settings.
+
+### Match transport tier
+
+When drawing a belt or pipe, snapping to an existing transport borrows its tier for the new route. When both ends connect to different tiers, the new route uses the higher tier. If one end is completed and the other is a ghost, the completed tier takes precedence. Matching also updates eligible ghosts at the connected ends. The next route starts with your original tool selection.
+
+**Match transport tier** is on by default. Turn it off in BDT settings to place an extension at a tier you choose.
 
 ### Pre-color pipes
 
@@ -232,7 +246,7 @@ BDT includes a **Legacy Belt Configurations** setting for designers who want Upd
 
 BDT adds a mod settings panel for feature toggles, hotkeys, Markdown export behavior, throughput display behavior, and recycle bin behavior.
 
-Settings are stored per save where appropriate. `config.json` supplies initial defaults for saves that do not yet have BDT settings state.
+Settings are stored per save. **Save as config** also stores defaults for future worlds in `%APPDATA%\Captain of Industry\ModConfigs\DesignerToolkit\BDTsettings.json` on Windows. The shipped `config.json` declares the available settings and built-in defaults. Designer Toolkit imports customized defaults from an older install when the old file is still available.
 
 ### Blueprint decoder tool
 

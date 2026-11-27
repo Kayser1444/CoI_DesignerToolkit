@@ -16,6 +16,8 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - [📝 Copy as Markdown](#copy-as-markdown)
 - [🧩 Symmetric entity normalization](#symmetric-entity-normalization)
 - [⚡ Instant build mode](#instant-build-mode)
+- [🔍 Infinite zoom](#infinite-zoom)
+- [🔗 Match transport tier](#match-transport-tier)
 - [🎨 Pre-color pipes](#pre-color-pipes)
 - [🧹 Transport cleanup tool](#transport-cleanup-tool)
 - [🗑️ Transport product removal](#transport-product-removal)
@@ -156,7 +158,19 @@ Enabling this feature turns off the game's built-in insta-build toggle. Surface 
 
 Buildings placed while Planning Mode is enabled remain paused until you unpause their construction.
 
+In Sandbox, BDT Instant build mode includes **true cut and paste** for completed buildings. Press `X` over a building or `Ctrl+X` to select an area, even before researching Cut. The cut removes the originals and puts a blueprint in your hand to place elsewhere. Press `Esc` to drop the blueprint or `Ctrl+Z` to restore the cut at its original location. Cut and paste each have their own undo entry.
+
 Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
+
+### 🔍 Infinite zoom
+
+The scroll wheel zooms past the game's normal limits in both directions. **Infinite zoom** starts enabled and can be turned off in BDT settings.
+
+### 🔗 Match transport tier
+
+When you connect a new belt or pipe to an existing transport, the route borrows that transport's tier. If the two ends differ, the new route uses the higher tier. When a completed transport meets a ghost, the completed tier takes priority and matching adjusts eligible ghosts at the connection. Completed transports keep their current tiers.
+
+The tool returns to your selected tier after placement or cancellation. **Match transport tier** starts enabled. Turn it off in BDT settings to choose the tier of an extension yourself.
 
 ### 🎨 Pre-color pipes
 
@@ -332,7 +346,7 @@ BDT adds a **Mod Settings** panel, accessible from the top-right **M** button in
 | **English separators** | Force English separators everywhere |
 | **Local separators** | Force current-language separators everywhere |
 
-Settings are stored per save file. The `markdown_table_language` and `markdown_number_format` keys in `config.json` set the initial values for saves that have no stored settings yet.
+Settings are stored per save file. **Save as config** writes your defaults to `ModConfigs/DesignerToolkit/BDTsettings.json`, outside the mod installation. BDT uses these defaults for new games and saves without stored BDT settings.
 
 The **Throughput** settings control the global overlay, overlay hotkey, default averaging period, heat-map mode, colorblind-friendly colors, percent display, and the Throughput Area Tool hotkey.
 

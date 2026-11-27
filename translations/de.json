@@ -77,11 +77,27 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Schließt Bau, Abriss, Upgrades und Downgrades automatisch und sofort ab – ohne Materialien, Arbeiter oder Einheit (auch im Pausezustand). Das Aktivieren deaktiviert auch den spieleigenen Sofortbau-Schalter."
+    "Schließt Bau, Abriss, Upgrades und Downgrades sofort ab, auch bei pausiertem Spiel und ohne Materialien, Arbeiter oder Einheit. Fertige Gebäude lassen sich ausschneiden und einfügen. Beim Ausschneiden werden die Originale entfernt und du erhältst eine Blaupause für einen anderen Standort. Ctrl+Z stellt die Originale wieder her. Deaktiviert den Sofortbau des Spiels."
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoom",
+    "Unbegrenzter Zoom"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoomDescription",
+    "Zoome mit dem Mausrad in beide Richtungen über die normalen Kameragrenzen hinaus."
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTier",
+    "Transportstufe abgleichen"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTierDescription",
+    "Passt die Stufe vorübergehend an die Förderbänder und Rohre an, mit denen du eine Verbindung herstellst. Deaktiviere die Option, um eine andere Stufe zu wählen."
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Hau ab in die Sandbox, du fauler Kerl!"
+    "In der Sandbox verfügbar. Fertige Gebäude lassen sich dort ausschneiden und einfügen."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -329,7 +345,7 @@
   ],
   [
     "DesignerToolkit.SettingsSaveAsGlobalTooltip",
-    "Speichert diese Einstellungen in config.json. Sie werden als Standardwerte für alle neuen Spiele verwendet."
+    "Speichert diese Einstellungen in BDTsettings.json. Sie werden als Standardwerte für alle neuen Spiele verwendet."
   ],
   [
     "DesignerToolkit.SettingsRestoredDefaults",
@@ -337,7 +353,7 @@
   ],
   [
     "DesignerToolkit.SettingsSavedToConfig",
-    "In config.json gespeichert."
+    "In BDTsettings.json gespeichert."
   ],
   [
     "DesignerToolkit.SettingsSaveFailed",
@@ -634,6 +650,14 @@
   [
     "DesignerToolkit.UndoSuccessMessage",
     "Rückgängig: Platzierung erfolgreich rückgängig gemacht."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Ausgeschnittene Objekte wurden wiederhergestellt."
+  ],
+  [
+    "DesignerToolkit.UndoCutFailedMessage",
+    "Einige ausgeschnittene Objekte konnten nicht wiederhergestellt werden."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

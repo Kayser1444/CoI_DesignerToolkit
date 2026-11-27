@@ -7,6 +7,7 @@
 // intended to contain only original mod code/configuration; if MaFi Games material
 // is included by mistake, I intend to correct it promptly upon discovery or notice.
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using Mafi;
@@ -73,6 +74,8 @@ internal static class DesignerToolkitSettings
     private const string MARKDOWN_TABLE_LANGUAGE_KEY = "markdown_table_language";
     private const string MARKDOWN_NUMBER_FORMAT_KEY = "markdown_number_format";
     private const string INSTANT_BUILD_MODE_KEY = "instant_build_mode";
+    private const string INFINITE_ZOOM_KEY = "infinite_zoom";
+    private const string MATCH_TRANSPORT_TIER_KEY = "match_transport_tier";
     private const string LEGACY_BELT_CONFIGURATIONS_KEY = "legacy_belt_configurations";
 
     private static Mafi.Core.Game.GameDifficultyConfig? s_difficultyConfig;
@@ -124,13 +127,16 @@ internal static class DesignerToolkitSettings
 
     private static ModJsonConfig? s_config;
     private static IModStateJsonStore? s_store;
-    private static string? s_modDirectory;
+    private const string GLOBAL_SETTINGS_FILE = "BDTsettings.json";
+    private static string? s_globalSettingsPath;
 
     public static MarkdownTableLanguage MarkdownTableLanguage { get; private set; } =
         MarkdownTableLanguage.English;
     public static MarkdownNumberFormat MarkdownNumberFormat { get; private set; } =
         MarkdownNumberFormat.Auto;
     public static bool InstantBuildModeEnabled { get; private set; }
+    public static bool InfiniteZoomEnabled { get; private set; } = true;
+    public static bool MatchTransportTierEnabled { get; private set; } = true;
     public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
     public static int HeightFilterMaxVisibleLevel { get; private set; } = 6;
     public static HeightFilterTransportVisibility HeightFilterTransportVisibility { get; private set; } = HeightFilterTransportVisibility.Medium;
@@ -411,39 +417,13 @@ internal static class DesignerToolkitSettings
     }
 
 
-    public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string modDirectory, bool gameWasLoaded)
+    public static void Initialize(ModJsonConfig config, IModStateJsonStore store, string gameDataRoot, bool gameWasLoaded)
     {
         s_config = config;
         s_store = store;
-        s_modDirectory = modDirectory;
+        s_globalSettingsPath = ModSettingsFile.GetPath(gameDataRoot, config.ModId, GLOBAL_SETTINGS_FILE);
         IsFirstUnpausePending = !gameWasLoaded;
-        MarkdownTableLanguage initialLanguage = FromInt(config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
-        MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
-        bool initialInstantBuildMode = config.GetBool(INSTANT_BUILD_MODE_KEY, false);
-        bool initialLegacyBeltConfigurations = config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
-        bool initialThroughputOverlayEnabled = config.GetBool(THROUGHPUT_OVERLAY_ENABLED_KEY, true);
-        bool initialThroughputGlowEnabled = config.GetBool(THROUGHPUT_GLOW_ENABLED_KEY, true);
-        ThroughputHeatmapMode initialThroughputHeatmapMode = HeatmapModeFromInt(config.GetInt(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode.Capacity));
-        bool initialThroughputColorblindMode = config.GetBool(THROUGHPUT_COLORBLIND_MODE_KEY, false);
-        bool initialThroughputShowAsPercent = config.GetBool(THROUGHPUT_SHOW_AS_PERCENT_KEY, false);
-        bool initialPollutionOverlayEnabled = config.GetBool(POLLUTION_OVERLAY_ENABLED_KEY, false);
-        bool initialPollutionGlowEnabled = config.GetBool(POLLUTION_GLOW_ENABLED_KEY, false);
-        int initialPollutionDaysToAverage = config.GetInt(POLLUTION_DAYS_TO_AVERAGE_KEY, 360);
-        bool initialPollutionShowAir = config.GetBool(POLLUTION_SHOW_AIR_KEY, true);
-        bool initialPollutionShowGround = config.GetBool(POLLUTION_SHOW_GROUND_KEY, true);
-        bool initialPollutionShowSolidWaste = config.GetBool(POLLUTION_SHOW_SOLID_WASTE_KEY, true);
-        bool initialPollutionShowVehicle = config.GetBool(POLLUTION_SHOW_VEHICLE_KEY, true);
-        bool initialPollutionShowShip = config.GetBool(POLLUTION_SHOW_SHIP_KEY, true);
-        bool initialRadiationOverlayEnabled = config.GetBool(RADIATION_OVERLAY_ENABLED_KEY, false);
-        bool initialRadiationGlowEnabled = config.GetBool(RADIATION_GLOW_ENABLED_KEY, false);
-        int initialRadiationDaysToAverage = config.GetInt(RADIATION_DAYS_TO_AVERAGE_KEY, 30);
-        bool initialLayoutBoxModeEnabled = config.GetBool(LAYOUT_BOX_MODE_ENABLED_KEY, false);
-        bool initialUseRecycleBin = config.GetBool(USE_RECYCLE_BIN_KEY, true);
-        string initialRecycleBinFolderName = config.GetString(RECYCLE_BIN_FOLDER_NAME_KEY, "Recycle Bin");
-        int initialBlueprintSpacing = config.GetInt(BLUEPRINT_SPACING_KEY, 6);
-        HeightFilterTransportVisibility initialTransportVisibility = TransportVisibilityFromInt(config.GetInt(HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY, (int)HeightFilterTransportVisibility.Medium));
-        HeightFilterPillarVisibility initialPillarVisibility = PillarVisibilityFromInt(config.GetInt(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility.Detached));
-
+        LoadGlobalDefaults(config);
         LoadFromStore();
     }
 
@@ -455,6 +435,8 @@ internal static class DesignerToolkitSettings
         MarkdownTableLanguage initialLanguage = FromInt(s_config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
         MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(s_config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
         bool initialInstantBuildMode = s_config.GetBool(INSTANT_BUILD_MODE_KEY, false);
+        InfiniteZoomEnabled = s_config.GetBool(INFINITE_ZOOM_KEY, true);
+        MatchTransportTierEnabled = s_config.GetBool(MATCH_TRANSPORT_TIER_KEY, true);
         bool initialLegacyBeltConfigurations = s_config.GetBool(LEGACY_BELT_CONFIGURATIONS_KEY, true);
         bool initialThroughputOverlayEnabled = s_config.GetBool(THROUGHPUT_OVERLAY_ENABLED_KEY, true);
         bool initialThroughputGlowEnabled = s_config.GetBool(THROUGHPUT_GLOW_ENABLED_KEY, true);
@@ -601,6 +583,13 @@ internal static class DesignerToolkitSettings
 
         root.Add(instantBuildToggle);
 
+        Toggle matchTransportTierToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsMatchTransportTier.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsMatchTransportTierDescription.AsFormatted)
+            .Value(MatchTransportTierEnabled)
+            .OnValueChanged(enabled => MatchTransportTierEnabled = enabled);
+        root.Add(matchTransportTierToggle);
+
         Toggle preColorPipesToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsPreColorPipes.AsFormatted)
             .Tooltip(BdtLocalization.SettingsPreColorPipesDescription.AsFormatted)
@@ -614,6 +603,13 @@ internal static class DesignerToolkitSettings
             .Value(LegacyBeltConfigurationsEnabled)
             .OnValueChanged(SetLegacyBeltConfigurations);
         root.Add(legacyBeltConfigurationsToggle);
+
+        Toggle infiniteZoomToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsInfiniteZoom.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsInfiniteZoomDescription.AsFormatted)
+            .Value(InfiniteZoomEnabled)
+            .OnValueChanged(enabled => InfiniteZoomEnabled = enabled);
+        root.Add(infiniteZoomToggle);
 
         root.Add(new Title(BdtLocalization.SettingsHeightFilterHeading.AsFormatted)
             .MarginTop(4.pt())
@@ -944,6 +940,8 @@ internal static class DesignerToolkitSettings
             languageDropdown.SetValue(MarkdownTableLanguage);
             numberFormatDropdown.SetValue(MarkdownNumberFormat);
             instantBuildToggle.Value(InstantBuildModeEnabled);
+            infiniteZoomToggle.Value(InfiniteZoomEnabled);
+            matchTransportTierToggle.Value(MatchTransportTierEnabled);
             legacyBeltConfigurationsToggle.Value(LegacyBeltConfigurationsEnabled);
             preColorPipesToggle.Value(PreColorPipesEnabled);
             throughputGlowToggle.Value(ThroughputGlowEnabled);
@@ -1089,6 +1087,8 @@ internal static class DesignerToolkitSettings
             MarkdownTableLanguage = MarkdownTableLanguage.English;
             MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             SetInstantBuildMode(false);
+            InfiniteZoomEnabled = true;
+            MatchTransportTierEnabled = true;
             SetLegacyBeltConfigurations(true);
             SetPreColorPipesEnabled(true);
             SetHeightFilterMaxVisibleLevel(6);
@@ -1141,249 +1141,127 @@ internal static class DesignerToolkitSettings
             save);
     }
 
-    private static bool TrySaveGlobalConfig(out string error)
+    private static Dictionary<string, object> CollectGlobalDefaults() => new()
     {
-        error = string.Empty;
+        [MARKDOWN_TABLE_LANGUAGE_KEY] = (int)MarkdownTableLanguage,
+        [MARKDOWN_NUMBER_FORMAT_KEY] = (int)MarkdownNumberFormat,
+        [INSTANT_BUILD_MODE_KEY] = InstantBuildModeEnabled,
+        [INFINITE_ZOOM_KEY] = InfiniteZoomEnabled,
+        [MATCH_TRANSPORT_TIER_KEY] = MatchTransportTierEnabled,
+        [LEGACY_BELT_CONFIGURATIONS_KEY] = LegacyBeltConfigurationsEnabled,
+        [PRE_COLOR_PIPES_KEY] = PreColorPipesEnabled,
+        [THROUGHPUT_OVERLAY_ENABLED_KEY] = ThroughputOverlayEnabled,
+        [THROUGHPUT_GLOW_ENABLED_KEY] = ThroughputGlowEnabled,
+        [THROUGHPUT_DAYS_TO_AVERAGE_KEY] = ThroughputDaysToAverage,
+        [THROUGHPUT_HEATMAP_MODE_KEY] = (int)ThroughputHeatmapMode,
+        [THROUGHPUT_COLORBLIND_MODE_KEY] = ThroughputColorblindMode,
+        [THROUGHPUT_SHOW_AS_PERCENT_KEY] = ThroughputShowAsPercent,
+        [POLLUTION_OVERLAY_ENABLED_KEY] = PollutionOverlayEnabled,
+        [POLLUTION_GLOW_ENABLED_KEY] = PollutionGlowEnabled,
+        [POLLUTION_GLOW_COLOR_KEY] = FormatPollutionGlowColor(),
+        [POLLUTION_DAYS_TO_AVERAGE_KEY] = PollutionDaysToAverage,
+        [POLLUTION_SHOW_AIR_KEY] = PollutionShowAir,
+        [POLLUTION_SHOW_GROUND_KEY] = PollutionShowGround,
+        [POLLUTION_SHOW_SOLID_WASTE_KEY] = PollutionShowSolidWaste,
+        [POLLUTION_SHOW_VEHICLE_KEY] = PollutionShowVehicle,
+        [POLLUTION_SHOW_SHIP_KEY] = PollutionShowShip,
+        [RADIATION_OVERLAY_ENABLED_KEY] = RadiationOverlayEnabled,
+        [RADIATION_GLOW_ENABLED_KEY] = RadiationGlowEnabled,
+        [RADIATION_DAYS_TO_AVERAGE_KEY] = RadiationDaysToAverage,
+        [LAYOUT_BOX_MODE_ENABLED_KEY] = LayoutBoxModeEnabled,
+        [USE_RECYCLE_BIN_KEY] = UseRecycleBin,
+        [RECYCLE_BIN_FOLDER_NAME_KEY] = RecycleBinFolderName,
+        [BLUEPRINT_SPACING_KEY] = BlueprintSpacing,
+        [HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY] = (int)HeightFilterTransportVisibility,
+        [HEIGHT_FILTER_PILLAR_VISIBILITY_KEY] = (int)HeightFilterPillarVisibility,
+    };
+
+    private static void LoadGlobalDefaults(ModJsonConfig config)
+    {
+        string path = s_globalSettingsPath!;
         try
         {
-            if (s_config != null && !s_config.TrySetValue(MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(PRE_COLOR_PIPES_KEY, PreColorPipesEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_DAYS_TO_AVERAGE_KEY, ThroughputDaysToAverage, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_OVERLAY_ENABLED_KEY, PollutionOverlayEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_GLOW_ENABLED_KEY, PollutionGlowEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_GLOW_COLOR_KEY, FormatPollutionGlowColor(), out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_DAYS_TO_AVERAGE_KEY, PollutionDaysToAverage, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_AIR_KEY, PollutionShowAir, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_GROUND_KEY, PollutionShowGround, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_SOLID_WASTE_KEY, PollutionShowSolidWaste, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_VEHICLE_KEY, PollutionShowVehicle, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(RADIATION_OVERLAY_ENABLED_KEY, RadiationOverlayEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(RADIATION_GLOW_ENABLED_KEY, RadiationGlowEnabled, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(RADIATION_DAYS_TO_AVERAGE_KEY, RadiationDaysToAverage, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(USE_RECYCLE_BIN_KEY, UseRecycleBin, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(BLUEPRINT_SPACING_KEY, BlueprintSpacing, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY, (int)HeightFilterTransportVisibility, out error))
-                return false;
-            if (s_config != null && !s_config.TrySetValue(HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility, out error))
-                return false;
+            var supported = CollectGlobalDefaults();
+            if (!File.Exists(path))
+                MigrateGlobalDefaults(config, supported.Keys, path);
 
+            // The native config already carries the settings of existing worlds.
+            if (!config.LoadedVersion.IsEmpty || !File.Exists(path))
+                return;
 
-            if (string.IsNullOrWhiteSpace(s_modDirectory))
-            {
-                error = "Could not resolve mod directory.";
-                return false;
-            }
+            using var reader = File.OpenText(path);
+            if (new JsonParser().Parse(reader) is not Dict<string, object> defaults)
+                throw new InvalidDataException("Expected a JSON settings object.");
 
-            string path = Path.Combine(s_modDirectory, "config.json");
-            string json = File.ReadAllText(path);
-            string updated = TryReplaceConfigDefault(json, MARKDOWN_TABLE_LANGUAGE_KEY, (int)MarkdownTableLanguage, out bool languageUpdated);
-            updated = TryReplaceConfigDefault(updated, MARKDOWN_NUMBER_FORMAT_KEY, (int)MarkdownNumberFormat, out bool numberFormatUpdated);
-            updated = TryReplaceConfigDefault(updated, INSTANT_BUILD_MODE_KEY, InstantBuildModeEnabled, out bool instantBuildUpdated);
-            updated = TryReplaceConfigDefault(updated, LEGACY_BELT_CONFIGURATIONS_KEY, LegacyBeltConfigurationsEnabled, out bool legacyBeltConfigurationsUpdated);
-            updated = TryReplaceConfigDefault(updated, PRE_COLOR_PIPES_KEY, PreColorPipesEnabled, out bool preColorPipesUpdated);
-            updated = TryReplaceConfigDefault(updated, THROUGHPUT_OVERLAY_ENABLED_KEY, ThroughputOverlayEnabled, out bool throughputOverlayEnabledUpdated);
-            updated = TryReplaceConfigDefault(updated, THROUGHPUT_GLOW_ENABLED_KEY, ThroughputGlowEnabled, out bool throughputGlowEnabledUpdated);
-            updated = TryReplaceConfigDefault(updated, THROUGHPUT_DAYS_TO_AVERAGE_KEY, ThroughputDaysToAverage, out bool throughputDaysToAverageUpdated);
-            updated = TryReplaceConfigDefault(updated, THROUGHPUT_HEATMAP_MODE_KEY, (int)ThroughputHeatmapMode, out bool throughputHeatmapModeUpdated);
-            updated = TryReplaceConfigDefault(updated, THROUGHPUT_COLORBLIND_MODE_KEY, ThroughputColorblindMode, out bool throughputColorblindModeUpdated);
-            updated = TryReplaceConfigDefault(updated, THROUGHPUT_SHOW_AS_PERCENT_KEY, ThroughputShowAsPercent, out bool throughputShowAsPercentUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_OVERLAY_ENABLED_KEY, PollutionOverlayEnabled, out bool pollutionOverlayEnabledUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_GLOW_ENABLED_KEY, PollutionGlowEnabled, out bool pollutionGlowEnabledUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_GLOW_COLOR_KEY, FormatPollutionGlowColor(), out bool pollutionGlowColorUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_DAYS_TO_AVERAGE_KEY, PollutionDaysToAverage, out bool pollutionDaysToAverageUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_AIR_KEY, PollutionShowAir, out bool pollutionShowAirUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_GROUND_KEY, PollutionShowGround, out bool pollutionShowGroundUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_SOLID_WASTE_KEY, PollutionShowSolidWaste, out bool pollutionShowSolidWasteUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_VEHICLE_KEY, PollutionShowVehicle, out bool pollutionShowVehicleUpdated);
-            updated = TryReplaceConfigDefault(updated, POLLUTION_SHOW_SHIP_KEY, PollutionShowShip, out bool pollutionShowShipUpdated);
-            updated = TryReplaceConfigDefault(updated, RADIATION_OVERLAY_ENABLED_KEY, RadiationOverlayEnabled, out bool radiationOverlayEnabledUpdated);
-            updated = TryReplaceConfigDefault(updated, RADIATION_GLOW_ENABLED_KEY, RadiationGlowEnabled, out bool radiationGlowEnabledUpdated);
-            updated = TryReplaceConfigDefault(updated, RADIATION_DAYS_TO_AVERAGE_KEY, RadiationDaysToAverage, out bool radiationDaysToAverageUpdated);
-            updated = TryReplaceConfigDefault(updated, LAYOUT_BOX_MODE_ENABLED_KEY, LayoutBoxModeEnabled, out bool layoutBoxModeEnabledUpdated);
-            updated = TryReplaceConfigDefault(updated, USE_RECYCLE_BIN_KEY, UseRecycleBin, out bool useRbUpdated);
-            updated = TryReplaceConfigDefault(updated, RECYCLE_BIN_FOLDER_NAME_KEY, RecycleBinFolderName, out bool rbNameUpdated);
-            updated = TryReplaceConfigDefault(updated, BLUEPRINT_SPACING_KEY, BlueprintSpacing, out bool blueprintSpacingUpdated);
-            updated = TryReplaceConfigDefault(updated, HEIGHT_FILTER_TRANSPORT_VISIBILITY_KEY, (int)HeightFilterTransportVisibility, out bool transportVisibilityUpdated);
-            updated = TryReplaceConfigDefault(updated, HEIGHT_FILTER_PILLAR_VISIBILITY_KEY, (int)HeightFilterPillarVisibility, out bool pillarVisibilityUpdated);
+            foreach (var entry in defaults)
+            {
+                if (!supported.ContainsKey(entry.Key)
+                    || !config.Parameters.TryGetValue(entry.Key, out var parameter)
+                    || !Equals(parameter.CurrentValue, parameter.DefaultValue))
+                    continue;
 
-            if (!languageUpdated)
-            {
-                error = "Could not find markdown_table_language default in config.json.";
-                return false;
+                if (!config.TrySetValue(entry.Key, entry.Value, out string error))
+                    s_log.Warning($"Invalid default in {GLOBAL_SETTINGS_FILE}: {error}");
             }
-            if (!numberFormatUpdated)
+        }
+        catch (Exception ex)
+        {
+            s_log.Warning($"Could not load global settings from {path}: {ex.Message}");
+        }
+    }
+
+    private static void MigrateGlobalDefaults(ModJsonConfig config, IEnumerable<string> keys, string path)
+    {
+        // Older BDT versions wrote global defaults into the installed config.json.
+        // Compare its defaults against the bundled schema to copy only custom values.
+        using var stockStream = typeof(DesignerToolkitSettings).Assembly
+            .GetManifestResourceStream("DesignerToolkit.StockConfig.json");
+        if (stockStream == null)
+            throw new InvalidOperationException("Could not read the bundled config.json.");
+        using var stockReader = new StreamReader(stockStream);
+        if (new JsonParser().Parse(stockReader) is not Dict<string, object> stockJson
+            || !ModJsonConfig.TryLoadFromJson(stockJson, config.ModId, out var stock, out _))
+            throw new InvalidDataException("Invalid bundled config.json.");
+
+        var customDefaults = new Dictionary<string, object>();
+        foreach (string key in keys)
+        {
+            if (config.Parameters.TryGetValue(key, out var installed)
+                && stock.Parameters.TryGetValue(key, out var original)
+                && !Equals(installed.DefaultValue, original.DefaultValue))
+                customDefaults.Add(key, installed.DefaultValue);
+        }
+
+        if (customDefaults.Count > 0 && WriteGlobalDefaults(path, customDefaults, overwrite: false))
+            s_log.Info($"Migrated Designer Toolkit global defaults to: {path}");
+    }
+
+    private static bool TrySaveGlobalConfig(out string error)
+    {
+        if (s_config == null || s_globalSettingsPath == null)
+        {
+            error = "Global settings path is unavailable.";
+            return false;
+        }
+
+        try
+        {
+            var defaults = CollectGlobalDefaults();
+            foreach (var entry in defaults)
             {
-                error = "Could not find markdown_number_format default in config.json.";
-                return false;
-            }
-            if (!instantBuildUpdated)
-            {
-                error = "Could not find instant_build_mode default in config.json.";
-                return false;
-            }
-            if (!legacyBeltConfigurationsUpdated)
-            {
-                error = "Could not find legacy_belt_configurations default in config.json.";
-                return false;
-            }
-            if (!preColorPipesUpdated)
-            {
-                error = "Could not find pre_color_pipes default in config.json.";
-                return false;
-            }
-            if (!throughputOverlayEnabledUpdated)
-            {
-                error = "Could not find throughput_overlay_enabled default in config.json.";
-                return false;
-            }
-            if (!throughputGlowEnabledUpdated)
-            {
-                error = "Could not find throughput_glow_enabled default in config.json.";
-                return false;
-            }
-            if (!throughputDaysToAverageUpdated)
-            {
-                error = "Could not find throughput_days_to_average default in config.json.";
-                return false;
-            }
-            if (!throughputHeatmapModeUpdated)
-            {
-                error = "Could not find throughput_heatmap_mode default in config.json.";
-                return false;
-            }
-            if (!throughputColorblindModeUpdated)
-            {
-                error = "Could not find throughput_colorblind_mode default in config.json.";
-                return false;
-            }
-            if (!throughputShowAsPercentUpdated)
-            {
-                error = "Could not find throughput_show_as_percent default in config.json.";
-                return false;
-            }
-            if (!pollutionOverlayEnabledUpdated)
-            {
-                error = "Could not find pollution_overlay_enabled default in config.json.";
-                return false;
-            }
-            if (!pollutionGlowEnabledUpdated)
-            {
-                error = "Could not find pollution_glow_enabled default in config.json.";
-                return false;
-            }
-            if (!pollutionGlowColorUpdated)
-            {
-                error = "Could not find pollution_glow_color default in config.json.";
-                return false;
-            }
-            if (!pollutionDaysToAverageUpdated)
-            {
-                error = "Could not find pollution_days_to_average default in config.json.";
-                return false;
-            }
-            if (!pollutionShowAirUpdated)
-            {
-                error = "Could not find pollution_show_air default in config.json.";
-                return false;
-            }
-            if (!pollutionShowGroundUpdated)
-            {
-                error = "Could not find pollution_show_ground default in config.json.";
-                return false;
-            }
-            if (!pollutionShowVehicleUpdated)
-            {
-                error = "Could not find pollution_show_vehicle default in config.json.";
-                return false;
-            }
-            if (!pollutionShowShipUpdated)
-            {
-                error = "Could not find pollution_show_ship default in config.json.";
-                return false;
-            }
-            if (!radiationOverlayEnabledUpdated)
-            {
-                error = "Could not find radiation_overlay_enabled default in config.json.";
-                return false;
-            }
-            if (!radiationGlowEnabledUpdated)
-            {
-                error = "Could not find radiation_glow_enabled default in config.json.";
-                return false;
-            }
-            if (!radiationDaysToAverageUpdated)
-            {
-                error = "Could not find radiation_days_to_average default in config.json.";
-                return false;
-            }
-            if (!layoutBoxModeEnabledUpdated)
-            {
-                error = "Could not find layout_box_mode_enabled default in config.json.";
-                return false;
-            }
-            if (!useRbUpdated)
-            {
-                error = "Could not find use_recycle_bin default in config.json.";
-                return false;
-            }
-            if (!rbNameUpdated)
-            {
-                error = "Could not find recycle_bin_folder_name default in config.json.";
-                return false;
-            }
-            if (!blueprintSpacingUpdated)
-            {
-                error = "Could not find blueprint_spacing default in config.json.";
-                return false;
-            }
-            if (!transportVisibilityUpdated)
-            {
-                error = "Could not find height_filter_transport_visibility default in config.json.";
-                return false;
-            }
-            if (!pillarVisibilityUpdated)
-            {
-                error = "Could not find height_filter_pillar_visibility default in config.json.";
-                return false;
+                if (!s_config.Parameters.TryGetValue(entry.Key, out var parameter))
+                {
+                    error = $"Could not find {entry.Key} in config.json.";
+                    return false;
+                }
+                if (!parameter.Validate(entry.Value, out _, out error))
+                    return false;
             }
 
-            File.WriteAllText(path, updated, new System.Text.UTF8Encoding(false));
+            WriteGlobalDefaults(s_globalSettingsPath, defaults);
+            foreach (var entry in defaults)
+                s_config.TrySetValue(entry.Key, entry.Value, out _);
+            error = string.Empty;
             return true;
         }
         catch (Exception ex)
@@ -1391,6 +1269,17 @@ internal static class DesignerToolkitSettings
             error = ex.Message;
             return false;
         }
+    }
+
+    private static bool WriteGlobalDefaults(string path, Dictionary<string, object> defaults, bool overwrite = true)
+    {
+        var lines = new List<string>();
+        foreach (var entry in defaults)
+        {
+            var value = new JsonWriter(32);
+            lines.Add($"  \"{JsonWriter.JsonEscapeString(entry.Key)}\": {value.ValueOf(entry.Value).GetJson()}");
+        }
+        return ModSettingsFile.Write(path, "{\n" + string.Join(",\n", lines) + "\n}\n", overwrite);
     }
 
     private static void SetMarkdownTableLanguage(MarkdownTableLanguage language)
@@ -1409,6 +1298,7 @@ internal static class DesignerToolkitSettings
             return;
 
         InstantBuildModeEnabled = enabled;
+        CompletedBuildingCut.RefreshAvailability();
         try { InstantBuildModeChanged?.Invoke(enabled); }
         catch (Exception ex) { s_log.Warning($"Instant build mode change handler failed: {ex.Message}"); }
     }
@@ -1486,67 +1376,6 @@ internal static class DesignerToolkitSettings
     }
 
 
-
-    private static string TryReplaceConfigDefault(string json, string key, int value, out bool updated)
-    {
-        string pattern = "(\"" + key + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)-?\\d+";
-        updated = Regex.IsMatch(json, pattern, RegexOptions.Singleline);
-        if (!updated)
-            return json;
-        return Regex.Replace(
-            json,
-            pattern,
-            match => match.Groups[1].Value + value.ToString(System.Globalization.CultureInfo.InvariantCulture),
-            RegexOptions.Singleline);
-    }
-
-    private static string TryReplaceConfigDefault(string json, string key, bool value, out bool updated)
-    {
-        string pattern = "(\"" + key + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)(true|false|0|1)";
-        updated = Regex.IsMatch(json, pattern, RegexOptions.Singleline | RegexOptions.IgnoreCase);
-        if (!updated)
-            return json;
-        return Regex.Replace(
-            json,
-            pattern,
-            match => match.Groups[1].Value + (value ? "true" : "false"),
-            RegexOptions.Singleline | RegexOptions.IgnoreCase);
-    }
-
-    private static string TryReplaceConfigDefault(string json, string key, string value, out bool updated)
-    {
-        string pattern = "(\"" + key + "\"\\s*:\\s*\\{[^}]*?\"default\"\\s*:\\s*)\"(?:\\\\.|[^\"])*\"";
-        updated = Regex.IsMatch(json, pattern, RegexOptions.Singleline);
-        if (!updated)
-            return json;
-        return Regex.Replace(
-            json,
-            pattern,
-            match => match.Groups[1].Value + "\"" + EscapeJsonString(value) + "\"",
-            RegexOptions.Singleline);
-    }
-
-    private static string EscapeJsonString(string value)
-    {
-        return value.Replace("\\", "\\\\").Replace("\"", "\\\"");
-    }
-
-    private static bool ConfigHasValue(ModJsonConfig config, string key)
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(s_modDirectory))
-                return false;
-
-            string json = File.ReadAllText(Path.Combine(s_modDirectory, "config.json"));
-            return Regex.IsMatch(json, "\"" + Regex.Escape(key) + "\"\\s*:");
-        }
-        catch (Exception ex)
-        {
-            s_log.Warning($"Failed to inspect BDT config for legacy hotkey '{key}': {ex.Message}");
-            return false;
-        }
-    }
 
     private static void LoadFromJsonStore(
         IModStateJsonStore store,
@@ -1630,6 +1459,10 @@ internal static class DesignerToolkitSettings
                 MarkdownNumberFormat = NumberFormatFromInt(numberFormat);
             if (TryGetBool(root, "instantBuildMode", out bool instantBuildMode))
                 InstantBuildModeEnabled = instantBuildMode;
+            if (TryGetBool(root, "infiniteZoom", out bool infiniteZoom))
+                InfiniteZoomEnabled = infiniteZoom;
+            if (TryGetBool(root, "matchTransportTier", out bool matchTransportTier))
+                MatchTransportTierEnabled = matchTransportTier;
             if (TryGetBool(root, "legacyBeltConfigurations", out bool legacyBeltConfigurations))
                 LegacyBeltConfigurationsEnabled = legacyBeltConfigurations;
             if (TryGetInt(root, "heightFilterMaxVisibleLevel", out int heightFilterMaxVisibleLevel))
@@ -1708,6 +1541,8 @@ internal static class DesignerToolkitSettings
         writer.Field("markdownTableLanguage", (int)MarkdownTableLanguage);
         writer.Field("markdownNumberFormat", (int)MarkdownNumberFormat);
         writer.Field("instantBuildMode", InstantBuildModeEnabled);
+        writer.Field("infiniteZoom", InfiniteZoomEnabled);
+        writer.Field("matchTransportTier", MatchTransportTierEnabled);
         writer.Field("legacyBeltConfigurations", LegacyBeltConfigurationsEnabled);
         writer.Field("heightFilterMaxVisibleLevel", HeightFilterMaxVisibleLevel);
         writer.Field("throughputOverlayEnabled", ThroughputOverlayEnabled);

@@ -127,5 +127,9 @@ is included by mistake, I intend to correct it promptly upon discovery or notice
     </AssemblyAttribute>
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="config.json" LogicalName="DesignerToolkit.StockConfig.json" />
+  </ItemGroup>
+
   <Import Project="external\CoI_AutoHelpers\build\CoI.Compatibility.targets" />
 </Project>

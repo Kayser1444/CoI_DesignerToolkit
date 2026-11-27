@@ -1,3 +1,10 @@
+v0.13.0 | 2026-11-27
+
+* Added **Infinite zoom**, on by default, so the scroll wheel can zoom past the normal camera limits in both directions
+* Added true cut and paste for completed buildings in Sandbox **Instant build mode**. Use `X` over a building or `Ctrl+X` to select an area. `Ctrl+Z` restores the cut at its original location
+* Added **Match transport tier**, on by default, for extensions and connections at either end of a belt or pipe. The new route uses the higher tier when both ends differ, or the completed tier when connecting to a ghost
+* **Save as config** now saves defaults outside the mod folder and imports customized defaults from older installations
+
 v0.12.2 | 2026-11-23
 
 * Fixed: Connected belts no longer show extra end caps after using the height filter

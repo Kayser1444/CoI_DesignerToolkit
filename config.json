@@ -30,7 +30,15 @@
   },
   "instant_build_mode": {
     "default": false,
-    "description": "Initial instant build mode for saves without BDT settings state. When enabled, BDT completes construction and deconstruction automatically."
+    "description": "Initial instant build mode for saves without BDT settings state. When enabled, BDT completes construction and deconstruction automatically and lets you cut completed buildings."
+  },
+  "infinite_zoom": {
+    "default": true,
+    "description": "Remove the normal scroll-wheel zoom limits."
+  },
+  "match_transport_tier": {
+    "default": true,
+    "description": "Temporarily match belt and pipe tiers when connecting to existing transports."
   },
   "legacy_belt_configurations": {
     "default": true,

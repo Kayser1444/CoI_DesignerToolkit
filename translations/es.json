@@ -77,11 +77,27 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Completa automáticamente y al instante la construcción, demolición, mejoras y degradaciones sin materiales, trabajadores ni unidad (incluso en pausa). Activar esto también desactiva el interruptor de construcción instantánea del juego."
+    "Completa al instante la construcción, la demolición, las mejoras y las reducciones de nivel sin materiales, trabajadores ni unidad, incluso con el juego en pausa. Permite cortar y pegar edificios terminados. Al cortar, se retiran los originales y recibes un plano para colocarlos en otro lugar. Ctrl+Z restaura los originales. Desactiva la construcción instantánea del juego."
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoom",
+    "Zoom ilimitado"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoomDescription",
+    "Usa la rueda del ratón para acercar y alejar la cámara más allá de los límites habituales."
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTier",
+    "Igualar el nivel de transporte"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTierDescription",
+    "Adapta temporalmente el nivel al de las cintas y tuberías que conectes. Desactiva esta opción para elegir otro nivel."
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "¡Lárgate al modo sandbox, holgazán!"
+    "Disponible en Sandbox. Permite cortar y pegar edificios terminados."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -329,7 +345,7 @@
   ],
   [
     "DesignerToolkit.SettingsSaveAsGlobalTooltip",
-    "Guardar estas configuraciones en config.json. Se utilizarán como valores predeterminados para todos los juegos nuevos."
+    "Guardar estas configuraciones en BDTsettings.json. Se utilizarán como valores predeterminados para todos los juegos nuevos."
   ],
   [
     "DesignerToolkit.SettingsRestoredDefaults",
@@ -337,7 +353,7 @@
   ],
   [
     "DesignerToolkit.SettingsSavedToConfig",
-    "Guardado en config.json."
+    "Guardado en BDTsettings.json."
   ],
   [
     "DesignerToolkit.SettingsSaveFailed",
@@ -634,6 +650,14 @@
   [
     "DesignerToolkit.UndoSuccessMessage",
     "Deshacer: colocación revertida correctamente."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Se han restaurado los elementos cortados."
+  ],
+  [
+    "DesignerToolkit.UndoCutFailedMessage",
+    "No se han podido restaurar algunos de los elementos cortados."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

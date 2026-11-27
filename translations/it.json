@@ -77,11 +77,27 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Completa automaticamente e istantaneamente costruzione, demolizione, potenziamenti e declassamenti senza materiali, lavoratori o unità (anche in pausa). L'attivazione disattiva anche l'interruttore di costruzione istantanea del gioco."
+    "Completa all’istante costruzione, demolizione, potenziamenti e declassamenti senza materiali, lavoratori o unità, anche a gioco in pausa. Consente di tagliare e incollare gli edifici completati. Quando tagli, gli originali vengono rimossi e ricevi un progetto da posizionare altrove. Ctrl+Z ripristina gli originali. Disattiva la costruzione istantanea del gioco."
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoom",
+    "Zoom illimitato"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoomDescription",
+    "Usa la rotella del mouse per superare i normali limiti di zoom della telecamera in entrambe le direzioni."
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTier",
+    "Abbina il livello dei trasporti"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTierDescription",
+    "Adatta temporaneamente il livello a quello dei nastri e dei tubi a cui ti colleghi. Disattiva l’opzione per scegliere un altro livello."
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Vattene nella sandbox, pigrone!"
+    "Disponibile in Sandbox. Consente di tagliare e incollare gli edifici completati."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -329,7 +345,7 @@
   ],
   [
     "DesignerToolkit.SettingsSaveAsGlobalTooltip",
-    "Salva queste impostazioni in config.json. Verranno utilizzate come predefinite per tutte le nuove partite."
+    "Salva queste impostazioni in BDTsettings.json. Verranno utilizzate come predefinite per tutte le nuove partite."
   ],
   [
     "DesignerToolkit.SettingsRestoredDefaults",
@@ -337,7 +353,7 @@
   ],
   [
     "DesignerToolkit.SettingsSavedToConfig",
-    "Salvato in config.json."
+    "Salvato in BDTsettings.json."
   ],
   [
     "DesignerToolkit.SettingsSaveFailed",
@@ -634,6 +650,14 @@
   [
     "DesignerToolkit.UndoSuccessMessage",
     "Annulla: posizionamento annullato correttamente."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Gli elementi tagliati sono stati ripristinati."
+  ],
+  [
+    "DesignerToolkit.UndoCutFailedMessage",
+    "Non è stato possibile ripristinare alcuni elementi tagliati."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

@@ -39,31 +39,43 @@ internal static class UndoPatches
     [HarmonyPatch(typeof(InputScheduler), "processCmd", new Type[] { typeof(IInputCommand), typeof(bool) })]
     private static class ProcessCmdPatch
     {
+        private enum ActionType { Ignore, Record, Restore }
+
         [HarmonyPrefix]
-        private static void Prefix(IInputCommand cmd)
+        private static void Prefix(IInputCommand cmd, out ActionType __state)
         {
+            if (UndoManager.BeginRestoration(cmd))
+            {
+                __state = ActionType.Restore;
+                return;
+            }
+
+            __state = ActionType.Ignore;
             if (cmd is BatchCreateStaticEntitiesCmd || cmd is PasteSurfaceDesignationsCmd || cmd is BatchAddSurfaceDecalCmd || cmd is ReplaceEntityCmd)
             {
                 UndoManager.BeginRecord();
+                __state = ActionType.Record;
             }
         }
 
-        [HarmonyPostfix]
-        private static void Postfix(IInputCommand cmd)
+        [HarmonyFinalizer]
+        private static void Finish(IInputCommand cmd, ActionType __state, Exception? __exception)
         {
-            if (cmd is BatchCreateStaticEntitiesCmd || cmd is PasteSurfaceDesignationsCmd || cmd is BatchAddSurfaceDecalCmd || cmd is ReplaceEntityCmd)
+            if (__state == ActionType.Restore)
             {
-                if (cmd is PasteSurfaceDesignationsCmd pasteCmd)
-                {
-                    UndoManager.RecordPastedSurfaces(pasteCmd.Data);
-                }
-                else if (cmd is BatchAddSurfaceDecalCmd decalCmd)
-                {
-                    UndoManager.RecordPastedDecals(decalCmd.Data);
-                }
-
-                UndoManager.EndRecord();
+                UndoManager.EndRestoration(cmd, __exception == null);
+                return;
             }
+
+            if (__state != ActionType.Record)
+                return;
+
+            if (cmd is PasteSurfaceDesignationsCmd pasteCmd)
+                UndoManager.RecordPastedSurfaces(pasteCmd.Data);
+            else if (cmd is BatchAddSurfaceDecalCmd decalCmd)
+                UndoManager.RecordPastedDecals(decalCmd.Data);
+
+            UndoManager.EndRecord();
         }
     }
 
@@ -73,6 +85,7 @@ internal static class UndoPatches
         [HarmonyPostfix]
         private static void Postfix(IEntity entity)
         {
+            UndoManager.TrackRestoredEntity(entity);
             if (UndoManager.IsRecording)
             {
                 UndoManager.RecordPlacedEntity(entity.Id);

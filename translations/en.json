@@ -77,11 +77,27 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Automatically and instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or unity (even while paused). Enabling this also turns off the game's insta-build toggle."
+    "Instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or Unity, even while paused. Includes true cut and paste. Cut removes completed buildings and gives you a blueprint to place elsewhere. Ctrl+Z restores the cut. Turns off the game's Insta-build toggle."
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoom",
+    "Infinite zoom"
+  ],
+  [
+    "DesignerToolkit.SettingsInfiniteZoomDescription",
+    "Scroll past the normal camera zoom limits in either direction."
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTier",
+    "Match transport tier"
+  ],
+  [
+    "DesignerToolkit.SettingsMatchTransportTierDescription",
+    "Temporarily matches the tier of belts and pipes you connect to. Turn this off to place a different tier on purpose."
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Sod off to the sandbox, you lazy git!"
+    "Available in Sandbox. Includes true cut and paste for completed buildings."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -329,7 +345,7 @@
   ],
   [
     "DesignerToolkit.SettingsSaveAsGlobalTooltip",
-    "Save these settings to config.json. They will be used as the defaults for all new games."
+    "Save these settings to BDTsettings.json. They will be used as the defaults for all new games."
   ],
   [
     "DesignerToolkit.SettingsRestoredDefaults",
@@ -337,7 +353,7 @@
   ],
   [
     "DesignerToolkit.SettingsSavedToConfig",
-    "Saved to config.json."
+    "Saved to BDTsettings.json."
   ],
   [
     "DesignerToolkit.SettingsSaveFailed",
@@ -634,6 +650,14 @@
   [
     "DesignerToolkit.UndoSuccessMessage",
     "Undo: Placement reverted successfully."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Undo: Cut restored."
+  ],
+  [
+    "DesignerToolkit.UndoCutFailedMessage",
+    "Undo: Some cut items could not be restored."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",
