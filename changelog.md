@@ -2,6 +2,8 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.13.1 [unreleased]
+
 ## v0.13.0 [released]
 
 - Store **Save as config** defaults in `ModConfigs/DesignerToolkit/BDTsettings.json`. Import customized defaults from an older installed `config.json` when available.
