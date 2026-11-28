@@ -30,7 +30,11 @@
   },
   "instant_build_mode": {
     "default": false,
-    "description": "Initial instant build mode for saves without BDT settings state. When enabled, BDT completes construction and deconstruction automatically and lets you cut completed buildings."
+    "description": "Initial instant build mode for saves without BDT settings state. When enabled, BDT completes construction and deconstruction automatically in Sandbox."
+  },
+  "move_buildings": {
+    "default": false,
+    "description": "Enable Cut buildings for completed buildings and player-laid pavement. Available after Cut research, or immediately in Sandbox."
   },
   "infinite_zoom": {
     "default": true,
@@ -157,6 +161,10 @@
   "dtkSettingsStateJson": {
     "default": "{\"schemaVersion\":1}",
     "description": "Internal per-save Designer Toolkit settings state. Editing may reset saved BDT settings."
+  },
+  "bdtBuildingMoveStateJson": {
+    "default": "",
+    "description": "Internal per-save Designer Toolkit state for active building moves."
   },
   "bdtRateLimitsStateJson": {
     "default": "{\"schemaVersion\":1}",

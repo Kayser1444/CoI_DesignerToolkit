@@ -35,6 +35,11 @@ public static partial class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Run(string mod)
     {
+        TransportCleanupContracts(mod);
+        BuildingRecutContracts(mod);
+        BuildingReclassificationContracts(mod);
+        BuildingCancellationContracts(mod);
+        SurfaceInstantBuildContracts(mod);
         RadiationContracts(mod);
         ProductProto a = Product("A"), b = Product("B"), placeholder = Product("Mixed");
         var category = (MixedMaterialCategory)RuntimeHelpers.GetUninitializedObject(typeof(MixedMaterialCategory));

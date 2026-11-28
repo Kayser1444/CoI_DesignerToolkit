@@ -1,6 +1,6 @@
 # Transport Cleanup Tool
 
-BDT can remove disconnected belt and pipe segments inside a selection dragged over the terrain.
+BDT can remove disconnected belts, pipes, lifts, balancers, connectors, and sorters from a selection dragged over the terrain.
 
 ## Hotkeys
 
@@ -9,10 +9,10 @@ BDT can remove disconnected belt and pipe segments inside a selection dragged ov
 
 The tool hotkey can be changed in BDT's mod settings or seeded through `config.json`. In mod settings, click a keybinding field to edit it or right-click the field to clear it.
 
-After arming the mode, drag a rectangle over belts or pipes in the world. Matching disconnected transport segments highlight red while selected, then BDT removes them when the mouse is released over the world.
+After arming the mode, drag a rectangle over the entities you want to check. Eligible entities highlight red, and the HUD lists their names and counts. Release the mouse over the world to remove the selection.
 
 ## Selection Rules
 
-The selection matches any part of a disconnected belt or pipe. The tool removes the whole matching segment. Connected belts and pipes are skipped.
+A belt or pipe is eligible if at least one end is disconnected. Drag over any part of it to select the whole segment. Lifts, balancers, connectors, and sorters are eligible if zero or one of their ports is connected.
 
 This feature is destructive and changes real entities in the loaded game.

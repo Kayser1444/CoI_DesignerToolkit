@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Slutför byggnation, rivning, uppgraderingar och nedgraderingar direkt utan material, arbetare eller Unity, även när spelet är pausat. Du kan klippa ut och klistra in färdigbyggda byggnader. När du klipper ut tas byggnaderna bort och du får en ritning att placera någon annanstans. Ctrl+Z återställer byggnaderna. Inaktiverar spelets eget snabbygge."
+    "Slutför omedelbart byggande, rivning, uppgraderingar och nedgraderingar även när spelet är pausat. Inga material, arbetare eller Unity krävs. Stänger av spelets eget snabbbygge."
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "Anpassar tillfälligt nivån till de transportband och rör du ansluter till. Stäng av för att kunna välja en annan nivå."
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "Klipp ut byggnader"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "Välj nytt mål för blockerad flytt"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "Välj en ny plats för den senaste blockerade flytten. Blockerade flyttar gör automatiskt nya försök på den valda platsen."
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "Klipp ut färdigbyggda byggnader och beläggning som spelaren har lagt. Klistra in markeringen på en annan plats eller tryck på Esc för att släppa den. Vanliga byggnader börjar rivas när du klipper ut dem. För unika byggnader börjar rivningen när du bekräftar destinationen. Tillgängligt efter att du har forskat fram Klipp ut, eller direkt i Sandbox. Ctrl+Z ångrar en urklippning eller flytt."
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Tillgängligt i Sandbox. Där kan du klippa ut och klistra in färdigbyggda byggnader."
+    "Tillgängligt i Sandbox."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "Ångra: Placeringen har återställts."
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "Urklippta byggnader har återställts."
+    "DesignerToolkit.MoveNoBlocked",
+    "Det finns ingen blockerad flytt att välja en ny plats för."
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "Vissa urklippta objekt kunde inte återställas."
+    "DesignerToolkit.MoveDestinationBlocked",
+    "Platsen för flytten är blockerad."
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "En urklippt markering kan bara klistras in en gång."
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "Byggnaden ingår i en pågående urklippning eller flytt. Ångra eller slutför den först."
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "Flytten står i kö. Bygget börjar när den ursprungliga platsen är fri."
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "Byggnaden står kvar på sin ursprungliga plats. Resten av flytten fortsätter."
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "Flytten avbröts eftersom rivningen av en unik byggnad avbröts."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "Bygget på den nya platsen har beställts."
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "Flytten är blockerad. {0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "En byggnadstyp saknas."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "Det gick inte att bygga på den nya platsen."
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "Det går inte att lägga beläggning vid {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "Det finns redan en ytbeställning vid {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "Det finns redan beläggning vid {0}."
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "En markering ligger utanför kartan."
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "En markering behöver beläggning vid {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "Det finns redan en markering vid {0}."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Urklippta byggnader har återställts."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

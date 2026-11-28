@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Conclui instantaneamente construções, demolições, melhorias e reduções de nível sem materiais, trabalhadores ou unidade, mesmo com o jogo pausado. Permite recortar e colar edifícios concluídos. Ao recortar, os originais são removidos e você recebe uma planta para posicioná-los em outro local. Ctrl+Z restaura os originais. Desativa a construção instantânea do jogo."
+    "Conclui instantaneamente construções, demolições, melhorias e rebaixamentos, mesmo com o jogo pausado. Não consome materiais, trabalhadores nem unidade. Desativa a construção instantânea do jogo."
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "Ajusta temporariamente o nível ao das esteiras e tubulações que você conectar. Desative esta opção para escolher outro nível."
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "Recortar edifícios"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "Redefinir destino da mudança bloqueada"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "Escolha um novo destino para a última mudança bloqueada. Mudanças bloqueadas são tentadas novamente de forma automática no destino selecionado."
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "Recorte edifícios concluídos e pavimentos instalados pelo jogador. Cole a seleção em outro lugar ou pressione Esc para soltá-la. Recortar edifícios comuns inicia a demolição. Edifícios únicos aguardam a confirmação do destino. Disponível após pesquisar Recortar ou imediatamente no modo Sandbox. Ctrl+Z desfaz o recorte ou a mudança."
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Disponível no modo Sandbox. Permite recortar e colar edifícios concluídos."
+    "Disponível no modo Sandbox."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "Desfazer: colocação revertida com sucesso."
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "Os itens recortados foram restaurados."
+    "DesignerToolkit.MoveNoBlocked",
+    "Nenhuma mudança bloqueada para redefinir."
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "Não foi possível restaurar alguns dos itens recortados."
+    "DesignerToolkit.MoveDestinationBlocked",
+    "O destino da mudança está bloqueado."
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "Uma seleção recortada só pode ser colada uma vez."
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "Este edifício faz parte de um recorte ou mudança em andamento. Desfaça ou conclua essa operação primeiro."
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "Mudança na fila. A construção começará quando o local de origem estiver livre."
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "O edifício cancelado permanece no local original. O restante da mudança continuará."
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "Mudança cancelada porque a demolição de um edifício único foi cancelada."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "Construção solicitada no novo destino."
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "Mudança bloqueada. {0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "Falta um protótipo de edifício."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "Não foi possível solicitar a construção no destino."
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "Não é possível instalar pavimento em {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "Já existe uma designação de superfície em {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "Já existe pavimento em {0}."
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "Uma marca no piso está fora do mapa."
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "A marca em {0} precisa de pavimento."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "Já existe uma marca no piso em {0}."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Os itens recortados foram restaurados."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

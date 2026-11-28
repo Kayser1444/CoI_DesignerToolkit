@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Schließt Bau, Abriss, Upgrades und Downgrades sofort ab, auch bei pausiertem Spiel und ohne Materialien, Arbeiter oder Einheit. Fertige Gebäude lassen sich ausschneiden und einfügen. Beim Ausschneiden werden die Originale entfernt und du erhältst eine Blaupause für einen anderen Standort. Ctrl+Z stellt die Originale wieder her. Deaktiviert den Sofortbau des Spiels."
+    "Schließt Bau, Abriss, Auf- und Abstufungen sofort ab, auch bei pausiertem Spiel. Benötigt weder Materialien noch Arbeiter oder Unity. Schaltet den Sofortbau des Spiels aus."
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "Passt die Stufe vorübergehend an die Förderbänder und Rohre an, mit denen du eine Verbindung herstellst. Deaktiviere die Option, um eine andere Stufe zu wählen."
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "Gebäude ausschneiden"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "Neues Ziel für blockierten Umzug wählen"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "Wähle einen neuen Standort für den letzten blockierten Umzug. Blockierte Umzüge werden am gewählten Standort automatisch erneut versucht."
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "Schneide fertige Gebäude und selbst verlegte Bodenbeläge aus. Füge die Auswahl an einem anderen Ort ein oder drücke Esc, um sie abzulegen. Bei normalen Gebäuden beginnt der Abriss beim Ausschneiden. Bei einzigartigen Gebäuden beginnt er, sobald du den Zielort bestätigst. Verfügbar nach Erforschung von Ausschneiden oder sofort in der Sandbox. Strg+Z macht das Ausschneiden oder den Umzug rückgängig."
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "In der Sandbox verfügbar. Fertige Gebäude lassen sich dort ausschneiden und einfügen."
+    "In der Sandbox verfügbar."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "Rückgängig: Platzierung erfolgreich rückgängig gemacht."
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "Ausgeschnittene Objekte wurden wiederhergestellt."
+    "DesignerToolkit.MoveNoBlocked",
+    "Es gibt keinen blockierten Umzug, für den ein neuer Standort gewählt werden kann."
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "Einige ausgeschnittene Objekte konnten nicht wiederhergestellt werden."
+    "DesignerToolkit.MoveDestinationBlocked",
+    "Der Zielort des Umzugs ist blockiert."
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "Eine ausgeschnittene Auswahl kann nur einmal eingefügt werden."
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "Dieses Gebäude ist Teil eines laufenden Ausschneide- oder Umzugsvorgangs. Mache den Vorgang rückgängig oder schließe ihn zuerst ab."
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "Umzug in die Warteschlange aufgenommen. Sobald der ursprüngliche Standort frei ist, beginnt der Bau."
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "Das Gebäude bleibt an seinem ursprünglichen Standort. Der Rest des Umzugs wird fortgesetzt."
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "Der Umzug wurde abgebrochen, weil der Abriss eines einzigartigen Gebäudes abgebrochen wurde."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "Der Bau am neuen Standort wurde beauftragt."
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "Der Umzug ist blockiert. {0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "Eine Gebäudevorlage fehlt."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "Der Bau am neuen Standort konnte nicht beauftragt werden."
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "Bei {0} kann kein Bodenbelag verlegt werden."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "Bei {0} befindet sich bereits eine Flächenmarkierung."
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "Bei {0} befindet sich bereits ein Bodenbelag."
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "Eine Bodenmarkierung liegt außerhalb der Karte."
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "Die Bodenmarkierung bei {0} benötigt einen Bodenbelag."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "Bei {0} befindet sich bereits eine Bodenmarkierung."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Ausgeschnittene Objekte wurden wiederhergestellt."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

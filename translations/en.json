@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or Unity, even while paused. Includes true cut and paste. Cut removes completed buildings and gives you a blueprint to place elsewhere. Ctrl+Z restores the cut. Turns off the game's Insta-build toggle."
+    "Instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or Unity, even while paused. Turns off the game's Insta-build toggle."
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "Temporarily matches the tier of belts and pipes you connect to. Turn this off to place a different tier on purpose."
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "Cut buildings"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "Retarget blocked move"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "Pick a new destination for the latest blocked move. Blocked moves automatically retry their current destination."
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "Cut completed buildings and player-laid pavement. Paste the selection to place it elsewhere, or press Esc to drop it. Cutting starts demolition for ordinary buildings. Unique buildings wait until you confirm a destination. Available after Cut research, or immediately in Sandbox. Ctrl+Z undoes a cut or move."
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Available in Sandbox. Includes true cut and paste for completed buildings."
+    "Available in Sandbox."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "Undo: Placement reverted successfully."
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "Undo: Cut restored."
+    "DesignerToolkit.MoveNoBlocked",
+    "There is no blocked move to retarget."
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "Undo: Some cut items could not be restored."
+    "DesignerToolkit.MoveDestinationBlocked",
+    "The move destination is blocked."
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "A cut can be pasted once."
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "This building belongs to an active cut or move. Undo or finish that move first."
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "Move queued. Construction will start when the source is clear."
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "The canceled building stays at its original location. The rest of the move will continue."
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "Move canceled because demolition of a unique building was canceled."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "Move construction ordered."
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "Move blocked. {0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "A building prototype is missing."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "The move could not be constructed."
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "Pavement cannot be placed at {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "A surface designation already occupies {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "Existing pavement occupies {0}."
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "A decal is outside the map."
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "A decal needs pavement at {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "An existing decal occupies {0}."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Undo: Cut restored."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

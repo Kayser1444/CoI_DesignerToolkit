@@ -16,6 +16,9 @@ It is built around one rule: **designer-only, consumer-free**. Players who downl
 - [📝 Copy as Markdown](#copy-as-markdown)
 - [🧩 Symmetric entity normalization](#symmetric-entity-normalization)
 - [⚡ Instant build mode](#instant-build-mode)
+- [✂️ Cut buildings](#cut-buildings)
+- [🔍 Infinite zoom](#infinite-zoom)
+- [🔗 Match transport tier](#match-transport-tier)
 - [🎨 Pre-color pipes](#pre-color-pipes)
 - [🧹 Transport cleanup tool](#transport-cleanup-tool)
 - [🗑️ Transport product removal](#transport-product-removal)
@@ -152,11 +155,29 @@ This is a passive feature that allows you to freely place connectors, balancers,
 
 BDT includes an Instant Build mode (configurable in Mod Settings) that automatically and instantly completes construction, deconstruction, upgrades, and downgrades without consuming materials, workers, or unity. The benefit over the vanilla insta-build toggle is that you don't need to unpause the game and risk having products end up in the wrong places when your build is being modified.
 
-Enabling this feature turns off the game's built-in insta-build toggle. Surface placement and clearing also complete automatically in sandbox mode.
+Enabling this feature turns off the game's built-in insta-build toggle. Surface placement and clearing also complete automatically in Sandbox, including while the game is paused.
 
 Buildings placed while Planning Mode is enabled remain paused until you unpause their construction.
 
 Migrated from Moriarty's Utilities++, with permission. (Thanks @Mori!)
+
+### ✂️ Cut buildings
+
+Enable **Cut buildings** under **Build Behaviors** in Mod Settings. Press `X` over a completed building or `Ctrl+X` to select an area. The Buildings, Surfaces, and Decals filters control what goes into the cut. Surfaces includes finished player-laid pavement and pending paving designations. The tool is available after Cut research, or immediately in Sandbox.
+
+Cut starts demolition for ordinary buildings. Unique buildings stay in place until you confirm a destination, and their replacements wait until the originals are gone. Canceling demolition for a batch’s only unique building leaves it in place and lets the rest of the move continue. If the batch started with several unique buildings, canceling one of their demolitions stops the move and the batch’s remaining demolition.
+
+Press `Esc` to drop the held selection. Demolition already ordered continues. Press `Ctrl+Z` to undo a cut or move using normal construction and demolition. Use **Retarget blocked move** in Mod Settings to choose another destination for a blocked move.
+
+### 🔍 Infinite zoom
+
+The scroll wheel zooms past the game's normal limits in both directions. **Infinite zoom** starts enabled and can be turned off in BDT settings.
+
+### 🔗 Match transport tier
+
+When you connect a new belt or pipe to an existing transport, the route borrows that transport's tier. If the two ends differ, the new route uses the higher tier. When a completed transport meets a ghost, the completed tier takes priority and matching adjusts eligible ghosts at the connection. Completed transports keep their current tiers.
+
+The tool returns to your selected tier after placement or cancellation. **Match transport tier** starts enabled. Turn it off in BDT settings to choose the tier of an extension yourself.
 
 ### 🎨 Pre-color pipes
 
@@ -168,7 +189,7 @@ Enable **Pre-color pipes** under **BUILD BEHAVIORS** in Mod Settings. The affect
 
 ### 🧹 Transport cleanup tool
 
-BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. This tool allows you to detect and demolish useless belts and pipes via an area selection drag, before capturing your blueprint. To avoid capturing input and output transports, terminate them properly with a source or sink.
+Press `Alt+Del` and drag an area to preview which entities will be demolished. The preview shows the selected entities and their counts by type. Cleanup picks up disconnected belts and pipes, along with lifts, balancers, connectors, and sorters with fewer than two connected ports. To keep input and output transports out of the selection, terminate them with a source or sink.
 
 The hotkey can be changed in BDT's mod settings under **TRANSPORT CLEANUP**.
 
@@ -332,7 +353,7 @@ BDT adds a **Mod Settings** panel, accessible from the top-right **M** button in
 | **English separators** | Force English separators everywhere |
 | **Local separators** | Force current-language separators everywhere |
 
-Settings are stored per save file. The `markdown_table_language` and `markdown_number_format` keys in `config.json` set the initial values for saves that have no stored settings yet.
+Settings are stored per save file. **Save as config** writes your defaults to `ModConfigs/DesignerToolkit/BDTsettings.json`, outside the mod installation. BDT uses these defaults for new games and saves without stored BDT settings.
 
 The **Throughput** settings control the global overlay, overlay hotkey, default averaging period, heat-map mode, colorblind-friendly colors, percent display, and the Throughput Area Tool hotkey.
 

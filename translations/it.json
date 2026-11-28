@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Completa all’istante costruzione, demolizione, potenziamenti e declassamenti senza materiali, lavoratori o unità, anche a gioco in pausa. Consente di tagliare e incollare gli edifici completati. Quando tagli, gli originali vengono rimossi e ricevi un progetto da posizionare altrove. Ctrl+Z ripristina gli originali. Disattiva la costruzione istantanea del gioco."
+    "Completa all'istante costruzioni, demolizioni, potenziamenti e declassamenti, anche a gioco in pausa. Non richiede materiali, lavoratori o unità. Disattiva la costruzione istantanea del gioco."
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "Adatta temporaneamente il livello a quello dei nastri e dei tubi a cui ti colleghi. Disattiva l’opzione per scegliere un altro livello."
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "Taglia edifici"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "Scegli un'altra destinazione"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "Scegli una nuova destinazione per l'ultimo spostamento bloccato. Gli spostamenti bloccati vengono riprovati automaticamente nella destinazione scelta."
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "Taglia edifici completati e pavimentazioni posate dal giocatore. Incolla la selezione altrove o premi Esc per rilasciarla. Tagliando un edificio ordinario ne avvii la demolizione. Gli edifici unici attendono la conferma della destinazione. Disponibile dopo la ricerca Taglia, o subito in Sandbox. Ctrl+Z annulla il taglio o lo spostamento."
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Disponibile in Sandbox. Consente di tagliare e incollare gli edifici completati."
+    "Disponibile in Sandbox."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "Annulla: posizionamento annullato correttamente."
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "Gli elementi tagliati sono stati ripristinati."
+    "DesignerToolkit.MoveNoBlocked",
+    "Non ci sono spostamenti bloccati da riposizionare."
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "Non è stato possibile ripristinare alcuni elementi tagliati."
+    "DesignerToolkit.MoveDestinationBlocked",
+    "La destinazione dello spostamento è bloccata."
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "Una selezione tagliata può essere incollata una sola volta."
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "Questo edificio fa parte di un taglio o spostamento in corso. Annulla o completa prima l'operazione."
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "Spostamento in coda. La costruzione inizierà quando il luogo di origine sarà libero."
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "L'edificio annullato resta nella posizione originale. Il resto dello spostamento proseguirà."
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "Spostamento annullato perché è stata annullata la demolizione di un edificio unico."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "Costruzione ordinata nella nuova posizione."
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "Spostamento bloccato. {0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "Manca un prototipo di edificio."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "Non è stato possibile ordinare la costruzione a destinazione."
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "Impossibile posare la pavimentazione in {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "In {0} esiste già una designazione di superficie."
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "In {0} è già presente una pavimentazione."
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "Un segno sul pavimento si trova fuori dalla mappa."
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "Il segno in {0} richiede una pavimentazione."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "In {0} è già presente un segno sul pavimento."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Gli elementi tagliati sono stati ripristinati."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

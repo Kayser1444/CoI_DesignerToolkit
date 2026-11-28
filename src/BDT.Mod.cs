@@ -145,11 +145,11 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
         m_saveManager.OnSaveDone += onSaveDone;
 
         m_settingsStateStore = ModStateJsonStores.CreateDefault(JsonConfig, DesignerToolkitSettings.SettingsStateConfigKey);
+        DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
         DesignerToolkitSettings.Initialize(JsonConfig, m_settingsStateStore,
             resolver.Resolve<IFileSystemHelper>().GameDataRootDirPath, gameWasLoaded);
         DesignerToolkitSettings.SetBlueprintsLibraryProvider(() => resolver.Resolve<Mafi.Core.Entities.Blueprints.BlueprintsLibrary>());
-        DesignerToolkitSettings.SetDifficultyConfig(resolver.Resolve<Mafi.Core.Game.GameDifficultyConfig>());
-        CompletedBuildingCut.Initialize(resolver.Resolve<Mafi.Unity.Ui.UiContext>().InputMgr);
+        CompletedBuildingCut.Initialize(resolver, ModStateJsonStores.CreateDefault(JsonConfig, BuildingMoveOrders.StateConfigKey));
         m_gameLoopEvents.SyncUpdate.AddNonSaveable(this, CompletedBuildingCut.RefreshAvailabilityIfChanged);
         TransportTierMatching.Initialize(resolver);
         PipeColoring.Initialize(resolver);
@@ -216,7 +216,8 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<UpgradesManager>(),
             m_simLoopEvents,
             instaBuildManager,
-            resolver.Resolve<GameDifficultyConfig>());
+            resolver.Resolve<GameDifficultyConfig>(),
+            resolver.Resolve<Mafi.Core.Terrain.Designation.SurfaceDesignationsManager>());
         m_instantBuildMode.Initialize();
         DesignerToolkitSettings.InstantBuildModeChanged += m_instantBuildMode.OnSettingsChanged;
 
@@ -225,6 +226,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<EntitiesManager>(),
             m_simLoopEvents,
             resolver.Resolve<Mafi.Unity.Ui.UiContext>(),
+            resolver.Resolve<HudController>(),
             resolver.Resolve<Mafi.Unity.InputControl.AreaTool.AreaSelectionToolFactory>(),
             resolver.Resolve<Mafi.Unity.UiStatic.Cursors.CursorManager>(),
             resolver.Resolve<NewInstanceOf<EntityHighlighter>>(),
@@ -263,6 +265,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
             resolver.Resolve<UiRoot>()
         );
         m_undoManager.Initialize();
+        CompletedBuildingCut.RestoreUndoHistory();
 
         ModSettings.EnsureInitialized(
             resolver.Resolve<HudController>(),
@@ -287,6 +290,7 @@ public sealed class DesignerToolkitMod : IMod, IDisposable
     {
         LegacyStackerFullAlertManager.BeforeSave();
         TransportProductRemovalManager.SaveState();
+        CompletedBuildingCut.SaveState();
         m_removalSaveLifecycle.BeforeVanillaSave();
 
         IModStateJsonStore store = m_settingsStateStore

@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Мгновенно завершает строительство, демонтаж, повышение и понижение уровня без материалов, рабочих и «Единства», даже на паузе. Готовые здания можно вырезать и вставлять. При вырезании исходные здания удаляются, а вы получаете чертёж для размещения в другом месте. Ctrl+Z восстанавливает исходные здания. Отключает встроенное мгновенное строительство."
+    "Мгновенно завершает строительство, снос, улучшение и понижение уровня даже на паузе. Материалы, рабочие и Unity не требуются. Отключает встроенное мгновенное строительство."
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "Временно подбирает уровень по конвейерам и трубам, к которым вы подключаетесь. Отключите эту настройку, чтобы выбрать другой уровень."
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "Вырезать здания"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "Выбрать новое место для заблокированного переноса"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "Укажите новое место для последнего заблокированного переноса. Игра автоматически повторяет попытки переноса на выбранное место."
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "Вырезайте готовые здания и уложенное игроком покрытие. Вставьте выделенное в другом месте или нажмите Esc, чтобы убрать его из курсора. Снос обычных зданий начинается при вырезании. Снос уникальных зданий начинается после подтверждения нового места. Доступно после исследования «Вырезать» или сразу в песочнице. Ctrl+Z отменяет вырезание или перенос."
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Доступно в песочнице. Позволяет вырезать и вставлять готовые здания."
+    "Доступно в песочнице."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "Отмена: размещение успешно отменено."
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "Вырезанные объекты восстановлены."
+    "DesignerToolkit.MoveNoBlocked",
+    "Нет заблокированных переносов, для которых можно выбрать другое место."
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "Не удалось восстановить часть вырезанных объектов."
+    "DesignerToolkit.MoveDestinationBlocked",
+    "Место для переноса заблокировано."
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "Вырезанное можно вставить только один раз."
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "Это здание участвует в незавершённом вырезании или переносе. Сначала отмените или завершите эту операцию."
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "Перенос поставлен в очередь. Строительство начнётся, когда исходное место освободится."
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "Здание останется на прежнем месте. Перенос остальных объектов продолжится."
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "Перенос отменён, поскольку отменён снос уникального здания."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "Строительство на новом месте заказано."
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "Перенос заблокирован. {0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "Отсутствует прототип здания."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "Не удалось заказать строительство на новом месте."
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "Нельзя уложить покрытие в точке {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "В точке {0} уже есть обозначение поверхности."
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "В точке {0} уже есть покрытие."
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "Разметка находится за пределами карты."
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "Для разметки в точке {0} нужно покрытие."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "В точке {0} уже есть разметка."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Вырезанные объекты восстановлены."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

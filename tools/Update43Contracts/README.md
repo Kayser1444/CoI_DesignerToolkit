@@ -13,6 +13,10 @@ creates isolated, unspawned entity fixtures; no game or save is opened.
 dotnet run --project tools/Update43Contracts -- '<game Managed directory>' '<absolute path to bin/Debug/net48/DesignerToolkit.dll>'
 ```
 
+Checks transport cleanup with native lifts, balancers, connectors, and sorters
+at zero, one, and multiple port connections, and verifies the existing belt
+selection rules and area boundaries.
+
 Checks selected-member removal, retained unit order, removal scope limits,
 plain products, transient-buffer transfer quantities and regular/quick removal
 for zippers, lifts, mini-zippers and sorters. The quick-removal fixtures verify

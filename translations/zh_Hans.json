@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "即使游戏暂停，也能立即完成建造、拆除、升级和降级，无需材料、工人或统一度。支持剪切和粘贴已完工的建筑。剪切会移除原建筑，并将蓝图交给你，以便在其他位置放置。按 Ctrl+Z 可恢复原建筑。启用后会关闭游戏自带的即时建造功能。"
+    "即使游戏暂停，也能立即完成建造、拆除、升级和降级，无需材料、工人或凝聚力。启用此功能会关闭游戏自带的即时建造。"
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "临时匹配所连接的传送带或管道的等级。关闭此选项即可选择其他等级。"
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "剪切建筑"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "为受阻的搬迁改选位置"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "为最近一次受阻的搬迁选择新位置。受阻的搬迁会在所选位置自动重试。"
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "剪切已完工的建筑及玩家铺设的地面。粘贴可将选中的内容放到别处，按 Esc 可放下选区。剪切普通建筑会开始拆除，独特建筑会等到确认新位置后才开始拆除。研究剪切后即可使用，在沙盒模式中可直接使用。按 Ctrl+Z 撤销剪切或搬迁。"
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "仅在沙盒模式可用，支持剪切和粘贴已完工的建筑。"
+    "仅在沙盒模式可用。"
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "撤消：放置已成功恢复。"
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "已恢复剪切的对象。"
+    "DesignerToolkit.MoveNoBlocked",
+    "没有可改选位置的受阻搬迁。"
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "部分剪切的对象无法恢复。"
+    "DesignerToolkit.MoveDestinationBlocked",
+    "搬迁目的地受阻。"
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "剪切的选区只能粘贴一次。"
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "该建筑已处于剪切或搬迁流程中。请先撤销或完成这项操作。"
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "搬迁已加入队列。原址腾空后将开始建造。"
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "已取消搬迁的建筑会留在原址，其余项目将继续搬迁。"
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "因独特建筑的拆除被取消，搬迁已取消。"
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "已下达在新址建造的指令。"
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "搬迁受阻。{0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "缺少一种建筑原型。"
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "无法在新址下达建造指令。"
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "无法在 {0} 铺设地面。"
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "{0} 已有地面施工指定。"
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "{0} 已有铺装。"
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "有一个地面标记在地图边界之外。"
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "{0} 的地面标记需要铺装。"
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "{0} 已有地面标记。"
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "已恢复剪切的对象。"
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

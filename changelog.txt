@@ -1,3 +1,10 @@
+v0.13.1 | 2026-11-28
+
+* Split **Cut buildings** from **Instant build mode**. Cut completed buildings and player-laid pavement in Sandbox or after researching Cut in a normal game. Area cuts respect the Buildings, Surfaces, and Decals filters
+* Unique buildings begin demolition when you confirm a destination. Construction waits for the original to clear, and the move responds if you cancel demolition
+* Fixed: Sandbox **Instant build mode** completes paving and clearing while the game is paused
+* **Transport cleanup** previews the buildings and transports it will demolish. It also picks up lifts, balancers, connectors, and sorters with fewer than two connections
+
 v0.13.0 | 2026-11-27
 
 * Added **Infinite zoom**, on by default, so the scroll wheel can zoom past the normal camera limits in both directions

@@ -77,7 +77,7 @@
   ],
   [
     "DesignerToolkit.SettingsInstantBuildModeDescription",
-    "Completa al instante la construcción, la demolición, las mejoras y las reducciones de nivel sin materiales, trabajadores ni unidad, incluso con el juego en pausa. Permite cortar y pegar edificios terminados. Al cortar, se retiran los originales y recibes un plano para colocarlos en otro lugar. Ctrl+Z restaura los originales. Desactiva la construcción instantánea del juego."
+    "Completa al instante la construcción, la demolición y los cambios a niveles superiores o inferiores, incluso con el juego en pausa. No consume materiales, trabajadores ni unidad. Desactiva la construcción instantánea del juego."
   ],
   [
     "DesignerToolkit.SettingsInfiniteZoom",
@@ -96,8 +96,24 @@
     "Adapta temporalmente el nivel al de las cintas y tuberías que conectes. Desactiva esta opción para elegir otro nivel."
   ],
   [
+    "DesignerToolkit.SettingsMoveBuildings",
+    "Cortar edificios"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMove",
+    "Cambiar el destino de un traslado bloqueado"
+  ],
+  [
+    "DesignerToolkit.SettingsRetargetBuildingMoveDescription",
+    "Elige otro destino para el último traslado bloqueado. Los traslados bloqueados se vuelven a intentar automáticamente en el destino elegido."
+  ],
+  [
+    "DesignerToolkit.SettingsMoveBuildingsDescription",
+    "Corta edificios terminados y pavimento colocado por el jugador. Pega la selección en otro lugar o pulsa Esc para soltarla. Al cortar un edificio normal se inicia su demolición. Los edificios únicos esperan hasta que confirmes un destino. Disponible al investigar Cortar, o de inmediato en Sandbox. Ctrl+Z deshace el corte o el traslado."
+  ],
+  [
     "DesignerToolkit.SettingsInstantBuildModeSandboxOnly",
-    "Disponible en Sandbox. Permite cortar y pegar edificios terminados."
+    "Disponible en Sandbox."
   ],
   [
     "DesignerToolkit.SettingsLegacyBeltConfigurations",
@@ -652,12 +668,76 @@
     "Deshacer: colocación revertida correctamente."
   ],
   [
-    "DesignerToolkit.UndoCutSuccessMessage",
-    "Se han restaurado los elementos cortados."
+    "DesignerToolkit.MoveNoBlocked",
+    "No hay ningún traslado bloqueado al que asignar otro destino."
   ],
   [
-    "DesignerToolkit.UndoCutFailedMessage",
-    "No se han podido restaurar algunos de los elementos cortados."
+    "DesignerToolkit.MoveDestinationBlocked",
+    "El destino del traslado está bloqueado."
+  ],
+  [
+    "DesignerToolkit.MovePasteOnce",
+    "Una selección cortada solo se puede pegar una vez."
+  ],
+  [
+    "DesignerToolkit.MoveAlreadyInProgress",
+    "Este edificio forma parte de un corte o traslado en curso. Deshazlo o complétalo primero."
+  ],
+  [
+    "DesignerToolkit.MoveQueued",
+    "Traslado en cola. La construcción comenzará cuando se libere el lugar de origen."
+  ],
+  [
+    "DesignerToolkit.MoveContinueAfterCancel",
+    "El edificio cancelado se queda en su ubicación original. El resto del traslado continuará."
+  ],
+  [
+    "DesignerToolkit.MoveCanceled",
+    "Se canceló el traslado porque se canceló la demolición de un edificio único."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionOrdered",
+    "Se ha ordenado la construcción en el nuevo destino."
+  ],
+  [
+    "DesignerToolkit.MoveBlocked",
+    "Traslado bloqueado. {0}"
+  ],
+  [
+    "DesignerToolkit.MoveMissingPrototype",
+    "Falta un prototipo de edificio."
+  ],
+  [
+    "DesignerToolkit.MoveConstructionFailed",
+    "No se pudo ordenar la construcción en el destino."
+  ],
+  [
+    "DesignerToolkit.MovePavementInvalid",
+    "No se puede colocar pavimento en {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDesignation",
+    "Ya hay una designación de superficie en {0}."
+  ],
+  [
+    "DesignerToolkit.MoveExistingPavement",
+    "Ya hay pavimento en {0}."
+  ],
+  [
+    "DesignerToolkit.MoveDecalOutsideMap",
+    "Una marca del suelo está fuera del mapa."
+  ],
+  [
+    "DesignerToolkit.MoveDecalNeedsPavement",
+    "La marca del suelo de {0} necesita pavimento."
+  ],
+  [
+    "DesignerToolkit.MoveExistingDecal",
+    "Ya hay una marca del suelo en {0}."
+  ],
+  [
+    "DesignerToolkit.UndoCutSuccessMessage",
+    "Se han restaurado los elementos cortados."
   ],
   [
     "DesignerToolkit.UndoNoActionMessage",

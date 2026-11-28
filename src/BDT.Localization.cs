@@ -53,7 +53,7 @@ internal static class BdtLocalization
     public static LocStr SettingsInstantBuildMode =
         Loc.Str("DesignerToolkit.SettingsInstantBuildMode", "Instant build mode", "Settings row label for instant build mode.");
     public static readonly LocStr SettingsInstantBuildModeDescription =
-        Loc.Str("DesignerToolkit.SettingsInstantBuildModeDescription", "Instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or Unity, even while paused. Includes true cut and paste. Cut removes completed buildings and gives you a blueprint to place elsewhere. Ctrl+Z restores the cut. Turns off the game's Insta-build toggle.", "Settings row description for instant build mode.");
+        Loc.Str("DesignerToolkit.SettingsInstantBuildModeDescription", "Instantly completes construction, deconstruction, upgrades, and downgrades without materials, workers, or Unity, even while paused. Turns off the game's Insta-build toggle.", "Settings row description for instant build mode.");
     public static readonly LocStr SettingsInfiniteZoom =
         Loc.Str("DesignerToolkit.SettingsInfiniteZoom", "Infinite zoom", "Settings row label for removing scroll-wheel camera zoom limits.");
     public static readonly LocStr SettingsInfiniteZoomDescription =
@@ -62,8 +62,16 @@ internal static class BdtLocalization
         Loc.Str("DesignerToolkit.SettingsMatchTransportTier", "Match transport tier", "Settings row label for matching belt and pipe tiers while drawing a route.");
     public static readonly LocStr SettingsMatchTransportTierDescription =
         Loc.Str("DesignerToolkit.SettingsMatchTransportTierDescription", "Temporarily matches the tier of belts and pipes you connect to. Turn this off to place a different tier on purpose.", "Settings row description for transport tier matching.");
+    public static readonly LocStr SettingsMoveBuildings =
+        Loc.Str("DesignerToolkit.SettingsMoveBuildings", "Cut buildings", "Settings row label for cutting completed buildings.");
+    public static readonly LocStr SettingsRetargetBuildingMove =
+        Loc.Str("DesignerToolkit.SettingsRetargetBuildingMove", "Retarget blocked move", "Button for changing where a blocked building move will be constructed.");
+    public static readonly LocStr SettingsRetargetBuildingMoveDescription =
+        Loc.Str("DesignerToolkit.SettingsRetargetBuildingMoveDescription", "Pick a new destination for the latest blocked move. Blocked moves automatically retry their current destination.", "Tooltip for the retarget blocked move button.");
+    public static readonly LocStr SettingsMoveBuildingsDescription =
+        Loc.Str("DesignerToolkit.SettingsMoveBuildingsDescription", "Cut completed buildings and player-laid pavement. Paste the selection to place it elsewhere, or press Esc to drop it. Cutting starts demolition for ordinary buildings. Unique buildings wait until you confirm a destination. Available after Cut research, or immediately in Sandbox. Ctrl+Z undoes a cut or move.", "Settings row description for cutting completed buildings.");
     public static readonly LocStr SettingsInstantBuildModeSandboxOnly =
-        Loc.Str("DesignerToolkit.SettingsInstantBuildModeSandboxOnly", "Available in Sandbox. Includes true cut and paste for completed buildings.", "Tooltip for instant build mode when the game is not in sandbox mode.");
+        Loc.Str("DesignerToolkit.SettingsInstantBuildModeSandboxOnly", "Available in Sandbox.", "Tooltip for instant build mode when the game is not in sandbox mode.");
     public static LocStr SettingsLegacyBeltConfigurations =
         Loc.Str("DesignerToolkit.SettingsLegacyBeltConfigurations", "Allow curvy incline belts", "Settings row label for allowing legacy belt configurations (curvy incline belts).");
     public static LocStr SettingsLegacyBeltConfigurationsDescription =
@@ -356,10 +364,43 @@ internal static class BdtLocalization
 
     public static LocStr UndoSuccessMessage =
         Loc.Str("DesignerToolkit.UndoSuccessMessage", "Undo: Placement reverted successfully.", "Toast or message after undoing a placement.");
+    public static readonly LocStr MoveNoBlocked =
+        Loc.Str("DesignerToolkit.MoveNoBlocked", "There is no blocked move to retarget.", "Unavailable retarget action");
+    public static readonly LocStr MoveDestinationBlocked =
+        Loc.Str("DesignerToolkit.MoveDestinationBlocked", "The move destination is blocked.", "Paste rejection when the selected destination is obstructed");
+    public static readonly LocStr MovePasteOnce =
+        Loc.Str("DesignerToolkit.MovePasteOnce", "A cut can be pasted once.", "Paste rejection for a duplicate instance in a cut");
+    public static readonly LocStr MoveAlreadyInProgress =
+        Loc.Str("DesignerToolkit.MoveAlreadyInProgress", "This building belongs to an active cut or move. Undo or finish that move first.", "Cut rejection for a building reserved by another move");
+    public static readonly LocStr MoveQueued =
+        Loc.Str("DesignerToolkit.MoveQueued", "Move queued. Construction will start when the source is clear.", "Waiting for the original location to clear");
+    public static readonly LocStr MoveContinueAfterCancel =
+        Loc.Str("DesignerToolkit.MoveContinueAfterCancel", "The canceled building stays at its original location. The rest of the move will continue.", "Single unique demolition canceled while other parts continue moving");
+    public static readonly LocStr MoveCanceled =
+        Loc.Str("DesignerToolkit.MoveCanceled", "Move canceled because demolition of a unique building was canceled.", "Entire unique move canceled after the player cancels one demolition");
+    public static readonly LocStr MoveConstructionOrdered =
+        Loc.Str("DesignerToolkit.MoveConstructionOrdered", "Move construction ordered.", "Destination construction has been ordered");
+    public static readonly LocStr1 MoveBlocked =
+        Loc.Str1("DesignerToolkit.MoveBlocked", "Move blocked. {0}", "Explanation of a blocked move, with the placement error in {0}");
+    public static readonly LocStr MoveMissingPrototype =
+        Loc.Str("DesignerToolkit.MoveMissingPrototype", "A building prototype is missing.", "Move cannot place a building type absent from the game");
+    public static readonly LocStr MoveConstructionFailed =
+        Loc.Str("DesignerToolkit.MoveConstructionFailed", "The move could not be constructed.", "Fallback when destination construction fails");
+    public static readonly LocStr1 MovePavementInvalid =
+        Loc.Str1("DesignerToolkit.MovePavementInvalid", "Pavement cannot be placed at {0}.", "Move target coordinate in {0}");
+    public static readonly LocStr1 MoveExistingDesignation =
+        Loc.Str1("DesignerToolkit.MoveExistingDesignation", "A surface designation already occupies {0}.", "Move target coordinate in {0}");
+    public static readonly LocStr1 MoveExistingPavement =
+        Loc.Str1("DesignerToolkit.MoveExistingPavement", "Existing pavement occupies {0}.", "Move target coordinate in {0}");
+    public static readonly LocStr MoveDecalOutsideMap =
+        Loc.Str("DesignerToolkit.MoveDecalOutsideMap", "A decal is outside the map.", "Move target decal outside playable terrain");
+    public static readonly LocStr1 MoveDecalNeedsPavement =
+        Loc.Str1("DesignerToolkit.MoveDecalNeedsPavement", "A decal needs pavement at {0}.", "Move target coordinate in {0}");
+    public static readonly LocStr1 MoveExistingDecal =
+        Loc.Str1("DesignerToolkit.MoveExistingDecal", "An existing decal occupies {0}.", "Move target coordinate in {0}");
     public static readonly LocStr UndoCutSuccessMessage =
         Loc.Str("DesignerToolkit.UndoCutSuccessMessage", "Undo: Cut restored.", "Toast after restoring a cut selection to its original position.");
-    public static readonly LocStr UndoCutFailedMessage =
-        Loc.Str("DesignerToolkit.UndoCutFailedMessage", "Undo: Some cut items could not be restored.", "Toast when the game rejects some or all of a cut restoration.");
+
     public static LocStr UndoNoActionMessage =
         Loc.Str("DesignerToolkit.UndoNoActionMessage", "Undo: No placement actions to revert.", "Toast or message when undo queue is empty.");
 

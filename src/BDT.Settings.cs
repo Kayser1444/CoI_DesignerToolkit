@@ -73,6 +73,7 @@ internal static class DesignerToolkitSettings
 
     private const string MARKDOWN_TABLE_LANGUAGE_KEY = "markdown_table_language";
     private const string MARKDOWN_NUMBER_FORMAT_KEY = "markdown_number_format";
+    private const string MOVE_BUILDINGS_KEY = "move_buildings";
     private const string INSTANT_BUILD_MODE_KEY = "instant_build_mode";
     private const string INFINITE_ZOOM_KEY = "infinite_zoom";
     private const string MATCH_TRANSPORT_TIER_KEY = "match_transport_tier";
@@ -135,6 +136,7 @@ internal static class DesignerToolkitSettings
     public static MarkdownNumberFormat MarkdownNumberFormat { get; private set; } =
         MarkdownNumberFormat.Auto;
     public static bool InstantBuildModeEnabled { get; private set; }
+    public static bool MoveBuildingsEnabled { get; private set; }
     public static bool InfiniteZoomEnabled { get; private set; } = true;
     public static bool MatchTransportTierEnabled { get; private set; } = true;
     public static bool LegacyBeltConfigurationsEnabled { get; private set; } = true;
@@ -434,6 +436,7 @@ internal static class DesignerToolkitSettings
 
         MarkdownTableLanguage initialLanguage = FromInt(s_config.GetInt(MARKDOWN_TABLE_LANGUAGE_KEY, 0));
         MarkdownNumberFormat initialNumberFormat = NumberFormatFromInt(s_config.GetInt(MARKDOWN_NUMBER_FORMAT_KEY, 0));
+        MoveBuildingsEnabled = s_config.GetBool(MOVE_BUILDINGS_KEY, false);
         bool initialInstantBuildMode = s_config.GetBool(INSTANT_BUILD_MODE_KEY, false);
         InfiniteZoomEnabled = s_config.GetBool(INFINITE_ZOOM_KEY, true);
         MatchTransportTierEnabled = s_config.GetBool(MATCH_TRANSPORT_TIER_KEY, true);
@@ -582,6 +585,14 @@ internal static class DesignerToolkitSettings
         }
 
         root.Add(instantBuildToggle);
+        Toggle moveBuildingsToggle = new Toggle(standalone: true)
+            .Label(BdtLocalization.SettingsMoveBuildings.AsFormatted)
+            .Tooltip(BdtLocalization.SettingsMoveBuildingsDescription.AsFormatted)
+            .Value(MoveBuildingsEnabled)
+            .OnValueChanged(SetMoveBuildings);
+        root.Add(moveBuildingsToggle);
+        root.Add(new ButtonText(Button.General, BdtLocalization.SettingsRetargetBuildingMove.AsFormatted, CompletedBuildingCut.RetargetBlockedMove)
+            .Tooltip(BdtLocalization.SettingsRetargetBuildingMoveDescription.AsFormatted));
 
         Toggle matchTransportTierToggle = new Toggle(standalone: true)
             .Label(BdtLocalization.SettingsMatchTransportTier.AsFormatted)
@@ -940,6 +951,7 @@ internal static class DesignerToolkitSettings
             languageDropdown.SetValue(MarkdownTableLanguage);
             numberFormatDropdown.SetValue(MarkdownNumberFormat);
             instantBuildToggle.Value(InstantBuildModeEnabled);
+            moveBuildingsToggle.Value(MoveBuildingsEnabled);
             infiniteZoomToggle.Value(InfiniteZoomEnabled);
             matchTransportTierToggle.Value(MatchTransportTierEnabled);
             legacyBeltConfigurationsToggle.Value(LegacyBeltConfigurationsEnabled);
@@ -1087,6 +1099,7 @@ internal static class DesignerToolkitSettings
             MarkdownTableLanguage = MarkdownTableLanguage.English;
             MarkdownNumberFormat = MarkdownNumberFormat.Auto;
             SetInstantBuildMode(false);
+            SetMoveBuildings(false);
             InfiniteZoomEnabled = true;
             MatchTransportTierEnabled = true;
             SetLegacyBeltConfigurations(true);
@@ -1146,6 +1159,7 @@ internal static class DesignerToolkitSettings
         [MARKDOWN_TABLE_LANGUAGE_KEY] = (int)MarkdownTableLanguage,
         [MARKDOWN_NUMBER_FORMAT_KEY] = (int)MarkdownNumberFormat,
         [INSTANT_BUILD_MODE_KEY] = InstantBuildModeEnabled,
+        [MOVE_BUILDINGS_KEY] = MoveBuildingsEnabled,
         [INFINITE_ZOOM_KEY] = InfiniteZoomEnabled,
         [MATCH_TRANSPORT_TIER_KEY] = MatchTransportTierEnabled,
         [LEGACY_BELT_CONFIGURATIONS_KEY] = LegacyBeltConfigurationsEnabled,
@@ -1292,13 +1306,18 @@ internal static class DesignerToolkitSettings
         MarkdownNumberFormat = numberFormat;
     }
 
+    private static void SetMoveBuildings(bool enabled)
+    {
+        MoveBuildingsEnabled = enabled;
+        CompletedBuildingCut.RefreshAvailability();
+    }
+
     private static void SetInstantBuildMode(bool enabled)
     {
         if (InstantBuildModeEnabled == enabled)
             return;
 
         InstantBuildModeEnabled = enabled;
-        CompletedBuildingCut.RefreshAvailability();
         try { InstantBuildModeChanged?.Invoke(enabled); }
         catch (Exception ex) { s_log.Warning($"Instant build mode change handler failed: {ex.Message}"); }
     }
@@ -1459,6 +1478,10 @@ internal static class DesignerToolkitSettings
                 MarkdownNumberFormat = NumberFormatFromInt(numberFormat);
             if (TryGetBool(root, "instantBuildMode", out bool instantBuildMode))
                 InstantBuildModeEnabled = instantBuildMode;
+            if (TryGetBool(root, "moveBuildings", out bool moveBuildings))
+                MoveBuildingsEnabled = moveBuildings;
+            else if (InstantBuildModeEnabled && IsSandbox)
+                MoveBuildingsEnabled = true;
             if (TryGetBool(root, "infiniteZoom", out bool infiniteZoom))
                 InfiniteZoomEnabled = infiniteZoom;
             if (TryGetBool(root, "matchTransportTier", out bool matchTransportTier))
@@ -1541,6 +1564,7 @@ internal static class DesignerToolkitSettings
         writer.Field("markdownTableLanguage", (int)MarkdownTableLanguage);
         writer.Field("markdownNumberFormat", (int)MarkdownNumberFormat);
         writer.Field("instantBuildMode", InstantBuildModeEnabled);
+        writer.Field("moveBuildings", MoveBuildingsEnabled);
         writer.Field("infiniteZoom", InfiniteZoomEnabled);
         writer.Field("matchTransportTier", MatchTransportTierEnabled);
         writer.Field("legacyBeltConfigurations", LegacyBeltConfigurationsEnabled);

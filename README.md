@@ -16,6 +16,7 @@ Download the latest release from the Captain of Industry Hub: https://coigame.co
 - [Copy as Markdown](#copy-as-markdown)
 - [Symmetric entity normalization](#symmetric-entity-normalization)
 - [Instant build mode](#instant-build-mode)
+- [Cut buildings](#cut-buildings)
 - [Infinite zoom](#infinite-zoom)
 - [Match transport tier](#match-transport-tier)
 - [Pre-color pipes](#pre-color-pipes)
@@ -145,9 +146,13 @@ BDT includes an Instant Build mode that automatically completes construction, de
 
 When enabled, BDT turns off the game's built-in insta-build toggle and uses its own completion pass after player commands are processed.
 
-With BDT Instant build mode active, use `X` over a completed building or `Ctrl+X` to select an area. Cut puts a placement preview in hand. `Esc` drops it, and `Ctrl+Z` restores the cut at its original location. Cutting and pasting create separate undo entries.
-
 See [Instant Build Mode](docs/player/instant-build-mode.md) for player-facing details.
+
+### Cut buildings
+
+Enable **Cut buildings** under **Build Behaviors** to cut completed buildings and player-laid pavement. Press `X` over a building or `Ctrl+X` to select an area. Paste the selection to place it elsewhere, or press `Esc` to drop it. The tool uses normal demolition and construction and is available after Cut research, or immediately in Sandbox.
+
+See [Cut buildings](docs/player/move-buildings.md) for selection, unique buildings, and undo behavior.
 
 ### Infinite zoom
 
@@ -180,7 +185,7 @@ See [Groundwater Reservoir Insights](docs/player/groundwater-reservoir-insights.
 
 ### Transport cleanup tool
 
-BDT adds a transport cleanup tool with a default hotkey of `Alt+Del`. After arming the tool, drag a rectangle over belts or pipes; disconnected transport segments highlight red and are removed when the mouse is released.
+Press `Alt+Del` to arm transport cleanup, then drag over belts, pipes, lifts, balancers, connectors, or sorters. Eligible entities highlight red and appear in the demolition preview. Release the mouse over the world to remove them.
 
 This is useful before capturing a blueprint because it can strip accidental dangling belts and pipes without touching connected transport lines.
 

@@ -31,6 +31,7 @@ namespace CoIDesignerToolkit;
 internal sealed class InstantBuildMode : IDisposable
 {
     private static readonly ModLogger s_log = new ModLogger("BDT.InstantBuild");
+    private static readonly MethodInfo? s_surfaceUpdate = AccessTools.DeclaredMethod(typeof(SurfaceDesignationsManager), "simUpdate");
 
     private readonly EntitiesManager m_entitiesManager;
     private readonly IConstructionManager m_constructionManager;
@@ -39,6 +40,7 @@ internal sealed class InstantBuildMode : IDisposable
     private readonly object? m_instaBuildManager;
     private readonly MethodInfo? m_setInstaBuildMethod;
     private readonly GameDifficultyConfig m_difficultyConfig;
+    private readonly Action? m_updateSurfaces;
     private readonly List<IStaticEntity> m_snapshot = new List<IStaticEntity>();
 
     private bool m_isSubscribed;
@@ -49,7 +51,8 @@ internal sealed class InstantBuildMode : IDisposable
         UpgradesManager upgradesManager,
         ISimLoopEvents simLoopEvents,
         object? instaBuildManager,
-        GameDifficultyConfig difficultyConfig)
+        GameDifficultyConfig difficultyConfig,
+        SurfaceDesignationsManager surfaceDesignations)
     {
         m_entitiesManager = entitiesManager;
         m_constructionManager = constructionManager;
@@ -57,6 +60,8 @@ internal sealed class InstantBuildMode : IDisposable
         m_simLoopEvents = simLoopEvents;
         m_instaBuildManager = instaBuildManager;
         m_difficultyConfig = difficultyConfig;
+        if (s_surfaceUpdate != null)
+            m_updateSurfaces = (Action)s_surfaceUpdate.CreateDelegate(typeof(Action), surfaceDesignations);
         m_setInstaBuildMethod = instaBuildManager?.GetType().GetMethod(
             "SetInstaBuild",
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -64,8 +69,7 @@ internal sealed class InstantBuildMode : IDisposable
 
     internal static void ApplyPatches(Harmony harmony)
     {
-        MethodInfo? target = AccessTools.Method(typeof(SurfaceDesignationsManager), "simUpdate");
-        if (target == null)
+        if (s_surfaceUpdate == null)
         {
             s_log.Warning("Surface instant build is unavailable: the surface update method was not found.");
             return;
@@ -73,7 +77,7 @@ internal sealed class InstantBuildMode : IDisposable
 
         try
         {
-            harmony.Patch(target, transpiler: new HarmonyMethod(
+            harmony.Patch(s_surfaceUpdate, transpiler: new HarmonyMethod(
                 typeof(InstantBuildMode), nameof(AllowInstantSurfaceWork)));
         }
         catch (Exception ex)
@@ -147,6 +151,10 @@ internal sealed class InstantBuildMode : IDisposable
             return;
 
         DrainConstructionStates();
+
+        // The game skips the regular surface-designation update while paused.
+        if (m_simLoopEvents.IsSimPaused)
+            m_updateSurfaces?.Invoke();
     }
 
     /// <summary>

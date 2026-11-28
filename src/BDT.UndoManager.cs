@@ -33,8 +33,8 @@ internal sealed class UndoRecord
     public readonly List<EntityId> PlacedEntityIds = new List<EntityId>();
     public readonly List<EntityConfigData> OverwrittenConfigs = new List<EntityConfigData>();
     public readonly List<IStaticEntity> OverwrittenDeconstructedEntities = new List<IStaticEntity>();
-    public readonly List<EntityConfigData> CutConfigs = new List<EntityConfigData>();
-    public HashSet<EntityId>? CompletedCutIds;
+    public Action? UndoBuildingMove;
+    public object? BuildingMoveToken;
     public readonly List<TileSurfaceCopyPasteData> PastedSurfaces = new List<TileSurfaceCopyPasteData>();
     public readonly List<TileSurfaceCopyPasteData> PastedDecals = new List<TileSurfaceCopyPasteData>();
 
@@ -43,7 +43,6 @@ internal sealed class UndoRecord
         return PlacedEntityIds.Count > 0
             || OverwrittenConfigs.Count > 0
             || OverwrittenDeconstructedEntities.Count > 0
-            || CutConfigs.Count > 0
             || PastedSurfaces.Count > 0
             || PastedDecals.Count > 0;
     }
@@ -67,21 +66,10 @@ internal sealed class UndoManager : IDisposable
     private static UndoRecord? s_activeUndoRecord;
     private static int s_recordNestLevel;
     private static bool s_isUndoing;
+    [ThreadStatic] private static HashSet<EntityId>? s_movePlacements;
 
-    private sealed class Restoration
-    {
-        public Restoration(UndoRecord? cut)
-        {
-            Cut = cut;
-        }
-
-        public readonly UndoRecord? Cut;
-        public readonly List<IStaticEntity> AddedEntities = new List<IStaticEntity>();
-    }
-
-    private static readonly ConditionalWeakTable<IInputCommand, Restoration> s_restorations =
-        new ConditionalWeakTable<IInputCommand, Restoration>();
-    private static Restoration? s_activeRestoration;
+    private static readonly ConditionalWeakTable<IInputCommand, object> s_restorations = new();
+    private static readonly object s_restorationMarker = new();
 
     private readonly object m_lock = new object();
     private bool m_pendingUndo;
@@ -201,80 +189,36 @@ internal sealed class UndoManager : IDisposable
         }
     }
 
-    public static void RecordCut(IEnumerable<EntityConfigData> configs, HashSet<EntityId> completedIds)
+    public static void RecordBuildingMove(object token, Action undo) =>
+        PushRecord(new UndoRecord { BuildingMoveToken = token, UndoBuildingMove = undo });
+
+    public static void RemoveBuildingMove(object token)
     {
-        var record = new UndoRecord { CompletedCutIds = completedIds };
-        foreach (EntityConfigData config in configs)
-            record.CutConfigs.Add(config.CreateCopy());
-
-        PushRecord(record);
-    }
-
-    public static bool BeginRestoration(IInputCommand cmd)
-    {
-        if (!s_restorations.TryGetValue(cmd, out var restoration))
-            return false;
-
-        s_activeRestoration = restoration;
-        return true;
-    }
-
-    public static void TrackRestoredEntity(IEntity entity)
-    {
-        if (entity is IStaticEntity staticEntity && s_activeRestoration?.Cut != null)
-            s_activeRestoration.AddedEntities.Add(staticEntity);
-    }
-
-    public static void EndRestoration(IInputCommand cmd, bool completed)
-    {
-        Restoration? restoration = s_activeRestoration;
-        s_activeRestoration = null;
-        s_restorations.Remove(cmd);
-        if (restoration?.Cut is not { } cut || s_instance is not { } instance)
+        if (s_instance is not { } instance)
             return;
-
-        if (DesignerToolkitSettings.IsSandbox)
-        {
-            var completedConfigs = cut.CutConfigs
-                .Where(config => config.OriginalEntityId is { } id && cut.CompletedCutIds?.Contains(id) == true);
-            foreach (IStaticEntity entity in restoration.AddedEntities)
-            {
-                if (!entity.IsDestroyed && entity.ConstructionState == ConstructionState.InConstruction
-                    && completedConfigs.Any(config => IsRestoredEntity(config, entity)))
-                    instance.m_constructionManager.MarkConstructed(entity);
-            }
-        }
-
-        if (completed && cmd is BatchCreateStaticEntitiesCmd batch && batch.Result)
-        {
-            instance.m_uiRoot.ToastNotifProvider.ShowSuccess(BdtLocalization.UndoCutSuccessMessage.AsFormatted);
-            return;
-        }
-
-        cut.CutConfigs.RemoveAll(config =>
-            restoration.AddedEntities.Any(entity => !entity.IsDestroyed && IsRestoredEntity(config, entity)));
-        if (cut.CutConfigs.Count > 0)
-            instance.Push(cut);
-
-        instance.m_uiRoot.ToastNotifProvider.ShowFailure(BdtLocalization.UndoCutFailedMessage.AsFormatted);
+        lock (instance.m_lock)
+            instance.m_undoStack.RemoveAll(record => ReferenceEquals(record.BuildingMoveToken, token));
     }
 
-    private static bool IsRestoredEntity(EntityConfigData config, IStaticEntity entity)
+    public static void RunForBuildingMove(HashSet<EntityId> placed, Action action)
     {
-        if (config.Prototype.ValueOrNull != entity.Prototype)
-            return false;
-
-        if (entity is Transport transport && config.Trajectory.ValueOrNull is { } trajectory)
+        bool wasUndoing = s_isUndoing;
+        s_isUndoing = true;
+        s_movePlacements = placed;
+        try { action(); }
+        finally
         {
-            foreach (var pivot in trajectory.Pivots)
-            {
-                if (transport.Trajectory.TryGetLowPivotIndexFor(pivot, out _, out _))
-                    return true;
-            }
-            return false;
+            s_movePlacements = null;
+            s_isUndoing = wasUndoing;
         }
+    }
 
-        return entity is ILayoutEntity layout && config.Transform == layout.Transform;
+    public static bool TakeRestoration(IInputCommand cmd) => s_restorations.Remove(cmd);
+
+    public static void TrackMovePlacement(IEntity entity)
+    {
+        if (entity is IStaticEntity)
+            s_movePlacements?.Add(entity.Id);
     }
 
     public static void RecordPlacedEntity(EntityId id)
@@ -346,7 +290,8 @@ internal sealed class UndoManager : IDisposable
             if (m_undoStack.Count > 0)
             {
                 HotkeysRegistry.PlayClickSound();
-                undoingCut = m_undoStack[m_undoStack.Count - 1].CutConfigs.Count > 0;
+                UndoRecord latest = m_undoStack[m_undoStack.Count - 1];
+                undoingCut = latest.UndoBuildingMove != null;
             }
             m_pendingUndo = true;
         }
@@ -388,6 +333,12 @@ internal sealed class UndoManager : IDisposable
         if (record == null)
         {
             m_uiRoot.ToastNotifProvider.ShowFailure(BdtLocalization.UndoNoActionMessage.AsFormatted);
+            return;
+        }
+
+        if (record.UndoBuildingMove is { } undoMove)
+        {
+            undoMove();
             return;
         }
 
@@ -437,16 +388,15 @@ internal sealed class UndoManager : IDisposable
                 }
             }
 
-            configsToRestore.AddRange(record.CutConfigs);
             if (configsToRestore.Count > 0)
             {
                 var cmd = new BatchCreateStaticEntitiesCmd(
                     configsToRestore.ToImmutableArray(),
                     BuildMiniZippersMode.DeferToProto,
-                    allowValidationSuppression: record.CutConfigs.Count == 0,
+                    allowValidationSuppression: true,
                     applyConfiguration: true
                 );
-                s_restorations.Add(cmd, new Restoration(record.CutConfigs.Count > 0 ? record : null));
+                s_restorations.Add(cmd, s_restorationMarker);
                 m_inputScheduler.ScheduleInputCmd(cmd);
             }
 
@@ -464,11 +414,8 @@ internal sealed class UndoManager : IDisposable
                 m_inputScheduler.ScheduleInputCmd(cmd);
             }
 
-            if (record.CutConfigs.Count == 0)
-            {
-                s_log.Info("Undo executed successfully.");
-                m_uiRoot.ToastNotifProvider.ShowSuccess(BdtLocalization.UndoSuccessMessage.AsFormatted);
-            }
+            s_log.Info("Undo executed successfully.");
+            m_uiRoot.ToastNotifProvider.ShowSuccess(BdtLocalization.UndoSuccessMessage.AsFormatted);
         }
         catch (Exception ex)
         {

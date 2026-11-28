@@ -39,18 +39,14 @@ internal static class UndoPatches
     [HarmonyPatch(typeof(InputScheduler), "processCmd", new Type[] { typeof(IInputCommand), typeof(bool) })]
     private static class ProcessCmdPatch
     {
-        private enum ActionType { Ignore, Record, Restore }
+        private enum ActionType { Ignore, Record }
 
         [HarmonyPrefix]
         private static void Prefix(IInputCommand cmd, out ActionType __state)
         {
-            if (UndoManager.BeginRestoration(cmd))
-            {
-                __state = ActionType.Restore;
-                return;
-            }
-
             __state = ActionType.Ignore;
+            if (UndoManager.TakeRestoration(cmd))
+                return;
             if (cmd is BatchCreateStaticEntitiesCmd || cmd is PasteSurfaceDesignationsCmd || cmd is BatchAddSurfaceDecalCmd || cmd is ReplaceEntityCmd)
             {
                 UndoManager.BeginRecord();
@@ -59,14 +55,8 @@ internal static class UndoPatches
         }
 
         [HarmonyFinalizer]
-        private static void Finish(IInputCommand cmd, ActionType __state, Exception? __exception)
+        private static void Finish(IInputCommand cmd, ActionType __state)
         {
-            if (__state == ActionType.Restore)
-            {
-                UndoManager.EndRestoration(cmd, __exception == null);
-                return;
-            }
-
             if (__state != ActionType.Record)
                 return;
 
@@ -85,7 +75,7 @@ internal static class UndoPatches
         [HarmonyPostfix]
         private static void Postfix(IEntity entity)
         {
-            UndoManager.TrackRestoredEntity(entity);
+            UndoManager.TrackMovePlacement(entity);
             if (UndoManager.IsRecording)
             {
                 UndoManager.RecordPlacedEntity(entity.Id);

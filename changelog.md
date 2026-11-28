@@ -4,6 +4,14 @@ This private changelog tracks in-progress and alpha changes for maintainers and 
 
 ## v0.13.1 [unreleased]
 
+- Add an independent **Cut buildings** setting. Cut moves completed buildings and player-laid pavement through normal demolition and construction, honors the Buildings, Surfaces and Decals filters, and queues unique buildings until their originals are gone.
+- Cancel queued batch moves when a unique original’s demolition is canceled. A batch with only one unique building drops that building and continues with the remaining selection.
+- Add a runtime API for mods with research-dependent building uniqueness. Queued moves retry on the next simulation pass when the mod withdraws a uniqueness report.
+- Run Sandbox Instant build for surface clearing and paving while paused so pavement moves can finish.
+- Allow Cut to select a completed building again after its previous cut was dropped and its demolition was canceled. Show why a selected building could not be cut.
+- Transport cleanup shows a demolition preview with the type and count of selected entities while you drag.
+- Transport cleanup includes lifts, balancers, connectors, and sorters with fewer than two connected ports.
+
 ## v0.13.0 [released]
 
 - Store **Save as config** defaults in `ModConfigs/DesignerToolkit/BDTsettings.json`. Import customized defaults from an older installed `config.json` when available.
