@@ -2,6 +2,8 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
+## v0.13.2 [unreleased]
+
 ## v0.13.1 [released]
 
 - Add an independent **Cut buildings** setting. Cut moves completed buildings and player-laid pavement through normal demolition and construction, honors the Buildings, Surfaces and Decals filters, and queues unique buildings until their originals are gone.
