@@ -2,7 +2,7 @@
 
 This private changelog tracks in-progress and alpha changes for maintainers and testers. Public release notes still live in `changelog.txt` and are updated only when packaging or releasing.
 
-## v0.13.1 [unreleased]
+## v0.13.1 [packaged]
 
 - Add an independent **Cut buildings** setting. Cut moves completed buildings and player-laid pavement through normal demolition and construction, honors the Buildings, Surfaces and Decals filters, and queues unique buildings until their originals are gone.
 - Cancel queued batch moves when a unique original’s demolition is canceled. A batch with only one unique building drops that building and continues with the remaining selection.
